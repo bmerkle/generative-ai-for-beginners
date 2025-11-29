@@ -1,0 +1,5 @@
+azure_storage==0.37.0
+numpy==2.2.1
+openai==1.59.6
+pandas==2.2.3
+scikit_learn==1.6.1
