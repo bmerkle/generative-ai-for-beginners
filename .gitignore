@@ -165,4 +165,7 @@ node_modules/
 
 # downloaded stuff for 08-building-search-applications
 08-building-search-applications/scripts/transcripts_the_ai_show/
+08-building-search-applications/scripts/transcripts_the_ai_show.backup/
+08-building-search-applications/scripts/transcripts_sick/
+
 .tool-versions
