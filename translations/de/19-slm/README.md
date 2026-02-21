@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:13:26+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "de"
-}
--->
 # Einführung in kleine Sprachmodelle für generative KI für Einsteiger  
 Generative KI ist ein faszinierendes Gebiet der künstlichen Intelligenz, das sich darauf konzentriert, Systeme zu entwickeln, die in der Lage sind, neue Inhalte zu erzeugen. Diese Inhalte können von Texten und Bildern über Musik bis hin zu kompletten virtuellen Umgebungen reichen. Eine der spannendsten Anwendungen generativer KI liegt im Bereich der Sprachmodelle.
 
@@ -33,7 +24,7 @@ SLMs werden mit großen Mengen an Textdaten trainiert. Während des Trainings le
 
 Die Entwicklung von SLMs entspricht dem wachsenden Bedarf an Modellen, die in ressourcenbeschränkten Umgebungen eingesetzt werden können, wie etwa auf mobilen Geräten oder Edge-Computing-Plattformen, wo vollwertige LLMs aufgrund ihres hohen Ressourcenbedarfs oft unpraktisch sind. Durch den Fokus auf Effizienz schaffen SLMs eine Balance zwischen Leistung und Zugänglichkeit und ermöglichen so eine breitere Anwendung in verschiedenen Bereichen.
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.de.png)
+![slm](../../../translated_images/de/slm.4058842744d0444a.webp)
 
 ## Lernziele  
 
@@ -135,7 +126,7 @@ Wir können das Phi-3/3.5 Familienmodell je nach Szenario einsetzen. Im Gegensat
 
 Wir möchten Phi-3/3.5 in verschiedenen Szenarien einsetzen. Im Folgenden zeigen wir, wie man Phi-3/3.5 je nach Anwendungsszenario nutzt.
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.de.png)
+![phi3](../../../translated_images/de/phi3.655208c3186ae381.webp)
 
 ### Unterschiedliche Inferenzmöglichkeiten über Cloud-APIs  
 
@@ -145,9 +136,9 @@ GitHub Models ist der direkteste Weg. Du kannst schnell auf das Phi-3/3.5-Instru
 
 - Demo: Vergleich der Ergebnisse von Phi-3-mini und Phi-3.5-mini in chinesischen Szenarien
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.de.png)
+![phi3](../../../translated_images/de/gh1.126c6139713b622b.webp)
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.de.png)
+![phi35](../../../translated_images/de/gh2.07d7985af66f178d.webp)
 
 **Azure AI Studio**  
 

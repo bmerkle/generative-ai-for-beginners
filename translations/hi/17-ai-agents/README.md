@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8e8d1f6a63da606af7176a87ff8e92b6",
-  "translation_date": "2025-10-18T00:19:43+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "hi"
-}
--->
-[![ओपन सोर्स मॉडल्स](../../../translated_images/17-lesson-banner.a5b918fb0920e4e6d8d391a100f5cb1d5929f4c2752c937d40392905dec82592.hi.png)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+[![ओपन सोर्स मॉडल्स](../../../translated_images/hi/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## परिचय
 
@@ -33,7 +24,7 @@ AI एजेंट्स जनरेटिव AI की दुनिया म�
 
 AI एजेंट्स बड़े भाषा मॉडल्स (LLMs) को **स्टेट** और **टूल्स** तक पहुंच देकर कार्य करने की अनुमति देते हैं।
 
-![एजेंट मॉडल](../../../translated_images/what-agent.21f2893bdfd01e6a7fd09b0416c2b15594d97f44bbb2ab5a1ff8bf643d2fcb3d.hi.png)
+![एजेंट मॉडल](../../../translated_images/hi/what-agent.21f2893bdfd01e6a.webp)
 
 आइए इन शब्दों को परिभाषित करें:
 
@@ -53,7 +44,7 @@ AI एजेंट्स बड़े भाषा मॉडल्स (LLMs) क
 
 `Agent Executor` चैट इतिहास को भी संग्रहीत करता है ताकि चैट का संदर्भ प्रदान किया जा सके।
 
-![LangChain एजेंट्स](../../../translated_images/langchain-agents.edcc55b5d5c437169a2037211284154561183c58bcec6d4ac2f8a79046fac9af.hi.png)
+![LangChain एजेंट्स](../../../translated_images/hi/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChain एक [टूल्स का कैटलॉग](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) प्रदान करता है जिसे आपके एप्लिकेशन में आयात किया जा सकता है, जिसमें LLM को पहुंच प्राप्त होती है। ये समुदाय और LangChain टीम द्वारा बनाए गए हैं।
 
@@ -85,7 +76,7 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 यहां प्रक्रिया का एक उदाहरण है:
 
-![AutoGen](../../../translated_images/autogen.dee9a25a45fde584fedd84b812a6e31de5a6464687cdb66bb4f2cb7521391856.hi.png)
+![AutoGen](../../../translated_images/hi/autogen.dee9a25a45fde584.webp)
 
 #### सिस्टम संदेश के साथ परिभाषित LLM
 
@@ -129,7 +120,7 @@ chatbot (to user_proxy):
 
 कार्य को पूरा करने के लिए `Planner` टूल्स के संग्रह को एक्सेस करता है जिसे `Plugins` कहा जाता है। यह Python क्लासेस या एक सामान्य कोड इंटरप्रेटर हो सकता है। ये प्लगइन्स एम्बेडिंग के रूप में संग्रहीत होते हैं ताकि LLM सही प्लगइन को बेहतर तरीके से खोज सके।
 
-![Taskweaver](../../../translated_images/taskweaver.da8559999267715a95b7677cf9b7d7dd8420aee6f3c484ced1833f081988dcd5.hi.png)
+![Taskweaver](../../../translated_images/hi/taskweaver.da8559999267715a.webp)
 
 यहां एक प्लगइन का उदाहरण है जो विसंगति का पता लगाने को संभालता है:
 
@@ -143,7 +134,7 @@ class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_
 
 अंतिम एजेंट फ्रेमवर्क जिसे हम अन्वेषण करेंगे वह है [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst)। JARVIS को अनोखा बनाता है कि यह बातचीत के `state` को प्रबंधित करने के लिए एक LLM का उपयोग करता है और `tools` अन्य AI मॉडल्स होते हैं। प्रत्येक AI मॉडल विशेष कार्यों को करने वाले मॉडल्स होते हैं जैसे ऑब्जेक्ट डिटेक्शन, ट्रांसक्रिप्शन या इमेज कैप्शनिंग।
 
-![JARVIS](../../../translated_images/jarvis.762ddbadbd1a3a3364d4ca3db1a7a9c0d2180060c0f8da6f7bd5b5ea2a115aa7.hi.png)
+![JARVIS](../../../translated_images/hi/jarvis.762ddbadbd1a3a33.webp)
 
 LLM, एक सामान्य उद्देश्य मॉडल होने के नाते, उपयोगकर्ता से अनुरोध प्राप्त करता है और विशिष्ट कार्य और इसे पूरा करने के लिए आवश्यक किसी भी तर्क/डेटा की पहचान करता है।
 

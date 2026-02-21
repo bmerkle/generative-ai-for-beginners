@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8e8d1f6a63da606af7176a87ff8e92b6",
-  "translation_date": "2025-10-18T02:47:10+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "ta"
-}
--->
-[![திறந்த மூல மாடல்கள்](../../../translated_images/17-lesson-banner.a5b918fb0920e4e6d8d391a100f5cb1d5929f4c2752c937d40392905dec82592.ta.png)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+[![திறந்த மூல மாடல்கள்](../../../translated_images/ta/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## அறிமுகம்
 
@@ -33,7 +24,7 @@ AI முகவர்கள் ஜெனரேட்டிவ் AI உலகி
 
 AI முகவர்கள் பெரிய மொழி மாடல்களுக்கு (LLMs) **நிலை** மற்றும் **கருவிகள்** அணுகலை வழங்குவதன் மூலம் செயல்பாடுகளை மேற்கொள்ள அனுமதிக்கின்றன.
 
-![முகவர் மாடல்](../../../translated_images/what-agent.21f2893bdfd01e6a7fd09b0416c2b15594d97f44bbb2ab5a1ff8bf643d2fcb3d.ta.png)
+![முகவர் மாடல்](../../../translated_images/ta/what-agent.21f2893bdfd01e6a.webp)
 
 இந்த சொற்களை வரையறுக்கலாம்:
 
@@ -53,7 +44,7 @@ AI முகவர்கள் பெரிய மொழி மாடல்க�
 
 `Agent Executor` உரையாடல் வரலாற்றையும் சேமித்து உரையாடலின் சூழலை வழங்குகிறது.
 
-![Langchain முகவர்கள்](../../../translated_images/langchain-agents.edcc55b5d5c437169a2037211284154561183c58bcec6d4ac2f8a79046fac9af.ta.png)
+![Langchain முகவர்கள்](../../../translated_images/ta/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChain ஒரு [கருவிகளின் பட்டியலை](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) வழங்குகிறது, இது உங்கள் பயன்பாட்டில் இறக்குமதி செய்ய LLMக்கு அணுகலை வழங்குகிறது. இவை சமூகத்தால் மற்றும் LangChain குழுவால் உருவாக்கப்பட்டவை.
 
@@ -85,7 +76,7 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 இது செயல்முறை எப்படி செயல்படுகிறது என்பதற்கான ஒரு உதாரணம்:
 
-![AutoGen](../../../translated_images/autogen.dee9a25a45fde584fedd84b812a6e31de5a6464687cdb66bb4f2cb7521391856.ta.png)
+![AutoGen](../../../translated_images/ta/autogen.dee9a25a45fde584.webp)
 
 #### LLM அமைப்பு செய்தியுடன் வரையறுக்கப்பட்டது
 
@@ -129,7 +120,7 @@ AutoGen குறியீட்டு மாதிரிகளின் [பட
 
 செயல்பாடுகளை முடிக்க, `Planner` கருவிகளின் தொகுப்பான `Plugins`க்கு அணுகலை வழங்குகிறது. இது Python வகுப்புகள் அல்லது பொதுவான குறியீட்டு மொழிபெயர்ப்பாளராக இருக்கலாம். இந்த plugins, LLM சரியான pluginஐ தேடுவதற்கு உதவ, embeddings ஆக சேமிக்கப்படுகிறது.
 
-![Taskweaver](../../../translated_images/taskweaver.da8559999267715a95b7677cf9b7d7dd8420aee6f3c484ced1833f081988dcd5.ta.png)
+![Taskweaver](../../../translated_images/ta/taskweaver.da8559999267715a.webp)
 
 இது அசாதாரணத்தை கண்டறிய ஒரு plugin க்கான உதாரணம்:
 
@@ -143,7 +134,7 @@ class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_
 
 நாம் ஆராயும் கடைசி முகவர் கட்டமைப்பு [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst) ஆகும். JARVIS ஐ தனித்துவமாக ஆக்குவது என்னவென்றால், இது ஒரு LLMஐ உரையாடலின் `நிலையை` மேலாண்மை செய்ய பயன்படுத்துகிறது, மற்றும் `கருவிகள்` மற்ற AI மாடல்கள். ஒவ்வொரு AI மாடல்களும் குறிப்பிட்ட செயல்பாடுகளைச் செய்ய சிறப்பு மிக்க மாடல்களாக உள்ளன, உதாரணமாக பொருள் கண்டறிதல், உரை மாற்றம் அல்லது பட விளக்கம்.
 
-![JARVIS](../../../translated_images/jarvis.762ddbadbd1a3a3364d4ca3db1a7a9c0d2180060c0f8da6f7bd5b5ea2a115aa7.ta.png)
+![JARVIS](../../../translated_images/ta/jarvis.762ddbadbd1a3a33.webp)
 
 LLM, ஒரு பொதுவான நோக்கமுடைய மாடலாக, பயனரிடமிருந்து கோரிக்கையைப் பெறுகிறது மற்றும் குறிப்பிட்ட செயல்பாடு மற்றும் அந்த செயல்பாட்டை முடிக்க தேவையான எந்தவொரு அளவுரு/தரவை அடையாளம் காண்கிறது.
 

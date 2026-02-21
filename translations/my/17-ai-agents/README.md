@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8e8d1f6a63da606af7176a87ff8e92b6",
-  "translation_date": "2025-10-18T02:08:27+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "my"
-}
--->
-[![Open Source Models](../../../translated_images/17-lesson-banner.a5b918fb0920e4e6d8d391a100f5cb1d5929f4c2752c937d40392905dec82592.my.png)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+[![Open Source Models](../../../translated_images/my/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## အကျဉ်းချုပ်
 
@@ -33,7 +24,7 @@ AI Agents သည် Generative AI ကမ္ဘာတွင် စိတ်လှ
 
 AI Agents များသည် Large Language Models (LLMs) များကို **state** နှင့် **tools** များကို အသုံးပြုခြင်းဖြင့် လုပ်ဆောင်မှုများ ပြုလုပ်နိုင်စေသည်။
 
-![Agent Model](../../../translated_images/what-agent.21f2893bdfd01e6a7fd09b0416c2b15594d97f44bbb2ab5a1ff8bf643d2fcb3d.my.png)
+![Agent Model](../../../translated_images/my/what-agent.21f2893bdfd01e6a.webp)
 
 ဒီစကားလုံးများကို အဓိပ္ပါယ်ဖော်ပြပါမည်-
 
@@ -53,7 +44,7 @@ AI Agents များသည် Large Language Models (LLMs) များကိ�
 
 `Agent Executor` သည် chat history ကိုလည်း သိမ်းဆည်းထားပြီး chat context ကို ပေးစွမ်းသည်။
 
-![Langchain Agents](../../../translated_images/langchain-agents.edcc55b5d5c437169a2037211284154561183c58bcec6d4ac2f8a79046fac9af.my.png)
+![Langchain Agents](../../../translated_images/my/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChain သည် LLM များကို အသုံးပြုနိုင်သော [tools catalog](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) ကို ပေးထားပြီး community နှင့် LangChain အဖွဲ့မှ ဖန်တီးထားသည်။
 
@@ -85,7 +76,7 @@ State ကို ပြောင်းလဲပြီး စီမံရန် As
 
 ဤလုပ်ငန်းစဉ်၏ ဥပမာကို ကြည့်ပါ-
 
-![AutoGen](../../../translated_images/autogen.dee9a25a45fde584fedd84b812a6e31de5a6464687cdb66bb4f2cb7521391856.my.png)
+![AutoGen](../../../translated_images/my/autogen.dee9a25a45fde584.webp)
 
 #### LLM ကို System Message ဖြင့် သတ်မှတ်ခြင်း
 
@@ -129,7 +120,7 @@ AutoGen ကို အသုံးပြု၍ တည်ဆောက်ရန် 
 
 လုပ်ငန်းများကို ပြီးမြောက်စေရန် `Planner` သည် `Plugins` ဟုခေါ်သော tools များကို အသုံးပြုသည်။ ၎င်းသည် Python classes သို့မဟုတ် general code interpreter ဖြစ်နိုင်သည်။ ဒီ plugins များကို embeddings အဖြစ် သိမ်းဆည်းထားပြီး LLM သည် သက်ဆိုင်သော plugin ကို ပိုမိုကောင်းစွာ ရှာဖွေနိုင်စေသည်။
 
-![Taskweaver](../../../translated_images/taskweaver.da8559999267715a95b7677cf9b7d7dd8420aee6f3c484ced1833f081988dcd5.my.png)
+![Taskweaver](../../../translated_images/my/taskweaver.da8559999267715a.webp)
 
 ဤသည်မှာ anomaly detection ကို စီမံရန် plugin တစ်ခု၏ ဥပမာဖြစ်သည်-
 
@@ -143,7 +134,7 @@ code ကို လုပ်ဆောင်မီ verify လုပ်သည်။
 
 နောက်ဆုံး Agent Framework သည် [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst) ဖြစ်သည်။ JARVIS ၏ ထူးခြားချက်မှာ LLM ကို စကားဝိုင်း၏ `state` ကို စီမံရန် အသုံးပြုပြီး `tools` များသည် အခြား AI models ဖြစ်သည်။ AI models များသည် object detection, transcription သို့မဟုတ် image captioning စသည်တို့ကဲ့သို့သော အထူးလုပ်ငန်းများကို လုပ်ဆောင်နိုင်သော models ဖြစ်သည်။
 
-![JARVIS](../../../translated_images/jarvis.762ddbadbd1a3a3364d4ca3db1a7a9c0d2180060c0f8da6f7bd5b5ea2a115aa7.my.png)
+![JARVIS](../../../translated_images/my/jarvis.762ddbadbd1a3a33.webp)
 
 LLM သည် general purpose model ဖြစ်ပြီး အသုံးပြုသူ၏ တောင်းဆိုမှုကို လက်ခံပြီး သတ်မှတ်ထားသော လုပ်ငန်းနှင့် လိုအပ်သော arguments/data ကို ရှာဖွေသည်။
 

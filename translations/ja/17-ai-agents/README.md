@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8e8d1f6a63da606af7176a87ff8e92b6",
-  "translation_date": "2025-10-17T23:58:04+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "ja"
-}
--->
-[![オープンソースモデル](../../../translated_images/17-lesson-banner.a5b918fb0920e4e6d8d391a100f5cb1d5929f4c2752c937d40392905dec82592.ja.png)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+[![オープンソースモデル](../../../translated_images/ja/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## はじめに
 
@@ -33,7 +24,7 @@ AIエージェントは生成AIの世界で非常にエキサイティングな�
 
 AIエージェントは、大規模言語モデル（LLM）に**状態**と**ツール**へのアクセスを提供することでタスクを実行できるようにします。
 
-![エージェントモデル](../../../translated_images/what-agent.21f2893bdfd01e6a7fd09b0416c2b15594d97f44bbb2ab5a1ff8bf643d2fcb3d.ja.png)
+![エージェントモデル](../../../translated_images/ja/what-agent.21f2893bdfd01e6a.webp)
 
 これらの用語を定義しましょう：
 
@@ -53,7 +44,7 @@ AIエージェントは、大規模言語モデル（LLM）に**状態**と**ツ
 
 `AgentExecutor`はチャット履歴も保存し、チャットのコンテキストを提供します。
 
-![LangChainエージェント](../../../translated_images/langchain-agents.edcc55b5d5c437169a2037211284154561183c58bcec6d4ac2f8a79046fac9af.ja.png)
+![LangChainエージェント](../../../translated_images/ja/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChainは、LLMがアクセスできる[ツールのカタログ](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst)を提供しています。これらはコミュニティやLangChainチームによって作成されています。
 
@@ -85,7 +76,7 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 以下はそのプロセスの例です：
 
-![AutoGen](../../../translated_images/autogen.dee9a25a45fde584fedd84b812a6e31de5a6464687cdb66bb4f2cb7521391856.ja.png)
+![AutoGen](../../../translated_images/ja/autogen.dee9a25a45fde584.webp)
 
 #### システムメッセージで定義されたLLM
 
@@ -129,7 +120,7 @@ chatbot (to user_proxy):
 
 タスクを完了するために、`Planner`は`Plugins`と呼ばれるツールのコレクションにアクセスします。これらはPythonクラスや一般的なコードインタープリターである可能性があります。このプラグインは埋め込みとして保存され、LLMが適切なプラグインをよりよく検索できるようにします。
 
-![Taskweaver](../../../translated_images/taskweaver.da8559999267715a95b7677cf9b7d7dd8420aee6f3c484ced1833f081988dcd5.ja.png)
+![Taskweaver](../../../translated_images/ja/taskweaver.da8559999267715a.webp)
 
 以下は異常検出を処理するプラグインの例です：
 
@@ -143,7 +134,7 @@ class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_
 
 最後に探るエージェントフレームワークは[JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst)です。JARVISのユニークな点は、会話の`状態`を管理するためにLLMを使用し、`ツール`として他のAIモデルを使用することです。これらのAIモデルは、物体検出、文字起こし、画像キャプションなど特定のタスクを実行する専門モデルです。
 
-![JARVIS](../../../translated_images/jarvis.762ddbadbd1a3a3364d4ca3db1a7a9c0d2180060c0f8da6f7bd5b5ea2a115aa7.ja.png)
+![JARVIS](../../../translated_images/ja/jarvis.762ddbadbd1a3a33.webp)
 
 汎用モデルであるLLMは、ユーザーからのリクエストを受け取り、特定のタスクとそのタスクを完了するために必要な引数やデータを特定します。
 

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:38:37+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "fi"
-}
--->
 # Johdanto pieniin kielimalleihin generatiivisessa tekoälyssä aloittelijoille  
 Generatiivinen tekoäly on kiehtova tekoälyn osa-alue, joka keskittyy järjestelmien luomiseen, jotka pystyvät tuottamaan uutta sisältöä. Tämä sisältö voi olla tekstiä, kuvia, musiikkia tai jopa kokonaisia virtuaaliympäristöjä. Yksi generatiivisen tekoälyn jännittävimmistä sovelluksista liittyy kielimalleihin.
 
@@ -33,7 +24,7 @@ SLM:t koulutetaan valtavilla tekstiaineistoilla. Koulutuksen aikana ne oppivat k
 
 SLM:ien kehitys vastaa kasvavaa tarvetta malleille, joita voidaan käyttää resurssirajoitetuissa ympäristöissä, kuten mobiililaitteissa tai reunalaskennassa, joissa täysimittaiset LLM:t voivat olla liian raskaita. Tehokkuuteen keskittyen SLM:t tasapainottavat suorituskyvyn ja saavutettavuuden, mahdollistaen laajemman soveltamisen eri aloilla.
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.fi.png)
+![slm](../../../translated_images/fi/slm.4058842744d0444a.webp)
 
 ## Oppimistavoitteet  
 
@@ -135,7 +126,7 @@ Voimme käyttää Phi-3/3.5 -perheen malleja eri käyttötarkoituksissa. Toisin 
 
 Toivomme käyttävämme Phi-3/3.5 -malleja eri tilanteissa. Seuraavaksi käytämme Phi-3/3.5 -malleja eri käyttötarkoitusten mukaan.  
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.fi.png)
+![phi3](../../../translated_images/fi/phi3.655208c3186ae381.webp)
 
 ### Päättelyn erot pilvipalvelun API:n kautta  
 
@@ -145,9 +136,9 @@ GitHub Models on suorin tapa. Voit nopeasti käyttää Phi-3/3.5-Instruct -malli
 
 - Demo: Vertailu Phi-3-mini:n ja Phi-3.5-mini:n vaikutuksista kiinankielisissä tilanteissa  
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.fi.png)  
+![phi3](../../../translated_images/fi/gh1.126c6139713b622b.webp)  
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.fi.png)  
+![phi35](../../../translated_images/fi/gh2.07d7985af66f178d.webp)  
 
 **Azure AI Studio**  
 

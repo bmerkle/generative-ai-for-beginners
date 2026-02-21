@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:44:38+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "hu"
-}
--->
 # Bevezetés a kis nyelvi modellekbe a generatív MI kezdőknek
 A generatív MI az a mesterséges intelligencia izgalmas területe, amely olyan rendszerek létrehozására fókuszál, amelyek képesek új tartalmak generálására. Ezek a tartalmak lehetnek szövegek, képek, zene vagy akár teljes virtuális környezetek is. A generatív MI egyik legizgalmasabb alkalmazási területe a nyelvi modellek világa.
 
@@ -33,7 +24,7 @@ Az SLM-eket hatalmas mennyiségű szöveges adaton tanítják. A tanulás során
 
 Az SLM-ek fejlesztése összhangban áll azzal a növekvő igénnyel, hogy olyan modelleket hozzunk létre, amelyek erőforrás-korlátozott környezetekben, például mobil eszközökön vagy élő számítástechnikai platformokon is használhatók, ahol a teljes méretű LLM-ek túl erőforrás-igényesek lennének. Az SLM-ek az erőforrás-hatékonyságra fókuszálva egyensúlyt teremtenek a teljesítmény és az elérhetőség között, így szélesebb körben alkalmazhatók különböző területeken.
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.hu.png)
+![slm](../../../translated_images/hu/slm.4058842744d0444a.webp)
 
 ## Tanulási célok
 
@@ -135,7 +126,7 @@ A Phi-3/3.5 család modelljeit különböző szcenáriókban használhatjuk. Az 
 
 Szeretnénk a Phi-3/3.5-öt különböző szcenáriókban használni. Ezután különböző helyzetekben fogjuk alkalmazni a Phi-3/3.5-öt.
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.hu.png)
+![phi3](../../../translated_images/hu/phi3.655208c3186ae381.webp)
 
 ### Inferálás különbsége a felhő API-jával
 

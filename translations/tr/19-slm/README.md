@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:33:05+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "tr"
-}
--->
 # Başlangıç Seviyesi için Üretken Yapay Zeka İçin Küçük Dil Modellerine Giriş  
 Üretken Yapay Zeka, yeni içerik oluşturabilen sistemler geliştirmeye odaklanan büyüleyici bir yapay zeka alanıdır. Bu içerikler metin ve görsellerden müziğe ve hatta tamamen sanal ortamlara kadar çeşitlilik gösterebilir. Üretken yapay zekanın en heyecan verici uygulamalarından biri dil modelleri alanındadır.
 
@@ -33,7 +24,7 @@ SLM’ler, çok büyük miktarda metin verisi üzerinde eğitilir. Eğitim sıra
 
 SLM’lerin geliştirilmesi, tam ölçekli LLM’lerin ağır kaynak gereksinimleri nedeniyle pratik olmadığı mobil cihazlar veya uç bilişim platformları gibi kaynak kısıtlı ortamlarda kullanılabilecek modeller ihtiyacına paraleldir. Verimliliğe odaklanarak, SLM’ler performans ile erişilebilirlik arasında bir denge kurar ve çeşitli alanlarda daha geniş uygulama imkanı sağlar.  
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.tr.png)  
+![slm](../../../translated_images/tr/slm.4058842744d0444a.webp)  
 
 ## Öğrenme Hedefleri  
 
@@ -135,7 +126,7 @@ Phi-3/3.5 Ailesi modellerini farklı senaryolara göre kullanabiliriz. LLM’ler
 
 Phi-3/3.5’i farklı senaryolarda kullanmayı hedefliyoruz. Şimdi, farklı senaryolara göre Phi-3/3.5 kullanacağız.  
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.tr.png)  
+![phi3](../../../translated_images/tr/phi3.655208c3186ae381.webp)  
 
 ### Bulut API’si ile Çıkarım Farkı  
 
@@ -145,9 +136,9 @@ GitHub Modelleri en doğrudan yoldur. Phi-3/3.5-Instruct modeline GitHub Modelle
 
 - Demo: Çince senaryolarda Phi-3-mini ve Phi-3.5-mini etkilerinin karşılaştırılması  
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.tr.png)  
+![phi3](../../../translated_images/tr/gh1.126c6139713b622b.webp)  
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.tr.png)  
+![phi35](../../../translated_images/tr/gh2.07d7985af66f178d.webp)  
 
 **Azure AI Studio**  
 

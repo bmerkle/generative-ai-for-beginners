@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8e8d1f6a63da606af7176a87ff8e92b6",
-  "translation_date": "2025-10-17T22:23:06+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "bg"
-}
--->
-[![Модели с отворен код](../../../translated_images/17-lesson-banner.a5b918fb0920e4e6d8d391a100f5cb1d5929f4c2752c937d40392905dec82592.bg.png)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+[![Модели с отворен код](../../../translated_images/bg/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## Въведение
 
@@ -33,7 +24,7 @@ AI агентите са много вълнуваща област в свет�
 
 AI агентите позволяват на големите езикови модели (LLMs) да изпълняват задачи, като им предоставят достъп до **състояние** и **инструменти**.
 
-![Модел на агент](../../../translated_images/what-agent.21f2893bdfd01e6a7fd09b0416c2b15594d97f44bbb2ab5a1ff8bf643d2fcb3d.bg.png)
+![Модел на агент](../../../translated_images/bg/what-agent.21f2893bdfd01e6a.webp)
 
 Нека дефинираме тези термини:
 
@@ -53,7 +44,7 @@ AI агентите позволяват на големите езикови м
 
 `AgentExecutor` също така съхранява историята на чата, за да предостави контекста на разговора.
 
-![Langchain агенти](../../../translated_images/langchain-agents.edcc55b5d5c437169a2037211284154561183c58bcec6d4ac2f8a79046fac9af.bg.png)
+![Langchain агенти](../../../translated_images/bg/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChain предлага [каталог с инструменти](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst), които могат да бъдат импортирани във вашето приложение, за да получи LLM достъп до тях. Те са създадени от общността и екипа на LangChain.
 
@@ -85,7 +76,7 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 Ето пример за процеса:
 
-![AutoGen](../../../translated_images/autogen.dee9a25a45fde584fedd84b812a6e31de5a6464687cdb66bb4f2cb7521391856.bg.png)
+![AutoGen](../../../translated_images/bg/autogen.dee9a25a45fde584.webp)
 
 #### LLM, дефиниран със системно съобщение
 
@@ -129,7 +120,7 @@ chatbot (to user_proxy):
 
 За да изпълни задачите, `Planner` има достъп до колекция от инструменти, наречени `Plugins`. Това могат да бъдат Python класове или общ интерпретатор на код. Тези плъгини се съхраняват като embeddings, за да може LLM по-добре да търси правилния плъгин.
 
-![Taskweaver](../../../translated_images/taskweaver.da8559999267715a95b7677cf9b7d7dd8420aee6f3c484ced1833f081988dcd5.bg.png)
+![Taskweaver](../../../translated_images/bg/taskweaver.da8559999267715a.webp)
 
 Ето пример за плъгин за обработка на откриване на аномалии:
 
@@ -143,7 +134,7 @@ class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_
 
 Последната рамка за агенти, която ще разгледаме, е [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). Това, което прави JARVIS уникален, е, че използва LLM за управление на `състоянието` на разговора, а `инструментите` са други AI модели. Всеки от AI моделите е специализиран модел, който изпълнява определени задачи като разпознаване на обекти, транскрипция или описание на изображения.
 
-![JARVIS](../../../translated_images/jarvis.762ddbadbd1a3a3364d4ca3db1a7a9c0d2180060c0f8da6f7bd5b5ea2a115aa7.bg.png)
+![JARVIS](../../../translated_images/bg/jarvis.762ddbadbd1a3a33.webp)
 
 LLM, като общ модел, получава заявката от потребителя и идентифицира конкретната задача и всички аргументи/данни, които са необходими за изпълнение на задачата.
 

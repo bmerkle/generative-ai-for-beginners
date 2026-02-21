@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8e8d1f6a63da606af7176a87ff8e92b6",
-  "translation_date": "2025-10-17T18:43:31+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "th"
-}
--->
-[![Open Source Models](../../../translated_images/17-lesson-banner.a5b918fb0920e4e6d8d391a100f5cb1d5929f4c2752c937d40392905dec82592.th.png)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+[![Open Source Models](../../../translated_images/th/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## บทนำ
 
@@ -33,7 +24,7 @@ AI Agents เป็นสาขาที่น่าตื่นเต้นม�
 
 AI Agents ช่วยให้ Large Language Models (LLMs) สามารถทำงานได้โดยให้พวกมันเข้าถึง **สถานะ** และ **เครื่องมือ**
 
-![Agent Model](../../../translated_images/what-agent.21f2893bdfd01e6a7fd09b0416c2b15594d97f44bbb2ab5a1ff8bf643d2fcb3d.th.png)
+![Agent Model](../../../translated_images/th/what-agent.21f2893bdfd01e6a.webp)
 
 มาทำความเข้าใจคำศัพท์เหล่านี้:
 
@@ -53,7 +44,7 @@ AI Agents ช่วยให้ Large Language Models (LLMs) สามารถ�
 
 `Agent Executor` ยังเก็บประวัติการสนทนาเพื่อให้บริบทของการสนทนา
 
-![Langchain Agents](../../../translated_images/langchain-agents.edcc55b5d5c437169a2037211284154561183c58bcec6d4ac2f8a79046fac9af.th.png)
+![Langchain Agents](../../../translated_images/th/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChain มี [แคตตาล็อกของเครื่องมือ](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) ที่สามารถนำเข้าไปในแอปพลิเคชันของคุณเพื่อให้ LLM เข้าถึงได้ เครื่องมือเหล่านี้สร้างโดยชุมชนและทีม LangChain
 
@@ -85,7 +76,7 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 นี่คือตัวอย่างของกระบวนการ:
 
-![AutoGen](../../../translated_images/autogen.dee9a25a45fde584fedd84b812a6e31de5a6464687cdb66bb4f2cb7521391856.th.png)
+![AutoGen](../../../translated_images/th/autogen.dee9a25a45fde584.webp)
 
 #### LLM กำหนดด้วยข้อความระบบ
 
@@ -129,7 +120,7 @@ Frameworks ของ Agent ถัดไปที่เราจะสำรว�
 
 เพื่อทำงานให้เสร็จ `Planner` จะเข้าถึงชุดเครื่องมือที่เรียกว่า `Plugins` ซึ่งสามารถเป็นคลาส Python หรือ interpreter โค้ดทั่วไป Plugins เหล่านี้ถูกเก็บเป็น embeddings เพื่อให้ LLM สามารถค้นหา plugin ที่เหมาะสมได้ดียิ่งขึ้น
 
-![Taskweaver](../../../translated_images/taskweaver.da8559999267715a95b7677cf9b7d7dd8420aee6f3c484ced1833f081988dcd5.th.png)
+![Taskweaver](../../../translated_images/th/taskweaver.da8559999267715a.webp)
 
 นี่คือตัวอย่างของ plugin สำหรับจัดการการตรวจจับความผิดปกติ:
 
@@ -143,7 +134,7 @@ class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_
 
 Frameworks ของ Agent สุดท้ายที่เราจะสำรวจคือ [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst) สิ่งที่ทำให้ JARVIS มีเอกลักษณ์คือการใช้ LLM ในการจัดการ `สถานะ` ของการสนทนา และ `เครื่องมือ` คือโมเดล AI อื่น ๆ แต่ละโมเดล AI เป็นโมเดลเฉพาะที่ทำงานบางอย่าง เช่น การตรวจจับวัตถุ การถอดเสียง หรือการสร้างคำบรรยายภาพ
 
-![JARVIS](../../../translated_images/jarvis.762ddbadbd1a3a3364d4ca3db1a7a9c0d2180060c0f8da6f7bd5b5ea2a115aa7.th.png)
+![JARVIS](../../../translated_images/th/jarvis.762ddbadbd1a3a33.webp)
 
 LLM ซึ่งเป็นโมเดลทั่วไป จะรับคำขอจากผู้ใช้และระบุงานเฉพาะและอาร์กิวเมนต์/ข้อมูลที่จำเป็นในการทำงานให้เสร็จ
 

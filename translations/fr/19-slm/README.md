@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:12:06+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "fr"
-}
--->
 # Introduction aux petits modèles de langage pour l’IA générative pour débutants  
 L’IA générative est un domaine fascinant de l’intelligence artificielle qui se concentre sur la création de systèmes capables de générer du contenu nouveau. Ce contenu peut aller du texte et des images à la musique, voire à des environnements virtuels entiers. L’une des applications les plus passionnantes de l’IA générative se trouve dans le domaine des modèles de langage.
 
@@ -33,7 +24,7 @@ Les SLM sont entraînés sur d’énormes quantités de données textuelles. Pen
 
 Le développement des SLM répond au besoin croissant de modèles pouvant être déployés dans des environnements aux ressources limitées, comme les appareils mobiles ou les plateformes de calcul en périphérie, où les LLM à grande échelle peuvent être impraticables en raison de leurs lourdes exigences en ressources. En privilégiant l’efficacité, les SLM équilibrent performance et accessibilité, permettant une application plus large dans divers domaines.
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.fr.png)
+![slm](../../../translated_images/fr/slm.4058842744d0444a.webp)
 
 ## Objectifs d’apprentissage  
 
@@ -135,7 +126,7 @@ Nous pouvons utiliser les modèles de la famille Phi-3/3.5 selon différents sc�
 
 Nous souhaitons utiliser Phi-3/3.5 dans différents scénarios. Ensuite, nous verrons comment utiliser Phi-3/3.5 selon ces différents cas.
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.fr.png)
+![phi3](../../../translated_images/fr/phi3.655208c3186ae381.webp)
 
 ### Différences d’inférence avec l’API Cloud  
 
@@ -145,9 +136,9 @@ GitHub Models est la méthode la plus directe. Vous pouvez rapidement accéder a
 
 - Démo : comparaison des performances de Phi-3-mini et Phi-3.5-mini dans des scénarios en chinois
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.fr.png)
+![phi3](../../../translated_images/fr/gh1.126c6139713b622b.webp)
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.fr.png)
+![phi35](../../../translated_images/fr/gh2.07d7985af66f178d.webp)
 
 **Azure AI Studio**  
 

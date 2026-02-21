@@ -1,15 +1,6 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "0135e6c271f3ece8699050d4debbce88",
-  "translation_date": "2025-10-18T01:26:14+00:00",
-  "source_file": "04-prompt-engineering-fundamentals/README.md",
-  "language_code": "sr"
-}
--->
 # Основе инжењеринга упутстава
 
-[![Основе инжењеринга упутстава](../../../translated_images/04-lesson-banner.a2c90deba7fedacda69f35b41636a8951ec91c2e33f5420b1254534ac85bc18e.sr.png)](https://youtu.be/GElCu2kUlRs?si=qrXsBvXnCW12epb8)
+[![Основе инжењеринга упутстава](../../../translated_images/sr/04-lesson-banner.a2c90deba7fedacd.webp)](https://youtu.be/GElCu2kUlRs?si=qrXsBvXnCW12epb8)
 
 ## Увод
 Овај модул покрива основне концепте и технике за креирање ефикасних упутстава у моделима генеративне вештачке интелигенције. Начин на који пишете своје упутство за LLM је такође важан. Пажљиво осмишљено упутство може довести до бољег квалитета одговора. Али шта тачно значе термини као што су _упутство_ и _инжењеринг упутстава_? И како могу побољшати _улазно упутство_ које шаљем LLM-у? Ово су питања на која ћемо покушати да одговоримо у овом и наредном поглављу.
@@ -53,7 +44,7 @@ Notebook долази са _почетним_ вежбама - али се ох�
 
 Желите да добијете ширу слику о томе шта ова лекција покрива пре него што се удубите? Погледајте овај илустровани водич, који вам даје осећај о главним темама које се покривају и кључним закључцима о којима треба да размислите у свакој од њих. План лекције вас води од разумевања основних концепата и изазова до њиховог решавања релевантним техникама инжењеринга упутстава и најбољим праксама. Имајте на уму да се одељак "Напредне технике" у овом водичу односи на садржај који је покривен у _следећем_ поглављу овог курикулума.
 
-![Илустровани водич за инжењеринг упутстава](../../../translated_images/04-prompt-engineering-sketchnote.d5f33336957a1e4f623b826195c2146ef4cc49974b72fa373de6929b474e8b70.sr.png)
+![Илустровани водич за инжењеринг упутстава](../../../translated_images/sr/04-prompt-engineering-sketchnote.d5f33336957a1e4f.webp)
 
 ## Наша стартап идеја
 
@@ -94,7 +85,7 @@ LLM види упутства као _секвенцу токена_ где ра
 
 Да бисте стекли интуицију о томе како токенизација функционише, пробајте алатке као што је [OpenAI Tokenizer](https://platform.openai.com/tokenizer?WT.mc_id=academic-105485-koreyst) приказан испод. Копирајте своје упутство - и видите како се оно претвара у токене, обраћајући пажњу на то како се обрађују знакови размака и интерпункције. Имајте на уму да овај пример приказује старији LLM (GPT-3) - па би покушај са новијим моделом могао произвести другачији резултат.
 
-![Токенизација](../../../translated_images/04-tokenizer-example.e71f0a0f70356c5c7d80b21e8753a28c18a7f6d4aaa1c4b08e65d17625e85642.sr.png)
+![Токенизација](../../../translated_images/sr/04-tokenizer-example.e71f0a0f70356c5c.webp)
 
 ### Концепт: Основни модели
 
@@ -104,7 +95,7 @@ LLM види упутства као _секвенцу токена_ где ра
 
 Али шта ако корисник жели да види нешто специфично што испуњава одређене критеријуме или циљ задатка? Овде _LLM-ови подешени за инструкције_ долазе у игру.
 
-![Завршетак четовања основног LLM-а](../../../translated_images/04-playground-chat-base.65b76fcfde0caa6738e41d20f1a6123f9078219e6f91a88ee5ea8014f0469bdf.sr.png)
+![Завршетак четовања основног LLM-а](../../../translated_images/sr/04-playground-chat-base.65b76fcfde0caa67.webp)
 
 ### Концепт: LLM-ови подешени за инструкције
 
@@ -118,7 +109,7 @@ LLM види упутства као _секвенцу токена_ где ра
 
 Видите ли како је резултат сада подешен да одражава жељени циљ и формат? Едукатор сада може директно користити овај одговор у својим слајдовима за ту класу.
 
-![Завршетак четовања LLM-а подешеног за инструкције](../../../translated_images/04-playground-chat-instructions.b30bbfbdf92f2d051639c9bc23f74a0e2482f8dc7f0dafc6cc6fda81b2b00534.sr.png)
+![Завршетак четовања LLM-а подешеног за инструкције](../../../translated_images/sr/04-playground-chat-instructions.b30bbfbdf92f2d05.webp)
 
 ## Зашто нам је потребан инжењеринг упутстава?
 
@@ -133,15 +124,15 @@ Pretraga na internetu pokazala mi je da postoje izmišljeni prikazi (npr. televi
 
 > **Odgovor 1**: OpenAI Playground (GPT-35)
 
-![Odgovor 1](../../../translated_images/04-fabrication-oai.5818c4e0b2a2678c40e0793bf873ef4a425350dd0063a183fb8ae02cae63aa0c.sr.png)
+![Odgovor 1](../../../translated_images/sr/04-fabrication-oai.5818c4e0b2a2678c.webp)
 
 > **Odgovor 2**: Azure OpenAI Playground (GPT-35)
 
-![Odgovor 2](../../../translated_images/04-fabrication-aoai.b14268e9ecf25caf613b7d424c16e2a0dc5b578f8f960c0c04d4fb3a68e6cf61.sr.png)
+![Odgovor 2](../../../translated_images/sr/04-fabrication-aoai.b14268e9ecf25caf.webp)
 
 > **Odgovor 3**: Hugging Face Chat Playground (LLama-2)
 
-![Odgovor 3](../../../translated_images/04-fabrication-huggingchat.faf82a0a512789565e410568bce1ac911075b943dec59b1ef4080b61723b5bf4.sr.png)
+![Odgovor 3](../../../translated_images/sr/04-fabrication-huggingchat.faf82a0a51278956.webp)
 
 Kao što se očekivalo, svaki model (ili verzija modela) proizvodi malo drugačije odgovore zahvaljujući stohastičkom ponašanju i varijacijama u sposobnostima modela. Na primer, jedan model cilja publiku osmog razreda, dok drugi pretpostavlja da se obraća srednjoškolcima. Ali sva tri modela generisala su odgovore koji bi mogli ubediti neinformisanog korisnika da je događaj stvaran.
 

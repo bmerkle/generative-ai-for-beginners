@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:31:28+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "it"
-}
--->
 # Introduzione ai Modelli Linguistici di Piccole Dimensioni per l’IA Generativa per Principianti  
 L’IA generativa è un campo affascinante dell’intelligenza artificiale che si concentra sulla creazione di sistemi capaci di generare nuovi contenuti. Questi contenuti possono spaziare da testi e immagini a musica e persino interi ambienti virtuali. Una delle applicazioni più entusiasmanti dell’IA generativa riguarda i modelli linguistici.
 
@@ -33,7 +24,7 @@ Gli SLM vengono addestrati su enormi quantità di dati testuali. Durante l’add
 
 Lo sviluppo degli SLM risponde alla crescente necessità di modelli che possano essere implementati in ambienti con risorse limitate, come dispositivi mobili o piattaforme di edge computing, dove gli LLM a piena scala potrebbero risultare impraticabili a causa dell’elevato consumo di risorse. Concentrandosi sull’efficienza, gli SLM bilanciano prestazioni e accessibilità, permettendo un’applicazione più ampia in diversi ambiti.
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.it.png)
+![slm](../../../translated_images/it/slm.4058842744d0444a.webp)
 
 ## Obiettivi di Apprendimento  
 
@@ -135,7 +126,7 @@ Possiamo utilizzare il modello della famiglia Phi-3/3.5 in base a diversi scenar
 
 Vogliamo utilizzare Phi-3/3.5 in diversi scenari. Di seguito, useremo Phi-3/3.5 in base a differenti contesti.
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.it.png)
+![phi3](../../../translated_images/it/phi3.655208c3186ae381.webp)
 
 ### Differenze di Inferenza con l’API Cloud  
 
@@ -145,9 +136,9 @@ GitHub Models è il modo più diretto. Puoi accedere rapidamente al modello Phi-
 
 - Demo: Confronto degli effetti di Phi-3-mini e Phi-3.5-mini in scenari in cinese
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.it.png)
+![phi3](../../../translated_images/it/gh1.126c6139713b622b.webp)
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.it.png)
+![phi35](../../../translated_images/it/gh2.07d7985af66f178d.webp)
 
 **Azure AI Studio**  
 

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:23:03+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "ja"
-}
--->
 # 初心者向け生成AIのための小型言語モデル入門
 生成AIは、新しいコンテンツを生成できるシステムの構築に焦点を当てた魅力的な人工知能の分野です。このコンテンツは、テキストや画像から音楽、さらには仮想環境全体にまで及びます。生成AIの最もエキサイティングな応用の一つが言語モデルの領域です。
 
@@ -33,7 +24,7 @@ SLMは大量のテキストデータで訓練されます。訓練中に言語�
 
 SLMの開発は、モバイルデバイスやエッジコンピューティングプラットフォームなど、リソースが限られた環境での展開ニーズの高まりに対応しています。フルスケールのLLMはリソース負荷が大きいため実用的でない場合があります。効率性に重点を置くことで、SLMは性能とアクセスのバランスを取り、さまざまな分野での幅広い応用を可能にしています。
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.ja.png)
+![slm](../../../translated_images/ja/slm.4058842744d0444a.webp)
 
 ## 学習目標
 
@@ -135,7 +126,7 @@ Phi-3/3.5ファミリーのモデルはシナリオに応じて使い分けが�
 
 Phi-3/3.5をさまざまなシナリオで活用したいと思います。次に、異なるシナリオに基づいてPhi-3/3.5を使う方法を紹介します。
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.ja.png)
+![phi3](../../../translated_images/ja/phi3.655208c3186ae381.webp)
 
 ### クラウドAPIによる推論の違い
 
@@ -145,9 +136,9 @@ GitHub Modelsは最も直接的な方法です。GitHub Modelsを通じてPhi-3/
 
 - デモ：中国語シナリオにおけるPhi-3-miniとPhi-3.5-miniの効果比較
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.ja.png)
+![phi3](../../../translated_images/ja/gh1.126c6139713b622b.webp)
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.ja.png)
+![phi35](../../../translated_images/ja/gh2.07d7985af66f178d.webp)
 
 **Azure AI Studio**
 

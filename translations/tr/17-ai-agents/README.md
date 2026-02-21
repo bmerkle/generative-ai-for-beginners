@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8e8d1f6a63da606af7176a87ff8e92b6",
-  "translation_date": "2025-10-17T16:24:50+00:00",
-  "source_file": "17-ai-agents/README.md",
-  "language_code": "tr"
-}
--->
-[![Açık Kaynak Modeller](../../../translated_images/17-lesson-banner.a5b918fb0920e4e6d8d391a100f5cb1d5929f4c2752c937d40392905dec82592.tr.png)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+[![Açık Kaynak Modeller](../../../translated_images/tr/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## Giriş
 
@@ -33,7 +24,7 @@ AI Agent'ler, Generative AI dünyasında oldukça heyecan verici bir alandır. B
 
 AI Agent'ler, Büyük Dil Modellerinin (LLM'ler) bir **duruma** ve **araçlara** erişim sağlayarak görevleri yerine getirmesine olanak tanır.
 
-![Agent Model](../../../translated_images/what-agent.21f2893bdfd01e6a7fd09b0416c2b15594d97f44bbb2ab5a1ff8bf643d2fcb3d.tr.png)
+![Agent Model](../../../translated_images/tr/what-agent.21f2893bdfd01e6a.webp)
 
 Bu terimleri tanımlayalım:
 
@@ -53,7 +44,7 @@ Bu tanımlar, ileride nasıl uygulandıklarını inceleyeceğimiz için size sa�
 
 `AgentExecutor`, sohbet geçmişini de saklayarak sohbetin bağlamını sağlar.
 
-![Langchain Agents](../../../translated_images/langchain-agents.edcc55b5d5c437169a2037211284154561183c58bcec6d4ac2f8a79046fac9af.tr.png)
+![Langchain Agents](../../../translated_images/tr/langchain-agents.edcc55b5d5c43716.webp)
 
 LangChain, LLM'nin erişebileceği [araç kataloğu](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) sunar. Bu araçlar, topluluk ve LangChain ekibi tarafından oluşturulmuştur.
 
@@ -85,7 +76,7 @@ Durumu değiştirmek ve yönetmek için, bir yardımcı Agent görevi tamamlamak
 
 İşte sürecin bir örneği:
 
-![AutoGen](../../../translated_images/autogen.dee9a25a45fde584fedd84b812a6e31de5a6464687cdb66bb4f2cb7521391856.tr.png)
+![AutoGen](../../../translated_images/tr/autogen.dee9a25a45fde584.webp)
 
 #### Sistem Mesajı ile Tanımlı LLM
 
@@ -129,7 +120,7 @@ Sohbetin durumunu yönetmek için TaskWeaver, bir `Planner` kavramını kullanı
 
 Görevleri tamamlamak için `Planner`, `Plugins` adı verilen araçlar koleksiyonuna erişir. Bu araçlar Python sınıfları veya genel bir kod yorumlayıcı olabilir. Bu eklentiler, LLM'nin doğru eklentiyi daha iyi arayabilmesi için gömülü olarak saklanır.
 
-![Taskweaver](../../../translated_images/taskweaver.da8559999267715a95b7677cf9b7d7dd8420aee6f3c484ced1833f081988dcd5.tr.png)
+![Taskweaver](../../../translated_images/tr/taskweaver.da8559999267715a.webp)
 
 İşte anomali tespiti için bir eklenti örneği:
 
@@ -143,7 +134,7 @@ Kod, yürütülmeden önce doğrulanır. Taskweaver'da bağlamı yönetmek için
 
 Son olarak keşfedeceğimiz agent çerçevesi [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). JARVIS'i benzersiz kılan şey, bir LLM'nin sohbetin `durumunu` yönetmesi ve `araçların` diğer AI modelleri olmasıdır. Her bir AI modeli, nesne algılama, transkripsiyon veya görüntü açıklama gibi belirli görevleri yerine getiren uzmanlaşmış modellerdir.
 
-![JARVIS](../../../translated_images/jarvis.762ddbadbd1a3a3364d4ca3db1a7a9c0d2180060c0f8da6f7bd5b5ea2a115aa7.tr.png)
+![JARVIS](../../../translated_images/tr/jarvis.762ddbadbd1a3a33.webp)
 
 Genel amaçlı bir model olan LLM, kullanıcıdan gelen talebi alır ve belirli görevi ve bu görevi tamamlamak için gereken argümanları/verileri belirler.
 

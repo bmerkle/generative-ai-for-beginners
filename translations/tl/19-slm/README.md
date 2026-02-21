@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:43:00+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "tl"
-}
--->
 # Panimula sa Maliit na Language Models para sa Generative AI para sa mga Baguhan
 Ang Generative AI ay isang kahanga-hangang larangan ng artificial intelligence na nakatuon sa paglikha ng mga sistema na kayang bumuo ng bagong nilalaman. Ang nilalamang ito ay maaaring mula sa teksto at mga larawan hanggang sa musika at maging buong virtual na kapaligiran. Isa sa mga pinaka-kapana-panabik na aplikasyon ng generative AI ay sa larangan ng mga language model.
 
@@ -33,7 +24,7 @@ Ang SLM ay sinasanay gamit ang malalaking dami ng tekstong datos. Sa panahon ng 
 
 Ang pagbuo ng SLM ay tugma sa lumalaking pangangailangan para sa mga modelong maaaring gamitin sa mga kapaligirang may limitadong resources, tulad ng mga mobile device o edge computing platforms, kung saan ang full-scale na LLM ay maaaring hindi praktikal dahil sa mataas na pangangailangan sa resources. Sa pagtutok sa episyensya, pinagsasama ng SLM ang performance at accessibility, na nagpapahintulot ng mas malawak na aplikasyon sa iba't ibang larangan.
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.tl.png)
+![slm](../../../translated_images/tl/slm.4058842744d0444a.webp)
 
 ## Mga Layunin sa Pagkatuto
 
@@ -135,7 +126,7 @@ Maaari nating gamitin ang Phi-3/3.5 Family model base sa iba't ibang senaryo. Hi
 
 Nais naming gamitin ang Phi-3/3.5 sa iba't ibang senaryo. Susunod, gagamitin natin ang Phi-3/3.5 base sa iba't ibang senaryo.
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.tl.png)
+![phi3](../../../translated_images/tl/phi3.655208c3186ae381.webp)
 
 ### Pagkakaiba sa Inference gamit ang Cloud's API
 
@@ -145,9 +136,9 @@ Ang GitHub Models ang pinaka-direktang paraan. Maaari kang mabilis na makakuha n
 
 - Demo: Paghahambing ng epekto ng Phi-3-mini at Phi-3.5-mini sa mga senaryo sa wikang Tsino
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.tl.png)
+![phi3](../../../translated_images/tl/gh1.126c6139713b622b.webp)
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.tl.png)
+![phi35](../../../translated_images/tl/gh2.07d7985af66f178d.webp)
 
 **Azure AI Studio**
 

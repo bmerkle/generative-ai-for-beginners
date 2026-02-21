@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:37:11+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "da"
-}
--->
 # Introduktion til Små Sprogmodeller for Generativ AI for Begyndere  
 Generativ AI er et fascinerende område inden for kunstig intelligens, der fokuserer på at skabe systemer, som kan generere nyt indhold. Dette indhold kan spænde fra tekst og billeder til musik og endda hele virtuelle miljøer. En af de mest spændende anvendelser af generativ AI er inden for sprogmodeller.
 
@@ -33,7 +24,7 @@ SLM’er trænes på enorme mængder tekstdata. Under træningen lærer de sprog
 
 Udviklingen af SLM’er matcher det stigende behov for modeller, der kan implementeres i miljøer med begrænsede ressourcer, såsom mobile enheder eller edge computing-platforme, hvor fuldskala LLM’er kan være upraktiske på grund af deres store ressourceforbrug. Ved at fokusere på effektivitet balancerer SLM’er ydeevne med tilgængelighed, hvilket muliggør bredere anvendelse på tværs af forskellige domæner.
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.da.png)
+![slm](../../../translated_images/da/slm.4058842744d0444a.webp)
 
 ## Læringsmål  
 
@@ -135,7 +126,7 @@ Vi kan bruge Phi-3/3.5-familien baseret på forskellige scenarier. I modsætning
 
 Vi håber at bruge Phi-3/3.5 i forskellige scenarier. Næste vil vi anvende Phi-3/3.5 baseret på forskellige scenarier.
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.da.png)
+![phi3](../../../translated_images/da/phi3.655208c3186ae381.webp)
 
 ### Inferensforskel Cloud’s API  
 
@@ -145,9 +136,9 @@ GitHub Models er den mest direkte måde. Du kan hurtigt få adgang til Phi-3/3.5
 
 - Demo: Sammenligning af effekterne af Phi-3-mini og Phi-3.5-mini i kinesiske scenarier
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.da.png)
+![phi3](../../../translated_images/da/gh1.126c6139713b622b.webp)
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.da.png)
+![phi35](../../../translated_images/da/gh2.07d7985af66f178d.webp)
 
 **Azure AI Studio**  
 

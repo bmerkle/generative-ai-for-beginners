@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "124ad36cfe96f74038811b6e2bb93e9d",
-  "translation_date": "2025-07-09T18:40:55+00:00",
-  "source_file": "19-slm/README.md",
-  "language_code": "vi"
-}
--->
 # Giới thiệu về Mô hình Ngôn ngữ Nhỏ cho Generative AI dành cho Người mới bắt đầu  
 Generative AI là một lĩnh vực hấp dẫn của trí tuệ nhân tạo, tập trung vào việc tạo ra các hệ thống có khả năng sinh ra nội dung mới. Nội dung này có thể bao gồm văn bản, hình ảnh, âm nhạc và thậm chí cả các môi trường ảo hoàn chỉnh. Một trong những ứng dụng thú vị nhất của generative AI là trong lĩnh vực mô hình ngôn ngữ.
 
@@ -33,7 +24,7 @@ SLM được huấn luyện trên lượng lớn dữ liệu văn bản. Trong q
 
 Việc phát triển SLM phù hợp với nhu cầu ngày càng tăng về các mô hình có thể triển khai trong môi trường hạn chế tài nguyên, như thiết bị di động hoặc nền tảng điện toán biên, nơi mà LLM đầy đủ có thể không thực tế do yêu cầu tài nguyên lớn. Bằng cách tập trung vào hiệu quả, SLM cân bằng giữa hiệu suất và khả năng tiếp cận, giúp mở rộng ứng dụng trong nhiều lĩnh vực khác nhau.  
 
-![slm](../../../translated_images/slm.4058842744d0444a021548a3e8253efd20e93a6ef59ec1525ded361bfc9e6c22.vi.png)  
+![slm](../../../translated_images/vi/slm.4058842744d0444a.webp)  
 
 ## Mục tiêu học tập  
 
@@ -135,7 +126,7 @@ Chúng ta có thể sử dụng mô hình Phi-3/3.5 Family dựa trên các kị
 
 Chúng ta hy vọng sử dụng Phi-3/3.5 trong các kịch bản khác nhau. Tiếp theo, chúng ta sẽ sử dụng Phi-3/3.5 dựa trên các kịch bản khác nhau.  
 
-![phi3](../../../translated_images/phi3.655208c3186ae38168d66032ed529d1d0d9c881ac531c95a2a5a32dbe11c38b4.vi.png)  
+![phi3](../../../translated_images/vi/phi3.655208c3186ae381.webp)  
 
 ### Sự khác biệt khi suy luận qua API đám mây  
 
@@ -145,9 +136,9 @@ GitHub Models là cách trực tiếp nhất. Bạn có thể nhanh chóng truy 
 
 - Demo: So sánh hiệu quả của Phi-3-mini và Phi-3.5-mini trong các kịch bản tiếng Trung  
 
-![phi3](../../../translated_images/gh1.126c6139713b622b2564ef280de7d2a4c7f4c4a5e60cf577b94b47feec4342dd.vi.png)  
+![phi3](../../../translated_images/vi/gh1.126c6139713b622b.webp)  
 
-![phi35](../../../translated_images/gh2.07d7985af66f178df0c80d0331f39f763c5b5ec2859931d86ed7f2b43e6fa644.vi.png)  
+![phi35](../../../translated_images/vi/gh2.07d7985af66f178d.webp)  
 
 **Azure AI Studio**  
 

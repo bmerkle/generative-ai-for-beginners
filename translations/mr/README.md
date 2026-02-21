@@ -1,15 +1,6 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "d90bfd4a5d8b43f1d616dbc6e9dc8342",
-  "translation_date": "2025-11-12T08:18:01+00:00",
-  "source_file": "README.md",
-  "language_code": "mr"
-}
--->
-![जेनरेटिव AI सुरुवातीसाठी](../../translated_images/repo-thumbnailv4-fixed.11f1ce6a85d01461c33c11943bb61f2b6d6dcce3a3b25cd27e627031f41f8e00.mr.png)
+![Generative AI For Beginners](../../translated_images/mr/repo-thumbnailv4-fixed.11f1ce6a85d01461.webp)
 
-### 21 धडे जे तुम्हाला जेनरेटिव AI अॅप्लिकेशन्स तयार करण्यासाठी आवश्यक असलेले सर्वकाही शिकवतात
+### जनरेटिव एआय ऍप्लिकेशन्स तयार करायला सुरुवात करण्यासाठी आवश्यक असलेली प्रत्येक गोष्ट शिकवणारे 21 धडे
 
 [![GitHub license](https://img.shields.io/github/license/microsoft/Generative-AI-For-Beginners.svg)](https://github.com/microsoft/Generative-AI-For-Beginners/blob/master/LICENSE?WT.mc_id=academic-105485-koreyst)
 [![GitHub contributors](https://img.shields.io/github/contributors/microsoft/Generative-AI-For-Beginners.svg)](https://GitHub.com/microsoft/Generative-AI-For-Beginners/graphs/contributors/?WT.mc_id=academic-105485-koreyst)
@@ -21,118 +12,136 @@ CO_OP_TRANSLATOR_METADATA:
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/Generative-AI-For-Beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/Generative-AI-For-Beginners/network/?WT.mc_id=academic-105485-koreyst)
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/Generative-AI-For-Beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/Generative-AI-For-Beginners/stargazers/?WT.mc_id=academic-105485-koreyst)
 
-[![](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ### 🌐 बहुभाषिक समर्थन
 
-#### GitHub Action द्वारे समर्थित (स्वयंचलित आणि नेहमी अद्ययावत)
+#### GitHub Action द्वारे समर्थित (स्वयंचलित आणि नेहमीच अद्ययावत)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[अरबी](../ar/README.md) | [बंगाली](../bn/README.md) | [बल्गेरियन](../bg/README.md) | [बर्मी (म्यानमार)](../my/README.md) | [चिनी (सरलीकृत)](../zh/README.md) | [चिनी (पारंपरिक, हाँगकाँग)](../hk/README.md) | [चिनी (पारंपरिक, मकाऊ)](../mo/README.md) | [चिनी (पारंपरिक, तैवान)](../tw/README.md) | [क्रोएशियन](../hr/README.md) | [चेक](../cs/README.md) | [डॅनिश](../da/README.md) | [डच](../nl/README.md) | [एस्टोनियन](../et/README.md) | [फिनिश](../fi/README.md) | [फ्रेंच](../fr/README.md) | [जर्मन](../de/README.md) | [ग्रीक](../el/README.md) | [हिब्रू](../he/README.md) | [हिंदी](../hi/README.md) | [हंगेरियन](../hu/README.md) | [इंडोनेशियन](../id/README.md) | [इटालियन](../it/README.md) | [जपानी](../ja/README.md) | [कोरियन](../ko/README.md) | [लिथुआनियन](../lt/README.md) | [मलय](../ms/README.md) | [मराठी](./README.md) | [नेपाळी](../ne/README.md) | [नायजेरियन पिडगिन](../pcm/README.md) | [नॉर्वेजियन](../no/README.md) | [पर्शियन (फारसी)](../fa/README.md) | [पोलिश](../pl/README.md) | [पोर्तुगीज (ब्राझील)](../br/README.md) | [पोर्तुगीज (पोर्तुगाल)](../pt/README.md) | [पंजाबी (गुरमुखी)](../pa/README.md) | [रोमानियन](../ro/README.md) | [रशियन](../ru/README.md) | [सर्बियन (सिरिलिक)](../sr/README.md) | [स्लोव्हाक](../sk/README.md) | [स्लोव्हेनियन](../sl/README.md) | [स्पॅनिश](../es/README.md) | [स्वाहिली](../sw/README.md) | [स्वीडिश](../sv/README.md) | [टागालोग (फिलिपिनो)](../tl/README.md) | [तमिळ](../ta/README.md) | [थाई](../th/README.md) | [तुर्की](../tr/README.md) | [युक्रेनियन](../uk/README.md) | [उर्दू](../ur/README.md) | [व्हिएतनामी](../vi/README.md)
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](./README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+
+> **स्थानिक पातळीवर क्लोन करायचा प्राधान्यी आहे?**
+
+> या रिपॉझिटरीमध्ये ५०+ भाषा अनुवाद आहेत जे डाउनलोड आकार मोठा करतात. अनुवादांशिवाय क्लोन करण्यासाठी sparse checkout वापरा:
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/generative-ai-for-beginners.git
+> cd generative-ai-for-beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+> त्यामुळे तुम्हाला कोर्स पूर्ण करण्यासाठी आवश्यक असलेली सर्व काही जास्त वेगाने डाउनलोड करणे शक्य होईल.
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-# जेनरेटिव AI सुरुवातीसाठी (आवृत्ती 3) - एक कोर्स
+# जनरेटिव एआय फॉर बिगिनर्स (आवृत्ती 3) - एक कोर्स
 
-Microsoft Cloud Advocates द्वारे तयार केलेल्या 21 धड्यांच्या व्यापक कोर्ससह जेनरेटिव AI अॅप्लिकेशन्स तयार करण्याचे मूलभूत ज्ञान मिळवा.
+Microsoft Cloud Advocates द्वारे तयार केलेल्या आमच्या २१ धड्यांच्या सखोल कोर्ससह जनरेटिव एआय ऍप्लिकेशन्स तयार करण्याच्या मूलभूत गोष्टींचे शिक्षण घ्या.
 
-## 🌱 सुरुवात कशी करावी
+## 🌱 सुरुवात करणे
 
-या कोर्समध्ये 21 धडे आहेत. प्रत्येक धडा त्याचा स्वतःचा विषय कव्हर करतो, त्यामुळे तुम्ही कुठूनही सुरुवात करू शकता!
+या कोर्समध्ये २१ धडे आहेत. प्रत्येक धडा स्वतःच्या विषयावर आहे, त्यामुळे आवडीनुसार कुठूनही सुरुवात करा!
 
-धड्यांना "Learn" किंवा "Build" असे लेबल दिले आहे. "Learn" धडे जेनरेटिव AI संकल्पना स्पष्ट करतात, तर "Build" धडे संकल्पना आणि **Python** आणि **TypeScript** मधील कोड उदाहरणे समजावून सांगतात.
+धडे "Learn" किंवा "Build" असे लेबल केले गेले आहेत:
+- "Learn" धडे म्हणजे जनरेटिव एआय संकल्पना समजावणारे धडे,
+- "Build" धडे म्हणजे संकल्पना आणि **Python** आणि **TypeScript** मध्ये कोड उदाहरणे दिलेले जब शक्य असेल ते.
 
-.NET डेव्हलपर्ससाठी [जेनरेटिव AI सुरुवातीसाठी (.NET आवृत्ती)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst) पहा!
+.NET विकासकांसाठी [Generative AI for Beginners (.NET Edition)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst) तपासा!
 
-प्रत्येक धड्यात "Keep Learning" विभाग आहे ज्यामध्ये अतिरिक्त शिक्षण साधने दिली आहेत.
+प्रत्येक धड्यात "Keep Learning" विभाग देखील आहे जो अतिरिक्त शिक्षण साधने प्रदान करतो.
 
-## तुम्हाला काय आवश्यक आहे
-### या कोर्सचा कोड चालवण्यासाठी तुम्ही खालीलपैकी कोणतेही वापरू शकता:
- - [Azure OpenAI Service](https://aka.ms/genai-beginners/azure-open-ai?WT.mc_id=academic-105485-koreyst) - **धडे:** "aoai-assignment"
- - [GitHub Marketplace Model Catalog](https://aka.ms/genai-beginners/gh-models?WT.mc_id=academic-105485-koreyst) - **धडे:** "githubmodels"
+## आपल्याला काय आवश्यक आहे
+### या कोर्सचा कोड चालवण्यासाठी, आपण यापैकी कोणतेही वापरू शकता: 
+ - [Azure OpenAI सेवा](https://aka.ms/genai-beginners/azure-open-ai?WT.mc_id=academic-105485-koreyst) - **धडे:** "aoai-assignment"
+ - [GitHub Marketplace मॉडेल कॅटलॉग](https://aka.ms/genai-beginners/gh-models?WT.mc_id=academic-105485-koreyst) - **धडे:** "githubmodels"
  - [OpenAI API](https://aka.ms/genai-beginners/open-ai?WT.mc_id=academic-105485-koreyst) - **धडे:** "oai-assignment" 
+   
+- Python किंवा TypeScript च्या मूलभूत माहितीचा फायदा होतो - *पूर्णपणे नवख्या लोकांसाठी हे [Python](https://aka.ms/genai-beginners/python?WT.mc_id=academic-105485-koreyst) आणि [TypeScript](https://aka.ms/genai-beginners/typescript?WT.mc_id=academic-105485-koreyst) कोर्स पहा
+- आपला स्वतःचा GitHub खाते असणे जेणेकरून आपण संपूर्ण रेपो [fork करू शकता](https://aka.ms/genai-beginners/github?WT.mc_id=academic-105485-koreyst)
 
-- Python किंवा TypeScript चे मूलभूत ज्ञान उपयुक्त आहे - \*पूर्ण सुरुवातीसाठी [Python](https://aka.ms/genai-beginners/python?WT.mc_id=academic-105485-koreyst) आणि [TypeScript](https://aka.ms/genai-beginners/typescript?WT.mc_id=academic-105485-koreyst) कोर्स पहा
-- तुमच्या स्वतःच्या GitHub खात्यावर [हे संपूर्ण रेपो फोर्क करण्यासाठी](https://aka.ms/genai-beginners/github?WT.mc_id=academic-105485-koreyst) GitHub खाते आवश्यक आहे
+आम्ही तुमच्या विकास पर्यावरण सेटअपमध्ये मदत करण्यासाठी **[कोर्स सेटअप](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)** धडा तयार केला आहे.
 
-तुमच्या विकास वातावरणाची सेटअप करण्यासाठी आम्ही **[कोर्स सेटअप](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)** धडा तयार केला आहे.
+नंतर शोधायला सोपे जावे म्हणून हा रेपो [स्टार (🌟) करायला विसरू नका](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars?WT.mc_id=academic-105485-koreyst).
 
-नंतर सोपे शोधण्यासाठी [या रेपोला स्टार (🌟) द्या](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars?WT.mc_id=academic-105485-koreyst).
+## 🧠 तैनात करण्यास तयार आहात?
 
-## 🧠 तैनात करण्यासाठी तयार?
-
-तुम्ही अधिक प्रगत कोड नमुने शोधत असाल, तर आमचे [जेनरेटिव AI कोड नमुन्यांचे संग्रह](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst) पहा, जे **Python** आणि **TypeScript** मध्ये उपलब्ध आहेत.
+जर तुम्हाला अधिक प्रगत कोड नमुने पाहिजे असतील, तर आमच्या [जनरेटिव एआय कोड नमुन्यांच्या संग्रहणाकडे](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst) पहा, जे Python आणि TypeScript मध्ये आहेत.
 
 ## 🗣️ इतर शिकणाऱ्यांना भेटा, समर्थन मिळवा
 
-आमच्या [अधिकृत Azure AI Foundry Discord सर्व्हर](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst) मध्ये सामील व्हा, जिथे तुम्ही या कोर्सचे इतर शिकणाऱ्यांना भेटू शकता आणि नेटवर्किंग करू शकता.
+या कोर्सचा हिस्सा घेणार्‍या इतर शिकणाऱ्यांशी भेटण्यासाठी आणि समर्थनासाठी आमच्या [अधिकृत Azure AI Foundry Discord सर्व्हर](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst) मध्ये सहभागी व्हा.
 
-आमच्या [Azure AI Foundry Developer Forum](https://aka.ms/azureaifoundry/forum) वर GitHub वर प्रश्न विचारा किंवा उत्पादन अभिप्राय शेअर करा.
+प्रश्न विचारा किंवा उत्पादन प्रतिसाद आमच्या [Azure AI Foundry Developer Forum](https://aka.ms/azureaifoundry/forum) GitHub वर शेअर करा.
 
 ## 🚀 स्टार्टअप तयार करत आहात?
 
-आजच Azure क्रेडिट्ससह तयार करण्यासाठी कसे सुरू करावे हे जाणून घेण्यासाठी [Microsoft for Startups](https://www.microsoft.com/startups) ला भेट द्या.
+आजच Azure क्रेडिट्ससह कसे सुरू करायचे ते जाणून घेण्यासाठी [Microsoft for Startups](https://www.microsoft.com/startups) भेट द्या.
 
-## 🙏 मदत करू इच्छिता?
+## 🙏 मदत करायची आहे का?
 
-तुमच्याकडे सूचना आहेत किंवा स्पेलिंग किंवा कोडमध्ये चुका आढळल्या आहेत? [एक समस्या उभारा](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst) किंवा [पुल रिक्वेस्ट तयार करा](https://github.com/microsoft/generative-ai-for-beginners/pulls?WT.mc_id=academic-105485-koreyst)
+आपल्याकडे सुचना आहेत किंवा स्पेलिंग किंवा कोड चुका सापडल्या आहेत? [इश्यू उघडा](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst) किंवा [पुल रिक्वेस्ट तयार करा](https://github.com/microsoft/generative-ai-for-beginners/pulls?WT.mc_id=academic-105485-koreyst)
 
-## 📂 प्रत्येक धड्यात समाविष्ट आहे:
+## 📂 प्रत्येक धड्यामध्ये समाविष्ट आहे:
 
-- विषयाचे संक्षिप्त व्हिडिओ परिचय
-- README मध्ये स्थित लेखी धडा
-- Azure OpenAI आणि OpenAI API ला समर्थन देणारे Python आणि TypeScript कोड नमुने
-- तुमचे शिक्षण सुरू ठेवण्यासाठी अतिरिक्त संसाधनांचे दुवे
+- विषयाची एक लहान व्हिडिओ ओळख
+- README मधील लिखित धडा
+- Azure OpenAI आणि OpenAI API समर्थन करणारे Python आणि TypeScript कोड नमुने
+- शिक्षण सुरू ठेवण्यासाठी अतिरिक्त संसाधने
 
 ## 🗃️ धडे
 
-| #   | **धड्याचा दुवा**                                                                                                                              | **वर्णन**                                                                                 | **व्हिडिओ**                                                                   | **अतिरिक्त शिक्षण**                                                             |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| 00  | [कोर्स सेटअप](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)                                                                 | **शिका:** तुमचे विकास वातावरण कसे सेटअप करावे                                            | व्हिडिओ लवकरच येत आहे                                                                 | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 01  | [जेनरेटिव AI आणि LLMs ची ओळख](./01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst)                              | **शिका:** जेनरेटिव AI म्हणजे काय आणि मोठ्या भाषा मॉडेल्स (LLMs) कसे कार्य करतात.       | [व्हिडिओ](https://aka.ms/gen-ai-lesson-1-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 02  | [विविध LLMs शोधणे आणि तुलना करणे](./02-exploring-and-comparing-different-llms/README.md?WT.mc_id=academic-105485-koreyst)             | **शिका:** तुमच्या उपयोगासाठी योग्य मॉडेल कसे निवडावे                                      | [व्हिडिओ](https://aka.ms/gen-ai-lesson2-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 03  | [जेनरेटिव AI जबाबदारीने वापरणे](./03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)                           | **शिका:** जेनरेटिव AI अॅप्लिकेशन्स जबाबदारीने कसे तयार करावे                                  | [व्हिडिओ](https://aka.ms/gen-ai-lesson3-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 04  | [प्रॉम्प्ट इंजिनिअरिंग मूलभूत गोष्टी समजून घेणे](./04-prompt-engineering-fundamentals/README.md?WT.mc_id=academic-105485-koreyst)             | **शिका:** प्रॉम्प्ट इंजिनिअरिंग सर्वोत्तम पद्धतींचे हाताळणी                                           | [व्हिडिओ](https://aka.ms/gen-ai-lesson4-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 05  | [प्रगत प्रॉम्प्ट तयार करणे](./05-advanced-prompts/README.md?WT.mc_id=academic-105485-koreyst)                                                | **शिका:** प्रॉम्प्ट इंजिनिअरिंग तंत्रांचा वापर करून तुमच्या प्रॉम्प्ट्सचे परिणाम सुधारण्याचे तंत्र. | [व्हिडिओ](https://aka.ms/gen-ai-lesson5-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 06  | [टेक्स्ट जनरेशन अ‍ॅप्स तयार करणे](./06-text-generation-apps/README.md?WT.mc_id=academic-105485-koreyst)                                | **तयार करा:** Azure OpenAI / OpenAI API वापरून टेक्स्ट जनरेशन अ‍ॅप तयार करा                                | [व्हिडिओ](https://aka.ms/gen-ai-lesson6-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 07  | [चॅट अ‍ॅप्स तयार करणे](./07-building-chat-applications/README.md?WT.mc_id=academic-105485-koreyst)                                     | **तयार करा:** चॅट अ‍ॅप्स कार्यक्षमतेने तयार करण्यासाठी आणि समाकलित करण्यासाठी तंत्र.               | [व्हिडिओ](https://aka.ms/gen-ai-lessons7-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 08  | [सर्च अ‍ॅप्स तयार करणे - व्हेक्टर डेटाबेस](./08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)                        | **तयार करा:** डेटा शोधण्यासाठी एम्बेडिंग्स वापरणारे सर्च अ‍ॅप.                        | [व्हिडिओ](https://aka.ms/gen-ai-lesson8-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 09  | [इमेज जनरेशन अ‍ॅप्स तयार करणे](./09-building-image-applications/README.md?WT.mc_id=academic-105485-koreyst)                        | **तयार करा:** इमेज जनरेशन अ‍ॅप                                                       | [व्हिडिओ](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 10  | [लो कोड AI अ‍ॅप्स तयार करणे](./10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)                       | **तयार करा:** लो कोड टूल्स वापरून जनरेटिव्ह AI अ‍ॅप तयार करा                                     | [व्हिडिओ](https://aka.ms/gen-ai-lesson10-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 11  | [फंक्शन कॉलिंगसह बाह्य अ‍ॅप्स समाकलित करणे](./11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst) | **तयार करा:** फंक्शन कॉलिंग म्हणजे काय आणि अ‍ॅप्ससाठी त्याचा उपयोग कसा करायचा                          | [व्हिडिओ](https://aka.ms/gen-ai-lesson11-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 12  | [AI अ‍ॅप्ससाठी UX डिझाइन करणे](./12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)                         | **शिका:** जनरेटिव्ह AI अ‍ॅप्स विकसित करताना UX डिझाइन तत्त्वे कशी लागू करायची         | [व्हिडिओ](https://aka.ms/gen-ai-lesson12-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 13  | [तुमचे जनरेटिव्ह AI अ‍ॅप्स सुरक्षित करणे](./13-securing-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)                         | **शिका:** AI प्रणालींवरील धोके आणि जोखीम आणि या प्रणालींना सुरक्षित ठेवण्याचे पद्धती.             | [व्हिडिओ](https://aka.ms/gen-ai-lesson13-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 14  | [जनरेटिव्ह AI अ‍ॅप्लिकेशन जीवनचक्र](./14-the-generative-ai-application-lifecycle/README.md?WT.mc_id=academic-105485-koreyst)           | **शिका:** LLM जीवनचक्र आणि LLMOps व्यवस्थापित करण्यासाठी साधने आणि मेट्रिक्स                         | [व्हिडिओ](https://aka.ms/gen-ai-lesson14-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 15  | [रिट्रीव्हल ऑगमेंटेड जनरेशन (RAG) आणि व्हेक्टर डेटाबेस](./15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst)        | **तयार करा:** व्हेक्टर डेटाबेसमधून एम्बेडिंग्स मिळवण्यासाठी RAG फ्रेमवर्क वापरून अ‍ॅप तयार करा  | [व्हिडिओ](https://aka.ms/gen-ai-lesson15-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 16  | [ओपन सोर्स मॉडेल्स आणि हगिंग फेस](./16-open-source-models/README.md?WT.mc_id=academic-105485-koreyst)                                    | **तयार करा:** हगिंग फेसवर उपलब्ध ओपन सोर्स मॉडेल्स वापरून अ‍ॅप तयार करा                    | [व्हिडिओ](https://aka.ms/gen-ai-lesson16-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 17  | [AI एजंट्स](./17-ai-agents/README.md?WT.mc_id=academic-105485-koreyst)                                                                       | **तयार करा:** AI एजंट फ्रेमवर्क वापरून अ‍ॅप तयार करा                                           | [व्हिडिओ](https://aka.ms/gen-ai-lesson17-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 18  | [LLMs फाइन-ट्यून करणे](./18-fine-tuning/README.md?WT.mc_id=academic-105485-koreyst)                                                              | **शिका:** LLMs फाइन-ट्यूनिंगचे काय, का आणि कसे                                            | [व्हिडिओ](https://aka.ms/gen-ai-lesson18-gh?WT.mc_id=academic-105485-koreyst) | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 19  | [SLMs सह तयार करणे](./19-slm/README.md?WT.mc_id=academic-105485-koreyst)                                                              | **शिका:** स्मॉल लँग्वेज मॉडेल्ससह तयार करण्याचे फायदे                                            | व्हिडिओ लवकरच उपलब्ध होईल | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 20  | [मिस्ट्रल मॉडेल्ससह तयार करणे](./20-mistral/README.md?WT.mc_id=academic-105485-koreyst)                                                              | **शिका:** मिस्ट्रल फॅमिली मॉडेल्सची वैशिष्ट्ये आणि फरक                                           | व्हिडिओ लवकरच उपलब्ध होईल | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
-| 21  | [मेटा मॉडेल्ससह तयार करणे](./21-meta/README.md?WT.mc_id=academic-105485-koreyst)                                                              | **शिका:** मेटा फॅमिली मॉडेल्सची वैशिष्ट्ये आणि फरक                                           | व्हिडिओ लवकरच उपलब्ध होईल | [अधिक जाणून घ्या](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| #   | **धडा लिंक**                                                                                                                                | **वर्णन**                                                                                      | **व्हिडिओ**                                                                  | **अतिरिक्त शिक्षण**                                                            |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 00  | [कोर्स सेटअप](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)                                                                   | **शिका:** तुमचे विकास पर्यावरण कसे सेट करायचे                                                 | व्हिडिओ लवकरच येणार                                                        | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)  |
+| 01  | [जनरेटिव एआय आणि LLMs ची ओळख](./01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst)                                         | **शिका:** जनरेटिव एआय म्हणजे काय आणि लार्ज लँग्वेज मॉडेल्स (LLMs) कसे कार्य करतात हे समजून घ्या | [व्हिडिओ](https://aka.ms/gen-ai-lesson-1-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)  |
+| 02  | [वेगवेगळ्या LLMs चे अन्वेषण आणि तुलना](./02-exploring-and-comparing-different-llms/README.md?WT.mc_id=academic-105485-koreyst)                   | **शिका:** आपल्या वापरासाठी योग्य मॉडेल कसे निवडायचे                                           | [व्हिडिओ](https://aka.ms/gen-ai-lesson2-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)  |
+| 03  | [जनरेटिव एआय जबाबदारीने वापरणे](./03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)                               | **शिका:** जनरेटिव एआय ऍप्लिकेशन्स जबाबदारीने कसे बनवायचे                                    | [व्हिडिओ](https://aka.ms/gen-ai-lesson3-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)  |
+| 04  | [प्रॉम्प्ट इंजिनीअरिंग मूलभूत तत्व समजून घेणे](./04-prompt-engineering-fundamentals/README.md?WT.mc_id=academic-105485-koreyst)             | **शिका:** प्रॅक्टिकल प्रॉम्प्ट इंजिनीअरिंग सर्वोत्तम पद्धती                                           | [व्हिडिओ](https://aka.ms/gen-ai-lesson4-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 05  | [अॅडव्हान्स प्रॉम्प्ट तयार करणे](./05-advanced-prompts/README.md?WT.mc_id=academic-105485-koreyst)                                                | **शिका:** तुमच्या प्रॉम्प्ट्सच्या परिणामांना सुधारण्यासाठी प्रॉम्प्ट इंजिनीअरिंग तंत्र कसे लागू करायचे. | [व्हिडिओ](https://aka.ms/gen-ai-lesson5-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 06  | [टेक्स्ट जनरेशन अनुप्रयोग तयार करणे](./06-text-generation-apps/README.md?WT.mc_id=academic-105485-koreyst)                                | **बांधा:** Azure OpenAI / OpenAI API वापरून टेक्स्ट जनरेशन अॅप                                   | [व्हिडिओ](https://aka.ms/gen-ai-lesson6-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 07  | [चॅट अनुप्रयोग बनविणे](./07-building-chat-applications/README.md?WT.mc_id=academic-105485-koreyst)                                     | **बांधा:** चॅट अनुप्रयोग कार्यक्षमतेने बनविण्यासाठी आणि समाकलित करण्यासाठी तंत्र                      | [व्हिडिओ](https://aka.ms/gen-ai-lessons7-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 08  | [शोध अॅप्स व्हेक्टर डेटाबेस वापरून तयार करणे](./08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)                        | **बांधा:** एम्बेडिंग्ज वापरून डेटा शोधण्यासाठी शोध अनुप्रयोग                                      | [व्हिडिओ](https://aka.ms/gen-ai-lesson8-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 09  | [इमेज जनरेशन अनुप्रयोग तयार करणे](./09-building-image-applications/README.md?WT.mc_id=academic-105485-koreyst)                        | **बांधा:** इमेज जनरेशन अनुप्रयोग                                                               | [व्हिडिओ](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)  | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 10  | [लो कोड AI अनुप्रयोग तयार करणे](./10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)                       | **बांधा:** लो कोड टूल्स वापरून एक जनरेटिव AI अनुप्रयोग                                         | [व्हिडिओ](https://aka.ms/gen-ai-lesson10-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 11  | [फंक्शन कॉलिंगसह बाह्य अनुप्रयोग समाकलित करणे](./11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst) | **बांधा:** फंक्शन कॉलिंग म्हणजे काय आणि अनुप्रयोगांसाठी त्याचे वापर                              | [व्हिडिओ](https://aka.ms/gen-ai-lesson11-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 12  | [AI अनुप्रयोगांसाठी UX डिझाइन करणे](./12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)                         | **शिका:** जनरेटिव AI अनुप्रयोग तयार करताना UX डिझाइन मूलतत्त्व कसे लागू करायचे                   | [व्हिडिओ](https://aka.ms/gen-ai-lesson12-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 13  | [तुमच्या जनरेटिव AI अनुप्रयोगांचे संरक्षण](./13-securing-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)                         | **शिका:** AI प्रणालींना धोके आणि जोखमी आणि या प्रणालींचे संरक्षण करण्याचे मार्ग                   | [व्हिडिओ](https://aka.ms/gen-ai-lesson13-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 14  | [जनरेटिव AI अनुप्रयोग जीवनचक्र](./14-the-generative-ai-application-lifecycle/README.md?WT.mc_id=academic-105485-koreyst)           | **शिका:** LLM जीवनचक्र आणि LLMOps व्यवस्थापित करण्यासाठी साधने आणि मेट्रिक्स                      | [व्हिडिओ](https://aka.ms/gen-ai-lesson14-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 15  | [रिट्रीव्हल ऑगमेंटेड जनरेशन (RAG) आणि व्हेक्टर डेटाबेस](./15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst)        | **बांधा:** RAG फ्रेमवर्क वापरून व्हेक्टर डेटाबेसमधून एम्बेडिंग्ज प्राप्त करणारा अनुप्रयोग         | [व्हिडिओ](https://aka.ms/gen-ai-lesson15-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 16  | [ओपन सोर्स मॉडेल्स आणि हगिंग फेस](./16-open-source-models/README.md?WT.mc_id=academic-105485-koreyst)                                    | **बांधा:** हगिंग फेसवर उपलब्ध असलेल्या ओपन सोर्स मॉडेल्स वापरून अनुप्रयोग                       | [व्हिडिओ](https://aka.ms/gen-ai-lesson16-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 17  | [AI एजंट्स](./17-ai-agents/README.md?WT.mc_id=academic-105485-koreyst)                                                                       | **बांधा:** AI एजंट फ्रेमवर्क वापरून अनुप्रयोग                                                 | [व्हिडिओ](https://aka.ms/gen-ai-lesson17-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 18  | [LLM चे फाइन-ट्यूनिंग](./18-fine-tuning/README.md?WT.mc_id=academic-105485-koreyst)                                                              | **शिका:** LLM चे काय, का आणि कसे फाइन-ट्यून करायचे                                           | [व्हिडिओ](https://aka.ms/gen-ai-lesson18-gh?WT.mc_id=academic-105485-koreyst) | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 19  | [SLM वापरून तयार करणे](./19-slm/README.md?WT.mc_id=academic-105485-koreyst)                                                              | **शिका:** स्मॉल लँग्वेज मॉडेल्स वापरून तयार करण्याच्या फायदे                                   | लवकरच व्हिडिओ उपलब्ध | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 20  | [मिस्ट्राल मॉडेल्स वापरून तयार करणे](./20-mistral/README.md?WT.mc_id=academic-105485-koreyst)                                                              | **शिका:** मिस्ट्राल फॅमिली मॉडेल्सचे वैशिष्ट्ये आणि फरक                                      | लवकरच व्हिडिओ उपलब्ध | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
+| 21  | [मेटा मॉडेल्स वापरून तयार करणे](./21-meta/README.md?WT.mc_id=academic-105485-koreyst)                                                              | **शिका:** मेटा फॅमिली मॉडेल्सचे वैशिष्ट्ये आणि फरक                                          | लवकरच व्हिडिओ उपलब्ध | [अधिक शिका](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) |
 
-### 🌟 विशेष धन्यवाद
+### 🌟 विशेष आभार
 
-[**जॉन अझीज**](https://www.linkedin.com/in/john0isaac/) यांचे सर्व GitHub Actions आणि वर्कफ्लो तयार केल्याबद्दल विशेष आभार.
+GitHub अॅक्शन्स आणि वर्कफ्लोज तयार करण्यासाठी [**जॉन अजिझ**](https://www.linkedin.com/in/john0isaac/) यांचे विशेष आभार
 
-[**बर्नहार्ड मर्कल**](https://www.linkedin.com/in/bernhard-merkle-738b73/) यांचे प्रत्येक धड्याला महत्त्वपूर्ण योगदान देऊन शिकणाऱ्यांचा आणि कोड अनुभव सुधारण्यासाठी केलेल्या प्रयत्नांबद्दल आभार. 
+प्रत्येक धड्यासाठी शिकणाऱ्यांचा आणि कोड अनुभव सुधारण्यासाठी महत्त्वाचे योगदान दिल्याबद्दल [**बर्नहार्ड मर्कले**](https://www.linkedin.com/in/bernhard-merkle-738b73/) यांचे आभार.
 
-## 🎒 इतर अभ्यासक्रम
+## 🎒 इतर कोर्सेस
 
-आमची टीम इतर अभ्यासक्रम तयार करते! येथे पहा:
+आमची टीम इतर कोर्सेस तयार करते! पाहा:
 
 <!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![सुरुवातीसाठी LangChain4j](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![सुरुवातीसाठी LangChain.js](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+[![सुरुवातीसाठी LangChain](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
+---
+
 ### Azure / Edge / MCP / Agents
-[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![सुरुवातीसाठी AZD](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![सुरुवातीसाठी Edge AI](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![सुरुवातीसाठी MCP](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![सुरुवातीसाठी AI Agents](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
  
-### जनरेटिव्ह AI मालिका
-[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
-[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+### जनरेटिव AI सिरीज
+[![सुरुवातीसाठी जनरेटिव AI](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![जनरेटिव AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![जनरेटिव AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
 [![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
 
 ---
@@ -142,30 +151,31 @@ Microsoft Cloud Advocates द्वारे तयार केलेल्य�
 [![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
 [![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
 [![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
-[![वेब डेव्हलपमेंट सुरुवातीसाठी](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
-[![सुरुवातीसाठी IoT](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
-[![सुरुवातीसाठी XR डेव्हलपमेंट](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
 
 ---
-
-### कोपायलट मालिका
-[![AI जोडप्यांसाठी कोपायलट प्रोग्रामिंग](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
-[![C#/.NET साठी कोपायलट](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
-[![कोपायलट साहस](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+ 
+### कॉपायलट सिरीज
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+<!-- CO-OP TRANSLATOR OTHER COURSES END -->
 
 ## मदत मिळवा
 
-जर तुम्हाला अडचण आली किंवा AI अ‍ॅप्स तयार करण्याबद्दल काही प्रश्न असतील तर सामील व्हा:
+जर तुम्ही अडकलात किंवा AI अॅप्स तयार करताना काही प्रश्न असतील तर. MCP बद्दल चर्चा करण्यासाठी सह-अभ्यसक आणि अनुभवी विकसकांसोबत सामील व्हा. ही एक सहायक समुदाय आहे जिथे प्रश्नांना स्वागत आहे आणि ज्ञान मुक्तपणे सामायिक केले जाते.
 
-[![Azure AI Foundry डिस्कॉर्ड](https://img.shields.io/badge/Discord-Azure_AI_Foundry_Community_Discord-blue?style=for-the-badge&logo=discord&color=5865f2&logoColor=fff)](https://aka.ms/foundry/discord?WT.mc_id=academic-105485-koreyst)
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-जर तुम्हाला उत्पादनाबद्दल अभिप्राय द्यायचा असेल किंवा तयार करताना काही त्रुटी आढळल्या तर भेट द्या:
+जर तुम्हाला उत्पादनाचे अभिप्राय किंवा बग आढळले तर भेट द्या:
 
-[![Azure AI Foundry डेव्हलपर फोरम](https://img.shields.io/badge/GitHub-Azure_AI_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum?WT.mc_id=academic-105485-koreyst)
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**अस्वीकरण**:  
-हा दस्तऐवज AI भाषांतर सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून भाषांतरित करण्यात आला आहे. आम्ही अचूकतेसाठी प्रयत्नशील असलो तरी, कृपयास लक्षात घ्या की स्वयंचलित भाषांतरे त्रुटी किंवा अचूकतेच्या अभावाने युक्त असू शकतात. मूळ भाषेतील दस्तऐवज हा अधिकृत स्रोत मानला जावा. महत्त्वाच्या माहितीसाठी, व्यावसायिक मानवी भाषांतराची शिफारस केली जाते. या भाषांतराचा वापर करून उद्भवलेल्या कोणत्याही गैरसमज किंवा चुकीच्या अर्थासाठी आम्ही जबाबदार राहणार नाही.
+**अस्वीकरण**:
+हा दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित केला आहे. जरी आम्ही अचूकतेसाठी प्रयत्नशील असलो, तरी कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये चुका किंवा अचूकतेची कमतरता असू शकते. मूळ दस्तावेज त्याच्या स्थानिक भाषेत अधिकृत स्रोत मानला जावा. महत्त्वाच्या माहितींसाठी व्यावसायिक मानवी अनुवाद करण्याची शिफारस केली जाते. या अनुवादाच्या वापरातून होणाऱ्या कोणत्याही गैरसमजुती किंवा चुकीच्या अर्थवजावटीसाठी आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
