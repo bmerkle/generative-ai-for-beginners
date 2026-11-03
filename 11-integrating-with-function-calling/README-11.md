@@ -11,7 +11,7 @@ marp: true
 
 This lesson will cover:
 
-- Explain what is function calling and its use cases.
+- Explain what function calling is and its use cases.
 - Creating a function call using Azure OpenAI.
 - How to integrate a function call into an application.
 
@@ -23,11 +23,11 @@ By the end of this lesson, you will be able to:
 - Setup Function Call using the Azure OpenAI Service.
 - Design effective function calls for your application's use case.
 
-## Scenario: improving our chatbot with functions
+## Scenario: Improving our chatbot with functions
 
 For this lesson, we want to build a feature for our education startup that allows users to use a chatbot to find technical courses. We will recommend courses that fit their skill level, current role and technology of interest.
 
-To complete this scenario we will use a combination of:
+To complete this scenario, we will use a combination of:
 
 - `Azure OpenAI` to create a chat experience for the user.
 - `Microsoft Learn Catalog API` to help users find courses based on the request of the user.
@@ -37,9 +37,9 @@ To get started, let's look at why we would want to use function calling in the f
 
 ## Why Function Calling
 
-Before function calling, responses from an LLM were unstructured and inconsistent. Developers were required to write complex validation code to make sure they are able to handle each variation of a response. Users could not get answers like "What is the current weather in Stockholm?". This is because models were limited to the time the data was trained on.
+Before function calling, responses from an LLM were unstructured and inconsistent. Developers were required to write complex validation code to make sure they were able to handle each variation of a response. Users could not get answers like "What is the current weather in Stockholm?". This is because models were limited to the time the data was trained on.
 
-Function Calling is a feature of the Azure OpenAI Service to overcome to the following limitations:
+Function Calling is a feature of the Azure OpenAI Service to overcome the following limitations:
 
 - **Consistent response format**. If we can better control the response format we can more easily integrate the response downstream to other systems.
 - **External data**. Ability to use data from other sources of an application in a chat context.
@@ -58,16 +58,16 @@ There are many different use cases where function calls can improve your app lik
 
 The process of creating a function call includes 3 main steps:
 
-1. **Calling** the Chat Completions API with a list of your functions and a user message.
-2. **Reading** the model's response to perform an action ie execute a function or API Call.
-3. **Making** another call to Chat Completions API with the response from your function to use that information to create a response to the user.
+1. **Calling** the Responses API with a list of your functions (tools) and a user message.
+2. **Reading** the model's response to perform an action i.e. execute a function or API Call.
+3. **Making** another call to the Responses API with the response from your function to use that information to create a response to the user.
 
 ---
 ![LLM Flow](./images/LLM-Flow.png?WT.mc_id=academic-105485-koreyst)
 
 ### Step 1 - creating messages
 
-The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Chat Completions API, we need to define the `role` and the `content` of the message.
+The first step is to create a user message. This can be dynamically assigned by taking the value of a text input or you can assign a value here. If this is your first time working with the Responses API, we need to define the `role` and the `content` of the message.
 
 The `role` can be either `system` (creating rules), `assistant` (the model) or `user` (the end-user). For function calling, we will assign this as `user` and an example question.
 
@@ -83,11 +83,12 @@ Next, we will define a function and the parameters of that function. We will use
 
 > **Important** : Functions are included in the system message to the LLM and will be included in the amount of available tokens you have available.
 
-Below, we create the functions as an array of items. Each item is a function and has properties `name`, `description` and `parameters`:
+Below, we create the functions as an array of items. Each item is a tool in the flat Responses API format, with properties `type`, `name`, `description` and `parameters`:
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -119,7 +120,7 @@ Let's describe each function instance more in detail below:
 
 - `name` - The name of the function that we want to have called.
 - `description` - This is the description of how the function works. Here it's important to be specific and clear.
-- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where item have the following properties:
+- `parameters` - A list of values and format that you want the model to produce in its response. The parameters array consists of items where the items have the following properties:
   1.  `type` - The data type of the properties will be stored in.
   1.  `properties` - List of the specific values that the model will use for its response
       1. `name` - The key is the name of the property that the model will use in its formatted response, for example, `product`.
@@ -130,6 +131,6 @@ There's also an optional property `required` - required property for the functio
 
 ### Step 3 - Making the function call
 
-After defining a function, we now need to include it in the call to the Chat Completion API. We do this by adding `functions` to the request. In this case `functions=functions`.
+After defining a function, we now need to include it in the call to the Responses API. We do this by adding `tools` to the request. In this case `tools=functions`.
 
-There is also an option to set `function_call` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.
+There is also an option to set `tool_choice` to `auto`. This means we will let the LLM decide which function should be called based on the user message rather than assigning it ourselves.

@@ -31,7 +31,7 @@ AI Agents allow Large Language Models (LLMs) to perform tasks by giving them acc
 ---
 Let's define these terms:
 
-**Large Language Models** - These are the models referred throughout this course such as GPT-3.5, GPT-4, Llama-2, etc.
+**Large Language Models** - These are the models referred throughout this course such as GPT-5, GPT-4o, and Llama 3.3, etc.
 
 **State** - This refers to the context that the LLM is working in. The LLM uses the context of its past actions and the current context, guiding its decision-making for subsequent actions. AI Agent Frameworks allow developers to maintain this context easier.
 
@@ -114,6 +114,91 @@ Once the initial chat is processed, the Agent will send the suggest tool to call
 
 You can find a list of [AutoGen code samples](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) to further explore how to get started building.
 
+## Microsoft Agent Framework
+
+[Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst) is Microsoft's open-source SDK for building AI Agents and multi-agent systems in both **Python** and **.NET**. It brings together the strengths of two earlier Microsoft projects — the enterprise features of **Semantic Kernel** and the multi-agent orchestration of **AutoGen** — into a single, supported framework. If you are starting a new agent project today, this is the recommended successor to AutoGen.
+
+The framework scales from a single **chat agent** all the way up to complex **multi-agent workflows**, and it integrates directly with Microsoft Foundry, Azure OpenAI, and OpenAI. It also provides built-in observability through OpenTelemetry so you can trace exactly what your agents are doing.
+
+### State and Tools
+
+**State** - The framework manages conversation context for you through **threads**. An agent keeps track of the message history (user requests, tool calls, and their results), so each turn builds on the previous ones. Threads can also be persisted, allowing a conversation to be paused and resumed later.
+
+**Tools** - You give an agent tools by passing plain Python functions. Type-annotated parameters are automatically turned into a schema, so the model knows how and when to call them (function calling). The framework also supports Model Context Protocol (MCP) servers and hosted tools such as a code interpreter.
+
+---
+Here is an example of a single agent with a custom tool:
+
+```python
+import asyncio
+from typing import Annotated
+
+from pydantic import Field
+from agent_framework import Agent
+from agent_framework.openai import OpenAIChatClient
+
+
+def get_weather(
+    location: Annotated[str, Field(description="The location to get the weather for.")],
+) -> str:
+    """Get the weather for a given location."""
+    return f"The weather in {location} is sunny with a high of 22°C."
+
+
+async def main():
+    agent = Agent(
+        client=OpenAIChatClient(),
+        instructions="You are a helpful assistant that can answer weather questions.",
+        tools=[get_weather],
+    )
+
+    response = await agent.run("What's the weather in Amsterdam?")
+    print(response)
+
+
+asyncio.run(main())
+```
+
+---
+To connect to Azure OpenAI in Microsoft Foundry instead, pass your endpoint and credentials to the client:
+
+```python
+from azure.identity.aio import AzureCliCredential
+from agent_framework.openai import OpenAIChatClient
+
+client = OpenAIChatClient(
+    model="my-gpt-5-mini-deployment",
+    azure_endpoint="https://my-resource.openai.azure.com",
+    credential=AzureCliCredential(),
+)
+```
+
+### Multi-agent workflows
+
+Where the framework really stands out is orchestrating several agents together. For example, you can run agents one after another (each passing its context to the next) or fan out to several agents in parallel and aggregate their results:
+
+```python
+from agent_framework.orchestrations import SequentialBuilder, ConcurrentBuilder
+
+# Run agents in sequence, passing the conversation context along the chain
+sequential = SequentialBuilder(participants=[researcher, writer, editor]).build()
+
+# Fan out to agents in parallel, then aggregate their responses
+concurrent = ConcurrentBuilder(participants=[analyst_a, analyst_b, analyst_c]).build()
+```
+
+---
+To install the framework and get started:
+
+```bash
+pip install agent-framework-core
+# Optional integrations
+pip install agent-framework-openai       # OpenAI and Azure OpenAI
+pip install agent-framework-foundry      # Microsoft Foundry
+```
+
+You can explore more in the [Microsoft Agent Framework repository](https://github.com/microsoft/agent-framework?WT.mc_id=academic-105485-koreyst) and the [official documentation](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst).
+
 ## Taskweaver
 
 The next agent framework we will explore is [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). It is known as a "code-first" agent because instead of working strictly with `strings` , it can work with DataFrames in Python. This becomes extremely useful for data analysis and generation tasks. This can be things like creating graphs and charts or generating random numbers.
@@ -136,7 +221,7 @@ The code is verified before executing. Another feature to manage context in Task
 
 ## JARVIS
 
-The last agent framework we will explore is [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). What makes JARVIS unique is that it uses an LLM to manage the `state` of the conversation and the `tools`are other AI models. Each of the AI models are specialized models that perform certain tasks such as object detection, transcription or image captioning.
+The last agent framework we will explore is [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file&WT.mc_id=academic-105485-koreyst). What makes JARVIS unique is that it uses an LLM to manage the `state` of the conversation and the `tools`are other AI models. Each of the AI models are specialized models that perform certain tasks such as object detection, transcription or image captioning.
 
 ![JARVIS](./images/jarvis.png?WT.mc_id=academic-105485-koreyst)
 

@@ -14,7 +14,7 @@ The world of open-source LLMs is exciting and constantly evolving. This lesson a
 
 - Gain an understanding of open source Models
 - Understanding the benefits of working with open source Models
-- Exploring the open models available on Hugging Face and the Azure AI Studio
+- Exploring the open models available on Hugging Face and the Microsoft Foundry model catalog
 
 ## What are Open Source Models?
 
@@ -61,13 +61,13 @@ Some examples of fine-tuned versions of Falcon are the [OpenAssistant](https://h
 
 ## How to Choose
 
-There is no one answer for choosing an open model. A good place to start is by using the Azure AI Studio's filter by task feature. This will help you understand what types of tasks the model has been trained for. Hugging Face also maintains an LLM Leaderboard which shows you the best performing models based on certain metrics.
+There is no one answer for choosing an open model. A good place to start is by using the Microsoft Foundry model catalog's filter by task feature. This will help you understand what types of tasks the model has been trained for. Hugging Face also maintains an LLM Leaderboard which shows you the best performing models based on certain metrics.
 
 When looking to compare LLMs across the different types, [Artificial Analysis](https://artificialanalysis.ai/?WT.mc_id=academic-105485-koreyst) is another great resource:
 
 ---
 ![Model Quality](./images/model-quality.png?WT.mc_id=academic-105485-koreyst)
-Source: Artifical Analysis
+Source: Artificial Analysis
 
 If working on a specific use case, searching for fine-tuned versions that are focused on the same area can be effective. Experimenting with multiple open models to see how they perform according to your and your users' expectations is another good practice
 
