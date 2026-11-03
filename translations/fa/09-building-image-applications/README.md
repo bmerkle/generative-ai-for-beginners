@@ -1,479 +1,198 @@
-# ساخت برنامه‌های تولید تصویر
+# ساخت برنامه‌های تولید تصویر  
 
-[![ساخت برنامه‌های تولید تصویر](../../../translated_images/fa/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![ساخت برنامه‌های تولید تصویر](../../../translated_images/fa/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)  
 
-مدل‌های زبانی بزرگ (LLMs) فقط برای تولید متن نیستند. امکان تولید تصاویر از توضیحات متنی نیز وجود دارد. داشتن تصاویر به عنوان یک حالت می‌تواند در بسیاری از زمینه‌ها مانند فناوری پزشکی، معماری، گردشگری، توسعه بازی و موارد دیگر بسیار مفید باشد. در این فصل، به دو مدل محبوب تولید تصویر، DALL-E و Midjourney، خواهیم پرداخت.
+مدل‌های زبانی بزرگ بیش از تولید متن هستند. شما همچنین می‌توانید از توصیفات متنی تصویر بسازید. تصاویر به عنوان یک حالت ارتباطی در حوزه‌های پزشکی فناوری، معماری، گردشگری، توسعه بازی، بازاریابی و غیره کاربرد دارند. در این درس به مدل‌های امروز **GPT Image** نگاه می‌کنیم و یک برنامه تولید تصویر می‌سازیم.  
 
-## مقدمه
+## مقدمه  
 
-در این درس، موارد زیر را پوشش خواهیم داد:
+تولید تصویر به شما امکان می‌دهد که یک پرس‌وجوی زبان طبیعی را به تصویر تبدیل کنید. در این درس با خانواده مدل‌های **`gpt-image`** از OpenAI کار می‌کنیم - نسل فعلی مدل‌های تصویری موجود در **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** و پلتفرم OpenAI. این مدل‌ها جایگزین مدل‌های قدیمی‌تر DALL·E شده‌اند (DALL·E 2/3 مدل‌های قدیمی هستند).  
 
-- تولید تصویر و دلایل مفید بودن آن.
-- DALL-E و Midjourney، چی هستند و چگونه کار می‌کنند.
-- چگونه می‌توانید یک برنامه تولید تصویر بسازید.
+در طول درس از یک استارتاپ فرضی به نام **Edu4All** استفاده می‌کنیم که ابزارهای آموزشی می‌سازد. تیم می‌خواهد برای تکالیف و مواد مطالعه تصاویر رنگی تولید کند.  
 
-## اهداف یادگیری
+## اهداف یادگیری  
 
-پس از اتمام این درس، قادر خواهید بود:
+در پایان این درس قادر خواهید بود:  
 
-- یک برنامه تولید تصویر بسازید.
-- مرزهایی برای برنامه خود با استفاده از متاپرامپت‌ها تعریف کنید.
-- با DALL-E و Midjourney کار کنید.
+- توضیح دهید تولید تصویر چیست و کجا کاربرد دارد.  
+- با خانواده مدل `gpt-image` آشنا شوید و تفاوت آن را با مدل‌های قدیمی DALL·E درک کنید.  
+- یک برنامه تولید تصویر به زبان پایتون (و تایپ‌اسکریپت/.NET) بسازید.  
+- تصاویر را ویرایش و با متاپرومپت‌ها مکانیسم‌های ایمنی را اعمال کنید.  
 
-## چرا باید یک برنامه تولید تصویر بسازیم؟
+## تولید تصویر چیست؟  
 
-برنامه‌های تولید تصویر راهی عالی برای کشف قابلیت‌های هوش مصنوعی تولیدی هستند. این برنامه‌ها می‌توانند برای مثال در موارد زیر استفاده شوند:
+مدل‌های تولید تصویر، تصویر را از یک توضیح متنی ایجاد می‌کنند. مدل‌های مدرن مثل `gpt-image` مبتنی بر تکنیک‌های ترنسفورمر + دیفیوژن هستند: مدل در طول آموزش رابطه بین متن و تصویر را می‌آموزد، سپس با دریافت یک پرس‌وجو، به صورت تدریجی نویز تصادفی را "برطرف" می‌کند تا تصویری مطابق توضیح بسازد.  
 
-- **ویرایش و ترکیب تصاویر**. می‌توانید تصاویر را برای موارد مختلفی مانند ویرایش و ترکیب تصاویر تولید کنید.
+دو خانواده شناخته‌شده مدل‌های تصویری عبارتند از:  
 
-- **کاربرد در صنایع مختلف**. همچنین می‌توانند برای تولید تصاویر در صنایع مختلف مانند فناوری پزشکی، گردشگری، توسعه بازی و موارد دیگر استفاده شوند.
+- **`gpt-image` (OpenAI)** - نسل فعلی، استفاده‌شده در این درس. از تولید تصویر از متن و ویرایش تصویر (inpainting با ماسک) پشتیبانی می‌کند.  
+- **Midjourney** - یک مدل محبوب شخص ثالث با سرویس اختصاصی و گردش‌کار بر پایه Discord.  
 
-## سناریو: Edu4All
+> مدل‌های تصویری قدیمی‌تر OpenAI - **DALL·E 2** و **DALL·E 3** - مدل‌های منسوخ هستند. DALL·E 3 دیگر برای استقرارهای جدید در دسترس نیست و ویژگی‌هایی مثل `create_variation` فقط در DALL·E 2 وجود داشتند. برای برنامه‌های جدید از مدل‌های `gpt-image` استفاده کنید.  
 
-به عنوان بخشی از این درس، ما به کار با استارتاپ خود، Edu4All، ادامه خواهیم داد. دانش‌آموزان تصاویر را برای ارزیابی‌های خود ایجاد خواهند کرد. اینکه چه تصاویری ایجاد کنند به خودشان بستگی دارد، اما می‌توانند تصاویری برای داستان‌های خود یا شخصیت‌های جدیدی برای داستان‌هایشان ایجاد کنند یا به آن‌ها کمک کنند تا ایده‌ها و مفاهیم خود را تجسم کنند.
+### کدام مدل `gpt-image` را باید استفاده کنم؟  
 
-در اینجا نمونه‌ای از چیزی که دانش‌آموزان Edu4All می‌توانند ایجاد کنند آورده شده است، اگر در کلاس روی بناهای تاریخی کار می‌کنند:
+در Microsoft Foundry مدل‌های زیر **عموماً در دسترس** هستند:  
 
-![استارتاپ Edu4All، کلاس درباره بناهای تاریخی، برج ایفل](../../../translated_images/fa/startup.94d6b79cc4bb3f5a.webp)
+| مدل | توضیحات |  
+| --- | --- |  
+| **`gpt-image-2`** | جدیدترین و قدرتمندترین مدل تصویر - پیش‌فرض توصیه‌شده. |  
+| `gpt-image-1.5` | عموماً در دسترس؛ کیفیت مناسب با هزینه کمتر. |  
+| `gpt-image-1-mini` | عموماً در دسترس؛ سریع‌ترین / کم‌هزینه‌ترین. |  
+| `gpt-image-1` | فقط پیش‌نمایش. |  
 
-با استفاده از پرامپتی مانند:
+همیشه فهرست [مدل‌های تصویری Foundry](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) را برای دسترسی و مناطق بررسی کنید.  
 
-> "سگی کنار برج ایفل در نور صبحگاهی"
+> **مهم:** مدل‌های `gpt-image` تصویر تولیدشده را به صورت **base64** (`b64_json`) بازمی‌گردانند، نه URL. کد شما رشته base64 را رمزگشایی می‌کند به بایت‌ها و ذخیره می‌کند - هیچ URL تصویری برای دانلود وجود ندارد.  
 
-## DALL-E و Midjourney چیستند؟
+## راه‌اندازی  
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) و [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) دو مدل محبوب تولید تصویر هستند که به شما امکان می‌دهند با استفاده از پرامپت‌ها تصاویر تولید کنید.
+شما می‌توانید نمونه‌ها را روی **Azure OpenAI در Microsoft Foundry** (نمونه‌های `aoai-*`) یا پلتفرم **OpenAI** (نمونه‌های `oai-*`) اجرا کنید.  
 
-### DALL-E
+### ۱. ایجاد و استقرار مدل  
 
-بیایید با DALL-E شروع کنیم، که یک مدل هوش مصنوعی تولیدی است و تصاویر را از توضیحات متنی تولید می‌کند.
+راهنمای [ایجاد منبع](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) را دنبال کنید تا منبعی در Microsoft Foundry بسازید، سپس یک مدل تصویر مستقر کنید - **`gpt-image-2`** توصیه شده است.  
 
-> [DALL-E ترکیبی از دو مدل، CLIP و توجه پراکنده است](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
-
-- **CLIP**، مدلی است که تعبیه‌ها (نمایش‌های عددی داده‌ها) را از تصاویر و متن تولید می‌کند.
-
-- **توجه پراکنده**، مدلی است که تصاویر را از تعبیه‌ها تولید می‌کند. DALL-E بر اساس مجموعه داده‌ای از تصاویر و متن آموزش دیده است و می‌تواند تصاویر را از توضیحات متنی تولید کند. برای مثال، DALL-E می‌تواند تصاویر یک گربه با کلاه یا یک سگ با موهاک تولید کند.
-
-### Midjourney
-
-Midjourney به شیوه‌ای مشابه DALL-E کار می‌کند و تصاویر را از پرامپت‌های متنی تولید می‌کند. Midjourney همچنین می‌تواند با استفاده از پرامپت‌هایی مانند "گربه‌ای با کلاه" یا "سگی با موهاک" تصاویر تولید کند.
-
-![تصویر تولید شده توسط Midjourney، کبوتر مکانیکی](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_اعتبار تصویر: ویکی‌پدیا، تصویر تولید شده توسط Midjourney_
-
-## DALL-E و Midjourney چگونه کار می‌کنند؟
-
-ابتدا، [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E یک مدل هوش مصنوعی تولیدی بر اساس معماری ترانسفورمر با یک _ترانسفورمر خودبازگشتی_ است.
-
-یک _ترانسفورمر خودبازگشتی_ تعیین می‌کند که چگونه یک مدل تصاویر را از توضیحات متنی تولید می‌کند. این مدل یک پیکسل را در هر بار تولید می‌کند و سپس از پیکسل‌های تولید شده برای تولید پیکسل بعدی استفاده می‌کند. این فرآیند از طریق لایه‌های مختلف شبکه عصبی ادامه می‌یابد تا تصویر کامل شود.
-
-با این فرآیند، DALL-E ویژگی‌ها، اشیاء، خصوصیات و موارد دیگر را در تصویر تولید شده کنترل می‌کند. با این حال، DALL-E 2 و 3 کنترل بیشتری بر تصویر تولید شده دارند.
-
-## ساخت اولین برنامه تولید تصویر
-
-برای ساخت یک برنامه تولید تصویر به کتابخانه‌های زیر نیاز دارید:
-
-- **python-dotenv**، توصیه می‌شود از این کتابخانه برای نگهداری اطلاعات محرمانه در فایل _.env_ دور از کد استفاده کنید.
-- **openai**، این کتابخانه برای تعامل با API OpenAI استفاده می‌شود.
-- **pillow**، برای کار با تصاویر در پایتون.
-- **requests**، برای کمک به ارسال درخواست‌های HTTP.
-
-## ایجاد و استقرار مدل Azure OpenAI
-
-اگر هنوز این کار را انجام نداده‌اید، دستورالعمل‌های صفحه [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) را دنبال کنید
-تا یک منبع و مدل Azure OpenAI ایجاد کنید. مدل DALL-E 3 را انتخاب کنید.
-
-## ایجاد برنامه
-
-1. یک فایل _.env_ با محتوای زیر ایجاد کنید:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   این اطلاعات را در پورتال Azure OpenAI Foundry برای منبع خود در بخش "Deployments" پیدا کنید.
-
-1. کتابخانه‌های بالا را در یک فایل به نام _requirements.txt_ جمع‌آوری کنید، به این صورت:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. سپس، محیط مجازی ایجاد کرده و کتابخانه‌ها را نصب کنید:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   برای ویندوز، از دستورات زیر برای ایجاد و فعال کردن محیط مجازی استفاده کنید:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. کد زیر را در فایلی به نام _app.py_ اضافه کنید:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-توضیح این کد:
-
-- ابتدا، کتابخانه‌های مورد نیاز را وارد می‌کنیم، از جمله کتابخانه OpenAI، کتابخانه dotenv، کتابخانه requests و کتابخانه Pillow.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- سپس، متغیرهای محیطی را از فایل _.env_ بارگذاری می‌کنیم.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- بعد از آن، سرویس مشتری Azure OpenAI را پیکربندی می‌کنیم.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- سپس، تصویر را تولید می‌کنیم:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  کد بالا با یک شی JSON پاسخ می‌دهد که حاوی URL تصویر تولید شده است. می‌توانیم از این URL برای دانلود تصویر و ذخیره آن در یک فایل استفاده کنیم.
-
-- در نهایت، تصویر را باز کرده و از نمایشگر استاندارد تصویر برای نمایش آن استفاده می‌کنیم:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### جزئیات بیشتر درباره تولید تصویر
-
-بیایید کدی که تصویر را تولید می‌کند با جزئیات بیشتری بررسی کنیم:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**، پرامپت متنی است که برای تولید تصویر استفاده می‌شود. در این مورد، ما از پرامپت "خرگوش روی اسب، در حال نگه داشتن یک آب‌نبات چوبی، در یک چمنزار مه‌آلود که در آن نرگس رشد می‌کند" استفاده می‌کنیم.
-- **size**، اندازه تصویر تولید شده است. در این مورد، ما تصویری با اندازه 1024x1024 پیکسل تولید می‌کنیم.
-- **n**، تعداد تصاویر تولید شده است. در این مورد، ما دو تصویر تولید می‌کنیم.
-- **temperature**، پارامتری است که تصادفی بودن خروجی مدل هوش مصنوعی تولیدی را کنترل می‌کند. مقدار دما بین 0 و 1 است که 0 به معنای خروجی قطعی و 1 به معنای خروجی تصادفی است. مقدار پیش‌فرض 0.7 است.
-
-کارهای بیشتری می‌توانید با تصاویر انجام دهید که در بخش بعدی به آن‌ها خواهیم پرداخت.
-
-## قابلیت‌های اضافی تولید تصویر
-
-تا اینجا دیدید که چگونه توانستیم با چند خط کد در پایتون یک تصویر تولید کنیم. با این حال، کارهای بیشتری می‌توانید با تصاویر انجام دهید.
-
-همچنین می‌توانید کارهای زیر را انجام دهید:
-
-- **ویرایش تصاویر**. با ارائه یک تصویر موجود، یک ماسک و یک پرامپت، می‌توانید تصویر را تغییر دهید. برای مثال، می‌توانید چیزی را به بخشی از تصویر اضافه کنید. تصور کنید تصویر خرگوش ما، می‌توانید یک کلاه به خرگوش اضافه کنید. این کار را با ارائه تصویر، یک ماسک (مشخص کردن بخشی از منطقه برای تغییر) و یک پرامپت متنی برای توضیح تغییر انجام می‌دهید.
-> توجه: این قابلیت در DALL-E 3 پشتیبانی نمی‌شود.
-
-در اینجا یک مثال با استفاده از GPT Image آورده شده است:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  تصویر پایه فقط شامل سالن با استخر خواهد بود اما تصویر نهایی یک فلامینگو خواهد داشت:
-
-<div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-  <img src="../../../translated_images/fa/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
-  <img src="../../../translated_images/fa/mask.1b2976ccec9e011e.webp" style="width: 30%; max-width: 200px; height: auto;">
-  <img src="../../../translated_images/fa/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
-</div>
-
-- **ایجاد تغییرات**. ایده این است که یک تصویر موجود را بگیرید و درخواست کنید که تغییراتی ایجاد شود. برای ایجاد تغییرات، یک تصویر و یک پرامپت متنی ارائه می‌دهید و کدی مانند زیر را اجرا می‌کنید:
-
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > توجه: این قابلیت فقط در OpenAI پشتیبانی می‌شود.
-
-## دما
-
-دما پارامتری است که تصادفی بودن خروجی مدل هوش مصنوعی تولیدی را کنترل می‌کند. مقدار دما بین 0 و 1 است که 0 به معنای خروجی قطعی و 1 به معنای خروجی تصادفی است. مقدار پیش‌فرض 0.7 است.
-
-بیایید یک مثال از نحوه کار دما را بررسی کنیم، با اجرای این پرامپت دو بار:
-
-> پرامپت: "خرگوش روی اسب، در حال نگه داشتن یک آب‌نبات چوبی، در یک چمنزار مه‌آلود که در آن نرگس رشد می‌کند"
-
-![خرگوش روی اسب در حال نگه داشتن آب‌نبات چوبی، نسخه 1](../../../translated_images/fa/v1-generated-image.a295cfcffa3c13c2.webp)
-
-حالا همان پرامپت را دوباره اجرا می‌کنیم تا ببینیم که تصویر یکسانی دریافت نمی‌کنیم:
-
-![تصویر تولید شده خرگوش روی اسب](../../../translated_images/fa/v2-generated-image.33f55a3714efe61d.webp)
-
-همانطور که می‌بینید، تصاویر مشابه هستند، اما یکسان نیستند. بیایید مقدار دما را به 0.1 تغییر دهیم و ببینیم چه اتفاقی می‌افتد:
-
-```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### تغییر دما
-
-بیایید سعی کنیم پاسخ را قطعی‌تر کنیم. از دو تصویری که تولید کردیم می‌توان مشاهده کرد که در تصویر اول یک خرگوش وجود دارد و در تصویر دوم یک اسب، بنابراین تصاویر تفاوت زیادی دارند.
-
-بنابراین کد خود را تغییر می‌دهیم و دما را به 0 تنظیم می‌کنیم، به این صورت:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-حالا وقتی این کد را اجرا می‌کنید، این دو تصویر را دریافت می‌کنید:
-
-- ![دما 0، نسخه 1](../../../translated_images/fa/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![دما 0، نسخه 2](../../../translated_images/fa/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-اینجا به وضوح می‌بینید که تصاویر بیشتر شبیه به هم هستند.
-
-## چگونه مرزهایی برای برنامه خود با متاپرامپت‌ها تعریف کنیم
-
-با دموی ما، می‌توانیم تصاویر را برای مشتریان خود تولید کنیم. با این حال، باید برخی مرزها برای برنامه خود ایجاد کنیم.
-
-برای مثال، نمی‌خواهیم تصاویر نامناسب برای محیط کار یا کودکان تولید کنیم.
-
-می‌توانیم این کار را با _متاپرامپت‌ها_ انجام دهیم. متاپرامپت‌ها پرامپت‌های متنی هستند که برای کنترل خروجی مدل هوش مصنوعی تولیدی استفاده می‌شوند. برای مثال، می‌توانیم از متاپرامپت‌ها برای کنترل خروجی استفاده کنیم و اطمینان حاصل کنیم که تصاویر تولید شده مناسب محیط کار یا کودکان هستند.
-
-### چگونه کار می‌کند؟
-
-حالا، متاپرامپت‌ها چگونه کار می‌کنند؟
-
-متاپرامپت‌ها پرامپت‌های متنی هستند که برای کنترل خروجی مدل هوش مصنوعی تولیدی استفاده می‌شوند. آن‌ها قبل از پرامپت متنی قرار می‌گیرند و برای کنترل خروجی مدل استفاده می‌شوند و در برنامه‌ها برای کنترل خروجی مدل تعبیه می‌شوند. پرامپت ورودی و ورودی متاپرامپت در یک پرامپت متنی واحد قرار می‌گیرند.
-
-یک مثال از متاپرامپت می‌تواند به صورت زیر باشد:
+### ۲. پیکربندی `.env` خود  
 
 ```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
 ```
+  
+این مقادیر را در صفحه **Deployments** منبع خود در [Foundry portal](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) پیدا کنید.  
 
-حالا، بیایید ببینیم چگونه می‌توانیم از متاپرامپت‌ها در دموی خود استفاده کنیم.
+### ۳. نصب کتابخانه‌ها  
+
+یک فایل `requirements.txt` ایجاد کنید:  
+
+```text
+python-dotenv
+openai
+pillow
+```
+  
+سپس محیط مجازی بسازید و فعال کنید و نصب کنید:  
+
+```bash
+python3 -m venv venv
+source venv/bin/activate        # ویندوز: venv\Scripts\activate
+pip install -r requirements.txt
+```
+  
+## ساخت برنامه  
+
+فایل `app.py` را با کد زیر بسازید. این برنامه یک تصویر تولید و به صورت PNG ذخیره می‌کند.  
 
 ```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-از پرامپت بالا می‌توانید ببینید که تمام تصاویر ایجاد شده متاپرامپت را در نظر می‌گیرند.
-
-## تکلیف - بیایید دانش‌آموزان را توانمند کنیم
-
-ما در ابتدای این درس Edu4All را معرفی کردیم. حالا وقت آن است که به دانش‌آموزان کمک کنیم تا تصاویر را برای ارزیابی‌های خود تولید کنند.
-
-دانش‌آموزان تصاویر را برای ارزیابی‌های خود که شامل بناهای تاریخی است ایجاد خواهند کرد. اینکه چه بناهایی را انتخاب کنند به خودشان بستگی دارد. از دانش‌آموزان خواسته می‌شود در این وظیفه خلاقیت خود را به کار بگیرند و این بناها را در زمینه‌های مختلف قرار دهند.
-
-## راه‌حل
-
-در اینجا یک راه‌حل ممکن آورده شده است:
-```python
-import openai
 import os
-import requests
+import base64
+from openai import AzureOpenAI
 from PIL import Image
 import dotenv
-from openai import AzureOpenAI
-# import dotenv
+
 dotenv.load_dotenv()
 
-# Get endpoint and key from environment variables
+# کلاینت را به منبع Azure OpenAI (Microsoft Foundry) خود اشاره دهید.
+# مدل‌های تصویری به نسخه جدید API نیاز دارند - مستندات Foundry را برای نسخه مورد نیاز مدل خود بررسی کنید.
 client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # مثلاً "gpt-image-2"
 
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # همچنین ۱۵۳۶×۱۰۲۴ (افقی)، ۱۰۲۴×۱۵۳۶ (عمودی)، یا "auto"
+    n=1,
+)
+
+# مدل‌های gpt-image خروجی base64 (b64_json) می‌دهند، نه URL - آن را به بایت تبدیل کنید.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+  
+با اجرای `python app.py` برنامه اجرا می‌شود. یک فایل PNG تحت `images/` ذخیره می‌شود.  
+
+> هر بار که `images.generate` را فراخوانی کنید تصویر متفاوتی برای همان پرس‌وجو تولید می‌شود - مدل‌های تصویری پارامتر `temperature` ندارند (این کنترل تولید متن است). برای تنوع بیشتر، دوباره API را صدا بزنید؛ برای کاهش تنوع، پرس‌وجوی خود را دقیق‌تر کنید.  
+
+## ویرایش تصاویر  
+
+مدل‌های `gpt-image` می‌توانند یک تصویر موجود را **ویرایش** کنند: تصویر، یک **ماسک** اختیاری (که ناحیه تغییر را مشخص می‌کند) و یک پرس‌وجوی توصیفی تغییر را بدهید. مثل تولید تصویر، ویرایش‌ها نیز به حالت base64 بازگردانده می‌شوند.  
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
+  
+<div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">  
+  <img src="../../../translated_images/fa/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">  
+  <img src="../../../translated_images/fa/mask.1b2976ccec9e011e.webp" style="width: 30%; max-width: 200px; height: auto;">  
+  <img src="../../../translated_images/fa/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">  
+</div>  
+
+## تعیین محدودیت‌ها با متاپرومپت‌ها  
+
+وقتی توانستید تصویر تولید کنید، نیاز دارید که محدودیت‌هایی قرار دهید تا برنامه شما محتوای ناایمن یا نامناسب تولید نکند. یک **متاپرومپت** متنی است که به ابتدای پرس‌وجوی کاربر اضافه می‌شود تا خروجی مدل محدود شود.  
+
+```python
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# `prompt` را به client.images.generate(...) بدهید
 ```
+  
+حالا هر تصویر در چارچوب محدودیت‌های تعیین‌شده توسط متاپرومپت تولید می‌شود. این را با فیلترهای محتوای داخلی Microsoft Foundry ترکیب کنید تا یک دفاع چندلایه ایجاد کنید.  
 
-## کار عالی! یادگیری خود را ادامه دهید
+## تمرین - فعال‌سازی دانش‌آموزان  
 
-پس از اتمام این درس، مجموعه [یادگیری هوش مصنوعی مولد](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) را بررسی کنید تا دانش خود در زمینه هوش مصنوعی مولد را ارتقا دهید!
+دانش‌آموزان Edu4All برای ارزیابی‌های خود به تصویر نیاز دارند. برنامه‌ای بسازید که تصاویر **بنای تاریخی** (انتخاب بنا بر عهده شماست) را در زمینه‌های مختلف و خلاقانه تولید کند - برای مثال یک نشانه معروف هنگام غروب با کودکی که به آن نگاه می‌کند.  
 
-به درس ۱۰ بروید، جایی که به بررسی نحوه [ساخت برنامه‌های هوش مصنوعی با کدنویسی کم](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst) خواهیم پرداخت.
+خودتان امتحان کنید و سپس با راه‌حل‌های مرجع مقایسه کنید:  
+
+- پایتون (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)  
+- برنامه کامل تولید پایتون (Azure): [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)  
+- پایتون (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)  
+- تایپ‌اسکریپت (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)  
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)  
+
+همچنین دفترچه‌های یادداشت در [python/](../../../09-building-image-applications/python) را انجام دهید (`aoai-assignment.ipynb` برای Azure، `oai-assignment.ipynb` برای OpenAI).  
+
+## کار عالی! به یادگیری ادامه دهید  
+
+پس از اتمام این درس، مجموعه یادگیری [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) را بررسی کنید تا دانش خود در زمینه هوش مصنوعی مولد را ارتقا دهید!  
+
+به درس ۱۰ بروید تا به یادگیری ادامه دهید.  
 
 ---
 
-**سلب مسئولیت**:  
-این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما تلاش می‌کنیم دقت را حفظ کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌ها باشند. سند اصلی به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما مسئولیتی در قبال سوء تفاهم‌ها یا تفسیرهای نادرست ناشی از استفاده از این ترجمه نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری خود باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوء تفاهم یا برداشت نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,153 +1,154 @@
-# Exploring and comparing different LLMs
+# Explorim an kompare diffrent LLMs
 
-[![Exploring and comparing different LLMs](../../../translated_images/pcm/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
+[![Explorim an kompare diffrent LLMs](../../../translated_images/pcm/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
 
-> _Click di image wey dey up to watch di video for dis lesson_
+> _Klik di pikshua up na to watch video of dis leson_
 
-For di last lesson, we don see how Generative AI dey change di technology world, how Large Language Models (LLMs) dey work, and how business - like our startup - fit use am for dia own case and grow! For dis chapter, we go compare and check di different types of large language models (LLMs) to sabi dia good and bad sides.
+Wit di leson we bin do bifo, we don see how Generative AI dey change di teknologi land, how Large Language Models (LLMs) dey wok an how bizniz - like our startup - fit use dem for dia use case an grow! For dis chapter, we dey try kompare an see diffren kain large language models (LLMs) to sabi wetin dem good at an where dem no too beta.
 
-Di next step for our startup journey na to check di LLMs wey dey now and sabi which one go fit our own case.
+Di next step for our startup waka na to explore di LLMs wey dey ground now an sabi which one go fit our use case.
 
 ## Introduction
 
-Dis lesson go cover:
+Dis leson go cover:
 
-- Di different types of LLMs wey dey now.
-- How to test, try, and compare different models for your own case for Azure.
-- How to deploy LLM.
+- Diffren kain LLMs wey dey ground now.
+- How to test, try again, an kompare diffren models for your use case for Azure.
+- How to set up LLM.
 
 ## Learning Goals
 
-After you finish dis lesson, you go fit:
+After you finish dis leson, you go fit:
 
-- Choose di correct model for your own case.
-- Sabi how to test, try, and make di model perform better.
-- Sabi how businesses dey deploy models.
+- Choose di correct model for your use case.
+- Understand how to test, try aplenty, an make your model wok beta.
+- Know how bizniz dem take deploy models.
 
-## Sabi di different types of LLMs
+## Understand diffren kain LLMs
 
-LLMs get different categories based on dia architecture, training data, and di case wey dem dey use am for. To sabi dis difference go help our startup choose di correct model for di situation, and sabi how to test, try, and make di performance better.
+LLMs fit get plenty kind dem based on how dem build am, data wey dem train am with, an wetin you wan take am do. If we sabi these difference, our startup go fit choose di correct model for di kain ting we wan do, an sabi how to test, try aplenty, an improve how e dey perform.
 
-Plenty types of LLM models dey, di one wey you go choose depend on wetin you wan use am do, di data wey you get, how much you fit pay, and other things.
+Plenty diffren kain LLM models dey, di one wey you go choose depend on wetin you wan use am do, your data, how much you fit pay an beta tins.
 
-If you wan use di models for text, audio, video, image generation, and so on, you fit choose different type of model.
+If na text, audio, video, image generation an di kain tins you wan use di models for, you fit choose diffren kain model.
 
-- **Audio and speech recognition**. For dis one, Whisper-type models dey good as dem dey general-purpose and dem dey for speech recognition. E dey train on different audio and fit do multilingual speech recognition. Learn more about [Whisper type models here](https://platform.openai.com/docs/models/whisper?WT.mc_id=academic-105485-koreyst).
+- **Audio an speech recognition**. Whisper-style models still dey useful as general speech recognition models, but for production now, fine new speech-to-text models dey like `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, an diarization variants. You suppose check language wey e cover, diarization, real-time support, how e fast, an how much e go cost for your palava. Learn more for [OpenAI speech-to-text documentation](https://platform.openai.com/docs/guides/speech-to-text?WT.mc_id=academic-105485-koreyst).
 
-- **Image generation**. For image generation, DALL-E and Midjourney na two popular choices. DALL-E dey available for Azure OpenAI. [Read more about DALL-E here](https://platform.openai.com/docs/models/dall-e?WT.mc_id=academic-105485-koreyst) and also for Chapter 9 of dis curriculum.
+- **Image generation**. DALL-E an Midjourney na well known image generation options, but current OpenAI image APIs dey focus on GPT Image models like `gpt-image-2`, while Stable Diffusion, Imagen, Flux, an oda model families also popular. Check how dem dey follow prompt well, editing support, style control, safety rules, an licenses. Learn more for [OpenAI image generation guide](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst) an Chapter 9 for dis curriculum.
 
-- **Text generation**. Most models dey train for text generation and you get plenty choices from GPT-3.5 to GPT-4. Dem get different costs, GPT-4 na di most expensive. E good to check di [Azure OpenAI playground](https://oai.azure.com/portal/playground?WT.mc_id=academic-105485-koreyst) to see which model go fit your needs for capability and cost.
+- **Text generation**. Text models now dey include frontier models, reasoning models, small fast models, an open-weight models. Current ones na OpenAI GPT-5.x models, Anthropic Claude 4.x models, Google Gemini 3.x models, Meta Llama 4 models, an Mistral models. No just pick based on e release date or price; consider task quality, latency, context window, tool use, safety, which region e fit, an total cost. [Microsoft Foundry model catalog](https://ai.azure.com/catalog?WT.mc_id=academic-105485-koreyst) good place to check models wey dey for Azure.
 
-- **Multi-modality**. If you wan handle different types of data for input and output, you fit check models like [gpt-4 turbo with vision or gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models?WT.mc_id=academic-105485-koreyst) - di latest OpenAI models - wey fit combine natural language processing with visual understanding, so you fit interact through multi-modal interfaces.
+- **Multi-modality**. Plenty models fit handle more than text. Some fit accept image, audio, or video inputs; some fit call tools; an specialized models fit generate images, audio, or video. For example, current OpenAI models fit text and image input, Gemini models fit text, code, image, audio, and video inputs depending on variant, an Llama 4 Scout and Maverick na open-weight natively multimodal models. Always check model card for supported input and output modalities before you build your workflow.
 
-To choose model mean say you go get some basic capabilities, but e fit no dey enough. Many times, you get company-specific data wey you go need to show di LLM. Different ways dey to do dis, we go talk more about am for di next sections.
+When you select model, you dey get some basic ability, but sometimes e no too enough. Many times you get company-specific data wey you need tell di LLM about. Dere some different ways to do am, we go talk more for next sections.
 
 ### Foundation Models versus LLMs
 
-Di term Foundation Model na [Stanford researchers coin am](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst) and dem define am as AI model wey get some criteria, like:
+Di term Foundation Model na [Stanford researchers](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst) coin am, an e mean AI model wey get some criteria like:
 
-- **Dem dey train using unsupervised learning or self-supervised learning**, meaning dem dey train on data wey no get label, and dem no need human annotation or labeling of data for dia training process.
-- **Dem be very big models**, wey dey based on very deep neural networks wey dem train on billions of parameters.
-- **Dem dey meant to serve as ‘foundation’ for other models**, meaning dem fit dey use as starting point for other models wey dem go build on top, wey dem fit do by fine-tuning.
+- **Dem train am with unsupervised learning or self-supervised learning**, meaning dem no need human make dem label data, e dey train on unlabeled multi-modal data.
+- **Dem models big well well**, them base am on deep neural networks wey dem train on billion parameters.
+- **Dem normally for serve as foundation for oda models**, so you fit use dem start to build beta models by fine-tuning.
 
 ![Foundation Models versus LLMs](../../../translated_images/pcm/FoundationModel.e4859dbb7a825c94.webp)
 
-Image source: [Essential Guide to Foundation Models and Large Language Models | by Babar M Bhatti | Medium
+Pikshua source: [Essential Guide to Foundation Models and Large Language Models | by Babar M Bhatti | Medium
 ](https://thebabar.medium.com/essential-guide-to-foundation-models-and-large-language-models-27dab58f7404)
 
-To explain dis difference more, make we use ChatGPT as example. To build di first version of ChatGPT, dem use one model wey dem call GPT-3.5 as di foundation model. Dis mean say OpenAI use some chat-specific data to create one tuned version of GPT-3.5 wey dem specialize to perform well for chat situations, like chatbots.
+To clear dis story well, mek we use ChatGPT as example. Early ChatGPT versions use GPT-3.5 as foundation model. OpenAI then use chat-specific data and alignment methods create tuned version wey perform beta for chatbots and conversational use. Modern AI services fit use many model variants, so service name and model name no always be di same.
 
 ![Foundation Model](../../../translated_images/pcm/Multimodal.2c389c6439e0fc51.webp)
 
-Image source: [2108.07258.pdf (arxiv.org)](https://arxiv.org/pdf/2108.07258.pdf?WT.mc_id=academic-105485-koreyst)
+Pikshua source: [2108.07258.pdf (arxiv.org)](https://arxiv.org/pdf/2108.07258.pdf?WT.mc_id=academic-105485-koreyst)
 
-### Open Source versus Proprietary Models
+### Open-Weight/Open-Source versus Proprietary Models
 
-Another way to categorize LLMs na whether dem be open source or proprietary.
+Another way to group LLMs na whether dem open-weight, open-source, or proprietary.
 
-Open-source models na models wey dem make available to di public and anybody fit use am. Di company wey create am or di research community fit make am available. People fit check, change, and customize di models for different LLM cases. But dem no dey always optimized for production use, and dem fit no perform reach proprietary models. Plus, di money wey dem dey use for open-source models fit dey small, and dem fit no dey maintain am for long or update am with di latest research. Examples of popular open-source models na [Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html?WT.mc_id=academic-105485-koreyst), [Bloom](https://huggingface.co/bigscience/bloom) and [LLaMA](https://llama.meta.com).
+Open-source an open-weight models dey allow make pipo check, download, or customize di model artifacts, but dia license dem different. Some full open-source, some open-weight but get usage restriction. Dem dey useful if bizniz want more control on deployment, data place, cost, or customization. But team still need check license, serving cost, maintenance, security update, an evaluation quality before use for production. Examples na [Meta Llama 4](https://ai.meta.com/blog/llama-4-multimodal-intelligence/?WT.mc_id=academic-105485-koreyst), some [Mistral models](https://docs.mistral.ai/models/overview?WT.mc_id=academic-105485-koreyst), an many models for [Hugging Face](https://huggingface.co/models?WT.mc_id=academic-105485-koreyst).
 
-Proprietary models na models wey company dey own and dem no dey make am available to di public. Dis models dey optimized for production use. But people no fit check, change, or customize di models for different cases. Plus, dem no dey always free, and you fit need subscription or payment to use am. Also, di users no get control over di data wey dem use train di model, so dem go need trust di model owner to make sure dem dey committed to data privacy and responsible AI use. Examples of popular proprietary models na [OpenAI models](https://platform.openai.com/docs/models/overview?WT.mc_id=academic-105485-koreyst), [Google Bard](https://sapling.ai/llm/bard?WT.mc_id=academic-105485-koreyst) or [Claude 2](https://www.anthropic.com/index/claude-2?WT.mc_id=academic-105485-koreyst).
+Proprietary models dey owned an hosted by provider. Dem dey optimized for production use and fit offer strong support, safety systems, tool integration an scale. But customers no fit check or change di model weights; dem go need check provider terms for privacy, data retention, compliance, and acceptable use. Examples na [OpenAI models](https://platform.openai.com/docs/models?WT.mc_id=academic-105485-koreyst), [Google Gemini](https://deepmind.google/models/gemini/pro/?WT.mc_id=academic-105485-koreyst), and [Anthropic Claude](https://platform.claude.com/docs/en/about-claude/models/overview?WT.mc_id=academic-105485-koreyst).
 
 ### Embedding versus Image generation versus Text and Code generation
 
-LLMs fit dey categorize by di output wey dem dey generate.
+LLMs fit also dey categorized by di output dem generate.
 
-Embeddings na models wey fit change text into numbers, wey dem dey call embedding, wey be numerical representation of di input text. Embeddings dey make am easy for machines to sabi di relationship between words or sentences and fit dey use as input for other models, like classification models, or clustering models wey dey perform better on numerical data. Embedding models dey often use for transfer learning, where dem dey build model for one task wey get plenty data, and then dem dey reuse di model weights (embeddings) for other tasks. Example of dis category na [OpenAI embeddings](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst).
+Embeddings na models wey fit change text go numerical form, wey dem dey call embedding, na number wey represent di input text. Embeddings dey help machine understand word or sentence relation well well, and oda models fit use di embedding as input, like classification models or clustering models wey beta for number data. Embedding models dey use for transfer learning, where dem build model for task wey get plenty data, then reuse model weights (embeddings) for oda tasks. Example na [OpenAI embeddings](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst).
 
 ![Embedding](../../../translated_images/pcm/Embedding.c3708fe988ccf760.webp)
 
-Image generation models na models wey dey generate images. Dem dey often use for image editing, image synthesis, and image translation. Image generation models dey train on big datasets of images, like [LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst), and dem fit use am to create new images or edit old ones with inpainting, super-resolution, and colorization techniques. Examples na [DALL-E-3](https://openai.com/dall-e-3?WT.mc_id=academic-105485-koreyst) and [Stable Diffusion models](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst).
+Image generation models na models wey dey generate pictures. Dem dey used for image editing, image synthesis an image translation. Dem dey train dem well with large image datasets, like [LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst), an fit generate new pictures or edit old pictures wit inpainting, super-resolution, and colorization. Examples na [GPT Image models](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst), [Stable Diffusion models](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst), and Imagen models.
 
 ![Image generation](../../../translated_images/pcm/Image.349c080266a763fd.webp)
 
-Text and code generation models na models wey dey generate text or code. Dem dey often use for text summarization, translation, and question answering. Text generation models dey train on big datasets of text, like [BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst), and dem fit use am to create new text, or answer questions. Code generation models, like [CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst), dey train on big datasets of code, like GitHub, and dem fit use am to create new code, or fix bugs for old code.
+Text an code generation models na models wey generate text or code. Dem dey used for text summarization, translation, an question answering. Dem train di text generation models wit big text datasets, like [BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst), an dem fit generate new text or answer questions. Code generation models, like [CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst), dey train with big code data like GitHub, an fit generate new code or fix bugs for code wey dey.
 
 ![Text and code generation](../../../translated_images/pcm/Text.a8c0cf139e5cc2a0.webp)
 
 ### Encoder-Decoder versus Decoder-only
 
-To talk about di different types of architectures of LLMs, make we use one example.
+To yarn about di diffren architecture types for LLMs, mek us use analogy.
 
-Imagine say your manager give you task to write quiz for students. You get two colleagues; one dey create di content and di other dey review am.
+Imagine your boss give you task to write quiz for students. You get two colleagues; one dey create content, di oda dey review am.
 
-Di person wey dey create di content na like Decoder-only model, dem fit look di topic and wetin you don write already, then dem fit write course based on dat. Dem dey very good for writing engaging and informative content, but dem no dey too good for understanding di topic and di learning objectives. Examples of Decoder models na GPT family models, like GPT-3.
+Di content creator be like decoder-only model: dem dey look topic, see wetin you don write before, an continue to generate content based on dat context. Dem sabi well for write beta an interesting content, but dem no be best for just classify, find, or encode info. Examples be decoder-only models like GPT an Llama.
 
-Di person wey dey review na like Encoder-only model, dem dey look di course wey dem don write and di answers, dem dey notice di relationship between dem and sabi di context, but dem no dey good for generating content. Example of Encoder-only model na BERT.
+Di reviewer be like Encoder-only model; dem go review di course an answer, dey see the relation, an sabi di context, but dem no dey generate content. Example be Encoder only model like BERT.
 
-Imagine say we fit get person wey fit create and review di quiz, dis one na Encoder-Decoder model. Examples na BART and T5.
+Imagine say we fit get person wey fit create and review quiz, na Encoder-Decoder model dat be. Examples na BART an T5.
 
 ### Service versus Model
 
-Now, make we talk about di difference between service and model. Service na product wey Cloud Service Provider dey offer, and e dey often combine models, data, and other components. Model na di main part of service, and e dey often be foundation model, like LLM.
+Now, mek we talk wetin different between service an model. Service na product wey Cloud Service Provider dey offer, an e dey usually combination of models, data an oda tins. Model na core part of service, usually foundation model, like LLM.
 
-Services dey often optimized for production use and e dey easy to use pass models, through graphical user interface. But services no dey always free, and you fit need subscription or payment to use am, to take advantage of di service owner’s equipment and resources, reduce expenses, and scale easily. Example of service na [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=academic-105485-koreyst), wey dey offer pay-as-you-go plan, meaning users go pay based on how much dem use di service. Also, Azure OpenAI Service dey offer enterprise-grade security and responsible AI framework on top of di model capabilities.
+Services dey optimized for production use an e easy to use pass models, using GUI. But services no always free, dem fit need subscription or payment, so you fit leverage service owner equipment an resources, optimize cost and scale easy. Example na [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-foundry/openai/overview?WT.mc_id=academic-105485-koreyst) wey get pay-as-you-go plan; people dey pay as dem use am. Azure OpenAI Service dey offer enterprise-grade security an responsible AI framework on top models.
 
-Models na just di Neural Network, with di parameters, weights, and others. E dey allow companies to run locally, but dem go need buy equipment, build structure to scale, and buy license or use open-source model. Model like LLaMA dey available to use, but e go need computational power to run di model.
+Models na di neural network artifacts: parameters, weights, architecture, tokenizer, an config. To run model locally or private need correct hardware, serving system, monitoring, an correct license (open-source/open-weight or commercial). Open-weight models like Llama 4 or Mistral fit self-host, but still need compute power an operational skill.
 
-## How to test and iterate with different models to understand performance on Azure
+## How to test an try wit diffren models to sabi how dem perform for Azure
 
-Once our team don check di LLMs wey dey now and find some wey fit dia case, di next step na to test dem with dia data and workload. Dis na process wey dem go do step by step, through experiments and measures.
-Most of di models wey we mention for di previous paragraphs (OpenAI models, open source models like Llama2, and Hugging Face transformers) dey available for [Model Catalog](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview?WT.mc_id=academic-105485-koreyst) inside [Azure AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst).
 
-[Azure AI Studio](https://learn.microsoft.com/azure/ai-studio/what-is-ai-studio?WT.mc_id=academic-105485-koreyst) na Cloud Platform wey dem design for developers to take build generative AI applications and manage di whole development process - from experimentation to evaluation - by combining all Azure AI services inside one hub wey get better GUI. Di Model Catalog for Azure AI Studio dey allow user to:
+Once our team don explore di current LLMs landscape and find some beta candidates for dia scenarios, di next step na to test dem on dia data and on dia workload. Dis na iterative process, wey dem dey do by experiments and measures.
+Most of di models we mention for previous paragraphs (OpenAI models, open-weight models like Llama 4 and Mistral, and Hugging Face models) dey available for [Microsoft Foundry Models](https://learn.microsoft.com/azure/foundry/concepts/foundry-models-overview?WT.mc_id=academic-105485-koreyst).
 
-- Find di Foundation Model wey dem need for di catalog - whether e be proprietary or open source, dem fit filter am by task, license, or name. To make search easy, di models dey arranged inside collections, like Azure OpenAI collection, Hugging Face collection, and others.
+[Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry?WT.mc_id=academic-105485-koreyst), wey dem been call Azure AI Studio/Azure AI Foundry before, na one unified Azure platform for building AI apps and agents. E dey help developers manage di lifecycle from experimentation and evaluation reach deployment, monitoring, and governance. Di model catalog for Microsoft Foundry dey allow di user to:
+
+- Find di foundation model wey dem dey interested for inside di catalog, including models wey Azure dey sell and models from partners and community providers. Users fit filter by task, provider, license, deployment option, or name.
 
 ![Model catalog](../../../translated_images/pcm/AzureAIStudioModelCatalog.3cf8a499aa8ba031.webp)
 
-- Check di model card, wey go include detailed description of how dem suppose use am and di training data, code samples, and evaluation results from di internal evaluations library.
+- Review di model card, including detailed description of how dem suppose use am and di training data, code samples and evaluation results for inside evaluations library.
 
 ![Model card](../../../translated_images/pcm/ModelCard.598051692c6e400d.webp)
 
-- Compare benchmarks across models and datasets wey dey available for di industry to know which one go fit di business scenario, through di [Model Benchmarks](https://learn.microsoft.com/azure/ai-studio/how-to/model-benchmarks?WT.mc_id=academic-105485-koreyst) pane.
+- Compare benchmarks across models and datasets wey dey for industry to check which one go match di business scenario, through di [Model Benchmarks](https://learn.microsoft.com/azure/ai-foundry/concepts/model-benchmarks?WT.mc_id=academic-105485-koreyst) pane.
 
 ![Model benchmarks](../../../translated_images/pcm/ModelBenchmarks.254cb20fbd06c03a.webp)
 
-- Fine-tune di model on custom training data to make di model perform better for one specific workload, using di experimentation and tracking features wey dey Azure AI Studio.
+- Fine-tune models wey dem support on custom training data to make di model performance beta for specific workload, using di experimentation and tracking capabilities of Microsoft Foundry.
 
 ![Model fine-tuning](../../../translated_images/pcm/FineTuning.aac48f07142e36fd.webp)
 
-- Deploy di original pre-trained model or di fine-tuned version to remote real-time inference - managed compute - or serverless api endpoint - [pay-as-you-go](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview#model-deployment-managed-compute-and-serverless-api-pay-as-you-go?WT.mc_id=academic-105485-koreyst) - so dat applications fit dey use am.
+- Deploy di original pre-trained model or di fine-tuned version to remote real-time inference endpoint, using managed compute or serverless deployment options, so applications fit use am.
 
 ![Model deployment](../../../translated_images/pcm/ModelDeploy.890da48cbd0bccdb.webp)
 
 > [!NOTE]
-> No be all di models wey dey di catalog fit dey fine-tuned and/or pay-as-you-go deployment. Make you check di model card for di details about di model capabilities and limitations.
+> No be all models for di catalog dey available for fine-tuning and/or pay-as-you-go deployment now. Make you check di model card for more details about di model capabilities and limits.
 
-## How to make LLM results better
+## How to improve LLM results
 
-We don discuss with our startup team different types of LLMs and one Cloud Platform (Azure Machine Learning) wey dey allow us compare different models, test dem with data, improve performance, and deploy dem for inference endpoints.
+We don explore with our startup team different kinds of LLMs and one cloud platform (Microsoft Foundry) wey fit help us compare different models, evaluate dem on test data, improve performance, and deploy dem on inference endpoints.
 
-But when dem suppose consider fine-tuning model instead of using pre-trained one? E get other ways to make model perform better for specific workloads?
+But when dem suppose consider to fine-tune model instead of to use pre-trained one? E get other ways to improve model performance for specific workloads?
 
-E get different ways wey business fit use to get di results wey dem need from LLM. You fit choose different types of models wey get different levels of training when you dey deploy LLM for production, with different levels of complexity, cost, and quality. Here be some of di ways:
+E get many ways a business fit use take get di results wey dem need from LLM. You fit select different types of models with different degrees of training when you dey deploy LLM for production, with different levels of complexity, cost, and quality. Here some different approaches be:
 
-- **Prompt engineering with context**. Di idea na to provide enough context when you dey prompt so you go get di response wey you need.
+- **Prompt engineering with context**. Di idea na to give enough context wen you dey prompt to make sure say you go get di responses wey you need.
 
-- **Retrieval Augmented Generation, RAG**. Your data fit dey inside database or web endpoint for example, to make sure say dis data, or part of am, dey included when you dey prompt, you fit fetch di correct data and add am to di user prompt.
+- **Retrieval Augmented Generation, RAG**. Your data fit dey for database or web endpoint for example, to make sure say this data, or part of am, dey included wen you dey prompt, you fit fetch di relevant data and add am as part of di user's prompt.
 
-- **Fine-tuned model**. Dis one na when you train di model more with your own data so di model go dey more accurate and go fit meet your needs well, but e fit cost.
+- **Fine-tuned model**. Here, you go train di model more on your own data wey make di model dey more exact and responsive to your needs but e fit dey costly.
 
 ![LLMs deployment](../../../translated_images/pcm/Deploy.18b2d27412ec8c02.webp)
 
@@ -155,57 +156,56 @@ Img source: [Four Ways that Enterprises Deploy LLMs | Fiddler AI Blog](https://w
 
 ### Prompt Engineering with Context
 
-Pre-trained LLMs dey work well for general natural language tasks, even if you just give dem short prompt, like sentence to complete or question – di so-called “zero-shot” learning.
+Pre-trained LLMs dey work well for generalized natural language tasks, even if na short prompt you use, like sentence to complete or question – na so dem dey call “zero-shot” learning.
 
-But di more user fit frame di question well, with detailed request and examples – di Context – di more accurate and close to wetin di user dey expect di answer go be. For dis case, we dey talk about “one-shot” learning if di prompt get only one example and “few-shot learning” if e get multiple examples. Prompt engineering with context na di cheapest way to start.
+But di more wey user fit frame dem query, with detailed request and examples – di Context – di more accurate and closest to user expectations di answer go be. For this case, we dey talk about “one-shot” learning if di prompt get only one example and “few shot learning” if e get many examples.
+Prompt engineering with context na di most cost-effective way to start with.
 
 ### Retrieval Augmented Generation (RAG)
 
-LLMs get limitation say dem fit only use di data wey dem take train di model to generate answer. Dis mean say dem no sabi anything about wetin happen after di training process, and dem no fit access private information (like company data). 
+LLMs get limitation say dem fit use only di data wey dem use for dia training to generate answer. Dis mean say dem no sabi anything about facts wey happen after dia training process, and dem no fit access non-public information (like company data).
+Dis one fit overcome with RAG, na technique wey dey add prompt with external data as chunks of documents, considering prompt length limits. Dis one na beta pass Vector database tools (like [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)) wey fit find di useful chunks from different pre-defined data sources and add dem to di prompt Context.
 
-RAG fit help solve dis problem, na technique wey dey add external data to di prompt in di form of document chunks, considering prompt length limits. Dis one dey supported by Vector database tools (like [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)) wey dey retrieve di correct chunks from different pre-defined data sources and add dem to di prompt Context.
-
-Dis technique dey very useful if business no get enough data, time, or resources to fine-tune LLM, but dem still wan make di model perform better for one specific workload and reduce di risk of fabrications, like false information or harmful content.
+Dis technique dey very handy when business no get enough data, enough time, or resources to fine-tune LLM, but still want to make performance beta for specific workload and reduce risk of hallucinated, outdated, or unsupported answers.
 
 ### Fine-tuned model
 
-Fine-tuning na process wey dey use transfer learning to ‘adapt’ di model to one downstream task or to solve one specific problem. E different from few-shot learning and RAG because e dey create new model, wey get updated weights and biases. E need set of training examples wey get one input (di prompt) and di output wey dey follow am (di completion). 
+Fine-tuning na process wey dey use transfer learning to ‘adapt’ di model to downstream task or to solve specific problem. E different from few-shot learning and RAG, because e go produce new model with updated weights and biases. E need set of training examples wey get single input (di prompt) and associated output (di completion).
+Dis one go beta if:
 
-Dis approach dey good if:
+- **Using smaller task-specific models**. Business go like fine-tune smaller model for narrow task instead of to always prompt bigger frontier model, so e go cheaper and faster.
 
-- **Using fine-tuned models**. Business wan use fine-tuned models wey no too strong (like embedding models) instead of high performance models, so e go cheap and fast.
+- **Considering latency**. Latency dey important for specific use-case, so you no fit use very long prompts or number of examples wey suppose learn no fit with prompt length limit.
 
-- **Considering latency**. If latency dey important for di use-case, so e no go possible to use very long prompts or di number of examples wey di model suppose learn no go fit di prompt length limit.
-
-- **Staying up to date**. Business get plenty high-quality data and correct labels and dem get di resources wey dem need to keep di data up to date.
+- **Adapting stable behavior**. Business get many high-quality examples and want model to always follow task pattern, output format, tone, or domain-specific style. If main problem na fresh facts or private knowledge wey dey change often, make you use RAG instead of just relying on fine-tuning.
 
 ### Trained model
 
-To train LLM from scratch na di hardest and most complex way to follow, e need plenty data, skilled people, and correct computational power. Dis option na only for business wey get domain-specific use case and plenty domain-centric data.
+Training LLM from scratch na di hardest and most complex approach, e need plenty data, skilled resources, and proper computing power. You suppose consider dis option only if business get domain-specific use case and large amount of domain-centric data.
 
 ## Knowledge check
 
-Which approach fit dey good to make LLM completion results better?
+Wetin fit be beta approach to improve LLM completion results?
 
 1. Prompt engineering with context
 1. RAG
 1. Fine-tuned model
 
-A:3, if you get di time, resources, and high-quality data, fine-tuning na di better option to stay up to date. But if you wan improve things and you no get time, e go make sense to consider RAG first.
+A: All three fit help. Start with prompt engineering and context to improve quick quick, and use RAG when model need current facts or private business data. Choose fine-tuning if you get enough high-quality examples and you want model to always follow task, format, tone, or domain pattern.
 
 ## 🚀 Challenge
 
-Read more about how you fit [use RAG](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview?WT.mc_id=academic-105485-koreyst) for your business.
+Read more on how you fit [use RAG](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview?WT.mc_id=academic-105485-koreyst) for your business.
 
 ## Great Work, Continue Your Learning
 
-After you finish dis lesson, check out our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue to learn more about Generative AI!
+After you finish this lesson, check our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue to improve your Generative AI knowledge!
 
-Go Lesson 3 where we go talk about how to [build with Generative AI Responsibly](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)!
+Head go Lesson 3 wey we go see how to [build with Generative AI Responsibly](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI transleto service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translation. Even as we dey try make am correct, abeg sabi say machine translation fit get mistake or no dey accurate well. Di original dokyument wey dey for im native language na di main source wey you go trust. For important mata, e good make professional human transleto check am. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translation.
+**Disclaimer**:
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

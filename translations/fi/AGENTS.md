@@ -2,316 +2,328 @@
 
 ## Projektin yleiskatsaus
 
-Tämä arkisto sisältää kattavan 21 oppitunnin kurssin, joka opettaa generatiivisen tekoälyn perusteet ja sovelluskehityksen. Kurssi on suunniteltu aloittelijoille ja kattaa kaiken peruskäsitteistä tuotantovalmiiden sovellusten rakentamiseen.
+Tämä arkisto sisältää kattavan 21 oppitunnin opetussuunnitelman, joka opettaa generatiivisen tekoälyn perusteet ja sovelluskehityksen. Kurssi on suunniteltu aloittelijoille ja kattaa kaiken peruskäsitteistä tuotantovalmiiden sovellusten rakentamiseen.
 
 **Keskeiset teknologiat:**
-- Python 3.9+ ja kirjastot: `openai`, `python-dotenv`, `tiktoken`, `azure-ai-inference`, `pandas`, `numpy`, `matplotlib`
-- TypeScript/JavaScript Node.js:n kanssa ja kirjastot: `@azure/openai`, `@azure-rest/ai-inference`, `openai`
-- Azure OpenAI Service, OpenAI API ja GitHub Models
-- Jupyter Notebooks interaktiiviseen oppimiseen
-- Dev Containers yhtenäisen kehitysympäristön varmistamiseksi
+- Python 3.9+ kirjastoilla: `openai`, `python-dotenv`, `tiktoken`, `azure-ai-inference`, `pandas`, `numpy`, `matplotlib`
+- TypeScript/JavaScript Node.js:llä ja kirjastoilla: `openai` (Azure OpenAI v1-päätepisteen kautta + Responses API), `@azure-rest/ai-inference` (Microsoft Foundry -mallit)
+- Azure OpenAI Service, OpenAI API ja Microsoft Foundry Models (GitHub Models poistuu käytöstä heinäkuun 2026 lopussa)
+- Jupyter-muistikirjat interaktiiviseen oppimiseen
+- Dev Containers yhdenmukaiseen kehitysympäristöön
 
 **Arkiston rakenne:**
-- 21 numeroitua oppituntihakemistoa (00-21), jotka sisältävät README-tiedostoja, esimerkkikoodeja ja tehtäviä
-- Useita toteutuksia: Python, TypeScript ja joskus .NET-esimerkkejä
+- 21 numeroitua oppituntihakemistoa (00-21), jotka sisältävät README:t, koodiesimerkit ja tehtävät
+- Useita toteutuksia: Python, TypeScript ja toisinaan .NET-esimerkit
 - Käännöshakemisto, jossa yli 40 kieliversiota
 - Keskitetty konfiguraatio `.env`-tiedoston kautta (käytä `.env.copy` mallina)
 
 ## Asennuskomennot
 
-### Alkuperäinen arkiston asennus
+### Alkukasitus arkistosta
 
 ```bash
-# Clone the repository
+# Kloonaa repositorio
 git clone https://github.com/microsoft/generative-ai-for-beginners.git
 cd generative-ai-for-beginners
 
-# Copy environment template
+# Kopioi ympäristöpohja
 cp .env.copy .env
-# Edit .env with your API keys and endpoints
+# Muokkaa .env tiedostoa API-avaimillasi ja päätepisteilläsi
 ```
 
 ### Python-ympäristön asennus
 
 ```bash
-# Create virtual environment
+# Luo virtuaaliympäristö
 python3 -m venv venv
 
-# Activate virtual environment
-# On macOS/Linux:
+# Aktivoi virtuaaliympäristö
+# macOS/Linux-käyttöjärjestelmässä:
 source venv/bin/activate
-# On Windows:
+# Windows-käyttöjärjestelmässä:
 venv\Scripts\activate
 
-# Install dependencies
+# Asenna riippuvuudet
 pip install -r requirements.txt
 ```
 
-### Node.js/TypeScript-asennus
+### Node.js/TypeScript:n asennus
 
 ```bash
-# Install root-level dependencies (for documentation tooling)
+# Asenna juuritason riippuvuudet (dokumentaatiotyökaluille)
 npm install
 
-# For individual lesson TypeScript examples, navigate to the specific lesson:
+# Yksittäisten oppituntien TypeScript-esimerkkeihin siirry tiettyyn oppituntiin:
 cd 06-text-generation-apps/typescript/recipe-app
 npm install
 ```
 
-### Dev Container -asennus (suositeltu)
+### Dev Containerin asennus (suositeltu)
 
-Arkisto sisältää `.devcontainer`-konfiguraation GitHub Codespacesille tai VS Code Dev Containersille:
+Arkisto sisältää `.devcontainer`-konfiguraation GitHub Codespacesille tai VS Code Dev Containers -laajennukselle:
 
-1. Avaa arkisto GitHub Codespacesissa tai VS Codessa Dev Containers -laajennuksen kanssa
-2. Dev Container asentaa automaattisesti:
-   - Python-riippuvuudet `requirements.txt`-tiedostosta
-   - Post-create-skriptin (`.devcontainer/post-create.sh`)
-   - Jupyter-kernelin
+1. Avaa arkisto GitHub Codespacesissa tai VS Codessa Dev Containers -laajennuksella
+2. Dev Container suorittaa automaattisesti:
+   - Asentaa Python-riippuvuudet `requirements.txt`-tiedostosta
+   - Suorittaa post-create-skriptin (`.devcontainer/post-create.sh`)
+   - Määrittää Jupyter-ytimen
 
-## Kehitystyön kulku
+## Kehitysprosessi
 
 ### Ympäristömuuttujat
 
-Kaikki oppitunnit, jotka vaativat API-yhteyttä, käyttävät `.env`-tiedostossa määriteltyjä ympäristömuuttujia:
+Kaikki oppitunnit, jotka tarvitsevat API-käyttöoikeuden, käyttävät `.env`-tiedostossa määriteltyjä ympäristömuuttujia:
 
 - `OPENAI_API_KEY` - OpenAI API:lle
-- `AZURE_OPENAI_API_KEY` - Azure OpenAI Service:lle
-- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI -palvelun URL-osoite
-- `AZURE_OPENAI_DEPLOYMENT` - Chat completion -mallin käyttönimi
-- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Embeddings-mallin käyttönimi
-- `AZURE_OPENAI_API_VERSION` - API-versio (oletus: `2024-02-01`)
+- `AZURE_OPENAI_API_KEY` - Azure OpenAI:lle Microsoft Foundryssa (Azure OpenAI Service on nyt osa Microsoft Foundrya: https://ai.azure.com)
+- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI -päätepisteen URL (Foundry-resurssipäätepiste)
+- `AZURE_OPENAI_DEPLOYMENT` - Chat completion -mallin käyttöönoton nimi (kurssin oletus: `gpt-5-mini`)
+- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Embeddings-mallin käyttöönoton nimi (kurssin oletus: `text-embedding-3-small`)
+- `AZURE_OPENAI_API_VERSION` - API-version (oletus: `2024-10-21`)
 - `HUGGING_FACE_API_KEY` - Hugging Face -malleille
-- `GITHUB_TOKEN` - GitHub Models -palvelulle
+- `AZURE_INFERENCE_ENDPOINT` - Microsoft Foundry Models -päätepiste (monitoimittajamallien luettelo)
+- `AZURE_INFERENCE_CREDENTIAL` - Microsoft Foundry Models -API-avain (korvaa poistuvan `GITHUB_TOKEN`:in)
+- `AZURE_INFERENCE_CHAT_MODEL` - Ei-päättelymalli (esim. `Llama-3.3-70B-Instruct`), jota käytetään `temperature`-esimerkeissä, koska päättelymallit eivät tue otantaa sääteleviä asetuksia
 
-### Python-esimerkkien suorittaminen
+### Mallikäytännöt (tärkeää)
+
+- **Oletus chat-malli on `gpt-5-mini`** – nykyinen, ei vanhentunut **päättelymalli**. Vuodesta 2026 lähtien vanhemmat otantaa tukevat ”mini”-mallit (`gpt-4o-mini`, `gpt-4.1-mini`) ovat poistumassa käytöstä, joten opetussuunnitelma standardisoi GPT-5 -perheeseen.
+- **Päättelymallit hylkäävät `temperature` ja `top_p`** ja käyttävät `max_output_tokens` (Responses API) / `max_completion_tokens` (chat completions) arvoa `max_tokens` sijaan. Älä lisää `temperature`/`top_p`/`max_tokens` arvoja esimerkkeihin, jotka käyttävät `gpt-5-mini`-mallia.
+- **`temperature`-asetuksen havainnollistamiseksi** esimerkeissä käytetään **Llama**-mallia (`Llama-3.3-70B-Instruct`) Microsoft Foundry Models -päätepisteen (`AZURE_INFERENCE_CHAT_MODEL`) kautta. Ohjaa päättelymalleja kehotetekniikalla ja päättelyohjauksilla otantapainikkeiden sijaan.
+- **Hienosäätö (oppitunti 18)** käyttää edelleen `gpt-4.1-mini`-mallia: GPT-5 tukee vain vahvistusoppimista (RFT), ei valvottua hienosäätöä (SFT), jota siellä näytetään.
+- Oppitunnit 20 (Mistral) ja 21 (Meta) käyttävät edelleen `temperature`/`max_tokens` asetuksia, koska ne kohdistuvat Mistral/Llama-malleihin, jotka niitä tukevat.
+
+### Python-esimerkkien ajaminen
 
 ```bash
-# Navigate to lesson directory
+# Siirry oppitunnin hakemistoon
 cd 06-text-generation-apps/python
 
-# Run a Python script
+# Suorita Python-skripti
 python aoai-app.py
 ```
 
-### TypeScript-esimerkkien suorittaminen
+### TypeScript-esimerkkien ajaminen
 
 ```bash
-# Navigate to TypeScript app directory
+# Siirry TypeScript-sovelluksen hakemistoon
 cd 06-text-generation-apps/typescript/recipe-app
 
-# Build the TypeScript code
+# Käännä TypeScript-koodi
 npm run build
 
-# Run the application
+# Suorita sovellus
 npm start
 ```
 
-### Jupyter Notebookien käyttö
+### Jupyter-muistikirjojen ajaminen
 
 ```bash
-# Start Jupyter in the repository root
+# Käynnistä Jupyter repositorion juurihakemistossa
 jupyter notebook
 
-# Or use VS Code with Jupyter extension
+# Tai käytä VS Codea Jupyter-laajennuksella
 ```
 
-### Erilaisten oppituntityyppien käsittely
+### Työskentely eri oppityyppien kanssa
 
-- **"Learn"-oppitunnit**: Keskittyvät README.md-dokumentaatioon ja käsitteisiin
-- **"Build"-oppitunnit**: Sisältävät toimivia esimerkkikoodeja Pythonilla ja TypeScriptillä
-- Jokaisessa oppitunnissa on README.md, jossa on teoriaa, koodin läpikäyntiä ja linkkejä videomateriaaleihin
+- **"Learn"-oppitunnit**: Painopiste README.md-dokumentaatiossa ja konsepteissa
+- **"Build"-oppitunnit**: Sisältävät toimivat koodiesimerkit Pythonilla ja TypeScriptillä
+- Jokaisella oppitunnilla on README.md, jossa teoria, koodikävelyt ja linkit videotietoihin
 
 ## Koodityyliohjeet
 
 ### Python
 
 - Käytä `python-dotenv` ympäristömuuttujien hallintaan
-- Tuo `openai`-kirjasto API-yhteyksiä varten
-- Käytä `pylint` linttaamiseen (joissakin esimerkeissä on `# pylint: disable=all` yksinkertaisuuden vuoksi)
-- Noudata PEP 8 -nimikäytäntöjä
-- Tallenna API-tunnukset `.env`-tiedostoon, älä koskaan koodiin
+- Tuo `openai`-kirjasto API-kutsuihin
+- Käytä `pylint`-tyylistä lintitys työkalua (joissakin esimerkeissä `# pylint: disable=all` yksinkertaisuuden vuoksi)
+- Noudata PEP 8 nimeämiskäytäntöjä
+- Tallenna API-tunnukset `.env` tiedostoon, älä koodiin
 
 ### TypeScript
 
 - Käytä `dotenv`-pakettia ympäristömuuttujille
-- TypeScript-konfiguraatio `tsconfig.json`-tiedostossa jokaiselle sovellukselle
-- Käytä `@azure/openai` tai `@azure-rest/ai-inference` Azure-palveluille
-- Käytä `nodemon` kehitykseen automaattisella uudelleenlatauksella
-- Käännä ennen suorittamista: `npm run build` ja sitten `npm start`
+- TypeScriptin konfiguraatio löytyy kunkin sovelluksen `tsconfig.json` tiedostosta
+- Käytä `openai`-pakettia Azure OpenAI:lle (kohdista asiakas `/openai/v1/` päätepisteeseen ja kutsu `client.responses.create`); käytä `@azure-rest/ai-inference` Microsoft Foundry Models -malleille
+- Käytä `nodemon`-työkalua kehitykseen automaattisella uudelleenkäynnistyksellä
+- Rakenna ennen ajoa: `npm run build` ja sitten `npm start`
 
 ### Yleiset käytännöt
 
-- Pidä koodiesimerkit yksinkertaisina ja opettavaisina
-- Sisällytä kommentteja, jotka selittävät keskeiset käsitteet
-- Jokaisen oppitunnin koodi tulee olla itsenäinen ja suoritettavissa
-- Käytä johdonmukaista nimeämistä: `aoai-` Azure OpenAI:lle, `oai-` OpenAI API:lle, `githubmodels-` GitHub Modelsille
+- Pidä koodiesimerkit yksinkertaisina ja opetuksellisina
+- Sisällytä kommentteja, jotka selittävät avainkäsiteitä
+- Kunkin oppitunnin koodin tulee olla itsenäistä ja suoritettavissa
+- Käytä yhdenmukaista nimeämistä: `aoai-` etuliite Azure OpenAI:lle, `oai-` OpenAI API:lle, `githubmodels-` Microsoft Foundry Models:lle (perinteinen GitHub Models ajalta säilynyt etuliite)
 
-## Dokumentaatiokäytännöt
+## Dokumentaation ohjeistukset
 
 ### Markdown-tyyli
 
-- Kaikki URL-osoitteet tulee olla muodossa `[teksti](../../url)` ilman ylimääräisiä välilyöntejä
-- Suhteellisten linkkien tulee alkaa `./` tai `../`
-- Kaikki Microsoftin verkkotunnuksiin johtavat linkit tulee sisältää seurantatunnus: `?WT.mc_id=academic-105485-koreyst`
-- Vältä maakohtaisia kielikoodeja URL-osoitteissa (vältä `/en-us/`)
-- Kuvat tallennetaan `./images`-hakemistoon kuvaavilla nimillä
+- Kaikki URL-osoitteet tulee kääriä muotoon `[teksti](../../url)` ilman ylimääräisiä välilyöntejä
+- Relatiivisten linkkien tulee alkaa `./` tai `../`
+- Kaikkien Microsoftin verkkotunnusten linkkien tulee sisältää seuranta-ID: `?WT.mc_id=academic-105485-koreyst`
+- Älä käytä maakohtaisia paikallisia polkuja URL-osoitteissa (vältä `/en-us/`)
+- Kuvat tallennetaan `./images`-kansioon kuvaavilla nimillä
 - Käytä tiedostonimissä englanninkielisiä merkkejä, numeroita ja viivoja
 
-### Käännöstuki
+### Käännöksen tuki
 
-- Arkisto tukee yli 40 kieltä automaattisten GitHub Actions -työnkulkujen kautta
+- Arkisto tukee yli 40 kieltä automatisoidun GitHub Actions -prosessin kautta
 - Käännökset tallennetaan `translations/`-hakemistoon
-- Älä lähetä osittaisia käännöksiä
+- Älä lähetä keskeneräisiä käännöksiä
 - Konekäännöksiä ei hyväksytä
 - Käännetyt kuvat tallennetaan `translated_images/`-hakemistoon
 
 ## Testaus ja validointi
 
-### Ennen lähettämistä
+### Tarkistukset ennen lähettämistä
 
-Tämä arkisto käyttää GitHub Actions -työnkulkuja validointiin. Ennen PR:n lähettämistä:
+Tämä arkisto käyttää GitHub Actions -palvelua validointiin. Ennen PR:n lähettämistä:
 
 1. **Tarkista Markdown-linkit**:
    ```bash
-   # The validate-markdown.yml workflow checks:
-   # - Broken relative paths
-   # - Missing tracking IDs on paths
-   # - Missing tracking IDs on URLs
-   # - URLs with country locale
-   # - Broken external URLs
+   # validate-markdown.yml-työnkulku tarkistaa:
+   # - Rikkinäiset suhteelliset polut
+   # - Puuttuvat seuranta-ID:t poluissa
+   # - Puuttuvat seuranta-ID:t URL-osoitteissa
+   # - Maan paikallisversioilla varustetut URL-osoitteet
+   # - Rikkinäiset ulkoiset URL-osoitteet
    ```
 
 2. **Manuaalinen testaus**:
    - Testaa Python-esimerkit: Aktivoi venv ja suorita skriptit
    - Testaa TypeScript-esimerkit: `npm install`, `npm run build`, `npm start`
-   - Varmista, että ympäristömuuttujat on konfiguroitu oikein
-   - Tarkista, että API-avaimet toimivat koodiesimerkkien kanssa
+   - Varmista, että ympäristömuuttujat on määritelty oikein
+   - Tarkista API-avaimien toimivuus koodiesimerkeissä
 
 3. **Koodiesimerkit**:
    - Varmista, että kaikki koodi toimii ilman virheitä
-   - Testaa sekä Azure OpenAI että OpenAI API, kun mahdollista
-   - Varmista, että esimerkit toimivat GitHub Models -palvelun kanssa, jos tuettu
+   - Testaa sekä Azure OpenAI että OpenAI API, kun sovellettavissa
+   - Varmista, että esimerkit toimivat Microsoft Foundry Models -malleilla, kun niitä tuetaan
 
-### Ei automatisoituja testejä
+### Automatisoituja testejä ei ole
 
-Tämä on opetusarkisto, joka keskittyy tutoriaaleihin ja esimerkkeihin. Ei ole yksikkötestejä tai integraatiotestejä suoritettavaksi. Validointi perustuu pääasiassa:
-- Koodiesimerkkien manuaaliseen testaukseen
-- GitHub Actions -työnkulkuihin Markdown-validointia varten
-- Yhteisön arviointiin opetusmateriaalista
+Tämä on oppimiseen keskittyvä arkisto, joka sisältää tutoriaaleja ja esimerkkejä. Yksikkö- tai integraatiotestejä ei ole suorittaa. Validointi perustuu pääasiassa:
+- Manuaaliseen koodiesimerkkien testaamiseen
+- GitHub Actions -työkaluun Markdownin tarkistamiseen
+- Yhteisön arvioon opetusmateriaalista
 
 ## Pull Request -ohjeet
 
 ### Ennen lähettämistä
 
-1. Testaa koodimuutokset sekä Pythonilla että TypeScriptillä, kun mahdollista
-2. Suorita Markdown-validointi (laukaistaan automaattisesti PR:ssä)
-3. Varmista, että seurantatunnukset ovat kaikissa Microsoftin URL-osoitteissa
-4. Tarkista, että suhteelliset linkit ovat kelvollisia
-5. Varmista, että kuvat on viitattu oikein
+1. Testaa koodimuutokset Pythonissa ja TypeScriptissä, kun sovellettavissa
+2. Suorita markdown-validointi (käynnistyy automaattisesti PR:ssä)
+3. Varmista, että seuranta-ID:t ovat mukana kaikissa Microsoftin URL-osoitteissa
+4. Tarkista, että relatiiviset linkit ovat voimassa
+5. Varmista, että kuvat on asianmukaisesti viitattu
 
-### PR:n otsikkomuoto
+### PR-otsikkotyylit
 
-- Käytä kuvaavia otsikoita: `[Lesson 06] Korjaa Python-esimerkin kirjoitusvirhe` tai `Päivitä README oppitunnille 08`
-- Viittaa ongelmanumeroihin, kun mahdollista: `Fixes #123`
+- Käytä kuvaavia otsikoita: `[Lesson 06] Korjaa Python-esimerkin kirjoitusvirhe` tai `Päivitä README oppitunnissa 08`
+- Viittaa tarvittaessa issuetunnuksiin: `Fixes #123`
 
-### PR:n kuvaus
+### PR-kuvaus
 
-- Selitä, mitä muutettiin ja miksi
-- Linkitä liittyviin ongelmiin
-- Koodimuutosten osalta kerro, mitkä esimerkit testattiin
-- Käännös-PR:ssä sisällytä kaikki tiedostot täydellistä käännöstä varten
+- Selitä, mitä ja miksi muutettiin
+- Lisää linkkejä asiaankuuluviin issueihin
+- Koodimuutoksissa kerro, mitä esimerkkejä testattiin
+- Käännös-PR:issä liitä kaikki tiedostot täydelliseen käännökseen
 
 ### Osallistumisvaatimukset
 
-- Allekirjoita Microsoft CLA (automaattisesti ensimmäisessä PR:ssä)
-- Haaroita arkisto omaan tiliisi ennen muutosten tekemistä
-- Yksi PR per looginen muutos (älä yhdistä liittymättömiä korjauksia)
-- Pidä PR:t keskittyneinä ja pieninä, kun mahdollista
+- Allekirjoita Microsoft CLA (automaattisesti ensimmäisessä PR:ssa)
+- Tee fork omaan tiliisi ennen muutosten tekemistä
+- Yksi PR per looginen muutos (älä yhdistä epäyhteensopivia korjauksia)
+- Pidä PR:t keskittyneinä ja pieninä mahdollisuuksien mukaan
 
 ## Yleiset työnkulut
 
 ### Uuden koodiesimerkin lisääminen
 
-1. Siirry oikeaan oppituntihakemistoon
+1. Siirry sopivaan oppituntihakemistoon
 2. Luo esimerkki `python/` tai `typescript/` alihakemistoon
 3. Noudata nimeämiskäytäntöä: `{provider}-{example-name}.{py|ts|js}`
-4. Testaa oikeilla API-tunnuksilla
-5. Dokumentoi uudet ympäristömuuttujat oppitunnin README-tiedostossa
+4. Testaa varsinaisilla API-tunnuksilla
+5. Dokumentoi mahdolliset uudet ympäristömuuttujat oppitunnin README:hen
 
 ### Dokumentaation päivittäminen
 
-1. Muokkaa README.md-tiedostoa oppituntihakemistossa
-2. Noudata Markdown-ohjeita (seurantatunnukset, suhteelliset linkit)
-3. Käännösten päivitykset hoidetaan GitHub Actionsilla (älä muokkaa käsin)
-4. Testaa, että kaikki linkit ovat kelvollisia
+1. Muokkaa oppitunnin README.md-tiedostoa
+2. Noudata Markdown-ohjeita (seuranta-ID:t, relatiiviset linkit)
+3. Käännösten päivitys hoituu GitHub Actionsien kautta (älä muokkaa manuaalisesti)
+4. Testaa, että kaikki linkit toimivat
 
-### Työskentely Dev Containerien kanssa
+### Työskentely Dev Containereiden kanssa
 
-1. Arkisto sisältää `.devcontainer/devcontainer.json`-tiedoston
+1. Arkistossa on `.devcontainer/devcontainer.json`
 2. Post-create-skripti asentaa Python-riippuvuudet automaattisesti
-3. Python- ja Jupyter-laajennukset ovat esikonfiguroituja
+3. Python- ja Jupyter-laajennukset on esikonfiguroitu
 4. Ympäristö perustuu `mcr.microsoft.com/devcontainers/universal:2.11.2`
 
-## Julkaisu ja jakelu
+## Julkaisu ja käyttöönotto
 
-Tämä on oppimisarkisto - ei ole julkaisuprosessia. Kurssimateriaali kulutetaan seuraavilla tavoilla:
+Tämä on oppimisarkisto - käyttöönottoa ei ole. Opetussuunnitelman kuluttavat:
 
 1. **GitHub-arkisto**: Suora pääsy koodiin ja dokumentaatioon
-2. **GitHub Codespaces**: Välitön kehitysympäristö esikonfiguroidulla asetuksella
-3. **Microsoft Learn**: Sisältöä voidaan syndikoida viralliselle oppimisalustalle
+2. **GitHub Codespaces**: Välitön kehitysympäristö esiasetuksilla
+3. **Microsoft Learn**: Sisältö voi olla mukana virallisella oppimisalustalla
 4. **docsify**: Dokumentaatiosivusto, joka rakennetaan Markdownista (katso `docsifytopdf.js` ja `package.json`)
 
-### Dokumentaatiosivuston rakentaminen
+### Dokumentaation sivuston rakentaminen
 
 ```bash
-# Generate PDF from documentation (if needed)
+# Luo PDF dokumentaatiosta (tarvittaessa)
 npm run convert
 ```
 
 ## Vianmääritys
 
-### Yleiset ongelmat
+### Yleisiä ongelmia
 
-**Python-tuontivirheet**:
+**Pythonin tuontivirheet**:
 - Varmista, että virtuaaliympäristö on aktivoitu
 - Suorita `pip install -r requirements.txt`
-- Tarkista, että Python-versio on 3.9+
+- Tarkista, että Python-versio on 3.9 tai uudempi
 
-**TypeScript-käännösvirheet**:
-- Suorita `npm install` sovelluksen hakemistossa
-- Tarkista, että Node.js-versio on yhteensopiva
+**TypeScriptin käännösvirheet**:
+- Suorita `npm install` sovelluskohtaisessa hakemistossa
+- Tarkista Node.js version yhteensopivuus
 - Tyhjennä `node_modules` ja asenna uudelleen tarvittaessa
 
 **API-todennusvirheet**:
-- Varmista, että `.env`-tiedosto on olemassa ja sisältää oikeat arvot
-- Tarkista, että API-avaimet ovat voimassa eivätkä vanhentuneet
-- Varmista, että URL-osoitteet ovat oikein alueellesi
+- Varmista, että `.env`-tiedosto on olemassa ja oikein täytetty
+- Tarkista, että API-avaimet ovat voimassa eivätkä ole vanhentuneet
+- Varmista, että päätepisteen URL-osoitteet ovat oikeat alueellasi
 
 **Puuttuvat ympäristömuuttujat**:
-- Kopioi `.env.copy` tiedostoon `.env`
-- Täytä kaikki tarvittavat arvot oppitunnille, jota työstät
+- Kopioi `.env.copy` tiedostoksi `.env`
+- Täytä kaikki tarvittavat arvot kulloiseenkin oppituntiin liittyen
 - Käynnistä sovellus uudelleen `.env`-päivityksen jälkeen
 
 ## Lisäresurssit
 
 - [Kurssin asennusopas](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)
 - [Osallistumisohjeet](./CONTRIBUTING.md)
-- [Toimintaohjeet](./CODE_OF_CONDUCT.md)
+- [Käyttäytymissäännöt](./CODE_OF_CONDUCT.md)
 - [Tietoturvapolitiikka](./SECURITY.md)
 - [Azure AI Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
 - [Kokoelma edistyneitä koodiesimerkkejä](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
 
-## Projektikohtaiset huomiot
+## Projektiin liittyviä huomioita
 
-- Tämä on **opetusarkisto**, joka keskittyy oppimiseen, ei tuotantokoodiin
-- Esimerkit ovat tarkoituksella yksinkertaisia ja keskittyvät käsitteiden opettamiseen
-- Koodin laatu tasapainotetaan opetuksellisen selkeyden kanssa
-- Jokainen oppitunti on itsenäinen ja voidaan suorittaa erikseen
-- Arkisto tukee useita API-palveluntarjoajia: Azure OpenAI, OpenAI ja GitHub Models
-- Sisältö on monikielistä automaattisten käännöstyönkulkujen avulla
+- Tämä on **opetuksellinen arkisto**, keskittyy oppimiseen, ei tuotantokoodiin
+- Esimerkit on tarkoituksella yksinkertaisia ja opetuksellisia
+- Koodin laatu ja opetuksen selkeys on tasapainotettu
+- Jokainen oppitunti on itsenäinen ja mahdollista suorittaa itsenäisesti
+- Arkisto tukee useita API-toimittajia: Azure OpenAI, OpenAI, Microsoft Foundry Models sekä offline-toimittajia kuten Foundry Local ja Ollama
+- Sisältö on monikielistä automatisoitujen käännösten työnkululla
 - Aktiivinen yhteisö Discordissa kysymyksiä ja tukea varten
 
 ---
 
-**Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

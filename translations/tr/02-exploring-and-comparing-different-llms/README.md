@@ -1,206 +1,211 @@
-# Farklı Büyük Dil Modellerini (LLM) Keşfetmek ve Karşılaştırmak
+# Farklı LLM'leri Keşfetmek ve Karşılaştırmak
 
-[![Farklı Büyük Dil Modellerini Keşfetmek ve Karşılaştırmak](../../../translated_images/tr/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
+[![Farklı LLM'leri Keşfetmek ve Karşılaştırmak](../../../translated_images/tr/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
 
-> _Bu dersin videosunu izlemek için yukarıdaki görsele tıklayın_
+> _Bu dersin videosunu izlemek için yukarıdaki resme tıklayın_
 
-Önceki derste, Üretken Yapay Zekanın teknoloji dünyasını nasıl değiştirdiğini, Büyük Dil Modellerinin (LLM) nasıl çalıştığını ve bir işletmenin - örneğin bizim girişimimiz gibi - bunları kendi kullanım senaryolarına nasıl uygulayarak büyüyebileceğini gördük! Bu bölümde, farklı büyük dil modellerini (LLM) karşılaştırarak avantajlarını ve dezavantajlarını anlamaya çalışacağız.
+Önceki derste, Yaratıcı AI'nın teknoloji ortamını nasıl değiştirdiğini, Büyük Dil Modellerinin (LLM'ler) nasıl çalıştığını ve bir işletme - örneğin start-up'ımızın - bunları kullanım durumlarına nasıl uygulayabileceğini ve büyüyebileceğini gördük! Bu bölümde, farklı türde büyük dil modellerini karşılaştırıp kıyaslayarak avantajlarını ve dezavantajlarını anlamaya çalışacağız.
 
-Girişimimizin bir sonraki adımı, mevcut LLM'ler dünyasını keşfetmek ve kullanım senaryomuza uygun olanları anlamaktır.
+Start-up'ımızın yolculuğundaki sonraki adım, mevcut LLM ortamını keşfetmek ve hangilerinin kullanım durumumuz için uygun olduğunu anlamaktır.
 
 ## Giriş
 
-Bu derste şunlar ele alınacaktır:
+Bu ders şunları kapsayacaktır:
 
-- Mevcut LLM türleri.
-- Azure'da kullanım senaryonuz için farklı modelleri test etme, yineleme ve karşılaştırma.
-- Bir LLM'nin nasıl dağıtılacağı.
+- Mevcut ortamda farklı LLM türleri.
+- Azure'da kullanım durumunuz için farklı modelleri test etmek, yinelemek ve karşılaştırmak.
+- Bir LLM'in nasıl dağıtılacağı.
 
 ## Öğrenme Hedefleri
 
-Bu dersi tamamladıktan sonra:
+Bu dersi tamamladıktan sonra şunları yapabileceksiniz:
 
-- Kullanım senaryonuz için doğru modeli seçebileceksiniz.
-- Modelinizin performansını test etme, yineleme ve geliştirme yöntemlerini anlayabileceksiniz.
-- İşletmelerin modelleri nasıl dağıttığını öğreneceksiniz.
+- Kullanım durumunuz için doğru modeli seçmek.
+- Modelinizi nasıl test edeceğinizi, yineleyeceğinizi ve performansını nasıl artıracağınızı anlamak.
+- İşletmelerin modelleri nasıl dağıttığını bilmek.
 
-## Farklı LLM Türlerini Anlamak
+## Farklı LLM türlerini anlamak
 
-LLM'ler mimarileri, eğitim verileri ve kullanım senaryolarına göre farklı kategorilere ayrılabilir. Bu farklılıkları anlamak, girişimimizin doğru modeli seçmesine, test etmesine, yinelemesine ve performansı geliştirmesine yardımcı olacaktır.
+LLM'ler, mimarileri, eğitim verileri ve kullanım durumlarına göre çoklu kategorilere ayrılabilir. Bu farklılıkları anlamak, start-up'ımızın senaryo için doğru modeli seçmesine ve performansı test edip, yineleyip geliştirmesine yardımcı olacaktır.
 
-Birçok farklı LLM modeli bulunmaktadır ve model seçiminiz, onları ne amaçla kullanmak istediğinize, verilerinize, bütçenize ve diğer faktörlere bağlıdır.
+Çok sayıda farklı LLM modeli vardır; model seçiminiz, onları ne için kullanmayı amaçladığınıza, verilerinize, ödemeye ne kadar hazır olduğunuza ve diğer unsurlara bağlıdır.
 
-Modelleri metin, ses, video, görüntü üretimi gibi farklı amaçlar için kullanmayı planlıyorsanız, farklı bir model türü tercih edebilirsiniz.
+Modelleri metin, ses, video, resim üretimi vb. amaçlar için kullanmayı planlıyorsanız, farklı tür modelleri tercih edebilirsiniz.
 
-- **Ses ve konuşma tanıma**. Bu amaç için Whisper türü modeller harika bir seçimdir çünkü genel amaçlıdır ve konuşma tanımaya yöneliktir. Çeşitli ses verileriyle eğitilmiştir ve çok dilli konuşma tanıma yapabilir. [Whisper türü modeller hakkında daha fazla bilgi edinin](https://platform.openai.com/docs/models/whisper?WT.mc_id=academic-105485-koreyst).
+- **Ses ve konuşma tanıma**. Whisper tarzı modeller hala genel amaçlı konuşma tanıma modelleri olarak faydalıdır; ancak üretim seçenekleri artık `gpt-4o-transcribe`, `gpt-4o-mini-transcribe` ve diarizasyon varyantları gibi daha yeni ses-ten metin modellerini de içerir. Senaryonuz için dil kapsamını, diarizasyonu, gerçek zamanlı desteği, gecikmeyi ve maliyeti değerlendirin. Daha fazla bilgi için [OpenAI ses-ten metin dokümantasyonu](https://platform.openai.com/docs/guides/speech-to-text?WT.mc_id=academic-105485-koreyst) sayfasını inceleyin.
 
-- **Görüntü üretimi**. Görüntü üretimi için DALL-E ve Midjourney oldukça bilinen seçeneklerdir. DALL-E, Azure OpenAI tarafından sunulmaktadır. [DALL-E hakkında daha fazla bilgi edinin](https://platform.openai.com/docs/models/dall-e?WT.mc_id=academic-105485-koreyst) ve bu müfredatın 9. bölümünde daha fazla bilgi bulabilirsiniz.
+- **Görüntü üretimi**. DALL-E ve Midjourney iyi bilinen görüntü üretim seçenekleridir, ancak mevcut OpenAI görüntü API'leri `gpt-image-2` gibi GPT Görüntü modellerine odaklanırken, Stable Diffusion, Imagen, Flux ve diğer model aileleri de yaygın olarak tercih edilir. İsteklere uygunluk, düzenleme desteği, stil kontrolü, güvenlik gereksinimleri ve lisanslama karşılaştırması yapın. Daha fazla bilgi için [OpenAI görüntü üretim kılavuzu](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst) ve bu müfredatın 9. Bölümüne bakınız.
 
-- **Metin üretimi**. Çoğu model metin üretimi için eğitilmiştir ve GPT-3.5'ten GPT-4'e kadar geniş bir seçenek yelpazesi bulunmaktadır. GPT-4 en pahalı olanıdır. [Azure OpenAI playground](https://oai.azure.com/portal/playground?WT.mc_id=academic-105485-koreyst) üzerinde hangi modellerin yetenek ve maliyet açısından ihtiyaçlarınıza en uygun olduğunu değerlendirmek faydalı olacaktır.
+- **Metin üretimi**. Metin modelleri artık sınır modelleri, mantık modelleri, daha küçük düşük gecikmeli modeller ve açık ağırlıklı modelleri kapsar. Güncel örnekler arasında OpenAI GPT-5.x modelleri, Anthropic Claude 4.x modelleri, Google Gemini 3.x modelleri, Meta Llama 4 modelleri ve Mistral modelleri bulunur. Sadece çıkış tarihi veya fiyat ile seçim yapmayın; görev kalitesi, gecikme, bağlam penceresi, araç kullanımı, güvenlik davranışı, bölgesel erişim ve toplam maliyet açısından karşılaştırın. Azure'daki modelleri karşılaştırmak için [Microsoft Foundry model kataloğu](https://ai.azure.com/catalog?WT.mc_id=academic-105485-koreyst) iyi bir kaynaktır.
 
-- **Çoklu modallık**. Girdi ve çıktı olarak birden fazla veri türünü işlemek istiyorsanız, [gpt-4 turbo with vision veya gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models?WT.mc_id=academic-105485-koreyst) gibi modelleri incelemek isteyebilirsiniz. Bu modeller, doğal dil işleme ile görsel anlayışı birleştirerek çoklu modal arayüzler üzerinden etkileşim sağlar.
+- **Çoklu modalite**. Mevcut birçok model metin dışındaki girdileri işleyebilir. Bazıları resim, ses veya video girişi kabul eder; bazıları araç çağırabilir; ve özel modeller resim, ses veya video üretebilir. Örneğin, mevcut OpenAI modelleri metin ve resim girişini destekler, Gemini modelleri varyanta bağlı olarak metin, kod, resim, ses ve video girişini destekler; Llama 4 Scout ve Maverick ise kendi başına çok modlu açık ağırlıklı modellerdir. Bir iş akışı oluşturmadan önce her model kartındaki desteklenen giriş ve çıkış modalitelerini mutlaka kontrol edin.
 
-Bir model seçmek, bazı temel yetenekler elde etmenizi sağlar, ancak bu her zaman yeterli olmayabilir. Çoğu zaman şirketinize özgü veriler vardır ve bunları bir şekilde LLM'ye aktarmanız gerekir. Bunun için farklı yaklaşımlar bulunmaktadır, bu konuyu ilerleyen bölümlerde ele alacağız.
+Bir model seçmek size bazı temel yetenekler sağlar, ancak bu her zaman yeterli olmayabilir. Çoğunlukla şirketinize özgü veriler vardır ve bu verileri LLM'e bir şekilde anlatmanız gerekir. Bu konuda farklı yaklaşımlar vardır; bununla ilgili detaylar sonraki bölümlerde.
 
-### Temel Modeller ve LLM'ler
+### Temel Modeller (Foundation Models) ve LLM'ler Arasındaki Fark
 
-Temel Model terimi [Stanford araştırmacıları tarafından](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst) ortaya atılmıştır ve şu kriterlere uyan bir yapay zeka modeli olarak tanımlanmıştır:
+Temel Model terimi, [Stanford araştırmacıları tarafından ortaya atılmıştır](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst) ve bazı kriterleri karşılayan bir AI modeli olarak tanımlanır:
 
-- **Denetimsiz öğrenme veya kendi kendine öğrenme ile eğitilirler**, yani etiketlenmemiş çoklu modal veriler üzerinde eğitilirler ve eğitim süreci için insan tarafından veri etiketleme veya açıklama gerektirmezler.
-- **Çok büyük modellerdir**, milyarlarca parametre üzerinde eğitilmiş çok derin sinir ağlarına dayanır.
-- **Genellikle diğer modeller için bir 'temel' olarak hizmet etmek üzere tasarlanmışlardır**, yani diğer modellerin üzerine inşa edilmesi için bir başlangıç noktası olarak kullanılabilirler ve bu, ince ayar yapılarak gerçekleştirilebilir.
+- **Gözetimsiz öğrenme veya kendi kendine gözetimli öğrenme kullanılarak eğitilirler**, yani etiketlenmemiş çok modlu verilerle eğitim alırlar ve eğitimleri için insan tarafından notlandırma veya etiketleme gerekmez.
+- **Çok büyük modellerdir**, çok derin sinir ağlarına dayanırlar ve milyarlarca parametre üzerinde eğitilirler.
+- **Normalde diğer modeller için ‘temel’ olarak hizmet etmesi amaçlanmıştır**, yani üzerine inşa edilecek diğer modellerin başlangıç noktası olarak kullanılabilirler, ince ayar (fine-tuning) ile yapılabilir.
 
 ![Temel Modeller ve LLM'ler](../../../translated_images/tr/FoundationModel.e4859dbb7a825c94.webp)
 
-Görsel kaynağı: [Temel Modeller ve Büyük Dil Modelleri için Temel Kılavuz | Babar M Bhatti | Medium](https://thebabar.medium.com/essential-guide-to-foundation-models-and-large-language-models-27dab58f7404)
+Görsel kaynak: [Essential Guide to Foundation Models and Large Language Models | by Babar M Bhatti | Medium
+](https://thebabar.medium.com/essential-guide-to-foundation-models-and-large-language-models-27dab58f7404)
 
-Bu ayrımı daha net bir şekilde açıklamak için ChatGPT'yi örnek olarak ele alalım. ChatGPT'nin ilk versiyonunu oluşturmak için GPT-3.5 adlı bir model temel model olarak kullanılmıştır. Bu, OpenAI'nin GPT-3.5'i sohbet senaryolarında, örneğin sohbet robotlarında, iyi performans gösterecek şekilde özelleştirilmiş bir versiyon oluşturmak için bazı sohbet odaklı veriler kullandığı anlamına gelir.
+Bu farkı daha iyi açıklamak için tarihsel bir örnek olarak ChatGPT'yi ele alalım. ChatGPT'nin erken sürümleri, temel model olarak GPT-3.5'i kullandı. OpenAI, sohbete özel veriler ve hizalama teknikleri kullanarak sohbet robotları gibi senaryolarda daha iyi performans gösteren ayarlanmış bir sürüm oluşturdu. Günümüzün AI hizmetleri sıklıkla birkaç model varyantı arasında yönlendirme yapar, dolayısıyla servis adı ile altyapıdaki model adı her zaman aynı olmayabilir.
 
 ![Temel Model](../../../translated_images/tr/Multimodal.2c389c6439e0fc51.webp)
 
-Görsel kaynağı: [2108.07258.pdf (arxiv.org)](https://arxiv.org/pdf/2108.07258.pdf?WT.mc_id=academic-105485-koreyst)
+Görsel kaynak: [2108.07258.pdf (arxiv.org)](https://arxiv.org/pdf/2108.07258.pdf?WT.mc_id=academic-105485-koreyst)
 
-### Açık Kaynak ve Özel Modeller
+### Açık-Ağırlıklı / Açık Kaynak versus Tescilli Modeller
 
-LLM'leri kategorize etmenin bir başka yolu, açık kaynaklı mı yoksa özel mi olduklarına bakmaktır.
+LLM'leri sınıflandırmanın bir diğer yolu, açık ağırlıklı, açık kaynaklı veya tescilli olup olmadıklarıdır.
 
-Açık kaynaklı modeller, halka açık olarak sunulan ve herkes tarafından kullanılabilen modellerdir. Genellikle bu modelleri oluşturan şirketler veya araştırma topluluğu tarafından sunulurlar. Bu modeller incelenebilir, değiştirilebilir ve LLM'lerdeki çeşitli kullanım senaryoları için özelleştirilebilir. Ancak, her zaman üretim kullanımı için optimize edilmemiş olabilirler ve özel modellere kıyasla performansları daha düşük olabilir. Ayrıca, açık kaynaklı modeller için finansman sınırlı olabilir, uzun vadede sürdürülemeyebilir veya en son araştırmalarla güncellenmeyebilir. Popüler açık kaynaklı modellere örnek olarak [Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html?WT.mc_id=academic-105485-koreyst), [Bloom](https://huggingface.co/bigscience/bloom) ve [LLaMA](https://llama.meta.com) verilebilir.
+Açık kaynak ve açık ağırlıklı modeller, model varlıklarını inceleme, indirme veya özelleştirme için erişime açar, ancak lisansları farklıdır. Bazıları tamamen açık kaynaklıdır; bazıları ise kullanım kısıtlamaları olan açık ağırlıklı modellerdir. Bir işletmenin dağıtım, veri yerelliği, maliyet veya özelleştirme üzerinde daha fazla kontrol sahibi olması gerektiğinde yararlı olabilirler. Yine de ekipler, üretimde kullanmadan önce lisans koşullarını, sunucu maliyetlerini, bakım, güvenlik güncellemelerini ve değerlendirme kalitesini gözden geçirmelidir. Örnekler arasında [Meta Llama 4](https://ai.meta.com/blog/llama-4-multimodal-intelligence/?WT.mc_id=academic-105485-koreyst), bazı [Mistral modelleri](https://docs.mistral.ai/models/overview?WT.mc_id=academic-105485-koreyst), ve [Hugging Face](https://huggingface.co/models?WT.mc_id=academic-105485-koreyst) üzerinde barındırılan birçok model yer almaktadır.
 
-Özel modeller, bir şirket tarafından sahip olunan ve halka açık olmayan modellerdir. Bu modeller genellikle üretim kullanımı için optimize edilmiştir. Ancak, farklı kullanım senaryoları için incelenemez, değiştirilemez veya özelleştirilemezler. Ayrıca, her zaman ücretsiz olarak sunulmazlar ve kullanmak için abonelik veya ödeme gerektirebilirler. Kullanıcılar, modelin eğitimi için kullanılan veriler üzerinde kontrol sahibi değildir, bu da veri gizliliği ve yapay zekanın sorumlu kullanımı konusunda model sahibine güvenmeyi gerektirir. Popüler özel modellere örnek olarak [OpenAI modelleri](https://platform.openai.com/docs/models/overview?WT.mc_id=academic-105485-koreyst), [Google Bard](https://sapling.ai/llm/bard?WT.mc_id=academic-105485-koreyst) veya [Claude 2](https://www.anthropic.com/index/claude-2?WT.mc_id=academic-105485-koreyst) verilebilir.
+Tescilli modeller bir sağlayıcıya ait ve onun tarafından barındırılır. Bu modeller genellikle yönetilen üretim kullanımı için optimize edilir ve güçlü destek, güvenlik sistemleri, araç entegrasyonu ve ölçek sunabilir. Ancak müşteriler genellikle model ağırlıklarını inceleyemez veya değiştiremez ve gizlilik, saklama, uyumluluk ve kabul edilebilir kullanım için sağlayıcı şartlarını kontrol etmeleri gerekir. Örnekler arasında [OpenAI modelleri](https://platform.openai.com/docs/models?WT.mc_id=academic-105485-koreyst), [Google Gemini](https://deepmind.google/models/gemini/pro/?WT.mc_id=academic-105485-koreyst) ve [Anthropic Claude](https://platform.claude.com/docs/en/about-claude/models/overview?WT.mc_id=academic-105485-koreyst) bulunmaktadır.
 
-### Gömme, Görüntü Üretimi, Metin ve Kod Üretimi
+### Embedding, Görüntü Üretimi ve Metin ile Kod Üretimi
 
-LLM'ler ayrıca ürettikleri çıktıya göre kategorize edilebilir.
+LLM'ler ayrıca ürettikleri çıktıya göre de sınıflandırılabilir.
 
-Gömme modelleri, metni sayısal bir forma dönüştürebilen bir model setidir. Bu sayısal form, gömme olarak adlandırılır ve giriş metninin sayısal bir temsilidir. Gömme modelleri, makinelerin kelimeler veya cümleler arasındaki ilişkileri anlamasını kolaylaştırır ve sınıflandırma modelleri veya sayısal verilerde daha iyi performans gösteren kümeleme modelleri gibi diğer modeller tarafından giriş olarak kullanılabilir. Gömme modelleri genellikle transfer öğrenimi için kullanılır; burada bir model, bol miktarda veri bulunan bir vekil görev için oluşturulur ve ardından model ağırlıkları (gömme) diğer alt görevler için yeniden kullanılır. Bu kategoriye bir örnek [OpenAI gömme modelleri](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst) olabilir.
+Embedding (gömme) modelleri, metni sayısal bir biçime dönüştürebilen modellerdir; bu, giriş metninin sayısal temsilidir. Embedding'ler, makinelerin kelimeler veya cümleler arasındaki ilişkileri anlamasını kolaylaştırır ve sınıflandırma modelleri veya sayısal verilerde daha yüksek performans sağlayan kümeleme modelleri gibi diğer modellerin girdisi olarak kullanılabilir. Embedding modelleri genellikle transfer öğrenme için kullanılır; bol veri bulunan bir vekil görev için model oluşturulur, ardından model ağırlıkları (embedding'ler) diğer alt görevlerde yeniden kullanılır. Bu kategoriye örnek olarak [OpenAI embedding'leri](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst) verilebilir.
 
-![Gömme](../../../translated_images/tr/Embedding.c3708fe988ccf760.webp)
+![Embedding](../../../translated_images/tr/Embedding.c3708fe988ccf760.webp)
 
-Görüntü üretimi modelleri, görüntü üreten modellerdir. Bu modeller genellikle görüntü düzenleme, görüntü sentezi ve görüntü çevirisi için kullanılır. Görüntü üretimi modelleri genellikle [LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst) gibi büyük görüntü veri setleri üzerinde eğitilir ve yeni görüntüler üretmek veya mevcut görüntüleri düzenlemek için kullanılabilir. Örnekler arasında [DALL-E-3](https://openai.com/dall-e-3?WT.mc_id=academic-105485-koreyst) ve [Stable Diffusion modelleri](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst) bulunmaktadır.
+Görüntü üretim modelleri, resim üreten modellerdir. Bu modeller sıklıkla resim düzenleme, sentezleme ve dönüştürme için kullanılır. Görüntü üretim modelleri genellikle [LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst) gibi büyük resim veri kümeleri üzerinde eğitilir ve yeni resimler oluşturmak veya var olanları inpainting, süper çözünürlük ve renklendirme teknikleriyle düzenlemek için kullanılabilir. Örnekler arasında [GPT Görüntü modelleri](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst), [Stable Diffusion modelleri](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst) ve Imagen modelleri vardır.
 
 ![Görüntü üretimi](../../../translated_images/tr/Image.349c080266a763fd.webp)
 
-Metin ve kod üretimi modelleri, metin veya kod üreten modellerdir. Bu modeller genellikle metin özetleme, çeviri ve soru yanıtlama için kullanılır. Metin üretimi modelleri genellikle [BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst) gibi büyük metin veri setleri üzerinde eğitilir ve yeni metinler üretmek veya soruları yanıtlamak için kullanılabilir. Kod üretimi modelleri, [CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst) gibi, genellikle GitHub gibi büyük kod veri setleri üzerinde eğitilir ve yeni kod üretmek veya mevcut koddaki hataları düzeltmek için kullanılabilir.
+Metin ve kod üretim modelleri, metin veya kod üreten modellerdir. Bu modeller sıklıkla metin özetleme, çeviri ve soru yanıtlama için kullanılır. Metin üretim modelleri genellikle [BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst) gibi büyük metin veri kümeleri üzerinde eğitilir ve yeni metin oluşturmak veya soruları yanıtlamak için kullanılabilir. Kod üretim modelleri, örneğin [CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst), genellikle GitHub gibi büyük kod veri kümeleri üzerinde eğitilir ve yeni kod üretmek veya mevcut koddaki hataları düzeltmek için kullanılır.
 
 ![Metin ve kod üretimi](../../../translated_images/tr/Text.a8c0cf139e5cc2a0.webp)
 
-### Kodlayıcı-Çözücü ve Sadece Çözücü
+### Encoder-Decoder ve Sadece Decoder Modeller
 
-LLM'lerin farklı mimari türlerini konuşmak için bir benzetme kullanalım.
+LLM mimarilerinin farklı türlerinden bahsetmek için bir benzetme kullanalım.
 
-Diyelim ki yöneticiniz size öğrenciler için bir sınav hazırlama görevi verdi. İki meslektaşınız var; biri içerik oluşturma, diğeri ise inceleme yapma görevini üstleniyor.
+Yöneticiniz size öğrenciler için bir quiz hazırlama görevi verdiğini hayal edin. İki iş arkadaşınız var; biri içeriğin oluşturulmasından, diğeri ise incelemesinden sorumlu.
 
-İçerik oluşturucu, yalnızca Çözücü modeline benzer. Konuya bakabilir, sizin yazdıklarınızı görebilir ve buna dayanarak bir kurs yazabilir. İlgi çekici ve bilgilendirici içerik yazmada çok iyidir, ancak konuyu ve öğrenme hedeflerini anlamada pek iyi değildir. Çözücü modellerin örnekleri arasında GPT ailesi modelleri, örneğin GPT-3, bulunur.
+İçerik oluşturucu, sadece decoder modeli gibidir: konuyu görür, zaten yazdıklarınıza bakar ve ardından bu bağlamı kullanarak içeriği üretmeye devam eder. İlgi çekici ve bilgilendirici içerik yazmakta çok iyidirler, ancak sadece sınıflandırma, alma veya bilgi kodlama gibi görevler için her zaman en iyi seçim olmayabilirler. Decoder-only model ailelerine örnek olarak GPT ve Llama modelleri verilebilir.
 
-İnceleyici, yalnızca Kodlayıcı modeline benzer. Yazılmış kursa ve cevaplara bakar, aralarındaki ilişkiyi fark eder ve bağlamı anlar, ancak içerik üretmede iyi değildir. Kodlayıcı modellerin bir örneği BERT olabilir.
+İnceleyen kişi ise yalnızca encoder modeli gibidir; yazılan dersi ve cevapları inceler, aralarındaki ilişkileri fark eder ve bağlamı anlar, ancak içerik üretmekte iyi değildir. Encoder-only model örneği olarak BERT verilebilir.
 
-Hem sınavı oluşturup hem de inceleyebilen birini hayal edin, bu bir Kodlayıcı-Çözücü modeldir. Örnekler arasında BART ve T5 bulunur.
+Quiz'i hem oluşturup hem inceleyebilen birisi olduğunu hayal edin, bu Encoder-Decoder modeline benzer. Örnekler arasında BART ve T5 bulunur.
 
-### Hizmet ve Model
+### Servis ve Model Arasındaki Fark
 
-Şimdi bir hizmet ile bir model arasındaki farkı konuşalım. Hizmet, bir Bulut Hizmet Sağlayıcısı tarafından sunulan bir üründür ve genellikle modeller, veriler ve diğer bileşenlerin bir kombinasyonudur. Model ise bir hizmetin temel bileşenidir ve genellikle bir temel modeldir, örneğin bir LLM.
+Şimdi, servis ile model arasındaki farkı konuşalım. Servis, bir Bulut Servis Sağlayıcısı tarafından sunulan bir üründür ve genellikle modeller, veriler ve diğer bileşenlerin birleşimidir. Model ise bir servisin temel bileşenidir ve genellikle bir temel model, örneğin bir LLM'dir.
 
-Hizmetler genellikle üretim kullanımı için optimize edilmiştir ve grafiksel kullanıcı arayüzü aracılığıyla kullanımı daha kolaydır. Ancak, hizmetler her zaman ücretsiz olarak sunulmaz ve hizmet sahibinin ekipman ve kaynaklarından yararlanmak, masrafları optimize etmek ve kolayca ölçeklendirmek karşılığında bir abonelik veya ödeme gerektirebilir. Bir hizmet örneği, [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=academic-105485-koreyst) olabilir. Bu hizmet, ne kadar kullanıldığına bağlı olarak orantılı bir ücretlendirme planı sunar. Ayrıca, Azure OpenAI Service, modellerin yeteneklerinin üzerine kurulu kurumsal düzeyde güvenlik ve sorumlu bir yapay zeka çerçevesi sunar.
+Servisler genellikle üretim kullanımı için optimize edilmiştir ve modellerden daha kolay kullanılır, genellikle grafiksel kullanıcı arayüzü sunarlar. Ancak servisler her zaman ücretsiz olmayabilir, kullanmak için abonelik veya ödeme gerekebilir; bunun karşılığında servis sahibi ekipman ve kaynakları sağlar, giderleri optimize eder ve ölçeklemeyi kolaylaştırır. Örnek olarak, kullanıcının kullandığı kadar ücret ödediği pay-as-you-go fiyatlandırma planı sunan [Azure OpenAI Servisi](https://learn.microsoft.com/azure/ai-foundry/openai/overview?WT.mc_id=academic-105485-koreyst) verilebilir. Azure OpenAI Servisi ayrıca, kurumsal düzeyde güvenlik ve modellerin yeteneklerinin üzerine sorumlu AI çerçevesi sunar.
 
-Modeller ise yalnızca Sinir Ağı, parametreler, ağırlıklar ve diğer bileşenlerden oluşur. Şirketlerin yerel olarak çalıştırmasına olanak tanır, ancak ekipman satın almayı, ölçeklendirme yapısını oluşturmayı ve bir lisans satın almayı veya açık kaynaklı bir model kullanmayı gerektirir. LLaMA gibi bir model kullanılabilir, ancak modeli çalıştırmak için hesaplama gücü gereklidir.
+Modeller, sinir ağı varlıklarıdır: parametreler, ağırlıklar, mimari, tokenizer ve destekleyici yapılandırma. Bir modeli yerel veya özel bir ortamda çalıştırmak uygun donanım, sunucu altyapısı, izleme ve uyumlu açık kaynak/açık ağırlık lisansı veya ticari lisans gerektirir. Llama 4 veya Mistral gibi açık ağırlıklı modeller kendi kendine barındırılabilir, ancak yine de hesaplama gücü ve operasyonel uzmanlık gerekir.
 
-## Azure'da Farklı Modelleri Test Etmek ve Performansı Anlamak İçin Yineleme
+## Performansı anlamak için Azure'da farklı modellerle nasıl test edilir ve yineleme yapılır
 
-Ekibimiz mevcut LLM'ler dünyasını keşfedip senaryoları için uygun adayları belirledikten sonra, bir sonraki adım bu modelleri kendi verileri ve iş yükleri üzerinde test etmektir. Bu, deneyler ve ölçümlerle yapılan yinelemeli bir süreçtir.
-Önceki paragraflarda bahsettiğimiz modellerin çoğu (OpenAI modelleri, Llama2 gibi açık kaynak modeller ve Hugging Face transformers) [Azure AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst) içindeki [Model Kataloğu](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview?WT.mc_id=academic-105485-koreyst) üzerinden erişilebilir.
 
-[Azure AI Studio](https://learn.microsoft.com/azure/ai-studio/what-is-ai-studio?WT.mc_id=academic-105485-koreyst), geliştiricilerin üretken yapay zeka uygulamaları oluşturması ve tüm geliştirme yaşam döngüsünü - denemeden değerlendirmeye kadar - yönetmesi için tasarlanmış bir Bulut Platformudur. Tüm Azure AI hizmetlerini tek bir merkezde birleştirerek kullanımı kolay bir grafik arayüz sunar. Azure AI Studio'daki Model Kataloğu, kullanıcıya şu imkanları sağlar:
+Ekibimiz mevcut LLM manzarasını keşfedip senaryoları için bazı iyi adayları belirledikten sonra, bir sonraki adım onları kendi verileri ve iş yükleri üzerinde test etmektir. Bu, deneyler ve ölçümler yoluyla yapılan yinelemeli bir süreçtir.
+Önceki paragraflarda bahsettiğimiz modellerin çoğu (OpenAI modelleri, Llama 4 ve Mistral gibi açık ağırlıklı modeller ve Hugging Face modelleri) [Microsoft Foundry Modelleri](https://learn.microsoft.com/azure/foundry/concepts/foundry-models-overview?WT.mc_id=academic-105485-koreyst) içinde mevcuttur.
 
-- İlgi duyulan Temel Modeli kataloğda bulma - ister özel ister açık kaynak olsun - görev, lisans veya ada göre filtreleme yaparak. Arama kolaylığı sağlamak için modeller, Azure OpenAI koleksiyonu, Hugging Face koleksiyonu gibi koleksiyonlar halinde düzenlenmiştir.
+[Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry?WT.mc_id=academic-105485-koreyst), eski adıyla Azure AI Studio/Azure AI Foundry, yapay zeka uygulamaları ve ajanları oluşturmak için birleşik bir Azure platformudur. Geliştiricilerin deneyden değerlendirmeye, dağıtıma, izlemeye ve yönetime kadar yaşam döngüsünü yönetmelerine yardımcı olur. Microsoft Foundry'deki model kataloğu kullanıcıya:
 
-![Model kataloğu](../../../translated_images/tr/AzureAIStudioModelCatalog.3cf8a499aa8ba031.webp)
+- Azure tarafından satılan modellerin yanı sıra ortaklar ve topluluk sağlayıcılarından gelen modeller dahil, katalogda ilgilenilen temel modeli bulma imkanı sağlar. Kullanıcılar göreve, sağlayıcıya, lisansa, dağıtım seçeneğine veya adı göre filtreleyebilir.
 
-- Model kartını inceleme, kullanım amacı ve eğitim verileri, kod örnekleri ve iç değerlendirme kütüphanesindeki değerlendirme sonuçları gibi ayrıntılı bir açıklama dahil.
+![Model catalog](../../../translated_images/tr/AzureAIStudioModelCatalog.3cf8a499aa8ba031.webp)
 
-![Model kartı](../../../translated_images/tr/ModelCard.598051692c6e400d.webp)
+- Model kartını inceleyebilir; amaçlanan kullanım ve eğitim verileri hakkında detaylı açıklama, kod örnekleri ve dahili değerlendirme kütüphanesindeki sonuçlar dahil.
 
-- İş senaryosuna en uygun olanı değerlendirmek için endüstride mevcut modeller ve veri setleri arasında karşılaştırma yapma, [Model Karşılaştırmaları](https://learn.microsoft.com/azure/ai-studio/how-to/model-benchmarks?WT.mc_id=academic-105485-koreyst) paneli aracılığıyla.
+![Model card](../../../translated_images/tr/ModelCard.598051692c6e400d.webp)
 
-![Model karşılaştırmaları](../../../translated_images/tr/ModelBenchmarks.254cb20fbd06c03a.webp)
+- [Model Benchmarks](https://learn.microsoft.com/azure/ai-foundry/concepts/model-benchmarks?WT.mc_id=academic-105485-koreyst) paneli aracılığıyla sektörde mevcut modeller ve veri setleri arasında karşılaştırma yaparak iş senaryosuna hangisinin en uygun olduğuna karar verebilir.
 
-- Model performansını belirli bir iş yükünde artırmak için özel eğitim verileriyle modeli ince ayar yapma, Azure AI Studio'nun deneme ve izleme yeteneklerinden yararlanarak.
+![Model benchmarks](../../../translated_images/tr/ModelBenchmarks.254cb20fbd06c03a.webp)
 
-![Model ince ayar](../../../translated_images/tr/FineTuning.aac48f07142e36fd.webp)
+- Microsoft Foundry'nin deney ve takip yeteneklerini kullanarak belirli bir iş yükünde model performansını artırmak için desteklenen modelleri özel eğitim verileri ile ince ayar yapabilir.
 
-- Orijinal önceden eğitilmiş modeli veya ince ayar yapılmış versiyonunu uzak gerçek zamanlı çıkarım - yönetilen hesaplama - veya sunucusuz API uç noktası - [kullandıkça öde](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview#model-deployment-managed-compute-and-serverless-api-pay-as-you-go?WT.mc_id=academic-105485-koreyst) - olarak dağıtarak uygulamaların bunu tüketmesini sağlama.
+![Model fine-tuning](../../../translated_images/tr/FineTuning.aac48f07142e36fd.webp)
 
-![Model dağıtımı](../../../translated_images/tr/ModelDeploy.890da48cbd0bccdb.webp)
+- Orijinal önceden eğitilmiş modeli veya ince ayarlı sürümü, yönetilen hesaplama veya sunucusuz dağıtım seçeneklerini kullanarak uygulamaların tüketebilmesi için uzak gerçek zamanlı çıkarım uç noktasına dağıtabilir.
+
+![Model deployment](../../../translated_images/tr/ModelDeploy.890da48cbd0bccdb.webp)
 
 > [!NOTE]
-> Katalogdaki tüm modeller şu anda ince ayar ve/veya kullandıkça öde dağıtımı için uygun değildir. Modelin yetenekleri ve sınırlamaları hakkında ayrıntılar için model kartını kontrol edin.
+> Katalogdaki tüm modeller şu anda ince ayar ve/veya kullandıkça öde dağıtım için mevcut değildir. Model yetenekleri ve sınırlamaları hakkında ayrıntılar için model kartını kontrol edin.
 
 ## LLM sonuçlarını iyileştirme
 
-Startup ekibimizle farklı türde LLM'leri ve test verileri üzerinde farklı modelleri karşılaştırmamıza, performansı iyileştirmemize ve çıkarım uç noktalarına dağıtmamıza olanak tanıyan bir Bulut Platformu (Azure Machine Learning) keşfettik.
+Startup ekibimizle farklı LLM türlerini ve farklı modelleri karşılaştırmamıza, test verileri üzerinde değerlendirme yapmamıza, performansı artırmamıza ve çıkarım uç noktalarına dağıtmamıza olanak tanıyan bulut platformu Microsoft Foundry'i keşfettik.
 
-Peki, ne zaman bir modeli ince ayar yapmayı düşünmeliler ve ne zaman önceden eğitilmiş bir model kullanmalılar? Belirli iş yüklerinde model performansını artırmak için başka yaklaşımlar var mı?
+Ancak bir modeli önceden eğitilmiş bir modeli kullanmak yerine ne zaman ince ayar yapmayı düşünmeliler? Belirli iş yüklerinde model performansını artırmak için başka yaklaşımlar var mı?
 
-Bir işletmenin bir LLM'den istediği sonuçları alması için kullanabileceği birkaç yaklaşım vardır. Üretimde bir LLM dağıtırken farklı eğitim derecelerine sahip farklı türde modeller seçebilirsiniz; bu da farklı karmaşıklık, maliyet ve kalite seviyelerine yol açar. İşte bazı farklı yaklaşımlar:
+Bir işletmenin LLM'den ihtiyaç duyduğu sonuçları almak için kullanabileceği birkaç yaklaşım vardır. LLM'yi üretimde dağıtırken farklı eğitim seviyelerine sahip farklı tür modelleri seçebilirsiniz, bunlar farklı karmaşıklık, maliyet ve kalite düzeylerine sahiptir. İşte bazı farklı yaklaşımlar:
 
-- **Bağlamla birlikte istem mühendisliği**. İstediğiniz yanıtları almanızı sağlamak için istem sırasında yeterli bağlam sağlama fikridir.
+- **Bağlam ile istem mühendisliği**. Amaç, yanıtları alabilmek için istem sırasında yeterli bağlam sağlamaktır.
 
-- **Geri Alımlı Üretim, RAG**. Verileriniz bir veritabanında veya web uç noktasında bulunabilir; bu verilerin veya bir alt kümesinin istem sırasında dahil edilmesini sağlamak için ilgili verileri alabilir ve bunu kullanıcının istemine ekleyebilirsiniz.
+- **Retrieval Augmented Generation, RAG**. Verileriniz örneğin bir veritabanında veya web uç noktasında olabilir; istem sırasında ilgili verilerin veya bir alt kümesinin dahil edilmesini sağlamak için ilgili verileri alıp kullanıcının istemine ekleyebilirsiniz.
 
-- **İnce ayar yapılmış model**. Burada, modeli kendi verilerinizle daha fazla eğiterek ihtiyaçlarınıza daha doğru ve duyarlı hale getirirsiniz, ancak bu maliyetli olabilir.
+- **İnce ayarlı model**. Burada modeli kendi verilerinizle daha fazla eğitirsiniz, bu da modelin ihtiyaçlarınıza daha kesin ve yanıt verebilir olmasını sağlar ancak maliyetli olabilir.
 
-![LLM'lerin dağıtımı](../../../translated_images/tr/Deploy.18b2d27412ec8c02.webp)
+![LLMs deployment](../../../translated_images/tr/Deploy.18b2d27412ec8c02.webp)
 
 Görsel kaynağı: [Four Ways that Enterprises Deploy LLMs | Fiddler AI Blog](https://www.fiddler.ai/blog/four-ways-that-enterprises-deploy-llms?WT.mc_id=academic-105485-koreyst)
 
-### Bağlamla İstem Mühendisliği
+### Bağlam ile İstem Mühendisliği
 
-Önceden eğitilmiş LLM'ler, kısa bir istemle çağrıldıklarında bile genel doğal dil görevlerinde çok iyi çalışır; örneğin tamamlanacak bir cümle veya bir soru - "sıfır atış" öğrenme olarak adlandırılır.
+Önceden eğitilmiş LLM'ler, kısa bir istem ile bile (tamamlanacak bir cümle veya soru gibi) genelleştirilmiş doğal dil görevlerinde çok iyi çalışır - buna "sıfır atış" öğrenme denir.
 
-Ancak, kullanıcı sorgusunu ayrıntılı bir istek ve örneklerle - Bağlam - çerçeveleyebildiğinde, yanıt daha doğru ve kullanıcının beklentilerine daha yakın olacaktır. Bu durumda, istem yalnızca bir örnek içeriyorsa "tek atış" öğrenmeden ve birden fazla örnek içeriyorsa "az atış" öğrenmeden bahsedilir. Bağlamla istem mühendisliği, başlamak için en uygun maliyetli yaklaşımdır.
+Ancak kullanıcı sorgusunu detaylı bir istek ve örneklerle - Bağlam ile - çerçevelendikçe, cevap daha doğru ve kullanıcının beklentilerine daha yakın olur. İstemde sadece bir örnek varsa buna "tek atış" öğrenme, birden fazla örnek varsa "birkaç atış öğrenme" denir.
+Bağlam ile istem mühendisliği, başlamanın en uygun ve maliyet etkin yaklaşımıdır.
 
-### Geri Alımlı Üretim (RAG)
+### Retrieval Augmented Generation (RAG)
 
-LLM'lerin yalnızca eğitim sırasında kullanılan verileri yanıt oluşturmak için kullanabilme sınırlaması vardır. Bu, eğitim sürecinden sonra gerçekleşen olaylar hakkında hiçbir şey bilmedikleri ve özel bilgilere (örneğin şirket verileri) erişemedikleri anlamına gelir.
-Bu, belgelerin parçaları şeklinde dış verilerle istemi artıran bir teknik olan RAG ile aşılabilir; istem uzunluğu sınırlarını göz önünde bulundurur. Bu, önceden tanımlanmış veri kaynaklarından yararlı parçaları alıp istem Bağlamına ekleyen [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst) gibi Vektör veritabanı araçları tarafından desteklenir.
+LLM'lerin sınırlaması, yanıt üretmek için sadece eğitim sırasında kullanılan verileri kullanabilmeleridir. Bu, eğitim süreçlerinden sonra gerçekleşen olaylar hakkında bilgi sahibi olmadıkları ve özel olmayan bilgileri (örneğin şirket verileri) erişemedikleri anlamına gelir.
+Bu durum, doküman parçaları olarak dış verilerle istemi destekleyen ve istem uzunluğu sınırlarını dikkate alan RAG ile aşılabilir. Bu, çeşitli önceden tanımlanmış veri kaynaklarından faydalı parçaları alıp istem bağlamına ekleyen Vektör veritabanı araçları (örneğin [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)) ile desteklenir.
 
-Bu teknik, bir işletmenin yeterli veri, yeterli zaman veya bir LLM'yi ince ayar yapmak için kaynaklara sahip olmadığı, ancak belirli bir iş yükünde performansı artırmak ve gerçekliği çarpıtma veya zararlı içerik risklerini azaltmak istediği durumlarda çok faydalıdır.
+Bu teknik, bir işletmenin yeterli verisi, zamanı veya kaynağı yoksa ancak belirli bir iş yükünde performansı artırmak ve halüsinasyonlu, güncel olmayan veya desteklenmeyen cevap risklerini azaltmak istediğinde çok faydalıdır.
 
-### İnce Ayar Yapılmış Model
+### İnce ayarlı model
 
-İnce ayar, transfer öğrenmeyi kullanarak modeli bir alt görev için "uyarlayan" veya belirli bir sorunu çözmek için kullanılan bir süreçtir. Az atış öğrenme ve RAG'den farklı olarak, güncellenmiş ağırlıklar ve önyargılarla yeni bir model oluşturulmasına yol açar. Bu, bir istem (girdi) ve buna karşılık gelen bir çıktı (tamamlama) örneklerinden oluşan bir eğitim örnekleri seti gerektirir.
-Bu tercih edilen bir yaklaşım olabilir:
+İnce ayar, transfer öğrenimini kullanarak modeli bir altında görev için 'uyarlamak' veya belirli bir problemi çözmek için kullanılan bir süreçtir. Birkaç atış öğrenme ve RAG'den farklı olarak, güncellenmiş ağırlıklar ve sapmalarla yeni bir model ortaya çıkarır. Bu, istem ve ona karşılık gelen çıktıdan oluşan eğitim örnekleri gerektirir.
+Bu tercih edilen yaklaşım olur:
 
-- **İnce ayar yapılmış modelleri kullanma**. Bir işletme, daha az yetenekli ince ayar yapılmış modelleri (örneğin gömme modelleri) yüksek performanslı modeller yerine kullanmak isteyebilir; bu da daha uygun maliyetli ve hızlı bir çözüm sağlar.
+- **Daha küçük görev-özel modeller kullanmak:** İşletme, büyük bir sınır modeli yerine dar bir görev için daha küçük bir modeli ince ayarlamak isteyebilir; bu, daha maliyet etkin ve hızlı bir çözümdür.
 
-- **Gecikmeyi dikkate alma**. Belirli bir kullanım durumu için gecikme önemlidir, bu nedenle çok uzun istemler kullanmak mümkün değildir veya modelin öğrenmesi gereken örnek sayısı istem uzunluğu sınırına uymuyordur.
+- **Gecikme süresini dikkate almak:** Gecikme süresi belirli bir kullanım durumu için önemlidir, dolayısıyla çok uzun istemler kullanılamaz veya öğrenilmesi gereken örnek sayısı istem uzunluğu sınırı ile uyumlu değildir.
 
-- **Güncel kalma**. Bir işletme, çok fazla yüksek kaliteli veri ve doğru etiketlere sahiptir ve bu verileri zaman içinde güncel tutmak için gereken kaynaklara sahiptir.
+- **Kararlı davranışa uyum sağlamak:** İşletmenin çok sayıda yüksek kaliteli örneği vardır ve modelin tutarlı şekilde bir görev kalıbını, çıktı formatını, tonu veya alan-özel stilini takip etmesini ister. Eğer ana sorun taze gerçekler veya sık değişen özel bilgiler ise, sadece ince ayarlamaya güvenmek yerine RAG kullanın.
 
-### Eğitilmiş Model
+### Eğitimli model
 
-Bir LLM'yi sıfırdan eğitmek, şüphesiz en zor ve en karmaşık yaklaşımdır; büyük miktarda veri, yetenekli kaynaklar ve uygun hesaplama gücü gerektirir. Bu seçenek, yalnızca bir işletmenin alanına özgü bir kullanım durumu ve büyük miktarda alan merkezli veriye sahip olduğu bir senaryoda düşünülmelidir.
+Baştan bir LLM eğitmek şüphesiz en zor ve en karmaşık yaklaşımdır; çok büyük veri, yetenekli kaynaklar ve uygun hesaplama gücü gerektirir. Bu seçenek ancak bir işletmenin alan-özel bir kullanım durumu ve çok miktarda alan-odaklı verisi varsa düşünülmelidir.
 
-## Bilgi Kontrolü
+## Bilgi kontrolü
 
-LLM tamamlama sonuçlarını iyileştirmek için iyi bir yaklaşım ne olabilir?
+LLM tamamlanma sonuçlarını iyileştirmek için iyi bir yaklaşım ne olabilir?
 
-1. Bağlamla istem mühendisliği
+1. Bağlam ile istem mühendisliği
 1. RAG
-1. İnce ayar yapılmış model
+1. İnce ayarlı model
 
-A:3, eğer zamanınız, kaynaklarınız ve yüksek kaliteli verileriniz varsa, güncel kalmak için ince ayar yapmak daha iyi bir seçenektir. Ancak, bir şeyleri iyileştirmeyi düşünüyorsanız ve zamanınız yoksa önce RAG'yi düşünmek faydalı olabilir.
+Cevap: Üçü de yardımcı olabilir. Hızlı iyileştirmeler için bağlam ile istem mühendisliğiyle başlayın, modelin güncel gerçeklere veya özel iş verilerine ihtiyacı olduğunda RAG kullanın. Yeterli yüksek kaliteli örneğiniz varsa ve modelin tutarlı şekilde görev, format, ton veya alan kalıbını takip etmesi gerekiyorsa ince ayarı tercih edin.
 
 ## 🚀 Meydan Okuma
 
-İşletmeniz için [RAG kullanımı](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview?WT.mc_id=academic-105485-koreyst) hakkında daha fazla bilgi edinin.
+İşiniz için [RAG›ı nasıl kullanabileceğiniz](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview?WT.mc_id=academic-105485-koreyst) hakkında daha fazla bilgi edinin.
 
-## Harika İş, Öğrenmeye Devam Edin
+## Harika iş çıkardınız, Öğrenmeye Devam Edin
 
-Bu dersi tamamladıktan sonra, [Üretken Yapay Zeka Öğrenme koleksiyonumuzu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) inceleyerek Üretken Yapay Zeka bilginizi geliştirmeye devam edin!
+Bu dersi tamamladıktan sonra, Generative AI bilgi seviyenizi yükseltmeye devam etmek için [Yaratıcı AI Öğrenme koleksiyonumuza](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) göz atın!
 
-3. Derse geçin ve [Üretken Yapay Zeka ile Sorumlu Şekilde Nasıl Çalışılır](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst) konusunu inceleyin!
+Sorumlu bir şekilde [Yaratıcı AI ile nasıl inşa edileceğine](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst) bakacağımız 3. Derse geçin!
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

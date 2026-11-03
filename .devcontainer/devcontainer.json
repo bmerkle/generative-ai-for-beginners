@@ -16,12 +16,26 @@
 		"vscode": {
 			"extensions": [
 				"ms-python.python",
-				"ms-toolsai.jupyter"
+				"ms-python.vscode-pylance",
+				"ms-toolsai.jupyter",
+				"ms-python.black-formatter",
+				"charliermarsh.ruff",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"github.copilot"
 			],
-			"postCreateCommand": [
-				"curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh",
-				"pip3 --disable-pip-version-check --no-cache-dir install -r requirements.txt"
-			]
+			"settings": {
+				"editor.formatOnSave": true,
+				"[python]": {
+					"editor.defaultFormatter": "ms-python.black-formatter"
+				},
+				"[javascript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
+				"[typescript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				}
+			}
 		}
 	}
 }

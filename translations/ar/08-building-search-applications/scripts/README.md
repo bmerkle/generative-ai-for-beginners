@@ -1,27 +1,27 @@
-# تحضير بيانات النسخ
+# إعداد بيانات التفريغ النصي
 
-تقوم سكريبتات تحضير بيانات النسخ بتنزيل نصوص فيديوهات YouTube وتجهيزها للاستخدام مع نموذج البحث الدلالي باستخدام OpenAI Embeddings والوظائف.
+تقوم سكريبتات إعداد بيانات التفريغ النصي بتنزيل نصوص فيديوهات يوتيوب وتحضيرها للاستخدام مع نموذج البحث الدلالي مع تضمينات OpenAI والوظائف.
 
-تم اختبار سكريبتات تحضير بيانات النسخ على أحدث إصدارات Windows 11 وmacOS Ventura وUbuntu 22.04 (وأعلى).
+تم اختبار سكريبتات إعداد بيانات التفريغ النصي على أحدث إصدارات Windows 11 وmacOS Ventura وUbuntu 22.04 (والأعلى).
 
 ## إنشاء الموارد المطلوبة لخدمة Azure OpenAI
 
 > [!IMPORTANT]
-> ننصح بتحديث Azure CLI إلى أحدث إصدار لضمان التوافق مع OpenAI
+> نقترح تحديث واجهة سطر أوامر Azure إلى أحدث إصدار لضمان التوافق مع OpenAI
 > راجع [التوثيق](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
 1. إنشاء مجموعة موارد
 
 > [!NOTE]
-> في هذه التعليمات نستخدم مجموعة الموارد المسماة "semantic-video-search" في منطقة East US.
-> يمكنك تغيير اسم مجموعة الموارد، ولكن عند تغيير موقع الموارد،
+> في هذه التعليمات نستخدم مجموعة الموارد المسماة "semantic-video-search" في شرق الولايات المتحدة.
+> يمكنك تغيير اسم مجموعة الموارد، ولكن عند تغيير موقع الموارد، 
 > تحقق من [جدول توفر النماذج](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
 ```
 
-1. إنشاء مورد لخدمة Azure OpenAI.
+1. إنشاء مورد خدمة Azure OpenAI.
 
 ```console
 az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
@@ -38,8 +38,8 @@ az cognitiveservices account keys list --name semantic-video-openai \
 ```
 
 1. نشر النماذج التالية:
-   - `text-embedding-ada-002` إصدار `2` أو أعلى، باسم `text-embedding-ada-002`
-   - `gpt-35-turbo` إصدار `0613` أو أعلى، باسم `gpt-35-turbo`
+   - الإصدار `2` أو أعلى من `text-embedding-ada-002`، المسمى `text-embedding-ada-002`
+   - `gpt-5-mini` المسمى `gpt-5-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -53,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-5-mini \
+    --model-name gpt-5-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -63,16 +62,16 @@ az cognitiveservices account deployment create \
 
 ## البرامج المطلوبة
 
-- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) أو أحدث
+- [بايثون 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) أو أعلى
 
 ## متغيرات البيئة
 
-المتغيرات البيئية التالية مطلوبة لتشغيل سكريبتات تحضير بيانات نسخ YouTube.
+المتغيرات البيئية التالية مطلوبة لتشغيل سكريبتات إعداد بيانات تفريغ يوتيوب.
 
 ### على ويندوز
 
-ننصح بإضافة المتغيرات إلى متغيرات بيئة `user`.
-`ابدأ ويندوز` > `تحرير متغيرات بيئة النظام` > `متغيرات البيئة` > `متغيرات المستخدم` لـ [USER] > `جديد`.
+يُوصى بإضافة المتغيرات إلى متغيرات بيئة المستخدم الخاصة بك.
+`بدء ويندوز` > `تحرير متغيرات نظام البيئة` > `متغيرات البيئة` > `متغيرات المستخدم` لـ [USER] > `جديد`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -81,11 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
+<!-- يمكنك إضافة متغيرات البيئة إلى ملف التعريف PowerShell الخاص بك.
 
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<مفتاح API لخدمة Azure OpenAI الخاص بك>"
+$env:AZURE_OPENAI_ENDPOINT = "<نقطة نهاية خدمة Azure OpenAI الخاصة بك>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<اسم نشر نموذج خدمة Azure OpenAI الخاص بك>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<مفتاح API لمطور جوجل الخاص بك>"
+``` -->
 
 ### على لينكس وmacOS
 
-ننصح بإضافة الصادرات التالية إلى ملف `~/.bashrc` أو `~/.zshrc`.
+يُوصى بإضافة الصادرات التالية إلى ملف `~/.bashrc` أو `~/.zshrc` الخاص بك.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -94,10 +100,10 @@ export AZURE_OPENAI_MODEL_DEPLOYMENT_NAME=<your Azure OpenAI Service model deplo
 export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ```
 
-## تثبيت مكتبات Python المطلوبة
+## تثبيت مكتبات بايثون المطلوبة
 
-1. قم بتثبيت [عميل git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) إذا لم يكن مثبتًا بالفعل.
-1. من نافذة `Terminal`، انسخ العينة إلى مجلد المستودع المفضل لديك.
+1. قم بتثبيت [عميل git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) إذا لم يكن مثبتاً مسبقاً.
+1. من نافذة `الطرفية`، انسخ العينة إلى مجلد المستودع المفضل لديك.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -109,7 +115,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    cd semanic-search-openai-embeddings-functions/src/data_prep
    ```
 
-1. أنشئ بيئة افتراضية لـ Python.
+1. أنشئ بيئة افتراضية لبايثون.
 
     على ويندوز:
 
@@ -123,7 +129,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
     python3 -m venv .venv
     ```
 
-1. فعّل البيئة الافتراضية لـ Python.
+1. فعّل البيئة الافتراضية لبايثون.
 
    على ويندوز:
 
@@ -137,7 +143,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    source .venv/bin/activate
    ```
 
-1. ثبّت المكتبات المطلوبة.
+1. ثبت المكتبات المطلوبة.
 
    على ويندوز:
 
@@ -151,7 +157,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    pip3 install -r requirements.txt
    ```
 
-## تشغيل سكريبتات تحضير بيانات نسخ YouTube
+## تشغيل سكريبتات إعداد بيانات التفريغ النصي ليوتيوب
 
 ### على ويندوز
 
@@ -165,5 +171,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ./transcripts_prepare.sh
 ```
 
-**إخلاء المسؤولية**:  
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق به. للمعلومات الهامة، يُنصح بالترجمة البشرية المهنية. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

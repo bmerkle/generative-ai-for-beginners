@@ -1,0 +1,170 @@
+# ការកសាងកម្មវិធីស្វែងរក
+
+[![ការណែនាំអំពី Generative AI និងមូដែលភាសាធំៗ](../../../translated_images/km/08-lesson-banner.8fff48c566dad08a.webp)](https://youtu.be/W0-nzXjOjr0?si=GcsqiTTvd7RKbo7V)
+
+> > _ចុចលើរូបភាពខាងលើដើម្បីមើលវីដេអូសម្រង់មេរៀននេះ_
+
+មានអ្វីច្រើនជាង chatbot និងការបង្កើតអត្ថបទមួយចំនួននៅក្នុង LLMs។ អ្នកក៏អាចបង្កើតកម្មវិធីស្វែងរកតាមរយៈ Embeddings ផងដែរ។ Embeddings គឺជាតំណាងលេខសម្រាប់ទិន្នន័យដែលគេហៅថា vectors ហើយអាចប្រើសម្រាប់ស្វែងរកតាមអត្ថន័យសម្រាប់ទិន្នន័យ។
+
+ក្នុងមេរៀននេះ អ្នកនឹងបង្កើតកម្មវិធីស្វែងរកសម្រាប់ស្ថាប័នចាប់ផ្តើមការអប់រំរបស់យើង។ ស្ថាប័នចាប់ផ្តើមនេះគឺជាស្ថាប័នមិនរកប្រាក់ចំណេញដែលផ្តល់អប់រំដោយឥតគិតថ្លៃសម្រាប់និស្សិតនៅប្រទេសកំពុងអភិវឌ្ឍ។ ស្ថាប័នលោកយើងមានវីដេអូ YouTube ច្រើនដែលនិស្សិតអាចប្រើសម្រាប់រៀនអំពី AI។ ស្ថាប័នចាប់ផ្តើមចង់បង្កើតកម្មវិធីស្វែងរកដែលអនុញ្ញាតឱ្យនិស្សិតស្វែងរកវីដេអូ YouTube ដោយវាយសំណួរ។
+
+ឧទាហរណ៍ និស្សិតអាចវាយ "What are Jupyter Notebooks?" ឬ "What is Azure ML" ហើយកម្មវិធីស្វែងរកនឹងបង្ហាញបញ្ជីវីដេអូ YouTube ដែលពាក់ព័ន្ធនឹងសំណួរនោះ ហើយល្អប្រសើរជាងនេះ កម្មវិធីស្វែងរកនឹងបង្ហាញតំណភ្ជាប់ទៅកន្លែងនៅក្នុងវីដេអូចំលើយសំណួរនោះត្រូវបានរកឃើញ។
+
+## ការណែនាំ
+
+ក្នុងមេរៀននេះ យើងនឹងពិភាក្សា៖
+
+- ការស្វែងរកតាមអត្ថន័យ យោងតាមការស្វែងរកតាមពាក្យគន្លឹះ។
+- Text Embeddings មានអ្វីខ្លះ។
+- ការបង្កើតសន្ទស្សន៍ Text Embeddings។
+- ស្វែងរកក្នុងសន្ទស្សន៍ Text Embeddings។
+
+## គោលបំណងការរៀន
+
+បន្ទាប់ពីបញ្ចប់មេរៀននេះ អ្នកនឹងអាច៖
+
+- ប្រាប់បានអំពីភាពខុសគ្នារវាងការស្វែងរកតាមអត្ថន័យ និងពាក្យគន្លឹះ។
+- ពន្យល់អំពីអ្វីទៅ Text Embeddings។
+- បង្កើតកម្មវិធីប្រើប្រាស់ Embeddings សម្រាប់ស្វែងរកទិន្នន័យ។
+
+## ហេតុអ្វីបានជាកសាងកម្មវិធីស្វែងរក?
+
+ការបង្កើតកម្មវិធីស្វែងរកនឹងជួយអ្នកយល់ពីវិធីប្រើ Embeddings សម្រាប់ស្វែងរកទិន្នន័យ។ អ្នកនឹងរៀនរបៀបកសាងកម្មវិធីស្វែងរកដែលអាចប្រើបានសម្រាប់និស្សិតក្នុងការស្វែងរកព័ត៌មានយ៉ាងលឿន។
+
+មេរៀននេះមានសន្ទស្សន៍ Embedding សម្រាប់ចម្លងសំឡេង YouTube សម្រាប់ឆាណែល Microsoft [AI Show](https://www.youtube.com/playlist?list=PLlrxD0HtieHi0mwteKBOfEeOYf0LJU4O1)។ AI Show គឺជាឆាណែល YouTube ដែលបង្រៀនអ្នកអំពី AI និង machine learning។ សន្ទស្សន៍ Embedding មាន Embeddings សម្រាប់ចម្លងសំឡេង YouTube រហូតដល់ខែតុលា 2023។ អ្នកនឹងប្រើសន្ទស្សន៍ Embedding ដើម្បីកសាងកម្មវិធីស្វែងរកសម្រាប់ startup របស់យើង។ កម្មវិធីស្វែងរកនឹងបង្ហាញតំណភ្ជាប់ទៅកន្លែងនៅក្នុងវីដេអូដែលមានចម្លើយសម្រាប់សំណួរ។ នេះជារបៀបល្អមួយសម្រាប់និស្សិតក្នុងការស្វែងរកព័ត៌មានដែលពួកគេចាំបាច់យ៉ាងរហ័ស។
+
+ខាងក្រោមជាឧទាហរណ៍នៃសំណួរតាមអត្ថន័យសម្រាប់សំណួរ 'តើអ្នកអាចប្រើ rstudio ជាមួយ azure ml ទេ?'។ សូមពិនិត្យ url YouTube នោះ អ្នកនឹងឃើញថា url មានពេលវេលាដែលនាំអ្នកទៅកន្លែងនៅក្នុងវីដេអូដែលមានចម្លើយសម្រាប់សំណួរ។
+
+![សំណួរតាមអត្ថន័យសម្រាប់សំណួរ "can you use rstudio with Azure ML"](../../../translated_images/km/query-results.bb0480ebf025fac6.webp)
+
+## តើអ្វីទៅជាការស្វែងរកតាមអត្ថន័យ?
+
+ឥឡូវនេះ អ្នកប្រាកដជាសួរថា តើអ្វីទៅជាការស្វែងរកតាមអត្ថន័យ? ការស្វែងរកតាមអត្ថន័យគឺជាបច្ចេកវិទ្យាស្វែងរកដែលប្រើអត្ថន័យ ឬន័យនៃពាក្យក្នុងសំណួរដើម្បីត្រឡប់លទ្ធផលពាក់ព័ន្ធ។
+
+នេះជាឧទាហរណ៍នៃការស្វែងរកតាមអត្ថន័យ។ សូមនិយាយថា អ្នកកំពុងស្វែងរកការជាវឡាន អ្នកអាចស្វែងរក 'my dream car' ការស្វែងរកតាមអត្ថន័យយល់ថា អ្នកមិនបាន `សុបិន` អំពីឡានទេ ប៉ុន្តែអ្នកកំពុងស្វែងរកឡាន `ល្អបំផុត` របស់អ្នក។ ការស្វែងរកតាមអត្ថន័យយល់គំនិតរបស់អ្នក ហើយត្រឡប់លទ្ធផលដែលពាក់ព័ន្ធ។ ជំនួសវា គឺ `keyword search` ដែលតាមពិតនឹងស្វែងរកទេពកោសដែលពាក់ព័ន្ធនឹងឡាន ហើយជាញ់ញឹមជាញ់គ្នាតែងតែបង្ហាញលទ្ធផលមិនពាក់ព័ន្ធ។
+
+## Text Embeddings ជាអ្វី?
+
+[Text embeddings](https://en.wikipedia.org/wiki/Word_embedding?WT.mc_id=academic-105485-koreyst) គឺជាបច្ចេកទេសតំណាងអត្ថបទដែលប្រើក្នុង [natural language processing](https://en.wikipedia.org/wiki/Natural_language_processing?WT.mc_id=academic-105485-koreyst)។ Text embeddings គឺជាតំណាងលេខសម្រាប់អត្ថបទដោយផ្អែកលើអត្ថន័យ។ Embeddings ត្រូវប្រើដើម្បីតំណាងទិន្នន័យឱ្យម៉ាស៊ីនយល់បានយ៉ាងងាយស្រួល។ មានម៉ូដែលជាច្រើនសម្រាប់បង្កើត text embeddings។ នៅក្នុងមេរៀននេះ យើងនឹងផ្ដោតលើការបង្កើត embeddings ប្រើម៉ូដែល OpenAI Embedding។
+
+នេះជាឧទាហរណ៍មួយ សូមយល់ព្រមថាអត្ថបទខាងក្រោមស្ថិតក្នុងចម្លងសំឡេងពីវគ្គមួយក្នុងឆាណែល AI Show YouTube:
+
+```text
+Today we are going to learn about Azure Machine Learning.
+```
+
+យើងនឹងផ្ញើអត្ថបទទៅ OpenAI Embedding API ហើយវានឹងត្រលប់ Embedding ដែលមានលេខចំនួន ១៥៣៦ ឬ vector មួយ។ ឡេខិ៍មួយនៃ vector ម្នាក់ឯងតំណាងឱ្យមុខងារផ្សេងៗនៃអត្ថបទ។ ដើម្បីឆាប់សង្ខេប ខាងក្រោមជាលេខដប់ដំបូងក្នុង vector។
+
+```python
+[-0.006655829958617687, 0.0026128944009542465, 0.008792596869170666, -0.02446001023054123, -0.008540431968867779, 0.022071078419685364, -0.010703742504119873, 0.003311325330287218, -0.011632772162556648, -0.02187200076878071, ...]
+```
+
+## តើធ្វើដូចម្តេចដើម្បីបង្កើតសន្ទស្សន៍ Embedding?
+
+សន្ទស្សន៍ Embedding សម្រាប់មេរៀននេះត្រូវបានបង្កើតជាប់ជាមួយសូម Python script ជាបន្តបន្ទាប់។ អ្នកអាចរក script ទាំងនេះរួមជាមួយការណែនាំក្នុង [README](./scripts/README.md?WT.mc_id=academic-105485-koreyst) ក្នុងថត 'scripts' សម្រាប់មេរៀននេះ។ អ្នកមិនចាំបាច់ដំណើរការ script ទាំងនេះដើម្បីបញ្ចប់មេរៀននោះទេ ពីព្រោះសន្ទស្សន៍ Embedding ត្រូវបានផ្តល់ជូនរួចហើយ។
+
+Script នោះធ្វើការដូចខាងក្រោម៖
+
+1. ចម្លងសំឡេងសម្រាប់វីដេអូ YouTube ក្នុងបញ្ជី [AI Show](https://www.youtube.com/playlist?list=PLlrxD0HtieHi0mwteKBOfEeOYf0LJU4O1) ត្រូវបានទាញយក។
+2. ប្រើ [OpenAI Functions](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/function-calling?WT.mc_id=academic-105485-koreyst) ដើម្បីឆែកឲ្យឃើញឈ្មោះអ្នកនិយាយ ពីចំនួន 3 នាទីដំបូងនៃចម្លងសំឡេង YouTube។ ឈ្មោះអ្នកនិយាយសម្រាប់វីដេអូទាំងអស់ត្រូវបានរក្សាទុកក្នុងសន្ទស្សន៍ Embedding ឈ្មោះ `embedding_index_3m.json`។
+3. អត្ថបទចម្លងសំឡេងត្រូវបានបំបែកជាផ្នែកអត្ថបទប្រហែល 3 នាទី។ ផ្នែកនីមួយៗមានពាក្យប្រហែល 20 ពាក្យពាក់កណ្តាលពីផ្នែកបន្ទាប់ ដើម្បីធានាថា Embedding របស់ផ្នែកមិនត្រូវបានកាត់ ហើយផ្តល់ context ស្វែងរកល្អប្រសើរ។
+4. ផ្នែកអត្ថបទនីមួយៗត្រូវបានផ្ញើទៅ OpenAI Chat API ដើម្បីសង្ខេបអត្ថបទក្នុង 60 ពាក្យ។ សង្ខេបនេះត្រូវបានរក្សាទុកក្នុងសន្ទស្សន៍ Embedding `embedding_index_3m.json` ក៏ដែរ។
+5. ចុងក្រោយ ផ្នែកអត្ថបទត្រូវបានផ្ញើទៅ OpenAI Embedding API។ Embedding API ត្រលប់ vector មានលេខចំនួន ១៥៣៦ ដែលតំណាងន័យអត្ថន័យនៃផ្នែក។ ផ្នែក និង vector OpenAI Embedding ត្រូវបានរក្សាទុកក្នុងសន្ទស្សន៍ Embedding `embedding_index_3m.json`។
+
+### មូលដ្ឋានទិន្នន័យវ៉ិកទ័រ
+
+សម្រាប់ភាពសាមញ្ញនៃមេរៀននេះ សន្ទស្សន៍ Embedding ត្រូវបានរក្សាទុកក្នុងឯកសារ JSON ឈ្មោះ `embedding_index_3m.json` ហើយផ្ទុកចូល Pandas DataFrame។ ទោះជាយ៉ាងណា ក្នុងផលិតកម្ម សន្ទស្សន៍ Embedding នឹងត្រូវបានរក្សាទុកក្នុងមូលដ្ឋានទិន្នន័យវ៉ិកទ័រដូចជា [Azure Cognitive Search](https://learn.microsoft.com/training/modules/improve-search-results-vector-search?WT.mc_id=academic-105485-koreyst), [Redis](https://cookbook.openai.com/examples/vector_databases/redis/readme?WT.mc_id=academic-105485-koreyst), [Pinecone](https://cookbook.openai.com/examples/vector_databases/pinecone/readme?WT.mc_id=academic-105485-koreyst), [Weaviate](https://cookbook.openai.com/examples/vector_databases/weaviate/readme?WT.mc_id=academic-105485-koreyst) ជាដើម។
+
+## យល់ដឹងអំពី cosine similarity
+
+យើងបានរៀនអំពី text embeddings ហើយជំហ៊ានបន្ទាប់គឺរៀនរបៀបប្រើ text embeddings ដើម្បីស្វែងរកទិន្នន័យ និងស្វែងរក embedding ដែលមានស្រដៀងបំផុតជាមួយសំណួរដោយប្រើ cosine similarity។
+
+### តើ cosine similarity ជាអ្វី?
+
+Cosine similarity គឺជាតម្លៃវាស់ពីភាពស្រដៀងរវាងវ៉ិកទ័រពីរគ្នា អ្នកនិងស្តាប់វាថា `nearest neighbor search`។ ដើម្បីធ្វើការស្វែងរកជាមួយ cosine similarity អ្នកត្រូវតែ _បម្លែង_ អត្ថបទសំណួរជាវ៉ិកទ័រដោយប្រើ OpenAI Embedding API។ បន្ទាប់មកគណនារ៉េស៊ីយ៉ូ cosine similarity រវាង​វ៉ិកទ័រសំណួរ និងវ៉ិកទ័រនីមួយៗក្នុងសន្ទស្សន៍ Embedding។ សូមចាំថា សន្ទស្សន៍ Embedding មានឯកសារវ៉ិកទ័រសម្រាប់ចម្លងសំឡេង YouTube រាល់ផ្នែកអត្ថបទ។ ចុងក្រោយ មើលលទ្ធផលតាមតម្រៀប cosine similarity ហើយផ្នែកអត្ថបទដែលមាន cosine similarity ខ្ពស់បំផុតជាផ្នែកដែលស្រដៀងជាងគេជាមួយសំណួរ។
+
+យោងទស្សនវិជ្ជាមានគណិតវិទ្យា cosine similarity វាស់កម្ពស់ acute angle រវាងវ៉ិកទ័រពីរត្រូវបានដាក់ក្នុងប្រវែងពហុវិមាត្រ។ ការវាស់នេះមានអត្ថប្រយោជន៍ ពីព្រោះបើឯកសារពីរមានចម្ងាយ Euclidean ឆ្ងាយពីគ្នាក្រោមប្រវែង ខណៈវិុមាត្រខូចតាមវិុមាត្រសំខាន់ប្រហែល angle រវាងវ៉ិកទ័រពួកវាអាចតិចហើយមាន cosine similarity ខ្ពស់ជាង។ សម្រាប់ព័ត៌មានបន្ថែមអំពីសមីការសំរាប់ cosine similarity សូមមើល [Cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity?WT.mc_id=academic-105485-koreyst)។
+
+## ការកសាងកម្មវិធីស្វែងរករបស់អ្នកជាដំបូង
+
+បន្ទាប់មក យើងនឹងរៀនរបៀបកសាងកម្មវិធីស្វែងរកប្រើ Embeddings។ កម្មវិធីស្វែងរកនឹងអនុញ្ញាតឱ្យនិស្សិតស្វែងរកវីដេអូដោយវាយសំណួរ។ កម្មវិធីស្វែងរកនឹងបង្ហាញបញ្ជីវីដេអូដែលពាក់ព័ន្ធនឹងសំណួរ។ កម្មវិធីនេះនឹងបង្ហាញតំណភ្ជាប់ទៅកន្លែងនៅក្នុងវីដេអូដែលមានចម្លើយសំណួរនោះ។
+
+ដំណោះស្រាយនេះត្រូវបានកសាង និងសាកល្បងលើ Windows 11, macOS, និង Ubuntu 22.04 ប្រើ Python 3.10 ឬអោយក្រោយ។ អ្នកអាចទាញយក Python ពី [python.org](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst)។
+
+## តួនាទី - ការកសាងកម្មវិធីស្វែងរក សម្រាប់អនុញ្ញាតនិស្សិត
+
+យើងបានណែនាំស្ថាប័នចាប់ផ្តើមនៅដើមមេរៀននេះ ហើយឥឡូវនេះពេលវេលាត្រូវអោយនិស្សិតកសាងកម្មវិធីស្វែងរកសម្រាប់ការវាយតម្លៃរបស់ពួកគេ។
+
+ក្នុងតួនាទីនេះ អ្នកនឹងបង្កើត Azure OpenAI Services ដែលនឹងប្រើសម្រាប់កសាងកម្មវិធីស្វែងរក។ អ្នកនឹងបង្កើត Azure OpenAI Services ដូចខាងក្រោម។ អ្នកត្រូវការជាវ Azure ដើម្បីបញ្ចប់តួនាទីនេះ។
+
+### ចាប់ផ្តើម Azure Cloud Shell
+
+1. ចូលទៅកាន់ [Azure portal](https://portal.azure.com/?WT.mc_id=academic-105485-koreyst)។
+2. ជ្រើសរើសរូបតំណាង Cloud Shell នៅផ្នែកជើងខាងស្តាំលើនៃ Azure portal។
+3. ជ្រើសរើស **Bash** សម្រាប់ប្រភេទបរិស្ថាន។
+
+#### បង្កើតក្រុមធនធាន
+
+> សម្រាប់ការណែនាំទាំងនេះ យើងប្រើក្រុមធនធានឈ្មោះ "semantic-video-search" នៅ East US។
+> អ្នកអាចផ្លាស់ប្តូរឈ្មោះក្រុមធនធាន ប៉ុន្តេលើពេលផ្លាស់ទីតំបន់សម្រាប់ធនធាន,
+> សូមពិនិត្យ [តារាងមានភាពអាចប្រើបានម៉ូដែល](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst)។
+
+```shell
+az group create --name semantic-video-search --location eastus
+```
+
+#### បង្កើតធនធាន Azure OpenAI Service
+
+ពី Azure Cloud Shell ប្រតិបត្តិការបញ្ជា ខាងក្រោមដើម្បីបង្កើតធនធាន Azure OpenAI Service។
+
+```shell
+az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
+    --location eastus --kind OpenAI --sku s0
+```
+
+#### ទទួលបាន endpoint និង key សម្រាប់ប្រើប្រាស់ក្នុងកម្មវិធីនេះ
+
+ពី Azure Cloud Shell ប្រតិបត្តិការបញ្ជា ខាងក្រោមដើម្បីទទួលបាន endpoint និង key សម្រាប់ធនធាន Azure OpenAI Service។
+
+```shell
+az cognitiveservices account show --name semantic-video-openai \
+   --resource-group  semantic-video-search | jq -r .properties.endpoint
+az cognitiveservices account keys list --name semantic-video-openai \
+   --resource-group semantic-video-search | jq -r .key1
+```
+
+#### ទំព័រ OpenAI Embedding model
+
+ពី Azure Cloud Shell ប្រតិបត្តិការបញ្ជា ខាងក្រោមដើម្បីដំឡើងម៉ូដែល OpenAI Embedding។
+
+```shell
+az cognitiveservices account deployment create \
+    --name semantic-video-openai \
+    --resource-group  semantic-video-search \
+    --deployment-name text-embedding-ada-002 \
+    --model-name text-embedding-ada-002 \
+    --model-version "2"  \
+    --model-format OpenAI \
+    --sku-capacity 100 --sku-name "Standard"
+```
+
+## ដំណោះស្រាយ
+
+បើក [សៀវភៅកំណត់ត្រាដំណោះស្រាយ](./python/aoai-solution.ipynb?WT.mc_id=academic-105485-koreyst) នៅ GitHub Codespaces ហើយអនុវត្តតាមការណែនាំក្នុង Jupyter Notebook។
+
+នៅពេលអ្នករត់សៀវភៅកំណត់ត្រា អ្នកនឹងត្រូវបានស្នើឱ្យបញ្ចូលសំណួរ ប្រអប់បញ្ចូលនឹងដូចខាងក្រោម៖
+
+![ប្រអប់បញ្ចូលសម្រាប់អ្នកប្រើបញ្ចូលសំណួរ](../../../translated_images/km/notebook-search.1e320b9c7fcbb0bc.webp)
+
+## ការងារល្អ! តាមដានការរៀនរបស់អ្នកបន្ថែម
+
+បន្ទាប់ពីបញ្ចប់មេរៀននេះ សូមពិនិត្យមើល [បណ្ណាល័យរៀន Generative AI របស់យើង](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ដើម្បីបន្តថ្កោលកម្រិតចំណេះដឹង Generative AI របស់អ្នក!
+
+ឆ្ពោះទៅមេរៀនទី ៩ ដែលយើងនឹងមើលរបៀប [បង្កើតកម្មវិធីបង្កើតរូបភាព](../09-building-image-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ការបដិសេធ**:
+ឯកសារនេះត្រូវបានបម្លែងភាសា ដោយប្រើសេវាបម្លែងភាសា AI [Co-op Translator](https://github.com/Azure/co-op-translator)។ ទោះយើងខ្ញុំមានក្តីប្រាថ្នាឱ្យបានច្បាស់លាស់ តែសូមយល់ដឹងថាការបម្លែងដោយស្វ័យប្រវត្តិក៏អាចមានកំហុសឬភាពមិនត្រឹមត្រូវ។ ឯកសារដើមជាភាសាទីតាំងគួរត្រូវបានគេប្រើជាប្រភពច្បាស់លាស់។ សម្រាប់ព័ត៌មានសំខាន់ៗ សូមណែនាំឱ្យប្រើប្រាស់ការប្រែដោយមនុស្សជំនាញ។ យើងខ្ញុំមិនទទួលខុសត្រូវចំពោះការយល់ច្រឡំ ឬការបកស្រាយខុសបន្ទាប់ពីការប្រើប្រាស់ការបម្លែងនេះនោះទេ។
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

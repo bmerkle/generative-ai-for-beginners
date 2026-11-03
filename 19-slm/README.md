@@ -86,7 +86,7 @@ Mainly for text generation, chat completion, and content information extraction,
 
 **Phi-3-mini**
 
-The 3.8B language model is available on Microsoft Azure AI Studio, Hugging Face, and Ollama. Phi-3 models significantly outperform language models of equal and larger sizes on key benchmarks (see benchmark numbers below, higher numbers are better). Phi-3-mini outperforms models twice its size, while Phi-3-small and Phi-3-medium outperform larger models, including GPT-3.5.
+The 3.8B language model is available on Microsoft Foundry, Hugging Face, and Ollama. Phi-3 models significantly outperform language models of equal and larger sizes on key benchmarks (see benchmark numbers below, higher numbers are better). Phi-3-mini outperforms models twice its size, while Phi-3-small and Phi-3-medium outperform larger models, including GPT-3.5.
 
 **Phi-3-small & medium**
 
@@ -134,9 +134,13 @@ We hope to use Phi-3/3.5 in different scenarios. Next, we will use Phi-3/3.5 bas
 
 ### Inference via Cloud APIs
 
-**GitHub Models**
+**Microsoft Foundry Models**
 
-GitHub Models is the most direct way. You can quickly access the Phi-3/3.5-Instruct model through GitHub Models. Combined with the Azure AI Inference SDK / OpenAI SDK, you can access the API through code to complete the Phi-3/3.5-Instruct call. You can also test different effects through Playground.
+> **Note:** GitHub Models is retiring at the end of July 2026. [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) is the direct replacement.
+
+> **Note:** The entire Phi-3/3.5 family (Instruct, Vision, and MoE variants) was retired from the Microsoft Foundry Models catalog on 2025-08-30. Use `Phi-4` (Instruct) or `Phi-4-mini-instruct` there instead — the Phi-3/3.5 examples below still work via Hugging Face, Ollama, ONNX Runtime, and NVIDIA NIM.
+
+Microsoft Foundry Models now provides the Phi-4 successors. Use `Phi-4` or `Phi-4-mini-instruct` instead of the retired Phi-3/3.5 models when following the cloud API examples.
 
 - Demo: Comparison of the effects of Phi-3-mini and Phi-3.5-mini in Chinese scenarios
 
@@ -145,14 +149,14 @@ GitHub Models is the most direct way. You can quickly access the Phi-3/3.5-Instr
 ![phi35](./img/gh2.png?WT.mc_id=academic-105485-koreyst)
 
 
-**Azure AI Studio**
+**Microsoft Foundry**
 
-Or if we want to use the vision and MoE models, you can use Azure AI Studio to complete the call. If you are interested, you can read the Phi-3 Cookbook to learn how to call Phi-3/3.5 Instruct, Vision, MoE through Azure AI Studio [Click this link](https://github.com/microsoft/Phi-3CookBook/blob/main/md/02.QuickStart/AzureAIStudio_QuickStart.md?WT.mc_id=academic-105485-koreyst)
+If you want to use vision (multimodal) models in the cloud, use the currently available `Phi-4-multimodal-instruct` through Microsoft Foundry instead of the retired Phi-3/3.5 Vision models; for text tasks use `Phi-4` or `Phi-4-mini-instruct`. The Phi-3.5 MoE model has been retired from Microsoft Foundry, so use the other options described in this lesson (for example Hugging Face) if you want to experiment with it. If you are interested, you can read the Phi Cookbook to learn how to call Phi models through Microsoft Foundry [Click this link](https://github.com/microsoft/PhiCookBook/blob/main/md/02.QuickStart/AzureAIFoundry_QuickStart.md?WT.mc_id=academic-105485-koreyst)
 
 
 **NVIDIA NIM**
 
-In addition to the cloud-based Model Catalog solutions provided by Azure and GitHub, you can also use [NVIDIA NIM](https://developer.nvidia.com/nim?WT.mc_id=academic-105485-koreyst) to complete related calls. You can visit NVIDIA NIM to complete the API calls of the Phi-3/3.5 Family. NVIDIA NIM (NVIDIA Inference Microservices) is a set of accelerated inference microservices designed to help developers deploy AI models efficiently across various environments, including clouds, data centers, and workstations.
+In addition to the cloud-based Microsoft Foundry Models catalog, you can also use [NVIDIA NIM](https://developer.nvidia.com/nim?WT.mc_id=academic-105485-koreyst) to complete related calls. You can visit NVIDIA NIM to complete the API calls of the Phi-3/3.5 Family. NVIDIA NIM (NVIDIA Inference Microservices) is a set of accelerated inference microservices designed to help developers deploy AI models efficiently across various environments, including clouds, data centers, and workstations.
 
 Here are some key features of NVIDIA NIM:
 
@@ -203,6 +207,33 @@ ollama run phi3.5
 
 ```
 
+**Foundry Local**
+
+[Foundry Local](https://foundrylocal.ai?WT.mc_id=academic-105485-koreyst) is Microsoft's offline, on-device runtime for running models like Phi entirely on your own hardware - no Azure subscription, API key, or network connection required. It automatically picks the best execution provider available (NPU, GPU, or CPU) and exposes an OpenAI-compatible endpoint, so existing `openai`/Azure AI Inference SDK code can point at it with minimal changes. See the [Foundry Local documentation](https://learn.microsoft.com/azure/ai-foundry/foundry-local/get-started?WT.mc_id=academic-105485-koreyst) to get started.
+
+```bash
+
+winget install Microsoft.FoundryLocal
+foundry model run phi-3.5-mini
+
+```
+
+Or use the SDK directly in Python:
+
+```bash
+
+pip install foundry-local-sdk
+
+```
+
+```python
+
+from foundry_local import FoundryLocalManager
+
+manager = FoundryLocalManager("phi-3.5-mini")
+print(manager.endpoint, manager.api_key)
+
+```
 
 **ONNX Runtime for GenAI**
 
@@ -310,13 +341,12 @@ while not generator.is_done():
 
 **Others**
 
-In addition to ONNX Runtime and Ollama reference methods, we can also complete the reference of quantitative models based on the model reference methods provided by different manufacturers. Such as Apple MLX framework with Apple Metal, Qualcomm QNN with NPU, Intel OpenVINO with CPU/GPU, etc. You can also get more content from [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst)
+In addition to ONNX Runtime, Ollama, and Foundry Local reference methods, we can also complete the reference of quantitative models based on the model reference methods provided by different manufacturers. Such as Apple MLX framework with Apple Metal, Qualcomm QNN with NPU, Intel OpenVINO with CPU/GPU, etc. You can also get more content from [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst)
 
 
 ## More
 
 We have learned the basics of Phi-3/3.5 Family, but to learn more about SLM we need more knowledge. You can find the answers in the Phi-3 Cookbook. If you want to learn more, please visit the [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst).
-
 
 
 

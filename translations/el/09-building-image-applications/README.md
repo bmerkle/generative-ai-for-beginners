@@ -1,267 +1,146 @@
-# Δημιουργία Εφαρμογών Γεννήτριας Εικόνων
+# Δημιουργία Εφαρμογών Γεννήτριας Εικόνας
 
-[![Δημιουργία Εφαρμογών Γεννήτριας Εικόνων](../../../translated_images/el/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Δημιουργία Εφαρμογών Γεννήτριας Εικόνας](../../../translated_images/el/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-Τα LLMs δεν περιορίζονται μόνο στη δημιουργία κειμένου. Είναι επίσης δυνατό να δημιουργηθούν εικόνες από περιγραφές κειμένου. Η ύπαρξη εικόνων ως μέσο μπορεί να είναι εξαιρετικά χρήσιμη σε πολλούς τομείς, όπως η ιατρική τεχνολογία, η αρχιτεκτονική, ο τουρισμός, η ανάπτυξη παιχνιδιών και άλλα. Σε αυτό το κεφάλαιο, θα εξετάσουμε τα δύο πιο δημοφιλή μοντέλα δημιουργίας εικόνων, το DALL-E και το Midjourney.
+Υπάρχει περισσότερα στα LLM πέρα από τη γεννήτρια κειμένου. Μπορείτε επίσης να δημιουργήσετε εικόνες από περιγραφές κειμένου. Οι εικόνες ως μέσο είναι χρήσιμες σε MedTech, αρχιτεκτονική, τουρισμό, ανάπτυξη παιχνιδιών, μάρκετινγκ και άλλα. Σε αυτό το μάθημα εξετάζουμε τα σημερινά μοντέλα **GPT Image** και δημιουργούμε μια εφαρμογή γεννήτριας εικόνας.
 
 ## Εισαγωγή
 
-Σε αυτό το μάθημα, θα καλύψουμε:
+Η γεννήτρια εικόνας σας επιτρέπει να μετατρέψετε ένα φυσικό γλωσσικό αίτημα σε εικόνα. Σε αυτό το μάθημα δουλεύουμε με την οικογένεια μοντέλων **`gpt-image`** της OpenAI - τη σημερινή γενιά μοντέλων εικόνας που διατίθενται στην **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** και στην πλατφόρμα OpenAI. Αυτά τα μοντέλα αντικαθιστούν τα παλαιότερα μοντέλα DALL·E (DALL·E 2/3 είναι παλαιάς μορφής).
 
-- Τη δημιουργία εικόνων και γιατί είναι χρήσιμη.
-- Το DALL-E και το Midjourney, τι είναι και πώς λειτουργούν.
-- Πώς μπορείτε να δημιουργήσετε μια εφαρμογή γεννήτριας εικόνων.
+Καθ’ όλη τη διάρκεια του μαθήματος χρησιμοποιούμε μια φανταστική startup, την **Edu4All**, που δημιουργεί εργαλεία μάθησης. Η ομάδα θέλει να δημιουργήσει εικονογραφήσεις για εργασίες και υλικό μελέτης.
 
-## Στόχοι Μάθησης
+## Στόχοι μάθησης
 
-Μετά την ολοκλήρωση αυτού του μαθήματος, θα μπορείτε:
+Μέχρι το τέλος του μαθήματος θα μπορείτε να:
 
-- Να δημιουργήσετε μια εφαρμογή γεννήτριας εικόνων.
-- Να ορίσετε όρια για την εφαρμογή σας με μετα-προτροπές.
-- Να εργαστείτε με το DALL-E και το Midjourney.
+- Εξηγήσετε τι είναι η γεννήτρια εικόνας και πού είναι χρήσιμη.
+- Κατανοήσετε την οικογένεια μοντέλων `gpt-image` και πώς διαφέρει από τα παλαιά μοντέλα DALL·E.
+- Δημιουργήσετε μια εφαρμογή γεννήτριας εικόνας σε Python (και TypeScript / .NET).
+- Επεξεργαστείτε εικόνες και εφαρμόσετε ασφάλεια με metaprompts.
 
-## Γιατί να δημιουργήσετε μια εφαρμογή γεννήτριας εικόνων;
+## Τι είναι η γεννήτρια εικόνας;
 
-Οι εφαρμογές γεννήτριας εικόνων είναι ένας εξαιρετικός τρόπος για να εξερευνήσετε τις δυνατότητες της Γενετικής Τεχνητής Νοημοσύνης. Μπορούν να χρησιμοποιηθούν, για παράδειγμα:
+Τα μοντέλα γεννήτριας εικόνας δημιουργούν εικόνες από κείμενο. Τα σύγχρονα μοντέλα όπως το `gpt-image` βασίζονται σε τεχνικές μετασχηματιστών και διάχυσης: το μοντέλο μαθαίνει τη σχέση μεταξύ κειμένου και εικόνων κατά την εκπαίδευση, μετά, με δεδομένο ένα αίτημα, σταδιακά «καθαρίζει» τον τυχαίο θόρυβο σε μια εικόνα που ταιριάζει με την περιγραφή.
 
-- **Επεξεργασία και σύνθεση εικόνων**. Μπορείτε να δημιουργήσετε εικόνες για διάφορες χρήσεις, όπως επεξεργασία και σύνθεση εικόνων.
+Δύο δημοφιλείς οικογένειες μοντέλων εικόνας είναι:
 
-- **Εφαρμογή σε διάφορες βιομηχανίες**. Μπορούν επίσης να χρησιμοποιηθούν για τη δημιουργία εικόνων για διάφορες βιομηχανίες όπως η ιατρική τεχνολογία, ο τουρισμός, η ανάπτυξη παιχνιδιών και άλλα.
+- **`gpt-image` (OpenAI)** - η τρέχουσα γενιά, που χρησιμοποιείται σε αυτό το μάθημα. Υποστηρίζει γεννήτρια εικόνας από κείμενο και επεξεργασία εικόνων (inpainting με μάσκα).
+- **Midjourney** - ένα δημοφιλές τρίτο μοντέλο με τη δική του υπηρεσία και ροή εργασίας στο Discord.
 
-## Σενάριο: Edu4All
+> Παλιότερα μοντέλα εικόνας OpenAI - **DALL·E 2** και **DALL·E 3** - είναι παλαιάς μορφής. Το DALL·E 3 δεν είναι πλέον διαθέσιμο για νέες αναπτύξεις, και λειτουργίες όπως `create_variation` υπήρχαν μόνο στο DALL·E 2. Χρησιμοποιήστε τα μοντέλα `gpt-image` για νέες εφαρμογές.
 
-Στο πλαίσιο αυτού του μαθήματος, θα συνεχίσουμε να εργαζόμαστε με τη startup μας, Edu4All. Οι μαθητές θα δημιουργήσουν εικόνες για τις εργασίες τους, ακριβώς ποιες εικόνες είναι στη διακριτική τους ευχέρεια, αλλά θα μπορούσαν να είναι εικονογραφήσεις για το δικό τους παραμύθι ή να δημιουργήσουν έναν νέο χαρακτήρα για την ιστορία τους ή να τους βοηθήσουν να οπτικοποιήσουν τις ιδέες και τις έννοιες τους.
+### Ποιο μοντέλο `gpt-image` να χρησιμοποιήσω;
 
-Ακολουθεί ένα παράδειγμα του τι θα μπορούσαν να δημιουργήσουν οι μαθητές του Edu4All εάν εργάζονται στην τάξη για μνημεία:
+Στο Microsoft Foundry τα παρακάτω είναι **Γενικά Διαθέσιμα**:
 
-![Startup Edu4All, τάξη για μνημεία, Πύργος του Άιφελ](../../../translated_images/el/startup.94d6b79cc4bb3f5a.webp)
+| Μοντέλο | Σημειώσεις |
+| --- | --- |
+| **`gpt-image-2`** | Το πιο πρόσφατο και ικανό μοντέλο εικόνας - συνιστώμενο προεπιλεγμένο. |
+| `gpt-image-1.5` | Γενικά διαθέσιμο; καλή ποιότητα με χαμηλότερο κόστος. |
+| `gpt-image-1-mini` | Γενικά διαθέσιμο; ταχύτερο / χαμηλότερο κόστος. |
+| `gpt-image-1` | Μόνο για δοκιμή. |
 
-χρησιμοποιώντας μια προτροπή όπως
+Ελέγχετε πάντα την τρέχουσα [λίστα μοντέλων εικόνας Foundry](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) για διαθεσιμότητα και περιοχές.
 
-> "Σκύλος δίπλα στον Πύργο του Άιφελ στο πρωινό φως του ήλιου"
+> **Σημαντικό:** Τα μοντέλα `gpt-image` επιστρέφουν την παραγόμενη εικόνα ως **base64** (`b64_json`), όχι ως URL. Ο κώδικάς σας αποκωδικοποιεί τη συμβολοσειρά base64 σε bytes και τη σώζει - δεν υπάρχει URL εικόνας για λήψη.
 
-## Τι είναι το DALL-E και το Midjourney;
+## Ρυθμίσεις
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) και [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) είναι δύο από τα πιο δημοφιλή μοντέλα δημιουργίας εικόνων, που σας επιτρέπουν να χρησιμοποιείτε προτροπές για τη δημιουργία εικόνων.
+Μπορείτε να τρέξετε τα παραδείγματα στην **Azure OpenAI στο Microsoft Foundry** (τα δείγματα `aoai-*`) ή στην **πλατφόρμα OpenAI** (τα δείγματα `oai-*`).
 
-### DALL-E
+### 1. Δημιουργία και ανάπτυξη μοντέλου
 
-Ας ξεκινήσουμε με το DALL-E, το οποίο είναι ένα μοντέλο Γενετικής Τεχνητής Νοημοσύνης που δημιουργεί εικόνες από περιγραφές κειμένου.
+Ακολουθήστε τον οδηγό [δημιουργίας πόρου](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) για να δημιουργήσετε έναν πόρο Microsoft Foundry, και στη συνέχεια αναπτύξτε ένα μοντέλο εικόνας - συνιστάται το **`gpt-image-2`**.
 
-> [Το DALL-E είναι ένας συνδυασμός δύο μοντέλων, CLIP και diffused attention](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. Ρυθμίστε το `.env` σας
 
-- **CLIP**, είναι ένα μοντέλο που δημιουργεί ενσωματώσεις, οι οποίες είναι αριθμητικές αναπαραστάσεις δεδομένων, από εικόνες και κείμενο.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention**, είναι ένα μοντέλο που δημιουργεί εικόνες από ενσωματώσεις. Το DALL-E εκπαιδεύεται σε ένα σύνολο δεδομένων εικόνων και κειμένου και μπορεί να χρησιμοποιηθεί για τη δημιουργία εικόνων από περιγραφές κειμένου. Για παράδειγμα, το DALL-E μπορεί να χρησιμοποιηθεί για τη δημιουργία εικόνων μιας γάτας με καπέλο ή ενός σκύλου με μοϊκάνα.
+Βρείτε αυτές τις τιμές στη σελίδα **Deployments** του πόρου σας στο [Foundry portal](https://ai.azure.com?WT.mc_id=academic-105485-koreyst).
 
-### Midjourney
+### 3. Εγκαταστήστε τις βιβλιοθήκες
 
-Το Midjourney λειτουργεί με παρόμοιο τρόπο με το DALL-E, δημιουργεί εικόνες από προτροπές κειμένου. Το Midjourney μπορεί επίσης να χρησιμοποιηθεί για τη δημιουργία εικόνων χρησιμοποιώντας προτροπές όπως "μια γάτα με καπέλο" ή "ένας σκύλος με μοϊκάνα".
+Δημιουργήστε ένα `requirements.txt`:
 
-![Εικόνα που δημιουργήθηκε από το Midjourney, μηχανικό περιστέρι](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Πηγή εικόνας Wikipedia, εικόνα που δημιουργήθηκε από το Midjourney_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Πώς λειτουργούν το DALL-E και το Midjourney
+Μετά δημιουργήστε και ενεργοποιήστε ένα virtual environment και εγκαταστήστε:
 
-Πρώτα, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). Το DALL-E είναι ένα μοντέλο Γενετικής Τεχνητής Νοημοσύνης βασισμένο στην αρχιτεκτονική transformer με έναν _autoregressive transformer_.
-
-Ένας _autoregressive transformer_ καθορίζει πώς ένα μοντέλο δημιουργεί εικόνες από περιγραφές κειμένου, δημιουργεί ένα pixel τη φορά και στη συνέχεια χρησιμοποιεί τα παραγόμενα pixels για να δημιουργήσει το επόμενο pixel. Περνώντας μέσα από πολλαπλά επίπεδα σε ένα νευρωνικό δίκτυο, μέχρι να ολοκληρωθεί η εικόνα.
-
-Με αυτή τη διαδικασία, το DALL-E ελέγχει χαρακτηριστικά, αντικείμενα, χαρακτηριστικά και άλλα στην εικόνα που δημιουργεί. Ωστόσο, το DALL-E 2 και 3 έχουν μεγαλύτερο έλεγχο στην παραγόμενη εικόνα.
-
-## Δημιουργία της πρώτης σας εφαρμογής γεννήτριας εικόνων
-
-Τι χρειάζεται λοιπόν για να δημιουργήσετε μια εφαρμογή γεννήτριας εικόνων; Χρειάζεστε τις ακόλουθες βιβλιοθήκες:
-
-- **python-dotenv**, συνιστάται ιδιαίτερα να χρησιμοποιήσετε αυτήν τη βιβλιοθήκη για να διατηρήσετε τα μυστικά σας σε ένα αρχείο _.env_ μακριά από τον κώδικα.
-- **openai**, αυτή η βιβλιοθήκη είναι αυτή που θα χρησιμοποιήσετε για να αλληλεπιδράσετε με το OpenAI API.
-- **pillow**, για να εργαστείτε με εικόνες σε Python.
-- **requests**, για να σας βοηθήσει να κάνετε αιτήματα HTTP.
-
-## Δημιουργία και ανάπτυξη ενός μοντέλου Azure OpenAI
-
-Εάν δεν το έχετε κάνει ήδη, ακολουθήστε τις οδηγίες στη σελίδα [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) 
-για να δημιουργήσετε έναν πόρο και ένα μοντέλο Azure OpenAI. Επιλέξτε το DALL-E 3 ως μοντέλο.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ## Δημιουργία της εφαρμογής
 
-1. Δημιουργήστε ένα αρχείο _.env_ με το ακόλουθο περιεχόμενο:
+Δημιουργήστε το `app.py` με τον παρακάτω κώδικα. Δημιουργεί μια εικόνα και την αποθηκεύει ως PNG.
 
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-   Εντοπίστε αυτές τις πληροφορίες στο Azure OpenAI Foundry Portal για τον πόρο σας στην ενότητα "Deployments".
+dotenv.load_dotenv()
 
-1. Συλλέξτε τις παραπάνω βιβλιοθήκες σε ένα αρχείο που ονομάζεται _requirements.txt_ όπως παρακάτω:
+# Κατευθύνετε τον πελάτη στην πηγή Azure OpenAI (Microsoft Foundry) σας.
+# Τα μοντέλα εικόνων απαιτούν πρόσφατη έκδοση API - ελέγξτε τα έγγραφα Foundry για την έκδοση που απαιτεί το μοντέλο σας.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # π.χ. "gpt-image-2"
 
-1. Στη συνέχεια, δημιουργήστε ένα εικονικό περιβάλλον και εγκαταστήστε τις βιβλιοθήκες:
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # επίσης 1536x1024 (οριζόντιο), 1024x1536 (κατακόρυφο), ή "auto"
+    n=1,
+)
 
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
+# τα μοντέλα gpt-image επιστρέφουν base64 (b64_json), όχι URL - αποκωδικοποιήστε το σε bytes.
+image_bytes = base64.b64decode(result.data[0].b64_json)
 
-   Για Windows, χρησιμοποιήστε τις παρακάτω εντολές για να δημιουργήσετε και να ενεργοποιήσετε το εικονικό σας περιβάλλον:
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
 
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
+Image.open(image_path).show()
+```
 
-1. Προσθέστε τον παρακάτω κώδικα σε ένα αρχείο που ονομάζεται _app.py_:
+Τρέξτε το με `python app.py`. Θα λάβετε ένα αρχείο PNG αποθηκευμένο στο `images/`.
 
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
+> Κάθε κλήση στο `images.generate` παράγει διαφορετική εικόνα για το ίδιο αίτημα - τα μοντέλα εικόνας δεν δέχονται παράμετρο `temperature` (που ελέγχει τη γεννήτρια κειμένου). Για ποικιλία καλέστε απλά την API ξανά· για λιγότερη ποικιλία, κάντε το αίτημά σας πιο συγκεκριμένο.
 
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
+## Επεξεργασία εικόνων
 
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
+Τα μοντέλα `gpt-image` μπορούν να **επεξεργαστούν** μια υπάρχουσα εικόνα: δώστε την εικόνα, μια προαιρετική **μάσκα** (που σηματοδοτεί την περιοχή προς αλλαγή), και ένα αίτημα που περιγράφει την αλλαγή. Όπως στη δημιουργία, οι επεξεργασίες επιστρέφονται ως base64.
 
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Ας εξηγήσουμε αυτόν τον κώδικα:
-
-- Πρώτα, εισάγουμε τις βιβλιοθήκες που χρειαζόμαστε, συμπεριλαμβανομένων των βιβλιοθηκών OpenAI, dotenv, requests και Pillow.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Στη συνέχεια, φορτώνουμε τις μεταβλητές περιβάλλοντος από το αρχείο _.env_.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Μετά από αυτό, διαμορφώνουμε τον πελάτη υπηρεσίας Azure OpenAI.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Στη συνέχεια, δημιουργούμε την εικόνα:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Ο παραπάνω κώδικας επιστρέφει ένα αντικείμενο JSON που περιέχει τη διεύθυνση URL της παραγόμενης εικόνας. Μπορούμε να χρησιμοποιήσουμε τη διεύθυνση URL για να κατεβάσουμε την εικόνα και να την αποθηκεύσουμε σε ένα αρχείο.
-
-- Τέλος, ανοίγουμε την εικόνα και χρησιμοποιούμε τον τυπικό προβολέα εικόνων για να την εμφανίσουμε:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Περισσότερες λεπτομέρειες για τη δημιουργία της εικόνας
-
-Ας δούμε τον κώδικα που δημιουργεί την εικόνα πιο αναλυτικά:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, είναι η προτροπή κειμένου που χρησιμοποιείται για τη δημιουργία της εικόνας. Σε αυτήν την περίπτωση, χρησιμοποιούμε την προτροπή "Λαγός πάνω σε άλογο, κρατώντας γλειφιτζούρι, σε ομιχλώδες λιβάδι όπου φυτρώνουν νάρκισσοι".
-- **size**, είναι το μέγεθος της εικόνας που δημιουργείται. Σε αυτήν την περίπτωση, δημιουργούμε μια εικόνα που είναι 1024x1024 pixels.
-- **n**, είναι ο αριθμός των εικόνων που δημιουργούνται. Σε αυτήν την περίπτωση, δημιουργούμε δύο εικόνες.
-- **temperature**, είναι μια παράμετρος που ελέγχει την τυχαιότητα του αποτελέσματος ενός μοντέλου Γενετικής Τεχνητής Νοημοσύνης. Η θερμοκρασία είναι μια τιμή μεταξύ 0 και 1 όπου το 0 σημαίνει ότι το αποτέλεσμα είναι ντετερμινιστικό και το 1 σημαίνει ότι το αποτέλεσμα είναι τυχαίο. Η προεπιλεγμένη τιμή είναι 0.7.
-
-Υπάρχουν περισσότερα πράγματα που μπορείτε να κάνετε με εικόνες, τα οποία θα καλύψουμε στην επόμενη ενότητα.
-
-## Πρόσθετες δυνατότητες δημιουργίας εικόνων
-
-Έχετε δει μέχρι στιγμής πώς μπορέσαμε να δημιουργήσουμε μια εικόνα χρησιμοποιώντας λίγες γραμμές κώδικα σε Python. Ωστόσο, υπάρχουν περισσότερα πράγματα που μπορείτε να κάνετε με εικόνες.
-
-Μπορείτε επίσης να κάνετε τα εξής:
-
-- **Επεξεργασία εικόνων**. Παρέχοντας μια υπάρχουσα εικόνα, μια μάσκα και μια προτροπή, μπορείτε να τροποποιήσετε μια εικόνα. Για παράδειγμα, μπορείτε να προσθέσετε κάτι σε ένα μέρος μιας εικόνας. Φανταστείτε την εικόνα του λαγού μας, μπορείτε να προσθέσετε ένα καπέλο στον λαγό. Πώς θα το κάνετε αυτό είναι παρέχοντας την εικόνα, μια μάσκα (που προσδιορίζει το μέρος της περιοχής για την αλλαγή) και μια προτροπή κειμένου για να πείτε τι πρέπει να γίνει. 
-> Σημείωση: αυτό δεν υποστηρίζεται στο DALL-E 3. 
-
-Ακολουθεί ένα παράδειγμα χρησιμοποιώντας το GPT Image:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Η αρχική εικόνα θα περιείχε μόνο το lounge με την πισίνα, αλλά η τελική εικόνα θα είχε ένα φλαμίνγκο:
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/el/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -269,156 +148,51 @@ _Πηγή εικόνας Wikipedia, εικόνα που δημιουργήθηκ
   <img src="../../../translated_images/el/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
+## Ορισμός ορίων με metaprompts
 
-- **Δημιουργία παραλλαγών**. Η ιδέα είναι ότι παίρνετε μια υπάρχουσα εικόνα και ζητάτε να δημιουργηθούν παραλλαγές. Για να δημιουργήσετε μια παραλλαγή, παρέχετε μια εικόνα και μια προτροπή κειμένου και κώδικα όπως παρακάτω:
-
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Σημείωση, αυτό υποστηρίζεται μόνο στο OpenAI.
-
-## Θερμοκρασία
-
-Η θερμοκρασία είναι μια παράμετρος που ελέγχει την τυχαιότητα του αποτελέσματος ενός μοντέλου Γενετικής Τεχνητής Νοημοσύνης. Η θερμοκρασία είναι μια τιμή μεταξύ 0 και 1 όπου το 0 σημαίνει ότι το αποτέλεσμα είναι ντετερμινιστικό και το 1 σημαίνει ότι το αποτέλεσμα είναι τυχαίο. Η προεπιλεγμένη τιμή είναι 0.7.
-
-Ας δούμε ένα παράδειγμα του πώς λειτουργεί η θερμοκρασία, εκτελώντας αυτήν την προτροπή δύο φορές:
-
-> Προτροπή: "Λαγός πάνω σε άλογο, κρατώντας γλειφιτζούρι, σε ομιχλώδες λιβάδι όπου φυτρώνουν νάρκισσοι"
-
-![Λαγός πάνω σε άλογο κρατώντας γλειφιτζούρι, έκδοση 1](../../../translated_images/el/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Τώρα ας εκτελέσουμε την ίδια προτροπή για να δούμε ότι δεν θα πάρουμε την ίδια εικόνα δύο φορές:
-
-![Παραγόμενη εικόνα λαγού πάνω σε άλογο](../../../translated_images/el/v2-generated-image.33f55a3714efe61d.webp)
-
-Όπως μπορείτε να δείτε, οι εικόνες είναι παρόμοιες, αλλά όχι ίδιες. Ας δοκιμάσουμε να αλλάξουμε την τιμή της θερμοκρασίας σε 0.1 και να δούμε τι συμβαίνει:
+Μόλις μπορείτε να δημιουργείτε εικόνες, χρειάζεστε κανόνες ασφάλειας ώστε η εφαρμογή σας να μην παράγει μη ασφαλές ή μη σύμφωνο με την εταιρεία περιεχόμενο. Ένα **metaprompt** είναι κείμενο που προσθέτετε πριν από το αίτημα χρήστη για να περιορίσετε την έξοδο του μοντέλου.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Αλλαγή της θερμοκρασίας
-
-Ας προσπαθήσουμε να κάνουμε την απάντηση πιο ντετερμινιστική. Μπορούσαμε να παρατηρήσουμε από τις δύο εικόνες που δημιουργήσαμε ότι στην πρώτη εικόνα υπάρχει ένας λαγός και στη δεύτερη εικόνα υπάρχει ένα άλογο, οπότε οι εικόνες διαφέρουν πολύ.
-
-Ας αλλάξουμε λοιπόν τον κώδικά μας και να ορίσουμε τη θερμοκρασία στο 0, όπως παρακάτω:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Τώρα όταν εκτελέσετε αυτόν τον κώδικα, θα πάρετε αυτές τις δύο εικόνες:
-
-- ![Θερμοκρασία 0, έκδοση 1](../../../translated_images/el/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Θερμοκρασία 0, έκδοση 2](../../../translated_images/el/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Εδώ μπορείτε να δείτε καθαρά πώς οι εικόνες μοιάζουν περισσότερο μεταξύ τους.
-
-## Πώς να ορίσετε όρια για την εφαρμογή σας με μετα-προτροπές
-
-Με το demo μας, μπορούμε ήδη να δημιουργούμε εικόνες για τους πελάτες μας. Ωστόσο, πρέπει να δημιουργήσουμε κάποια όρια για την εφαρμογή μας.
-
-Για παράδειγμα, δεν θέλουμε να δημιουργούμε εικόνες που δεν είναι κατάλληλες για εργασία ή που δεν είναι κατάλληλες για παιδιά.
-
-Μπορούμε να το κάνουμε αυτό με _μετα-προτροπές_. Οι μετα-προτροπές είναι προτροπές κειμένου που χρησιμοποιούνται για τον έλεγχο του αποτελέσματος ενός μοντέλου Γενετικής Τεχνητής Νοημοσύνης. Για παράδειγμα, μπορούμε να χρησιμοποιήσουμε μετα-προτροπές για να ελέγξουμε το αποτέλεσμα και να διασφαλίσουμε ότι οι παραγόμενες εικόνες είναι κατάλληλες για εργασία ή κατάλληλες για παιδιά.
-
-### Πώς λειτουργεί;
-
-Πώς λειτουργούν λοιπόν οι μετα-προτροπές;
-
-Οι μετα-προτροπές είναι προτροπές κειμένου που χρησιμοποιούνται για τον έλεγχο του αποτελέσματος ενός μοντέλου Γενετικής Τεχνητής Νοημοσύνης, τοποθετούνται πριν από την προτροπή κειμένου και χρησιμοποιούνται για τον έλεγχο του αποτελέσματος του μοντέλου και ενσωματώνονται
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# περάστε το `prompt` στο client.images.generate(...)
 ```
 
-## Εξαιρετική Δουλειά! Συνεχίστε τη Μάθηση
+Κάθε εικόνα παράγεται τώρα εντός των ορίων που θέτει το metaprompt. Συνδυάστε αυτό με τα φίλτρα περιεχομένου που είναι ενσωματωμένα στο Microsoft Foundry για βαθιά προστασία.
 
-Αφού ολοκληρώσετε αυτό το μάθημα, δείτε τη [συλλογή μάθησης για Γενετική Τεχνητή Νοημοσύνη](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) για να συνεχίσετε να αναβαθμίζετε τις γνώσεις σας στη Γενετική Τεχνητή Νοημοσύνη!
+## Εργασία - ας υποστηρίξουμε τους μαθητές
 
-Προχωρήστε στο Μάθημα 10, όπου θα εξετάσουμε πώς να [δημιουργήσετε εφαρμογές AI με low-code](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Οι μαθητές της Edu4All χρειάζονται εικόνες για τις αξιολογήσεις τους. Δημιουργήστε μια εφαρμογή που παράγει εικόνες **μνημείων** (ποια μνημεία περιλαμβάνονται είναι δική σας επιλογή) τοποθετημένα σε διαφορετικά, δημιουργικά περιβάλλοντα - για παράδειγμα, ένα διάσημο σημείο κατά το ηλιοβασίλεμα με ένα παιδί να κοιτάζει.
+
+Δοκιμάστε το μόνοι σας και μετά συγκρίνετε με τις λύσεις αναφοράς:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) πλήρης εφαρμογή δημιουργίας: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Επίσης επεξεργαστείτε τα σημειωματάρια στο [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` για Azure, `oai-assignment.ipynb` για OpenAI).
+
+## Υπέροχη δουλειά! Συνεχίστε τη μάθησή σας
+
+Μετά την ολοκλήρωση αυτού του μαθήματος, δείτε τη [συλλογή μάθησης Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) για να συνεχίσετε να αναβαθμίζετε τις γνώσεις σας στη Γεννητική AI!
+
+Προχωρήστε στο μάθημα 10 για να συνεχίσετε τη μάθηση.
 
 ---
 
-**Αποποίηση ευθύνης**:  
-Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης AI [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Αποποίηση ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στη μητρική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

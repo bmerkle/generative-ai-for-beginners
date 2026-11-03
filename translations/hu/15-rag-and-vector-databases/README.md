@@ -1,90 +1,90 @@
-# Lekérdezés-gyorsított generálás (RAG) és vektor adatbázisok
+# Retrieval Augmented Generation (RAG) és vektoralapú adatbázisok
 
-[![Lekérdezés-gyorsított generálás (RAG) és vektor adatbázisok](../../../translated_images/hu/15-lesson-banner.ac49e59506175d4f.webp)](https://youtu.be/4l8zhHUBeyI?si=BmvDmL1fnHtgQYkL)
+[![Retrieval Augmented Generation (RAG) és vektoralapú adatbázisok](../../../translated_images/hu/15-lesson-banner.ac49e59506175d4f.webp)](https://youtu.be/4l8zhHUBeyI?si=BmvDmL1fnHtgQYkL)
 
-A keresési alkalmazások leckében röviden megismertük, hogyan lehet integrálni a saját adatainkat a nagyméretű nyelvi modellekbe (LLM-ekbe). Ebben a leckében mélyebben bepillantást nyerünk az adatok alapozásának fogalmaiba az LLM alkalmazásaidban, a folyamat mechanikájába és az adattárolási módszerekbe, beleértve a beágyazásokat és a szöveget is.
+A keresési alkalmazások leckében röviden megtanultuk, hogyan lehet a saját adatainkat integrálni a nagynyelvű modellekbe (LLM-ekbe). Ebben a leckében mélyebben belemerülünk az adataink LLM alkalmazásban történő megalapozásának fogalmaiba, a folyamat mechanikájába és az adatok tárolási módszereibe, beleértve mind a beágyazásokat, mind a szöveget.
 
-> **Videó hamarosan elérhető**
+> **Videó hamarosan**
 
 ## Bevezetés
 
 Ebben a leckében a következőkről lesz szó:
 
-- Bevezetés a RAG-be, mi is az és miért használjuk mesterséges intelligenciában (AI).
+- Bevezetés a RAG-ba, mi ez és miért használják a mesterséges intelligenciában (AI).
 
-- Megértjük, mik azok a vektor adatbázisok, és hogyan hozhatunk létre egyet az alkalmazásunkhoz.
+- Megértjük, mik azok a vektoralapú adatbázisok, és létrehozunk egyet az alkalmazásunkhoz.
 
-- Gyakorlati példa arra, hogyan integráljuk a RAG-et egy alkalmazásba.
+- Egy gyakorlati példa arra, hogyan lehet a RAG-ot integrálni egy alkalmazásba.
 
 ## Tanulási célok
 
 A lecke elvégzése után képes leszel:
 
-- Megmagyarázni a RAG jelentőségét az adatok lekérdezésében és feldolgozásában.
+- Megmagyarázni a RAG jelentőségét az adatok visszakeresésében és feldolgozásában.
 
-- Beállítani a RAG alkalmazást és az adatokat összekötni egy LLM-mel.
+- Beállítani a RAG alkalmazást és megalapozni az adatokat egy LLM-ben
 
-- Hatékonyan integrálni a RAG-et és a vektor adatbázisokat LLM alkalmazásokban.
+- Hatékonyan integrálni a RAG-ot és a vektoralapú adatbázisokat LLM alkalmazásokban.
 
-## A forgatókönyvünk: az LLM-jeink bővítése saját adatainkkal
+## Forgatókönyvünk: LLM-jeink kiegészítése a saját adatainkkal
 
-Ebben a leckében saját jegyzeteinket szeretnénk hozzáadni az oktatási startuphoz, amely lehetővé teszi, hogy a chatbot több információval rendelkezzen a különböző tantárgyakról. A jegyzeteink segítségével a tanulók jobban tanulhatnak és megérthetik a különféle témákat, megkönnyítve a vizsgára való készülést. Forgatókönyvünk elkészítéséhez a következőket használjuk:
+Ehhez a leckéhez azt szeretnénk, ha a chatbot a saját jegyzeteink alapján több információt kapna a különböző témákról. Ezen jegyzetek segítségével a tanulók jobban tanulhatnak és jobban megérthetik a különböző témaköröket, így könnyebben készülhetnek a vizsgáikra. Forgatókönyvünk létrehozásához a következőket fogjuk használni:
 
-- `Azure OpenAI:` az LLM, amelyet chatbot létrehozására használunk
+- `Azure OpenAI:` az LLM, amellyel chatbotunkat létrehozzuk
 
-- `AI az kezdőknek lecke a neurális hálózatokról`: ez lesz az adat, amelyhez az LLM-et alapozzuk
+- `AI kezdőknek' leckéje a neurális hálózatokról`: ezekre az adatokra alapozzuk az LLM-et
 
-- `Azure AI Search` és `Azure Cosmos DB:` vektor adatbázis az adataink tárolására és keresési index létrehozására
+- `Azure AI Search` és `Azure Cosmos DB:` vektoralapú adatbázis az adataink tárolásához és keresési index létrehozásához
 
-A felhasználók gyakoroló kvízeket hozhatnak létre a jegyzeteikből, készíthetnek ismétlő kártyákat és összefoglalókat. Kezdjük azzal, hogy mi az a RAG és hogyan működik:
+A felhasználók képesek lesznek gyakorló kvízeket készíteni jegyzeteikből, ismétlő kártyákat létrehozni, és ezekből tömör összefoglalókat készíteni. Kezdésként nézzük meg, hogy mi az a RAG és hogyan működik:
 
-## Lekérdezés-gyorsított generálás (RAG)
+## Retrieval Augmented Generation (RAG)
 
-Egy LLM-alapú chatbot felhasználói utasításokat dolgoz fel válaszok generálására. Interaktív kialakítású, és sokféle témában kommunikál a felhasználókkal. Válaszai azonban a rendelkezésre álló kontextusra és az alapképzés adataira korlátozódnak. Például a GPT-4 tudásvágási dátuma 2021 szeptember, vagyis nem ismeri az azóta történt eseményeket. Továbbá, az LLM-ek kiképzéséhez használt adatok nem tartalmaznak bizalmas információkat, mint például személyes jegyzeteket vagy egy cég termékkézikönyvét.
+Egy LLM által működtetett chatbot feldolgozza a felhasználói kérdéseket, hogy válaszokat generáljon. Interaktívnak tervezték, számos témában képes válaszolni a felhasználóknak. Válaszai azonban kizárólag a rendelkezésre álló kontextusra és az alapul szolgáló tanító adatokra korlátozódnak. Például a GPT-4 tudásvágása 2021 szeptemberében van, vagyis nem ismeri az ezután bekövetkezett eseményeket. Emellett a LLM-ek képzéséhez használt adatok nem tartalmaznak bizalmas információkat, például személyes jegyzeteket vagy egy cég termékkézikönyvét.
 
-### Hogyan működnek a RAG-ek (Lekérdezés-gyorsított generálás)
+### Hogyan működnek a RAG-ok (Retrieval Augmented Generation)
 
-![rajz a RAG működéséről](../../../translated_images/hu/how-rag-works.f5d0ff63942bd3a6.webp)
+![rajz, amely bemutatja, hogyan működnek a RAG-ok](../../../translated_images/hu/how-rag-works.f5d0ff63942bd3a6.webp)
 
-Tegyük fel, hogy egy chatbotot szeretnél üzemeltetni, amely a jegyzeteidből hoz létre kvízeket, ehhez kapcsolódni kell a tudásbázishoz. Itt jön a képbe a RAG. A RAG-ek így működnek:
+Tegyük fel, hogy egy chatbotot szeretnél telepíteni, amely a jegyzeteidből kvízeket készít, ehhez kapcsolat szükséges a tudásbázishoz. Itt jön képbe a RAG. A RAG-ok a következőképpen működnek:
 
-- **Tudásbázis:** A lekérdezés előtt ezeket a dokumentumokat be kell olvasni és elő kell feldolgozni, általában nagy dokumentumokat kisebb részekre bontva, átalakítva őket szöveges beágyazássá, majd tárolva az adatbázisban.
+- **Tudásbázis:** A visszakeresés előtt ezeket a dokumentumokat be kell olvasni és elő kell dolgozni, általában nagy dokumentumokat kisebb darabokra bontanak, átalakítják őket szövegbeágyazássá, majd eltárolják egy adatbázisban.
 
-- **Felhasználói lekérdezés:** a felhasználó kérdést tesz fel
+- **Felhasználói kérdés:** a felhasználó kérdést tesz fel
 
-- **Lekérdezés:** Amikor a felhasználó kérdez, a beágyazás modell releváns információkat keres a tudásbázisban, hogy több kontextust adjon a prompthoz.
+- **Visszakeresés:** Amikor a felhasználó kérdez, a beágyazási modellet használva lekéri a releváns információkat a tudásbázisból, hogy több kontextust biztosítson, amely beépül a kérdésbe.
 
-- **Kiterjesztett generálás:** az LLM a lekért adatok alapján javítja válaszát. Ez lehetővé teszi, hogy a válasz ne csak a tanult adatokon alapuljon, hanem a hozzáadott releváns kontextusból is. A lekért adatokat az LLM válaszainak bővítésére használják. Az LLM ezután visszaadja a választ a felhasználó kérdésére.
+- **Kiterjesztett generálás:** az LLM a lekért adatok alapján fejleszti a válaszát. Ez lehetővé teszi, hogy a válasz ne csak előre betanított adatokon alapuljon, hanem a hozzáadott kontextusból származó releváns információkon is. A lekért adatokat az LLM válaszaihoz használja. Ezután az LLM visszaadja a választ a felhasználó kérdésére.
 
-![rajz a RAG architektúrájáról](../../../translated_images/hu/encoder-decode.f2658c25d0eadee2.webp)
+![rajz, amely bemutatja a RAG architektúrát](../../../translated_images/hu/encoder-decode.f2658c25d0eadee2.webp)
 
-A RAG architektúrája transformer modell alapján működik, amely két részből áll: egy kódolóból és egy dekódolóból. Például, amikor a felhasználó kérdez, a bemeneti szöveget „kódolják” vektorokká, amelyek a szavak jelentését rögzítik, majd ezeket a vektorokat „dekódolják” a dokumentum indexünkbe, és új szöveget generálnak a kérdés alapján. Az LLM mind a kódoló-dekódoló modellt használja a kimenet létrehozására.
+A RAG architektúra transformer alapú, két részből áll: egy kódolóból és egy dekódolóból. Például amikor egy felhasználó kérdést tesz fel, a bemeneti szöveget úgy „kódolják” vektorokká, amelyek a szavak jelentését képviselik, majd ezek a vektorok „dekódolódnak” a dokumentumindexbe, és új szöveget generálnak a felhasználói kérdés alapján. Az LLM mind a kódoló-dekódoló modellt használja a kimenet generálásához.
 
-A javasolt tanulmány [Retrieval-Augmented Generation for Knowledge intensive NLP Tasks](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst) szerint a RAG implementálásnak két megközelítése van:
+Két megközelítés a RAG implementálására a javasolt cikk alapján: [Retrieval-Augmented Generation for Knowledge intensive NLP (természetes nyelvfeldolgozó feladatok)](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst):
 
-- **_RAG-Sequence_**: a lekért dokumentumokat használja a felhasználói kérdés legjobb válaszának előrejelzésére
+- **_RAG-Sequence_** a lekért dokumentumokat használja a lehető legjobb válasz megjóslásához a felhasználói kérdésre
 
-- **RAG-Token**: a dokumentumokat használva generálja a következő tokent, majd újra lekéri őket a válaszhoz
+- **RAG-Token** a következő token generálásához használja a dokumentumokat, majd lekéri azokat a válaszhoz
 
-### Miért használnál RAG-et?
+### Miért használnád a RAG-okat?
 
-- **Információ gazdagság:** biztosítja, hogy a szöveges válaszok naprakészek és aktuálisak legyenek. Ezáltal javítja az adott szakterületi feladatok teljesítményét azáltal, hogy hozzáfér az belső tudásbázishoz.
+- **Információgazdagság:** biztosítja, hogy a szöveges válaszok naprakészek és aktuálisak legyenek. Ezáltal javítja a teljesítményt az adott szakterületi feladatokon, mivel hozzáfér az adott tudásbázishoz.
 
-- Csökkenti a kitalálást azzal, hogy **ellenőrizhető adatokat** használ a tudásbázisban a felhasználói kérdések kontextusához.
+- Csökkenti a kitalálásokat azzal, hogy **ellenőrizhető adatokat** használ a tudásbázisból a felhasználói kérdések kontextusának biztosításához.
 
-- **Költséghatékony**, mivel gazdaságosabb, mint egy LLM finomhangolása.
+- **Költséghatékony:** mivel gazdaságosabb, mint egy LLM finomhangolása
 
 ## Tudásbázis létrehozása
 
-Az alkalmazásunk saját adatainkra épül, azaz az AI kezdőknek oktatási anyagának Neurális Hálózatok leckéjére.
+Az alkalmazásunk személyes adatokon alapul, nevezetesen az AI kezdőknek tananyagban a neurális hálózatok leckén.
 
-### Vektor adatbázisok
+### Vektoralapú adatbázisok
 
-A vektor adatbázis egy speciális adatbázis, amely beágyazott vektorok tárolására, kezelésére és keresésére szolgál, szemben a hagyományos adatbázisokkal. A dokumentumok numerikus reprezentációit tárolja. Az adatok numerikus beágyazássá bontása megkönnyíti az MI rendszer számára az adatok megértését és feldolgozását.
+A vektoralapú adatbázis eltér a hagyományos adatbázisoktól, mivel speciális adatbázis, amely beágyazott vektorok tárolására, kezelésére és keresésére szolgál. Számértékes ábrázolásokat tárol dokumentumokról. Az adatok számértékes beágyazássá bontása megkönnyíti az AI rendszerünk számára az adatok megértését és feldolgozását.
 
-A beágyazásainkat vektor adatbázisban tároljuk, mivel az LLM-eknek van bemeneti token korlátjuk. Mivel nem lehet az összes beágyazást egyszerre átadni az LLM-nek, darabokra kell őket bontani, és amikor a felhasználó kérdez, a kérdéshez leginkább illeszkedő beágyazásokat visszaadjuk a prompttal együtt. A darabolás csökkenti az LLM-en átvitt tokenek számát, így költséghatékonyabb.
+Embeddingjeinket vektoralapú adatbázisokban tároljuk, mivel az LLM-ek korlátozva vannak a bevitt tokenek számában. Nem lehet az egész embeddinget az LLM-nek átadni, ezért fel kell darabolni darabokra, és amikor egy felhasználó kérdez, az embeddingek közül a kérdéshez leginkább hasonlót adjuk vissza a kérdéssel együtt. A darabolás csökkenti a tokeneken alapuló költségeket is.
 
-Néhány népszerű vektor adatbázis: Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant és DeepLake. Azure CLI segítségével például így hozhatsz létre Azure Cosmos DB modellt:
+Néhány népszerű vektoralapú adatbázis az Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant és DeepLake. Azure CLI-vel Azure Cosmos DB modellt az alábbi parancs segítségével hozhatsz létre:
 
 ```bash
 az login
@@ -93,9 +93,9 @@ az cosmosdb create -n <cosmos-db-name> -r <resource-group-name>
 az cosmosdb list-keys -n <cosmos-db-name> -g <resource-group-name>
 ```
 
-### Szövegből beágyazás
+### A szövegtől az embeddingekig
 
-Mielőtt adatainkat tárolnánk, vektor beágyazásokká kell alakítani őket. Ha nagy dokumentumokkal vagy hosszú szövegekkel dolgozol, darabolhatod őket a várható lekérdezések szerint. Darabolás történhet mondatszinten vagy bekezdésszinten. Mivel a darabok a környező szavakból nyernek jelentést, adhatunk nekik plusz kontextust, például a dokumentum címét vagy némi szöveget a darab előtt vagy után. A darabolás így történhet:
+Az adatok tárolása előtt vektor embeddingekké kell konvertálnunk őket. Ha nagy dokumentumokkal vagy hosszú szövegekkel dolgozol, a várható lekérdezések alapján felbonthatod őket darabokra. A darabolás történhet mondatszinten vagy bekezdésszinten. Mivel a darabok jelentése a körülötte lévő szavakból származik, adhatsz további kontextust egy darabhoz, például a dokumentum címét, vagy a darab előtt vagy után néhány szöveget. Az adatok darabolása a következőképpen történhet:
 
 ```python
 def split_text(text, max_length, min_length):
@@ -109,45 +109,45 @@ def split_text(text, max_length, min_length):
             chunks.append(' '.join(current_chunk))
             current_chunk = []
 
-    # Ha az utolsó darab nem érte el a minimális hosszúságot, akkor is add hozzá
+    # Ha az utolsó darab nem érte el a minimális hosszt, akkor is add hozzá
     if current_chunk:
         chunks.append(' '.join(current_chunk))
 
     return chunks
 ```
 
-Miután daraboltuk, különböző beágyazó modellekkel alakíthatjuk beágyazásokká a szöveget. Használható modellek például: word2vec, OpenAI ada-002, Azure Computer Vision és sok más. A modell választása a használt nyelvektől, a tartalom típusától (szöveg/kép/hang), az input méretétől és a beágyazás hosszától függ.
+A darabolás után beágyazhatjuk a szövegünket különféle embedding modellekkel. Használhatsz például word2vec-et, az OpenAI ada-002 modelljét, Azure Computer Visiont és még sok mást. A választott modell attól függ, milyen nyelven dolgozol, milyen típusú tartalmat kódolsz (szöveg/kép/hang), mekkora a bemenet és milyen hosszú a kimeneti embedding.
 
-Példa egy OpenAI `text-embedding-ada-002` modell által készített beágyazásra:
-![a cat szó beágyazása](../../../translated_images/hu/cat.74cbd7946bc9ca38.webp)
+Egy példája az OpenAI `text-embedding-ada-002` modelljével beágyazott szövegnek:
+![egy embedding a "cat" szóhoz](../../../translated_images/hu/cat.74cbd7946bc9ca38.webp)
 
-## Lekérdezés és vektor keresés
+## Visszakeresés és vektorkeresés
 
-Amikor a felhasználó kérdez, a kereső lekódolja a kérdést vektorrá, aztán a dokumentum keresési indexünkben keres releváns vektorokat a bemenethez kapcsolódó dokumentumok között. Ezután a bemeneti vektort és a dokumentum vektorokat szöveggé alakítva továbbítja az LLM-nek.
+Amikor egy felhasználó kérdést tesz fel, a visszakereső azonos vektorrá alakítja a kérdést a lekérdezés kódolójával, majd átkutatja a dokumentum keresőindexet a releváns vektorok után, amelyek kapcsolódnak a bemenethez. Ezután mind a bemeneti vektort, mind a dokumentum vektorokat szöveggé alakítja és továbbítja az LLM-nek.
 
-### Lekérdezés
+### Visszakeresés
 
-A lekérdezés akkor történik, amikor a rendszer gyorsan megpróbálja megtalálni azokat a dokumentumokat az indexből, amelyek megfelelnek a keresési feltételeknek. A lekérdező célja, hogy olyan dokumentumokat biztosítson, melyek kontextust adnak és alapozzák az LLM-et az adatokra.
+A visszakeresés akkor történik, amikor a rendszer gyorsan megpróbálja megtalálni a keresési feltételeknek megfelelő dokumentumokat az indexben. A cél az, hogy olyan dokumentumokat szerezzen be, amelyek kontextust biztosítanak és az LLM-et az adataid alapján alapozzák meg.
 
-Többféle keresési mód létezik az adatbázisban:
+Többféleképpen végezhetünk keresést adatbázisunkban, például:
 
-- **Kulcsszavas keresés** – szöveges keresésekhez
+- **Kulcsszavas keresés** - szöveges keresésekhez használatos
 
-- **Vektor keresés** – a dokumentumokat beágyazás modellek segítségével alakítja vektor reprezentációvá, lehetővé téve a **szemantikus keresést**, amely a szavak jelentésén alapul. A lekérdezés a legközelebbi vektorok alapján történik.
+- **Vektorkeresés** - a dokumentumokat szövegből vektor ábrázolássá alakítja embedding modellek használatával, lehetővé téve a **szemantikus keresést** a szavak jelentésén alapulva. A visszakeresés olyan dokumentumokat kérdez le, amelyek vektor ábrázolása a legközelebb áll a felhasználói kérdéshez.
 
-- **Hibrid** – a kulcsszavas és vektor keresés kombinációja.
+- **Hibrid** - a kulcsszavas és vektoros keresés kombinációja.
 
-A kihívás akkor jelentkezik, ha nincs a kérdéshez hasonló válasz az adatbázisban, ilyenkor a rendszer a legjobb elérhető információt adja vissza. Erre vannak trükkök, mint például relevancia maximális távolságának beállítása vagy hibrid keresés alkalmazása, mely kulcsszavas és vektor keresést egyaránt használ. Ebben a leckében hibrid keresést használunk, adatainkat adatkeretben tárolva, oszlopokban a darabokkal és beágyazásokkal.
+Problémát jelenthet, ha nincs hasonló válasz az adatbázisban a lekérdezésre, ilyenkor a rendszer a legjobb információt adja vissza, amit talál. Ugyanakkor alkalmazhatsz stratégiákat, például beállíthatod a relevancia maximális távolságát vagy hibrid keresést, amely mind kulcsszavas, mind vektorkeresést kombinál. Ebben a leckében hibrid keresést fogunk használni, amely mindkettőt ötvözi. Adatainkat egy dataframe-ben tároljuk oszlopokkal, amelyek tartalmazzák a darabokat és beágyazásokat.
 
-### Vektor hasonlóság
+### Vektorhasonlóság
 
-A kereső a tudásbázisban az összevethető beágyazások között keresi a legközelebbi szomszédokat, mert ezek a leginkább hasonló szövegek. Ha a felhasználó kérdez, azt először beágyazzuk, majd a hasonló beágyazásokkal illesztjük össze. A leggyakrabban használt mérőszám a vektorok hasonlóságára a koszinusz hasonlóság, amely a két vektor közötti szög alapján működik.
+A visszakereső a tudásbázisban hasonló, azaz egymáshoz közeli embeddingeket keres, mivel ezek hasonló szövegeket jelentenek. Amikor egy felhasználó kérdést tesz fel, először beágyazza azt, majd a hasonló embeddingekhez illeszti. A leggyakrabban használt mérőszám a különböző vektorok hasonlóságának vizsgálatára a koszinusz hasonlóság, amely a két vektor közötti szög alapján számít.
 
-Más alternatívák a hasonlóság mérésére az euklideszi távolság (a két vektor végpontja közötti egyenes vonal) vagy a skaláris szorzat (a két vektor megfelelő elemeinek szorzatainak összege).
+Más mérési alternatívák közé tartozik az euklideszi távolság, amely a vektor végpontjai közötti egyenes távolság, vagy a skaláris szorzat, amely két vektor megfelelő összetevőinek szorzatát összegezi.
 
 ### Keresési index
 
-Lekérdezés előtt szükséges keresési indexet építeni tudásbázisunkhoz. Az index tárolja a beágyazásainkat, és gyorsan tudja visszaadni a leginkább hasonló darabokat még nagy adatbázis esetén is. Indexet lokálisan így hozhatsz létre:
+A visszakeresés előtt létre kell hozni egy keresési indexet a tudásbázishoz. Egy index elraktározza az embeddingeket, és képes nagy adatbázisban is gyorsan visszaadni a leginkább hasonló darabokat. Az indexet helyileg is létrehozhatjuk a következő módon:
 
 ```python
 from sklearn.neighbors import NearestNeighbors
@@ -163,10 +163,10 @@ distances, indices = nbrs.kneighbors(embeddings)
 
 ### Újrarendezés
 
-Miután lekérdezted az adatbázist, szükség lehet az eredmények relevancia szerinti sorrendezésére. Egy újrarendező LLM gépi tanulást használ a keresési eredmények relevanciájának javítására úgy, hogy a legrelevánsabbat helyezi előre. Az Azure AI Search automatikusan végzi az újrarendezést szemantikus újrarendezővel. Íme egy példa arra, hogyan működik az újrarendezés a legközelebbi szomszédok alapján:
+Miután lekérdezted az adatbázist, szükség lehet az eredmények relevancia szerinti rendezésére. Egy újrarendező LLM gépi tanulást használ a keresési eredmények relevanciájának javítására, a legrelevánsabból kezdve. Az Azure AI Search automatikusan végzi el a szemantikus újrarendezést. Példa az újrarendezésre a legközelebbi szomszédok alapján:
 
 ```python
-# Találd meg a leginkább hasonló dokumentumokat
+# Keresd meg a leginkább hasonló dokumentumokat
 distances, indices = nbrs.kneighbors([query_vector])
 
 index = []
@@ -181,92 +181,92 @@ for i in range(3):
         print(f"Index {index} not found in DataFrame")
 ```
 
-## Összeillesztve
+## Mindent összegezve
 
-Az utolsó lépés, hogy az LLM-et is bevonjuk a folyamatba, hogy az adatainkra alapozott válaszokat kapjunk. Az implementáció a következő lépésekből áll:
+Az utolsó lépés az LLM bevonása a rendszerbe, hogy válaszokat kapjunk, amelyek az adatainkra alapozottak. Ezt a következőképpen valósíthatjuk meg:
 
 ```python
 user_input = "what is a perceptron?"
 
 def chatbot(user_input):
-    # A kérdés átalakítása lekérdezési vektorrá
+    # A kérdést lekérdezési vektorrá alakítani
     query_vector = create_embeddings(user_input)
 
-    # A leginkább hasonló dokumentumok megtalálása
+    # Megtalálni a leginkább hasonló dokumentumokat
     distances, indices = nbrs.kneighbors([query_vector])
 
-    # dokumentumok hozzáadása a lekérdezéshez a kontextus biztosításához
+    # Dokumentumokat hozzáadni a lekérdezéshez, hogy kontextust biztosítson
     history = []
     for index in indices[0]:
         history.append(flattened_df['chunks'].iloc[index])
 
-    # az előzmény és a felhasználói bevitel egyesítése
+    # Összekapcsolni a korábbiakat és a felhasználói bemenetet
     history.append(user_input)
 
-    # üzenetobjektum létrehozása
+    # Üzenetobjektumot létrehozni
     messages=[
         {"role": "system", "content": "You are an AI assistant that helps with AI questions."},
         {"role": "user", "content": "\n\n".join(history) }
     ]
 
-    # csevegő befejezést használva válasz generálása
-    response = openai.chat.completions.create(
-        model="gpt-4",
-        temperature=0.7,
-        max_tokens=800,
-        messages=messages
+    # A Responses API-t használni válasz generálásához
+    response = client.responses.create(
+        model="gpt-5-mini",
+        max_output_tokens=800,
+        input=messages,
+        store=False,
     )
 
-    return response.choices[0].message
+    return response.output_text
 
 chatbot(user_input)
 ```
 
-## Az alkalmazás kiértékelése
+## Alkalmazásunk értékelése
 
-### Kiértékelési mutatók
+### Értékelési metrikák
 
-- A válaszok minősége, hogy természetesnek, folyékonyan és emberinek hangzanak-e
+- A válaszok minősége: természetesnek, folyékonyan és emberinek tűnő válaszok biztosítása
 
-- Adatáhozás (groundedness): annak értékelése, hogy a válasz a megadott dokumentumokból származik-e
+- Az adatok megalapozottsága: annak értékelése, hogy a válasz a megadott dokumentumokból származik-e
 
-- Relevancia: hogy a válasz megegyezik-e és kapcsolódik-e a feltett kérdéshez
+- Relevancia: annak értékelése, hogy a válasz megfelel-e és kapcsolódik-e a feltett kérdéshez
 
-- Folyékonyság – hogy a válasz grammatikaileg értelmes-e
+- Folyékonyság - hogy a válasz nyelvtanilag értelmes-e
 
-## RAG (Lekérdezés-gyorsított generálás) és vektor adatbázisok alkalmazási területei
+## Használati esetek a RAG (Retrieval Augmented Generation) és vektoralapú adatbázisok használatához
 
-Számos alkalmazási eset van, ahol a funkcióhívások javíthatják az alkalmazásodat, például:
+Sokféle alkalmazás létezik, ahol a funkcióhívások javíthatják az alkalmazásodat, például:
 
-- Kérdés-válasz rendszerek: összekapcsolni a vállalati adatokat egy chattel, amit az alkalmazottak kérdések megválaszolására használhatnak.
+- Kérdés-válasz rendszer: alapozd céged adatait egy csetbothoz, amelyet az alkalmazottak kérdések feltevésére használhatnak.
 
-- Ajánlórendszerek: olyan rendszer létrehozása, amely a leginkább hasonló értékeket találja meg, pl. filmek, éttermek stb.
+- Ajánlórendszerek: olyan rendszerek létrehozása, amelyek a leginkább hasonló értékeket párosítják, pl. filmek, éttermek és még sok más.
 
-- Chatbot szolgáltatások: tárolhatod a chat előzményeket, és személyre szabhatod a beszélgetést a felhasználói adatok alapján.
+- Csetbot szolgáltatások: csevegési előzmények tárolása és az adott felhasználói adatok alapján személyre szabott beszélgetés.
 
-- Képes keresés vektor beágyazások alapján, hasznos képfelismerésnél vagy anomália kimutatásnál.
+- Képek keresése vektorembeddingek alapján, hasznos képfelismerésnél és anomália detektálásnál.
 
-## Összefoglaló
+## Összefoglalás
 
-Megismertük a RAG alapjait az adatok hozzáadásától az alkalmazáshoz, a felhasználói kérdéstől a kimenetig. A RAG kialakítását megkönnyítheted olyan keretrendszerekkel, mint a Semantic Kernel, Langchain vagy Autogen.
+Áttekintettük a RAG alapvető területeit az adataink alkalmazáshoz való hozzáadásától, a felhasználói kérdésen át a kimenetig. A RAG létrehozásának egyszerűsítéséhez használhatsz olyan keretrendszereket, mint a Semantic Kernel, Langchain vagy Autogen.
 
 ## Feladat
 
-A lekérdezés-gyorsított generálás (RAG) tanulásának folytatásához építsd meg:
+A Retrieval Augmented Generation (RAG) tanulmányozásának folytatásaként:
 
-- Egy front-end-et az alkalmazáshoz a saját választott keretrendszereddel
+- Készíts frontendet az alkalmazáshoz a választott keretrendszerrel
 
-- Használj keretrendszert, például LangChain-et vagy Semantic Kernelet, és készítsd újra az alkalmazásodat.
+- Használj egy keretrendszert, például LangChain vagy Semantic Kernel, és hozd létre újra az alkalmazásodat.
 
 Gratulálunk a lecke elvégzéséhez 👏.
 
-## A tanulás itt nem ér véget, folytasd az utat
+## A tanulás itt nem ér véget, folytasd az utad
 
-A lecke elvégzése után nézd meg a [Generatív AI tanulási gyűjteményünket](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy tovább fejleszd a generatív AI ismereteidet!
+A lecke befejezése után böngészd át generatív AI tanulási gyűjteményünket a tudásod további bővítéséhez: [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Jogi nyilatkozat**:
-Ezt a dokumentumot az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk le. Bár igyekszünk pontosságot biztosítani, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Fontos információk esetén szakmai emberi fordítást javaslunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy félreértelmezésekért.
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

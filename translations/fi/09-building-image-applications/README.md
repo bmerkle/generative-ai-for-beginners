@@ -1,267 +1,146 @@
-# Kuvien luontisovellusten rakentaminen
+# Kuvageneraattorisovellusten rakentaminen
 
-[![Kuvien luontisovellusten rakentaminen](../../../translated_images/fi/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Kuvageneraattorisovellusten rakentaminen](../../../translated_images/fi/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-LLM-malleilla voi tehdä muutakin kuin tekstin luontia. On myös mahdollista luoda kuvia tekstikuvauksista. Kuvien käyttö voi olla erittäin hyödyllistä monilla aloilla, kuten terveydenhuollossa, arkkitehtuurissa, matkailussa, pelikehityksessä ja muilla. Tässä luvussa tutustumme kahteen suosituimpaan kuvien luontimalliin, DALL-E:hen ja Midjourneyhin.
+LLM-mallien mahdollisuudet eivät rajoitu pelkkään tekstintuotantoon. Voit myös luoda kuvia tekstikuvausten pohjalta. Kuvien käyttö medteknologiassa, arkkitehtuurissa, matkailussa, pelikehityksessä, markkinoinnissa ja monilla muilla aloilla on hyödyllistä. Tässä oppitunnissa tutustumme tämän päivän **GPT Image** -malleihin ja rakennamme kuvageneraattorisovelluksen.
 
 ## Johdanto
 
-Tässä oppitunnissa käsittelemme:
+Kuvagenerointi mahdollistaa luonnollisen kielen kehotteen muuttamisen kuvaksi. Tässä oppitunnissa työskentelemme OpenAI:n **`gpt-image`** -malliperheen kanssa – nykyisen sukupolven kuvamallit, jotka ovat saatavilla **[Microsoft Foundryssä](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** ja OpenAI-alustalla. Nämä mallit korvaavat vanhemmat DALL·E-mallit (DALL·E 2/3 ovat vanhentuneita).
 
-- Kuvien luontia ja sen hyödyllisyyttä.
-- DALL-E:tä ja Midjourneyta, mitä ne ovat ja miten ne toimivat.
-- Kuinka rakentaa kuvien luontisovellus.
+Oppitunnin aikana käytämme kuvitteellista startup-yritystä, **Edu4All**, joka kehittää oppimisvälineitä. Tiimi haluaa luoda kuvituksia tehtäviin ja opiskelumateriaaleihin.
 
 ## Oppimistavoitteet
 
-Oppitunnin jälkeen osaat:
+Oppitunnin lopussa pystyt:
 
-- Rakentaa kuvien luontisovelluksen.
-- Määritellä sovelluksesi rajat metapromptien avulla.
-- Työskennellä DALL-E:n ja Midjourneyn kanssa.
+- Selittämään, mitä kuvagenerointi on ja missä sitä voi hyödyntää.
+- Ymmärtämään `gpt-image` -malliperheen ja sen erot vanhoihin DALL·E-malleihin verrattuna.
+- Rakentamaan kuvageneraattorisovelluksen Pythonilla (ja TypeScriptillä / .NETillä).
+- Muokkaamaan kuvia ja käyttämään turvarajauksia metakehotteiden avulla.
 
-## Miksi rakentaa kuvien luontisovellus?
+## Mikä on kuvagenerointi?
 
-Kuvien luontisovellukset ovat erinomainen tapa tutkia Generatiivisen tekoälyn mahdollisuuksia. Niitä voidaan käyttää esimerkiksi:
+Kuvagenerointimallit luovat kuvia tekstikehotteesta. Nykyaikaiset mallit, kuten `gpt-image`, perustuvat muunnin- ja diffuusiotekniikoihin: malli oppii tekstin ja kuvien välisen suhteen harjoitteluvaiheessa, minkä jälkeen se annettua kehotetta käyttäen iteratiivisesti "poistaa kohinaa" satunnaisesta melusta luodakseen kuvan, joka vastaa kuvausta.
 
-- **Kuvien muokkaus ja synteesi**. Voit luoda kuvia monenlaisiin käyttötarkoituksiin, kuten kuvien muokkaukseen ja synteesiin.
+Kaksi tunnettuja kuvamalliperhettä ovat:
 
-- **Soveltaminen eri toimialoille**. Niitä voidaan käyttää myös kuvien luomiseen monille toimialoille, kuten terveydenhuoltoon, matkailuun, pelikehitykseen ja muille.
+- **`gpt-image` (OpenAI)** – nykyinen sukupolvi, jota käytämme tässä oppitunnissa. Tukee tekstistä kuvaan -generaatiota ja kuvien muokkausta (maalausta maskin avulla).
+- **Midjourney** – suosittu kolmannen osapuolen malli omalla palvelullaan ja Discord-pohjaisella työnkululla.
 
-## Tilanne: Edu4All
+> Vanhemmat OpenAI:n kuvamallit - **DALL·E 2** ja **DALL·E 3** - ovat vanhentuneita. DALL·E 3 ei ole enää saatavilla uusiin käyttöönottoihin, ja ominaisuudet kuten `create_variation` löytyivät vain DALL·E 2:sta. Käytä `gpt-image` -malleja uusissa sovelluksissa.
 
-Tässä oppitunnissa jatkamme työskentelyä startupimme, Edu4Allin, kanssa. Opiskelijat luovat kuvia arviointejaan varten. Millaisia kuvia he luovat, on heidän päätettävissään, mutta ne voivat olla esimerkiksi kuvituksia heidän omalle sadulleen, uuden hahmon luomista tarinaansa tai heidän ideoidensa ja konseptiensa visualisointia.
+### Minkä `gpt-image` -mallin pitäisi valita?
 
-Tässä esimerkki siitä, mitä Edu4Allin opiskelijat voisivat luoda, jos he työskentelevät luokassa monumenttien parissa:
+Microsoft Foundryssa seuraavat ovat **Laajasti saatavilla**:
 
-![Edu4All startup, luokka monumenteista, Eiffel-torni](../../../translated_images/fi/startup.94d6b79cc4bb3f5a.webp)
+| Malli | Huomautuksia |
+| --- | --- |
+| **`gpt-image-2`** | Uusin ja kyvykäin kuvamalli – suositeltu oletus. |
+| `gpt-image-1.5` | Laajasti saatavilla; hyvä laatu edullisemmalla hinnalla. |
+| `gpt-image-1-mini` | Laajasti saatavilla; nopein / edullisin. |
+| `gpt-image-1` | Vain esikatselu. |
 
-käyttäen promptia kuten
+Tarkista aina nykyinen [Foundryn kuvamallien lista](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) saatavuuden ja alueiden osalta.
 
-> "Koira Eiffel-tornin vieressä aikaisen aamun auringonvalossa"
+> **Tärkeää:** `gpt-image` -mallit palauttavat luodun kuvan **base64-muodossa** (`b64_json`), eivät URL-osoitteena. Koodisi dekoodaa base64-merkkijonon tavuiksi ja tallentaa sen – latauslinkkiä kuvalle ei ole.
 
-## Mitä ovat DALL-E ja Midjourney?
+## Ympäristön valmistelu
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) ja [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) ovat kaksi suosituimpaa kuvien luontimallia, jotka mahdollistavat kuvien luomisen promptien avulla.
+Voit suorittaa esimerkit sekä **Azure OpenAI:n Microsoft Foundryssä** ( `aoai-*` -esimerkit) että **OpenAI-alustalla** ( `oai-*` -esimerkit).
 
-### DALL-E
+### 1. Luo ja ota käyttöön malli
 
-Aloitetaan DALL-E:stä, joka on Generatiivinen tekoälymalli, joka luo kuvia tekstikuvauksista.
+Noudata [resurssin luomisen](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) ohjetta luodaksesi Microsoft Foundryn resurssin ja ota käyttöön kuvamalli – **`gpt-image-2`** on suositeltu.
 
-> [DALL-E yhdistää kaksi mallia, CLIP ja diffused attention](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. Määritä `.env`-tiedostosi
 
-- **CLIP**, on malli, joka luo upotuksia, jotka ovat numeerisia esityksiä datasta, kuvista ja tekstistä.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention**, on malli, joka luo kuvia upotuksista. DALL-E on koulutettu kuvien ja tekstin datasetillä ja sitä voidaan käyttää kuvien luomiseen tekstikuvauksista. Esimerkiksi DALL-E:tä voidaan käyttää luomaan kuvia hatullisesta kissasta tai mohawkilla varustetusta koirasta.
+Löydät nämä arvot resurssisi **Deployments**-sivulta [Foundryn portaalissa](https://ai.azure.com?WT.mc_id=academic-105485-koreyst).
 
-### Midjourney
+### 3. Asenna kirjastot
 
-Midjourney toimii samalla tavalla kuin DALL-E, se luo kuvia tekstipromptien avulla. Midjourneyta voidaan myös käyttää luomaan kuvia promptien avulla, kuten “kissa hatussa” tai “koira mohawkilla”.
+Luo `requirements.txt`:
 
-![Midjourneyn luoma kuva, mekaaninen kyyhky](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Kuvan lähde Wikipedia, kuva luotu Midjourneylla_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Kuinka DALL-E ja Midjourney toimivat
+Sitten luo ja aktivoi virtuaaliympäristö ja asenna:
 
-Ensiksi, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E on Generatiivinen tekoälymalli, joka perustuu transformer-arkkitehtuuriin ja käyttää _autoregressiivistä transformeria_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-_Autoregressiivinen transformer_ määrittää, kuinka malli luo kuvia tekstikuvauksista, se luo yhden pikselin kerrallaan ja käyttää luotuja pikseleitä seuraavan pikselin luomiseen. Tämä prosessi toistuu useiden kerrosten läpi neuroverkossa, kunnes kuva on valmis.
+## Rakenna sovellus
 
-Tämän prosessin avulla DALL-E hallitsee kuvan ominaisuuksia, objekteja, piirteitä ja muuta. Kuitenkin DALL-E 2 ja 3 tarjoavat enemmän kontrollia luotuun kuvaan.
+Luo `app.py` seuraavalla koodilla. Se luo kuvan ja tallentaa sen PNG-muodossa.
 
-## Ensimmäisen kuvien luontisovelluksen rakentaminen
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-Mitä tarvitaan kuvien luontisovelluksen rakentamiseen? Tarvitset seuraavat kirjastot:
+dotenv.load_dotenv()
 
-- **python-dotenv**, tätä kirjastoa suositellaan vahvasti salaisuuksien säilyttämiseen _.env_-tiedostossa erillään koodista.
-- **openai**, tämä kirjasto mahdollistaa OpenAI API:n käytön.
-- **pillow**, kuvien käsittelyyn Pythonissa.
-- **requests**, HTTP-pyyntöjen tekemiseen.
+# Suuntaa asiakas Azure OpenAI (Microsoft Foundry) -resurssiisi.
+# Kuvamallit tarvitsevat äskettäisen API-version - tarkista Foundryn dokumentaatiosta, mitä versiota mallisi vaatii.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Luo ja ota käyttöön Azure OpenAI -malli
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # esim. "gpt-image-2"
 
-Jos et ole vielä tehnyt sitä, seuraa ohjeita [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) -sivulla
-luodaksesi Azure OpenAI -resurssin ja mallin. Valitse malliksi DALL-E 3.
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # myös 1536x1024 (maisema), 1024x1536 (muotokuva) tai "auto"
+    n=1,
+)
 
-## Luo sovellus
-
-1. Luo _.env_-tiedosto seuraavalla sisällöllä:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   Löydät nämä tiedot Azure OpenAI Foundry -portaalista resurssisi "Deployments"-osiosta.
-
-1. Kerää yllä olevat kirjastot tiedostoon _requirements.txt_ seuraavasti:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. Seuraavaksi luo virtuaaliympäristö ja asenna kirjastot:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Windowsissa käytä seuraavia komentoja virtuaaliympäristön luomiseen ja aktivoimiseen:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. Lisää seuraava koodi tiedostoon _app.py_:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Selitetään tämä koodi:
-
-- Ensiksi tuodaan tarvittavat kirjastot, mukaan lukien OpenAI-kirjasto, dotenv-kirjasto, requests-kirjasto ja Pillow-kirjasto.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Seuraavaksi ladataan ympäristömuuttujat _.env_-tiedostosta.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Tämän jälkeen konfiguroidaan Azure OpenAI -palvelun asiakas.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Seuraavaksi luodaan kuva:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Yllä oleva koodi vastaa JSON-objektilla, joka sisältää luodun kuvan URL-osoitteen. Voimme käyttää URL-osoitetta kuvan lataamiseen ja tallentamiseen tiedostoon.
-
-- Lopuksi avataan kuva ja käytetään standardia kuvien katseluohjelmaa sen näyttämiseen:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Lisätietoja kuvan luomisesta
-
-Katsotaan tarkemmin koodia, joka luo kuvan:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, on tekstiprompti, jota käytetään kuvan luomiseen. Tässä tapauksessa käytämme promptia "Pupu hevosen selässä, pitelee tikkaria, sumuisella niityllä, jossa kasvaa narsisseja".
-- **size**, on luodun kuvan koko. Tässä tapauksessa luomme kuvan, joka on 1024x1024 pikseliä.
-- **n**, on luotujen kuvien määrä. Tässä tapauksessa luomme kaksi kuvaa.
-- **temperature**, on parametri, joka ohjaa Generatiivisen tekoälymallin tuloksen satunnaisuutta. Temperature on arvo välillä 0–1, jossa 0 tarkoittaa, että tulos on deterministinen ja 1 tarkoittaa, että tulos on satunnainen. Oletusarvo on 0.7.
-
-Kuvien kanssa voi tehdä paljon muutakin, mitä käsittelemme seuraavassa osiossa.
-
-## Kuvien luomisen lisäominaisuudet
-
-Olet nähnyt, kuinka pystyimme luomaan kuvan muutamalla Python-rivillä. Kuvien kanssa voi kuitenkin tehdä paljon muutakin.
-
-Voit myös tehdä seuraavaa:
-
-- **Muokata kuvia**. Antamalla olemassa olevan kuvan, maskin ja promptin, voit muokata kuvaa. Esimerkiksi voit lisätä jotain osaan kuvaa. Kuvittele pupukuvaamme, voit lisätä pupulle hatun. Tämä tehdään antamalla kuva, maski (joka määrittää muokattavan alueen) ja tekstiprompti, joka kertoo, mitä pitäisi tehdä.
-> Huom: tämä ei ole tuettu DALL-E 3:ssa.
-
-Tässä esimerkki GPT Image -mallilla:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Peruskuvassa olisi vain lounge ja uima-allas, mutta lopullisessa kuvassa olisi flamingo:
+# gpt-kuvamallit palauttavat base64-koodin (b64_json), eivät URL-osoitetta - dekoodaa se tavuiksi.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+Suorita komennolla `python app.py`. Saat PNG-kuvan tallennettuna kansioon `images/`.
+
+> Jokainen kutsu `images.generate` tuottaa eri kuvan samalla kyselyllä – kuvamalleilla ei ole `temperature`-parametria (se on tekstigeneraation ohjaus). Monipuolisuuden saamiseksi kutsu API uudelleen; monipuolisuuden vähentämiseksi tee kehotteestasi tarkempi.
+
+## Kuvien muokkaus
+
+`gpt-image` -mallit voivat **muokata** olemassa olevaa kuvaa: anna kuva, valinnainen **maski** (joka merkitsee muutettavan alueen) ja kehotteena muutoksen kuvaus. Kuten generoinnissa, muokatut kuvat palautetaan base64-muodossa.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/fi/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -269,211 +148,51 @@ Tässä esimerkki GPT Image -mallilla:
   <img src="../../../translated_images/fi/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **Luoda variaatioita**. Ideana on, että otat olemassa olevan kuvan ja pyydät luomaan siitä variaatioita. Variaation luomiseksi annat kuvan ja tekstipromptin sekä koodin seuraavasti:
+## Rajojen asettaminen metakehotteilla
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Huom, tämä on tuettu vain OpenAI:ssa.
-
-## Temperature
-
-Temperature on parametri, joka ohjaa Generatiivisen tekoälymallin tuloksen satunnaisuutta. Temperature on arvo välillä 0–1, jossa 0 tarkoittaa, että tulos on deterministinen ja 1 tarkoittaa, että tulos on satunnainen. Oletusarvo on 0.7.
-
-Katsotaan esimerkkiä siitä, miten temperature toimii, ajamalla tämä prompti kahdesti:
-
-> Prompti: "Pupu hevosen selässä, pitelee tikkaria, sumuisella niityllä, jossa kasvaa narsisseja"
-
-![Pupu hevosen selässä, pitelee tikkaria, versio 1](../../../translated_images/fi/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Nyt ajetaan sama prompti uudelleen ja huomataan, että emme saa samaa kuvaa kahdesti:
-
-![Luotu kuva pupusta hevosen selässä](../../../translated_images/fi/v2-generated-image.33f55a3714efe61d.webp)
-
-Kuten näet, kuvat ovat samankaltaisia, mutta eivät identtisiä. Kokeillaan nyt muuttaa temperature-arvoa 0.1:ksi ja katsotaan, mitä tapahtuu:
+Kun osaat generoida kuvia, tarvitset turvarajat, jotta sovelluksesi ei tuota epäasiallista tai brändistä poikkeavaa sisältöä. **Metakehotteessa** on tekstiä, jonka lisäät käyttäjän kehotteen eteen rajoittaaksesi mallin tuloksia.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Temperature-arvon muuttaminen
-
-Kokeillaan tehdä vastauksesta deterministisempi. Voimme havaita kahdesta luodusta kuvasta, että ensimmäisessä kuvassa on pupu ja toisessa kuvassa hevonen, joten kuvat eroavat suuresti.
-
-Muutetaan siis koodiamme ja asetetaan temperature-arvo 0:ksi, kuten seuraavasti:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Kun suoritat tämän koodin, saat nämä kaksi kuvaa:
-
-- ![Temperature 0, v1](../../../translated_images/fi/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Temperature 0 , v2](../../../translated_images/fi/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Tässä näet selvästi, kuinka kuvat muistuttavat toisiaan enemmän.
-
-## Kuinka määritellä sovelluksesi rajat metapromptien avulla
-
-Demonstraatiomme avulla voimme jo luoda kuvia asiakkaillemme. Meidän on kuitenkin luotava joitakin rajoja sovelluksellemme.
-
-Esimerkiksi emme halua luoda kuvia, jotka eivät ole soveliaita työympäristöön tai lapsille.
-
-Tämä voidaan tehdä _metapromptien_ avulla. Metapromptit ovat tekstipromptit, joita käytetään Generatiivisen tekoälymallin tuloksen hallintaan. Esimerkiksi metapromptien avulla voimme hallita tulosta ja varmistaa, että luodut kuvat ovat soveliaita työympäristöön tai lapsille.
-
-### Kuinka se toimii?
-
-Kuinka metapromptit toimivat?
-
-Metapromptit ovat tekstipromptit, joita käytetään Generatiivisen tekoälymallin tuloksen hallintaan. Ne sijoitetaan tekstipromptin eteen ja niitä käytetään mallin tuloksen hallintaan ja upotetaan sovelluksiin mallin tuloksen hallitsemiseksi. Ne yhdistävät promptin syötteen ja metapromptin syötteen yhdeksi tekstipromptiksi.
-
-Yksi esimerkki metapromptista voisi olla seuraava:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Katsotaan nyt, kuinka voimme käyttää metapromptia demossamme.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Yllä olevasta promptista näet, kuinka kaikki luodut kuvat ottavat huomioon metapromptin.
-
-## Tehtävä - mahdollistetaan opiskelijoiden työskentely
-
-Esittelimme Edu4Allin oppitunnin alussa. Nyt on aika mahdollistaa opiskelijoiden kuvien luominen heidän arviointejaan varten.
-
-Opiskelijat luovat kuvia arviointejaan varten, jotka sisältävät monumentteja. Millaisia monumentteja, on opiskelijoiden päätettävissä. Opiskelijoita pyydetään käyttämään luovuuttaan tässä tehtävässä sijoittaakseen monumentit erilaisiin konteksteihin.
-
-## Ratkaisu
-
-Tässä yksi mahdollinen ratkaisu:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# välitä `prompt` client.images.generate(...) -metodille
 ```
+
+Jokainen kuva generoidaan nyt metakehotteen asettamien rajojen sisällä. Yhdistä tämä Microsoft Foundryn sisältösuodattimiin syväsuojaa varten.
+
+## Tehtävä – anna apua opiskelijoille
+
+Edu4Allin opiskelijat tarvitsevat kuvia arviointeihinsa. Rakenna sovellus, joka generoi kuvia **muistomerkeistä** (mitkä muistomerkit valitset, on sinun päätettävissä) eri luovissa tilanteissa – esimerkiksi tunnettu maamerkki auringonlaskussa lapsen katsellessa.
+
+Kokeile itse ja vertaa referenssiratkaisuihin:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) täydellinen generointisovellus: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Työstä myös läpi notebookit kansiossa [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` Azurelle, `oai-assignment.ipynb` OpenAI:lle).
 
 ## Hienoa työtä! Jatka oppimista
 
-Kun olet suorittanut tämän oppitunnin, tutustu [Generative AI Learning -kokoelmaan](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) jatkaaksesi Generative AI -tietämyksesi kehittämistä!
+Kun olet suorittanut tämän oppitunnin, tutustu [Generative AI Learning -kokoelmaamme](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ja jatka generatiivisen tekoälyn osaamisesi kehittämistä!
 
-Siirry oppituntiin 10, jossa tarkastelemme, kuinka [rakentaa tekoälysovelluksia vähäkoodisilla ratkaisuilla](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Siirry oppitunnille 10 jatkaaksesi oppimista.
 
 ---
 
-**Vastuuvapauslauseke**:  
-Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa väärinkäsityksistä tai virhetulkinnoista, jotka johtuvat tämän käännöksen käytöstä.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, otathan huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäinen asiakirja sen alkuperäiskielellä on virallinen lähde. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai tulkinnoista.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

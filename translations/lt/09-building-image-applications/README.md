@@ -1,266 +1,146 @@
-# Vaizdų generavimo programų kūrimas
+# Iliustracijų generavimo programų kūrimas
 
-[![Vaizdų generavimo programų kūrimas](../../../translated_images/lt/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Iliustracijų generavimo programų kūrimas](../../../translated_images/lt/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-LLM modeliai nėra skirti vien tik tekstų generavimui. Taip pat galima generuoti vaizdus iš tekstinių aprašymų. Vaizdai kaip modalumas gali būti labai naudingi įvairiose srityse, tokiose kaip medicinos technologijos, architektūra, turizmas, žaidimų kūrimas ir kt. Šiame skyriuje aptarsime du populiariausius vaizdų generavimo modelius – DALL-E ir Midjourney.
+LLM modeliai neapsiriboja tik teksto generavimu. Taip pat galite generuoti iliustracijas iš teksto aprašymų. Iliustracijos kaip modalumas yra naudingos MedTech, architektūros, turizmo, žaidimų kūrimo, rinkodaros ir kitose srityse. Šioje pamokoje aptarsime šių dienų **GPT Image** modelius ir sukursime iliustracijų generavimo programą.
 
 ## Įvadas
 
-Šioje pamokoje aptarsime:
+Iliustracijų generavimas leidžia natūralios kalbos komandas paversti paveikslėliais. Šioje pamokoje naudosime OpenAI **`gpt-image`** modelių šeimą – dabartinę iliustracijų modelių kartą, prieinamą **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** ir OpenAI platformoje. Šie modeliai pakeičia senesnius DALL·E modelius (DALL·E 2/3 yra pasenę).
 
-- Vaizdų generavimą ir kodėl jis naudingas.
-- DALL-E ir Midjourney: kas tai yra ir kaip jie veikia.
-- Kaip sukurti vaizdų generavimo programą.
+Visos pamokos metu naudosime fiktyvią startuolį, **Edu4All**, kuris kuria mokymosi įrankius. Komanda nori generuoti iliustracijas užduotims ir mokomajai medžiagai.
 
 ## Mokymosi tikslai
 
-Baigę šią pamoką, galėsite:
+Baigę šią pamoką mokėsite:
 
-- Sukurti vaizdų generavimo programą.
-- Apibrėžti savo programos ribas naudojant meta promptus.
-- Dirbti su DALL-E ir Midjourney.
+- Paaiškinti, kas yra iliustracijų generavimas ir kur jis naudingas.
+- Suprasti `gpt-image` modelių šeimą ir kuo ji skiriasi nuo senesnių DALL·E modelių.
+- Sukurti iliustracijų generavimo programą Python (bei TypeScript / .NET).
+- Redaguoti iliustracijas ir taikyti saugos ribojimus su metapromptais.
 
-## Kodėl verta kurti vaizdų generavimo programą?
+## Kas yra iliustracijų generavimas?
 
-Vaizdų generavimo programos yra puikus būdas tyrinėti generatyvinio dirbtinio intelekto galimybes. Jos gali būti naudojamos, pavyzdžiui:
+Iliustracijų generavimo modeliai kuria paveikslėlius pagal teksto užklausą. Šiuolaikiniai modeliai, tokie kaip `gpt-image`, kuriami derinant transformerių ir difuzijos metodus: modelis mokosi teksto ir vaizdų santykio treniruočių metu, tada pagal užklausą iteratyviai „išvalo“ atsitiktinį triukšmą į iliustraciją, atitinkančią aprašymą.
 
-- **Vaizdų redagavimas ir sintezė**. Galite generuoti vaizdus įvairiems tikslams, tokiems kaip vaizdų redagavimas ar sintezė.
+Dvi gerai žinomos iliustracijų modelių šeimos yra:
 
-- **Taikymas įvairiose pramonės šakose**. Taip pat galima generuoti vaizdus įvairioms pramonės šakoms, tokioms kaip medicinos technologijos, turizmas, žaidimų kūrimas ir kt.
+- **`gpt-image` (OpenAI)** – dabartinė karta, naudojama šioje pamokoje. Palaiko teksto į vaizdą generavimą ir vaizdų redagavimą (dailinimą su kauke).
+- **Midjourney** – populiarus trečiosios šalies modelis su savo paslauga ir Discord darbo eiga.
 
-## Scenarijus: Edu4All
+> Senesni OpenAI vaizdų modeliai – **DALL·E 2** ir **DALL·E 3** – yra pasenę. DALL·E 3 nebėra prieinamas naujoms diegimams, o funkcijos kaip `create_variation` egzistavo tik DALL·E 2. Naujiems projektams rekomenduojama naudoti `gpt-image` modelius.
 
-Šios pamokos metu toliau dirbsime su mūsų startuoliu Edu4All. Studentai kurs vaizdus savo užduotims – kokius vaizdus kurti, priklauso nuo jų pačių, tačiau tai gali būti iliustracijos jų pasakoms, naujo personažo kūrimas jų istorijai arba pagalba vizualizuojant jų idėjas ir koncepcijas.
+### Kurį `gpt-image` modelį rinktis?
 
-Štai ką, pavyzdžiui, galėtų sukurti Edu4All studentai, jei klasėje dirbtų su paminklais:
+Microsoft Foundry platformoje šie modeliai yra **Bendro naudojimo**:
 
-![Edu4All startuolis, pamoka apie paminklus, Eifelio bokštas](../../../translated_images/lt/startup.94d6b79cc4bb3f5a.webp)
+| Modelis | Pastabos |
+| --- | --- |
+| **`gpt-image-2`** | Naujausias ir pajėgiausias iliustracijų modelis – rekomenduojamas pagal numatytuosius nustatymus. |
+| `gpt-image-1.5` | Bendro naudojimo; geros kokybės už mažesnę kainą. |
+| `gpt-image-1-mini` | Bendro naudojimo; greičiausias / pigiausias variantas. |
+| `gpt-image-1` | Tik peržiūrai. |
 
-naudodami tokį promptą:
+Visada patikrinkite dabartinį [Foundry iliustracijų modelių sąrašą](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) dėl prieinamumo ir regionų.
 
-> "Šuo šalia Eifelio bokšto ankstyvo ryto saulės šviesoje"
+> **Svarbu:** `gpt-image` modeliai grąžina sugeneruotą iliustraciją kaip **base64** (`b64_json`), o ne kaip URL. Jūsų kodas dekoduoja base64 eilutę į baitus ir įrašo ją – nėra iliustracijos URL, kurį būtų galima atsisiųsti.
 
-## Kas yra DALL-E ir Midjourney?
+## Pasiruošimas
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) ir [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) yra du populiariausi vaizdų generavimo modeliai, leidžiantys naudoti promptus vaizdams generuoti.
+Galite paleisti pavyzdžius prieš **Azure OpenAI Microsoft Foundry** (pavyzdžiai su `aoai-*`) arba **OpenAI platformoje** (pavyzdžiai su `oai-*`).
 
-### DALL-E
+### 1. Sukurkite ir įdiekite modelį
 
-Pradėkime nuo DALL-E – tai generatyvinio dirbtinio intelekto modelis, kuris generuoja vaizdus iš tekstinių aprašymų.
+Vadovaukitės [kaip sukurti išteklių](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) vadovu, kad sukurtumėte Microsoft Foundry išteklių, tada įdiekite iliustracijų modelį – rekomenduojamas **`gpt-image-2`**.
 
-> [DALL-E yra dviejų modelių, CLIP ir difuzinės dėmesio sistemos, derinys](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. Konfigūruokite savo `.env`
 
-- **CLIP** – tai modelis, kuris generuoja įterpimus, t. y. duomenų skaitines reprezentacijas, iš vaizdų ir tekstų.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Difuzinė dėmesio sistema** – tai modelis, kuris generuoja vaizdus iš įterpimų. DALL-E yra apmokytas vaizdų ir tekstų duomenų rinkiniu ir gali būti naudojamas vaizdams generuoti iš tekstinių aprašymų. Pavyzdžiui, DALL-E gali generuoti vaizdus, kuriuose katė su skrybėle arba šuo su mohawk šukuosena.
+Šią informaciją rasite savo ištekliaus **Deployments** puslapyje [Foundry portale](https://ai.azure.com?WT.mc_id=academic-105485-koreyst).
 
-### Midjourney
+### 3. Įdiekite bibliotekas
 
-Midjourney veikia panašiai kaip DALL-E – jis generuoja vaizdus iš tekstinių promptų. Midjourney taip pat gali būti naudojamas vaizdams generuoti naudojant promptus, tokius kaip „katė su skrybėle“ arba „šuo su mohawk šukuosena“.
+Sukurkite `requirements.txt`:
 
-![Vaizdas, sukurtas Midjourney, mechaninis balandis](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Vaizdo autorius Wikipedia, vaizdas sukurtas Midjourney_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Kaip veikia DALL-E ir Midjourney
+Tada sukurkite ir aktyvinkite virtualią aplinką ir įdiekite:
 
-Pirmiausia, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E yra generatyvinio dirbtinio intelekto modelis, pagrįstas transformatorių architektūra su _autoregresiniu transformatoriumi_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-_Autoregresinis transformatorius_ apibrėžia, kaip modelis generuoja vaizdus iš tekstinių aprašymų – jis generuoja vieną pikselį vienu metu, o tada naudoja sugeneruotus pikselius kitam pikseliui generuoti. Procesas vyksta per kelis neuroninio tinklo sluoksnius, kol vaizdas tampa pilnas.
+## Programos kūrimas
 
-Šio proceso metu DALL-E kontroliuoja atributus, objektus, charakteristikas ir kitus elementus generuojamame vaizde. Tačiau DALL-E 2 ir 3 turi daugiau kontrolės galimybių generuojant vaizdą.
+Sukurkite `app.py` su žemiau pateiktu kodu. Jis sugeneruoja iliustraciją ir įrašo ją kaip PNG failą.
 
-## Pirmos vaizdų generavimo programos kūrimas
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-Taigi, ko reikia norint sukurti vaizdų generavimo programą? Jums reikės šių bibliotekų:
+dotenv.load_dotenv()
 
-- **python-dotenv** – labai rekomenduojama naudoti šią biblioteką, kad jūsų slaptažodžiai būtų saugomi _.env_ faile, atskirai nuo kodo.
-- **openai** – ši biblioteka naudojama sąveikai su OpenAI API.
-- **pillow** – darbui su vaizdais Python kalboje.
-- **requests** – padeda atlikti HTTP užklausas.
+# Nurodykite klientui savo Azure OpenAI (Microsoft Foundry) išteklių.
+# Vaizdo modeliams reikia naujausios API versijos – patikrinkite Foundry dokumentus, kokios versijos reikia jūsų modeliui.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Sukurkite ir įdiekite Azure OpenAI modelį
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # pvz. "gpt-image-2"
 
-Jei dar to nepadarėte, vadovaukitės [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) puslapyje pateiktomis instrukcijomis, kad sukurtumėte Azure OpenAI resursą ir modelį. Pasirinkite DALL-E 3 kaip modelį.
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # taip pat 1536x1024 (peizažas), 1024x1536 (portretas) arba "auto"
+    n=1,
+)
 
-## Sukurkite programą
-
-1. Sukurkite failą _.env_ su šiuo turiniu:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   Šią informaciją rasite Azure OpenAI Foundry portale savo resurso „Diegimų“ skiltyje.
-
-1. Surinkite aukščiau nurodytas bibliotekas į failą _requirements.txt_ taip:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. Toliau sukurkite virtualią aplinką ir įdiekite bibliotekas:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Windows operacinėje sistemoje naudokite šias komandas, kad sukurtumėte ir aktyvuotumėte virtualią aplinką:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. Į failą _app.py_ pridėkite šį kodą:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Paaiškinkime šį kodą:
-
-- Pirmiausia importuojame reikalingas bibliotekas, įskaitant OpenAI biblioteką, dotenv biblioteką, requests biblioteką ir Pillow biblioteką.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Toliau įkeliame aplinkos kintamuosius iš _.env_ failo.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Po to konfigūruojame Azure OpenAI paslaugos klientą.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Toliau generuojame vaizdą:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Aukščiau pateiktas kodas grąžina JSON objektą, kuriame yra sugeneruoto vaizdo URL. Šį URL galima naudoti vaizdui atsisiųsti ir išsaugoti faile.
-
-- Galiausiai atidarome vaizdą ir naudojame standartinį vaizdų peržiūros įrankį, kad jį parodytume:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Daugiau informacijos apie vaizdo generavimą
-
-Pažvelkime į kodą, kuris generuoja vaizdą, išsamiau:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt** – tai tekstinis promptas, naudojamas vaizdui generuoti. Šiuo atveju naudojame promptą „Triušis ant arklio, laikantis ledinuką, rūke apgaubtoje pievoje, kurioje auga narcizai“.
-- **size** – tai generuojamo vaizdo dydis. Šiuo atveju generuojame vaizdą, kurio dydis yra 1024x1024 pikseliai.
-- **n** – tai generuojamų vaizdų skaičius. Šiuo atveju generuojame du vaizdus.
-- **temperature** – tai parametras, kontroliuojantis generatyvinio dirbtinio intelekto modelio išvesties atsitiktinumą. Temperatūra yra reikšmė nuo 0 iki 1, kur 0 reiškia, kad išvestis yra deterministinė, o 1 – kad išvestis yra atsitiktinė. Numatytasis reikšmė yra 0.7.
-
-Yra daugiau dalykų, kuriuos galite daryti su vaizdais, apie tai kalbėsime kitame skyriuje.
-
-## Papildomos vaizdų generavimo galimybės
-
-Jūs jau matėte, kaip galime sugeneruoti vaizdą naudodami kelias Python kodo eilutes. Tačiau yra daugiau dalykų, kuriuos galite daryti su vaizdais.
-
-Taip pat galite:
-
-- **Redaguoti vaizdus**. Pateikdami esamą vaizdą, kaukę ir promptą, galite pakeisti vaizdą. Pavyzdžiui, galite pridėti kažką prie tam tikros vaizdo dalies. Įsivaizduokite mūsų triušio vaizdą – galite pridėti skrybėlę triušiui. Tai daroma pateikiant vaizdą, kaukę (nurodant sritį, kurioje reikia pakeitimų) ir tekstinį promptą, kuriame nurodoma, ką reikia padaryti.
-> Pastaba: tai nepalaikoma DALL-E 3.
-
-Štai pavyzdys naudojant GPT Image:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Pagrindiniame vaizde būtų tik poilsio zona su baseinu, tačiau galutiniame vaizde atsirastų flamingas:
+# gpt-image modeliai grąžina base64 (b64_json), ne URL – dekoduokite į baitus.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+Paleiskite naudodami `python app.py`. PNG failas bus įrašytas aplanke `images/`.
+
+> Kiekvienas kvietimas `images.generate` sugeneruoja skirtingą iliustraciją pagal tą patį užklausimą – iliustracijų modeliai neturi `temperature` parametro (tai valdymas tekstų generavime). Jei norite įvairumo, pakartokite API užklausą; jei norite mažiau variacijų, būkite konkretesni užklausoje.
+
+## Iliustracijų redagavimas
+
+`gpt-image` modeliai gali **redaguoti** esamą iliustraciją: pateikite vaizdą, pasirenkamą **kaukę** (pažymi plotą, kurį reikia pakeisti) ir aprašymą, ką pakeisti. Kaip ir generavimas, redagavimai grąžinami base64 formatu.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/lt/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -268,211 +148,51 @@ Taip pat galite:
   <img src="../../../translated_images/lt/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **Kurti variacijas**. Idėja yra ta, kad paimamas esamas vaizdas ir prašoma sukurti jo variacijas. Norėdami sukurti variaciją, pateikiate vaizdą ir tekstinį promptą bei kodą, kaip parodyta:
+## Ribų nustatymas su metapromptais
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Pastaba: tai palaikoma tik OpenAI.
-
-## Temperatūra
-
-Temperatūra yra parametras, kontroliuojantis generatyvinio dirbtinio intelekto modelio išvesties atsitiktinumą. Temperatūra yra reikšmė nuo 0 iki 1, kur 0 reiškia, kad išvestis yra deterministinė, o 1 – kad išvestis yra atsitiktinė. Numatytasis reikšmė yra 0.7.
-
-Pažvelkime į pavyzdį, kaip veikia temperatūra, paleisdami šį promptą du kartus:
-
-> Promptas: „Triušis ant arklio, laikantis ledinuką, rūke apgaubtoje pievoje, kurioje auga narcizai“
-
-![Triušis ant arklio, laikantis ledinuką, versija 1](../../../translated_images/lt/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Dabar paleiskime tą patį promptą dar kartą, kad pamatytume, jog negausime tokio paties vaizdo du kartus:
-
-![Sugeneruotas triušio ant arklio vaizdas](../../../translated_images/lt/v2-generated-image.33f55a3714efe61d.webp)
-
-Kaip matote, vaizdai yra panašūs, bet ne identiški. Pabandykime pakeisti temperatūros reikšmę į 0.1 ir pažiūrėkime, kas nutiks:
+Kai jau galite generuoti iliustracijas, reikia užtikrinti saugos ribas, kad jūsų programa negeneruotų nesaugių ar nepageidaujamų turinio. **Metapromptas** yra tekstas, kurį pridedate prie naudotojo užklausos, kad apribotumėte modelio generuojamą turinį.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Temperatūros keitimas
-
-Pabandykime padaryti išvestį labiau deterministinę. Galime pastebėti iš dviejų sugeneruotų vaizdų, kad pirmame vaizde yra triušis, o antrame – arklys, todėl vaizdai labai skiriasi.
-
-Todėl pakeiskime savo kodą ir nustatykime temperatūrą į 0, kaip parodyta:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Dabar, kai paleisite šį kodą, gausite šiuos du vaizdus:
-
-- ![Temperatūra 0, v1](../../../translated_images/lt/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Temperatūra 0, v2](../../../translated_images/lt/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Čia aiškiai matyti, kaip vaizdai labiau panašūs vienas į kitą.
-
-## Kaip apibrėžti savo programos ribas naudojant meta promptus
-
-Su mūsų demonstracija jau galime generuoti vaizdus savo klientams. Tačiau mums reikia sukurti tam tikras ribas savo programai.
-
-Pavyzdžiui, nenorime generuoti vaizdų, kurie nėra tinkami darbui ar netinkami vaikams.
-
-Tai galime padaryti naudodami _meta promptus_. Meta promptai yra tekstiniai promptai, naudojami generatyvinio dirbtinio intelekto modelio išvesties kontrolei. Pavyzdžiui, galime naudoti meta promptus, kad kontroliuotume išvestį ir užtikrintume, jog sugeneruoti vaizdai būtų tinkami darbui ar vaikams.
-
-### Kaip tai veikia?
-
-Kaip veikia meta promptai?
-
-Meta promptai yra tekstiniai promptai, naudojami generatyvinio dirbtinio intelekto modelio išvesties kontrolei. Jie yra pozicionuojami prieš tekstinį promptą ir naudojami modelio išvesties kontrolei, įterpiami į programas, kad kontroliuotų modelio išvestį. Meta promptas ir promptas yra sujungiami į vieną tekstinį promptą.
-
-Vienas meta prompto pavyzdys galėtų būti toks:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Dabar pažiūrėkime, kaip galime naudoti meta promptus savo demonstracijoje.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Iš aukščiau pateikto prompto matyti, kaip visi kuriami vaizdai atsižvelgia į meta promptą.
-
-## Užduotis – padėkime studentams
-
-Pamokos pradžioje pristatėme Edu4All. Dabar laikas padėti studentams generuoti vaizdus jų užduotims.
-
-Studentai kurs vaizdus savo užduotims, susijusioms su paminklais – kokie paminklai bus, priklauso nuo pačių studentų. Studentai kviečiami pasitelkti savo kūrybiškumą šioje užduotyje, kad paminklus patalpintų į įvairius kontekstus.
-
-## Sprendimas
-
-Štai vienas galimas sprendimas:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# perduoti `prompt` klientui per client.images.generate(...)
 ```
+
+Kiekviena iliustracija dabar sugeneruojama pagal metaprompto nustatytas ribas. Derinkite tai su turinio filtrais, integruotais į Microsoft Foundry, kad sustiprintumėte apsaugą.
+
+## Užduotis – leiskime studentams
+
+Edu4All studentams reikia iliustracijų jų vertinimams. Sukurkite programą, kuri generuotų **paminklų** (kokius – priklauso nuo jūsų) iliustracijas, pateiktas įvairiuose kūrybiniuose kontekstuose – pavyzdžiui, garsus orientyras saulėlydžio metu su vaiku, kuris žiūri.
+
+Išbandykite patys, po to palyginkite su referencinėmis sprendimų versijomis:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) pilna generavimo programa: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Taip pat dirbkite su užrašų knygutėmis [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` Azure ir `oai-assignment.ipynb` OpenAI).
 
 ## Puikus darbas! Tęskite mokymąsi
 
-Baigę šią pamoką, peržiūrėkite mūsų [Generatyvinio dirbtinio intelekto mokymosi kolekciją](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), kad toliau gilintumėte savo žinias apie generatyvinį dirbtinį intelektą!
+Baigę šią pamoką, peržiūrėkite mūsų [Generatyvios AI mokymosi rinkinį](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), kad toliau gilintumėte savo žinias apie generatyviąją AI!
 
-Eikite į 10 pamoką, kurioje aptarsime, kaip [kurti dirbtinio intelekto programas naudojant mažai kodo](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Eikite prie 10 pamokos, kad tęstumėte mokymąsi.
 
 ---
 
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus interpretavimus, atsiradusius naudojant šį vertimą.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

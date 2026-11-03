@@ -1,40 +1,42 @@
-# Paggawa gamit ang Mistral Models
+# Pagtatrabaho gamit ang Mistral Models 
 
-## Panimula
+## Panimula 
 
-Saklaw ng araling ito ang:  
-- Pagsusuri sa iba't ibang Mistral Models  
-- Pag-unawa sa mga gamit at sitwasyon para sa bawat modelo  
-- Mga halimbawa ng code na nagpapakita ng natatanging katangian ng bawat modelo.
+Saklaw ng leksyong ito: 
+- Pagsusuri sa iba't ibang Mistral Models 
+- Pag-unawa sa mga gamit at senaryo para sa bawat modelo 
+- Pagsusuri sa mga halimbawa ng code na nagpapakita ng natatanging mga tampok ng bawat modelo. 
 
-## Ang mga Mistral Models
+## Ang mga Mistral Models 
 
-Sa araling ito, tatalakayin natin ang 3 iba't ibang Mistral models:  
-**Mistral Large**, **Mistral Small**, at **Mistral Nemo**.
+Sa leksyong ito, susuriin natin ang 3 iba't ibang Mistral models: 
+**Mistral Large**, **Mistral Small** at **Mistral Nemo**. 
 
-Lahat ng mga modelong ito ay libre at makukuha sa Github Model marketplace. Gagamitin ang mga modelong ito sa notebook na ito para patakbuhin ang code. Narito ang karagdagang detalye sa paggamit ng Github Models para sa [prototyping gamit ang AI models](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+Ang bawat isa sa mga modelong ito ay libreng makukuha sa [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst). Ang code sa notebook na ito ay gagamit ng mga modelong ito upang patakbuhin ang code.
+
+> **Tandaan:** Ang GitHub Models ay titigil na sa katapusan ng Hulyo 2026. Narito ang higit pang mga detalye sa paggamit ng [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) para sa pag-prototype gamit ang mga AI models. 
+
 
 ## Mistral Large 2 (2407)
+Ang Mistral Large 2 ay kasalukuyang pangunahing modelo mula sa Mistral at dinisenyo para sa paggamit ng mga negosyo. 
 
-Ang Mistral Large 2 ang kasalukuyang pangunahing modelo mula sa Mistral at idinisenyo para sa paggamit sa enterprise.
+Ang modelo ay isang upgrade sa orihinal na Mistral Large sa pamamagitan ng pag-aalok ng 
+- Mas Malaking Context Window - 128k kumpara sa 32k 
+- Mas Magandang performance sa Math at Coding Tasks - 76.9% average accuracy kumpara sa 60.4% 
+- Pinalakas na multilingual performance - mga wika ay kinabibilangan ng: English, French, German, Spanish, Italian, Portuguese, Dutch, Russian, Chinese, Japanese, Korean, Arabic, at Hindi.
 
-Ang modelong ito ay isang upgrade mula sa orihinal na Mistral Large sa pamamagitan ng pagbibigay ng  
-- Mas Malaking Context Window - 128k kumpara sa 32k  
-- Mas mahusay na performance sa Math at Coding Tasks - 76.9% average accuracy kumpara sa 60.4%  
-- Mas mataas na multilingual na performance - kabilang ang mga wika: English, French, German, Spanish, Italian, Portuguese, Dutch, Russian, Chinese, Japanese, Korean, Arabic, at Hindi.
+Sa mga tampok na ito, mahusay ang Mistral Large sa 
+- *Retrieval Augmented Generation (RAG)* - dahil sa mas malaking context window
+- *Function Calling* - ang modelong ito ay may katutubong function calling na nagpapahintulot ng integrasyon sa mga panlabas na tool at APIs. Ang mga tawag na ito ay maaaring gawin ng sabay-sabay o sunud-sunod. 
+- *Code Generation* - mahusay ang modelong ito sa Python, Java, TypeScript at C++ na generation. 
 
-Dahil sa mga katangiang ito, mahusay ang Mistral Large sa  
-- *Retrieval Augmented Generation (RAG)* - dahil sa mas malaking context window  
-- *Function Calling* - may native function calling ang modelong ito na nagpapahintulot ng integrasyon sa mga external tools at APIs. Maaaring gawin ang mga tawag na ito nang sabay-sabay o sunod-sunod.  
-- *Code Generation* - mahusay ang modelong ito sa pagbuo ng Python, Java, TypeScript, at C++ code.
+### Halimbawa ng RAG gamit ang Mistral Large 2 
 
-### Halimbawa ng RAG gamit ang Mistral Large 2
+Sa halimbawang ito, ginagamit natin ang Mistral Large 2 upang patakbuhin ang RAG pattern sa isang tekstong dokumento. Ang tanong ay nakasulat sa Korean at nagtatanong tungkol sa mga gawain ng may-akda bago pumasok sa kolehiyo. 
 
-Sa halimbawang ito, ginagamit natin ang Mistral Large 2 para patakbuhin ang RAG pattern sa isang text document. Ang tanong ay nakasulat sa Korean at nagtatanong tungkol sa mga gawain ng may-akda bago pumasok sa kolehiyo.
+Ginagamit nito ang Cohere Embeddings Model upang lumikha ng embeddings ng tekstong dokumento pati na rin ng tanong. Para sa sample na ito, ginagamit nito ang faiss Python package bilang vector store. 
 
-Gumagamit ito ng Cohere Embeddings Model para gumawa ng embeddings ng text document pati na rin ng tanong. Sa sample na ito, ginagamit ang faiss Python package bilang vector store.
-
-Kasama sa prompt na ipinapadala sa Mistral model ang parehong mga tanong at mga nakuha na bahagi ng teksto na kahawig ng tanong. Pagkatapos, nagbibigay ang Model ng sagot sa natural na wika.
+Ang prompt na ipinadala sa Mistral model ay kinabibilangan ng mga tanong at mga nakuha na bahagi na katulad ng tanong. Ang modelo ay nagbibigay ng sagot gamit ang natural na wika. 
 
 ```python 
 pip install faiss-cpu
@@ -51,9 +53,10 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference import EmbeddingsClient
 
-endpoint = "https://models.inference.ai.azure.com"
+# Kunin ito mula sa pahina ng "Overview" ng iyong proyekto sa Microsoft Foundry
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -92,7 +95,7 @@ d = text_embeddings.shape[1]
 index = faiss.IndexFlatL2(d)
 index.add(text_embeddings)
 
-question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?？"
+question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?"
 
 question_embedding = embed_client.embed(
     input=[question],
@@ -102,7 +105,7 @@ question_embedding = embed_client.embed(
 question_embeddings = np.array(question_embedding.data[0].embedding)
 
 
-D, I = index.search(question_embeddings.reshape(1, -1), k=2) # distance, index
+D, I = index.search(question_embeddings.reshape(1, -1), k=2) # distansya, index
 retrieved_chunks = [chunks[i] for i in I.tolist()[0]]
 
 prompt = f"""
@@ -130,30 +133,30 @@ chat_response = client.complete(
 print(chat_response.choices[0].message.content)
 ```
 
-## Mistral Small
+## Mistral Small 
+Ang Mistral Small ay isa pang modelo sa pamilya ng Mistral na nasa ilalim ng premier/enterprise na kategorya. Gaya ng pangalan, ang modelong ito ay isang Small Language Model (SLM). Ang mga pakinabang ng paggamit ng Mistral Small ay: 
+- Nakakatipid ng gastos kumpara sa mga Mistral LLMs gaya ng Mistral Large at NeMo - 80% bawas sa presyo
+- Mababang latency - mas mabilis na tugon kumpara sa mga LLMs ng Mistral
+- Flexible - maaaring i-deploy sa iba’t ibang mga kapaligiran na may mas kaunting mga limitasyon sa kinakailangang mga resources. 
 
-Ang Mistral Small ay isa pang modelo sa pamilya ng Mistral na kabilang sa premier/enterprise category. Gaya ng pangalan, ito ay isang Small Language Model (SLM). Ang mga benepisyo ng paggamit ng Mistral Small ay:  
-- Nakakatipid sa gastos kumpara sa mga Mistral LLM tulad ng Mistral Large at NeMo - 80% mas mura  
-- Mababang latency - mas mabilis ang tugon kumpara sa mga LLM ng Mistral  
-- Flexible - maaaring i-deploy sa iba't ibang environment na may mas kaunting limitasyon sa kinakailangang resources.
 
-Magaling ang Mistral Small para sa:  
-- Mga text-based na gawain tulad ng pagsasummarize, sentiment analysis, at pagsasalin  
-- Mga aplikasyon na madalas ang mga request dahil sa pagiging cost-effective nito  
-- Mga code task na nangangailangan ng mababang latency tulad ng review at mga suhestiyon sa code
+Ang Mistral Small ay maganda para sa: 
+- Mga gawain na nakabase sa teksto tulad ng pagsasagawa ng buod, pagsusuri ng damdamin at pagsasalin. 
+- Mga aplikasyon kung saan madalas ang mga kahilingan dahil ito ay cost-effective 
+- Mababang latency sa mga gawain sa code tulad ng pagsusuri at mga mungkahi sa code 
 
-## Paghahambing ng Mistral Small at Mistral Large
+## Paghahambing ng Mistral Small at Mistral Large 
 
-Para ipakita ang pagkakaiba sa latency ng Mistral Small at Large, patakbuhin ang mga sumusunod na cells.
+Upang ipakita ang mga pagkakaiba sa latency sa pagitan ng Mistral Small at Large, patakbuhin ang mga cell sa ibaba. 
 
-Makikita mo ang pagkakaiba sa oras ng tugon na nasa pagitan ng 3-5 segundo. Pansinin din ang haba at estilo ng tugon sa parehong prompt.
+Makikita mo ang pagkakaiba sa oras ng tugon ng 3-5 segundo. Ito rin ay tandaan ang haba ng mga tugon at estilo gamit ang parehong prompt.  
 
 ```python 
 
 import os 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-small"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -182,9 +185,9 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -208,30 +211,31 @@ print(response.choices[0].message.content)
 
 ## Mistral NeMo
 
-Kumpara sa dalawang modelong tinalakay sa araling ito, ang Mistral NeMo lamang ang libreng modelo na may Apache2 License.
+Kumpara sa dalawang ibang modelo na tinalakay sa leksyon na ito, ang Mistral NeMo ang nag-iisang libreng modelo na may Apache2 License. 
 
-Tinuturing itong upgrade mula sa naunang open source LLM ng Mistral, ang Mistral 7B.
+Tinitingnan ito bilang isang upgrade sa naunang open source LLM mula sa Mistral, ang Mistral 7B. 
 
-Ilan pang mga katangian ng NeMo model ay:
+Ilan pang mga tampok ng NeMo model ay: 
 
-- *Mas epektibong tokenization:* Ginagamit ng modelong ito ang Tekken tokenizer kumpara sa mas karaniwang ginagamit na tiktoken. Nagbibigay ito ng mas mahusay na performance sa mas maraming wika at code.
+- *Mas epektibong tokenization:* Ang modelong ito ay gumagamit ng Tekken tokenizer kumpara sa mas karaniwang ginagamit na tiktoken. Ito ay nagpapahintulot ng mas mahusay na performance para sa mas maraming mga wika at code. 
 
-- *Finetuning:* Available ang base model para sa finetuning. Nagbibigay ito ng mas malaking flexibility para sa mga use-case na nangangailangan ng finetuning.
+- *Finetuning:* Ang base model ay available para sa finetuning. Ito ay nagbibigay ng mas maraming flexibility para sa mga kaso ng paggamit kung saan kinakailangan ang finetuning. 
 
-- *Native Function Calling* - Tulad ng Mistral Large, sinanay ang modelong ito sa function calling. Ginagawa nitong kakaiba ito bilang isa sa mga unang open source models na may ganitong kakayahan.
+- *Katutubong Function Calling* - Gaya ng Mistral Large, ang modelong ito ay sinanay para sa function calling. Ginagawa nitong natatangi bilang isa sa mga unang open source models na gumawa nito. 
 
-### Paghahambing ng mga Tokenizer
 
-Sa sample na ito, titingnan natin kung paano hinahandle ng Mistral NeMo ang tokenization kumpara sa Mistral Large.
+### Paghahambing ng mga Tokenizer 
 
-Parehong gumagamit ng parehong prompt ang dalawang sample ngunit makikita mong mas kaunti ang tokens na ibinabalik ng NeMo kumpara sa Mistral Large.
+Sa sample na ito, titingnan natin kung paano hinahawakan ng Mistral NeMo ang tokenization kumpara sa Mistral Large. 
+
+Parehong mga sample ay kumuha ng parehong prompt pero mapapansin mong mas kakaunti ang token na ibinabalik ng NeMo kumpara sa Mistral Large. 
 
 ```bash
 pip install mistral-common
 ```
 
 ```python 
-# Import needed packages:
+# I-import ang mga kinakailangang package:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -242,13 +246,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# I-load ang Mistral tokenizer
 
-model_name = "open-mistral-nemo	"
+model_name = "open-mistral-nemo"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# I-tokenize ang listahan ng mga mensahe
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -266,7 +270,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -282,12 +286,12 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# Bilangin ang dami ng mga token
 print(len(tokens))
 ```
 
 ```python
-# Import needed packages:
+# Mag-import ng mga kailangan na pakete:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -298,13 +302,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# I-load ang Mistral tokenizer
 
 model_name = "mistral-large-latest"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# I-tokenize ang listahan ng mga mensahe
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -322,7 +326,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -338,13 +342,17 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# Bilangin ang bilang ng mga token
 print(len(tokens))
 ```
 
 ## Hindi dito nagtatapos ang pag-aaral, ipagpatuloy ang paglalakbay
 
-Pagkatapos matapos ang araling ito, tingnan ang aming [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) para ipagpatuloy ang pagpapalawak ng iyong kaalaman sa Generative AI!
+Pagkatapos matapos ang lekisyon na ito, tingnan ang aming [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) upang ipagpatuloy ang pagpapalawak ng iyong kaalaman sa Generative AI!
 
-**Paalala**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagamat nagsusumikap kami para sa katumpakan, pakatandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o di-tumpak na impormasyon. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

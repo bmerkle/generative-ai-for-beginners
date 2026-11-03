@@ -1,90 +1,90 @@
-# 檢索增強生成 (RAG) 與向量資料庫
+# 檢索增強生成 (RAG) 與向量數據庫
 
-[![檢索增強生成 (RAG) 與向量資料庫](../../../translated_images/zh-HK/15-lesson-banner.ac49e59506175d4f.webp)](https://youtu.be/4l8zhHUBeyI?si=BmvDmL1fnHtgQYkL)
+[![檢索增強生成 (RAG) 與向量數據庫](../../../translated_images/zh-HK/15-lesson-banner.ac49e59506175d4f.webp)](https://youtu.be/4l8zhHUBeyI?si=BmvDmL1fnHtgQYkL)
 
-在搜尋應用課程中，我們曾簡略學習如何將自己的資料整合到大型語言模型（LLMs）中。本課程將進一步深入探討在 LLM 應用中將資料紮根的概念、流程機制及資料儲存方法，包括向量嵌入及文字。
+在搜尋應用課程中，我們簡要學習了如何將您自己的數據整合到大型語言模型（LLM）中。在本課程中，我們將深入探討在 LLM 應用中基於您的數據（grounding）的概念、過程機制以及存儲數據的方法，包括嵌入向量和文本。
 
-> **影片即將推出**
+> <strong>影片即將推出</strong>
 
 ## 介紹
 
-本課程將涵蓋以下內容：
+在本課程中，我們將涵蓋以下內容：
 
-- 介紹 RAG 是什麼及其在人工智慧 (AI) 中的用途。
+- RAG 的介紹，它是什麼以及為何在人工智能 (AI) 中使用它。
 
-- 了解向量資料庫是什麼及為我們的應用建立一個。
+- 了解向量數據庫的概念並為我們的應用創建一個。
 
-- 實作範例示範如何將 RAG 整合到應用中。
+- 關於如何將 RAG 集成到應用中的實用示例。
 
 ## 學習目標
 
 完成本課程後，您將能夠：
 
-- 解釋 RAG 在資料檢索與處理中的重要性。
+- 說明 RAG 在數據檢索與處理中的重要性。
 
-- 設定 RAG 應用並將資料紮根於 LLM。
+- 設置 RAG 應用並將您的數據基於到 LLM 中。
 
-- 有效整合 RAG 與向量資料庫於 LLM 應用中。
+- 在 LLM 應用中有效整合 RAG 與向量數據庫。
 
-## 我們的場景：用自己的資料強化 LLM
+## 我們的場景：用我們自己的數據強化 LLM
 
-本課程中，我們想將自己的筆記加入教育新創平台，以便聊天機器人能取得更多不同科目的資訊。利用這些筆記，學習者將能更佳地學習並理解各主題，方便為考試複習。為建立場景，我們將使用：
+本課程中，我們希望將自己的筆記添加到教育創業項目，讓聊天機器人能夠獲取各科更多資訊。利用我們的筆記，學習者將能更好地學習並理解不同主題，從而更輕鬆地複習考試。為了建立場景，我們將使用：
 
-- `Azure OpenAI:` 我們用來打造聊天機器人的 LLM。
+- `Azure OpenAI:` 我們用於建立聊天機器人的 LLM
 
-- `AI for beginners' lesson on Neural Networks:` 作為紮根我們 LLM 的資料。
+- `新手入門AI神經網絡課程`：我們將以此作為 LLM 的數據基礎
 
-- `Azure AI Search` 與 `Azure Cosmos DB:` 向量資料庫，用以儲存資料並建立搜尋索引。
+- `Azure AI Search` 和 `Azure Cosmos DB:` 用於存儲數據並建立搜尋索引的向量數據庫
 
-使用者可根據筆記產生練習測驗、複習閃卡及將內容摘要為簡明總結。開始前，讓我們先了解什麼是 RAG 及其運作方式：
+用戶將能從筆記中創建練習測驗、複習抽認卡並總結成簡明概覽。首先來看看 RAG 是什麼以及它如何運作：
 
 ## 檢索增強生成 (RAG)
 
-由 LLM 推動的聊天機器人處理用戶提示以生成回應。它被設計為互動式，能在多種主題與使用者交流。但其回應侷限於所提供的上下文與基礎訓練資料。例如 GPT-4 的知識截止於 2021 年 9 月，意即它不具備該日期後發生事件的知識。另外，訓練 LLM 的資料中不包含機密資訊，如個人筆記或公司的產品手冊。
+由 LLM 驅動的聊天機器人會處理用戶提示以生成回應。它被設計為互動式，能與用戶就各種主題交流。然而，其回答受限於提供的上下文和其基礎訓練資料。例如，GPT-4 的知識截止於 2021 年 9 月，意即它缺乏此後發生事件的知識。此外，訓練 LLM 的數據不包括機密資訊，例如個人筆記或公司產品手冊。
 
-### RAG（檢索增強生成）的運作方式
+### RAG（檢索增強生成）的運作原理
 
-![drawing showing how RAGs work](../../../translated_images/zh-HK/how-rag-works.f5d0ff63942bd3a6.webp)
+![展示 RAG 運作方式的圖示](../../../translated_images/zh-HK/how-rag-works.f5d0ff63942bd3a6.webp)
 
-假設你想部署一個可以從筆記建立測驗題的聊天機器人，你需要連接到知識庫。此時 RAG 發揮作用。RAG 運作流程如下：
+假設您想部署一個能根據您的筆記創建測驗的聊天機器人，您需要連接到知識庫。這就是 RAG 發揮作用之處。RAG 的運作流程如下：
 
-- **知識庫：** 在檢索前，這些文件需被匯入並預處理，通常將大型文件分割成較小的區塊，再轉成文字嵌入並儲存在資料庫中。
+- **知識庫：** 在檢索前，這些文檔需進行攝取與預處理，通常是將大型文檔拆分成較小的段落，轉換為文本嵌入，並存儲於數據庫中。
 
-- **使用者詢問：** 使用者提出問題。
+- **用戶查詢：** 用戶提出問題
 
-- **檢索：** 使用者提問時，嵌入模型從知識庫中取回相關資訊，提供更多上下文以納入提示。
+- **檢索：** 用戶發問時，嵌入模型從知識庫提取相關資訊，提供更多上下文，這些上下文會被納入提示中。
 
-- **增強生成：** LLM 根據取回的資料強化回應，不僅基於預訓練的資料，同時結合相關上下文資訊。檢索到的資料用以增強 LLM 的回應，LLM 然後返回答案給使用者。
+- **增強生成：** LLM 根據檢索到的數據加強回應，使生成的答案不僅基於預訓練數據，也結合了新增的相關上下文。LLM 接著回覆用戶的問題。
 
-![drawing showing how RAGs architecture](../../../translated_images/zh-HK/encoder-decode.f2658c25d0eadee2.webp)
+![展示 RAG 架構的圖示](../../../translated_images/zh-HK/encoder-decode.f2658c25d0eadee2.webp)
 
-RAG 架構透過 transformer 實現，由編碼器和解碼器兩部分組成。例如，當用戶提出問題時，輸入文字被「編碼」成捕捉詞意的向量，而這些向量被「解碼」用於文件索引並根據用戶查詢生成新文字。LLM 結合編碼器與解碼器模型生成輸出。
+RAG 架構使用 transformer，包含兩部分：編碼器與解碼器。舉例來說，用戶提問時，輸入文本會被「編碼」成捕捉詞義的向量，然後向量被「解碼」到我們的文檔索引，並根據用戶查詢生成新文本。LLM 同時使用編碼器-解碼器模型來生成輸出。
 
-根據提案論文 [Retrieval-Augmented Generation for Knowledge intensive NLP (natural language processing software) Tasks](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst)，實作 RAG 有兩種方法：
+根據論文 [Retrieval-Augmented Generation for Knowledge intensive NLP (natural language processing software) Tasks](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst)，實現 RAG 有兩種方法：
 
-- **_RAG-Sequence_** 使用檢索到的文件預測最佳答覆用戶查詢的答案。
+- **_RAG-Sequence_**：使用檢索的文檔預測用戶查詢的最佳答案
 
-- **RAG-Token** 利用文件產生下一個 token，然後檢索它們以回答用戶查詢。
+- **RAG-Token**：使用文檔生成下一個字元，然後檢索回應用戶查詢
 
-### 為何要使用 RAG？
+### 為何使用 RAG？
 
-- **資訊豐富性：** 確保文字回應為最新且即時。藉由存取內部知識庫，提升特定領域任務的效能。
+- **資訊豐富性：** 確保文字回答是最新且符合現狀，從而提升在特定領域任務上的表現，透過存取內部知識庫。
 
-- 利用知識庫中的 **可驗證數據** 降低捏造資訊，為使用者查詢提供上下文。
+- 利用知識庫中的 <strong>可驗證數據</strong> 提供上下文，減少捏造資訊的可能。
 
-- **成本效益佳，** 相較微調 LLM 更經濟。
+- 與微調 LLM 相比，它們的成本更低，故為 <strong>成本效益</strong> 之選。
 
 ## 建立知識庫
 
-我們的應用基於個人資料，即 AI 初學者課程中的神經網路單元。
+我們的應用基於我們的個人數據，即新手入門 AI 神經網絡課程中的內容。
 
-### 向量資料庫
+### 向量數據庫
 
-向量資料庫與傳統資料庫不同，是專門設計用於儲存、管理與搜尋嵌入向量的資料庫。它儲存文件的數值表示。將資料轉成數值嵌入使 AI 系統更容易理解與處理資料。
+向量數據庫與傳統數據庫不同，它是一種專門用於存儲、管理與搜索嵌入向量的數據庫。它存放文檔的數值表示。將數據拆解為數值嵌入向量使 AI 系統更易理解與處理數據。
 
-我們將嵌入存於向量資料庫中，因為 LLM 對可接受輸入的 token 數有上限。無法將整個嵌入一次輸入 LLM，因此需將其分塊。當用戶提問時，會回傳與問題最相似的嵌入及提示。分塊也能降低經過 LLM 的 token 代價。
+我們將嵌入存儲在向量數據庫中，因為 LLM 對輸入的標記數量有限制。由於無法將整個嵌入直接傳入 LLM，我們需要將其分段，當用戶提問時，最相似的嵌入及提示一起返回。分段也可降低通過 LLM 傳遞標記數造成的成本。
 
-常見的向量資料庫包括 Azure Cosmos DB、Clarifyai、Pinecone、Chromadb、ScaNN、Qdrant 與 DeepLake。你可使用 Azure CLI 下列指令建立 Azure Cosmos DB 模型：
+一些熱門的向量數據庫包括 Azure Cosmos DB、Clarifyai、Pinecone、Chromadb、ScaNN、Qdrant 和 DeepLake。您可以使用 Azure CLI 創建 Azure Cosmos DB 模型，命令如下：
 
 ```bash
 az login
@@ -93,9 +93,9 @@ az cosmosdb create -n <cosmos-db-name> -r <resource-group-name>
 az cosmosdb list-keys -n <cosmos-db-name> -g <resource-group-name>
 ```
 
-### 從文字到嵌入向量
+### 從文本到嵌入向量
 
-儲存資料前，需要將其轉換為向量嵌入再存至資料庫。如果處理大型文件或長文本，可根據預期查詢將其分塊。分塊可於句子層次或段落層次完成。因為分塊須從周圍文字擷取意義，你可加上其他上下文，如文件標題或加上分塊前後的文字。資料分塊方式如下：
+在儲存數據之前，我們需要將其轉換成向量嵌入。若您處理的是大型文檔或長文本，可根據預期查詢拆分為多段。可在句子級別或段落級別進行分段。由於分段依賴周圍詞彙的意義，您可以為分段添加上下文，例如加入文檔標題或包含分段前後的部分文本。分段方法範例如下：
 
 ```python
 def split_text(text, max_length, min_length):
@@ -109,45 +109,45 @@ def split_text(text, max_length, min_length):
             chunks.append(' '.join(current_chunk))
             current_chunk = []
 
-    # 如果最後一個區塊未達到最短長度，仍然加入該區塊
+    # 如果最後一塊未達到最小長度，也要加入
     if current_chunk:
         chunks.append(' '.join(current_chunk))
 
     return chunks
 ```
 
-分塊後，我們再使用不同嵌入模型將文字嵌入。一些可用模型包括 word2vec、OpenAI 的 ada-002、Azure Computer Vision 等。選擇模型時會視語言、編碼內容類型（文字/圖片/音訊）、可編碼輸入大小及輸出嵌入長度而定。
+分段後，我們可以使用不同的嵌入模型將文本嵌入。一些可用模型包括 word2vec、OpenAI 的 ada-002、Azure Computer Vision 等。選擇模型取決於您使用的語言、編碼的內容類型（文本/圖像/音頻）、可編碼的輸入大小及嵌入輸出的長度。
 
-以下為使用 OpenAI `text-embedding-ada-002` 模型嵌入「cat」字的示例：
-![an embedding of the word cat](../../../translated_images/zh-HK/cat.74cbd7946bc9ca38.webp)
+使用 OpenAI 的 `text-embedding-ada-002` 模型嵌入文本的示例如下：
+![一個表示單詞 cat 的嵌入](../../../translated_images/zh-HK/cat.74cbd7946bc9ca38.webp)
 
-## 檢索和向量搜尋
+## 檢索與向量搜索
 
-用戶提問時，檢索器使用查詢編碼器將其轉為向量，接著在文件搜尋索引中尋找與輸入相關的向量。一旦完成，將輸入向量和文件向量轉成文字並送入 LLM。
+用戶提問時，檢索器利用查詢編碼器將其轉為向量，接著在文檔搜尋索引中查找與輸入相關的向量。一旦找到，它會將輸入向量和文檔向量轉換成文本，再傳給 LLM。
 
 ### 檢索
 
-檢索是系統迅速尋找符合搜尋條件的文件。檢索器目標是取得用來提供上下文並將 LLM 紮根於資料的文件。
+檢索指系統試圖快速找到符合搜索條件的文檔。檢索器的目標是取得用於為 LLM 提供上下文及數據基礎的文檔。
 
-資料庫內搜尋方法包括：
+在數據庫內執行搜索有多種方式，例如：
 
-- **關鍵字搜尋** — 用於文字搜尋。
+- <strong>關鍵字搜索</strong> - 用於文本查詢
 
-- **向量搜尋** — 使用嵌入模型將文件從文字轉為向量表示，允許根據詞意的**語意搜尋**。檢索將找出向量表示與用戶問題最接近的文件。
+- <strong>向量搜索</strong> - 使用嵌入模型將文本轉換為向量表示，允許進行基於詞義的 <strong>語義搜索</strong>。透過查詢與用戶問題向量最接近的向量所對應文檔進行檢索。
 
-- **混合搜尋** — 關鍵字與向量搜尋結合。
+- <strong>混合搜索</strong> - 將關鍵字搜索與向量搜索結合。
 
-檢索的挑戰是若資料庫中無與查詢相似的回應，系統只能回傳最接近資訊。可使用設定最大相關距離或混合搜尋等策略。本課程使用混合搜尋，結合向量與關鍵字搜尋。我們將資料存入含有分塊及嵌入數據欄位的 dataframe。
+檢索的挑戰是當數據庫中無與查詢相似的回應，系統會返回最佳資訊；您可設置最大相關距離或使用結合關鍵字和向量的混合搜索。本課程將採用混合搜索，並將數據存入包含分段和嵌入向量的資料框。
 
 ### 向量相似度
 
-檢索器會尋找知識庫中彼此靠近的嵌入，即最鄰近的向量，因為它們文本相似。場景中用戶查詢先被嵌入，再與相似嵌入配對。衡量不同向量相似度的常見方法是餘弦相似度（基於兩向量間角度）。
+檢索器會在知識庫中尋找相近的嵌入，即最接近的鄰居，因為文字相似。在情境中，用戶先將查詢嵌入，再配對相似的嵌入。最常用的相似度衡量是基於兩向量間夾角的餘弦相似度。
 
-其他可用衡量方法包括歐氏距離（向量端點間直線距離）及點積（兩向量對應元素乘積和）。
+其他相似度衡量可用歐氏距離（向量端點間的直線距離）和點積（對應元素積的和）。
 
-### 搜尋索引
+### 搜索索引
 
-執行檢索前，我們需為知識庫建立搜尋索引。索引儲存嵌入，能於大型資料庫迅速找出最相似區塊。我們可在本地建立索引：
+檢索前需為知識庫建立搜索索引。索引儲存嵌入向量，即便數據庫龐大也能迅速檢索最相似的分段。我們可以使用以下方式在本地建立索引：
 
 ```python
 from sklearn.neighbors import NearestNeighbors
@@ -157,20 +157,20 @@ embeddings = flattened_df['embeddings'].to_list()
 # 建立搜尋索引
 nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(embeddings)
 
-# 要查詢索引，你可以使用kneighbors方法
+# 如要查詢索引，你可以使用 kneighbors 方法
 distances, indices = nbrs.kneighbors(embeddings)
 ```
 
-### 重新排名
+### 重新排序
 
-完成資料庫查詢後，可能需按照相關性排序結果。重新排名 LLM 利用機器學習依相關性對搜尋結果排序。使用 Azure AI Search 時，語意重新排名器會自動進行此步驟。下圖示範如何根據最近鄰做重新排名：
+查詢數據庫後，您可能需要將結果按相關性排序。重新排序 LLM 利用機器學習改善結果的相關性，從而將它們按最相關排序。使用 Azure AI Search，重新排序會自動由語義重排器完成。以下是使用最近鄰進行重新排序的示例：
 
 ```python
 # 尋找最相似的文件
 distances, indices = nbrs.kneighbors([query_vector])
 
 index = []
-# 列印最相似的文件
+# 輸出最相似的文件
 for i in range(3):
     index = indices[0][i]
     for index in indices[0]:
@@ -181,9 +181,9 @@ for i in range(3):
         print(f"Index {index} not found in DataFrame")
 ```
 
-## 整合所有元素
+## 整合實現
 
-最後一步是將 LLM 加入組合，讓回應可紮根於我們的資料。可按照以下方式實現：
+最後一步是將 LLM 加入流程，使回應能基於我們的數據。實現方法如下：
 
 ```python
 user_input = "what is a perceptron?"
@@ -203,70 +203,70 @@ def chatbot(user_input):
     # 結合歷史記錄和用戶輸入
     history.append(user_input)
 
-    # 創建一個訊息對象
+    # 建立訊息物件
     messages=[
         {"role": "system", "content": "You are an AI assistant that helps with AI questions."},
         {"role": "user", "content": "\n\n".join(history) }
     ]
 
-    # 使用聊天完成來生成回應
-    response = openai.chat.completions.create(
-        model="gpt-4",
-        temperature=0.7,
-        max_tokens=800,
-        messages=messages
+    # 使用回應 API 來產生回覆
+    response = client.responses.create(
+        model="gpt-5-mini",
+        max_output_tokens=800,
+        input=messages,
+        store=False,
     )
 
-    return response.choices[0].message
+    return response.output_text
 
 chatbot(user_input)
 ```
 
-## 應用評估
+## 評估應用
 
 ### 評估指標
 
-- 回應品質：確保回應自然流暢、具人類語感。
+- 回應質量：確保回答聽起來自然、流暢且具有人類風格
 
-- 資料紮根度：評估回應是否源自提供的文件。
+- 數據基礎性：評估回答是否來自提供的文檔
 
-- 相關性：評估回應是否與提問相符且相關。
+- 相關性：評估回答是否符合並關聯提問內容
 
-- 流暢度：評估回應語法是否合理。
+- 流利度：回答是否在語法上合理
 
-## RAG（檢索增強生成）與向量資料庫的使用案例
+## RAG（檢索增強生成）與向量數據庫的使用場景
 
-多種使用場合可透過功能呼叫改善應用，例如：
+多種使用場景中，函數呼叫能提升您的應用，比如：
 
-- 問答系統：將公司資料紮根於聊天機器人，供員工提問。
+- 問答系統：將公司數據基礎與聊天機器人連結，讓員工可提問。
 
-- 推薦系統：建立系統匹配相似項目，如電影、餐廳等。
+- 推薦系統：創建可匹配相似值的系統，如電影、餐廳等。
 
-- 聊天機器人服務：儲存聊天紀錄，根據使用者資料個人化對話。
+- 聊天機器人服務：存儲聊天記錄並基於用戶數據個性化對話。
 
-- 基於向量嵌入的影像搜尋，適用於圖像識別與異常檢測。
+- 基於向量嵌入的圖片搜尋，有助於圖像識別和異常檢測。
 
 ## 總結
 
-我們已涵蓋 RAG 的基本範圍，從將資料加入應用、使用者查詢到回應輸出。為簡化 RAG 建置，可使用 Semanti Kernel、Langchain 或 Autogen 等框架。
+我們涵蓋了 RAG 的基本領域，從將數據添加至應用、用戶查詢到輸出。為簡化 RAG 的創建，您可以使用 Semanti Kernel、Langchain 或 Autogen 等框架。
 
 ## 作業
 
-繼續學習 RAG，您可以建置：
+若要繼續學習檢索增強生成 (RAG)，您可以構建：
 
-- 利用您選擇的框架打造應用前端。
+- 使用任意選擇的框架建立應用前端
 
-- 運用 LangChain 或 Semantic Kernel 框架重建您的應用。
+- 採用 LangChain 或 Semantic Kernel 框架，重新創建您的應用。
 
-恭喜您完成課程 👏。
+恭喜您完成本課程 👏。
 
-## 學習不止於此，繼續探索旅程
+## 學習不止於此，繼續前行
 
-完成本課程後，前往我們的 [生成式 AI 學習集合](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)，持續提升您的生成式 AI 知識！
+完成本課程後，請查看我們的[生成式 AI 學習系列](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)，持續提升您對生成式 AI 的認識！
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的內容，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言版本的文件應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們不對因使用此翻譯而引起的任何誤解或誤釋承擔責任。
+**免責聲明**：
+本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯而成。雖然我們致力於確保準確性，但請注意，機器自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議進行專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

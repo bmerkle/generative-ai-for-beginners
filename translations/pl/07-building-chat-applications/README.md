@@ -1,66 +1,66 @@
-# Tworzenie aplikacji czatowych zasilanych przez generatywną sztuczną inteligencję
+# Tworzenie aplikacji czatowych zasilanych generatywną sztuczną inteligencją
 
-[![Tworzenie aplikacji czatowych zasilanych przez generatywną sztuczną inteligencję](../../../translated_images/pl/07-lesson-banner.a279b937f2843833.webp)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
+[![Building Generative AI-Powered Chat Applications](../../../translated_images/pl/07-lesson-banner.a279b937f2843833.webp)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
 
-> _(Kliknij obrazek powyżej, aby obejrzeć wideo z tej lekcji)_
+> _(Kliknij powyższy obraz, aby obejrzeć wideo z tej lekcji)_
 
-Teraz, gdy zobaczyliśmy, jak można budować aplikacje generujące tekst, przyjrzyjmy się aplikacjom czatowym.
+Teraz, gdy zobaczyliśmy, jak możemy tworzyć aplikacje do generowania tekstu, przyjrzyjmy się aplikacjom czatowym.
 
-Aplikacje czatowe stały się integralną częścią naszego codziennego życia, oferując coś więcej niż tylko możliwość prowadzenia swobodnych rozmów. Są kluczowym elementem obsługi klienta, wsparcia technicznego, a nawet zaawansowanych systemów doradczych. Prawdopodobnie niedawno skorzystałeś z pomocy aplikacji czatowej. W miarę jak integrujemy bardziej zaawansowane technologie, takie jak generatywna sztuczna inteligencja, z tymi platformami, rośnie zarówno ich złożoność, jak i wyzwania.
+Aplikacje czatowe stały się integralną częścią naszego codziennego życia, oferując znacznie więcej niż tylko sposób na swobodną rozmowę. Są one nieodłącznym elementem obsługi klienta, wsparcia technicznego, a nawet zaawansowanych systemów doradczych. Prawdopodobnie niedawno korzystałeś z pomocy aplikacji czatowej. W miarę jak integrujemy coraz bardziej zaawansowane technologie, takie jak generatywna SI, w tych platformach, rośnie ich złożoność, a wraz z nią wyzwania.
 
-Niektóre pytania, na które musimy znaleźć odpowiedzi, to:
+Niektóre pytania, na które musimy znaleźć odpowiedź, to:
 
-- **Budowa aplikacji**. Jak efektywnie budować i płynnie integrować te aplikacje zasilane przez AI dla konkretnych przypadków użycia?
-- **Monitorowanie**. Po wdrożeniu, jak możemy monitorować i zapewnić, że aplikacje działają na najwyższym poziomie jakości, zarówno pod względem funkcjonalności, jak i zgodności z [sześcioma zasadami odpowiedzialnej AI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst)?
+- **Tworzenie aplikacji**. Jak efektywnie budować i bezproblemowo integrować te aplikacje zasilane SI dla konkretnych zastosowań?
+- **Monitorowanie**. Po wdrożeniu, jak możemy monitorować i zapewnić, że aplikacje działają na najwyższym poziomie jakości, zarówno pod względem funkcjonalności, jak i zgodności z [sześcioma zasadami odpowiedzialnej SI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst)?
 
-W miarę jak wkraczamy w erę zdefiniowaną przez automatyzację i płynne interakcje człowiek-maszyna, zrozumienie, jak generatywna sztuczna inteligencja przekształca zakres, głębię i adaptacyjność aplikacji czatowych, staje się kluczowe. Ta lekcja zbada aspekty architektury wspierającej te złożone systemy, zagłębi się w metody dostosowywania ich do zadań specyficznych dla danej dziedziny oraz oceni metryki i kwestie istotne dla zapewnienia odpowiedzialnego wdrożenia AI.
+W miarę jak wkraczamy w wiek zdefiniowany przez automatyzację i płynne interakcje człowiek-maszyna, zrozumienie, jak generatywna SI przekształca zakres, głębokość i elastyczność aplikacji czatowych, staje się niezbędne. Ta lekcja zbada aspekty architektury wspierające te złożone systemy, zgłębi metody dostrajania ich do zadań specyficznych dla dziedzin oraz oceni metryki i kwestie istotne dla zapewnienia odpowiedzialnego wdrożenia SI.
 
 ## Wprowadzenie
 
 Ta lekcja obejmuje:
 
-- Techniki efektywnego budowania i integracji aplikacji czatowych.
-- Jak zastosować dostosowanie i dopasowanie aplikacji.
-- Strategie i kwestie dotyczące skutecznego monitorowania aplikacji czatowych.
+- Techniki efektywnego budowania i integrowania aplikacji czatowych.
+- Jak stosować personalizację i dostrajanie aplikacji.
+- Strategie i rozważania dotyczące skutecznego monitorowania aplikacji czatowych.
 
 ## Cele nauki
 
-Po ukończeniu tej lekcji będziesz w stanie:
+Pod koniec tej lekcji będziesz potrafił:
 
 - Opisać kwestie związane z budową i integracją aplikacji czatowych z istniejącymi systemami.
-- Dostosować aplikacje czatowe do konkretnych przypadków użycia.
-- Zidentyfikować kluczowe metryki i kwestie dotyczące skutecznego monitorowania i utrzymania jakości aplikacji czatowych zasilanych przez AI.
-- Zapewnić, że aplikacje czatowe odpowiedzialnie wykorzystują sztuczną inteligencję.
+- Dostosować aplikacje czatowe do konkretnych zastosowań.
+- Zidentyfikować kluczowe metryki i rozważania do skutecznego monitorowania i utrzymania jakości aplikacji czatowych zasilanych SI.
+- Zapewnić odpowiedzialne wykorzystanie SI w aplikacjach czatowych.
 
-## Integracja generatywnej AI w aplikacjach czatowych
+## Integracja generatywnej SI w aplikacjach czatowych
 
-Podnoszenie jakości aplikacji czatowych za pomocą generatywnej AI nie polega tylko na uczynieniu ich bardziej inteligentnymi; chodzi o optymalizację ich architektury, wydajności i interfejsu użytkownika, aby zapewnić wysoką jakość doświadczenia użytkownika. Obejmuje to badanie podstaw architektonicznych, integracji API oraz rozważań dotyczących interfejsu użytkownika. Ta sekcja ma na celu dostarczenie kompleksowej mapy drogowej do poruszania się po tych złożonych obszarach, niezależnie od tego, czy integrujesz je z istniejącymi systemami, czy budujesz jako samodzielne platformy.
+Ulepszanie aplikacji czatowych za pomocą generatywnej SI to nie tylko kwestia ich „inteligentniejszego” działania; chodzi o optymalizację architektury, wydajności i interfejsu użytkownika, aby dostarczyć wysokiej jakości doświadczenia użytkownika. Obejmuje to badanie fundamentów architektonicznych, integracji API oraz zagadnień interfejsu użytkownika. Ta sekcja ma na celu zapewnienie Ci kompleksowej mapy drogowej do poruszania się po tych złożonych obszarach, niezależnie od tego, czy podłączasz je do istniejących systemów, czy tworzysz jako samodzielne platformy.
 
-Po zakończeniu tej sekcji będziesz wyposażony w wiedzę potrzebną do efektywnego konstruowania i włączania aplikacji czatowych.
+Pod koniec tej sekcji będziesz wyposażony w wiedzę niezbędną do efektywnego konstruowania i integrowania aplikacji czatowych.
 
 ### Chatbot czy aplikacja czatowa?
 
-Zanim zagłębimy się w budowę aplikacji czatowych, porównajmy „chatboty” z „aplikacjami czatowymi zasilanymi przez AI”, które pełnią różne role i funkcje. Głównym celem chatbota jest automatyzacja określonych zadań konwersacyjnych, takich jak odpowiadanie na często zadawane pytania czy śledzenie przesyłek. Zazwyczaj działa on na zasadzie logiki opartej na regułach lub złożonych algorytmach AI. Z kolei aplikacja czatowa zasilana przez AI to znacznie bardziej rozbudowane środowisko zaprojektowane do obsługi różnych form komunikacji cyfrowej, takich jak czaty tekstowe, głosowe i wideo między użytkownikami. Jej cechą charakterystyczną jest integracja modelu generatywnej AI, który symuluje subtelne, ludzkie rozmowy, generując odpowiedzi na podstawie szerokiej gamy danych wejściowych i wskazówek kontekstowych. Aplikacja czatowa zasilana przez generatywną AI może prowadzić rozmowy na dowolny temat, dostosowywać się do zmieniających się kontekstów konwersacyjnych, a nawet tworzyć kreatywne lub złożone dialogi.
+Zanim przejdziemy do tworzenia aplikacji czatowych, porównajmy „chatboty” z „aplikacjami czatowymi zasilanymi SI”, które pełnią odmienne role i funkcje. Głównym celem chatbota jest automatyzacja określonych zadań konwersacyjnych, takich jak odpowiadanie na często zadawane pytania czy śledzenie przesyłki. Zazwyczaj jest on sterowany przez logikę opartą na regułach lub skomplikowane algorytmy SI. Natomiast aplikacja czatowa zasilana SI to znacznie szersze środowisko, stworzone do umożliwienia różnych form komunikacji cyfrowej, takich jak czat tekstowy, głosowy czy wideo między użytkownikami. Charakterystyczną cechą jest integracja generatywnego modelu SI, który symuluje zniuansowane, przypominające ludzkie rozmowy, generując odpowiedzi na podstawie różnorodnych danych wejściowych i kontekstu. Aplikacja czatowa z generatywną SI może prowadzić otwarte dyskusje, dostosowywać się do zmieniających się kontekstów rozmowy, a nawet tworzyć kreatywne lub złożone dialogi.
 
-Poniższa tabela przedstawia kluczowe różnice i podobieństwa, które pomagają zrozumieć ich unikalne role w komunikacji cyfrowej.
+Poniższa tabela przedstawia kluczowe różnice i podobieństwa, które pomogą zrozumieć ich unikalne role w komunikacji cyfrowej.
 
-| Chatbot                               | Aplikacja czatowa zasilana generatywną AI |
-| ------------------------------------- | ----------------------------------------- |
-| Skoncentrowany na zadaniach i oparty na regułach | Świadomy kontekstu                        |
-| Często zintegrowany z większymi systemami | Może obsługiwać jeden lub wiele chatbotów |
-| Ograniczony do zaprogramowanych funkcji | Zawiera modele generatywnej AI            |
-| Specjalistyczne i strukturalne interakcje | Zdolny do rozmów na dowolny temat         |
+| Chatbot                               | Aplikacja czatowa zasilana generatywną SI         |
+| ------------------------------------- | ----------------------------------------------- |
+| Skoncentrowany na zadaniach i oparty na regułach | Świadomy kontekstu                               |
+| Często integrowany z większymi systemami          | Może obsługiwać jeden lub wiele chatbotów       |
+| Ograniczony do zaprogramowanych funkcji           | Wykorzystuje modele generatywnej SI              |
+| Specjalistyczne i ustrukturyzowane interakcje      | Możliwość dyskusji o otwartym zakresie tematycznym|
 
-### Wykorzystanie gotowych funkcji za pomocą SDK i API
+### Wykorzystanie gotowych funkcji poprzez SDK i API
 
-Podczas budowy aplikacji czatowej dobrym pierwszym krokiem jest ocena dostępnych rozwiązań. Wykorzystanie SDK i API do budowy aplikacji czatowych to korzystna strategia z wielu powodów. Integrując dobrze udokumentowane SDK i API, strategicznie pozycjonujesz swoją aplikację na długoterminowy sukces, rozwiązując problemy związane ze skalowalnością i utrzymaniem.
+Przy tworzeniu aplikacji czatowej świetnym pierwszym krokiem jest ocena, co już istnieje. Używanie SDK i API do budowania aplikacji czatowych to korzystna strategia z wielu powodów. Integrując dobrze udokumentowane SDK i API, strategicznie pozycjonujesz swoją aplikację na długoterminowy sukces, rozwiązując problemy skalowalności i konserwacji.
 
-- **Przyspiesza proces rozwoju i zmniejsza koszty**: Korzystanie z gotowych funkcji zamiast kosztownego procesu ich budowy pozwala skupić się na innych aspektach aplikacji, które mogą być ważniejsze, takich jak logika biznesowa.
-- **Lepsza wydajność**: Budując funkcjonalność od podstaw, w końcu zadasz sobie pytanie: „Jak to się skaluje? Czy aplikacja jest w stanie obsłużyć nagły napływ użytkowników?” Dobrze utrzymane SDK i API często mają wbudowane rozwiązania dla tych problemów.
-- **Łatwiejsze utrzymanie**: Aktualizacje i ulepszenia są łatwiejsze do zarządzania, ponieważ większość API i SDK wymaga jedynie aktualizacji biblioteki po wydaniu nowszej wersji.
-- **Dostęp do najnowszych technologii**: Wykorzystanie modeli, które zostały dopracowane i przeszkolone na obszernych zestawach danych, zapewnia Twojej aplikacji możliwości przetwarzania języka naturalnego.
+- **Przyspiesza proces rozwoju i zmniejsza nakład pracy**: Poleganie na gotowych funkcjach zamiast na kosztownym tworzeniu ich samodzielnie pozwala skupić się na innych ważniejszych aspektach aplikacji, takich jak logika biznesowa.
+- **Lepsza wydajność**: Budując funkcjonalność od podstaw, z czasem zastanawiasz się „Jak to się skalować? Czy aplikacja jest w stanie obsłużyć nagły wzrost użytkowników?” Dobrze utrzymywane SDK i API często mają wbudowane rozwiązania na te problemy.
+- **Łatwiejsza konserwacja**: Aktualizacje i ulepszenia są prostsze w zarządzaniu, ponieważ większość API i SDK wymaga jedynie aktualizacji biblioteki po wydaniu nowszej wersji.
+- **Dostęp do najnowszych technologii**: Wykorzystanie modeli, które zostały dostrojone i wytrenowane na rozległych zbiorach danych, zapewnia Twojej aplikacji możliwości przetwarzania języka naturalnego.
 
-Dostęp do funkcji SDK lub API zazwyczaj wymaga uzyskania zgody na korzystanie z udostępnionych usług, co często odbywa się za pomocą unikalnego klucza lub tokena uwierzytelniającego. Użyjemy biblioteki OpenAI Python Library, aby zobaczyć, jak to wygląda. Możesz również samodzielnie wypróbować to w następującym [notebooku dla OpenAI](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) lub [notebooku dla Azure OpenAI Services](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) w ramach tej lekcji.
+Uzyskanie dostępu do funkcji SDK czy API zwykle wymaga uzyskania pozwolenia na korzystanie z oferowanych usług, często poprzez unikalny klucz lub token uwierzytelniający. Użyjemy biblioteki OpenAI w Pythonie, aby pokazać, jak to wygląda. Możesz też wypróbować samodzielnie w następujących [notatnikach dla OpenAI](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) lub [notatnikach dla Azure OpenAI Services](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) do tej lekcji.
 
 ```python
 import os
@@ -72,111 +72,121 @@ client = OpenAI(
     api_key=API_KEY
     )
 
-chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Suggest two titles for an instructional lesson on chat applications for generative AI."}])
+response = client.responses.create(model="gpt-5-mini", input="Suggest two titles for an instructional lesson on chat applications for generative AI.", store=False)
+print(response.output_text)
 ```
 
-Powyższy przykład używa modelu GPT-3.5 Turbo do uzupełnienia podpowiedzi, ale zauważ, że klucz API jest ustawiony przed wykonaniem tego kroku. Jeśli nie ustawisz klucza, otrzymasz błąd.
+Powyższy przykład używa modelu GPT-5 mini z API Responses do ukończenia promptu, ale zwróć uwagę, że klucz API jest ustawiony przed tym działaniem. Bez ustawienia klucza otrzymałbyś błąd.
 
 ## Doświadczenie użytkownika (UX)
 
-Ogólne zasady UX mają zastosowanie do aplikacji czatowych, ale istnieją dodatkowe kwestie, które stają się szczególnie istotne ze względu na komponenty uczenia maszynowego.
+Ogólne zasady UX odnoszą się do aplikacji czatowych, ale oto kilka dodatkowych kwestii, które stają się szczególnie ważne ze względu na komponenty uczenia maszynowego.
 
-- **Mechanizm rozwiązywania niejasności**: Modele generatywnej AI czasami generują niejasne odpowiedzi. Funkcja umożliwiająca użytkownikom zadawanie pytań uzupełniających może być pomocna w takich sytuacjach.
-- **Zachowanie kontekstu**: Zaawansowane modele generatywnej AI mają zdolność zapamiętywania kontekstu w rozmowie, co może być niezbędnym atutem dla doświadczenia użytkownika. Dając użytkownikom możliwość kontrolowania i zarządzania kontekstem, poprawiamy ich doświadczenie, ale wprowadzamy ryzyko przechowywania wrażliwych informacji. Rozważania dotyczące czasu przechowywania tych informacji, takie jak wprowadzenie polityki retencji, mogą zrównoważyć potrzebę zachowania kontekstu z ochroną prywatności.
-- **Personalizacja**: Dzięki zdolności do uczenia się i adaptacji, modele AI oferują spersonalizowane doświadczenie dla użytkownika. Dostosowanie doświadczenia użytkownika poprzez funkcje takie jak profile użytkowników nie tylko sprawia, że użytkownik czuje się zrozumiany, ale także pomaga mu w szybkim znajdowaniu konkretnych odpowiedzi, tworząc bardziej efektywną i satysfakcjonującą interakcję.
+- **Mechanizm rozwiązywania niejasności**: Modele generatywnej SI czasem generują niejasne odpowiedzi. Funkcja pozwalająca użytkownikom prosić o wyjaśnienia może być pomocna w takich sytuacjach.
+- **Zachowanie kontekstu**: Zaawansowane modele genaratywnej SI potrafią pamiętać kontekst rozmowy, co może być niezwykle ważne dla UX. Danie użytkownikom możliwości kontrolowania i zarządzania kontekstem poprawia doświadczenie, ale niesie ryzyko przechowywania wrażliwych danych użytkownika. Rozważanie, jak długo te dane są przechowywane, na przykład wprowadzenie polityki retencji, może zrównoważyć potrzebę kontekstu z ochroną prywatności.
+- **Personalizacja**: Dzięki zdolności do uczenia się i adaptacji, modele SI oferują spersonalizowane doświadczenie użytkownika. Dostosowanie UX przez funkcje takie jak profile użytkownika nie tylko sprawia, że użytkownik czuje się zauważony, ale także pomaga szybciej znaleźć konkretne odpowiedzi, czyniąc interakcję bardziej efektywną i satysfakcjonującą.
 
-Jednym z przykładów personalizacji są ustawienia „Instrukcje niestandardowe” w ChatGPT od OpenAI. Pozwalają one na podanie informacji o sobie, które mogą być ważnym kontekstem dla Twoich podpowiedzi. Oto przykład instrukcji niestandardowej.
+Przykładem takiej personalizacji są „Instrukcje niestandardowe” w ChatGPT od OpenAI. Pozwalają one podać informacje o sobie, które mogą stanowić ważny kontekst dla promptów. Oto przykład takiej instrukcji.
 
-![Ustawienia instrukcji niestandardowych w ChatGPT](../../../translated_images/pl/custom-instructions.b96f59aa69356fcf.webp)
+![Custom Instructions Settings in ChatGPT](../../../translated_images/pl/custom-instructions.b96f59aa69356fcf.webp)
 
-Ten „profil” skłania ChatGPT do stworzenia planu lekcji na temat list powiązanych. Zauważ, że ChatGPT bierze pod uwagę, że użytkownik może chcieć bardziej szczegółowego planu lekcji na podstawie swojego doświadczenia.
+Ten „profil” nakazuje ChatGPT stworzyć plan lekcji dotyczący list powiązanych. Zauważ, że ChatGPT bierze pod uwagę doświadczenie użytkownika i możliwe życzenie otrzymania bardziej szczegółowego planu.
 
-![Podpowiedź w ChatGPT dotycząca planu lekcji o listach powiązanych](../../../translated_images/pl/lesson-plan-prompt.cc47c488cf1343df.webp)
+![A prompt in ChatGPT for a lesson plan about linked lists](../../../translated_images/pl/lesson-plan-prompt.cc47c488cf1343df.webp)
 
-### Framework wiadomości systemowych Microsoft dla dużych modeli językowych
+### Microsoftowy Framework Wiadomości Systemowej dla Dużych Modeli Językowych
 
-[Microsoft udostępnił wskazówki](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) dotyczące pisania skutecznych wiadomości systemowych podczas generowania odpowiedzi z LLM, podzielone na 4 obszary:
+[Microsoft udostępnił wytyczne](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) dotyczące pisania efektywnych wiadomości systemowych przy generowaniu odpowiedzi z dużych modeli językowych (LLM), podzielone na 4 obszary:
 
-1. Określenie, dla kogo jest model, jego możliwości i ograniczenia.
-2. Określenie formatu wyjściowego modelu.
-3. Podanie konkretnych przykładów, które demonstrują zamierzone zachowanie modelu.
-4. Zapewnienie dodatkowych zabezpieczeń behawioralnych.
+1. Określenie, dla kogo jest model oraz jego możliwości i ograniczenia.
+2. Definiowanie formatu wyjścia modelu.
+3. Dostarczanie konkretnych przykładów ilustrujących zamierzone zachowanie modelu.
+4. Zapewnienie dodatkowych zabezpieczeń zachowania.
 
 ### Dostępność
 
-Niezależnie od tego, czy użytkownik ma problemy ze wzrokiem, słuchem, motoryką czy poznawcze, dobrze zaprojektowana aplikacja czatowa powinna być dostępna dla wszystkich. Poniższa lista przedstawia konkretne funkcje mające na celu poprawę dostępności dla różnych rodzajów niepełnosprawności użytkowników.
+Niezależnie od tego, czy użytkownik ma zaburzenia wzroku, słuchu, motoryki czy kognitywne, dobrze zaprojektowana aplikacja czatowa powinna być dostępna dla wszystkich. Poniższa lista przedstawia konkretne funkcje mające na celu zwiększenie dostępności dla różnych niepełnosprawności.
 
-- **Funkcje dla osób z zaburzeniami wzroku**: Motywy o wysokim kontraście i możliwość zmiany rozmiaru tekstu, kompatybilność z czytnikami ekranu.
-- **Funkcje dla osób z zaburzeniami słuchu**: Funkcje zamiany tekstu na mowę i mowy na tekst, wizualne wskazówki dla powiadomień dźwiękowych.
-- **Funkcje dla osób z zaburzeniami motorycznymi**: Obsługa nawigacji za pomocą klawiatury, polecenia głosowe.
-- **Funkcje dla osób z zaburzeniami poznawczymi**: Opcje uproszczonego języka.
+- **Funkcje dla osób z wadami wzroku**: Motywy o wysokim kontraście i możliwość zmiany rozmiaru tekstu, kompatybilność z czytnikami ekranu.
+- **Funkcje dla osób z wadami słuchu**: Funkcje tekst-na-mowę i mowa-na-tekst, wizualne wskazówki dla powiadomień dźwiękowych.
+- **Funkcje dla osób z wadami motorycznymi**: Obsługa nawigacji klawiaturą, polecenia głosowe.
+- **Funkcje dla osób z zaburzeniami kognitywnymi**: Opcje uproszczonego języka.
 
-## Dostosowanie i dopasowanie do modeli językowych specyficznych dla danej dziedziny
+## Personalizacja i dostrajanie modeli językowych specyficznych dla domeny
 
-Wyobraź sobie aplikację czatową, która rozumie żargon Twojej firmy i przewiduje specyficzne pytania, które mogą zadawać jej użytkownicy. Istnieje kilka podejść, które warto rozważyć:
+Wyobraź sobie aplikację czatową, która rozumie żargon twojej firmy i przewiduje konkretne pytania, które często zadają jej użytkownicy. Warto wspomnieć o kilku podejściach:
 
-- **Wykorzystanie modeli DSL**. DSL oznacza język specyficzny dla danej dziedziny. Możesz wykorzystać tak zwany model DSL, który został przeszkolony w określonej dziedzinie, aby zrozumieć jej koncepcje i scenariusze.
-- **Zastosowanie dopasowania**. Dopasowanie to proces dalszego szkolenia modelu za pomocą określonych danych.
+- **Wykorzystanie modeli DSL**. DSL oznacza język specyficzny dla domeny. Możesz wykorzystać model DSL wytrenowany w konkretnej dziedzinie, aby zrozumieć jej pojęcia i scenariusze.
+- **Stosowanie dostrajania**. Dostrajanie to proces dalszego trenowania modelu za pomocą specyficznych danych.
 
-## Dostosowanie: Wykorzystanie DSL
+## Personalizacja: korzystanie z DSL
 
-Wykorzystanie modeli językowych specyficznych dla danej dziedziny (DSL Models) może zwiększyć zaangażowanie użytkowników, zapewniając specjalistyczne, kontekstowo odpowiednie interakcje. Jest to model, który został przeszkolony lub dopasowany do generowania tekstu związanego z określoną dziedziną, branżą lub tematem. Opcje korzystania z modelu DSL mogą się różnić od szkolenia od podstaw, przez korzystanie z już istniejących modeli za pośrednictwem SDK i API, po dopasowanie, które polega na dostosowaniu istniejącego modelu wstępnie przeszkolonego do konkretnej dziedziny.
+Wykorzystanie modeli języka specyficznego dla domeny (modele DSL) może zwiększyć zaangażowanie użytkowników, zapewniając specjalistyczne, kontekstowo odpowiednie interakcje. Jest to model wytrenowany lub dostrojony, aby rozumieć i generować tekst związany z określoną dziedziną, branżą lub tematem. Opcje wykorzystania modelu DSL mogą obejmować trenowanie od podstaw lub korzystanie z istniejących przez SDK i API. Inną opcją jest dostrajanie, które polega na adaptacji istniejącego, wcześniej wytrenowanego modelu do specyficznej dziedziny.
 
-## Dostosowanie: Zastosowanie dopasowania
+## Personalizacja: stosowanie dostrajania
 
-Dopasowanie jest często rozważane, gdy model wstępnie przeszkolony nie spełnia oczekiwań w specjalistycznej dziedzinie lub konkretnym zadaniu.
+Dostrajanie często rozważa się, gdy model wstępnie wytrenowany zawodzi w specjalistycznej dziedzinie lub konkretnym zadaniu.
 
-Na przykład, zapytania medyczne są skomplikowane i wymagają dużej ilości kontekstu. Kiedy lekarz diagnozuje pacjenta, opiera się na różnych czynnikach, takich jak styl życia czy istniejące schorzenia, a nawet na najnowszych publikacjach medycznych, aby potwierdzić swoją diagnozę. W takich złożonych scenariuszach ogólny model AI czatowy nie może być wiarygodnym źródłem.
+Na przykład, pytania medyczne są skomplikowane i wymagają wielu kontekstów. Gdy specjalista medyczny diagnozuje pacjenta, opiera się na wielu czynnikach, takich jak styl życia czy choroby współistniejące, a nawet może sięgać do najnowszych publikacji medycznych, aby potwierdzić diagnozę. W takich subtelnych sytuacjach ogólnego przeznaczenia aplikacja czatowa nie może być wiarygodnym źródłem.
 
 ### Scenariusz: aplikacja medyczna
 
-Rozważmy aplikację czatową zaprojektowaną do wspierania lekarzy poprzez szybkie dostarczanie informacji o wytycznych dotyczących leczenia, interakcjach leków czy najnowszych wynikach badań.
+Wyobraź sobie aplikację czatową zaprojektowaną do wspierania lekarzy poprzez szybki dostęp do wytycznych leczenia, interakcji leków czy najnowszych badań.
 
-Ogólny model może być wystarczający do odpowiadania na podstawowe pytania medyczne lub udzielania ogólnych porad, ale może mieć trudności z następującymi kwestiami:
+Model ogólnego przeznaczenia może być wystarczający do odpowiadania na podstawowe pytania medyczne lub udzielania ogólnych porad, ale może mieć problemy z:
 
-- **Bardzo specyficzne lub złożone przypadki**. Na przykład neurolog może zapytać aplikację: „Jakie są obecne najlepsze praktyki w zarządzaniu lekooporną padaczką u dzieci?”
-- **Brak najnowszych osiągnięć**. Ogólny model może mieć trudności z udzieleniem aktualnej odpowiedzi uwzględniającej najnowsze osiągnięcia w dziedzinie neurologii i farmakologii.
+- **Bardzo specyficznymi lub złożonymi przypadkami**. Na przykład neurolog może zapytać aplikację: „Jakie są obecne najlepsze praktyki zarządzania oporną na leki epilepsją u pacjentów pediatrycznych?”
+- **Brakiem najnowszych osiągnięć**. Model ogólnego przeznaczenia może mieć trudności z podaniem aktualnej odpowiedzi uwzględniającej najnowsze osiągnięcia w neurologii i farmakologii.
 
-W takich przypadkach dopasowanie modelu za pomocą specjalistycznego zestawu danych medycznych może znacznie poprawić jego zdolność do radzenia sobie z tymi skomplikowanymi zapytaniami medycznymi w sposób bardziej precyzyjny i wiarygodny. Wymaga to dostępu do dużego i odpowiedniego zestawu danych, który odzwierciedla wyzwania i pytania specyficzne dla danej dziedziny.
+W takich przypadkach dostrajanie modelu na specjalistycznym, medycznym zbiorze danych może znacząco poprawić jego zdolność do precyzyjniejszego i bardziej wiarygodnego obsługiwania tych złożonych pytań medycznych. Wymaga to dostępu do dużego i relewantnego zbioru danych, który odzwierciedla specyfikę dziedziny oraz wyzwania i pytania, które należy rozwiązać.
 
-## Kwestie dotyczące wysokiej jakości doświadczenia z AI w aplikacjach czatowych
+## Kwestie dotyczące wysokiej jakości doświadczenia czatowego opartego na SI
 
-Ta sekcja przedstawia kryteria „wysokiej jakości” aplikacji czatowych, które obejmują zbieranie mierzalnych danych oraz przestrzeganie zasad odpowiedzialnego wykorzystania technologii AI.
+Ta sekcja przedstawia kryteria dla „wysokiej jakości” aplikacji czatowych, które obejmują zbieranie wymiernych metryk oraz przestrzeganie ram odpowiedzialnego wykorzystania technologii SI.
 
 ### Kluczowe metryki
 
-Aby utrzymać wysoką jakość działania aplikacji, konieczne jest śledzenie kluczowych metryk i rozważenie istotnych kwestii. Te pomiary nie tylko zapewniają funkcjonalność aplikacji, ale także oceniają jakość modelu AI i doświadczenie użytkownika. Poniżej znajduje się lista obejmująca podstawowe metryki, metryki AI oraz metryki doświadczenia użytkownika, które warto wziąć pod uwagę.
+Aby zachować wysoką jakość działania aplikacji, należy śledzić kluczowe metryki i czynniki. Te pomiary nie tylko zapewniają funkcjonalność aplikacji, ale także oceniają jakość modelu SI i doświadczenia użytkownika. Poniżej znajduje się lista podstawowych metryk, metryk SI i UX do rozważenia.
 
-| Metryka                     | Definicja                                                                                  | Kwestie dla twórcy aplikacji                                              |
-| --------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| **Czas działania**          | Mierzy czas, przez który aplikacja jest operacyjna i dostępna dla użytkowników.             | Jak zminimalizujesz czas przestoju?                                       |
-| **Czas odpowiedzi**         | Czas potrzebny aplikacji na odpowiedź na zapytanie użytkownika.                            | Jak możesz zoptymalizować przetwarzanie zap
-| **Wykrywanie anomalii**       | Narzędzia i techniki identyfikacji nietypowych wzorców, które nie odpowiadają oczekiwanym zachowaniom.                     | Jak zareagujesz na anomalie?                                              |
+| Metryka                      | Definicja                                                                                                               | Rozważania dla twórcy czatu                                               |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------| ------------------------------------------------------------------------- |
+| **Dostępność (Uptime)**     | Mierzy czas, w którym aplikacja jest operacyjna i dostępna dla użytkowników.                                            | Jak zminimalizujesz przestoje?                                            |
+| **Czas odpowiedzi**          | Czas, jaki aplikacja potrzebuje na odpowiedź na zapytanie użytkownika.                                                 | Jak możesz zoptymalizować przetwarzanie zapytań, aby przyspieszyć odpowiedź? |
+| **Precyzja**                | Stosunek prawidłowych trafień pozytywnych do wszystkich prognoz pozytywnych.                                           | Jak zweryfikujesz precyzję swojego modelu?                                |
+| **Czułość (Recall)**        | Stosunek prawidłowych trafień pozytywnych do rzeczywistej liczby pozytywnych przypadków.                                | Jak zmierzysz i poprawisz czułość?                                        |
+| **Wynik F1**                | Średnia harmoniczna precyzji i czułości, która balansuje kompromis między nimi.                                         | Jaki będzie Twój cel w wyniku F1? Jak zrównoważysz precyzję i czułość?   |
+| **Perpleksja**              | Mierzy, jak dobrze rozkład prawdopodobieństwa przewidziany przez model pokrywa się z rzeczywistym rozkładem danych.     | Jak zminimalizujesz perpleksję?                                           |
+| **Metryki satysfakcji użytkownika** | Mierzą percepcję użytkownika względem aplikacji. Często zbierane przez ankiety.                                         | Jak często będziesz zbierać opinie użytkowników? Jak się do nich dostosujesz? |
+| **Wskaźnik błędów**           | Wskaźnik błędów modelu w rozumieniu lub generowaniu odpowiedzi.                                                        | Jakie strategie masz na zmniejszenie liczby błędów?                       |
+| **Cykl retreningu**           | Częstotliwość, z jaką model jest aktualizowany, aby uwzględnić nowe dane i wnioski.                                     | Jak często będziesz ponownie trenować model? Co wyzwala cykl retreningu? |
+| **Wykrywanie anomalii**         | Narzędzia i techniki identyfikujące nietypowe wzorce, które nie odpowiadają oczekiwanym zachowaniom.                        | Jak zareagujesz na anomalie?                                        |
 
 ### Wdrażanie odpowiedzialnych praktyk AI w aplikacjach czatu
 
-Podejście Microsoftu do Odpowiedzialnej AI opiera się na sześciu zasadach, które powinny kierować rozwojem i wykorzystaniem AI. Poniżej znajdują się zasady, ich definicje oraz rzeczy, które powinien rozważyć twórca aplikacji czatu, a także dlaczego są one istotne.
+Podejście Microsoft do odpowiedzialnej AI określiło sześć zasad, które powinny kierować rozwojem i wykorzystaniem AI. Poniżej znajdują się zasady, ich definicje oraz kwestie, które deweloper czatu powinien rozważyć i dlaczego powinien traktować je poważnie.
 
-| Zasady                 | Definicja Microsoftu                                  | Rozważania dla twórcy aplikacji czatu                                  | Dlaczego to ważne                                                                     |
+| Zasady                | Definicja Microsoft                                   | Uwagi dla dewelopera czatu                                           | Dlaczego to ważne                                                                   |
 | ---------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Sprawiedliwość         | Systemy AI powinny traktować wszystkich ludzi równo.  | Upewnij się, że aplikacja czatu nie dyskryminuje na podstawie danych użytkownika. | Aby budować zaufanie i inkluzywność wśród użytkowników; unika problemów prawnych.       |
-| Niezawodność i bezpieczeństwo | Systemy AI powinny działać niezawodnie i bezpiecznie. | Wprowadź testy i mechanizmy zabezpieczające, aby zminimalizować błędy i ryzyko. | Zapewnia satysfakcję użytkowników i zapobiega potencjalnym szkodom.                    |
-| Prywatność i bezpieczeństwo | Systemy AI powinny być bezpieczne i szanować prywatność. | Wprowadź silne szyfrowanie i środki ochrony danych.                    | Aby chronić wrażliwe dane użytkowników i przestrzegać przepisów dotyczących prywatności. |
-| Inkluzywność           | Systemy AI powinny wspierać wszystkich i angażować ludzi. | Projektuj interfejsy UI/UX dostępne i łatwe w użyciu dla różnych grup odbiorców. | Zapewnia, że szeroka grupa osób może efektywnie korzystać z aplikacji.                 |
-| Przejrzystość          | Systemy AI powinny być zrozumiałe.                     | Zapewnij jasną dokumentację i wyjaśnienia dotyczące odpowiedzi AI.     | Użytkownicy są bardziej skłonni zaufać systemowi, jeśli rozumieją, jak podejmowane są decyzje. |
-| Odpowiedzialność       | Ludzie powinni być odpowiedzialni za systemy AI.       | Ustanów jasny proces audytu i poprawy decyzji AI.                      | Umożliwia ciągłe doskonalenie i podejmowanie działań naprawczych w przypadku błędów.    |
+| Sprawiedliwość         | Systemy AI powinny traktować wszystkich ludzi uczciwie. | Zapewnij, że aplikacja czatu nie dyskryminuje na podstawie danych użytkownika. | Aby budować zaufanie i inkluzywność wśród użytkowników; unika konsekwencji prawnych.                |
+| Niezawodność i bezpieczeństwo | Systemy AI powinny działać niezawodnie i bezpiecznie.   | Wprowadź testowanie i mechanizmy zapobiegające błędom oraz ryzyku.         | Zapewnia satysfakcję użytkownika i zapobiega potencjalnym szkodom.                                 |
+| Prywatność i bezpieczeństwo | Systemy AI powinny być bezpieczne i szanować prywatność. | Wdroż silne szyfrowanie i środki ochrony danych.              | Aby chronić wrażliwe dane użytkowników i przestrzegać przepisów dotyczących prywatności.                         |
+| Inkluzywność           | Systemy AI powinny wzmacniać wszystkich i angażować ludzi. | Zaprojektuj UI/UX, które jest dostępne i łatwe w obsłudze dla różnorodnych odbiorców. | Zapewnia, że szerszy zakres ludzi może skutecznie korzystać z aplikacji.                   |
+| Przejrzystość          | Systemy AI powinny być zrozumiałe.                    | Dostarcz jasną dokumentację i uzasadnienie odpowiedzi AI.            | Użytkownicy bardziej ufają systemowi, jeśli mogą zrozumieć, jak podejmowane są decyzje. |
+| Odpowiedzialność       | Ludzie powinni być odpowiedzialni za systemy AI.      | Ustanów jasny proces audytu i poprawy decyzji AI.     | Umożliwia stałe ulepszanie i działania korygujące w przypadku błędów.               |
 
 ## Zadanie
 
-Zobacz [zadanie](../../../07-building-chat-applications/python). Przeprowadzi Cię ono przez serię ćwiczeń, od uruchomienia pierwszych zapytań czatu, przez klasyfikację i podsumowywanie tekstu, aż po inne zadania. Zauważ, że zadania są dostępne w różnych językach programowania!
+Zobacz [assignment](../../../07-building-chat-applications/python). Przeprowadzi Cię przez serię ćwiczeń, od uruchamiania pierwszych promptów czatu, przez klasyfikację i podsumowywanie tekstu, i więcej. Zauważ, że zadania są dostępne w różnych językach programowania!
 
-## Świetna robota! Kontynuuj naukę
+## Świetna robota! Kontynuuj podróż
 
-Po ukończeniu tej lekcji, sprawdź naszą [kolekcję nauki o generatywnej AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby dalej rozwijać swoją wiedzę na temat generatywnej AI!
+Po ukończeniu tej lekcji, sprawdź naszą [kolekcję nauki o Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby dalej rozwijać swoją wiedzę na temat Generative AI!
 
-Przejdź do Lekcji 8, aby dowiedzieć się, jak zacząć [budować aplikacje wyszukiwania](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Przejdź do Lekcji 8, aby zobaczyć jak możesz zacząć [budować aplikacje do wyszukiwania](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

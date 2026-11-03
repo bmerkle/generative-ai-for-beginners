@@ -12,7 +12,7 @@ For you to add such an experience to an app, you need to understand concepts lik
 
 In this chapter, you will:
 
-- Learn about the openai library and it's core concepts.
+- Learn about the openai library and its core concepts.
 - Build a text generation app using openai.
 - Understand how to use concepts like prompt, temperature, and tokens to build a text generation app.
 
@@ -87,19 +87,19 @@ pip install openai
 You need to carry out the following steps:
 
 - Create an account on Azure [https://azure.microsoft.com/free/](https://azure.microsoft.com/free/?WT.mc_id=academic-105485-koreyst).
-- Gain access to Azure OpenAI. Go to [https://learn.microsoft.com/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai](https://learn.microsoft.com/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai?WT.mc_id=academic-105485-koreyst) and request access.
+- Gain access to Azure OpenAI. Go to [https://learn.microsoft.com/azure/ai-foundry/openai/overview#how-do-i-get-access-to-azure-openai](https://learn.microsoft.com/azure/ai-foundry/openai/overview#how-do-i-get-access-to-azure-openai?WT.mc_id=academic-105485-koreyst) and request access.
 
   > [!NOTE]
   > At the time of writing, you need to apply for access to Azure OpenAI.
 
 - Install Python <https://www.python.org/>
-- Have created an Azure OpenAI Service resource. See this guide for how to [create a resource](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal?WT.mc_id=academic-105485-koreyst).
+- Have created an Azure OpenAI Service resource. See this guide for how to [create a resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal?WT.mc_id=academic-105485-koreyst).
 
 ### Locate API key and endpoint
 
 At this point, you need to tell your `openai` library what API key to use. To find your API key, go to "Keys and Endpoint" section of your Azure OpenAI resource and copy the "Key 1" value.
 
-![Keys and Endpoint resource blade in Azure Portal](https://learn.microsoft.com/azure/ai-services/openai/media/quickstarts/endpoint.png?WT.mc_id=academic-105485-koreyst)
+![Keys and Endpoint resource blade in Azure Portal](https://learn.microsoft.com/azure/ai-foundry/openai/media/quickstarts/endpoint.png?WT.mc_id=academic-105485-koreyst)
 
 Now that you have this information copied, let's instruct the libraries to use it.
 
@@ -111,48 +111,53 @@ Now that you have this information copied, let's instruct the libraries to use i
 
 ### Setup configuration Azure
 
-If you're using Azure OpenAI, here's how you setup configuration:
+If you're using Azure OpenAI (now part of Microsoft Foundry), here's how you setup configuration. We use the standard `OpenAI` client pointed at the Azure OpenAI `/openai/v1/` endpoint, which works with the Responses API and needs no `api_version`:
 
 ```python
-openai.api_type = 'azure'
-openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.api_version = '2023-05-15'
-openai.api_base = os.getenv("API_BASE")
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    base_url=f"{os.environ['AZURE_OPENAI_ENDPOINT'].rstrip('/')}/openai/v1/",
+)
 ```
 
 Above we're setting the following:
 
-- `api_type` to `azure`. This tells the library to use Azure OpenAI and not OpenAI.
-- `api_key`, this is your API key found in the Azure Portal.
-- `api_version`, this is the version of the API you want to use. At the time of writing, the latest version is `2023-05-15`.
-- `api_base`, this is the endpoint of the API. You can find it in the Azure Portal next to your API key.
+- `api_key`, this is your API key found in the Azure Portal or Microsoft Foundry portal.
+- `base_url`, this is your Foundry resource endpoint with `/openai/v1/` appended. The stable v1 endpoint works across OpenAI and Azure OpenAI with no `api_version` management.
 
-> [!NOTE] > `os.getenv` is a function that reads environment variables. You can use it to read environment variables like `OPENAI_API_KEY` and `API_BASE`. Set these environment variables in your terminal or by using a library like `dotenv`.
+> [!NOTE] > `os.environ` reads environment variables. You can use it to read environment variables like `AZURE_OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT`. Set these environment variables in your terminal or by using a library like `dotenv`.
 
 ## Generate text
 
-The way to generate text is to use the `Completion` class. Here's an example:
+The way to generate text is to use the Responses API via the `responses.create` method. Here's an example:
 
 ```python
 prompt = "Complete the following: Once upon a time there was a"
 
-completion = openai.Completion.create(model="davinci-002", prompt=prompt)
-print(completion.choices[0].text)
+response = client.responses.create(
+    model="gpt-5-mini",  # this is your model deployment name
+    input=prompt,
+    store=False,
+)
+print(response.output_text)
 ```
 
-In the above code, we create a completion object and pass in the model we want to use and the prompt. Then we print the generated text.
+In the above code, we create a response and pass in the model we want to use and the prompt. Then we print the generated text via `response.output_text`.
 
-### Chat completions
+### Multi-turn conversations
 
-So far, you've seen how we've been using `Completion` to generate text. But there's another class called `ChatCompletion` that is more suited for chatbots. Here's an example of using it:
+The Responses API is well suited for both single-turn text generation and multi-turn chatbots - you provide a list of messages in `input` to build up a conversation:
 
 ```python
-import openai
+from openai import OpenAI
 
-openai.api_key = "sk-..."
+client = OpenAI(api_key="sk-...")
 
-completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world"}])
-print(completion.choices[0].message.content)
+response = client.responses.create(model="gpt-5-mini", input="Hello world", store=False)
+print(response.output_text)
 ```
 
 More on this functionality in an upcoming chapter.
@@ -178,28 +183,27 @@ Now that we learned how to set up and configure openai, it's time to build your 
 1. Create an _app.py_ file and give it the following code:
 
    ```python
-   import openai
+   import os
+   from openai import OpenAI
 
-   openai.api_key = "<replace this value with your open ai key or Azure OpenAI key>"
-
-   openai.api_type = 'azure'
-   openai.api_version = '2023-05-15'
-   openai.api_base = "<endpoint found in Azure Portal where your API key is>"
+   client = OpenAI(
+       api_key="<replace this value with your Azure OpenAI key>",
+       base_url="<endpoint found in Azure Portal>/openai/v1/",
+   )
    deployment_name = "<deployment name>"
 
    # add your completion code
    prompt = "Complete the following: Once upon a time there was a"
-   messages = [{"role": "user", "content": prompt}]
 
-   # make completion
-   completion = openai.chat.completions.create(model=deployment_name, messages=messages)
+   # make a request using the Responses API
+   response = client.responses.create(model=deployment_name, input=prompt, store=False)
 
    # print response
-   print(completion.choices[0].message.content)
+   print(response.output_text)
    ```
 
    > [!NOTE]
-   > If you're using Azure OpenAI, you need to set the `api_type` to `azure` and set the `api_key` to your Azure OpenAI key.
+   > If you're using plain OpenAI (not Azure), use `client = OpenAI(api_key="<replace this value with your OpenAI key>")` (no `base_url`) and pass a model name like `gpt-5-mini` instead of a deployment name.
 
    You should see an output like the following:
 
@@ -510,16 +514,15 @@ To further improve it, we want to add the following:
   Locate the part in the code that prints out the result from the first prompt and add the following code below:
 
   ```python
-  old_prompt_result = completion.choices[0].message.content
+  old_prompt_result = response.output_text
   prompt = "Produce a shopping list for the generated recipes and please don't include ingredients that I already have."
 
   new_prompt = f"{old_prompt_result} {prompt}"
-  messages = [{"role": "user", "content": new_prompt}]
-  completion = openai.Completion.create(engine=deployment_name, messages=messages, max_tokens=1200)
+  response = client.responses.create(model=deployment_name, input=new_prompt, max_output_tokens=1200, store=False)
 
   # print response
   print("Shopping list:")
-  print(completion.choices[0].message.content)
+  print(response.output_text)
   ```
 
   Note the following:
@@ -530,10 +533,10 @@ To further improve it, we want to add the following:
      new_prompt = f"{old_prompt_result} {prompt}"
      ```
 
-  1. We make a new request, but also considering the number of tokens we asked for in the first prompt, so this time we say `max_tokens` is 1200.
+  1. We make a new request, but also considering the number of tokens we asked for in the first prompt, so this time we say `max_output_tokens` is 1200.
 
      ```python
-     completion = openai.Completion.create(engine=deployment_name, prompt=new_prompt, max_tokens=1200)
+     response = client.responses.create(model=deployment_name, input=new_prompt, max_output_tokens=1200, store=False)
      ```
 
      Taking this code for a spin, we now arrive at the following output:
@@ -562,30 +565,32 @@ What we have so far is code that works, but there are some tweaks we should be d
      OPENAI_API_KEY=sk-...
      ```
 
-     > Note, for Azure, you need to set the following environment variables:
+     > Note, for Azure OpenAI in Microsoft Foundry, you need to set the following environment variables instead:
 
      ```bash
-     OPENAI_API_TYPE=azure
-     OPENAI_API_VERSION=2023-05-15
-     OPENAI_API_BASE=<replace>
+     AZURE_OPENAI_API_KEY=<replace>
+     AZURE_OPENAI_ENDPOINT=<replace>
+     AZURE_OPENAI_API_VERSION=2024-10-21
      ```
 
      In code, you would load the environment variables like so:
 
      ```python
+     import os
      from dotenv import load_dotenv
+     from openai import OpenAI
 
      load_dotenv()
 
-     openai.api_key = os.environ["OPENAI_API_KEY"]
+     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
      ```
 
 - **A word on token length**. We should consider how many tokens we need to generate the text we want. Tokens cost money, so where possible, we should try to be economical with the number of tokens we use. For example, can we phrase the prompt so that we can use less tokens?
 
-  To change the tokens used, you can use the `max_tokens` parameter. For example, if you want to use 100 tokens, you would do:
+  To change the tokens used, you can use the `max_output_tokens` parameter. For example, if you want to use 100 tokens, you would do:
 
   ```python
-  completion = client.chat.completions.create(model=deployment, messages=messages, max_tokens=100)
+  response = client.responses.create(model=deployment, input=prompt, max_output_tokens=100, store=False)
   ```
 
 - **Experimenting with temperature**. Temperature is something we haven't mentioned so far but is an important context for how our program performs. The higher the temperature value the more random the output will be. Conversely the lower the temperature value the more predictable the output will be. Consider whether you want variation in your output or not.
@@ -593,10 +598,16 @@ What we have so far is code that works, but there are some tweaks we should be d
   To alter the temperature, you can use the `temperature` parameter. For example, if you want to use a temperature of 0.5, you would do:
 
   ```python
-  completion = client.chat.completions.create(model=deployment, messages=messages, temperature=0.5)
+  response = client.responses.create(model=deployment, input=prompt, temperature=0.5, store=False)
   ```
 
   > Note, the closer to 1.0, the more varied the output.
+
+- **Reasoning models don't use `temperature`**. This is an important 2026 shift. The current, non-deprecated models on Microsoft Foundry are **reasoning models** (the GPT-5 family, o-series) - and they **don't support `temperature` or `top_p`** (nor `max_tokens`; use `max_output_tokens`). If you send `temperature` to `gpt-5-mini` you'll get a "parameter not supported" error. So to try the temperature example above, point it at a model that still supports sampling controls - for example an open **Llama** model such as `Llama-3.3-70B-Instruct` from the [Microsoft Foundry model catalog](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst), called via the Foundry Models / Azure AI Inference endpoint (the same way as the `githubmodels-*` samples). For reasoning models like GPT-5, you steer output differently:
+  - **Prompt engineering** - clear instructions, examples, and structured output (see lesson [04 - Prompt Engineering](../04-prompt-engineering-fundamentals/README.md?WT.mc_id=academic-105485-koreyst)) do the work that sampling knobs used to.
+  - **Reasoning controls** - parameters like reasoning effort/verbosity trade depth of reasoning against latency and cost.
+
+  In short: `temperature`/`top_p` are still valid on many models (Llama, Mistral, Phi, and the GPT-4.x family - though GPT-4.x is deprecating), but the direction of travel is prompt engineering + reasoning controls on reasoning models like GPT-5.
 
 ## Assignment
 

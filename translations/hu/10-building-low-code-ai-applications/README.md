@@ -1,23 +1,24 @@
-# Alacsony kódú AI alkalmazások építése
+# Alacsony kódú MI alkalmazások építése
 
-[![Alacsony kódú AI alkalmazások építése](../../../translated_images/hu/10-lesson-banner.a01ac8fe3fd86310.webp)](https://youtu.be/1vzq3Nd8GBA?si=h6LHWJXdmqf6mhDg)
+[![Alacsony kódú MI alkalmazások építése](../../../translated_images/hu/10-lesson-banner.a01ac8fe3fd86310.webp)](https://youtu.be/1vzq3Nd8GBA?si=h6LHWJXdmqf6mhDg)
 
-> _(Kattints a fenti képre a lecke videójának megtekintéséhez)_
+> _(Kattintson a fenti képre a lecke videójának megtekintéséhez)_
 
 ## Bevezetés
 
-Most, hogy megtanultuk, hogyan készítsünk képgeneráló alkalmazásokat, beszéljünk az alacsony kódról. A generatív AI számos különböző területen alkalmazható, beleértve az alacsony kódot is, de mi is az az alacsony kód, és hogyan adhatunk hozzá AI-t?
+Most, hogy megtanultuk, hogyan építsünk képgeneráló alkalmazásokat, beszéljünk az alacsony kódról. A generatív MI különféle területeken használható, beleértve az alacsony kódot is, de mi az az alacsony kód, és hogyan adhatunk hozzá MIt?
 
-Az alkalmazások és megoldások építése könnyebbé vált a hagyományos fejlesztők és nem fejlesztők számára az alacsony kódú fejlesztési platformok használatával. Az alacsony kódú fejlesztési platformok lehetővé teszik, hogy kevés vagy semmilyen kódolással építsünk alkalmazásokat és megoldásokat. Ez egy vizuális fejlesztési környezet biztosításával érhető el, amely lehetővé teszi, hogy komponenseket húzzunk és ejtsünk az alkalmazások és megoldások építéséhez. Ezáltal gyorsabban és kevesebb erőforrással építhetünk alkalmazásokat és megoldásokat. Ebben a leckében mélyebben belemerülünk az alacsony kód használatába, és abba, hogyan lehet az alacsony kódú fejlesztést AI-val fejleszteni a Power Platform segítségével.
+Alkalmazások és megoldások építése könnyebbé vált a hagyományos fejlesztők és nem fejlesztők számára az Alacsony Kód Fejlesztési Platformok használatával. Az Alacsony Kód Fejlesztési Platformok lehetővé teszik, hogy kevés vagy semmilyen kód írása nélkül építsünk alkalmazásokat és megoldásokat. Ezt egy vizuális fejlesztői környezet biztosításával érik el, amely lehetővé teszi komponensek húzását és ejtését az alkalmazások és megoldások építéséhez. Ez gyorsabb és kevesebb erőforrással történő alkalmazás- és megoldásépítést tesz lehetővé. Ebben a leckében mélyebben belemerülünk, hogyan használjuk az Alacsony Kódot, és hogyan fokozhatjuk azt MI-vel a Power Platform segítségével.
 
-A Power Platform lehetőséget nyújt a szervezetek számára, hogy csapataikat felhatalmazzák saját megoldásaik megépítésére egy intuitív alacsony kódú vagy kódmentes környezetben. Ez a környezet egyszerűsíti a megoldások építésének folyamatát. A Power Platform segítségével a megoldások napok vagy hetek alatt építhetők fel, nem hónapok vagy évek alatt. A Power Platform öt kulcsfontosságú termékből áll: Power Apps, Power Automate, Power BI, Power Pages és Copilot Studio.
+A Power Platform lehetőséget nyújt a szervezeteknek, hogy csapatukat felhatalmazzák saját megoldásaik felépítésére egy intuitív alacsony vagy kód nélküli környezetben. Ez a környezet egyszerűsíti a megoldások építésének folyamatát. A Power Platform segítségével a megoldások napok vagy hetek alatt építhetők, hónapok vagy évek helyett. A Power Platform öt kulcsfontosságú termékből áll: Power Apps, Power Automate, Power BI, Power Pages és Copilot Studio.
 
-Ez a lecke az alábbiakat tartalmazza:
+Ez a lecke a következőket fedi le:
 
-- Bevezetés a generatív AI-ba a Power Platformon
-- Bevezetés a Copilotba és annak használatába
-- Generatív AI használata alkalmazások és folyamatok építéséhez a Power Platformon
-- Az AI modellek megértése a Power Platformon az AI Builder segítségével
+- Bevezetés a generatív MI-be a Power Platformon belül
+- Bevezetés a Copilot-ba és használatának módja
+- Generatív MI használata alkalmazások és folyamatok építéséhez a Power Platformon
+- Az MI modellek megértése a Power Platformon az AI Builder segítségével
+- Intelligens ügynökök építése a Microsoft Copilot Studio-val
 
 ## Tanulási célok
 
@@ -25,216 +26,257 @@ A lecke végére képes leszel:
 
 - Megérteni, hogyan működik a Copilot a Power Platformon.
 
-- Felépíteni egy Diák Feladatkövető Alkalmazást az oktatási startupunk számára.
+- Egy diákmunkakövető alkalmazás fejlesztése oktatási startupunk számára.
 
-- Felépíteni egy Számla Feldolgozó Folyamatot, amely AI-t használ az információk kinyerésére a számlákból.
+- Számlafeldolgozó folyam létrehozása, amely MI segítségével kinyeri az adatokat a számlákból.
 
-- Alkalmazni a legjobb gyakorlatokat a GPT AI Modell szövegalkotási funkciójának használatakor.
+- Legjobb gyakorlatok alkalmazása a Create Text with GPT AI Model használatakor.
 
-Az eszközök és technológiák, amelyeket ebben a leckében használni fogsz:
+- Megérteni, mi az a Microsoft Copilot Studio és hogyan lehet intelligens ügynököket építeni vele.
 
-- **Power Apps**, a Diák Feladatkövető Alkalmazáshoz, amely alacsony kódú fejlesztési környezetet biztosít az alkalmazások építéséhez, amelyek adatokat követnek, kezelnek és interakcióba lépnek velük.
+Az eszközök és technológiák, amelyeket ebben a leckében használsz:
 
-- **Dataverse**, az adatok tárolásához a Diák Feladatkövető Alkalmazás számára, ahol a Dataverse alacsony kódú adatplatformot biztosít az alkalmazás adatainak tárolásához.
+- **Power Apps**, a Diákmunkakövető alkalmazáshoz, amely egy alacsony kódú fejlesztői környezetet biztosít az adatok követésére, kezelésére és kezelésére szolgáló alkalmazások építéséhez.
 
-- **Power Automate**, a Számla Feldolgozó Folyamathoz, ahol alacsony kódú fejlesztési környezetet kapsz a munkafolyamatok építéséhez, amelyek automatizálják a számla feldolgozási folyamatot.
+- **Dataverse**, az alkalmazás adatainak tárolására szolgáló adatplatform a Diákmunkakövető alkalmazáshoz, amely kód nélküli adattárolási platformot biztosít.
 
-- **AI Builder**, a Számla Feldolgozó AI Modellhez, ahol előre elkészített AI modelleket használsz a startupunk számláinak feldolgozásához.
+- **Power Automate**, a számlafeldolgozó folyamhoz, amely alacsony kódú fejlesztői környezetet ad a számlafeldolgozás folyamatának automatizálásához.
 
-## Generatív AI a Power Platformon
+- **AI Builder**, a számlafeldolgozó MI modellhez, ahol előre elkészített MI modelleket használsz a startup számláinak feldolgozására.
 
-Az alacsony kódú fejlesztés és alkalmazások generatív AI-val való fejlesztése kulcsfontosságú terület a Power Platform számára. A cél az, hogy mindenki képes legyen AI-alapú alkalmazásokat, weboldalakat, irányítópultokat építeni és folyamatokat automatizálni AI-val, _anélkül, hogy adat-tudományi szakértelemre lenne szükség_. Ezt a célt úgy érjük el, hogy a generatív AI-t integráljuk az alacsony kódú fejlesztési élménybe a Power Platformon, Copilot és AI Builder formájában.
+## Generatív MI a Power Platformon
+
+Az alacsony kódú fejlesztés és alkalmazás generatív MI-vel történő fokozása a Power Platform egyik központi fókusza. A cél, hogy bárki építhessen MI-vezérelt alkalmazásokat, webhelyeket, irányítópultokat és automatizálhasson folyamatokat MI-vel, _anélkül, hogy adatkutatói szakértelemre lenne szükség_. Ezt úgy érik el, hogy a generatív MI-t integrálják az alacsony kódú fejlesztési élménybe a Power Platformon a Copilot és az AI Builder segítségével.
 
 ### Hogyan működik ez?
 
-A Copilot egy AI asszisztens, amely lehetővé teszi, hogy Power Platform megoldásokat építsünk az igényeink természetes nyelven történő leírásával, egy sor beszélgetési lépésben. Például utasíthatjuk az AI asszisztenst, hogy adja meg, milyen mezőket használjon az alkalmazásunk, és az létrehozza az alkalmazást és az alapjául szolgáló adatmodellt, vagy megadhatjuk, hogyan állítsunk be egy folyamatot a Power Automate-ben.
+A Copilot egy MI asszisztens, amely lehetővé teszi a Power Platform megoldások építését úgy, hogy természetes nyelven, egy sor beszélgetéses lépésben leírod az igényeidet. Például megkérheted az MI asszisztenst, hogy mondja meg, mely mezőket fogja használni az alkalmazás, és az létrehozza az alkalmazást és az alatta lévő adatmodellt, vagy megadhatod, hogyan állíts be egy folyamatot a Power Automatében.
 
-A Copilot által vezérelt funkciókat alkalmazásképernyőkön is használhatjuk, hogy a felhasználók beszélgetésen keresztül fedezhessék fel az információkat.
+A Copilot-vezérelt funkciókat alkalmazásod képernyőin is használhatod, hogy lehetővé tedd a felhasználók számára, hogy beszélgetéses interakciók révén felfedezzék az összefüggéseket.
 
-Az AI Builder egy alacsony kódú AI képesség, amely elérhető a Power Platformon, és lehetővé teszi, hogy AI modelleket használjunk folyamatok automatizálására és eredmények előrejelzésére. Az AI Builder segítségével AI-t hozhatunk az alkalmazásainkba és folyamainkba, amelyek kapcsolódnak a Dataverse-ben vagy különböző felhőalapú adatforrásokban, például SharePoint, OneDrive vagy Azure tárolt adatainkhoz.
+Az AI Builder alacsony kódú MI lehetőség a Power Platformon, amely lehetővé teszi MI modellek használatát a folyamatok automatizálására és kimenetek előrejelzésére. Az AI Builder-rel MI-t vihetsz alkalmazásaidba és folyamataidba, amelyek csatlakoznak a Dataverse adatbázishoz vagy különböző felhőalapú adatforrásokhoz, például SharePointhoz, OneDrive-hoz vagy Azure-hoz.
 
-A Copilot elérhető a Power Platform összes termékében: Power Apps, Power Automate, Power BI, Power Pages és Power Virtual Agents. Az AI Builder elérhető a Power Appsben és a Power Automate-ben. Ebben a leckében arra összpontosítunk, hogyan használjuk a Copilotot és az AI Builder-t a Power Appsben és a Power Automate-ben, hogy megoldást építsünk oktatási startupunk számára.
+A Copilot elérhető a Power Platform összes termékében: Power Apps, Power Automate, Power BI, Power Pages és Copilot Studio (korábban Power Virtual Agents). Az AI Builder a Power Apps-ban és Power Automatében érhető el. Ebben a leckében arra koncentrálunk, hogyan használjuk a Copilotot és az AI Buildert Power Apps-ban és Power Automatében egy oktatási startup megoldásának építéséhez.
 
-### Copilot a Power Appsben
+### Copilot a Power Apps-ban
 
-A Power Platform részeként a Power Apps alacsony kódú fejlesztési környezetet biztosít az alkalmazások építéséhez, amelyek adatokat követnek, kezelnek és interakcióba lépnek velük. Ez egy alkalmazásfejlesztési szolgáltatásokból álló csomag, amely skálázható adatplatformot és a felhőszolgáltatásokhoz és helyszíni adatokhoz való csatlakozás képességét kínálja. A Power Apps lehetővé teszi, hogy böngészőkön, táblagépeken és telefonokon futó alkalmazásokat építsünk, amelyeket megoszthatunk munkatársainkkal. A Power Apps egyszerű felületével könnyíti meg az alkalmazásfejlesztést, így minden üzleti felhasználó vagy profi fejlesztő egyedi alkalmazásokat építhet. Az alkalmazásfejlesztési élményt a Generatív AI is javítja a Copilot segítségével.
+A Power Platform részeként a Power Apps alacsony kódú fejlesztői környezetet biztosít alkalmazások építéséhez, amelyek követik, kezelik és interakcióba lépnek az adatokkal. Ez egy alkalmazásfejlesztő szolgáltatások összessége, egy skálázható adatplatformmal és a képességgel, hogy felhőszolgáltatásokhoz és helyszíni adatokhoz csatlakozzon. A Power Apps lehetővé teszi, hogy böngészőkön, táblagépeken és telefonokon futó alkalmazásokat építs, amelyeket megoszthatsz kollégáiddal. A Power Apps egyszerű felülettel vezeti be a felhasználókat az alkalmazásfejlesztésbe, így minden üzleti felhasználó vagy profi fejlesztő egyedi alkalmazásokat hozhat létre. Az alkalmazásfejlesztési élményt tovább fokozza a generatív MI a Copilot révén.
 
-A Copilot AI asszisztens funkció a Power Appsben lehetővé teszi, hogy leírjuk, milyen típusú alkalmazásra van szükségünk, és milyen információkat szeretnénk, hogy az alkalmazásunk kövessen, gyűjtsön vagy mutasson. A Copilot ezután egy reszponzív Canvas alkalmazást generál a leírásunk alapján. Ezután testre szabhatjuk az alkalmazást az igényeink szerint. Az AI Copilot emellett generál és javasol egy Dataverse táblát a szükséges mezőkkel, hogy tárolja azokat az adatokat, amelyeket követni szeretnénk, valamint néhány mintaadatot. Ebben a leckében később megnézzük, mi az a Dataverse, és hogyan használhatjuk a Power Appsben. Ezután testre szabhatjuk a táblát az igényeink szerint az AI Copilot asszisztens funkcióval, beszélgetési lépések segítségével. Ez a funkció könnyen elérhető a Power Apps kezdőképernyőjéről.
+A Power Apps-ban elérhető Copilot MI asszisztens funkció lehetővé teszi, hogy leírd, milyen típusú alkalmazásra van szükséged, és milyen információkat szeretnél az alkalmazásodban követni, gyűjteni vagy megjeleníteni. A Copilot ezt követően egy reszponzív Canvas alkalmazást generál a leírásod alapján. Ezt követően testreszabhatod az alkalmazást az igényeidnek megfelelően. Az MI Copilot továbbá generál és javasol egy Dataverse táblát a szükséges mezőkkel az adatok tárolásához és néhány mintaadatot. Megnézzük, mi az a Dataverse és hogyan használhatod azt a Power Apps-ban a későbbiekben ebben a leckében. Ezután testreszabhatod a táblát az MI Copilot asszisztens funkción keresztüli beszélgetéses lépések segítségével. Ez a funkció közvetlenül elérhető a Power Apps kezdőképernyőjén.
 
-### Copilot a Power Automate-ben
+### Copilot a Power Automatében
 
-A Power Platform részeként a Power Automate lehetővé teszi a felhasználók számára, hogy automatizált munkafolyamatokat hozzanak létre alkalmazások és szolgáltatások között. Segít automatizálni az ismétlődő üzleti folyamatokat, például a kommunikációt, adatgyűjtést és döntési jóváhagyásokat. Egyszerű felülete lehetővé teszi, hogy minden technikai kompetenciával rendelkező felhasználó (kezdőktől a tapasztalt fejlesztőkig) automatizálja a munkafeladatokat. A munkafolyamat-fejlesztési élményt a Generatív AI is javítja a Copilot segítségével.
+A Power Platform részeként a Power Automate lehetővé teszi, hogy felhasználók automatizált munkafolyamatokat hozzanak létre alkalmazások és szolgáltatások között. Segít az ismétlődő üzleti folyamatok, mint például kommunikáció, adatgyűjtés és döntési jóváhagyások automatizálásában. Egyszerű felülete révén minden technikai tudással rendelkező felhasználó (kezdőtől tapasztalt fejlesztőig) képes automatizálni munkafeladatokat. A munkafolyamat-fejlesztési élményt generatív MI is fokozza a Copilot révén.
 
-A Copilot AI asszisztens funkció a Power Automate-ben lehetővé teszi, hogy leírjuk, milyen típusú folyamatra van szükségünk, és milyen műveleteket szeretnénk, hogy a folyamatunk végrehajtson. A Copilot ezután egy folyamatot generál a leírásunk alapján. Ezután testre szabhatjuk a folyamatot az igényeink szerint. Az AI Copilot emellett generál és javasolja azokat a műveleteket, amelyek szükségesek a feladat automatizálásához. Ebben a leckében később megnézzük, mik azok a folyamatok, és hogyan használhatjuk őket a Power Automate-ben. Ezután testre szabhatjuk a műveleteket az igényeink szerint az AI Copilot asszisztens funkcióval, beszélgetési lépések segítségével. Ez a funkció könnyen elérhető a Power Automate kezdőképernyőjéről.
+A Power Automatében elérhető Copilot MI asszisztens funkció lehetővé teszi, hogy leírd, milyen típusú folyamatra van szükséged, és milyen műveleteket szeretnél, hogy a folyamatod végrehajtson. A Copilot ezután létrehozza a folyamatot a leírásod alapján. Ezután testreszabhatod a folyamatot az igényeidnek megfelelően. Az MI Copilot generál és javasolja azokat a műveleteket, amelyek szükségesek a kívánt feladat automatizálásához. Megnézzük, mik azok a folyamatok és hogyan használhatod őket a Power Automatében a későbbiekben ebben a leckében. Ezután testreszabhatod a műveleteket az MI Copilot asszisztens funkción keresztül, beszélgetéses lépések segítségével. Ez a funkció is közvetlenül elérhető a Power Automate kezdőképernyőjén.
 
-## Feladat: Diákfeladatok és számlák kezelése startupunk számára, Copilot használatával
+## Intelligens ügynökök építése a Microsoft Copilot Studioval
 
-Startupunk online kurzusokat kínál diákoknak. A startup gyorsan növekedett, és most nehezen tud lépést tartani a kurzusok iránti kereslettel. A startup felvett téged, mint Power Platform fejlesztőt, hogy segíts neki egy alacsony kódú megoldás építésében, amely segít a diákfeladatok és számlák kezelésében. A megoldásnak képesnek kell lennie arra, hogy nyomon kövesse és kezelje a diákfeladatokat egy alkalmazáson keresztül, valamint automatizálja a számlafeldolgozási folyamatot egy munkafolyamaton keresztül. Megkértek, hogy generatív AI-t használj a megoldás fejlesztéséhez.
+A [Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio?WT.mc_id=academic-105485-koreyst) (korábban Power Virtual Agents) a Power Platform alacsony kódú tagja az **MI ügynökök** – beszélgetős kopilotok – építésére, amelyek képesek kérdések megválaszolására, műveletek végrehajtására és feladatok automatizálására a felhasználóid nevében. A Power Platform többi részéhez hasonlóan ezeket az ügynököket vizuális, természetes nyelvre összpontosító élményben építed: leírod, mit szeretnél, hogy az ügynök tegyen, és a Copilot Studio segít az utasítások, ismeretek és műveletek megalkotásában.
 
-Amikor elkezded használni a Copilotot, használhatod a [Power Platform Copilot Prompt Library](https://github.com/pnp/powerplatform-prompts?WT.mc_id=academic-109639-somelezediko) könyvtárat, hogy elkezdhesd a promptok használatát. Ez a könyvtár tartalmaz egy listát a promptokról, amelyeket használhatsz alkalmazások és folyamatok építéséhez a Copilot segítségével. A könyvtárban található promptokat arra is használhatod, hogy ötletet kapj arról, hogyan írd le az igényeidet a Copilotnak.
+Oktatási startupunk számára építhetsz olyan ügynököt, amely válaszol a diákok kurzusokkal kapcsolatos kérdéseire, ellenőrzi a beadási határidőket, és akár e-mailt is küld az oktatónak – mindezt kódírás nélkül.
 
-### Építs egy Diák Feladatkövető Alkalmazást a Startupunk számára
+Íme néhány a legújabb képességek közül, amelyek a Copilot Studiot erőssé teszik:
 
-Startupunk oktatói nehezen tudják nyomon követni a diákfeladatokat. Egy táblázatot használtak a feladatok nyomon követésére, de ez nehezen kezelhetővé vált, ahogy a diákok száma növekedett. Megkértek, hogy építs egy alkalmazást, amely segít nekik nyomon követni és kezelni a diákfeladatokat. Az alkalmazásnak lehetővé kell tennie számukra, hogy új feladatokat adjanak hozzá, megtekintsék a feladatokat, frissítsék a feladatokat és töröljék a feladatokat. Az alkalmazásnak lehetővé kell tennie az oktatók és diákok számára, hogy megtekintsék azokat a feladatokat, amelyeket már értékeltek, és azokat, amelyeket még nem értékeltek.
+- **Generatív válaszok tudásanyagodból**. Ahelyett, hogy minden beszélgetést kézzel írnál, csatlakoztathatsz **tudásforrásokat** – nyilvános webhelyeket, SharePointot, OneDrive-ot, Dataverse-t, feltöltött fájlokat vagy vállalati adatokat csatlakozókon keresztül –, és az ügynök ezekből megalapozott válaszokat generál.
 
-Az alkalmazást a Power Appsben, Copilot segítségével fogod megépíteni az alábbi lépések követésével:
+- **Generatív összehangolás**. A merev indító kifejezések helyett az ügynök MI segítségével érti a kérést, és dinamikusan dönti el, mely tudásokat, témákat és műveleteket kapcsolja össze a teljesítéshez, több lépést is összekapcsolva.
+
+- **Műveletek és csatlakozók**. Az ügynökök tudnak *tenni* dolgokat, nem csak csevegni. Az ügynökök műveleteket kapnak az 1 500+ előre elkészített Power Platform csatlakozóval, Power Automate folyamatokkal, egyedi REST API-kkal, felkérésekkel vagy a **Model Context Protocol (MCP)** szerverekkel.
+
+- **Autonóm ügynökök**. Az ügynökök nem csak chat ablakban válaszolnak. Építhetsz **autonóm ügynököket**, amelyek események – például új e-mail, új rekord a Dataverse-ben vagy fájlfeltöltés – hatására aktiválódnak, majd háttérben működnek egy feladat elvégzéséhez.
+
+- **Több ügynök összehangolása**. Az ügynökök képesek más ügynököket hívni. Egy Copilot Studio ügynök átadhat, vagy kibővíthető más ügynökökkel, beleértve a Microsoft 365 Copilotba publikáltakat és a Microsoft Foundry-ban építetteket.
+
+- **Modellválasztás**. A beépített modelleken túl a Microsoft Foundry modellkatalógusából is behozhatsz modelleket, hogy személyre szabhasd, hogyan érveljen és válaszoljon az ügynököd.
+
+- **Publikálás bárhol**. Az elkészült ügynök több csatornára publikálható – Microsoft Teams, Microsoft 365 Copilot, weboldal vagy egyedi alkalmazás és mások –, miközben a biztonság, hitelesítés és elemzés a Power Platform adminisztrációs élményén keresztül kezelhető.
+
+Első ügynököd építését a [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com?WT.mc_id=academic-105485-koreyst) oldalon kezdheted, és bővebb információt találsz a [Microsoft Copilot Studio dokumentációjában](https://learn.microsoft.com/microsoft-copilot-studio/?WT.mc_id=academic-105485-koreyst).
+
+## Feladat: Kezeld a diákok feladatait és számláit a startupunk számára a Copilot használatával
+
+Startupunk online tanfolyamokat kínál diákoknak. A startup gyorsan növekedett, és most nehéz lépést tartani a tanfolyamok iránti kereslettel. Felkértek, hogy Power Platform fejlesztőként segíts egy alacsony kódú megoldás építésében, amely segít a diákfeladatok és a számlák kezelésében. A megoldásnak képesnek kell lennie a diákfeladatok követésére és kezelésére egy alkalmazáson keresztül, valamint a számlafeldolgozás automatizálására egy munkafolyamat segítségével. Kérték, hogy a megoldás fejlesztéséhez generatív MI-t használj.
+
+A Copilot használatának megkezdéséhez használhatod a [Power Platform Copilot Prompt Könyvtárat](https://github.com/pnp/powerplatform-prompts?WT.mc_id=academic-109639-somelezediko), amely számos promptot tartalmaz, amellyel alkalmazásokat és folyamatokat építhetsz Copilot segítségével. A könyvtár promptjai ötletet adnak a Copilot-nak adott igények leírására is.
+
+### Diákmunkakövető alkalmazás építése startupunk számára
+
+Oktatóinknak nehézséget okoz a diákfeladatok követése. Korábban táblázatkezelőt használtak a feladatok nyomon követésére, de ez kezelhetetlenné vált a diákok számának növekedésével. Ezért kértek téged, hogy építs egy alkalmazást, amely segít a diákfeladatok követésében és kezelésében. Az alkalmazásnak lehetővé kell tennie új feladatok hozzáadását, a feladatok megtekintését, frissítését és törlését. Az alkalmazásnak azt is lehetővé kell tennie az oktatók és a diákok számára, hogy megtekintsék az értékelt és az értékelésre váró feladatokat.
+
+Az alkalmazást a Power Apps Copilot segítségével az alábbi lépéseket követve építed meg:
 
 1. Navigálj a [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) kezdőképernyőjére.
 
-1. Használd a kezdőképernyő szövegmezőjét, hogy leírd, milyen alkalmazást szeretnél építeni. Például: **_Egy alkalmazást szeretnék építeni a diákfeladatok nyomon követésére és kezelésére_**. Kattints a **Küldés** gombra, hogy elküldd a promptot az AI Copilotnak.
+1. Használd a kezdőképernyő szövegterületét az építeni kívánt alkalmazás leírására. Például, **_Szeretnék egy alkalmazást építeni, hogy kövessem és kezeljem a diákfeladatokat_**. Kattints a **Küldés** gombra, hogy elküldd a promptot az MI Copilotnak.
 
-![Írd le, milyen alkalmazást szeretnél építeni](../../../translated_images/hu/copilot-chat-prompt-powerapps.84250f341d060830.webp)
+![Írd le az alkalmazást, amelyet építeni szeretnél](../../../translated_images/hu/copilot-chat-prompt-powerapps.84250f341d060830.webp)
 
-1. Az AI Copilot javasolni fog egy Dataverse táblát a szükséges mezőkkel, hogy tárolja azokat az adatokat, amelyeket követni szeretnél, valamint néhány mintaadatot. Ezután testre szabhatod a táblát az igényeid szerint az AI Copilot asszisztens funkcióval, beszélgetési lépések segítségével.
+1. Az MI Copilot javasolni fog egy Dataverse táblát a szükséges mezőkkel az adatok tárolásához és néhány mintaadatot. Ezután testre szabhatod a táblát az MI Copilot asszisztens funkción keresztül beszélgetéses lépésekben.
 
-   > **Fontos**: A Dataverse a Power Platform alapjául szolgáló adatplatform. Ez egy alacsony kódú adatplatform az alkalmazás adatainak tárolásához. Ez egy teljesen kezelt szolgáltatás, amely biztonságosan tárolja az adatokat a Microsoft Cloudban, és a Power Platform környezetedben van telepítve. Beépített adatirányítási képességekkel rendelkezik, mint például adatklasszifikáció, adatvonal, finomhangolt hozzáférés-vezérlés és még sok más. További információt a Dataverse-ről [itt találhatsz](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
+   > **Fontos**: A Dataverse a Power Platform alatti adatplatform. Ez egy alacsony kódú adatplatform az alkalmazás adatainak tárolására. Teljesen kezelt szolgáltatás, amely biztonságosan tárolja az adatokat a Microsoft felhőjében és a Power Platform környezetedben van kiosztva. Beépített adatkezelési funkciókat kínál, mint például adat-osztályozás, adatszármaztatás, finomhangolt hozzáférés-vezérlés és még sok más. További információt a Dataverse-ről [itt](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko) találsz.
 
    ![Javasolt mezők az új tábládban](../../../translated_images/hu/copilot-dataverse-table-powerapps.f4cc07b5d5f9327b.webp)
 
-1. Az oktatók szeretnének e-maileket küldeni azoknak a diákoknak, akik leadták a feladataikat, hogy tájékoztassák őket a feladataik állapotáról. Használhatod a Copilotot, hogy új mezőt adj hozzá a táblához a diák e-mail címének tárolásához. Például használhatod a következő promptot, hogy új mezőt adj hozzá a táblához: **_Egy oszlopot szeretnék hozzáadni a diák e-mail címének tárolásához_**. Kattints a **Küldés** gombra, hogy elküldd a promptot az AI Copilotnak.
+1. Az oktatók e-maileket szeretnének küldeni azoknak a diákoknak, akik leadták a feladatokat, hogy tájékoztassák őket a feladatok állapotáról. Használhatod a Copilotot, hogy új mezőt adj a táblához a diák e-mail címének tárolására. Például használhatod a következő promptot: **_Olyan oszlopot szeretnék hozzáadni, amely a diák e-mail címét tárolja_**. Kattints a **Küldés** gombra a prompt elküldéséhez az MI Copilotnak.
 
 ![Új mező hozzáadása](../../../translated_images/hu/copilot-new-column.35e15ff21acaf274.webp)
 
-1. Az AI Copilot generálni fog egy új mezőt, és ezután testre szabhatod a mezőt az igényeid szerint.
+1. Az MI Copilot létrehozza az új mezőt, és utána testre szabhatod azt az igényeid szerint.
 
-1. Miután elkészültél a táblával, kattints a **Alkalmazás létrehozása** gombra, hogy létrehozd az alkalmazást.
 
-1. Az AI Copilot egy reszponzív Canvas alkalmazást generál a leírásod alapján. Ezután testre szabhatod az alkalmazást az igényeid szerint.
+1. Miután elkészült a táblázattal, kattintson a **Alkalmazás létrehozása** gombra az alkalmazás létrehozásához.
 
-1. Az oktatók számára, hogy e-maileket küldjenek a diákoknak, használhatod a Copilotot, hogy új képernyőt adj hozzá az alkalmazáshoz. Például használhatod a következő promptot, hogy új képernyőt adj hozzá az alkalmazáshoz: **_Egy képernyőt szeretnék hozzáadni, hogy e-maileket küldhessek a diákoknak_**. Kattints a **Küldés** gombra, hogy elküldd a promptot az AI Copilotnak.
+1. Az AI Copilot a leírása alapján generál egy reszponzív Canvas alkalmazást. Ezután testre szabhatja az alkalmazást az igényeinek megfelelően.
 
-![Új képernyő hozzáadása prompt utasítással](../../../translated_images/hu/copilot-new-screen.2e0bef7132a17392.webp)
+1. Oktatók számára, akik emailt szeretnének küldeni a diákoknak, használhatják a Copilotot egy új képernyő hozzáadásához az alkalmazáshoz. Például az alábbi utasítást használhatja egy új képernyő hozzáadásához az alkalmazásban: **_Szeretnék egy képernyőt hozzáadni, hogy emailt küldhessek a diákoknak_**. Kattintson a **Küldés** gombra, hogy elküldje az utasítást az AI Copilotnak.
 
-1. Az AI Copilot generálni fog egy új képernyőt, és ezután testre szabhatod a képernyőt az igényeid szerint.
+![Új képernyő hozzáadása utasítás alapján](../../../translated_images/hu/copilot-new-screen.2e0bef7132a17392.webp)
 
-1. Miután elkészültél az alkalmazással, kattints a **Mentés** gombra, hogy elmentsd az alkalmazást.
+1. Az AI Copilot létrehoz egy új képernyőt, amelyet aztán testre szabhat az igényeinek megfelelően.
 
-1. Az alkalmazás megosztásához az oktatókkal kattints a **Megosztás** gombra,
-Miért érdemes a Dataverse-t használni a startupunkhoz? A Dataverse szabványos és egyedi táblái biztonságos és felhőalapú tárolási lehetőséget kínálnak az adatok számára. A táblák lehetővé teszik különböző típusú adatok tárolását, hasonlóan ahhoz, ahogy egy Excel munkafüzetben több munkalapot használhatunk. A táblák segítségével tárolhatja azokat az adatokat, amelyek kifejezetten az Ön szervezetének vagy üzleti igényeinek felelnek meg. A Dataverse használatával startupunk számos előnyhöz juthat, többek között:
+1. Miután elkészült az alkalmazással, kattintson a **Mentés** gombra az alkalmazás mentéséhez.
 
-- **Könnyen kezelhető**: Mind a metaadatok, mind az adatok a felhőben tárolódnak, így nem kell aggódnia amiatt, hogy hogyan tárolja vagy kezeli őket. Ön az alkalmazások és megoldások fejlesztésére koncentrálhat.
+1. Az alkalmazás megosztásához az oktatókkal kattintson a **Megosztás** gombra, majd ismét kattintson a **Megosztás** gombra. Ezt követően megoszthatja az alkalmazást az oktatókkal, ha megadja az email címüket.
 
-- **Biztonságos**: A Dataverse biztonságos és felhőalapú tárolási lehetőséget kínál az adatok számára. Szerepkör-alapú biztonság segítségével szabályozhatja, hogy ki férhet hozzá az adatokhoz a táblákban, és hogyan férhet hozzájuk.
+> **Házi feladat:** Az imént elkészített alkalmazás jó kezdet, de tovább fejleszthető. Az email funkcióval az oktatók csak manuálisan tudnak emailt küldeni a diákoknak, az email címek beírásával. Tudja használni a Copilotot egy olyan automatizálás létrehozásához, amely lehetővé teszi, hogy az oktatók automatikusan küldjenek emailt a diákoknak, amikor beadják a feladataikat? A tipp: a megfelelő utasítással használhatja a Copilotot a Power Automate-ban erre a célra.
+
+### Számlainformációs tábla létrehozása a startupunk számára
+
+A startup pénzügyi csapata problémákkal küzd a számlák nyomon követésében. Egy táblázatot használnak a számlák kezelésére, de ahogy a számlák száma nőtt, az irányítás egyre nehezebbé vált. Kérték öntől egy olyan tábla elkészítését, amely segít tárolni, nyomon követni és kezelni a beérkező számlák adatait. A táblázatot egy automatizálás alapjaként kell használni, amely kinyeri az összes számla információt és tárolja őket a táblázatban. A táblázatnak lehetővé kell tennie a pénzügyi csapat számára, hogy megtekinthessék a kifizetett és a kifizetésre váró számlákat egyaránt.
+
+A Power Platform mögött egy adatplatform, a Dataverse áll, amely lehetővé teszi, hogy az alkalmazásokhoz és megoldásokhoz adatokat tároljon. A Dataverse egy alacsony kódú adatplatform az alkalmazások adatainak tárolásához. Teljesen kezelt szolgáltatás, amely biztonságosan tárolja az adatokat a Microsoft Cloud-ban, és a Power Platform környezetén belül kerül kiépítésre. Beépített adatkezelési képességekkel rendelkezik, mint például adat-osztályozás, adatok eredetének követése, finomhangolt hozzáférés-ellenőrzés és mások. További információkat talál [itt a Dataverse-ről](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
+
+Miért érdemes Dataverse-t használni a startupunkban? A szabványos és egyedi táblák a Dataverse-ben biztonságos, felhőalapú tárhelyet biztosítanak az adatoknak. A táblák segítségével különböző típusú adatokat tárolhat, hasonlóan ahhoz, ahogy több munkalapot használ egyetlen Excel munkafüzetben. Használhat táblákat specifikus adatok tárolására a szervezet vagy üzleti igények szerint. A Dataverse használatából eredő előnyök startupunk számára többek között, de nem kizárólagosan:
+
+- **Könnyen kezelhető**: Mind a metaadatokat, mind az adatokat a felhőben tárolják, így nem kell aggódnia, hogyan tárolják vagy kezelik őket. Az alkalmazások és megoldások építésére koncentrálhat.
+
+- **Biztonságos**: A Dataverse biztonságos, felhőalapú tárhelyet biztosít az adatoknak. Szabályozhatja, ki férhet hozzá az adatokhoz a táblázataiban és hogyan férhet hozzájuk a szerepalapú biztonság segítségével.
 
 - **Gazdag metaadatok**: Az adattípusok és kapcsolatok közvetlenül használhatók a Power Apps-ben.
 
-- **Logika és validáció**: Üzleti szabályokat, számított mezőket és validációs szabályokat használhat az üzleti logika érvényesítésére és az adatok pontosságának fenntartására.
+- **Logika és érvényesítés**: Használhat üzleti szabályokat, számított mezőket és érvényesítési szabályokat az üzleti logika érvényesítésére és az adatok pontosságának fenntartására.
 
-Most, hogy tudja, mi az a Dataverse és miért érdemes használni, nézzük meg, hogyan használhatja a Copilotot egy tábla létrehozásához a Dataverse-ben, hogy megfeleljen pénzügyi csapatunk igényeinek.
+Most, hogy tudja, mi az a Dataverse és miért érdemes használni, nézzük meg, hogyan használhatja a Copilotot egy tábla létrehozásához a Dataverse-ben, amely megfelel a pénzügyi csapat igényeinek.
 
-> **Note**: Ezt a táblát a következő szakaszban fogja használni egy automatizálás létrehozásához, amely az összes számla információt kinyeri és tárolja a táblában.
+> **Megjegyzés** : A következő szakaszban ezt a táblát fogja használni egy automatizálás létrehozásához, amely kinyeri az összes számlainformációt és tárolja a táblázatban.
 
-A Dataverse-ben történő tábla létrehozásához a Copilot segítségével kövesse az alábbi lépéseket:
+A Copilot segítségével a Dataverse-ben táblázat létrehozásához kövesse az alábbi lépéseket:
 
-1. Lépjen a [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) kezdőképernyőjére.
+1. Navigáljon a [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) kezdőképernyőjére.
 
-2. A bal oldali navigációs sávban válassza a **Táblák** lehetőséget, majd kattintson az **Új tábla leírása** gombra.
+2. A bal oldali navigációs sávon válassza a **Táblázatok** menüpontot, majd kattintson a **Új táblázat leírása** gombra.
 
 ![Új tábla kiválasztása](../../../translated_images/hu/describe-new-table.0792373eb757281e.webp)
 
-3. Az **Új tábla leírása** képernyőn használja a szövegmezőt a létrehozni kívánt tábla leírására. Például: **_Egy táblát szeretnék létrehozni a számlainformációk tárolására_**. Kattintson a **Küldés** gombra, hogy elküldje a kérést az AI Copilotnak.
+1. Az **Új tábla leírása** képernyőn a szövegmezőbe írja le a létrehozni kívánt táblázatot. Például: **_Egy számlainformációkat tároló táblát szeretnék létrehozni_**. Kattintson a **Küldés** gombra az utasítás elküldéséhez az AI Copilotnak.
 
-![A tábla leírása](../../../translated_images/hu/copilot-chat-prompt-dataverse.feb2f81e5872b9d2.webp)
+![Tábla leírása](../../../translated_images/hu/copilot-chat-prompt-dataverse.feb2f81e5872b9d2.webp)
 
-4. Az AI Copilot javasolni fog egy Dataverse táblát a szükséges mezőkkel, amelyekkel tárolhatja a nyomon követni kívánt adatokat, valamint néhány mintaadatot. Ezután testre szabhatja a táblát az AI Copilot asszisztens funkció segítségével, beszélgetéses lépések révén.
+1. Az AI Copilot javasol egy Dataverse táblát a szükséges mezőkkel, hogy tárolja a követni kívánt adatokat, és néhány mintaadatot is bemutat. Ezután a Copilot asszisztens funkciójával párbeszédes lépésekben testre szabhatja a táblázatot az igényeinek megfelelően.
 
 ![Javasolt Dataverse tábla](../../../translated_images/hu/copilot-dataverse-table.b3bc936091324d9d.webp)
 
-5. A pénzügyi csapat szeretne e-mailt küldeni a beszállítónak, hogy tájékoztassa őket számlájuk aktuális állapotáról. A Copilot segítségével új mezőt adhat a táblához a beszállító e-mail címének tárolására. Például használhatja a következő kérést egy új mező hozzáadásához a táblához: **_Egy oszlopot szeretnék hozzáadni a beszállító e-mail címének tárolására_**. Kattintson a **Küldés** gombra, hogy elküldje a kérést az AI Copilotnak.
+1. A pénzügyi csapat szeretne egy emailt küldeni a beszállítónak, hogy tájékoztassák a számla aktuális állapotáról. Használhatja a Copilotot, hogy egy új mezőt adjon a táblázathoz a beszállító email címének tárolására. Például az alábbi utasítást adhatja meg a mező hozzáadásához: **_Szeretnék egy oszlopot hozzáadni a beszállító email címének tárolásához_**. Kattintson a **Küldés** gombra az utasítás elküldéséhez az AI Copilotnak.
 
-6. Az AI Copilot létrehoz egy új mezőt, amelyet aztán testre szabhat az igényeinek megfelelően.
+1. Az AI Copilot hozzáadja az új mezőt, amelyet aztán testre szabhat az igényeinek megfelelően.
 
-7. Miután elkészült a táblával, kattintson a **Létrehozás** gombra a tábla létrehozásához.
+1. Miután végzett a táblázattal, kattintson a **Létrehozás** gombra a tábla létrehozásához.
 
-## AI modellek a Power Platformban az AI Builder segítségével
+## AI modellek a Power Platform-ban az AI Builder-rel
 
-Az AI Builder egy alacsony kódú AI képesség, amely elérhető a Power Platformban, és lehetővé teszi AI modellek használatát folyamatok automatizálására és eredmények előrejelzésére. Az AI Builder segítségével AI-t hozhat az alkalmazásaiba és folyamataiba, amelyek kapcsolódnak a Dataverse-ben vagy különböző felhőalapú adatforrásokban, például SharePointban, OneDrive-ban vagy Azure-ban tárolt adatokhoz.
+Az AI Builder egy alacsony kódú AI funkció a Power Platformban, amely lehetővé teszi AI modellek használatát a folyamatok automatizálásához és eredmények előrejelzéséhez. Az AI Builder-rel AI-t hozhat létre az alkalmazásaiban és folyamataiban, amelyek adatokhoz csatlakoznak a Dataverse-ben vagy különböző felhőalapú adatforrásokban, mint például a SharePoint, OneDrive vagy Azure.
 
 ## Előre elkészített AI modellek vs Egyedi AI modellek
 
-Az AI Builder kétféle AI modellt kínál: előre elkészített AI modelleket és egyedi AI modelleket. Az előre elkészített AI modellek olyan kész AI modellek, amelyeket a Microsoft képezett ki, és elérhetők a Power Platformban. Ezek segítenek intelligenciát adni az alkalmazásokhoz és folyamatokhoz anélkül, hogy adatokat kellene gyűjteni, majd saját modelleket építeni, képezni és közzétenni. Ezeket a modelleket folyamatok automatizálására és eredmények előrejelzésére használhatja.
+Az AI Builder kétféle AI modellt kínál: előre elkészített AI modelleket és egyedi AI modelleket. Az előre elkészített AI modellek készen állnak a használatra, a Microsoft által vannak betanítva és elérhetőek a Power Platformban. Ezek segítenek intelligenciát adni az alkalmazásokhoz és folyamatokhoz anélkül, hogy adatokat kellene gyűjtenie, majd saját modelleket építenie, tanítania és közzétennie. Ezekkel az automatizálhat folyamatokat és előre jelezhet eredményeket.
 
-Néhány előre elkészített AI modell, amely elérhető a Power Platformban:
+Néhány az előre elkészített AI modellek közül, amelyek elérhetőek a Power Platformban:
 
-- **Kulcsszó kinyerés**: Ez a modell kulcsszavakat nyer ki szövegből.
+- **Kulcsfontosságú kifejezés kinyerése**: Ez a modell kulcsfontosságú kifejezéseket emel ki szövegből.
 - **Nyelvfelismerés**: Ez a modell felismeri a szöveg nyelvét.
-- **Hangulat elemzés**: Ez a modell pozitív, negatív, semleges vagy vegyes hangulatot érzékel a szövegben.
-- **Névjegykártya olvasó**: Ez a modell információt nyer ki névjegykártyákból.
-- **Szövegfelismerés**: Ez a modell szöveget nyer ki képekből.
-- **Objektumfelismerés**: Ez a modell objektumokat érzékel és nyer ki képekből.
-- **Dokumentumfeldolgozás**: Ez a modell információt nyer ki űrlapokból.
-- **Számlafeldolgozás**: Ez a modell információt nyer ki számlákból.
+- **Hangulatelemzés**: Ez a modell azonosítja a pozitív, negatív, semleges vagy vegyes érzelmeket a szövegben.
+- **Névjegykártya olvasó**: Ez a modell információkat emel ki névjegykártyákról.
+- **Szövegfelismerés**: Ez a modell szöveget emel ki képekből.
+- **Objektumfelismerés**: Ez a modell azonosít és emel ki objektumokat képekből.
+- **Dokumentum feldolgozás**: Ez a modell űrlapokból emel ki információkat.
+- **Számla feldolgozás**: Ez a modell számlákból emel ki információkat.
 
-Az egyedi AI modellekkel saját modellt hozhat az AI Builderbe, hogy az úgy működjön, mint bármely AI Builder egyedi modell, lehetővé téve a modell képzését saját adatokkal. Ezeket a modelleket folyamatok automatizálására és eredmények előrejelzésére használhatja mind a Power Apps-ben, mind a Power Automate-ben. Saját modell használata esetén bizonyos korlátozások érvényesek. További információért olvassa el ezeket a [korlátozásokat](https://learn.microsoft.com/ai-builder/byo-model#limitations?WT.mc_id=academic-105485-koreyst).
+Egyedi AI modellekkel behozhatja saját modelljét az AI Builderbe, hogy úgy működjön, mint bármely egyedi AI Builder modell, lehetővé téve, hogy a modellt saját adataival tanítsa. Ezeket a modelleket használhatja folyamatok automatizálására és eredmények előrejelzésére a Power Apps és Power Automate-ben egyaránt. Saját modell használatakor bizonyos korlátok érvényesek. További információ a [korlátokról](https://learn.microsoft.com/ai-builder/byo-model#limitations?WT.mc_id=academic-105485-koreyst).
 
 ![AI builder modellek](../../../translated_images/hu/ai-builder-models.8069423b84cfc47f.webp)
 
-## 2. feladat - Számlafeldolgozási folyamat létrehozása a startupunk számára
+## 2. feladat - Számlafeldolgozó folyamat létrehozása our startupunk számára
 
-A pénzügyi csapat nehézségekbe ütközik a számlák feldolgozása során. Egy táblázatot használnak a számlák nyomon követésére, de ez egyre nehezebbé válik, ahogy a számlák száma növekszik. Arra kértek, hogy hozzon létre egy munkafolyamatot, amely segít nekik a számlák AI segítségével történő feldolgozásában. A munkafolyamatnak lehetővé kell tennie, hogy a számlákból információt nyerjen ki, és tárolja az információt egy Dataverse táblában. A munkafolyamatnak azt is lehetővé kell tennie, hogy e-mailt küldjenek a pénzügyi csapatnak a kinyert információkkal.
+A pénzügyi csapat problémákkal küzd a számlák feldolgozásában. Táblázatot használnak a számlák nyomon követésére, de amint a számlák száma nőtt, a kezelés egyre bonyolultabbá vált. Arra kértek, hogy építsen egy munkafolyamatot, amely segít a számlák feldolgozásában AI segítségével. A munkafolyamatnak lehetővé kell tennie az információ kinyerését a számlákból és az adatok tárolását egy Dataverse táblázatban. Továbbá a munkafolyamatnak lehetővé kell tennie, hogy emailt küldjenek a pénzügyi csapatnak a kinyert információkkal.
 
-Most, hogy tudja, mi az AI Builder és miért érdemes használni, nézzük meg, hogyan használhatja az AI Builderben korábban bemutatott Számlafeldolgozási AI modellt egy munkafolyamat létrehozásához, amely segít a pénzügyi csapatnak a számlák feldolgozásában.
+Most, hogy tudja, mi az az AI Builder és miért érdemes használni, nézzük meg, hogyan használhatja a Számlafeldolgozó AI modellt az AI Builderben, amelyről korábban már beszéltünk, a munkafolyamat létrehozásához, amely segít a pénzügyi csapatnak a számlák feldolgozásában.
 
-A Számlafeldolgozási AI Modell használatával történő munkafolyamat létrehozásához kövesse az alábbi lépéseket:
+A pénzügyi csapat számláit feldolgozó munkafolyamat létrehozásához az AI Builder Számlafeldolgozó AI modelljével az alábbi lépéseket kövesse:
 
-1. Lépjen a [Power Automate](https://make.powerautomate.com?WT.mc_id=academic-105485-koreyst) kezdőképernyőjére.
+1. Navigáljon a [Power Automate](https://make.powerautomate.com?WT.mc_id=academic-105485-koreyst) kezdőképernyőjére.
 
-2. Használja a kezdőképernyőn található szövegmezőt a létrehozni kívánt munkafolyamat leírására. Például: **_Feldolgozzon egy számlát, amikor az megérkezik a postafiókomba_**. Kattintson a **Küldés** gombra, hogy elküldje a kérést az AI Copilotnak.
+2. A kezdőképernyőn lévő szövegmezőben írja le a létrehozni kívánt munkafolyamatot. Például: **_Számla feldolgozása, amikor megérkezik a postafiókomba_**. Kattintson a **Küldés** gombra az utasítás elküldéséhez az AI Copilot-nak.
 
    ![Copilot power automate](../../../translated_images/hu/copilot-chat-prompt-powerautomate.f377e478cc8412de.webp)
 
-3. Az AI Copilot javasolni fogja azokat a lépéseket, amelyek szükségesek az automatizálni kívánt feladat elvégzéséhez. Kattintson a **Tovább** gombra, hogy végigmenjen a következő lépéseken.
+3. Az AI Copilot javasolja azokat a műveleteket, amelyeket el kell végeznie a feladat automatizálásához. Kattintson a **Tovább** gombra a következő lépések megtekintéséhez.
 
-4. A következő lépésben a Power Automate megkéri, hogy állítsa be a folyamat végrehajtásához szükséges kapcsolatokat. Miután elkészült, kattintson a **Folyamat létrehozása** gombra a folyamat létrehozásához.
+4. A következő lépésben a Power Automate felszólítja a munkafolyamathoz szükséges kapcsolatok beállítására. Miután elkészült, kattintson a **Folyamat létrehozása** gombra.
 
-5. Az AI Copilot létrehoz egy folyamatot, amelyet aztán testre szabhat az igényeinek megfelelően.
+5. Az AI Copilot létrehozza a folyamatot, amelyet aztán testre szabhat az igényeinek megfelelően.
 
-6. Frissítse a folyamat indítóját, és állítsa be a **Mappa** mezőt arra a mappára, ahol a számlák tárolva lesznek. Például beállíthatja a mappát **Beérkezett üzenetek**-re. Kattintson a **További beállítások megjelenítése** gombra, és állítsa a **Csak mellékletekkel** opciót **Igen**-re. Ez biztosítja, hogy a folyamat csak akkor fusson, ha egy mellékletet tartalmazó e-mail érkezik a mappába.
+6. Frissítse a folyamat indítóját és állítsa be a **Mappa** értékét arra a mappára, ahol a számlák tárolva lesznek. Például állítsa a mappát a **Beérkezett üzenetek**-re. Kattintson a **Speciális beállítások megjelenítése** pontra, és állítsa a **Csak mellékletes levelek** opciót **Igen** értékre. Ez biztosítja, hogy a folyamat csak akkor fusson, ha mellékletet tartalmazó email érkezik a mappába.
 
-7. Távolítsa el a következő műveleteket a folyamatból: **HTML szöveggé**, **Összeállítás**, **Összeállítás 2**, **Összeállítás 3** és **Összeállítás 4**, mivel ezeket nem fogja használni.
+7. Távolítsa el a következő műveleteket a folyamatból: **HTML szöveggé**, **Összeállítás**, **Összeállítás 2**, **Összeállítás 3** és **Összeállítás 4**, mert ezekre nem lesz szüksége.
 
-8. Távolítsa el a **Feltétel** műveletet a folyamatból, mivel ezt nem fogja használni. A folyamatnak a következő képernyőképhez hasonlóan kell kinéznie:
+8. Távolítsa el a **Feltétel** műveletet is a folyamatból, mert azt sem fogja használni. Az alábbi képernyőképhez hasonlóan kell kinéznie:
 
    ![power automate, műveletek eltávolítása](../../../translated_images/hu/powerautomate-remove-actions.7216392fe684ceba.webp)
 
-9. Kattintson az **Új művelet hozzáadása** gombra, és keressen rá a **Dataverse**-re. Válassza az **Új sor hozzáadása** műveletet.
+9. Kattintson az **Új művelet hozzáadása** gombra, majd keressen rá a **Dataverse** kifejezésre. Válassza az **Új sor hozzáadása** műveletet.
 
-10. Az **Információk kinyerése a számlákból** műveletnél frissítse a **Számlafájl** mezőt, hogy az az e-mail **Melléklet tartalmára** mutasson. Ez biztosítja, hogy a folyamat a számla mellékletéből nyerje ki az információkat.
+10. Az **Információk kinyerése számlákból** műveletben frissítse a **Számla fájl** beállítást úgy, hogy a **Melléklet tartalma** legyen megadva az emailből. Ez biztosítja, hogy a folyamat a számla mellékletéből nyerje ki az információkat.
 
-11. Válassza ki a korábban létrehozott **Táblát**. Például válassza az **Számlainformáció** táblát. Válassza ki a dinamikus tartalmat az előző műveletből, hogy kitöltse a következő mezőket:
+11. Válassza ki az előzőleg létrehozott **Táblázatot**. Például választhatja a **Számlainformáció** táblát. Az előző művelet dinamikus tartalmát használja az alábbi mezők kitöltésére:
 
-    - ID
+    - Azonosító (ID)
     - Összeg
     - Dátum
     - Név
-    - Állapot - Állítsa az **Állapotot** **Függőben**-re.
-    - Beszállító e-mail - Használja a **Feladó** dinamikus tartalmat a **Amikor új e-mail érkezik** indítóból.
+    - Állapot - Állítsa az **Állapot** mezőt **Függőben** értékre.
+    - Beszállító email cím - Használja a **Feladó** dinamikus tartalmat az **Új email érkezésekor** indítóból.
 
     ![power automate új sor hozzáadása](../../../translated_images/hu/powerautomate-add-row.5edce45e5dd3d51e.webp)
 
-12. Miután elkészült a folyamattal, kattintson a **Mentés** gombra a folyamat mentéséhez. Ezután tesztelheti a folyamatot úgy, hogy küld egy e-mailt egy számlával a triggerben megadott mappába.
+12. Miután elkészült a folyamattal, kattintson a **Mentés** gombra az elmentéshez. Ezután tesztelheti a folyamatot, ha a megadott mappába számlát tartalmazó emailt küld.
 
-> **Házi feladat**: Az éppen elkészített folyamat jó kezdet, most gondolja át, hogyan tudna egy olyan automatizálást létrehozni, amely lehetővé teszi pénzügyi csapatunk számára, hogy e-mailt küldjenek a beszállítónak, hogy tájékoztassák őket számlájuk aktuális állapotáról. Tipp: a folyamatnak akkor kell futnia, amikor a számla állapota megváltozik.
+> **Házi feladat:** Az imént elkészített folyamat jó kezdet, most pedig gondolkodjon el azon, hogy hogyan készíthet olyan automatizálást, amely lehetővé teszi a pénzügyi csapat számára, hogy emailt küldjenek a beszállítónak a számla aktuális állapotáról. Tipp: a folyamatnak akkor kell futnia, amikor a számla állapota megváltozik.
 
-## Szöveg generálása AI modellel a Power Automate-ben
+## Szöveg generálása AI modellel a Power Automate-ban
 
-Az AI Builderben elérhető Create Text with GPT AI Model lehetővé teszi szöveg generálását egy kérés alapján, és a Microsoft Azure OpenAI Service által működik. Ezzel a képességgel a GPT (Generative Pre-Trained Transformer) technológiát integrálhatja az alkalmazásaiba és folyamataiba, hogy különféle automatizált folyamatokat és hasznos alkalmazásokat hozzon létre.
+Az AI Builder Create Text with GPT AI modellje lehetővé teszi, hogy bemeneti utasítás alapján szöveget generáljon, és a Microsoft Azure OpenAI Service hajtja végre. Ezzel a képességgel GPT (Generatív Előzetesen Betanított Transformer) technológiát építhet be az alkalmazásaiba és folyamataiba, hogy számos automatizált folyamatot és hasznos alkalmazást hozzon létre.
 
-A GPT modellek hatalmas mennyiségű adaton történő kiterjedt képzésen mennek keresztül, lehetővé téve számukra, hogy olyan szöveget állítsanak elő, amely szorosan hasonlít az emberi nyelvre, amikor egy kérés érkezik. A munkafolyamat-automatizálással kombinálva az AI modellek, mint például a GPT, széles körű feladatok egyszerűsítésére és automatizálására használhatók.
+A GPT modelleket hatalmas adatmennyiségen tanítják, ami lehetővé teszi számukra, hogy bemeneti utasítás esetén olyan szövegeket állítsanak elő, amelyek nagyon hasonlítanak az emberi nyelvre. A munkafolyamat automatizációval integrálva az olyan AI modellek, mint a GPT, széles körű feladatok egyszerűsítésére és automatizálására használhatók.
 
-Például létrehozhat folyamatokat, amelyek automatikusan generálnak szöveget különféle felhasználási esetekhez, például e-mail vázlatokhoz, termékleírásokhoz és más célokra. A modellt arra is használhatja, hogy szöveget generáljon különféle alkalmazásokhoz, például chatbotokhoz és ügyfélszolgálati alkalmazásokhoz, amelyek lehetővé teszik az ügyfélszolgálati munkatársak számára, hogy hatékonyan és eredményesen válaszoljanak az ügyfélkérdésekre.
+Például létrehozhat olyan folyamatokat, amelyek automatikusan szöveget generálnak különféle célokra, például email tervezetekhez, termékleírásokhoz és még sok máshoz. A modellt használhatja különféle alkalmazásokban is, például chatbotokban és ügyfélszolgálati alkalmazásokban, amelyek lehetővé teszik az ügyfélszolgálati munkatársak számára, hogy hatékonyan és eredményesen válaszoljanak az ügyfélmegkeresésekre.
 
-![kérés létrehozása](../../../translated_images/hu/create-prompt-gpt.69d429300c2e870a.webp)
+![Utasítás létrehozása](../../../translated_images/hu/create-prompt-gpt.69d429300c2e870a.webp)
 
-Ha szeretne többet megtudni ennek az AI Modellnek a Power Automate-ben történő használatáról, tekintse meg az [Add intelligence with AI Builder and GPT](https://learn.microsoft.com/training/modules/ai-builder-text-generation/?WT.mc_id=academic-109639-somelezediko) modult.
 
-## Szép munka! Folytassa a tanulást
+Ha meg szeretné tanulni, hogyan használja ezt a mesterséges intelligencia modellt a Power Automatében, tekintse át az [Add intelligence with AI Builder and GPT](https://learn.microsoft.com/training/modules/ai-builder-text-generation/?WT.mc_id=academic-109639-somelezediko) modult.
 
-A lecke befejezése után nézze meg a [Generative AI Learning gyűjteményt](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy tovább fejlessze generatív AI ismereteit!
+## Remek munka! Folytassa a tanulást
 
-Lépjen tovább a 11. leckére, ahol megvizsgáljuk, hogyan lehet [integrálni a generatív AI-t funkcióhívással](../11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst)!
+A lecke elvégzése után nézze meg a [Generatív MI tanulási gyűjteményünket](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy tovább fejlessze generatív MI tudását!
+
+Szeretné testre szabni és többet kihozni a Copilotból? Fedezze fel az [Awesome Copilot](https://github.com/github/awesome-copilot?WT.mc_id=academic-105485-koreyst) gyűjteményt — egy közösség által hozzájárult utasítások, ügynökök, készségek és konfigurációk gyűjteményét, amely segít a GitHub Copilot maximális kihasználásában.
+
+Ugorjon át a 11. leckére, ahol megnézzük, hogyan lehet [integrálni a generatív MI-t függvényhívással](../11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Felelősség kizárása**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

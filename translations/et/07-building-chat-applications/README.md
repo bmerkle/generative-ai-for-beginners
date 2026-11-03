@@ -1,66 +1,66 @@
-# Generatiivse AI-põhiste vestlusrakenduste loomine
+# Generatiivse tehisintellekti jõul töötavate vestlusrakenduste loomine
 
-[![Generatiivse AI-põhiste vestlusrakenduste loomine](../../../translated_images/et/07-lesson-banner.a279b937f2843833.webp)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
+[![Generatiivse tehisintellekti jõul töötavate vestlusrakenduste loomine](../../../translated_images/et/07-lesson-banner.a279b937f2843833.webp)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
 
-> _(Klõpsa ülaloleval pildil, et vaadata selle õppetunni videot)_
+> _(Video vaatamiseks klõpsake ülaloleval pildil)_
 
-Nüüd, kui oleme näinud, kuidas luua tekstigeneratsiooni rakendusi, vaatame lähemalt vestlusrakendusi.
+Nüüd, kui oleme näinud, kuidas tekstiloomerakendusi üles ehitada, vaatame vestlusrakendusi.
 
-Vestlusrakendused on muutunud meie igapäevaelu lahutamatuks osaks, pakkudes rohkemat kui lihtsalt juhuslikku suhtlust. Need on olulised klienditeeninduses, tehnilises toetamises ja isegi keerukates nõustamissüsteemides. Tõenäoliselt olete hiljuti saanud abi mõnest vestlusrakendusest. Kui integreerime nendesse platvormidesse arenenud tehnoloogiaid, nagu generatiivne AI, suureneb nii keerukus kui ka väljakutsed.
+Vestlusrakendused on muutunud meie igapäevaelu osaks, pakkudes enamat kui lihtsalt juhuslikku vestlusviisi. Need on lahutamatud klienditeenindusest, tehnilisest toetusest ja isegi keerukatest nõustamissüsteemidest. On tõenäoline, et saite mitte liiga kaua aega tagasi abi vestlusrakendusest. Nii kui integreerime sellesse platvormidesse tänapäevaseid tehnoloogiaid, nagu generatiivne tehisintellekt, kasvab ka keerukus ja väljakutsed.
 
 Mõned küsimused, millele peame vastused leidma, on:
 
-- **Rakenduse loomine**. Kuidas ehitada ja integreerida tõhusalt neid AI-põhiseid rakendusi konkreetsete kasutusjuhtude jaoks?
-- **Jälgimine**. Kuidas tagada, et rakendused töötavad pärast kasutuselevõttu kõrgeima kvaliteediga, nii funktsionaalsuse kui ka [vastutustundliku AI kuue põhimõtte](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) järgimise osas?
+- **Rakenduse loomine**. Kuidas ehitada tõhusalt ja sujuvalt integreerida AI-jõul töötavaid rakendusi konkreetseteks kasutusjuhtudeks?
+- **Jälgimine**. Kui rakendus on juurutatud, kuidas saame jälgida ja tagada nende kõrgeima kvaliteedi nii funktsionaalsuse kui ka [vastutustundliku tehisintellekti kuue põhimõtte](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) järgimise osas?
 
-Kuna liigume edasi ajastusse, mida iseloomustavad automatiseerimine ja sujuvad inimese-masina interaktsioonid, muutub oluliseks mõista, kuidas generatiivne AI muudab vestlusrakenduste ulatust, sügavust ja kohanemisvõimet. See õppetund uurib arhitektuuri aspekte, mis toetavad neid keerukaid süsteeme, süveneb meetoditesse nende kohandamiseks valdkonnapõhiste ülesannete jaoks ning hindab meetrikaid ja kaalutlusi, mis on olulised vastutustundliku AI kasutuselevõtu tagamiseks.
+Kuna liigume aina enam automatiseerimise ja sujuvate inimese ja masina interaktsioonide ajastusse, muutub oluliseks mõista, kuidas generatiivne tehisintellekt muudab vestlusrakenduste ulatust, sügavust ja kohandatavust. See õppetund uurib arhitektuuri aspekte, mis toetavad neid keerulisi süsteeme, süveneb nende peenhäälestamise meetoditesse konkreetsete valdkondlike ülesannete jaoks ja hindab mõõdikuid ning kaalutlusi, mis on asjakohased vastutustundliku AI-lahenduse tagamiseks.
 
 ## Sissejuhatus
 
-Selles õppetunnis käsitletakse:
+See õppetund käsitleb:
 
-- Tehnikaid vestlusrakenduste tõhusaks loomiseks ja integreerimiseks.
-- Kohandamise ja peenhäälestuse rakendamist rakendustes.
+- Meetodeid vestlusrakenduste tõhusaks ehitamiseks ja integreerimiseks.
+- Kuidas rakendada rakenduste kohandamist ja peenhäälestust.
 - Strateegiaid ja kaalutlusi vestlusrakenduste tõhusaks jälgimiseks.
 
-## Õppeeesmärgid
+## Õpieesmärgid
 
-Selle õppetunni lõpuks suudate:
+Õppetunni lõpuks oskate:
 
-- Kirjeldada kaalutlusi vestlusrakenduste loomiseks ja integreerimiseks olemasolevatesse süsteemidesse.
-- Kohandada vestlusrakendusi konkreetsete kasutusjuhtude jaoks.
-- Tuvastada peamisi meetrikaid ja kaalutlusi, et tõhusalt jälgida ja säilitada AI-põhiste vestlusrakenduste kvaliteeti.
-- Tagada, et vestlusrakendused kasutavad AI-d vastutustundlikult.
+- Kirjeldada kaalutlusi vestlusrakenduste ehitamiseks ja olemasolevatesse süsteemidesse integreerimiseks.
+- Kohandada vestlusrakendusi konkreetsetele kasutusjuhtudele.
+- Tuvastada olulisi mõõdikuid ja kaalutlusi AI-jõul töötavate vestlusrakenduste kvaliteedi tõhusaks jälgimiseks ja tagamiseks.
+- Tagada, et vestlusrakendused kasutaksid tehisintellekti vastutustundlikult.
 
 ## Generatiivse AI integreerimine vestlusrakendustesse
 
-Vestlusrakenduste täiustamine generatiivse AI abil ei seisne ainult nende nutikamaks muutmises; see hõlmab ka nende arhitektuuri, jõudluse ja kasutajaliidese optimeerimist, et pakkuda kvaliteetset kasutajakogemust. See hõlmab arhitektuuriliste aluste, API integratsioonide ja kasutajaliidese kaalutluste uurimist. See osa pakub teile terviklikku teekaarti nende keerukate maastike navigeerimiseks, olgu siis nende integreerimine olemasolevatesse süsteemidesse või nende ehitamine iseseisvate platvormidena.
+Vestlusrakenduste täiustamine generatiivse tehisintellekti abil ei seisne ainult nende targemaks tegemises; see on seotud nende arhitektuuri, jõudluse ja kasutajaliidese optimeerimisega kvaliteetse kasutajakogemuse pakkumiseks. See hõlmab arhitektuuriliste alustalade, API integratsioonide ja kasutajaliidese kaalutluste uurimist. Selle osa eesmärk on pakkuda teile terviklikku teejuhti nende keeruliste maastike navigatsiooniks, olenemata sellest, kas sisestate need olemasolevatesse süsteemidesse või ehitate neid iseseisvate platvormidena.
 
-Selle osa lõpuks olete varustatud teadmistega vestlusrakenduste tõhusaks loomiseks ja integreerimiseks.
+Selle osa lõpuks omandate vajaliku teadmistepagasi vestlusrakenduste tõhusaks ülesehitamiseks ja integreerimiseks.
 
 ### Vestlusrobot või vestlusrakendus?
 
-Enne kui sukeldume vestlusrakenduste loomisse, võrdleme "vestlusroboteid" ja "AI-põhiseid vestlusrakendusi", mis täidavad erinevaid rolle ja funktsioone. Vestlusroboti peamine eesmärk on automatiseerida konkreetseid vestlusülesandeid, nagu korduma kippuvatele küsimustele vastamine või paketi jälgimine. Seda juhivad tavaliselt reeglipõhine loogika või keerukad AI algoritmid. AI-põhine vestlusrakendus on seevastu palju laiem keskkond, mis on loodud hõlbustama erinevaid digitaalse suhtluse vorme, nagu tekst-, hääl- ja videovestlused inimkasutajate vahel. Selle määravaks omaduseks on generatiivse AI mudeli integreerimine, mis simuleerib nüansirikkaid, inimlikke vestlusi, genereerides vastuseid mitmesuguste sisendite ja kontekstuaalsete vihjete põhjal. Generatiivse AI-põhine vestlusrakendus suudab osaleda avatud domeeni aruteludes, kohaneda muutuvate vestluskontekstidega ja isegi luua loomingulisi või keerukaid dialooge.
+Enne kui sukeldume vestlusrakenduste loomisse, võrreldagem 'vestlusroboteid' ja 'AI-jõul töötavaid vestlusrakendusi', millel on erinevad rollid ja funktsioonid. Vestlusroboti peamine eesmärk on automatiseerida kindlaid vestlust ülesandeid, näiteks vastata sageli esitatavatele küsimustele või jälgida paketti. See on tavaliselt juhitud reeglipõhise loogika või keerukate tehisintellekti algoritmidega. Seevastu AI-jõul töötav vestlusrakendus on palju laiem keskkond, mis võimaldab mitut tüüpi digitaalseid suhtlusviise, näiteks tekstivestlused, häälvestlused ja videovestlused inimkasutajate vahel. Selle määravaks omaduseks on generatiivse AI mudeli integreerimine, mis simuleerib nüansirikkaid, inimlaadseid vestlusi, genereerides vastuseid laia valiku sisendi ja kontekstuaalsete vihjete põhjal. Generatiivse tehisintellekti jõul töötav vestlusrakendus suudab kaasata avatud domeeni aruteludesse, kohanduda muutuvate vestluskontekstidega ja isegi luua loomingulisi või keerukaid dialooge.
 
-Allolev tabel toob välja peamised erinevused ja sarnasused, et aidata meil mõista nende ainulaadseid rolle digitaalses suhtluses.
+Alljärgnev tabel toob esile peamised erinevused ja sarnasused, et aidata mõista nende unikaalseid rolle digitaalses kommunikatsioonis.
 
-| Vestlusrobot                        | Generatiivse AI-põhine vestlusrakendus |
-| ----------------------------------- | ------------------------------------- |
-| Ülesandekeskne ja reeglipõhine      | Kontekstitundlik                      |
-| Sageli integreeritud suurematesse süsteemidesse | Võib majutada ühte või mitut vestlusrobotit |
-| Piirdub programmeeritud funktsioonidega | Sisaldab generatiivseid AI mudeleid   |
-| Spetsialiseeritud ja struktureeritud suhtlus | Võimeline avatud domeeni aruteludeks |
+| Vestlusrobot                        | Generatiivse tehisintellekti jõul töötav vestlusrakendus          |
+| ---------------------------------- | --------------------------------------------------------------- |
+| Ülesandekeskne ja reeglipõhine      | Kontekstitundlik                                                  |
+| Sageli integreeritud suurematesse süsteemidesse | Võib majutada ühte või mitut vestlusrobotit              |
+| Piiratud programmeeritud funktsioonidega         | Sisaldab generatiivseid tehisintellekti mudeleid             |
+| Spetsialiseerunud ja struktureeritud interaktsioonid | Võimeline avatud domeeni aruteludeks                        |
 
-### Eelvalmistatud funktsioonide kasutamine SDK-de ja API-de abil
+### Eelvalmis funktsioonide kasutamine SDK-de ja API-de abil
 
-Vestlusrakenduse loomisel on suurepärane esimene samm hinnata, mis juba olemas on. SDK-de ja API-de kasutamine vestlusrakenduste loomiseks on mitmel põhjusel kasulik strateegia. Hästi dokumenteeritud SDK-de ja API-de integreerimisega positsioneerite oma rakenduse strateegiliselt pikaajalise edu saavutamiseks, lahendades mastaapsuse ja hooldusega seotud probleeme.
+Vestlusrakendust luues on väga hea esimene samm hinnata, mis on juba olemas. SDK-de ja API-de kasutamine vestlusrakenduste ehitamisel on kasulik mitmel põhjusel. Integreerides hästi dokumenteeritud SDK-sid ja API-sid, positsioneerite oma rakenduse strateegiliselt pikaajalise edu jaoks, lahendades skaleeritavuse ja hooldusega seotud küsimusi.
 
-- **Kiirendab arendusprotsessi ja vähendab kulusid**: Tuginedes eelvalmistatud funktsioonidele, mitte kulukale protsessile nende ise ehitamisel, saate keskenduda oma rakenduse teistele aspektidele, mida peate olulisemaks, näiteks äriloogikale.
-- **Parem jõudlus**: Funktsionaalsuse nullist ehitamisel küsite endalt lõpuks: "Kuidas see skaleerub? Kas see rakendus suudab toime tulla äkilise kasutajate sissevooluga?" Hästi hooldatud SDK-d ja API-d sisaldavad sageli lahendusi nendele probleemidele.
-- **Lihtsam hooldus**: Uuendusi ja täiustusi on lihtsam hallata, kuna enamik API-sid ja SDK-sid nõuavad lihtsalt teegi uuendamist, kui ilmub uuem versioon.
-- **Juurdepääs tipptasemel tehnoloogiale**: Mudelite kasutamine, mis on peenhäälestatud ja treenitud ulatuslike andmekogumite põhjal, annab teie rakendusele loomuliku keele võimekuse.
+- **Arendab arendusprotsessi kiiresti ja vähendab koormust**: Eelvalmis funktsioonidele toetumine, selle asemel et neid ise kulukalt ehitada, võimaldab keskenduda rakenduse teistele olulistele aspektidele, näiteks äriloogikale.
+- **Parem jõudlus**: Funktsioonide nullist ehitamisel küsid lõpuks endalt „Kuidas see skaleerub? Kas see rakendus suudab toime tulla kasutajate järsu vooga?“ Hästi hooldatud SDK-del ja API-del on sageli sisseehitatud lahendused nendele probleemidele.
+- **Lihtsam hooldus**: Uuendused ja täiustused on lihtsamad hallata, kuna enamik API-sid ja SDK-sid nõuavad lihtsalt teegi uuendamist, kui ilmub uuem versioon.
+- **Juurdepääs tipptasemel tehnoloogiale**: Mudelite kasutamine, mida on põhjalikult peenhäälestatud ja koolitatud mahukatel andmestikel, annab teie rakendusele loomuliku keele käsitlemise võimekuse.
 
-SDK või API funktsionaalsusele juurdepääs hõlmab tavaliselt loa saamist pakutavate teenuste kasutamiseks, mis toimub sageli unikaalse võtme või autentimistunnuse kaudu. Kasutame OpenAI Python Library't, et uurida, kuidas see välja näeb. Võite seda ise proovida järgmises [OpenAI märkmikus](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) või [Azure OpenAI Services märkmikus](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) selle õppetunni jaoks.
+SDK või API funktsionaalsuse kasutamiseks tuleb tavaliselt saada luba teenuste kasutamiseks, mis toimub sageli unikaalse võtme või autentimistempli kaudu. Me kasutame selle uurimiseks OpenAI Python teeki. Võite ise seda proovida järgnevas [OpenAI töövihikus](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) või [Azure OpenAI teenuste töövihikus](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) selle õppetunni jaoks.
 
 ```python
 import os
@@ -72,111 +72,121 @@ client = OpenAI(
     api_key=API_KEY
     )
 
-chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Suggest two titles for an instructional lesson on chat applications for generative AI."}])
+response = client.responses.create(model="gpt-5-mini", input="Suggest two titles for an instructional lesson on chat applications for generative AI.", store=False)
+print(response.output_text)
 ```
 
-Ülaltoodud näide kasutab GPT-3.5 Turbo mudelit, et täita käsk, kuid märkige, et API võti määratakse enne seda. Kui te võtit ei määraks, saaksite vea.
+Ülaltoodud näide kasutab GPT-5 mini mudelit koos Responses API-ga, et täita prompt, kuid pane tähele, et API võti on määratud enne seda. Kui sa võtme ei määra, saad veateate.
 
 ## Kasutajakogemus (UX)
 
-Üldised UX-põhimõtted kehtivad vestlusrakenduste puhul, kuid siin on mõned täiendavad kaalutlused, mis muutuvad eriti oluliseks masinõppe komponentide tõttu.
+Üldised UX põhimõtted kehtivad ka vestlusrakenduste puhul, kuid siin on mõned lisaküsimused, mis muutuvad eriti oluliseks masinõppe komponentide tõttu.
 
-- **Ebaselguse lahendamise mehhanism**: Generatiivsed AI mudelid genereerivad aeg-ajalt ebaselgeid vastuseid. Funktsioon, mis võimaldab kasutajatel selgitust küsida, võib olla kasulik, kui nad selle probleemiga kokku puutuvad.
-- **Konteksti säilitamine**: Täiustatud generatiivsed AI mudelid suudavad vestluse konteksti meeles pidada, mis võib olla kasutajakogemuse jaoks vajalik eelis. Kasutajatele võimaluse andmine konteksti kontrollimiseks ja haldamiseks parandab kasutajakogemust, kuid toob kaasa riski säilitada tundlikku kasutajainfot. Kaalutlused selle kohta, kui kaua seda teavet säilitatakse, näiteks säilitamispoliitika kehtestamine, võivad tasakaalustada konteksti vajadust privaatsuse vastu.
-- **Personaliseerimine**: AI mudelitel on võime õppida ja kohaneda, pakkudes kasutajale individuaalset kogemust. Kasutajakogemuse kohandamine selliste funktsioonide kaudu nagu kasutajaprofiilid mitte ainult ei anna kasutajale tunnet, et teda mõistetakse, vaid aitab tal leida konkreetseid vastuseid, luues tõhusama ja rahuldustpakkuvama suhtluse.
+- **Ambiguiteedi lahenduse mehhanism**: Generatiivsed AI mudelid annavad mõnikord ebamääraseid vastuseid. Kasutajatel võib olla kasulik võimalus küsida täpsustusi, kui selline probleem tekib.
+- **Konteksti säilitamine**: Täiustatud generatiivsete AI mudelite võime vestluse konteksti meeles pidada võib kasutajakogemuse jaoks olla vajalik omand. Kasutajatele konteksti juhtimise ja haldamise võimaldamine parandab kogemust, kuid tekitab riski tundliku kasutajateabe säilitamisel. Kaaluge, kui kaua sellist teavet hoitakse, näiteks säilituspoliitika kehtestamise teel, et tasakaalustada konteksti vajadust privaatsusega.
+- **Isikupärastamine**: Õppimis- ja kohandumisvõimega AI mudelid pakuvad kasutajale individuaalset kogemust. Kasutajakogemuse kohandamine näiteks kasutajaprofiilide kaudu mitte ainult ei pane kasutajat tundma, et teda mõistetakse, vaid aitab ka kiiremini ja rahuldustpakkuvamalt leida soovitud vastuseid.
 
-Üks selline personaliseerimise näide on OpenAI ChatGPT "Kohandatud juhiste" seaded. See võimaldab teil anda teavet enda kohta, mis võib olla teie käskude jaoks oluline kontekst. Siin on näide kohandatud juhistest.
+Näiteks on OpenAI ChatGPT „Kohandatud juhiste“ seaded, mis võimaldavad anda enda kohta teavet, mis võib olla tähtis teie promptide kontekstis. Siin on näide kohandatud juhisest.
 
-![Kohandatud juhiste seaded ChatGPT-s](../../../translated_images/et/custom-instructions.b96f59aa69356fcf.webp)
+![Kohandatud juhised ChatGPT-s](../../../translated_images/et/custom-instructions.b96f59aa69356fcf.webp)
 
-See "profiil" palub ChatGPT-l koostada õppetund lingitud loendite kohta. Märkige, et ChatGPT arvestab, et kasutaja võib soovida põhjalikumat õppetundi, lähtudes tema kogemustest.
+See „profiil“ suunab ChatGPT looma õppetundi seotud listidest. Märka, et ChatGPT võtab arvesse, et kasutaja võib soovida põhjalikumat õppetundi oma kogemuse põhjal.
 
-![ChatGPT-s lingitud loendite õppetunni kohta käiv käsk](../../../translated_images/et/lesson-plan-prompt.cc47c488cf1343df.webp)
+![Prompt ChatGPT-s õppetundi plaani kohta seotud listidest](../../../translated_images/et/lesson-plan-prompt.cc47c488cf1343df.webp)
 
-### Microsofti süsteemisõnumite raamistik suurte keelemudelite jaoks
+### Microsofti Süsteemiteate raamistik suurte keelemudelite jaoks
 
-[Microsoft on pakkunud juhiseid](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) tõhusate süsteemisõnumite kirjutamiseks LLM-idelt vastuste genereerimisel, jagades need neljaks valdkonnaks:
+[Microsoft on andnud juhiseid](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst), kuidas kirjutada tõhusaid süsteemiteateid LLM-idelt vastuste genereerimisel, mis jagunevad neljaks valdkonnaks:
 
-1. Määratlege, kellele mudel on mõeldud, samuti selle võimekused ja piirangud.
-2. Määratlege mudeli väljundi formaat.
-3. Esitage konkreetseid näiteid, mis demonstreerivad mudeli soovitud käitumist.
-4. Esitage täiendavaid käitumispiiranguid.
+1. Määratle, kelle jaoks mudel on mõeldud, ning selle võimed ja piirangud.
+2. Määratle mudeli väljundvorming.
+3. Esita konkreetsed näited, mis demonstreerivad mudeli soovitud käitumist.
+4. Paku täiendavaid käitumise turvavöösid.
 
 ### Juurdepääsetavus
 
-Olgu kasutajal nägemis-, kuulmis-, motoorika- või kognitiivsed häired, hästi kujundatud vestlusrakendus peaks olema kõigile kasutatav. Järgmine loetelu jagab konkreetseid funktsioone, mille eesmärk on parandada juurdepääsetavust erinevate kasutajate vajaduste jaoks.
+Kas kasutajal on nägemis-, kuulmis-, motoorsed või kognitiivsed puudujäägid, hästi kujundatud vestlusrakendus peaks olema kõigile kasutatav. Järgnev nimekiri toob ära spetsiifilised funktsioonid, mis parandavad juurdepääsetavust eri puuetega kasutajatele.
 
-- **Funktsioonid nägemispuudega kasutajatele**: Kõrge kontrastsusega teemad ja muudetava suurusega tekst, ekraanilugeja ühilduvus.
-- **Funktsioonid kuulmispuudega kasutajatele**: Teksti kõneks ja kõne tekstiks funktsioonid, visuaalsed vihjed heliteavituste jaoks.
-- **Funktsioonid motoorikahäiretega kasutajatele**: Klaviatuuri navigatsiooni tugi, häälkäsklused.
-- **Funktsioonid kognitiivsete häiretega kasutajatele**: Lihtsustatud keelevalikud.
+- **Funktsioonid nägemispuudega kasutajatele**: Kõrge kontrastsusega teemad ja muudetava suurusega tekst, ekraanilugerite tugi.
+- **Funktsioonid kuulmispuudega kasutajatele**: Teksti kõneks ja kõne tekstiks funktsioonid, visuaalsed märguanded heliteavituste jaoks.
+- **Funktsioonid motoorsete puuetega kasutajatele**: Klaviatuuriga navigeerimise tugi, häälkäsklused.
+- **Funktsioonid kognitiivsete puuetega kasutajatele**: Lihtsustatud keelevalikud.
 
-## Kohandamine ja peenhäälestus valdkonnapõhiste keelemudelite jaoks
+## Kohandamine ja peenhäälestamine valdkonnaspetsiifiliste keelemudelite jaoks
 
-Kujutage ette vestlusrakendust, mis mõistab teie ettevõtte erialatermineid ja ennustab kasutajate tavapäraseid päringuid. Siin on kaks lähenemisviisi, mida tasub mainida:
+Kujutage ette vestlusrakendust, mis mõistab teie ettevõtte erikeelt ja oskab ette näha kasutajate sagedasi konkreetseid päringuid. On paar lähenemist, mida tasub mainida:
 
-- **DSL-mudelite kasutamine**. DSL tähistab valdkonnapõhist keelt. Võite kasutada nn DSL-mudelit, mis on treenitud konkreetse valdkonna mõistmiseks ja selle kontseptsioonide käsitlemiseks.
-- **Peenhäälestuse rakendamine**. Peenhäälestus on protsess, kus teie mudelit treenitakse täiendavalt konkreetsete andmetega.
+- **Valdkonnaspetsiifiliste keelemudelite kasutamine (DSL)**. DSL tähendab valdkonnaspetsiifilist keelt. Saate kasutada nn DSL-mudelit, mis on koolitatud konkreetse valdkonna mõistmiseks ja stsenaariumite töötlemiseks.
+- **Peenhäälestuse rakendamine**. Peenhäälestus on protsess, mille käigus koolitate mudelit täiendavalt konkreetsete andmetega.
 
-## Kohandamine: DSL-i kasutamine
+## Kohandamine: DSL kasutamine
 
-Valdkonnapõhiste keelemudelite (DSL-mudelite) kasutamine võib parandada kasutajate kaasatust, pakkudes spetsialiseeritud ja kontekstuaalselt asjakohaseid interaktsioone. See on mudel, mis on treenitud või peenhäälestatud, et mõista ja genereerida teksti, mis on seotud konkreetse valdkonna, tööstuse või teemaga. DSL-mudeli kasutamise võimalused võivad varieeruda selle nullist treenimisest kuni olemasolevate mudelite kasutamiseni SDK-de ja API-de kaudu. Teine võimalus on peenhäälestus, mis hõlmab olemasoleva eeltreenitud mudeli kohandamist konkreetse valdkonna jaoks.
+Valdkonnaspetsiifiliste keelemudelite (DSL mudelid) kasutamine võib suurendada kasutajate kaasatust, pakkudes spetsialiseeritud ja kontekstuaalselt asjakohaseid interaktsioone. See mudel on koolitatud või peenhäälestatud, et mõista ja genereerida teksti, mis on seotud konkreetse valdkonna, tööstuse või teemaga. DSL mudelite kasutamise valikud võivad ulatuda nullist koolitamisest olemasolevate SDK-de ja API-de kaudu kasutamiseni. Teine võimalus on peenhäälestus, mis hõlmab olemasoleva eelkoolitatud mudeli kohandamist konkreetseks valdkonnaks.
 
 ## Kohandamine: Peenhäälestuse rakendamine
 
-Peenhäälestust kaalutakse sageli siis, kui eeltreenitud mudel jääb erialases valdkonnas või konkreetse ülesande täitmisel alla.
+Peenhäälestamine tuleb sageli mängu siis, kui eelkoolitatud mudel jääb spetsialiseerunud valdkonnas või konkreetses ülesandes nõrgaks.
 
-Näiteks meditsiinilised päringud on keerulised ja nõuavad palju konteksti. Kui meditsiinitöötaja diagnoosib patsienti, tugineb ta mitmesugustele teguritele, nagu elustiil või olemasolevad haigusseisundid, ja võib isegi toetuda hiljutistele meditsiinilistele artiklitele, et oma diagnoosi kinnitada. Sellistes nüansirikastes olukordades ei saa üldotstarbeline AI vestlusrakendus olla usaldusväärne allikas.
+Näiteks on meditsiinilised päringud keerulised ja vajavad palju konteksti. Kui meditsiinitöötaja diagnoosib patsienti, tugineb ta mitmesugustele teguritele, nagu elustiil või olemasolevad seisundid, ning võib isegi toetuda hiljutistele meditsiiniajakirjadele diagnoosi kinnitamiseks. Sellistes nüansirohketes olukordades ei saa üldotstarbeline AI vestlusrakendus olla usaldusväärne allikas.
 
-### Näide: meditsiiniline rakendus
+### Näide: meditsiinirakendus
 
-Mõelge vestlusrakendusele, mis on loodud meditsiinitöötajate abistamiseks, pakkudes kiiret viidet ravijuhistele, ravimite koostoimetele või hiljutistele teadusuuringutele.
+Mõelge vestlusrakendusele, mis aitab meditsiinitöötajaid, pakkudes kiiret juurdepääsu ravijuhistele, ravimite koostoimetele või hiljutistele uurimistulemustele.
 
-Üldotstarbeline mudel võib olla piisav, et vastata põhilistele meditsiinilistele küsimustele või anda üldist nõu, kuid see võib hätta jääda järgmistes olukordades:
+Üldotstarbeline mudel võib piisata põhilistele meditsiinilistele küsimustele vastamiseks või üldiste nõuannete pakkumiseks, kuid võib rasketeks osutuda järgnevas:
 
-- **Väga spetsiifilised või keerulised juhtumid**. Näiteks võib neuroloog küsida rakenduselt: "Millised on praegused parimad tavad ravimiresistentse epilepsia juhtimiseks lastel?"
-- **Viimaste edusammude puudumine**. Üldotstarbeline mudel võib raskustega anda praegust vastust, mis sisaldab neuroloogia ja farmakoloogia viimaseid edusamme.
+- **Väga spetsiifilised või keerukad juhtumid**. Näiteks võib neuroloog küsida rakenduselt: „Millised on praegused parimad praktikad ravimiresistentse epilepsia juhtimiseks lastel?“
+- **Vajaka viimastest teadusavastustest**. Üldotstarbeline mudel võib raskustega pakkuda ajakohast vastust, mis sisaldab neuroloogia ja farmakoloogia viimatiseid arenguid.
 
-Sellistel juhtudel võib mudeli peenhäälestamine spetsialiseeritud meditsiinilise andmekogumiga oluliselt parandada selle võimet käsitleda neid keerukaid meditsiinilisi päringuid täpsemalt ja usaldusväärsemalt. See nõuab juurdepääsu suurele ja asjakohasele andmekogumile, mis esindab valdkonnapõhiseid väljakutseid ja küsimusi, mida tuleb lahendada.
+Sellistes olukordades võib peenhäälestus spetsiaalse meditsiinilise andmestikuga oluliselt parandada mudeli võimekust käsitleda keerulisi meditsiinipäringuid täpsemini ja usaldusväärsemalt. Selleks on vaja juurdepääsu suurele ja asjakohasele andmestikule, mis esindab valdkonnaspetsiifilisi väljakutseid ja küsimusi.
 
-## Kaalutlused kvaliteetse AI-põhise vestluskogemuse jaoks
+## Kvaliteetse AI-põhise vestluskogemuse kaalutlused
 
-Selles osas tuuakse välja "kvaliteetsete" vestlusrakenduste kriteeriumid, mis hõlmavad tegevusvõimeliste meetrikate kogumist ja raamistiku järgimist, mis kasutab AI tehnoloogiat vastutustundlikult.
+See jaotis kirjeldab „kõrgekvaliteediliste“ vestlusrakenduste kriteeriume, mis hõlmavad tegutsemisvõimeliste mõõdikute kogumist ja raamistiku järgimist, mis vastutustundlikult kasutab tehisintellekti tehnoloogiat.
 
-### Põhimõõdikud
+### Peamised mõõdikud
 
-Rakenduse kõrgekvaliteedilise toimivuse säilitamiseks on oluline jälgida põhimõõdikuid ja kaalutlusi. Need mõõtmised mitte ainult ei taga rakenduse funktsionaalsust, vaid hindavad ka AI mudeli ja kasutajakogemuse kvaliteeti. Allpool on loetelu, mis hõlmab põhilisi, AI ja kasutajakogemuse mõõdikuid, mida arvestada.
+Rakenduse kõrgekvaliteedilise jõudluse tagamiseks on oluline jälgida võtmemõõdikuid ja kaalutlusi. Need mõõtmised tagavad mitte ainult rakenduse funktsionaalsuse, vaid ka hindavad AI mudeli ja kasutajakogemuse kvaliteeti. Alljärgnev nimekiri hõlmab põhimeetrikad, AI ja kasutuskogemuse mõõdikud, mida kaaluda.
 
-| Mõõdik                        | Definitsioon                                                                                                             | Kaalutlused vestlusrakenduse arendajale                                   |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Tööaeg**                    | Mõõdab aega, mil rakendus on kasutajatele operatiivne ja kättesaadav.                                                     | Kuidas minimeerida seisakuid?                                             |
-| **Reaktsiooniaeg**             | Aeg, mis kulub rakendusel kasutaja päringule vastamiseks.                                                                | Kuidas optimeerida päringute töötlemist, et parandada reaktsiooniaega
-| **Anomaaliate tuvastamine**   | Tööriistad ja tehnikad ebatavaliste mustrite tuvastamiseks, mis ei vasta oodatud käitumisele.                          | Kuidas reageerid anomaaliatele?                                             |
+| Mõõdik                       | Definitsioon                                                                                                           | Arvestused vestlusrakenduse arendajale                          |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| **Tööaeg**                   | Mõõdab aega, mil rakendus on töökorras ja kasutajatele ligipääsetav.                                                    | Kuidas vähendate seisakuid?                                     |
+| **Reageerimisaeg**           | Aeg, mis kulub rakendusel kasutaja päringule vastamiseks.                                                              | Kuidas optimeerite päringute töötlemist, et parandada reageerimisaega? |
+| **Täpsus**                   | Tõepoolsete positiivsete ennustuste suhe kõigi positiivsete ennustuste hulgas.                                         | Kuidas valideerite mudeli täpsust?                              |
+| **Kõrvaleastumine (tundlikkus)** | Tõepoolsete positiivsete ennustuste suhe tegelike positiivsete arvule.                                                    | Kuidas mõõdate ja parandate kõrvaleastumist?                   |
+| **F1 skoor**                 | Täpsuse ja kõrvaleastumise harmooniline keskmine, mis tasakaalustab nende vahelised kompromissid.                      | Mis on teie siht-F1 skoor? Kuidas tasakaalustate täpsust ja kõrvaleastumist? |
+| **Segadustegur**             | Mõõdab, kui hästi mudeli poolt prognoositud tõenäosusjaotus vastab tegeliku andmestiku jaotusele.                        | Kuidas vähendate segadustegurit?                               |
+| **Kasutajate rahulolu mõõdikud** | Mõõdab kasutaja tajutud kogemust rakendusega. Sageli kogutakse küsitluste kaudu.                                        | Kui sageli kogute kasutajate tagasisidet? Kuidas kohandute selle põhjal? |
+| **Vigade määr**              | Sagedus, mil mudel teeb mõistmis- või väljundvigu.                                                                     | Millised strateegiad teil on vigade määra vähendamiseks?       |
+| **Ülekoolituskorrad**       | Kui sageli mudelit uuendatakse uute andmete ja teadmistega kohandamiseks.                                              | Kui tihti treenite mudelit uuesti? Mis käivitab uusõppe tsükli?|
+| **Anomaaliate tuvastamine** | Tööriistad ja tehnikad ebatavaliste mustrite tuvastamiseks, mis ei vasta oodatud käitumisele.                        | Kuidas reageerite anomaaliatele?                                        |
 
-### Vastutustundliku tehisintellekti praktikate rakendamine vestlusrakendustes
+### Vastutustundliku tehisintellekti tavade rakendamine vestlusrakendustes
 
-Microsofti lähenemine vastutustundlikule tehisintellektile on tuvastanud kuus põhimõtet, mis peaksid suunama tehisintellekti arendamist ja kasutamist. Allpool on toodud põhimõtted, nende definitsioonid ning asjad, mida vestlusrakenduse arendaja peaks arvesse võtma ja miks neid tõsiselt võtta.
+Microsofti lähenemine vastutustundlikule tehisintellektile on tuvastanud kuus põhimõtet, mis peaksid juhima tehisintellekti arendamist ja kasutamist. Allpool on põhimõtted, nende definitsioon ning asjad, mida vestluse arendaja peaks kaaluma ja miks neid tuleks tõsiselt võtta.
 
-| Põhimõtted             | Microsofti definitsioon                               | Vestlusrakenduse arendaja kaalutlused                                   | Miks see on oluline                                                                     |
-| ---------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Õiglus                 | Tehisintellekti süsteemid peaksid kohtlema kõiki inimesi õiglaselt. | Veendu, et vestlusrakendus ei diskrimineeri kasutajaandmete põhjal.    | Usalduse ja kaasatuse loomiseks kasutajate seas; väldib õiguslikke tagajärgi.          |
-| Usaldusväärsus ja ohutus | Tehisintellekti süsteemid peaksid toimima usaldusväärselt ja ohutult. | Rakenda testimist ja turvameetmeid, et vähendada vigu ja riske.        | Tagab kasutajate rahulolu ja väldib potentsiaalset kahju.                              |
-| Privaatsus ja turvalisus | Tehisintellekti süsteemid peaksid olema turvalised ja austama privaatsust. | Rakenda tugevat krüpteerimist ja andmekaitsemeetmeid.                  | Kaitseb tundlikke kasutajaandmeid ja vastab privaatsusseadustele.                      |
-| Kaasatus               | Tehisintellekti süsteemid peaksid andma kõigile võimaluse ja kaasama inimesi. | Kujunda kasutajaliides, mis on ligipääsetav ja lihtne kasutada erinevatele sihtrühmadele. | Tagab, et laiem valik inimesi saab rakendust tõhusalt kasutada.                        |
-| Läbipaistvus           | Tehisintellekti süsteemid peaksid olema arusaadavad.  | Paku selget dokumentatsiooni ja põhjendusi tehisintellekti vastuste kohta. | Kasutajad usaldavad süsteemi rohkem, kui nad mõistavad, kuidas otsuseid tehakse.       |
-| Vastutus               | Inimesed peaksid olema tehisintellekti süsteemide eest vastutavad. | Loo selge protsess tehisintellekti otsuste auditeerimiseks ja parandamiseks. | Võimaldab pidevat täiustamist ja parandusmeetmeid vigade korral.                       |
+| Põhimõtted          | Microsofti definitsioon                                        | Vestluse arendaja kaalutlused                                         | Miks see on oluline                                                               |
+| ------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Õiglus              | Tehisintellekti süsteemid peaksid kõiki inimesi õiglaselt kohtlema. | Tagada, et vestlusrakendus ei diskrimineeriks kasutajate andmete alusel. | Usalduse ja kaasatuse loomine kasutajate seas; väldib juriidilisi tagajärgi.     |
+| Usaldusväärsus ja ohutus | Tehisintellekti süsteemid peaksid toimima usaldusväärselt ja ohutult. | Rakendada testimist ja vigadega arvestamist, et minimeerida vigu ja riske. | Tagab kasutajate rahulolu ja väldib võimalikke kahjustusi.                       |
+| Privaatsus ja turvalisus | Tehisintellekti süsteemid peaksid olema turvalised ja austama privaatsust. | Rakendada tugevat krüpteerimist ja andmekaitse meetmeid.             | Tundlike kasutajaandmete kaitsmine ja privaatsusseadustele vastavus.             |
+| Kaasatus            | Tehisintellekti süsteemid peaksid kõiki võimestama ja kaasama. | Kujundada kasutajaliides, mis on ligipääsetav ja lihtsasti kasutatav mitmekesisele publikule. | Tagab laiemale kasutajaskonnale rakenduse tõhusa kasutamise.                      |
+| Läbipaistvus         | Tehisintellekti süsteemid peaksid olema arusaadavad.         | Pakkuda selget dokumentatsiooni ja põhjendust tehisintellekti vastuste osas. | Kasutajad usaldavad süsteemi rohkem, kui nad mõistavad, kuidas otsused tehakse. |
+| Vastutus            | Inimesed peaksid vastutama tehisintellekti süsteemide eest.   | Luuakse selge protsess tehisintellekti otsuste auditeerimiseks ja parandamiseks. | Võimaldab pidevat täiustamist ja vigade korral parandusmeetmeid.                 |
 
 ## Ülesanne
 
-Vaata [ülesannet](../../../07-building-chat-applications/python). See viib sind läbi mitmete harjutuste, alates esimestest vestluskäskudest kuni teksti klassifitseerimise ja kokkuvõtete tegemiseni. Pane tähele, et ülesanded on saadaval erinevates programmeerimiskeeltes!
+Vaata [ülesannet](../../../07-building-chat-applications/python). See viib sind läbi mitme harjutuse, alustades esimeste vestluse üleskutsete käivitamisest kuni teksti klassifitseerimise ja kokkuvõtete tegemiseni ja rohkem. Märka, et ülesanded on saadaval erinevates programmeerimiskeeltes!
 
-## Suurepärane töö! Jätka teekonda
+## Tubli töö! Jätka teekonda
 
-Pärast selle õppetunni lõpetamist tutvu meie [Generatiivse tehisintellekti õppekollektsiooniga](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), et jätkata oma generatiivse tehisintellekti teadmiste arendamist!
+Pärast selle õppetunni lõpetamist vaata meie [Generatiivse tehisintellekti õppimiskogu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), et jätkata oma generatiivse tehisintellekti teadmiste taseme tõstmist!
 
-Liigu edasi 8. õppetundi, et näha, kuidas alustada [otsingurakenduste loomist](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Suundu 8. õppetundi, et näha, kuidas saad alustada [otsingurakenduste loomist](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgenduste eest.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

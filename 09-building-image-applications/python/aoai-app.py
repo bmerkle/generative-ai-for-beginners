@@ -1,19 +1,19 @@
-from openai import AzureOpenAI
+from openai import AzureOpenAI, BadRequestError
 import os
-import requests
 from PIL import Image
 import dotenv
 import json
+import base64
 
 # import dotenv
 dotenv.load_dotenv()
 
  
 
-# Assign the API version (DALL-E is currently supported for the 2023-06-01-preview API version only)
+# Assign the API version (check the Microsoft Foundry docs for the current API version required by your model)
 client = AzureOpenAI(
   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-  api_version = "2023-12-01-preview",
+  api_version = "2025-04-01-preview",
   azure_endpoint=os.environ['AZURE_OPENAI_ENDPOINT'] 
   )
 
@@ -42,8 +42,9 @@ try:
     image_path = os.path.join(image_dir, 'generated-image.png')
 
     # Retrieve the generated image
-    image_url = generation_response["data"][0]["url"]  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
+    # gpt-image models return the image as base64 (b64_json), not a URL
+    image_b64 = generation_response["data"][0]["b64_json"]
+    generated_image = base64.b64decode(image_b64)
     with open(image_path, "wb") as image_file:
         image_file.write(generated_image)
 
@@ -52,7 +53,7 @@ try:
     image.show()
 
 # catch exceptions
-#except client.error.InvalidRequestError as err:
+#except BadRequestError as err:
 #    print(err)
 
 finally:

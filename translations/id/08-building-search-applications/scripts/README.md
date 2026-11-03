@@ -1,8 +1,8 @@
 # Persiapan data transkripsi
 
-Skrip persiapan data transkripsi mengunduh transkrip video YouTube dan menyiapkannya untuk digunakan dengan contoh Semantic Search dengan OpenAI Embeddings dan Functions.
+Skrip persiapan data transkripsi mengunduh transkrip video YouTube dan menyiapkannya untuk digunakan dengan contoh Semantic Search menggunakan OpenAI Embeddings dan Fungsi.
 
-Skrip persiapan data transkripsi telah diuji pada rilis terbaru Windows 11, macOS Ventura, dan Ubuntu 22.04 (dan versi lebih baru).
+Skrip persiapan data transkripsi telah diuji pada rilis terbaru Windows 11, macOS Ventura, dan Ubuntu 22.04 (dan yang lebih baru).
 
 ## Membuat sumber daya Azure OpenAI Service yang diperlukan
 
@@ -10,11 +10,11 @@ Skrip persiapan data transkripsi telah diuji pada rilis terbaru Windows 11, macO
 > Kami menyarankan Anda memperbarui Azure CLI ke versi terbaru untuk memastikan kompatibilitas dengan OpenAI
 > Lihat [Dokumentasi](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
-1. Buat resource group
+1. Buat grup sumber daya
 
 > [!NOTE]
-> Untuk petunjuk ini kami menggunakan resource group bernama "semantic-video-search" di East US.
-> Anda dapat mengubah nama resource group, tetapi saat mengubah lokasi sumber daya, 
+> Untuk petunjuk ini, kami menggunakan grup sumber daya bernama "semantic-video-search" di East US.
+> Anda dapat mengubah nama grup sumber daya, tetapi saat mengubah lokasi sumber daya,
 > periksa [tabel ketersediaan model](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
@@ -37,9 +37,9 @@ az cognitiveservices account keys list --name semantic-video-openai \
    --resource-group semantic-video-search | jq -r .key1
 ```
 
-1. Deploy model berikut:
-   - `text-embedding-ada-002` versi `2` atau lebih tinggi, dengan nama `text-embedding-ada-002`
-   - `gpt-35-turbo` versi `0613` atau lebih tinggi, dengan nama `gpt-35-turbo`
+1. Terapkan model berikut:
+   - `text-embedding-ada-002` versi `2` atau lebih tinggi, bernama `text-embedding-ada-002`
+   - `gpt-5-mini` bernama `gpt-5-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -53,17 +53,16 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-5-mini \
+    --model-name gpt-5-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
 ```
 
-## Perangkat lunak yang dibutuhkan
+## Perangkat lunak yang diperlukan
 
-- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) atau versi lebih baru
+- [Python 3.9](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst) atau lebih baru
 
 ## Variabel lingkungan
 
@@ -81,7 +80,14 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
+<!-- Anda dapat menambahkan variabel lingkungan ke profil PowerShell Anda.
 
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<kunci API Azure OpenAI Service anda>"
+$env:AZURE_OPENAI_ENDPOINT = "<endpoint Azure OpenAI Service anda>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<nama penyebaran model Azure OpenAI Service anda>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<kunci API pengembang Google anda>"
+``` -->
 
 ### Di Linux dan macOS
 
@@ -94,22 +100,22 @@ export AZURE_OPENAI_MODEL_DEPLOYMENT_NAME=<your Azure OpenAI Service model deplo
 export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ```
 
-## Instalasi pustaka Python yang dibutuhkan
+## Instal perpustakaan Python yang diperlukan
 
-1. Instal [git client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) jika belum terpasang.
-1. Dari jendela `Terminal`, clone contoh ini ke folder repo pilihan Anda.
+1. Instal [git client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) jika belum terinstal.
+1. Dari jendela `Terminal`, kloning contoh ke folder repo pilihan Anda.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
     ```
 
-1. Masuk ke folder `data_prep`.
+1. Navigasi ke folder `data_prep`.
 
    ```bash
    cd semanic-search-openai-embeddings-functions/src/data_prep
    ```
 
-1. Buat virtual environment Python.
+1. Buat lingkungan virtual Python.
 
     Di Windows:
 
@@ -123,7 +129,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
     python3 -m venv .venv
     ```
 
-1. Aktifkan virtual environment Python.
+1. Aktifkan lingkungan virtual Python.
 
    Di Windows:
 
@@ -137,7 +143,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    source .venv/bin/activate
    ```
 
-1. Instal pustaka yang dibutuhkan.
+1. Instal perpustakaan yang diperlukan.
 
    Di Windows:
 
@@ -165,5 +171,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ./transcripts_prepare.sh
 ```
 
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sahih. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang sah. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

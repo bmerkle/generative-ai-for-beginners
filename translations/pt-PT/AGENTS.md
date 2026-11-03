@@ -2,19 +2,19 @@
 
 ## Visão Geral do Projeto
 
-Este repositório contém um currículo abrangente de 21 lições que ensina os fundamentos de IA Generativa e desenvolvimento de aplicações. O curso foi projetado para iniciantes e cobre desde conceitos básicos até a criação de aplicações prontas para produção.
+Este repositório contém um currículo abrangente de 21 lições que ensina os fundamentos da IA Generativa e desenvolvimento de aplicações. O curso é dirigido a iniciantes e cobre desde conceitos básicos até a construção de aplicações prontas para produção.
 
-**Principais Tecnologias:**
+**Tecnologias principais:**
 - Python 3.9+ com bibliotecas: `openai`, `python-dotenv`, `tiktoken`, `azure-ai-inference`, `pandas`, `numpy`, `matplotlib`
-- TypeScript/JavaScript com Node.js e bibliotecas: `@azure/openai`, `@azure-rest/ai-inference`, `openai`
-- Azure OpenAI Service, OpenAI API e Modelos do GitHub
+- TypeScript/JavaScript com Node.js e bibliotecas: `openai` (Azure OpenAI via endpoint v1 + API de respostas), `@azure-rest/ai-inference` (Microsoft Foundry Models)
+- Serviço Azure OpenAI, API OpenAI e Microsoft Foundry Models (GitHub Models será descontinuado no final de julho de 2026)
 - Jupyter Notebooks para aprendizagem interativa
-- Dev Containers para um ambiente de desenvolvimento consistente
+- Contêineres de desenvolvimento para ambiente consistente
 
 **Estrutura do Repositório:**
 - 21 diretórios numerados de lições (00-21) contendo READMEs, exemplos de código e tarefas
-- Múltiplas implementações: exemplos em Python, TypeScript e, ocasionalmente, .NET
-- Diretório de traduções com versões em mais de 40 idiomas
+- Múltiplas implementações: exemplos em Python, TypeScript e por vezes .NET
+- Diretório de traduções com 40+ versões em diferentes idiomas
 - Configuração centralizada via ficheiro `.env` (use `.env.copy` como modelo)
 
 ## Comandos de Configuração
@@ -22,249 +22,259 @@ Este repositório contém um currículo abrangente de 21 lições que ensina os 
 ### Configuração Inicial do Repositório
 
 ```bash
-# Clone the repository
+# Clonar o repositório
 git clone https://github.com/microsoft/generative-ai-for-beginners.git
 cd generative-ai-for-beginners
 
-# Copy environment template
+# Copiar o modelo de ambiente
 cp .env.copy .env
-# Edit .env with your API keys and endpoints
+# Editar o .env com as suas chaves API e endpoints
 ```
 
 ### Configuração do Ambiente Python
 
 ```bash
-# Create virtual environment
+# Criar ambiente virtual
 python3 -m venv venv
 
-# Activate virtual environment
-# On macOS/Linux:
+# Ativar ambiente virtual
+# No macOS/Linux:
 source venv/bin/activate
-# On Windows:
+# No Windows:
 venv\Scripts\activate
 
-# Install dependencies
+# Instalar dependências
 pip install -r requirements.txt
 ```
 
-### Configuração de Node.js/TypeScript
+### Configuração Node.js/TypeScript
 
 ```bash
-# Install root-level dependencies (for documentation tooling)
+# Instalar dependências ao nível da root (para ferramentas de documentação)
 npm install
 
-# For individual lesson TypeScript examples, navigate to the specific lesson:
+# Para exemplos individuais em TypeScript de cada lição, navegue até à lição específica:
 cd 06-text-generation-apps/typescript/recipe-app
 npm install
 ```
 
-### Configuração de Dev Container (Recomendado)
+### Configuração do Contêiner de Desenvolvimento (Recomendado)
 
-O repositório inclui uma configuração `.devcontainer` para GitHub Codespaces ou Dev Containers no VS Code:
+O repositório inclui uma configuração `.devcontainer` para GitHub Codespaces ou VS Code Dev Containers:
 
-1. Abra o repositório no GitHub Codespaces ou no VS Code com a extensão Dev Containers
-2. O Dev Container configurará automaticamente:
-   - Instalar dependências Python a partir de `requirements.txt`
-   - Executar o script pós-criação (`.devcontainer/post-create.sh`)
-   - Configurar o kernel do Jupyter
+1. Abra o repositório no GitHub Codespaces ou VS Code com a extensão Dev Containers
+2. O Contêiner de Desenvolvimento irá automaticamente:
+   - Instalar dependências Python do `requirements.txt`
+   - Executar o script post-create (`.devcontainer/post-create.sh`)
+   - Configurar o kernel Jupyter
 
 ## Fluxo de Trabalho de Desenvolvimento
 
 ### Variáveis de Ambiente
 
-Todas as lições que requerem acesso à API utilizam variáveis de ambiente definidas em `.env`:
+Todas as lições que necessitam de acesso à API usam variáveis de ambiente definidas em `.env`:
 
-- `OPENAI_API_KEY` - Para OpenAI API
-- `AZURE_OPENAI_API_KEY` - Para Azure OpenAI Service
-- `AZURE_OPENAI_ENDPOINT` - URL do endpoint Azure OpenAI
-- `AZURE_OPENAI_DEPLOYMENT` - Nome da implementação do modelo de conclusão de chat
-- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Nome da implementação do modelo de embeddings
-- `AZURE_OPENAI_API_VERSION` - Versão da API (padrão: `2024-02-01`)
+- `OPENAI_API_KEY` - Para API OpenAI
+- `AZURE_OPENAI_API_KEY` - Para Azure OpenAI no Microsoft Foundry (Azure OpenAI Service faz agora parte do Microsoft Foundry: https://ai.azure.com)
+- `AZURE_OPENAI_ENDPOINT` - URL do endpoint Azure OpenAI (endpoint do recurso Foundry)
+- `AZURE_OPENAI_DEPLOYMENT` - Nome do deployment do modelo de chat completion (default do curso: `gpt-5-mini`)
+- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Nome do deployment do modelo embeddings (default do curso: `text-embedding-3-small`)
+- `AZURE_OPENAI_API_VERSION` - Versão da API (default: `2024-10-21`)
 - `HUGGING_FACE_API_KEY` - Para modelos Hugging Face
-- `GITHUB_TOKEN` - Para Modelos do GitHub
+- `AZURE_INFERENCE_ENDPOINT` - Endpoint Microsoft Foundry Models (catálogo de modelos multi-fornecedor)
+- `AZURE_INFERENCE_CREDENTIAL` - Chave API Microsoft Foundry Models (substitui o `GITHUB_TOKEN` que será descontinuado)
+- `AZURE_INFERENCE_CHAT_MODEL` - Modelo sem capacidades de raciocínio (ex.: `Llama-3.3-70B-Instruct`) usado nos exemplos de `temperature`, já que modelos de raciocínio não suportam controlos de sampling
 
-### Executar Exemplos em Python
+### Convenções dos Modelos (importante)
+
+- **Modelo de chat padrão é `gpt-5-mini`** - um modelo de **raciocínio** atual, não descontinuado. A partir de 2026, os modelos "mini" mais antigos com suporte a temperature (`gpt-4o-mini`, `gpt-4.1-mini`) estão a *ser descontinuados*, portanto o currículo padroniza a família GPT-5.
+- **Modelos de raciocínio rejeitam `temperature` e `top_p`**, e usam `max_output_tokens` (Responses API) / `max_completion_tokens` (chat completions) em vez de `max_tokens`. Não adicione `temperature`/`top_p`/`max_tokens` a exemplos que chamem `gpt-5-mini`.
+- **Para demonstrar `temperature`**, os exemplos usam um modelo **Llama** (`Llama-3.3-70B-Instruct`) via endpoint Microsoft Foundry Models (`AZURE_INFERENCE_CHAT_MODEL`). Controle os modelos de raciocínio com engenharia de prompt + controlos de raciocínio em vez de controlos de sampling.
+- **Fine-tuning (lição 18)** mantém `gpt-4.1-mini`: GPT-5 suporta apenas fine-tuning por reforço (RFT), não o fine-tuning supervisionado (SFT) mostrado lá.
+- Lições 20 (Mistral) e 21 (Meta) mantêm `temperature`/`max_tokens` pois miram modelos Mistral/Llama, que os suportam.
+
+### Execução de Exemplos Python
 
 ```bash
-# Navigate to lesson directory
+# Navegar para o diretório da lição
 cd 06-text-generation-apps/python
 
-# Run a Python script
+# Executar um script Python
 python aoai-app.py
 ```
 
-### Executar Exemplos em TypeScript
+### Execução de Exemplos TypeScript
 
 ```bash
-# Navigate to TypeScript app directory
+# Navegar para o diretório da aplicação TypeScript
 cd 06-text-generation-apps/typescript/recipe-app
 
-# Build the TypeScript code
+# Compilar o código TypeScript
 npm run build
 
-# Run the application
+# Executar a aplicação
 npm start
 ```
 
-### Executar Jupyter Notebooks
+### Execução de Jupyter Notebooks
 
 ```bash
-# Start Jupyter in the repository root
+# Inicie o Jupyter na raiz do repositório
 jupyter notebook
 
-# Or use VS Code with Jupyter extension
+# Ou use o VS Code com a extensão Jupyter
 ```
 
 ### Trabalhar com Diferentes Tipos de Lição
 
-- **Lições "Learn"**: Focam na documentação README.md e conceitos
+- **Lições "Learn"**: Foco na documentação README.md e conceitos
 - **Lições "Build"**: Incluem exemplos de código funcionais em Python e TypeScript
-- Cada lição tem um README.md com teoria, explicações de código e links para conteúdo em vídeo
+- Cada lição tem um README.md com teoria, walkthroughs de código e links para vídeos
 
 ## Diretrizes de Estilo de Código
 
 ### Python
 
-- Utilize `python-dotenv` para gestão de variáveis de ambiente
-- Importe a biblioteca `openai` para interações com a API
-- Utilize `pylint` para linting (alguns exemplos incluem `# pylint: disable=all` para simplicidade)
-- Siga as convenções de nomenclatura do PEP 8
-- Armazene credenciais de API no ficheiro `.env`, nunca no código
+- Use `python-dotenv` para gestão de variáveis de ambiente
+- Importe a biblioteca `openai` para interações com API
+- Use `pylint` para linting (alguns exemplos incluem `# pylint: disable=all` para simplicidade)
+- Siga as convenções de nomeação PEP 8
+- Guarde credenciais API em ficheiro `.env`, nunca no código
 
 ### TypeScript
 
-- Utilize o pacote `dotenv` para variáveis de ambiente
-- Configuração TypeScript em `tsconfig.json` para cada aplicação
-- Utilize `@azure/openai` ou `@azure-rest/ai-inference` para serviços Azure
-- Utilize `nodemon` para desenvolvimento com recarregamento automático
-- Compile antes de executar: `npm run build` e depois `npm start`
+- Use o pacote `dotenv` para variáveis de ambiente
+- Configuração TypeScript em `tsconfig.json` para cada app
+- Use `openai` para Azure OpenAI (aponte o cliente ao endpoint `/openai/v1/` e chame `client.responses.create`); use `@azure-rest/ai-inference` para Microsoft Foundry Models
+- Use `nodemon` para desenvolvimento com reload automático
+- Compile antes de correr: `npm run build` depois `npm start`
 
 ### Convenções Gerais
 
-- Mantenha os exemplos de código simples e educativos
-- Inclua comentários explicando conceitos-chave
-- O código de cada lição deve ser autónomo e executável
-- Utilize nomenclatura consistente: prefixo `aoai-` para Azure OpenAI, `oai-` para OpenAI API, `githubmodels-` para Modelos do GitHub
+- Mantenha exemplos de código simples e educativos
+- Inclua comentários explicando conceitos chave
+- Cada código da lição deve ser autónomo e executável
+- Use nomenclatura consistente: prefixo `aoai-` para Azure OpenAI, `oai-` para API OpenAI, `githubmodels-` para Microsoft Foundry Models (prefixo legado do GitHub Models)
 
 ## Diretrizes de Documentação
 
 ### Estilo Markdown
 
-- Todos os URLs devem estar no formato `[texto](../../url)` sem espaços extras
+- Todas as URLs devem estar no formato `[text](../../url)` sem espaços extra
 - Links relativos devem começar com `./` ou `../`
-- Todos os links para domínios da Microsoft devem incluir ID de rastreamento: `?WT.mc_id=academic-105485-koreyst`
-- Evite locais específicos de país nos URLs (não use `/en-us/`)
+- Todos os links para domínios Microsoft devem incluir ID de rastreio: `?WT.mc_id=academic-105485-koreyst`
+- Evite locais específicos de país nas URLs (evite `/en-us/`)
 - Imagens armazenadas na pasta `./images` com nomes descritivos
-- Utilize caracteres em inglês, números e hífens nos nomes dos ficheiros
+- Use caracteres ingleses, números e hífens nos nomes dos ficheiros
 
 ### Suporte a Traduções
 
-- O repositório suporta mais de 40 idiomas via GitHub Actions automatizadas
-- Traduções armazenadas no diretório `translations/`
-- Não envie traduções parciais
-- Traduções automáticas não são aceites
+- Repositório suporta 40+ idiomas via GitHub Actions automatizados
+- Traduções guardadas no diretório `translations/`
+- Não submeta traduções parciais
+- Traduções automáticas por máquina não são aceites
 - Imagens traduzidas armazenadas no diretório `translated_images/`
 
 ## Testes e Validação
 
-### Verificações Antes da Submissão
+### Verificações Pré-submissão
 
-Este repositório utiliza GitHub Actions para validação. Antes de submeter PRs:
+Este repositório usa GitHub Actions para validação. Antes de submeter PRs:
 
 1. **Verificar Links Markdown**:
    ```bash
-   # The validate-markdown.yml workflow checks:
-   # - Broken relative paths
-   # - Missing tracking IDs on paths
-   # - Missing tracking IDs on URLs
-   # - URLs with country locale
-   # - Broken external URLs
+   # O fluxo de trabalho validate-markdown.yml verifica:
+   # - Caminhos relativos quebrados
+   # - IDs de acompanhamento em falta nos caminhos
+   # - IDs de acompanhamento em falta nas URLs
+   # - URLs com locale de país
+   # - URLs externas quebradas
    ```
 
 2. **Testes Manuais**:
-   - Testar exemplos em Python: Ativar venv e executar scripts
-   - Testar exemplos em TypeScript: `npm install`, `npm run build`, `npm start`
-   - Verificar se as variáveis de ambiente estão configuradas corretamente
-   - Confirmar que as chaves de API funcionam com os exemplos de código
+   - Testar exemplos Python: ativar venv e correr scripts
+   - Testar exemplos TypeScript: `npm install`, `npm run build`, `npm start`
+   - Verificar que variáveis de ambiente estão corretamente configuradas
+   - Confirmar que chaves API funcionam com os exemplos de código
 
 3. **Exemplos de Código**:
-   - Garantir que todo o código executa sem erros
-   - Testar com Azure OpenAI e OpenAI API quando aplicável
-   - Verificar se os exemplos funcionam com Modelos do GitHub onde suportado
+   - Garantir que todo o código corre sem erros
+   - Testar com Azure OpenAI e API OpenAI quando aplicável
+   - Verificar que exemplos funcionam com Microsoft Foundry Models onde suportado
 
 ### Sem Testes Automatizados
 
-Este é um repositório educacional focado em tutoriais e exemplos. Não há testes unitários ou de integração para executar. A validação é principalmente:
+Este é um repositório educativo focado em tutoriais e exemplos. Não existem testes unitários ou de integração. A validação é principalmente:
 - Testes manuais dos exemplos de código
-- GitHub Actions para validação de Markdown
-- Revisão comunitária do conteúdo educacional
+- GitHub Actions para validação Markdown
+- Revisão comunitária do conteúdo educativo
 
 ## Diretrizes para Pull Requests
 
 ### Antes de Submeter
 
-1. Testar alterações de código em Python e TypeScript quando aplicável
-2. Executar validação de Markdown (acionada automaticamente no PR)
-3. Garantir que IDs de rastreamento estão presentes em todos os URLs da Microsoft
-4. Verificar que links relativos são válidos
-5. Confirmar que as imagens estão referenciadas corretamente
+1. Testar alterações de código tanto em Python quanto em TypeScript quando aplicável
+2. Executar validação Markdown (disparada automaticamente no PR)
+3. Assegurar que os IDs de rastreio estão presentes em todas URLs Microsoft
+4. Verificar que os links relativos são válidos
+5. Confirmar que imagens estão corretamente referenciadas
 
 ### Formato do Título do PR
 
-- Utilize títulos descritivos: `[Lição 06] Corrigir erro de exemplo em Python` ou `Atualizar README para a lição 08`
-- Referencie números de problemas quando aplicável: `Fixes #123`
+- Usar títulos descritivos: `[Lesson 06] Fix Python example typo` ou `Update README for lesson 08`
+- Referenciar números de issues quando aplicável: `Fixes #123`
 
 ### Descrição do PR
 
-- Explique o que foi alterado e por quê
-- Link para problemas relacionados
-- Para alterações de código, especifique quais exemplos foram testados
-- Para PRs de tradução, inclua todos os ficheiros para uma tradução completa
+- Explicar o que foi alterado e porquê
+- Linkar issues relacionadas
+- Para alterações de código, especificar quais exemplos foram testados
+- Para PRs de tradução, incluir todos ficheiros para tradução completa
 
 ### Requisitos de Contribuição
 
-- Assinar o Microsoft CLA (automático no primeiro PR)
-- Fazer fork do repositório na sua conta antes de realizar alterações
-- Um PR por alteração lógica (não combine correções não relacionadas)
-- Mantenha os PRs focados e pequenos quando possível
+- Assinar o CLA Microsoft (automático no primeiro PR)
+- Fazer fork do repositório para sua conta antes de fazer alterações
+- Um PR por alteração lógica (não combinar correções não relacionadas)
+- Manter PRs focados e pequenos quando possível
 
 ## Fluxos de Trabalho Comuns
 
-### Adicionar um Novo Exemplo de Código
+### Adicionar Novo Exemplo de Código
 
-1. Navegue até o diretório da lição apropriada
-2. Crie o exemplo no subdiretório `python/` ou `typescript/`
-3. Siga a convenção de nomenclatura: `{provider}-{example-name}.{py|ts|js}`
-4. Teste com credenciais reais de API
-5. Documente quaisquer novas variáveis de ambiente no README da lição
+1. Navegar para o diretório da lição apropriada
+2. Criar exemplo na subpasta `python/` ou `typescript/`
+3. Seguir convenção de nomeação: `{provider}-{example-name}.{py|ts|js}`
+4. Testar com credenciais reais de API
+5. Documentar quaisquer novas variáveis de ambiente no README da lição
 
 ### Atualizar Documentação
 
-1. Edite o README.md no diretório da lição
-2. Siga as diretrizes de Markdown (IDs de rastreamento, links relativos)
-3. Atualizações de traduções são tratadas por GitHub Actions (não edite manualmente)
-4. Teste todos os links para garantir que são válidos
+1. Editar README.md no diretório da lição
+2. Seguir diretrizes Markdown (IDs de rastreio, links relativos)
+3. Atualização das traduções é feita via GitHub Actions (não editar manualmente)
+4. Testar se todos os links são válidos
 
 ### Trabalhar com Dev Containers
 
-1. O repositório inclui `.devcontainer/devcontainer.json`
-2. O script pós-criação instala automaticamente dependências Python
+1. Repositório inclui `.devcontainer/devcontainer.json`
+2. Script post-create instala automaticamente dependências Python
 3. Extensões para Python e Jupyter estão pré-configuradas
-4. O ambiente é baseado em `mcr.microsoft.com/devcontainers/universal:2.11.2`
+4. Ambiente baseado em `mcr.microsoft.com/devcontainers/universal:2.11.2`
 
-## Implantação e Publicação
+## Deploy e Publicação
 
-Este é um repositório de aprendizagem - não há processo de implantação. O currículo é consumido por:
+Este é um repositório de aprendizagem - não há processo de deploy. O currículo é consumido por:
 
-1. **Repositório GitHub**: Acesso direto ao código e documentação
-2. **GitHub Codespaces**: Ambiente de desenvolvimento instantâneo com configuração pré-definida
-3. **Microsoft Learn**: O conteúdo pode ser sindicado para a plataforma oficial de aprendizagem
-4. **docsify**: Site de documentação construído a partir de Markdown (veja `docsifytopdf.js` e `package.json`)
+1. **Repositório GitHub**: acesso direto ao código e documentação
+2. **GitHub Codespaces**: ambiente dev instantâneo com configuração prévia
+3. **Microsoft Learn**: conteúdo pode ser sindicado para plataforma oficial de aprendizagem
+4. **docsify**: site de documentação gerado a partir de Markdown (ver `docsifytopdf.js` e `package.json`)
 
-### Construir o Site de Documentação
+### Construir Site de Documentação
 
 ```bash
-# Generate PDF from documentation (if needed)
+# Gerar PDF a partir da documentação (se necessário)
 npm run convert
 ```
 
@@ -272,46 +282,48 @@ npm run convert
 
 ### Problemas Comuns
 
-**Erros de Importação em Python**:
-- Certifique-se de que o ambiente virtual está ativado
-- Execute `pip install -r requirements.txt`
-- Verifique se a versão do Python é 3.9+
+**Erros de Importação Python**:
+- Assegurar que o ambiente virtual está ativado
+- Executar `pip install -r requirements.txt`
+- Verificar que a versão do Python é 3.9+
 
-**Erros de Compilação em TypeScript**:
-- Execute `npm install` no diretório específico da aplicação
-- Verifique se a versão do Node.js é compatível
-- Limpe `node_modules` e reinstale, se necessário
+**Erros de Build TypeScript**:
+- Executar `npm install` no diretório específico da app
+- Verificar que a versão do Node.js é compatível
+- Limpar `node_modules` e reinstalar se necessário
 
-**Erros de Autenticação na API**:
-- Verifique se o ficheiro `.env` existe e tem valores corretos
-- Confirme que as chaves de API são válidas e não expiraram
-- Certifique-se de que os URLs dos endpoints estão corretos para sua região
+**Erros de Autenticação API**:
+- Verificar que o ficheiro `.env` existe e tem valores corretos
+- Confirmar que chaves API são válidas e não expiraram
+- Assegurar que URLs dos endpoints estão corretas para a sua região
 
-**Variáveis de Ambiente Ausentes**:
-- Copie `.env.copy` para `.env`
-- Preencha todos os valores necessários para a lição em que está a trabalhar
-- Reinicie sua aplicação após atualizar `.env`
+**Variáveis de Ambiente em Falta**:
+- Copiar `.env.copy` para `.env`
+- Preencher todos os valores requeridos para a lição que está a trabalhar
+- Reiniciar aplicação após atualizar `.env`
 
 ## Recursos Adicionais
 
 - [Guia de Configuração do Curso](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)
-- [Diretrizes de Contribuição](./CONTRIBUTING.md)
+- [Diretrizes para Contribuição](./CONTRIBUTING.md)
 - [Código de Conduta](./CODE_OF_CONDUCT.md)
 - [Política de Segurança](./SECURITY.md)
-- [Discord do Azure AI](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
+- [Discord Azure AI](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
 - [Coleção de Exemplos de Código Avançados](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
 
 ## Notas Específicas do Projeto
 
-- Este é um **repositório educacional** focado em aprendizagem, não em código de produção
-- Os exemplos são intencionalmente simples e focados em ensinar conceitos
-- A qualidade do código é equilibrada com a clareza educacional
-- Cada lição é autónoma e pode ser concluída independentemente
-- O repositório suporta múltiplos fornecedores de API: Azure OpenAI, OpenAI e Modelos do GitHub
-- O conteúdo é multilíngue com fluxos de trabalho de tradução automatizados
-- Comunidade ativa no Discord para perguntas e suporte
+- Este é um **repositório educativo** focado em aprendizagem, não código de produção
+- Exemplos são intencionalmente simples e focados no ensino de conceitos
+- Qualidade do código é equilibrada com clareza educativa
+- Cada lição é autónoma e pode ser completada independentemente
+- O repositório suporta múltiplos provedores de API: Azure OpenAI, OpenAI, Microsoft Foundry Models, e provedores offline como Foundry Local e Ollama
+- Conteúdo é multilíngue com fluxos de trabalho de tradução automatizada
+- Comunidade ativa no Discord para questões e apoio
 
 ---
 
-**Aviso**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, é importante notar que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritária. Para informações críticas, recomenda-se uma tradução profissional realizada por humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes da utilização desta tradução.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Aviso Legal**:
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes da utilização desta tradução.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

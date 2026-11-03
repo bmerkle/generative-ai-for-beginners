@@ -1,266 +1,146 @@
-# Vytváření aplikací pro generování obrázků
+# Tvorba aplikací pro generování obrázků
 
-[![Vytváření aplikací pro generování obrázků](../../../translated_images/cs/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Tvorba aplikací pro generování obrázků](../../../translated_images/cs/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-Generování textu není jedinou schopností LLM. Je také možné generovat obrázky na základě textových popisů. Obrázky jako modality mohou být velmi užitečné v mnoha oblastech, jako je zdravotnická technologie, architektura, cestovní ruch, vývoj her a další. V této kapitole se podíváme na dva nejpopulárnější modely pro generování obrázků, DALL-E a Midjourney.
+V LLM existuje víc než jen generování textu. Můžete také generovat obrázky z textových popisů. Obrázky jako modalita jsou užitečné v MedTech, architektuře, turistice, vývoji her, marketingu a dalších oblastech. V této lekci se podíváme na dnešní modely **GPT Image** a vytvoříme aplikaci pro generování obrázků.
 
 ## Úvod
 
-V této lekci se zaměříme na:
+Generování obrázků vám umožňuje převést přirozený jazykový popis do obrázku. V této lekci pracujeme s rodinou modelů **`gpt-image`** od OpenAI – současnou generací obrazových modelů dostupných na **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** a platformě OpenAI. Tyto modely nahrazují starší modely DALL·E (DALL·E 2/3 jsou již zastaralé).
 
-- Generování obrázků a jeho užitečnost.
-- DALL-E a Midjourney, co to je a jak fungují.
-- Jak vytvořit aplikaci pro generování obrázků.
+V průběhu lekce používáme fiktivní startup **Edu4All**, který vytváří vzdělávací nástroje. Tým chce generovat ilustrace pro úkoly a studijní materiály.
 
 ## Cíle učení
 
-Po dokončení této lekce budete schopni:
+Na konci této lekce budete umět:
 
-- Vytvořit aplikaci pro generování obrázků.
-- Definovat hranice pro vaši aplikaci pomocí meta promptů.
-- Pracovat s DALL-E a Midjourney.
+- Vysvětlit, co je generování obrázků a kde je užitečné.
+- Pochopit rodinu modelů `gpt-image` a jak se liší od starších modelů DALL·E.
+- Vytvořit aplikaci pro generování obrázků v Pythonu (a TypeScriptu / .NET).
+- Upravit obrázky a použít bezpečnostní opatření s metapromptami.
 
-## Proč vytvářet aplikaci pro generování obrázků?
+## Co je generování obrázků?
 
-Aplikace pro generování obrázků jsou skvělým způsobem, jak prozkoumat možnosti generativní umělé inteligence. Mohou být použity například pro:
+Modely generující obrázky vytvářejí obrázky na základě textového popisu. Moderní modely jako `gpt-image` jsou postavené na kombinaci transformer + diffusion technik: model během tréninku získá vztah mezi textem a obrázky, poté, při daném popisu, iterativně "odšumuje" náhodný šum do obrázku odpovídajícího popisu.
 
-- **Úpravy a syntézu obrázků**. Můžete generovat obrázky pro různé účely, jako je úprava obrázků nebo jejich syntéza.
+Dvě známé rodiny obrazových modelů jsou:
 
-- **Použití v různých odvětvích**. Mohou být také použity k vytváření obrázků pro různá odvětví, jako je zdravotnická technologie, cestovní ruch, vývoj her a další.
+- **`gpt-image` (OpenAI)** - současná generace, používaná v této lekci. Podporuje generování z textu do obrázku a úpravu obrázků (inpainting s maskou).
+- **Midjourney** - populární model třetí strany se svou vlastní službou a workflow na Discordu.
 
-## Scénář: Edu4All
+> Starší modely OpenAI pro obrázky - **DALL·E 2** a **DALL·E 3** - jsou zastaralé. DALL·E 3 již není dostupné pro nové nasazení a funkce jako `create_variation` existovaly jen v DALL·E 2. Pro nové aplikace používejte modely `gpt-image`.
 
-V rámci této lekce budeme pokračovat v práci s naším startupem Edu4All. Studenti budou vytvářet obrázky pro své úkoly, konkrétně jaké obrázky, to záleží na nich. Mohou například vytvořit ilustrace pro svou vlastní pohádku, vytvořit novou postavu pro svůj příběh nebo jim pomoci vizualizovat své nápady a koncepty.
+### Který model `gpt-image` bych měl použít?
 
-Například pokud studenti Edu4All pracují ve třídě na tématu památek, mohli by vytvořit něco takového:
+Na Microsoft Foundry jsou následující modely **obecně dostupné**:
 
-![Startup Edu4All, třída o památkách, Eiffelova věž](../../../translated_images/cs/startup.94d6b79cc4bb3f5a.webp)
+| Model | Poznámky |
+| --- | --- |
+| **`gpt-image-2`** | Nejnovější a nejvýkonnější model obrázků – doporučený výchozí. |
+| `gpt-image-1.5` | Obecně dostupný; silná kvalita za nižší cenu. |
+| `gpt-image-1-mini` | Obecně dostupný; nejrychlejší / nejlevnější. |
+| `gpt-image-1` | Pouze náhled. |
 
-pomocí promptu jako:
+Vždy si zkontrolujte aktuální [seznam obrazových modelů Foundry](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) ohledně dostupnosti a regionů.
 
-> "Pes vedle Eiffelovy věže za ranního slunečního světla"
+> **Důležité:** Modely `gpt-image` vrací generovaný obrázek jako **base64** (`b64_json`), nikoli jako URL. Váš kód dekóduje base64 řetězec na bajty a uloží jej – neexistuje žádná URL k obrázku ke stažení.
 
-## Co je DALL-E a Midjourney?
+## Nastavení
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) a [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) jsou dva z nejpopulárnějších modelů pro generování obrázků, které umožňují používat textové prompty k vytváření obrázků.
+Vzorky můžete spouštět proti **Azure OpenAI v Microsoft Foundry** (vzorky `aoai-*`) nebo na **platformě OpenAI** (vzorky `oai-*`).
 
-### DALL-E
+### 1. Vytvoření a nasazení modelu
 
-Začněme s DALL-E, což je model generativní umělé inteligence, který generuje obrázky na základě textových popisů.
+Postupujte podle návodu [vytvořit zdroj](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) pro vytvoření zdroje Microsoft Foundry a poté nasadit model pro obrázky – doporučujeme **`gpt-image-2`**.
 
-> [DALL-E je kombinací dvou modelů, CLIP a rozptýlené pozornosti](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. Nastavte si `.env`
 
-- **CLIP** je model, který generuje vektory (numerické reprezentace dat) z obrázků a textu.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Rozptýlená pozornost** je model, který generuje obrázky z vektorů. DALL-E je trénován na datasetu obrázků a textu a může být použit k generování obrázků na základě textových popisů. Například DALL-E může být použit k vytvoření obrázků kočky v klobouku nebo psa s čírem.
+Tyto hodnoty najdete na stránce **Deployments** vašeho zdroje v [portálu Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst).
 
-### Midjourney
+### 3. Nainstalujte knihovny
 
-Midjourney funguje podobně jako DALL-E, generuje obrázky na základě textových promptů. Midjourney může být také použit k vytvoření obrázků pomocí promptů jako „kočka v klobouku“ nebo „pes s čírem“.
+Vytvořte `requirements.txt`:
 
-![Obrázek generovaný Midjourney, mechanický holub](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Autor obrázku Wikipedia, obrázek generovaný Midjourney_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Jak fungují DALL-E a Midjourney
+Pak vytvořte a aktivujte virtuální prostředí a nainstalujte:
 
-Nejprve [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E je model generativní umělé inteligence založený na architektuře transformátorů s _autoregresivním transformátorem_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-_Autoregresivní transformátor_ definuje, jak model generuje obrázky z textových popisů. Generuje jeden pixel po druhém a poté používá generované pixely k vytvoření dalšího pixelu. Tento proces probíhá přes více vrstev neuronové sítě, dokud není obrázek kompletní.
+## Vytvořte aplikaci
 
-Díky tomuto procesu DALL-E kontroluje atributy, objekty, charakteristiky a další prvky v generovaném obrázku. Nicméně DALL-E 2 a 3 mají větší kontrolu nad generovaným obrázkem.
+Vytvořte `app.py` s následujícím kódem. Generuje obrázek a uloží jej jako PNG.
 
-## Vytvoření první aplikace pro generování obrázků
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-Co je potřeba k vytvoření aplikace pro generování obrázků? Potřebujete následující knihovny:
+dotenv.load_dotenv()
 
-- **python-dotenv**, doporučuje se použít tuto knihovnu k uchování tajných klíčů v souboru _.env_ mimo kód.
-- **openai**, tato knihovna slouží k interakci s OpenAI API.
-- **pillow**, pro práci s obrázky v Pythonu.
-- **requests**, pro pomoc s HTTP požadavky.
+# Nastavte klienta na váš zdroj Azure OpenAI (Microsoft Foundry).
+# Modely pro obrázky potřebují novější verzi API - zkontrolujte dokumentaci Foundry pro verzi, kterou váš model vyžaduje.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Vytvoření a nasazení modelu Azure OpenAI
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # např. "gpt-image-2"
 
-Pokud jste to ještě neudělali, postupujte podle pokynů na stránce [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal), abyste vytvořili zdroj a model Azure OpenAI. Vyberte model DALL-E 3.
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # také 1536x1024 (na šířku), 1024x1536 (na výšku) nebo "auto"
+    n=1,
+)
 
-## Vytvoření aplikace
-
-1. Vytvořte soubor _.env_ s následujícím obsahem:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   Tyto informace najdete v Azure OpenAI Foundry Portálu pro váš zdroj v sekci "Deployments".
-
-1. Shromážděte výše uvedené knihovny do souboru _requirements.txt_ takto:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. Dále vytvořte virtuální prostředí a nainstalujte knihovny:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Pro Windows použijte následující příkazy k vytvoření a aktivaci virtuálního prostředí:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. Přidejte následující kód do souboru _app.py_:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Vysvětlení kódu:
-
-- Nejprve importujeme potřebné knihovny, včetně knihovny OpenAI, knihovny dotenv, knihovny requests a knihovny Pillow.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Dále načteme proměnné prostředí ze souboru _.env_.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Poté nakonfigurujeme klienta služby Azure OpenAI.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Následně generujeme obrázek:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Výše uvedený kód odpovídá JSON objektem, který obsahuje URL generovaného obrázku. URL můžeme použít ke stažení obrázku a jeho uložení do souboru.
-
-- Nakonec otevřeme obrázek a použijeme standardní prohlížeč obrázků k jeho zobrazení:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Podrobnosti o generování obrázku
-
-Podívejme se podrobněji na kód, který generuje obrázek:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt** je textový prompt, který se používá k generování obrázku. V tomto případě používáme prompt "Králík na koni, držící lízátko, na mlhavé louce, kde rostou narcisy".
-- **size** je velikost generovaného obrázku. V tomto případě generujeme obrázek o rozměrech 1024x1024 pixelů.
-- **n** je počet generovaných obrázků. V tomto případě generujeme dva obrázky.
-- **temperature** je parametr, který ovládá náhodnost výstupu generativního modelu AI. Teplota je hodnota mezi 0 a 1, kde 0 znamená, že výstup je deterministický, a 1 znamená, že výstup je náhodný. Výchozí hodnota je 0,7.
-
-Existují další věci, které můžete s obrázky dělat, a ty probereme v další části.
-
-## Další možnosti generování obrázků
-
-Viděli jste, jak jsme byli schopni vygenerovat obrázek pomocí několika řádků v Pythonu. Existují však další věci, které můžete s obrázky dělat.
-
-Můžete také:
-
-- **Provádět úpravy**. Poskytnutím existujícího obrázku, masky a promptu můžete obrázek upravit. Například můžete přidat něco do určité části obrázku. Představte si náš obrázek králíka, můžete přidat klobouk králíkovi. Jak to udělat? Poskytnete obrázek, masku (identifikující část oblasti pro změnu) a textový prompt, který určí, co by mělo být provedeno. 
-> Poznámka: toto není podporováno v DALL-E 3.
-
-Zde je příklad použití GPT Image:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Základní obrázek by obsahoval pouze lounge s bazénem, ale finální obrázek by měl plameňáka:
+# gpt-image modely vracejí base64 (b64_json), ne URL - dekódujte to na bajty.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+Spusťte `python app.py`. PNG bude uloženo pod `images/`.
+
+> Každé volání `images.generate` vytvoří jiný obrázek na stejný prompt – modely obrázků nepřijímají parametr `temperature` (ten je pro generování textu). Pro větší rozmanitost zavolejte API znovu; pro menší rozmanitost specifikujte prompt podrobněji.
+
+## Úpravy obrázků
+
+Modely `gpt-image` mohou **upravit** existující obrázek: poskytněte obrázek, volitelnou **masku** (která označuje oblast k úpravě) a prompt popisující změnu. Stejně jako generování, úpravy se vrací v base64.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/cs/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -268,211 +148,51 @@ Zde je příklad použití GPT Image:
   <img src="../../../translated_images/cs/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **Vytvářet variace**. Myšlenka je, že vezmete existující obrázek a požádáte o vytvoření variací. Pro vytvoření variace poskytnete obrázek a textový prompt a kód jako takový:
+## Nastavení hranic pomocí metapromptů
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Poznámka: toto je podporováno pouze na OpenAI.
-
-## Teplota
-
-Teplota je parametr, který ovládá náhodnost výstupu generativního modelu AI. Teplota je hodnota mezi 0 a 1, kde 0 znamená, že výstup je deterministický, a 1 znamená, že výstup je náhodný. Výchozí hodnota je 0,7.
-
-Podívejme se na příklad, jak teplota funguje, spuštěním tohoto promptu dvakrát:
-
-> Prompt: "Králík na koni, držící lízátko, na mlhavé louce, kde rostou narcisy"
-
-![Králík na koni držící lízátko, verze 1](../../../translated_images/cs/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Nyní spusťme stejný prompt znovu, abychom viděli, že nedostaneme stejný obrázek dvakrát:
-
-![Generovaný obrázek králíka na koni](../../../translated_images/cs/v2-generated-image.33f55a3714efe61d.webp)
-
-Jak vidíte, obrázky jsou podobné, ale ne stejné. Zkusme změnit hodnotu teploty na 0,1 a uvidíme, co se stane:
+Jakmile umíte generovat obrázky, potřebujete omezení, aby vaše aplikace nevytvářela nebezpečný nebo nevyhovující obsah. **Metaprompt** je text, který předřadíte uživatelskému promptu, aby omezil výstup modelu.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Změna teploty
-
-Zkusme udělat odpověď více deterministickou. Mohli jsme si všimnout, že na prvním obrázku je králík a na druhém obrázku je kůň, takže se obrázky značně liší.
-
-Proto změňme náš kód a nastavme teplotu na 0, takto:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Nyní, když spustíte tento kód, dostanete tyto dva obrázky:
-
-- ![Teplota 0, v1](../../../translated_images/cs/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Teplota 0, v2](../../../translated_images/cs/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Zde jasně vidíte, jak se obrázky více podobají.
-
-## Jak definovat hranice pro vaši aplikaci pomocí meta promptů
-
-S naší ukázkou již můžeme generovat obrázky pro naše klienty. Nicméně je potřeba vytvořit určité hranice pro naši aplikaci.
-
-Například nechceme generovat obrázky, které nejsou vhodné pro práci nebo nejsou vhodné pro děti.
-
-To můžeme udělat pomocí _meta promptů_. Meta prompty jsou textové prompty, které se používají k ovládání výstupu generativního modelu AI. Například můžeme použít meta prompty k ovládání výstupu a zajistit, že generované obrázky budou vhodné pro práci nebo pro děti.
-
-### Jak to funguje?
-
-Jak tedy meta prompty fungují?
-
-Meta prompty jsou textové prompty, které se používají k ovládání výstupu generativního modelu AI. Jsou umístěny před textovým promptem a slouží k ovládání výstupu modelu. Jsou zabudovány do aplikací, aby ovládaly výstup modelu, a spojují vstup promptu a vstup meta promptu do jednoho textového promptu.
-
-Jedním příkladem meta promptu by mohl být následující:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Nyní se podívejme, jak můžeme použít meta prompty v naší ukázce.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Z výše uvedeného promptu můžete vidět, jak všechny generované obrázky zohledňují meta prompt.
-
-## Úkol - umožněme studentům
-
-Na začátku této lekce jsme představili Edu4All. Nyní je čas umožnit studentům generovat obrázky pro jejich úkoly.
-
-Studenti vytvoří obrázky pro své úkoly obsahující památky, konkrétně jaké památky, to záleží na nich. Studenti jsou vyzváni, aby použili svou kreativitu v tomto úkolu a umístili tyto památky do různých kontextů.
-
-## Řešení
-
-Zde je jedno možné řešení:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# předat `prompt` do client.images.generate(...)
 ```
+
+Každý obrázek je nyní generován v rámci hranic nastavených metapromptem. Kombinujte to s obsahovými filtry zabudovanými v Microsoft Foundry pro víceúrovňovou ochranu.
+
+## Úkol - umožněme studentům tvořit
+
+Studenti Edu4All potřebují obrázky pro své úkoly. Vytvořte aplikaci, která generuje obrázky **památek** (které památky záleží na vás) umístěných v různých kreativních kontextech – například slavná památka při západu slunce s dítětem, které se dívá.
+
+Vyzkoušejte to sami, pak porovnejte s referenčními řešeními:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) plná generace aplikace: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Projděte si také notebooky v [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` pro Azure, `oai-assignment.ipynb` pro OpenAI).
 
 ## Skvělá práce! Pokračujte v učení
 
-Po dokončení této lekce se podívejte na naši [sbírku učení o generativní AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), abyste si dále rozšířili své znalosti o generativní AI!
+Po dokončení této lekce si prohlédněte naši [kolekci Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), abyste nadále zvyšovali své znalosti v oblasti Generative AI!
 
-Přejděte na lekci 10, kde se podíváme na to, jak [vytvářet AI aplikace pomocí low-code](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Přejděte k lekci 10 pro další vzdělávání.
 
 ---
 
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlad [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

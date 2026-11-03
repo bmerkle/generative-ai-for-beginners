@@ -1,266 +1,146 @@
-# Görüntü Oluşturma Uygulamaları Oluşturma
+# Görüntü Oluşturma Uygulamaları İnşa Etme
 
-[![Görüntü Oluşturma Uygulamaları Oluşturma](../../../translated_images/tr/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Görüntü Oluşturma Uygulamaları İnşa Etme](../../../translated_images/tr/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-Büyük Dil Modelleri (LLM'ler) yalnızca metin oluşturma ile sınırlı değildir. Metin açıklamalarından görüntü oluşturmak da mümkündür. Görüntülerin bir modalite olarak kullanılması, MedTech, mimarlık, turizm, oyun geliştirme gibi birçok alanda oldukça faydalı olabilir. Bu bölümde, en popüler iki görüntü oluşturma modeli olan DALL-E ve Midjourney'i inceleyeceğiz.
+LLM'ler sadece metin üretmekten ibaret değildir. Metin açıklamalarından görüntüler de oluşturabilirsiniz. Görüntüler, MedTech, mimari, turizm, oyun geliştirme, pazarlama ve daha fazlası gibi birçok alanda faydalı bir modalitedir. Bu derste bugünün **GPT Görüntü** modellerine bakıyor ve bir görüntü oluşturma uygulaması kuruyoruz.
 
 ## Giriş
 
-Bu derste şunları ele alacağız:
+Görüntü oluşturma, doğal dilde bir istemi bir resme dönüştürmenizi sağlar. Bu derste OpenAI'nin **`gpt-image`** model ailesi ile çalışıyoruz - şu anda **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** ve OpenAI platformunda bulunan nesil görüntü modelleri. Bu modeller eski DALL·E modellerinin yerine geçer (DALL·E 2/3 eski sürümdür).
 
-- Görüntü oluşturma ve neden faydalı olduğu.
-- DALL-E ve Midjourney, ne oldukları ve nasıl çalıştıkları.
-- Görüntü oluşturma uygulaması nasıl oluşturulur.
+Ders boyunca, öğrenme araçları geliştiren hayali bir girişim olan **Edu4All** ile çalışıyoruz. Ekip, ödevler ve çalışma materyalleri için görseller oluşturmak istiyor.
 
-## Öğrenme Hedefleri
+## Öğrenme hedefleri
 
-Bu dersi tamamladıktan sonra şunları yapabileceksiniz:
+Bu dersin sonunda şunları yapabileceksiniz:
 
-- Görüntü oluşturma uygulaması oluşturmak.
-- Uygulamanız için meta istemlerle sınırlar belirlemek.
-- DALL-E ve Midjourney ile çalışmak.
+- Görüntü oluşturmanın ne olduğunu ve nerelerde faydalı olduğunu açıklayın.
+- `gpt-image` model ailesini anlayın ve eski DALL·E modellerinden nasıl farklı olduğunu kavrayın.
+- Python (ve TypeScript / .NET) kullanarak bir görüntü oluşturma uygulaması geliştirin.
+- Görüntüleri düzenleyin ve metapromptlar ile güvenlik önlemleri uygulayın.
 
-## Neden bir görüntü oluşturma uygulaması oluşturmalısınız?
+## Görüntü oluşturma nedir?
 
-Görüntü oluşturma uygulamaları, Üretken Yapay Zeka'nın yeteneklerini keşfetmek için harika bir yoldur. Örneğin şu amaçlarla kullanılabilirler:
+Görüntü oluşturma modelleri, bir metin isteminden görüntüler yaratır. `gpt-image` gibi modern modeller, transformer + diffusion tekniklerine dayanır: model eğitimi sırasında metin ve görüntü arasındaki ilişkiyi öğrenir, ardından bir istem verildiğinde, açıklamaya uyan görüntüyü oluşturmak için rastgele gürültüyü aşamalı olarak "gürültüden arındırır".
 
-- **Görüntü düzenleme ve sentezleme**. Görüntü düzenleme ve görüntü sentezleme gibi çeşitli kullanım durumları için görüntüler oluşturabilirsiniz.
+İki bilinen görüntü modeli ailesi şunlardır:
 
-- **Çeşitli endüstrilere uygulanabilir**. MedTech, Turizm, Oyun geliştirme gibi çeşitli endüstriler için görüntüler oluşturmak için de kullanılabilirler.
+- **`gpt-image` (OpenAI)** - şu anki nesil, bu derste kullanılan. Metinden görüntü üretimi ve görüntü düzenleme (maske ile boya) destekler.
+- **Midjourney** - kendi hizmeti ve Discord tabanlı iş akışı olan popüler üçüncü taraf model.
 
-## Senaryo: Edu4All
+> Eski OpenAI görüntü modelleri - **DALL·E 2** ve **DALL·E 3** - eski sürüm. DALL·E 3 yeni dağıtımlar için artık mevcut değil ve `create_variation` gibi özellikler sadece DALL·E 2’de vardı. Yeni uygulamalar için `gpt-image` modellerini kullanın.
 
-Bu ders kapsamında, Edu4All adlı girişimimizle çalışmaya devam edeceğiz. Öğrenciler, değerlendirmeleri için görüntüler oluşturacaklar; hangi görüntülerin oluşturulacağı tamamen öğrencilere bağlıdır. Örneğin, kendi masalları için illüstrasyonlar oluşturabilir, hikayeleri için yeni bir karakter yaratabilir veya fikirlerini ve kavramlarını görselleştirmelerine yardımcı olabilirler.
+### Hangi `gpt-image` modeli kullanılmalı?
 
-Edu4All öğrencilerinin sınıfta anıtlar üzerinde çalışırken oluşturabilecekleri örneklerden biri:
+Microsoft Foundry'de aşağıdakiler **Genel Erişimde**:
 
-![Edu4All girişimi, anıtlar üzerine sınıf, Eyfel Kulesi](../../../translated_images/tr/startup.94d6b79cc4bb3f5a.webp)
+| Model | Notlar |
+| --- | --- |
+| **`gpt-image-2`** | En yeni ve en yetenekli görüntü modeli - önerilen varsayılan. |
+| `gpt-image-1.5` | Genel erişimde; daha düşük maliyette güçlü kalite. |
+| `gpt-image-1-mini` | Genel erişimde; en hızlı / en düşük maliyetli. |
+| `gpt-image-1` | Sadece önizleme. |
 
-şu tür bir istem kullanarak:
+Mevcut durumu ve bölgeleri kontrol etmek için her zaman güncel [Foundry görüntü modelleri listesini](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) kontrol edin.
 
-> "Sabahın erken saatlerinde güneş ışığında Eyfel Kulesi'nin yanında bir köpek"
+> **Önemli:** `gpt-image` modelleri oluşturulan görüntüyü bir URL olarak değil, **base64** (`b64_json`) olarak döner. Kodunuz base64 dizisini byte’lara dönüştürüp kaydeder - indirilecek bir görüntü URL'si yoktur.
 
-## DALL-E ve Midjourney nedir?
+## Kurulum
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) ve [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst), metin istemleri kullanarak görüntü oluşturmanıza olanak tanıyan en popüler iki görüntü oluşturma modelidir.
+Örnekleri **Microsoft Foundry’de Azure OpenAI** ( `aoai-*` örnekleri) veya **OpenAI platformu** ( `oai-*` örnekleri) üzerinde çalıştırabilirsiniz.
 
-### DALL-E
+### 1. Model oluşturun ve dağıtın
 
-Öncelikle DALL-E ile başlayalım. Bu, metin açıklamalarından görüntü oluşturan bir Üretken Yapay Zeka modelidir.
+Microsoft Foundry kaynağı oluşturmak için [kaynak oluşturma](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) kılavuzunu takip edin, ardından bir görüntü modeli dağıtın - **`gpt-image-2`** önerilir.
 
-> [DALL-E, CLIP ve diffused attention adlı iki modelin birleşimidir](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. `.env` dosyanızı yapılandırın
 
-- **CLIP**, görüntüler ve metinlerden sayısal veri temsilleri (embedding) oluşturan bir modeldir.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention**, embeddinglerden görüntü oluşturan bir modeldir. DALL-E, bir görüntü ve metin veri seti üzerinde eğitilmiştir ve metin açıklamalarından görüntü oluşturmak için kullanılabilir. Örneğin, DALL-E bir şapka takmış kedi veya mohawk saçlı bir köpek görüntüsü oluşturmak için kullanılabilir.
+Bu değerleri, kaynağınızın [Foundry portalındaki](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) **Dağıtımlar** sayfasında bulun.
 
-### Midjourney
+### 3. Kitaplıkları yükleyin
 
-Midjourney, DALL-E'ye benzer şekilde çalışır; metin istemlerinden görüntüler oluşturur. Midjourney, "şapka takmış bir kedi" veya "mohawk saçlı bir köpek" gibi istemler kullanılarak görüntüler oluşturmak için kullanılabilir.
+Bir `requirements.txt` oluşturun:
 
-![Midjourney tarafından oluşturulan görüntü, mekanik güvercin](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Wikipedia'dan alınan görsel, Midjourney tarafından oluşturulmuş görüntü_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## DALL-E ve Midjourney nasıl çalışır?
+Sonra bir sanal ortam oluşturup etkinleştirin ve yükleyin:
 
-Öncelikle, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E, _autoregressive transformer_ ile transformer mimarisine dayalı bir Üretken Yapay Zeka modelidir.
-
-Bir _autoregressive transformer_, bir modelin metin açıklamalarından görüntü oluşturma şeklini tanımlar; bir pikseli birer birer oluşturur ve ardından oluşturulan pikselleri bir sonraki pikseli oluşturmak için kullanır. Sinir ağında birden fazla katmandan geçerek görüntü tamamlanır.
-
-Bu süreçle DALL-E, oluşturduğu görüntüdeki nitelikleri, nesneleri, özellikleri ve daha fazlasını kontrol eder. Ancak, DALL-E 2 ve 3, oluşturulan görüntü üzerinde daha fazla kontrol sağlar.
-
-## İlk görüntü oluşturma uygulamanızı oluşturma
-
-Peki bir görüntü oluşturma uygulaması oluşturmak için neye ihtiyacınız var? Şu kütüphanelere ihtiyacınız olacak:
-
-- **python-dotenv**, gizli bilgilerinizi _.env_ dosyasında koddan uzak tutmanız için bu kütüphaneyi kullanmanız şiddetle tavsiye edilir.
-- **openai**, OpenAI API ile etkileşim kurmak için kullanacağınız kütüphane.
-- **pillow**, Python'da görüntülerle çalışmak için.
-- **requests**, HTTP istekleri yapmanıza yardımcı olur.
-
-## Azure OpenAI modelini oluşturma ve dağıtma
-
-Henüz yapmadıysanız, [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) sayfasındaki talimatları izleyerek bir Azure OpenAI kaynağı ve model oluşturun. Model olarak DALL-E 3'ü seçin.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ## Uygulamayı oluşturma
 
-1. _.env_ adlı bir dosya oluşturun ve şu içeriği ekleyin:
+Aşağıdaki kod ile `app.py` oluşturun. Bir görüntü oluşturur ve PNG olarak kaydeder.
 
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-   Bu bilgiyi Azure OpenAI Foundry Portal'daki "Deployments" bölümünde bulabilirsiniz.
+dotenv.load_dotenv()
 
-1. Yukarıdaki kütüphaneleri _requirements.txt_ adlı bir dosyada şu şekilde toplayın:
+# İstemciyi Azure OpenAI (Microsoft Foundry) kaynağınıza yönlendirin.
+# Görüntü modelleri için güncel bir API sürümü gerekir - modelinizin ihtiyaç duyduğu sürümü Foundry belgelerinden kontrol edin.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # örn. "gpt-image-2"
 
-1. Ardından sanal bir ortam oluşturun ve kütüphaneleri yükleyin:
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # ayrıca 1536x1024 (manzara), 1024x1536 (portre) veya "auto"
+    n=1,
+)
 
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
+# gpt-image modelleri URL yerine base64 (b64_json) döner - bunu baytlara çözün.
+image_bytes = base64.b64decode(result.data[0].b64_json)
 
-   Windows için sanal ortam oluşturma ve etkinleştirme komutları şunlardır:
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
 
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
+Image.open(image_path).show()
+```
 
-1. _app.py_ adlı bir dosyaya şu kodu ekleyin:
+`python app.py` ile çalıştırın. `images/` altında bir PNG kaydedilecektir.
 
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
+> `images.generate` her çağrıda aynı istem için farklı bir görüntü üretir - görüntü modelleri `temperature` parametresi almaz (bu metin üretimi kontrolüdür). Çeşitlilik için API’yi tekrar çağırın; çeşitliliği azaltmak için isteminizi daha spesifik yapın.
 
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
+## Görüntüleri düzenleme
 
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
+`gpt-image` modelleri mevcut bir görüntüyü **düzenleyebilir**: görüntüyü, isteğe bağlı bir **maske**yi (değiştirilecek alanı işaretler) ve değişikliği tanımlayan bir istemi verin. Düzenleme de base64 olarak döner.
 
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Bu kodu açıklayalım:
-
-- Öncelikle, OpenAI kütüphanesi, dotenv kütüphanesi, requests kütüphanesi ve Pillow kütüphanesi dahil olmak üzere ihtiyacımız olan kütüphaneleri içe aktarıyoruz.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Daha sonra, _.env_ dosyasından ortam değişkenlerini yüklüyoruz.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Ardından, Azure OpenAI hizmeti istemcisini yapılandırıyoruz.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Son olarak, görüntüyü oluşturuyoruz:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Yukarıdaki kod, oluşturulan görüntünün URL'sini içeren bir JSON nesnesiyle yanıt verir. Bu URL'yi kullanarak görüntüyü indirip bir dosyaya kaydedebiliriz.
-
-- Son olarak, görüntüyü açar ve standart görüntü görüntüleyici ile görüntüleriz:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Görüntü oluşturma hakkında daha fazla bilgi
-
-Görüntüyü oluşturan koda daha detaylı bakalım:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, görüntüyü oluşturmak için kullanılan metin istemidir. Bu durumda, "Sisli bir çayırda nergislerin yetiştiği bir alanda lolipop tutan bir atın üzerindeki tavşan" istemini kullanıyoruz.
-- **size**, oluşturulan görüntünün boyutudur. Bu durumda, 1024x1024 piksel boyutunda bir görüntü oluşturuyoruz.
-- **n**, oluşturulan görüntü sayısıdır. Bu durumda, iki görüntü oluşturuyoruz.
-- **temperature**, Üretken Yapay Zeka modelinin çıktısının rastgeleliğini kontrol eden bir parametredir. Sıcaklık, 0 ile 1 arasında bir değerdir; burada 0, çıktının deterministik olduğu ve 1, çıktının rastgele olduğu anlamına gelir. Varsayılan değer 0.7'dir.
-
-Görüntülerle yapabileceğiniz daha fazla şey var ve bunları bir sonraki bölümde ele alacağız.
-
-## Görüntü oluşturmanın ek yetenekleri
-
-Şimdiye kadar, Python'da birkaç satır kodla bir görüntü oluşturmayı nasıl başardığımızı gördünüz. Ancak, görüntülerle yapabileceğiniz daha fazla şey var.
-
-Ayrıca şunları yapabilirsiniz:
-
-- **Düzenlemeler yapma**. Mevcut bir görüntüye bir maske ve bir istem sağlayarak bir görüntüyü değiştirebilirsiniz. Örneğin, bir görüntünün bir kısmına bir şey ekleyebilirsiniz. Tavşan görüntümüzü hayal edin; tavşana bir şapka ekleyebilirsiniz. Bunu, görüntüyü, bir maske (değişiklik yapılacak alanı belirleyen) ve yapılması gerekeni belirten bir metin istemi sağlayarak yapabilirsiniz. 
-> Not: Bu özellik DALL-E 3'te desteklenmemektedir.
-
-İşte GPT Image kullanılarak yapılmış bir örnek:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Temel görüntü yalnızca havuzlu salonu içerirken, son görüntüde bir flamingo olacaktır:
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/tr/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -268,211 +148,51 @@ Ayrıca şunları yapabilirsiniz:
   <img src="../../../translated_images/tr/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **Varyasyonlar oluşturma**. Buradaki fikir, mevcut bir görüntüyü alıp farklı varyasyonlar oluşturmanızdır. Bir varyasyon oluşturmak için bir görüntü ve bir metin istemi sağlayarak şu şekilde kod yazabilirsiniz:
+## Metapromptlarla sınırlar belirleme
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Not: Bu özellik yalnızca OpenAI'de desteklenmektedir.
-
-## Sıcaklık
-
-Sıcaklık, Üretken Yapay Zeka modelinin çıktısının rastgeleliğini kontrol eden bir parametredir. Sıcaklık, 0 ile 1 arasında bir değerdir; burada 0, çıktının deterministik olduğu ve 1, çıktının rastgele olduğu anlamına gelir. Varsayılan değer 0.7'dir.
-
-Sıcaklığın nasıl çalıştığını görmek için bu istemi iki kez çalıştırarak bir örneğe bakalım:
-
-> İstem: "Sisli bir çayırda nergislerin yetiştiği bir alanda lolipop tutan bir atın üzerindeki tavşan"
-
-![Lolipop tutan bir atın üzerindeki tavşan, versiyon 1](../../../translated_images/tr/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Şimdi aynı istemi tekrar çalıştırarak aynı görüntüyü iki kez alamayacağımızı görelim:
-
-![Atın üzerindeki tavşan görüntüsü](../../../translated_images/tr/v2-generated-image.33f55a3714efe61d.webp)
-
-Gördüğünüz gibi, görüntüler benzer ancak aynı değil. Şimdi sıcaklık değerini 0.1'e değiştirip ne olduğunu görelim:
+Görüntü oluşturmayı öğrendikten sonra, uygulamanızın güvensiz veya markaya uygun olmayan içerik üretmemesi için güvenlik önlemleri gerekir. Bir **metaprompt**, modelin çıktılarını sınırlamak için kullanıcı isteminden önce eklenen metindir.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Sıcaklığı değiştirme
-
-Yanıtı daha deterministik hale getirmeye çalışalım. Oluşturduğumuz iki görüntüden, ilk görüntüde bir tavşan ve ikinci görüntüde bir at olduğunu gözlemleyebiliriz, dolayısıyla görüntüler oldukça farklıdır.
-
-Bu nedenle kodumuzu değiştirip sıcaklığı 0 olarak ayarlayalım:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Şimdi bu kodu çalıştırdığınızda şu iki görüntüyü elde edersiniz:
-
-- ![Sıcaklık 0, v1](../../../translated_images/tr/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Sıcaklık 0, v2](../../../translated_images/tr/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Burada açıkça görebilirsiniz ki görüntüler birbirine daha çok benziyor.
-
-## Uygulamanız için sınırları meta istemlerle nasıl tanımlarsınız?
-
-Demo ile müşterilerimiz için zaten görüntüler oluşturabiliyoruz. Ancak, uygulamamız için bazı sınırlar oluşturmalıyız.
-
-Örneğin, iş için uygun olmayan veya çocuklar için uygun olmayan görüntüler oluşturmak istemiyoruz.
-
-Bunu _meta istemler_ ile yapabiliriz. Meta istemler, Üretken Yapay Zeka modelinin çıktısını kontrol etmek için kullanılan metin istemleridir. Örneğin, meta istemleri kullanarak çıktıyı kontrol edebilir ve oluşturulan görüntülerin iş için uygun veya çocuklar için uygun olmasını sağlayabiliriz.
-
-### Nasıl çalışır?
-
-Peki, meta istemler nasıl çalışır?
-
-Meta istemler, Üretken Yapay Zeka modelinin çıktısını kontrol etmek için kullanılan metin istemleridir. Metin istemden önce konumlandırılırlar ve modelin çıktısını kontrol etmek için kullanılırlar. İstem girdisi ve meta istem girdisini tek bir metin istemde kapsar.
-
-Bir meta istem örneği şu şekilde olabilir:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Şimdi, demo'muzda meta istemleri nasıl kullanabileceğimizi görelim.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Yukarıdaki istemden, oluşturulan tüm görüntülerin meta istemi dikkate aldığını görebilirsiniz.
-
-## Ödev - Öğrencileri destekleyelim
-
-Bu dersin başında Edu4All'ı tanıttık. Şimdi öğrencilerin değerlendirmeleri için görüntüler oluşturmalarını sağlama zamanı.
-
-Öğrenciler, anıtlar içeren değerlendirmeleri için görüntüler oluşturacaklar; hangi anıtların olacağı tamamen öğrencilere bağlı. Öğrencilerden bu görevde yaratıcılıklarını kullanarak bu anıtları farklı bağlamlara yerleştirmeleri isteniyor.
-
-## Çözüm
-
-İşte olası bir çözüm:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# `prompt` parametresini client.images.generate(...) fonksiyonuna geçirin
 ```
 
-## Harika İş! Öğrenmeye Devam Edin
+Artık her görüntü metaprompt tarafından belirlenen sınırlar içinde oluşturuluyor. Bunu Microsoft Foundry’e gömülü içerik filtreleriyle derin savunma için birleştirin.
 
-Bu dersi tamamladıktan sonra, Generative AI bilginizi geliştirmeye devam etmek için [Generative AI Öğrenme koleksiyonumuza](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) göz atın!
+## Ödev - öğrencileri destekleyelim
 
-Düşük kodla [AI uygulamaları oluşturmayı](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst) inceleyeceğimiz 10. Derse geçin.
+Edu4All öğrencileri değerlendirmeleri için görüntülere ihtiyaç duyuyor. Farklı ve yaratıcı bağlamlarda yer alan **anıtların** (hangi anıtların olduğu size kalmış) görüntülerini oluşturan bir uygulama geliştirin - örneğin, günbatımında ünlü bir anıtın yanında çocuk izliyor.
+
+Kendiniz deneyin, sonra referans çözümlerle karşılaştırın:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) tam oluşturma uygulaması: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Ayrıca [python/](../../../09-building-image-applications/python) dizinindeki not defterlerini kullanarak çalışın (`aoai-assignment.ipynb` Azure için, `oai-assignment.ipynb` OpenAI için).
+
+## Harika iş! Öğrenmeye devam et
+
+Bu dersi tamamladıktan sonra, **Üretken AI Öğrenme koleksiyonumuzu** [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) kontrol ederek Üretken AI bilginizi artırmaya devam edin!
+
+Öğrenmeye devam etmek için 10. derse geçin.
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çeviriler hata veya yanlışlıklar içerebilir. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlama durumunda sorumluluk kabul edilmez.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

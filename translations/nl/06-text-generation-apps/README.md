@@ -1,20 +1,20 @@
-# Toepassen van tekstgeneratie in applicaties
+# Het bouwen van tekstgeneratie-applicaties
 
-[![Toepassen van tekstgeneratie in applicaties](../../../translated_images/nl/06-lesson-banner.a5c629f990a636c8.webp)](https://youtu.be/0Y5Luf5sRQA?si=t_xVg0clnAI4oUFZ)
+[![Het bouwen van tekstgeneratie-applicaties](../../../translated_images/nl/06-lesson-banner.a5c629f990a636c8.webp)](https://youtu.be/0Y5Luf5sRQA?si=t_xVg0clnAI4oUFZ)
 
 > _(Klik op de afbeelding hierboven om de video van deze les te bekijken)_
 
-Tot nu toe heb je in dit curriculum gezien dat er kernconcepten zijn zoals prompts en zelfs een hele discipline genaamd "prompt engineering". Veel tools waarmee je kunt werken, zoals ChatGPT, Office 365, Microsoft Power Platform en meer, ondersteunen het gebruik van prompts om iets te bereiken.
+Je hebt tot nu toe in deze leerroute gezien dat er kernconcepten zijn zoals prompts en zelfs een hele discipline genaamd "prompt engineering". Veel tools waarmee je kunt interacteren, zoals ChatGPT, Office 365, Microsoft Power Platform en meer, ondersteunen het gebruik van prompts om iets te bereiken.
 
-Om zo'n ervaring aan een app toe te voegen, moet je concepten zoals prompts, completions begrijpen en een bibliotheek kiezen om mee te werken. Dat is precies wat je in dit hoofdstuk zult leren.
+Als je zo'n ervaring aan een app wilt toevoegen, moet je concepten zoals prompts en completions begrijpen en een bibliotheek kiezen om mee te werken. Dat is precies wat je in dit hoofdstuk zult leren.
 
 ## Introductie
 
-In dit hoofdstuk leer je:
+In dit hoofdstuk ga je:
 
-- Over de openai-bibliotheek en de kernconcepten ervan.
-- Hoe je een tekstgeneratie-app bouwt met openai.
-- Hoe je concepten zoals prompt, temperatuur en tokens gebruikt om een tekstgeneratie-app te bouwen.
+- Leren over de openai-bibliotheek en de kernconcepten ervan.
+- Een tekstgeneratie-app bouwen met openai.
+- Begrijpen hoe je concepten als prompt, temperatuur en tokens gebruikt om een tekstgeneratie-app te bouwen.
 
 ## Leerdoelen
 
@@ -22,61 +22,61 @@ Aan het einde van deze les kun je:
 
 - Uitleggen wat een tekstgeneratie-app is.
 - Een tekstgeneratie-app bouwen met openai.
-- Je app configureren om meer of minder tokens te gebruiken en ook de temperatuur aan te passen voor een gevarieerde output.
+- Je app configureren om meer of minder tokens te gebruiken en ook de temperatuur te wijzigen voor een gevarieerde output.
 
 ## Wat is een tekstgeneratie-app?
 
 Normaal gesproken heeft een app die je bouwt een soort interface zoals de volgende:
 
-- Commandogestuurd. Console-apps zijn typische apps waarin je een commando typt en een taak uitvoert. Bijvoorbeeld, `git` is een commandogestuurde app.
-- Gebruikersinterface (UI). Sommige apps hebben grafische gebruikersinterfaces (GUIs) waarin je op knoppen klikt, tekst invoert, opties selecteert en meer.
+- Op commando gebaseerd. Console-apps zijn typische apps waarbij je een commando typt en die een taak uitvoert. Bijvoorbeeld, `git` is een op commando gebaseerde app.
+- Gebruikersinterface (UI). Sommige apps hebben grafische gebruikersinterfaces (GUIs) waar je op knoppen klikt, tekst invoert, opties selecteert en meer.
 
 ### Console- en UI-apps zijn beperkt
 
-Vergelijk dit met een commandogestuurde app waarin je een commando typt:
+Vergelijk het met een op commando gebaseerde app waarbij je een commando typt:
 
 - **Het is beperkt**. Je kunt niet zomaar elk commando typen, alleen de commando's die de app ondersteunt.
-- **Taal specifiek**. Sommige apps ondersteunen meerdere talen, maar standaard is de app gebouwd voor een specifieke taal, zelfs als je meer taalondersteuning kunt toevoegen.
+- **Taalgebonden**. Sommige apps ondersteunen veel talen, maar standaard is de app gebouwd voor een specifieke taal, ook al kun je vaak extra taalondersteuning toevoegen.
 
 ### Voordelen van tekstgeneratie-apps
 
 Hoe verschilt een tekstgeneratie-app dan?
 
-In een tekstgeneratie-app heb je meer flexibiliteit, je bent niet beperkt tot een set commando's of een specifieke invoertaal. In plaats daarvan kun je natuurlijke taal gebruiken om met de app te communiceren. Een ander voordeel is dat je al interactie hebt met een gegevensbron die is getraind op een enorme hoeveelheid informatie, terwijl een traditionele app mogelijk beperkt is tot wat er in een database staat.
+In een tekstgeneratie-app heb je meer flexibiliteit; je bent niet beperkt tot een set commando's of een specifieke invoertaal. In plaats daarvan kun je natuurlijke taal gebruiken om met de app te communiceren. Een ander voordeel is dat je al interactie hebt met een databron die getraind is op een enorme hoeveelheid informatie, terwijl een traditionele app vaak beperkt is tot wat er in een database staat.
 
 ### Wat kan ik bouwen met een tekstgeneratie-app?
 
 Er zijn veel dingen die je kunt bouwen. Bijvoorbeeld:
 
-- **Een chatbot**. Een chatbot die vragen beantwoordt over onderwerpen, zoals je bedrijf en zijn producten, kan een goede match zijn.
-- **Hulpje**. LLM's zijn geweldig in dingen zoals het samenvatten van tekst, het verkrijgen van inzichten uit tekst, het produceren van tekst zoals cv's en meer.
-- **Code-assistent**. Afhankelijk van het taalmodel dat je gebruikt, kun je een code-assistent bouwen die je helpt bij het schrijven van code. Je kunt bijvoorbeeld een product zoals GitHub Copilot gebruiken, evenals ChatGPT, om je te helpen bij het schrijven van code.
+- **Een chatbot**. Een chatbot die vragen beantwoordt over onderwerpen zoals je bedrijf en diens producten zou een goede match kunnen zijn.
+- **Helper**. LLM's zijn uitstekend in zaken zoals het samenvatten van tekst, het verkrijgen van inzichten uit tekst, het produceren van tekst zoals cv's en meer.
+- **Code-assistent**. Afhankelijk van het taalmodel dat je gebruikt, kun je een code-assistent bouwen die je helpt code te schrijven. Bijvoorbeeld kun je producten gebruiken zoals GitHub Copilot en ChatGPT om je code te helpen schrijven.
 
 ## Hoe kan ik beginnen?
 
-Je moet een manier vinden om te integreren met een LLM, wat meestal de volgende twee benaderingen inhoudt:
+Je moet een manier vinden om te integreren met een LLM, wat meestal neerkomt op de volgende twee benaderingen:
 
-- Gebruik een API. Hierbij stel je webverzoeken op met je prompt en krijg je gegenereerde tekst terug.
-- Gebruik een bibliotheek. Bibliotheken helpen bij het inkapselen van de API-aanroepen en maken ze gemakkelijker te gebruiken.
+- Gebruik een API. Hierbij stel je webverzoeken samen met je prompt en krijg je de gegenereerde tekst terug.
+- Gebruik een bibliotheek. Bibliotheken helpen de API-aanroepen te kapselen en maken ze makkelijker te gebruiken.
 
 ## Bibliotheken/SDK's
 
-Er zijn een paar bekende bibliotheken voor het werken met LLM's, zoals:
+Er zijn een paar bekende bibliotheken om met LLM's te werken zoals:
 
-- **openai**, deze bibliotheek maakt het eenvoudig om verbinding te maken met je model en prompts te verzenden.
+- **openai**, deze bibliotheek maakt het makkelijk om je model te verbinden en prompts te versturen.
 
-Daarnaast zijn er bibliotheken die op een hoger niveau werken, zoals:
+Vervolgens zijn er bibliotheken die op een hoger niveau opereren zoals:
 
-- **Langchain**. Langchain is goed bekend en ondersteunt Python.
+- **Langchain**. Langchain is bekend en ondersteunt Python.
 - **Semantic Kernel**. Semantic Kernel is een bibliotheek van Microsoft die de talen C#, Python en Java ondersteunt.
 
 ## Eerste app met openai
 
-Laten we eens kijken hoe we onze eerste app kunnen bouwen, welke bibliotheken we nodig hebben, hoeveel werk het is, enzovoort.
+Laten we bekijken hoe we onze eerste app kunnen bouwen, welke bibliotheken we nodig hebben, hoeveel er vereist is enzovoort.
 
 ### Installeer openai
 
-Er zijn veel bibliotheken beschikbaar om te communiceren met OpenAI of Azure OpenAI. Het is ook mogelijk om verschillende programmeertalen te gebruiken, zoals C#, Python, JavaScript, Java en meer. We hebben ervoor gekozen om de Python-bibliotheek `openai` te gebruiken, dus we zullen `pip` gebruiken om deze te installeren.
+Er zijn veel bibliotheken om te communiceren met OpenAI of Azure OpenAI. Het is mogelijk om ook verschillende programmeertalen te gebruiken zoals C#, Python, JavaScript, Java en meer. Wij hebben gekozen om de `openai` Python-bibliotheek te gebruiken, dus we installeren die met `pip`.
 
 ```bash
 pip install openai
@@ -87,79 +87,84 @@ pip install openai
 Je moet de volgende stappen uitvoeren:
 
 - Maak een account aan op Azure [https://azure.microsoft.com/free/](https://azure.microsoft.com/free/?WT.mc_id=academic-105485-koreyst).
-- Verkrijg toegang tot Azure OpenAI. Ga naar [https://learn.microsoft.com/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai](https://learn.microsoft.com/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai?WT.mc_id=academic-105485-koreyst) en vraag toegang aan.
+- Krijg toegang tot Azure OpenAI. Ga naar [https://learn.microsoft.com/azure/ai-foundry/openai/overview#how-do-i-get-access-to-azure-openai](https://learn.microsoft.com/azure/ai-foundry/openai/overview#how-do-i-get-access-to-azure-openai?WT.mc_id=academic-105485-koreyst) en vraag toegang aan.
 
   > [!NOTE]
-  > Op het moment van schrijven moet je toegang aanvragen tot Azure OpenAI.
+  > Ten tijde van schrijven moet je toegang aanvragen voor Azure OpenAI.
 
 - Installeer Python <https://www.python.org/>
-- Maak een Azure OpenAI Service-resource aan. Zie deze handleiding voor hoe je een [resource aanmaakt](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal?WT.mc_id=academic-105485-koreyst).
+- Heb een Azure OpenAI Service resource aangemaakt. Zie deze gids voor het [aanmaken van een resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal?WT.mc_id=academic-105485-koreyst).
 
-### Vind API-sleutel en eindpunt
+### Zoek API-sleutel en endpoint
 
-Op dit punt moet je je `openai`-bibliotheek vertellen welke API-sleutel je wilt gebruiken. Om je API-sleutel te vinden, ga je naar de sectie "Keys and Endpoint" van je Azure OpenAI-resource en kopieer je de waarde van "Key 1".
+Op dit moment moet je aan je `openai` bibliotheek doorgeven welke API-sleutel te gebruiken. Om je API-sleutel te vinden, ga je naar het gedeelte "Keys and Endpoint" van je Azure OpenAI-resource en kopieer je de waarde van "Key 1".
 
-![Keys and Endpoint resource blade in Azure Portal](https://learn.microsoft.com/azure/ai-services/openai/media/quickstarts/endpoint.png?WT.mc_id=academic-105485-koreyst)
+![Keys and Endpoint resource blade in Azure Portal](https://learn.microsoft.com/azure/ai-foundry/openai/media/quickstarts/endpoint.png?WT.mc_id=academic-105485-koreyst)
 
-Nu je deze informatie hebt gekopieerd, laten we de bibliotheken instrueren om deze te gebruiken.
+Nu je deze informatie hebt gekopieerd, laten we de bibliotheken instrueren deze te gebruiken.
 
 > [!NOTE]
-> Het is verstandig om je API-sleutel te scheiden van je code. Je kunt dit doen door gebruik te maken van omgevingsvariabelen.
+> Het is verstandig je API-sleutel van je code te scheiden. Dat kun je doen door gebruik te maken van omgevingsvariabelen.
 >
 > - Stel de omgevingsvariabele `OPENAI_API_KEY` in op je API-sleutel.
 >   `export OPENAI_API_KEY='sk-...'`
 
-### Configuratie instellen voor Azure
+### Stel Azure-configuratie in
 
-Als je Azure OpenAI gebruikt, kun je de configuratie als volgt instellen:
+Als je Azure OpenAI (nu onderdeel van Microsoft Foundry) gebruikt, zo stel je de configuratie in. We gebruiken de standaard `OpenAI` client gericht op de Azure OpenAI `/openai/v1/` endpoint, die werkt met de Responses API en geen `api_version` nodig heeft:
 
 ```python
-openai.api_type = 'azure'
-openai.api_key = os.environ["OPENAI_API_KEY"]
-openai.api_version = '2023-05-15'
-openai.api_base = os.getenv("API_BASE")
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    base_url=f"{os.environ['AZURE_OPENAI_ENDPOINT'].rstrip('/')}/openai/v1/",
+)
 ```
 
-Hierboven stellen we het volgende in:
+Bovenstaande stelt het volgende in:
 
-- `api_type` op `azure`. Dit vertelt de bibliotheek om Azure OpenAI te gebruiken en niet OpenAI.
-- `api_key`, dit is je API-sleutel die je in de Azure Portal kunt vinden.
-- `api_version`, dit is de versie van de API die je wilt gebruiken. Op het moment van schrijven is de nieuwste versie `2023-05-15`.
-- `api_base`, dit is het eindpunt van de API. Je kunt dit vinden in de Azure Portal naast je API-sleutel.
+- `api_key`, dit is je API-sleutel gevonden in de Azure Portal of Microsoft Foundry portal.
+- `base_url`, dit is je Foundry resource endpoint met `/openai/v1/` eraan toegevoegd. De stabiele v1 endpoint werkt over OpenAI en Azure OpenAI heen zonder `api_version`-beheer.
 
-> [!NOTE] > `os.getenv` is een functie die omgevingsvariabelen leest. Je kunt deze gebruiken om omgevingsvariabelen zoals `OPENAI_API_KEY` en `API_BASE` te lezen. Stel deze omgevingsvariabelen in je terminal in of gebruik een bibliotheek zoals `dotenv`.
+> [!NOTE] > `os.environ` leest omgevingsvariabelen. Je kunt het gebruiken om omgevingsvariabelen zoals `AZURE_OPENAI_API_KEY` en `AZURE_OPENAI_ENDPOINT` te lezen. Stel deze omgevingsvariabelen in je terminal in of gebruik een bibliotheek zoals `dotenv`.
 
 ## Tekst genereren
 
-De manier om tekst te genereren is door de klasse `Completion` te gebruiken. Hier is een voorbeeld:
+De manier om tekst te genereren is door de Responses API te gebruiken via de `responses.create` methode. Hier is een voorbeeld:
 
 ```python
 prompt = "Complete the following: Once upon a time there was a"
 
-completion = openai.Completion.create(model="davinci-002", prompt=prompt)
-print(completion.choices[0].text)
+response = client.responses.create(
+    model="gpt-5-mini",  # dit is de naam van je modeluitrol
+    input=prompt,
+    store=False,
+)
+print(response.output_text)
 ```
 
-In de bovenstaande code maken we een completion-object en geven we het model dat we willen gebruiken en de prompt door. Vervolgens printen we de gegenereerde tekst.
+In bovenstaande code maken we een response aan en geven het model door dat we willen gebruiken en de prompt. Daarna printen we de gegenereerde tekst via `response.output_text`.
 
-### Chat-completions
+### Conversaties met meerdere beurten
 
-Tot nu toe heb je gezien hoe we `Completion` hebben gebruikt om tekst te genereren. Maar er is een andere klasse genaamd `ChatCompletion` die beter geschikt is voor chatbots. Hier is een voorbeeld van het gebruik ervan:
+De Responses API is zeer geschikt voor zowel tekstgeneratie in één beurt als voor chatbots met meerdere beurten - je geeft een lijst met berichten in `input` mee om een gesprek op te bouwen:
 
 ```python
-import openai
+from openai import OpenAI
 
-openai.api_key = "sk-..."
+client = OpenAI(api_key="sk-...")
 
-completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world"}])
-print(completion.choices[0].message.content)
+response = client.responses.create(model="gpt-5-mini", input="Hello world", store=False)
+print(response.output_text)
 ```
 
 Meer over deze functionaliteit in een aankomend hoofdstuk.
 
-## Oefening - je eerste tekstgeneratie-app
+## Oefening - jouw eerste tekstgeneratie-app
 
-Nu we hebben geleerd hoe we openai kunnen instellen en configureren, is het tijd om je eerste tekstgeneratie-app te bouwen. Volg de volgende stappen om je app te bouwen:
+Nu we hebben geleerd hoe we openai kunnen instellen en configureren, is het tijd om je eerste tekstgeneratie-app te bouwen. Volg deze stappen om je app te bouwen:
 
 1. Maak een virtuele omgeving en installeer openai:
 
@@ -173,35 +178,34 @@ Nu we hebben geleerd hoe we openai kunnen instellen en configureren, is het tijd
    > Als je Windows gebruikt, typ dan `venv\Scripts\activate` in plaats van `source venv/bin/activate`.
 
    > [!NOTE]
-   > Vind je Azure OpenAI-sleutel door naar [https://portal.azure.com/](https://portal.azure.com/?WT.mc_id=academic-105485-koreyst) te gaan, zoek naar `Open AI`, selecteer de `Open AI resource` en vervolgens `Keys and Endpoint` en kopieer de waarde van `Key 1`.
+   > Vind je Azure OpenAI-sleutel door naar [https://portal.azure.com/](https://portal.azure.com/?WT.mc_id=academic-105485-koreyst) te gaan, zoek naar `Open AI`, selecteer de `Open AI resource` en klik vervolgens op `Keys and Endpoint` en kopieer de waarde van `Key 1`.
 
-1. Maak een _app.py_-bestand en geef het de volgende code:
+1. Maak een _app.py_-bestand aan en geef deze de volgende code:
 
    ```python
-   import openai
+   import os
+   from openai import OpenAI
 
-   openai.api_key = "<replace this value with your open ai key or Azure OpenAI key>"
-
-   openai.api_type = 'azure'
-   openai.api_version = '2023-05-15'
-   openai.api_base = "<endpoint found in Azure Portal where your API key is>"
+   client = OpenAI(
+       api_key="<replace this value with your Azure OpenAI key>",
+       base_url="<endpoint found in Azure Portal>/openai/v1/",
+   )
    deployment_name = "<deployment name>"
 
-   # add your completion code
+   # voeg je voltooiingscode toe
    prompt = "Complete the following: Once upon a time there was a"
-   messages = [{"role": "user", "content": prompt}]
 
-   # make completion
-   completion = openai.chat.completions.create(model=deployment_name, messages=messages)
+   # doe een verzoek met de Responses API
+   response = client.responses.create(model=deployment_name, input=prompt, store=False)
 
-   # print response
-   print(completion.choices[0].message.content)
+   # print antwoord
+   print(response.output_text)
    ```
 
    > [!NOTE]
-   > Als je Azure OpenAI gebruikt, moet je de `api_type` instellen op `azure` en de `api_key` instellen op je Azure OpenAI-sleutel.
+   > Als je gewone OpenAI (niet Azure) gebruikt, gebruik `client = OpenAI(api_key="<vervang deze waarde door je OpenAI sleutel>")` (zonder `base_url`) en geef een modelnaam door zoals `gpt-5-mini` in plaats van een deploymentnaam.
 
-   Je zou een output moeten zien zoals de volgende:
+   Je zou ongeveer de volgende output moeten zien:
 
    ```output
     very unhappy _____.
@@ -209,25 +213,25 @@ Nu we hebben geleerd hoe we openai kunnen instellen en configureren, is het tijd
    Once upon a time there was a very unhappy mermaid.
    ```
 
-## Verschillende soorten prompts voor verschillende doeleinden
+## Verschillende soorten prompts, voor verschillende dingen
 
-Nu heb je gezien hoe je tekst kunt genereren met een prompt. Je hebt zelfs een programma dat draait en dat je kunt aanpassen en wijzigen om verschillende soorten tekst te genereren.
+Nu je hebt gezien hoe je tekst kunt genereren met een prompt, heb je zelfs een programma draaien dat je kunt aanpassen om verschillende soorten tekst te genereren.
 
-Prompts kunnen voor allerlei taken worden gebruikt. Bijvoorbeeld:
+Prompts kunnen worden gebruikt voor allerlei taken. Bijvoorbeeld:
 
-- **Een type tekst genereren**. Bijvoorbeeld, je kunt een gedicht genereren, vragen voor een quiz, enz.
-- **Informatie opzoeken**. Je kunt prompts gebruiken om informatie op te zoeken, zoals het volgende voorbeeld: 'Wat betekent CORS in webontwikkeling?'.
-- **Code genereren**. Je kunt prompts gebruiken om code te genereren, bijvoorbeeld het ontwikkelen van een reguliere expressie die wordt gebruikt om e-mails te valideren of waarom niet een heel programma genereren, zoals een webapp?
+- **Genereer een type tekst**. Bijvoorbeeld, je kunt een gedicht genereren, vragen voor een quiz, enzovoort.
+- **Zoek informatie op**. Je kunt prompts gebruiken om informatie op te zoeken zoals in het volgende voorbeeld: 'Wat betekent CORS in webontwikkeling?'.
+- **Genereer code**. Je kunt prompts gebruiken om code te genereren, bijvoorbeeld een reguliere expressie die e-mailadressen controleert of waarom niet een heel programma genereren, zoals een webapp?
 
-## Een praktischer voorbeeld: een recepten-generator
+## Een praktischer toepassingsvoorbeeld: een recepten-generator
 
-Stel je hebt ingrediënten thuis en je wilt iets koken. Daarvoor heb je een recept nodig. Een manier om recepten te vinden is door een zoekmachine te gebruiken, of je kunt een LLM gebruiken.
+Stel je voor dat je ingrediënten thuis hebt en iets wilt koken. Daarvoor heb je een recept nodig. Een manier om recepten te vinden is via een zoekmachine, of je kunt een LLM daarvoor gebruiken.
 
 Je zou een prompt kunnen schrijven zoals:
 
-> "Laat me 5 recepten zien voor een gerecht met de volgende ingrediënten: kip, aardappelen en wortels. Per recept, lijst alle gebruikte ingrediënten op."
+> "Toon me 5 recepten voor een gerecht met de volgende ingrediënten: kip, aardappelen en wortels. Per recept, lijst alle gebruikte ingrediënten op."
 
-Gezien de bovenstaande prompt, zou je een antwoord kunnen krijgen zoals:
+Gegeven bovenstaande prompt zou je een vergelijkbare reactie kunnen krijgen:
 
 ```output
 1. Roasted Chicken and Vegetables:
@@ -291,16 +295,16 @@ Ingredients:
 - 1 teaspoon dried oregano
 ```
 
-Dit resultaat is geweldig, ik weet wat ik kan koken. Op dit punt zouden nuttige verbeteringen kunnen zijn:
+Deze uitkomst is geweldig, ik weet wat ik kan koken. Op dit punt kunnen nuttige verbeteringen zijn:
 
 - Ingrediënten filteren die ik niet lekker vind of waar ik allergisch voor ben.
-- Een boodschappenlijst maken, voor het geval ik niet alle ingrediënten thuis heb.
+- Een boodschappenlijst maken, voor het geval ik niet alle ingrediënten in huis heb.
 
-Voor de bovenstaande gevallen, laten we een extra prompt toevoegen:
+Voor bovenstaande gevallen voegen we een extra prompt toe:
 
-> "Verwijder recepten met knoflook omdat ik allergisch ben en vervang het door iets anders. Maak ook een boodschappenlijst voor de recepten, rekening houdend met wat ik al thuis heb: kip, aardappelen en wortels."
+> "Verwijder alsjeblieft recepten met knoflook omdat ik daar allergisch voor ben en vervang het door iets anders. Maak ook een boodschappenlijst voor de recepten, rekening houdend met dat ik al kip, aardappelen en wortels in huis heb."
 
-Nu krijg je een nieuw resultaat, namelijk:
+Nu heb je een nieuw resultaat, namelijk:
 
 ```output
 1. Roasted Chicken and Vegetables:
@@ -367,20 +371,20 @@ Shopping List:
 - Pepper
 ```
 
-Dat zijn je vijf recepten, zonder knoflook genoemd, en je hebt ook een boodschappenlijst rekening houdend met wat je al thuis hebt.
+Dat zijn je vijf recepten zonder knoflook en je hebt ook een boodschappenlijst, rekening houdend met wat je al in huis hebt.
 
 ## Oefening - bouw een recepten-generator
 
-Nu we een scenario hebben uitgewerkt, laten we code schrijven om het gedemonstreerde scenario te matchen. Volg hiervoor de volgende stappen:
+Nu we een scenario hebben uitgewerkt, laten we code schrijven die bij het gedemonstreerde scenario past. Volg deze stappen:
 
-1. Gebruik het bestaande _app.py_-bestand als uitgangspunt.
-1. Zoek de variabele `prompt` en wijzig de code naar het volgende:
+1. Gebruik het bestaande _app.py_-bestand als startpunt
+1. Zoek de variabele `prompt` en verander de code ervan naar het volgende:
 
    ```python
    prompt = "Show me 5 recipes for a dish with the following ingredients: chicken, potatoes, and carrots. Per recipe, list all the ingredients used"
    ```
 
-   Als je nu de code uitvoert, zou je een output moeten zien die lijkt op:
+   Als je nu de code uitvoert, zou je een vergelijkbare output moeten zien als:
 
    ```output
    -Chicken Stew with Potatoes and Carrots: 3 tablespoons oil, 1 onion, chopped, 2 cloves garlic, minced, 1 carrot, peeled and chopped, 1 potato, peeled and chopped, 1 bay leaf, 1 thyme sprig, 1/2 teaspoon salt, 1/4 teaspoon black pepper, 1 1/2 cups chicken broth, 1/2 cup dry white wine, 2 tablespoons chopped fresh parsley, 2 tablespoons unsalted butter, 1 1/2 pounds boneless, skinless chicken thighs, cut into 1-inch pieces
@@ -392,9 +396,9 @@ Nu we een scenario hebben uitgewerkt, laten we code schrijven om het gedemonstre
    -Chicken, Potato, and Carrot Curry: 1 tablespoon vegetable oil, 1 large onion, chopped, 2 cloves garlic, minced, 1 carrot, peeled and chopped, 1 potato, peeled and chopped, 1 teaspoon ground coriander, 1 teaspoon ground cumin, 1/2 teaspoon ground turmeric, 1/2 teaspoon ground ginger, 1/4 teaspoon cayenne pepper, 2 cups chicken broth, 1/2 cup dry white wine, 1 (15-ounce) can chickpeas, drained and rinsed, 1/2 cup raisins, 1/2 cup chopped fresh cilantro
    ```
 
-   > NOTE, je LLM is niet-deterministisch, dus je kunt elke keer dat je het programma uitvoert verschillende resultaten krijgen.
+   > LET OP, je LLM is niet deterministisch, dus je kunt elke keer dat je het programma uitvoert verschillende resultaten krijgen.
 
-   Geweldig, laten we kijken hoe we dingen kunnen verbeteren. Om dingen te verbeteren, willen we ervoor zorgen dat de code flexibel is, zodat ingrediënten en het aantal recepten kunnen worden verbeterd en gewijzigd.
+   Geweldig, laten we eens kijken hoe we dingen kunnen verbeteren. Om dingen te verbeteren willen we dat de code flexibel is, zodat ingrediënten en aantal recepten aangepast en veranderd kunnen worden.
 
 1. Laten we de code op de volgende manier wijzigen:
 
@@ -403,11 +407,11 @@ Nu we een scenario hebben uitgewerkt, laten we code schrijven om het gedemonstre
 
    ingredients = input("List of ingredients (for example, chicken, potatoes, and carrots): ")
 
-   # interpolate the number of recipes into the prompt an ingredients
+   # interpoleer het aantal recepten in de prompt en ingrediënten
    prompt = f"Show me {no_recipes} recipes for a dish with the following ingredients: {ingredients}. Per recipe, list all the ingredients used"
    ```
 
-   Het testen van de code kan er zo uitzien:
+   Het uitvoeren van de code voor een test kan er zo uitzien:
 
    ```output
    No of recipes (for example, 5): 3
@@ -420,11 +424,11 @@ Nu we een scenario hebben uitgewerkt, laten we code schrijven om het gedemonstre
 
 ### Verbeteren door filter en boodschappenlijst toe te voegen
 
-We hebben nu een werkende app die recepten kan produceren en flexibel is omdat het afhankelijk is van invoer van de gebruiker, zowel wat betreft het aantal recepten als de gebruikte ingrediënten.
+We hebben nu een werkende app die recepten kan produceren en het is flexibel omdat het afhankelijk is van invoer van de gebruiker, zowel qua aantal recepten als de gebruikte ingrediënten.
 
-Om het verder te verbeteren, willen we het volgende toevoegen:
+Om het verder te verbeteren willen we het volgende toevoegen:
 
-- **Ingrediënten filteren**. We willen ingrediënten kunnen filteren die we niet lekker vinden of waar we allergisch voor zijn. Om deze wijziging door te voeren, kunnen we onze bestaande prompt bewerken en een filtervoorwaarde toevoegen aan het einde, zoals:
+- **Ingrediënten filteren**. We willen in staat zijn om ingrediënten te filteren die we niet lekker vinden of waarvoor we allergisch zijn. Om deze wijziging door te voeren, kunnen we onze bestaande prompt aanpassen en een filtervoorwaarde aan het einde toevoegen zoals:
 
   ```python
   filter = input("Filter (for example, vegetarian, vegan, or gluten-free): ")
@@ -432,9 +436,9 @@ Om het verder te verbeteren, willen we het volgende toevoegen:
   prompt = f"Show me {no_recipes} recipes for a dish with the following ingredients: {ingredients}. Per recipe, list all the ingredients used, no {filter}"
   ```
 
-  Hierboven voegen we `{filter}` toe aan het einde van de prompt en we vangen ook de filterwaarde van de gebruiker op.
+  Boven voegen we `{filter}` toe aan het einde van de prompt en we leggen ook de filterwaarde vast van de gebruiker.
 
-  Een voorbeeldinvoer van het uitvoeren van het programma kan er nu zo uitzien:
+  Een voorbeeldinvoer bij het uitvoeren van het programma kan nu zo eruitzien:
 
   ```output
   No of recipes (for example, 5): 3
@@ -501,41 +505,42 @@ Om het verder te verbeteren, willen we het volgende toevoegen:
   5. Add to soup and simmer for an additional 5 minutes, or until soup has thickened.
   ```
 
-  Zoals je kunt zien, zijn alle recepten met melk eruit gefilterd. Maar als je lactose-intolerant bent, wil je misschien ook recepten met kaas eruit filteren, dus het is belangrijk om duidelijk te zijn.
+  Zoals je ziet zijn recepten met melk eruit gefilterd. Maar als je lactose-intolerant bent, wil je misschien ook recepten met kaas eruit filteren, dus het is belangrijk duidelijk te zijn.
 
-- **Een boodschappenlijst maken**. We willen een boodschappenlijst maken, rekening houdend met wat we al thuis hebben.
 
-  Voor deze functionaliteit kunnen we proberen alles in één prompt op te lossen of we kunnen het opsplitsen in twee prompts. Laten we de laatste aanpak proberen. Hier stellen we voor om een extra prompt toe te voegen, maar om dat te laten werken, moeten we het resultaat van de eerste prompt als context toevoegen aan de tweede prompt.
+- **Maak een boodschappenlijst**. We willen een boodschappenlijst maken, rekening houdend met wat we al thuis hebben.
 
-  Zoek het deel in de code dat het resultaat van de eerste prompt afdrukt en voeg de volgende code hieronder toe:
+  Voor deze functionaliteit kunnen we proberen alles in één prompt op te lossen, of we kunnen het opsplitsen in twee prompts. Laten we de laatste benadering proberen. Hier suggereert men een extra prompt toe te voegen, maar daarvoor moeten we het resultaat van de eerste prompt als context toevoegen aan de tweede prompt.
+
+  Zoek het deel in de code waar het resultaat van de eerste prompt wordt afgedrukt en voeg hieronder de volgende code toe:
+
   ```python
-  old_prompt_result = completion.choices[0].message.content
+  old_prompt_result = response.output_text
   prompt = "Produce a shopping list for the generated recipes and please don't include ingredients that I already have."
 
   new_prompt = f"{old_prompt_result} {prompt}"
-  messages = [{"role": "user", "content": new_prompt}]
-  completion = openai.Completion.create(engine=deployment_name, messages=messages, max_tokens=1200)
+  response = client.responses.create(model=deployment_name, input=new_prompt, max_output_tokens=1200, store=False)
 
-  # print response
+  # print antwoord
   print("Shopping list:")
-  print(completion.choices[0].message.content)
+  print(response.output_text)
   ```
 
   Let op het volgende:
 
-  1. We maken een nieuwe prompt door het resultaat van de eerste prompt toe te voegen aan de nieuwe prompt:
+  1. We construeren een nieuwe prompt door het resultaat van de eerste prompt toe te voegen aan de nieuwe prompt:
 
      ```python
      new_prompt = f"{old_prompt_result} {prompt}"
      ```
 
-  1. We doen een nieuwe aanvraag, maar houden ook rekening met het aantal tokens dat we hebben gevraagd in de eerste prompt. Deze keer stellen we `max_tokens` in op 1200.
+  1. We doen een nieuw verzoek, maar houden ook rekening met het aantal tokens dat we in de eerste prompt hebben gevraagd, dus zeggen we deze keer dat `max_output_tokens` 1200 is.
 
      ```python
-     completion = openai.Completion.create(engine=deployment_name, prompt=new_prompt, max_tokens=1200)
+     response = client.responses.create(model=deployment_name, input=new_prompt, max_output_tokens=1200, store=False)
      ```
 
-     Door deze code uit te proberen, komen we nu tot het volgende resultaat:
+     Als we deze code uitvoeren, komen we uit op het volgende resultaat:
 
      ```output
      No of recipes (for example, 5): 2
@@ -549,69 +554,77 @@ Om het verder te verbeteren, willen we het volgende toevoegen:
      -Flour, baking powder, baking soda, salt, sugar, egg, buttermilk, butter, apple, nutmeg, cinnamon, allspice
      ```
 
-## Verbeter je setup
+## Verbeter je opzet
 
-Wat we tot nu toe hebben, is code die werkt, maar er zijn enkele aanpassingen die we kunnen doen om dingen verder te verbeteren. Enkele dingen die we zouden moeten doen zijn:
+Wat we tot nu toe hebben is code die werkt, maar er zijn enkele aanpassingen die we moeten doen om de zaken verder te verbeteren. Enkele dingen die we moeten doen zijn:
 
-- **Scheiding van geheimen en code**, zoals de API-sleutel. Geheimen horen niet in de code thuis en moeten op een veilige plek worden opgeslagen. Om geheimen van de code te scheiden, kunnen we gebruik maken van omgevingsvariabelen en bibliotheken zoals `python-dotenv` om ze uit een bestand te laden. Zo zou dat eruitzien in code:
+- **Scheiding van geheimen en code**, zoals de API-sleutel. Geheimen horen niet in de code thuis en moeten op een veilige plek worden opgeslagen. Om geheimen te scheiden van code kunnen we omgevingsvariabelen gebruiken en bibliotheken zoals `python-dotenv` om deze uit een bestand te laden. Zo zou dat er in code uitzien:
 
-  1. Maak een `.env` bestand met de volgende inhoud:
+  1. Maak een `.env`-bestand aan met de volgende inhoud:
 
      ```bash
      OPENAI_API_KEY=sk-...
      ```
 
-     > Let op, voor Azure moet je de volgende omgevingsvariabelen instellen:
+     > Let op, voor Azure OpenAI in Microsoft Foundry moet je in plaats daarvan de volgende omgevingsvariabelen instellen:
 
      ```bash
-     OPENAI_API_TYPE=azure
-     OPENAI_API_VERSION=2023-05-15
-     OPENAI_API_BASE=<replace>
+     AZURE_OPENAI_API_KEY=<replace>
+     AZURE_OPENAI_ENDPOINT=<replace>
+     AZURE_OPENAI_API_VERSION=2024-10-21
      ```
 
-     In de code zou je de omgevingsvariabelen als volgt laden:
+     In de code laad je de omgevingsvariabelen als volgt:
 
      ```python
+     import os
      from dotenv import load_dotenv
+     from openai import OpenAI
 
      load_dotenv()
 
-     openai.api_key = os.environ["OPENAI_API_KEY"]
+     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
      ```
 
-- **Een woord over tokenlengte**. We moeten nadenken over hoeveel tokens we nodig hebben om de tekst te genereren die we willen. Tokens kosten geld, dus waar mogelijk moeten we proberen zuinig te zijn met het aantal tokens dat we gebruiken. Kunnen we bijvoorbeeld de prompt zo formuleren dat we minder tokens nodig hebben?
+- **Een woord over tokenlengte**. We moeten nadenken over hoeveel tokens we nodig hebben om de gewenste tekst te genereren. Tokens kosten geld, dus waar mogelijk moeten we proberen spaarzaam te zijn met het aantal tokens dat we gebruiken. Bijvoorbeeld, kunnen we de prompt zo formuleren dat we minder tokens nodig hebben?
 
-  Om het aantal gebruikte tokens te wijzigen, kun je de parameter `max_tokens` gebruiken. Als je bijvoorbeeld 100 tokens wilt gebruiken, zou je dit doen:
+  Om het aantal gebruikte tokens te wijzigen, kun je de parameter `max_output_tokens` gebruiken. Als je bijvoorbeeld 100 tokens wilt gebruiken, doe je het volgende:
 
   ```python
-  completion = client.chat.completions.create(model=deployment, messages=messages, max_tokens=100)
+  response = client.responses.create(model=deployment, input=prompt, max_output_tokens=100, store=False)
   ```
 
-- **Experimenteren met temperatuur**. Temperatuur is iets dat we tot nu toe niet hebben genoemd, maar het is een belangrijke factor voor hoe ons programma presteert. Hoe hoger de temperatuurwaarde, hoe willekeuriger de output zal zijn. Omgekeerd, hoe lager de temperatuurwaarde, hoe voorspelbaarder de output zal zijn. Overweeg of je variatie in je output wilt of niet.
+- **Experimenteren met temperatuur**. Temperatuur hebben we tot nu toe niet besproken, maar het is een belangrijke context voor de werking van ons programma. Hoe hoger de temperatuurwaarde, hoe willekeuriger de output zal zijn. Hoe lager de temperatuurwaarde, hoe voorspelbaarder de output is. Bedenk of je variatie in je output wilt of niet.
 
-  Om de temperatuur aan te passen, kun je de parameter `temperature` gebruiken. Als je bijvoorbeeld een temperatuur van 0,5 wilt gebruiken, zou je dit doen:
+  Om de temperatuur aan te passen, gebruik je de parameter `temperature`. Bijvoorbeeld, als je een temperatuur van 0,5 wilt gebruiken, doe je:
 
   ```python
-  completion = client.chat.completions.create(model=deployment, messages=messages, temperature=0.5)
+  response = client.responses.create(model=deployment, input=prompt, temperature=0.5, store=False)
   ```
 
   > Let op, hoe dichter bij 1.0, hoe gevarieerder de output.
 
+- **Redeneringsmodellen gebruiken geen `temperature`**. Dit is een belangrijke verandering in 2026. De huidige, niet-verouderde modellen op Microsoft Foundry zijn **redeneringsmodellen** (de GPT-5 familie, o-series) – en ze **ondersteunen geen `temperature` of `top_p`** (evenmin `max_tokens`; gebruik `max_output_tokens`). Als je `temperature` naar `gpt-5-mini` stuurt, krijg je een "parameter niet ondersteund" foutmelding. Dus om het temperatuurvoorbeeld hierboven uit te proberen, gebruik je een model dat nog wel sampling-controles ondersteunt – bijvoorbeeld een open **Llama** model zoals `Llama-3.3-70B-Instruct` uit de [Microsoft Foundry model catalogus](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst), aangeroepen via de Foundry Models / Azure AI Inference endpoint (net zoals de `githubmodels-*` voorbeelden). Voor redeneringsmodellen zoals GPT-5 stuur je output anders aan:
+  - **Prompt engineering** - duidelijke instructies, voorbeelden en gestructureerde output (zie les [04 - Prompt Engineering](../04-prompt-engineering-fundamentals/README.md?WT.mc_id=academic-105485-koreyst)) doen het werk dat sampling-knoppen vroeger deden.
+  - **Redeneringscontroles** - parameters zoals redeneringsinspanning/woordrijkheid ruilen diepte van redenering in tegen latency en kosten.
+
+  Kort gezegd: `temperature`/`top_p` zijn nog steeds geldig voor veel modellen (Llama, Mistral, Phi en de GPT-4.x familie – hoewel GPT-4.x wordt uitgefaseerd), maar de trend is prompt engineering + redeneringscontroles bij redeneringsmodellen zoals GPT-5.
+
 ## Opdracht
 
-Voor deze opdracht kun je zelf kiezen wat je wilt bouwen.
+Voor deze opdracht kun je zelf kiezen wat je bouwt.
 
 Hier zijn enkele suggesties:
 
-- Pas de recepten-generator app aan om deze verder te verbeteren. Experimenteer met temperatuurwaarden en de prompts om te zien wat je kunt creëren.
-- Bouw een "studievriend". Deze app moet vragen kunnen beantwoorden over een onderwerp, bijvoorbeeld Python. Je zou prompts kunnen hebben zoals "Wat is een bepaald onderwerp in Python?", of een prompt die zegt: "Laat me code zien voor een bepaald onderwerp", enzovoort.
-- Geschiedenisbot, laat geschiedenis tot leven komen. Geef de bot de opdracht om een bepaalde historische figuur te spelen en stel hem vragen over zijn leven en tijd.
+- Pas de receptengenerator-app aan om deze verder te verbeteren. Experimenteer met temperatuurwaarden en de prompts om te zien wat je kunt bedenken.
+- Bouw een "studiegenoot". Deze app moet in staat zijn vragen te beantwoorden over een onderwerp, bijvoorbeeld Python. Je kunt prompts gebruiken zoals "Wat is een bepaald onderwerp in Python?" of prompts die vragen om code te laten zien voor een bepaald onderwerp, enzovoorts.
+- Geschiedenisbott, laat geschiedenis tot leven komen, stuur de bot aan om een bepaalde historische figuur te spelen en stel hem vragen over zijn leven en tijd.
 
 ## Oplossing
 
-### Studievriend
+### Studienoot
 
-Hieronder staat een startprompt, kijk hoe je deze kunt gebruiken en aanpassen naar jouw wensen.
+Hieronder staat een startprompt, kijk hoe je die kunt gebruiken en aanpassen naar wens.
 
 ```text
 - "You're an expert on the Python language
@@ -624,9 +637,9 @@ Hieronder staat een startprompt, kijk hoe je deze kunt gebruiken en aanpassen na
     - exercise in code with solutions"
 ```
 
-### Geschiedenisbot
+### Geschiedenisbott
 
-Hier zijn enkele prompts die je zou kunnen gebruiken:
+Hier zijn enkele prompts die je kunt gebruiken:
 
 ```text
 - "You are Abe Lincoln, tell me about yourself in 3 sentences, and respond using grammar and words like Abe would have used"
@@ -635,25 +648,27 @@ Hier zijn enkele prompts die je zou kunnen gebruiken:
    Tell me about your greatest accomplishments, in 300 words"
 ```
 
-## Kennischeck
+## Kenniscontrole
 
 Wat doet het concept temperatuur?
 
 1. Het bepaalt hoe willekeurig de output is.
 1. Het bepaalt hoe groot de respons is.
-1. Het bepaalt hoeveel tokens worden gebruikt.
+1. Het bepaalt hoeveel tokens er worden gebruikt.
 
 ## 🚀 Uitdaging
 
-Tijdens het werken aan de opdracht, probeer te variëren met de temperatuur. Probeer deze in te stellen op 0, 0,5 en 1. Onthoud dat 0 het minst gevarieerd is en 1 het meest. Welke waarde werkt het beste voor jouw app?
+Wanneer je aan de opdracht werkt, probeer dan de temperatuur te variëren, zet deze op 0, 0.5 en 1. Onthoud dat 0 het minst gevarieerd is en 1 het meest. Welke waarde werkt het beste voor jouw app?
 
-## Goed gedaan! Blijf leren
+## Goed gedaan! Ga door met leren
 
-Na het voltooien van deze les, bekijk onze [Generative AI Learning collectie](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) om je kennis over Generatieve AI verder uit te breiden!
+Na het voltooien van deze les, bekijk onze [Generative AI Learning collectie](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) om je kennis van Generative AI verder uit te breiden!
 
-Ga door naar Les 7, waar we gaan kijken hoe je [chatapplicaties kunt bouwen](../07-building-chat-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Ga verder naar Les 7 waar we bekijken hoe je [chatapplicaties bouwt](../07-building-chat-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI vertaaldienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

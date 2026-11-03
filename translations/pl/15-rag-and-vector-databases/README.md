@@ -1,90 +1,90 @@
-# Retrieval Augmented Generation (RAG) i bazy danych wektorowych
+# Generowanie Wzbogacone o Wyszukiwanie (RAG) i Bazy Danych Wektorowych
 
-[![Retrieval Augmented Generation (RAG) i bazy danych wektorowych](../../../translated_images/pl/15-lesson-banner.ac49e59506175d4f.webp)](https://youtu.be/4l8zhHUBeyI?si=BmvDmL1fnHtgQYkL)
+[![Generowanie Wzbogacone o Wyszukiwanie (RAG) i Bazy Danych Wektorowych](../../../translated_images/pl/15-lesson-banner.ac49e59506175d4f.webp)](https://youtu.be/4l8zhHUBeyI?si=BmvDmL1fnHtgQYkL)
 
-W lekcji o zastosowaniach wyszukiwania krótko omówiliśmy, jak zintegrować własne dane z dużymi modelami językowymi (LLM). W tej lekcji zagłębimy się w koncepcje osadzania danych w aplikacji LLM, mechanikę procesu oraz metody przechowywania danych, obejmujące zarówno osadzenia (embeddings), jak i tekst.
+W lekcji o aplikacjach wyszukiwawczych krótko poznaliśmy, jak integrować własne dane z dużymi modelami językowymi (LLM). W tej lekcji zagłębimy się dalej w koncepcje osadzania danych w aplikacji LLM, mechanikę tego procesu oraz metody przechowywania danych, obejmujące zarówno osadzenia, jak i tekst.
 
 > **Wideo wkrótce**
 
 ## Wprowadzenie
 
-W tej lekcji omówimy:
+W tej lekcji omówimy następujące zagadnienia:
 
-- Wprowadzenie do RAG — czym jest i dlaczego jest stosowane w sztucznej inteligencji (AI).
+- Wprowadzenie do RAG, czym jest i dlaczego jest stosowany w AI (sztucznej inteligencji).
 
-- Zrozumienie, czym są bazy danych wektorowych i stworzenie takiej dla naszej aplikacji.
+- Zrozumienie czym są bazy danych wektorowych i tworzenie jednej dla naszej aplikacji.
 
 - Praktyczny przykład integracji RAG w aplikacji.
 
 ## Cele nauki
 
-Po ukończeniu tej lekcji będziesz w stanie:
+Po ukończeniu tej lekcji będziesz potrafił/a:
 
 - Wyjaśnić znaczenie RAG w wyszukiwaniu i przetwarzaniu danych.
 
-- Skonfigurować aplikację RAG i osadzić dane w LLM.
+- Skonfigurować aplikację RAG i osadzić swoje dane w LLM.
 
-- Skutecznie zintegrować RAG oraz bazy danych wektorowych w aplikacjach LLM.
+- Skutecznie integrować RAG oraz bazy danych wektorowych w aplikacjach LLM.
 
-## Nasz scenariusz: wzbogacenie LLM o własne dane
+## Nasz scenariusz: wzbogacanie naszych LLM o własne dane
 
-W tej lekcji chcemy dodać własne notatki do startupu edukacyjnego, co pozwoli chatbotowi uzyskać więcej informacji na różne tematy. Korzystając z posiadanych notatek, uczniowie będą mogli lepiej się uczyć i rozumieć różne zagadnienia, co ułatwi im powtórki do egzaminów. Do stworzenia naszego scenariusza wykorzystamy:
+Na tę lekcję chcemy dodać własne notatki do startupu edukacyjnego, co pozwoli chatbotowi na uzyskanie większej ilości informacji na różne tematy. Korzystając z posiadanych notatek, uczący się będą mogli lepiej się uczyć i rozumieć różne tematy, co ułatwi przygotowania do egzaminów. Do stworzenia naszego scenariusza wykorzystamy:
 
 - `Azure OpenAI:` LLM, którego użyjemy do stworzenia chatbota
 
-- `Lekcję "AI dla początkujących" o sieciach neuronowych:` to będą dane, na których osadzimy nasz LLM
+- `Lekcja AI dla początkujących o Sieciach Neuronowych:` dane, na których opieramy nasz LLM
 
-- `Azure AI Search` i `Azure Cosmos DB:` baza danych wektorowych do przechowywania danych oraz tworzenia indeksu wyszukiwawczego
+- `Azure AI Search` i `Azure Cosmos DB:` baza danych wektorowych do przechowywania naszych danych i tworzenia indeksów wyszukiwania
 
-Użytkownicy będą mogli tworzyć quizy na podstawie notatek, fiszki do powtórek i streszczenia w zwięzłej formie. Zanim zaczniemy, przyjrzyjmy się, czym jest RAG i jak działa:
+Użytkownicy będą mogli tworzyć quizy na podstawie notatek, fiszki do powtórek oraz streszczenia w formie zwięzłych przeglądów. Aby zacząć, zobaczmy czym jest RAG i jak działa:
 
-## Retrieval Augmented Generation (RAG)
+## Generowanie Wzbogacone o Wyszukiwanie (RAG)
 
-Chatbot oparty o LLM przetwarza teksty użytkowników, by generować odpowiedzi. Jest zaprojektowany do interakcji i prowadzenia rozmów na szeroki zakres tematów. Jednak jego odpowiedzi są ograniczone do dostarczonego kontekstu i danych, na których został wytrenowany. Na przykład, GPT-4 ma cutoff wiedzy na wrzesień 2021, co oznacza, że nie zna wydarzeń po tej dacie. Ponadto dane używane do trenowania LLM wykluczają poufne informacje jak notatki osobiste czy instrukcje obsługi firmy.
+Chatbot zasilany LLM przetwarza dane wejściowe użytkownika, aby generować odpowiedzi. Jest zaprojektowany tak, aby być interaktywny i angażować się w rozmowy na różne tematy. Jednak jego odpowiedzi są ograniczone do kontekstu podanego i bazowych danych treningowych. Na przykład, GPT-4 ma datę odcięcia wiedzy na wrzesień 2021, co oznacza, że nie zna wydarzeń, które nastąpiły po tym czasie. Dodatkowo, dane użyte do trenowania LLM nie zawierają informacji poufnych, takich jak notatki osobiste czy instrukcje obsługi firmy.
 
-### Jak działają RAG (Retrieval Augmented Generation)
+### Jak działają RAG (Generowanie Wzbogacone o Wyszukiwanie)
 
-![rysunek przedstawiający działanie RAG](../../../translated_images/pl/how-rag-works.f5d0ff63942bd3a6.webp)
+![rysunek pokazujący jak działają RAG](../../../translated_images/pl/how-rag-works.f5d0ff63942bd3a6.webp)
 
-Załóżmy, że chcesz wdrożyć chatbota tworzącego quizy na podstawie twoich notatek; potrzebujesz połączenia z bazą wiedzy. Tu z pomocą przychodzi RAG. RAG działa następująco:
+Załóżmy, że chcesz wdrożyć chatbota tworzącego quizy na podstawie twoich notatek, potrzebujesz więc połączenia z bazą wiedzy. Tutaj z pomocą przychodzi RAG. RAG działa następująco:
 
-- **Baza wiedzy:** Przed pobraniem, dokumenty muszą zostać wczytane i przetworzone, zwykle dzieląc duże dokumenty na mniejsze fragmenty, konwertując je do osadzeń tekstowych i przechowując w bazie danych.
+- **Baza wiedzy:** Przed wyszukiwaniem dokumenty muszą zostać załadowane i przetworzone, zwykle poprzez podział dużych dokumentów na mniejsze fragmenty, przekształcenie ich na osadzenia tekstowe i zapisanie w bazie danych.
 
 - **Zapytanie użytkownika:** użytkownik zadaje pytanie
 
-- **Pobieranie (Retrieval):** W momencie zapytania, model osadzający pobiera istotne informacje z bazy wiedzy, aby dostarczyć kontekst, który zostanie dołączony do promptu.
+- **Wyszukiwanie:** Gdy użytkownik pyta, model osadzający wyszukuje odpowiednie informacje w bazie wiedzy, aby dostarczyć więcej kontekstu, który zostanie dodany do prompta.
 
-- **Generowanie z uzupełnieniem (Augmented Generation):** LLM ulepsza swoją odpowiedź na podstawie pobranych danych. Pozwala to generować odpowiedzi nie tylko oparte na danych treningowych, ale też na dodanym kontekście. Pobierane dane wzbogacają odpowiedzi LLM, który następnie zwraca odpowiedź na pytanie użytkownika.
+- **Generowanie wzbogacone:** LLM ulepsza swoją odpowiedź na podstawie pobranych danych. Pozwala to na generowanie odpowiedzi nie tylko w oparciu o dane wstępnie wytrenowane, ale także o relewantne informacje z dodanego kontekstu. Pobranie danych służy do wzbogacenia odpowiedzi LLM. LLM zwraca następnie odpowiedź na pytanie użytkownika.
 
-![rysunek przedstawiający architekturę RAG](../../../translated_images/pl/encoder-decode.f2658c25d0eadee2.webp)
+![rysunek pokazujący architekturę RAG](../../../translated_images/pl/encoder-decode.f2658c25d0eadee2.webp)
 
-Architektura RAG jest realizowana za pomocą transformatorów, składających się z dwóch części: enkodera i dekodera. Na przykład, gdy użytkownik zadaje pytanie, tekst wejściowy jest "zakodowany" na wektory oddające znaczenie słów, a następnie te wektory są "dekodowane" w indeks dokumentów i generują nowy tekst na podstawie zapytania użytkownika. LLM wykorzystuje model enkoder-dekoder do wygenerowania odpowiedzi.
+Architektura RAG opiera się na transformatorach składających się z dwóch części: enkodera i dekodera. Na przykład, gdy użytkownik zadaje pytanie, tekst wejściowy jest "enkodowany" na wektory zawierające znaczenie słów, które następnie są "dekodowane" na nasz indeks dokumentów i generują nowy tekst na podstawie zapytania użytkownika. LLM używa modelu enkoder-dekoder do generowania wyjścia.
 
-Dwa podejścia do implementacji RAG według zaproponowanego artykułu: [Retrieval-Augmented Generation for Knowledge intensive NLP (natural language processing software) Tasks](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst) to:
+Dwa podejścia przy implementacji RAG według proponowanego artykułu: [Retrieval-Augmented Generation for Knowledge intensive NLP (natural language processing software) Tasks](https://arxiv.org/pdf/2005.11401.pdf?WT.mc_id=academic-105485-koreyst) to:
 
-- **_RAG-Sequence_** używający pobranych dokumentów do przewidzenia najlepszej możliwej odpowiedzi na zapytanie użytkownika
+- **_RAG-Sequence_** używający pobranych dokumentów do przewidywania najlepszej odpowiedzi na zapytanie użytkownika
 
-- **RAG-Token** używający dokumentów do generowania następnego tokenu, po czym ponownie pobierający dokumenty do odpowiedzi na zapytanie użytkownika
+- **RAG-Token** używający dokumentów do generowania kolejnego tokenu, a następnie pobierający je ponownie, aby odpowiedzieć na zapytanie użytkownika
 
-### Dlaczego warto używać RAG? 
+### Dlaczego warto używać RAG?
 
-- **Bogactwo informacji:** zapewnia, że odpowiedzi tekstowe są aktualne i na bieżąco. Poprawia wydajność w zadaniach domenowych, uzyskując dostęp do wewnętrznej bazy wiedzy.
+- **Bogactwo informacji:** zapewnia, że tekstowe odpowiedzi są aktualne i na czasie. Poprawia wydajność w zadaniach specyficznych dla danej dziedziny poprzez dostęp do wewnętrznej bazy wiedzy.
 
-- Ogranicza wymyślanie informacji dzięki wykorzystaniu **weryfikowalnych danych** w bazie wiedzy, by dostarczyć kontekst do zapytań użytkownika.
+- Zmniejsza zmyślanie, korzystając z **weryfikowalnych danych** w bazie wiedzy, by zapewnić kontekst do zapytań użytkowników.
 
-- Jest **opłacalne**, gdyż jest tańsze niż dostrajanie (fine-tuning) LLM.
+- Jest **opłacalne**, ponieważ jest bardziej ekonomiczne w porównaniu do dostrajania LLM.
 
 ## Tworzenie bazy wiedzy
 
-Nasza aplikacja bazuje na naszych osobistych danych, tj. lekcji o sieciach neuronowych z kursu AI dla początkujących.
+Nasza aplikacja opiera się na naszych danych osobistych, tj. lekcji o Sieciach Neuronowych z kursu AI dla początkujących.
 
 ### Bazy danych wektorowych
 
-Baza danych wektorowych, w przeciwieństwie do tradycyjnych baz, jest specjalistyczną bazą zaprojektowaną do przechowywania, zarządzania i wyszukiwania osadzonych wektorów. Przechowuje numeryczne reprezentacje dokumentów. Rozłożenie danych na osadzenia numeryczne ułatwia systemowi AI zrozumienie i przetwarzanie danych.
+Baza danych wektorowa, w odróżnieniu od tradycyjnych baz, to specjalistyczna baza zaprojektowana do przechowywania, zarządzania i wyszukiwania osadzonych wektorów. Przechowuje numeryczne reprezentacje dokumentów. Rozbicie danych na numeryczne osadzenia ułatwia naszemu systemowi AI zrozumienie i przetworzenie danych.
 
-Przechowujemy nasze osadzenia w bazach danych wektorowych, ponieważ LLM mają limit tokenów przyjmowanych jako wejście. Nie można przekazać całych osadzeń do LLM, więc trzeba je podzielić na fragmenty, a gdy użytkownik zada pytanie, zwrócone zostaną osadzenia najbardziej odpowiadające pytaniu, razem z promptem. Podział na fragmenty (chunking) także redukuje koszty związane z liczbą tokenów przetwarzanych przez LLM.
+Przechowujemy osadzenia w bazach danych wektorowych, ponieważ LLM mają limit liczby tokenów akceptowanych na wejściu. Nie można przekazać całych osadzeń do LLM, dlatego musimy podzielić je na fragmenty, a gdy użytkownik zada pytanie, zwrócone zostaną osadzenia najbardziej dopasowane wraz z promptem. Podział na fragmenty także obniża koszty związane z liczbą tokenów przesyłanych przez LLM.
 
-Popularne bazy danych wektorowych to Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant i DeepLake. Model Azure Cosmos DB można utworzyć za pomocą Azure CLI poleceniem:
+Do popularnych baz danych wektorowych należą Azure Cosmos DB, Clarifyai, Pinecone, Chromadb, ScaNN, Qdrant i DeepLake. Możesz utworzyć model Azure Cosmos DB używając Azure CLI poniższym poleceniem:
 
 ```bash
 az login
@@ -95,7 +95,7 @@ az cosmosdb list-keys -n <cosmos-db-name> -g <resource-group-name>
 
 ### Od tekstu do osadzeń
 
-Zanim przechowamy dane, musimy je konwertować do osadzeń wektorowych przed zapisem w bazie. Pracując z dużymi dokumentami lub długimi tekstami, można je dzielić na fragmenty według przewidywanych zapytań. Podział można robić na poziomie zdania lub akapitu. Ponieważ podział opiera się na znaczeniu słów w ich otoczeniu, można dodać dodatkowy kontekst do fragmentu, np. tytuł dokumentu lub trochę tekstu przed i po fragmencie. Można dzielić dane w ten sposób:
+Przed zapisaniem danych musimy przekształcić je w osadzenia wektorowe. Jeśli pracujesz z dużymi dokumentami lub długimi tekstami, możesz je podzielić na fragmenty według przewidywanych zapytań. Dzielenie może odbywać się na poziomie zdań lub akapitów. Ponieważ fragmenty czerpią znaczenie ze słów w ich otoczeniu, możesz dodać dodatkowy kontekst do fragmentu, np. tytuł dokumentu lub tekst przed lub po fragmencie. Fragmentowanie danych może wyglądać następująco:
 
 ```python
 def split_text(text, max_length, min_length):
@@ -109,46 +109,45 @@ def split_text(text, max_length, min_length):
             chunks.append(' '.join(current_chunk))
             current_chunk = []
 
-    # Jeśli ostatnia część nie osiągnęła minimalnej długości, dodaj ją mimo to
+    # Jeśli ostatni fragment nie osiągnął minimalnej długości, dodaj go mimo to
     if current_chunk:
         chunks.append(' '.join(current_chunk))
 
     return chunks
 ```
 
-Po podziale możemy osadzić tekst korzystając z różnych modeli osadzających. Do wyboru są modele takie jak: word2vec, ada-002 od OpenAI, Azure Computer Vision i wiele innych. Wybór modelu zależy od języków, typu kodowanej treści (tekst/obraz/audio), rozmiaru wejścia, które może zakodować oraz długości osadzenia na wyjściu.
+Po podzieleniu możemy osadzić tekst używając różnych modeli osadzania. Są to między innymi: word2vec, ada-002 od OpenAI, Azure Computer Vision i wiele innych. Wybór modelu zależy od języków, którymi pracujesz, rodzaju kodowanej treści (tekst/obraz/dźwięk), rozmiaru wejścia, które potrafi zakodować oraz długości wyjścia osadzenia.
 
-Przykład osadzonego tekstu za pomocą modelu OpenAI `text-embedding-ada-002`:
-
+Przykład osadzonego tekstu przy użyciu modelu `text-embedding-ada-002` od OpenAI:
 ![osadzenie słowa cat](../../../translated_images/pl/cat.74cbd7946bc9ca38.webp)
 
-## Wyszukiwanie i wyszukiwanie wektorowe
+## Wyszukiwanie i przeszukiwanie wektorowe
 
-Gdy użytkownik zada pytanie, pobieracz (retriever) konwertuje je na wektor za pomocą enkodera zapytania, a następnie przeszukuje nasz indeks dokumentów, znajdując wektory powiązane z zapytaniem. Po ukończeniu konwertuje zarówno wektor zapytania, jak i wektory dokumentów na tekst i przesyła go do LLM.
+Gdy użytkownik zada pytanie, system zamienia je na wektor za pomocą enkodera zapytań, a następnie przeszukuje indeks dokumentów, aby znaleźć wektory w dokumentach odpowiadające zapytaniu. Następnie konwertuje zarówno wektor wejściowy, jak i wektory dokumentów na tekst i przekazuje je do LLM.
 
-### Pobieranie (Retrieval)
+### Wyszukiwanie
 
-Pobieranie ma miejsce, gdy system szybko próbuje znaleźć dokumenty z indeksu spełniające kryteria wyszukiwania. Celem pobieracza jest uzyskanie dokumentów, które posłużą za kontekst i osadzenie LLM na twoich danych.
+Wyszukiwanie ma miejsce, gdy system próbuje szybko znaleźć dokumenty z indeksu spełniające kryteria wyszukiwania. Celem wyszukiwania jest znalezienie dokumentów, które posłużą do dostarczenia kontekstu i osadzenia LLM na twoich danych.
 
-Istnieje kilka sposobów wyszukiwania w bazie danych, m.in.:
+Istnieje kilka sposobów wyszukiwania w bazie danych, takich jak:
 
-- **Wyszukiwanie słów kluczowych** – używane do wyszukiwań tekstowych
+- **Wyszukiwanie po słowach kluczowych** - używane do wyszukiwania tekstu
 
-- **Wyszukiwanie wektorowe** – konwertuje dokumenty z tekstu na reprezentacje wektorowe przy pomocy modeli osadzających, umożliwiając **wyszukiwanie semantyczne** na bazie znaczenia słów. Pobieranie polega na zapytaniu dokumentów, których wektorowe reprezentacje są najbliższe pytaniu użytkownika.
+- **Wyszukiwanie wektorowe** - przekształca dokumenty z tekstu na reprezentacje wektorowe za pomocą modeli osadzania, umożliwiając **wyszukiwanie semantyczne** oparte na znaczeniu słów. Wyszukiwanie odbywa się poprzez zapytanie o dokumenty, których reprezentacje wektorowe są najbliższe zapytaniu użytkownika.
 
-- **Hybrydowe** – połączenie obu metod: wyszukiwania słów kluczowych i wektorowego.
+- **Hybrydowe** - połączenie wyszukiwania po słowach i wektorowego.
 
-Problem pojawia się, gdy w bazie nie ma podobnej odpowiedzi na zapytanie — system wtedy zwraca najlepszą dostępną informację. Można jednak zastosować taktyki jak ustawienie maksymalnej odległości dla relewantności czy użycie wyszukiwania hybrydowego łączącego słowa kluczowe i wektorowe. W tej lekcji użyjemy wyszukiwania hybrydowego, łączącego obie metody. Dane będziemy przechowywać w dataframe z kolumnami zawierającymi fragmenty oraz osadzenia.
+Problem pojawia się, gdy w bazie nie ma podobnej odpowiedzi do zapytania; system wtedy zwraca najlepsze dostępne informacje. Można jednak stosować takie metody jak ustalanie maksymalnej odległości dla trafności lub używać wyszukiwania hybrydowego, łączącego obie metody. W tej lekcji użyjemy wyszukiwania hybrydowego, łączącego wyszukiwanie wektorowe i po słowach kluczowych. Dane będziemy przechowywać w dataframe z kolumnami zawierającymi fragmenty oraz osadzenia.
 
 ### Podobieństwo wektorów
 
-Pobieracz przeszukuje bazę wiedzy w poszukiwaniu osadzeń blisko położonych, czyli najbliższych sąsiadów, ponieważ mają one podobny tekst. W scenariuszu, gdy użytkownik zadaje zapytanie, najpierw jest ono osadzone, a potem dopasowywane do podobnych osadzeń. Najczęściej stosowaną miarą podobieństwa jest podobieństwo cosinusowe, oparte na kącie między dwoma wektorami.
+Wyszukiwarka przeszukuje bazę wiedzy pod kątem osadzeń, które są blisko siebie, czyli najbliższego sąsiada, ponieważ teksty są podobne. W scenariuszu najpierw zapytanie użytkownika jest osadzone i dopasowywane do podobnych osadzeń. Popularną miarą podobieństwa wektorów jest podobieństwo cosinusowe oparte na kącie między dwoma wektorami.
 
-Alternatywnie można zastosować odległość euklidesową, czyli linię prostą między końcami wektorów, lub iloczyn skalarny, mierzący sumę iloczynów odpowiadających sobie elementów obu wektorów.
+Możemy także mierzyć podobieństwo alternatywnie, np. za pomocą odległości euklidesowej będącej najkrótszą linią między końcami wektorów oraz iloczynu skalarnego mierzącego sumę iloczynów odpowiadających elementów wektorów.
 
 ### Indeks wyszukiwania
 
-Przed wykonaniem wyszukiwania musimy zbudować indeks wyszukiwania dla naszej bazy wiedzy. Indeks przechowuje osadzenia i pozwala szybko odnajdować najbardziej zbliżone fragmenty nawet w dużej bazie danych. Indeks lokalnie można stworzyć za pomocą:
+Przed wykonaniem wyszukiwania musimy zbudować indeks wyszukiwania dla bazy wiedzy. Indeks przechowuje osadzenia i pozwala szybko odnaleźć najbardziej podobne fragmenty, nawet w dużej bazie danych. Możemy stworzyć indeks lokalnie za pomocą:
 
 ```python
 from sklearn.neighbors import NearestNeighbors
@@ -158,13 +157,13 @@ embeddings = flattened_df['embeddings'].to_list()
 # Utwórz indeks wyszukiwania
 nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(embeddings)
 
-# Aby zapytać indeks, możesz użyć metody kneighbors
+# Aby przeszukać indeks, możesz użyć metody kneighbors
 distances, indices = nbrs.kneighbors(embeddings)
 ```
 
 ### Ponowne sortowanie wyników (re-ranking)
 
-Po zapytaniu bazy możesz chcieć posortować wyniki od najbardziej relewantnych. Model rerankujący LLM wykorzystuje uczenie maszynowe, by poprawić relewantność wyników, układając je od najlepiej pasujących. W Azure AI Search reranking wykonywany jest automatycznie przez semantyczny re-ranker. Przykład działania rerankingu z użyciem najbliższych sąsiadów:
+Po wykonaniu zapytania do bazy możemy chcieć posortować wyniki od najbardziej relewantnych. LLM do ponownego sortowania wykorzystuje uczenie maszynowe, by poprawić trafność wyników poprzez ich uporządkowanie od najbardziej odpowiednich. Korzystając z Azure AI Search, ponowne sortowanie odbywa się automatycznie przez semantyczny reranker. Przykład działania ponownego sortowania z najbliższymi sąsiadami:
 
 ```python
 # Znajdź najbardziej podobne dokumenty
@@ -182,26 +181,26 @@ for i in range(3):
         print(f"Index {index} not found in DataFrame")
 ```
 
-## Połączenie wszystkiego razem
+## Podsumowanie
 
-Ostatnim krokiem jest dodanie naszego LLM, aby uzyskać odpowiedzi osadzone w danych. Możemy to zaimplementować następująco:
+Ostatnim krokiem jest dodanie naszego LLM do całego procesu, aby uzyskać odpowiedzi oparte na naszych danych. Możemy to zaimplementować w następujący sposób:
 
 ```python
 user_input = "what is a perceptron?"
 
 def chatbot(user_input):
-    # Zamień pytanie na wektor zapytania
+    # Konwertuj pytanie na wektor zapytania
     query_vector = create_embeddings(user_input)
 
     # Znajdź najbardziej podobne dokumenty
     distances, indices = nbrs.kneighbors([query_vector])
 
-    # dodaj dokumenty do zapytania, aby zapewnić kontekst
+    # dodaj dokumenty do zapytania, aby dostarczyć kontekst
     history = []
     for index in indices[0]:
         history.append(flattened_df['chunks'].iloc[index])
 
-    # połącz historię z danymi od użytkownika
+    # połącz historię i dane wejściowe użytkownika
     history.append(user_input)
 
     # utwórz obiekt wiadomości
@@ -210,15 +209,15 @@ def chatbot(user_input):
         {"role": "user", "content": "\n\n".join(history) }
     ]
 
-    # użyj uzupełniania czatu, aby wygenerować odpowiedź
-    response = openai.chat.completions.create(
-        model="gpt-4",
-        temperature=0.7,
-        max_tokens=800,
-        messages=messages
+    # użyj API Odpowiedzi, aby wygenerować odpowiedź
+    response = client.responses.create(
+        model="gpt-5-mini",
+        max_output_tokens=800,
+        input=messages,
+        store=False,
     )
 
-    return response.choices[0].message
+    return response.output_text
 
 chatbot(user_input)
 ```
@@ -227,47 +226,47 @@ chatbot(user_input)
 
 ### Metryki oceny
 
-- Jakość odpowiedzi — brzmi naturalnie, płynnie i jak od człowieka
+- Jakość dostarczanych odpowiedzi, zapewniając, że brzmią naturalnie, płynnie i ludzko
 
-- Osadzenie w danych: ocena, czy odpowiedź pochodzi z dostarczonych dokumentów
+- Osadzenie danych: ocena, czy odpowiedź pochodzi z dostarczonych dokumentów
 
-- Trafność: ocena, czy odpowiedź odpowiada i jest związana z zadanym pytaniem
+- Trafność: ocena, czy odpowiedź pasuje i jest związana z zadanym pytaniem
 
-- Płynność — czy odpowiedź jest poprawna gramatycznie i sensowna
+- Płynność – czy odpowiedź jest poprawna gramatycznie
 
-## Przykłady użycia RAG i baz danych wektorowych
+## Przypadki użycia RAG (Generowanie Wzbogacone o Wyszukiwanie) i baz danych wektorowych
 
-Istnieje wiele przypadków, gdzie wywołania funkcji mogą ulepszyć aplikację, np.:
+Istnieje wiele różnych zastosowań, gdzie wywołania funkcji mogą poprawić twoją aplikację, m.in.:
 
-- Pytania i odpowiedzi: osadzenie danych firmowych w czacie, z którego pracownicy mogą korzystać pytając o informacje.
+- Pytania i odpowiedzi: osadzenie danych firmy w czacie, z którego mogą korzystać pracownicy, zadając pytania.
 
-- Systemy rekomendacji: tworzenie systemów dopasowujących najbardziej podobne wartości, np. filmy, restauracje i inne.
+- Systemy rekomendacji: tworzenie systemu dopasowującego najbardziej podobne wartości, np. filmy, restauracje i wiele innych.
 
-- Usługi chatbotów: przechowywanie historii czatów i personalizacja rozmowy na podstawie danych użytkownika.
+- Usługi chatbotów: przechowywanie historii rozmów i personalizacja konwersacji na podstawie danych użytkownika.
 
-- Wyszukiwanie obrazów na bazie osadzeń wektorowych, przydatne w rozpoznawaniu obrazów i wykrywaniu anomalii.
+- Wyszukiwanie obrazów oparte na osadzeniach wektorowych, przydatne podczas rozpoznawania obrazów i wykrywania anomalii.
 
 ## Podsumowanie
 
-Omówiliśmy podstawowe aspekty RAG: dodanie danych do aplikacji, zapytanie użytkownika oraz generowanie odpowiedzi. Aby uprościć tworzenie RAG, można używać frameworków jak Semantic Kernel, Langchain czy Autogen.
+Omówiliśmy podstawowe zagadnienia RAG, od dodania naszych danych do aplikacji, przez zapytanie użytkownika aż po wynik. Aby uprościć tworzenie RAG, możesz użyć frameworków takich jak Semantic Kernel, Langchain lub Autogen.
 
-## Zadanie
+## Zadanie domowe
 
-Aby kontynuować naukę Retrieval Augmented Generation (RAG) możesz:
+Aby kontynuować naukę Generowania Wzbogaconego o Wyszukiwanie (RAG), możesz zbudować:
 
-- Zbudować front-end aplikacji używając wybranego frameworka
+- Front-end aplikacji przy użyciu wybranego frameworka
 
-- Wykorzystać framework, np. LangChain lub Semantic Kernel, i odtworzyć aplikację.
+- Wykorzystać framework, taki jak LangChain lub Semantic Kernel, i odtworzyć swoją aplikację.
 
 Gratulacje za ukończenie lekcji 👏.
 
-## Nauka się nie kończy, kontynuuj podróż
+## Nauka się tutaj nie kończy, kontynuuj podróż
 
-Po ukończeniu tej lekcji zapoznaj się z naszą [kolekcją Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby dalej rozwijać swoją wiedzę z zakresu generatywnej AI!
+Po ukończeniu lekcji zapoznaj się z naszą [kolekcją nauki Generatywnej AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), aby dalej rozwijać swoją wiedzę z zakresu Generatywnej AI!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony przy użyciu automatycznej usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za źródło nadrzędne. W przypadku informacji o znaczeniu krytycznym zaleca się skorzystanie z profesjonalnego, ludzkiego tłumaczenia. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

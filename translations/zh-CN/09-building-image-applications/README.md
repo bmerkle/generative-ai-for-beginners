@@ -1,266 +1,146 @@
-# 构建图像生成应用程序
+# 构建图像生成应用
 
-[![构建图像生成应用程序](../../../translated_images/zh-CN/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![构建图像生成应用](../../../translated_images/zh-CN/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-大型语言模型（LLM）的功能不仅限于文本生成，还可以通过文本描述生成图像。图像作为一种模态在许多领域都非常有用，例如医疗技术、建筑、旅游、游戏开发等。在本章中，我们将探讨两个最流行的图像生成模型：DALL-E 和 Midjourney。
+大型语言模型不仅仅用于文本生成。你还可以根据文本描述生成图像。图像作为一种模态，在医疗技术、建筑、旅游、游戏开发、营销等领域非常有用。本课我们将了解当今的<strong>GPT图像</strong>模型，并构建一个图像生成应用。
 
-## 简介
+## 介绍
 
-在本课中，我们将学习：
+图像生成可以将自然语言提示转换为图片。本课使用OpenAI的**`gpt-image`**系列模型——这是现阶段在**[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)**和OpenAI平台上可用的最新一代图像模型。这些模型取代了旧的DALL·E模型（DALL·E 2/3属于遗留模型）。
 
-- 图像生成及其用途。
-- DALL-E 和 Midjourney，它们是什么以及如何工作。
-- 如何构建一个图像生成应用程序。
+在整个课程中，我们使用一个虚构的初创公司<strong>Edu4All</strong>，该公司开发学习工具。团队希望为作业和学习资料生成插图。
 
 ## 学习目标
 
-完成本课后，您将能够：
+本课结束时，你将能够：
 
-- 构建一个图像生成应用程序。
-- 使用元提示为您的应用程序定义边界。
-- 使用 DALL-E 和 Midjourney。
+- 解释什么是图像生成及其应用场景。
+- 理解`gpt-image`模型系列及其与遗留DALL·E模型的区别。
+- 使用Python（以及TypeScript / .NET）构建图像生成应用。
+- 使用元提示编辑图像并应用安全防护措施。
 
-## 为什么要构建图像生成应用程序？
+## 什么是图像生成？
 
-图像生成应用程序是探索生成式 AI 功能的绝佳方式。它们可以用于以下场景，例如：
+图像生成模型根据文本提示创建图像。现代模型如`gpt-image`基于Transformer+扩散技术：模型在训练中学习文本与图像的关系，然后根据提示，迭代地将随机噪声“去噪”成符合描述的图片。
 
-- **图像编辑和合成**。您可以为各种用例生成图像，例如图像编辑和图像合成。
+两个知名的图像模型系列是：
 
-- **应用于多个行业**。它们还可以用于生成适用于多个行业的图像，例如医疗技术、旅游、游戏开发等。
+- **`gpt-image`（OpenAI）** - 当前一代，用于本课。支持文本生成图像和图像编辑（带掩码的修补）。
+- **Midjourney** - 一个流行的第三方模型，拥有自己的服务和基于Discord的工作流程。
 
-## 场景：Edu4All
+> 旧的OpenAI图像模型——<strong>DALL·E 2</strong>和<strong>DALL·E 3</strong>——已是遗留模型。DALL·E 3不再对新部署开放，`create_variation`等功能仅存在于DALL·E 2。新应用请使用`gpt-image`模型。
 
-作为本课的一部分，我们将继续与我们的初创公司 Edu4All 合作。学生们将为他们的评估创建图像，具体创建什么图像由学生决定，例如可以是他们自己童话故事的插图，或者为他们的故事创建一个新角色，帮助他们将自己的想法和概念可视化。
+### 我应该使用哪款`gpt-image`模型？
 
-例如，如果 Edu4All 的学生在课堂上学习纪念碑，他们可以生成以下内容：
+在Microsoft Foundry上，以下模型为<strong>普遍可用</strong>：
 
-![Edu4All 初创公司，纪念碑课堂，埃菲尔铁塔](../../../translated_images/zh-CN/startup.94d6b79cc4bb3f5a.webp)
+| 模型 | 说明 |
+| --- | --- |
+| **`gpt-image-2`** | 最新且功能最强的图像模型——推荐为默认选择。 |
+| `gpt-image-1.5` | 普遍可用；较低成本下高质量。 |
+| `gpt-image-1-mini` | 普遍可用；速度最快且成本最低。 |
+| `gpt-image-1` | 仅预览。 |
 
-使用以下提示：
+请始终查阅当前的 [Foundry图像模型列表](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) 以确认可用性及地区支持。
 
-> “清晨阳光下埃菲尔铁塔旁边的狗”
+> **重要提示：** `gpt-image`模型以<strong>base64</strong>（`b64_json`）形式返回生成的图像，而不是URL。你的代码需要解码base64字符串成字节并保存——没有图像的下载链接。
 
-## 什么是 DALL-E 和 Midjourney？
+## 设置
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) 和 [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) 是两个最流行的图像生成模型，它们允许您使用提示生成图像。
+你可以使用<strong>Microsoft Foundry中的Azure OpenAI</strong>（`aoai-*`样例）或<strong>OpenAI平台</strong>（`oai-*`样例）运行示例。
 
-### DALL-E
+### 1. 创建并部署模型
 
-我们先从 DALL-E 开始，它是一个生成式 AI 模型，可以根据文本描述生成图像。
+按照[创建资源](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)指南创建Microsoft Foundry资源，然后部署图像模型——推荐使用**`gpt-image-2`**。
 
-> [DALL-E 是两个模型的结合：CLIP 和扩散注意力](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst)。
+### 2. 配置你的`.env`
 
-- **CLIP** 是一个模型，可以从图像和文本中生成嵌入，即数据的数值表示。
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **扩散注意力** 是一个模型，可以从嵌入中生成图像。DALL-E 是在图像和文本数据集上训练的，可以根据文本描述生成图像。例如，DALL-E 可以用来生成戴帽子的猫或留莫霍克发型的狗的图像。
+在[Foundry门户](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)资源的<strong>部署</strong>页面找到这些值。
 
-### Midjourney
+### 3. 安装库
 
-Midjourney 的工作方式与 DALL-E 类似，它通过文本提示生成图像。Midjourney 也可以使用类似“戴帽子的猫”或“留莫霍克发型的狗”这样的提示生成图像。
+创建`requirements.txt`：
 
-![由 Midjourney 生成的图像，机械鸽子](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_图片来源：维基百科，由 Midjourney 生成_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## DALL-E 和 Midjourney 的工作原理
+然后创建并激活虚拟环境，安装：
 
-首先，[DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst)。DALL-E 是一个基于 Transformer 架构的生成式 AI 模型，采用了自回归 Transformer。
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-自回归 Transformer 定义了模型如何根据文本描述生成图像，它一次生成一个像素，然后使用生成的像素生成下一个像素。通过神经网络的多个层，直到图像完成。
+## 构建应用
 
-通过这个过程，DALL-E 可以控制其生成图像中的属性、对象、特征等。然而，DALL-E 2 和 3 对生成的图像有更强的控制能力。
+创建`app.py`，代码如下。它生成图像并保存为PNG文件。
 
-## 构建您的第一个图像生成应用程序
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-那么构建一个图像生成应用程序需要什么呢？您需要以下库：
+dotenv.load_dotenv()
 
-- **python-dotenv**，强烈建议使用此库将您的密钥保存在代码之外的 _.env_ 文件中。
-- **openai**，此库用于与 OpenAI API 交互。
-- **pillow**，用于在 Python 中处理图像。
-- **requests**，帮助您发起 HTTP 请求。
+# 将客户端指向您的 Azure OpenAI（Microsoft Foundry）资源。
+# 图像模型需要较新的 API 版本 - 请查看 Foundry 文档中您的模型所需的版本。
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## 创建并部署 Azure OpenAI 模型
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # 例如 "gpt-image-2"
 
-如果尚未完成，请按照 [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) 页面上的说明创建 Azure OpenAI 资源和模型。选择 DALL-E 3 作为模型。
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # 还支持 1536x1024（横向）、1024x1536（纵向）或 "auto"
+    n=1,
+)
 
-## 创建应用程序
-
-1. 创建一个名为 _.env_ 的文件，内容如下：
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   在 Azure OpenAI Foundry Portal 的“部署”部分找到此信息。
-
-1. 将上述库收集到一个名为 _requirements.txt_ 的文件中，如下所示：
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. 接下来，创建虚拟环境并安装这些库：
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   对于 Windows，使用以下命令创建并激活虚拟环境：
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. 在名为 _app.py_ 的文件中添加以下代码：
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-代码解释如下：
-
-- 首先，我们导入所需的库，包括 OpenAI 库、dotenv 库、requests 库和 Pillow 库。
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- 接着，我们从 _.env_ 文件加载环境变量。
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- 然后，我们配置 Azure OpenAI 服务客户端。
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- 接下来，我们生成图像：
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  上述代码返回一个包含生成图像 URL 的 JSON 对象。我们可以使用该 URL 下载图像并保存到文件中。
-
-- 最后，我们打开图像并使用标准图像查看器显示它：
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### 关于生成图像的更多细节
-
-让我们更详细地看看生成图像的代码：
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt** 是用于生成图像的文本提示。在此示例中，我们使用的提示是“兔子骑马，手拿棒棒糖，站在长满水仙花的雾蒙蒙的草地上”。
-- **size** 是生成图像的大小。在此示例中，我们生成的图像大小为 1024x1024 像素。
-- **n** 是生成的图像数量。在此示例中，我们生成了两张图像。
-- **temperature** 是一个参数，用于控制生成式 AI 模型输出的随机性。温度值在 0 到 1 之间，其中 0 表示输出是确定性的，1 表示输出是随机的。默认值为 0.7。
-
-关于图像的更多操作，我们将在下一节中介绍。
-
-## 图像生成的附加功能
-
-到目前为止，您已经看到我们如何使用几行 Python 代码生成图像。然而，图像生成还有更多功能。
-
-您还可以执行以下操作：
-
-- **进行编辑**。通过提供现有图像、遮罩和提示，您可以修改图像。例如，您可以在图像的某个部分添加内容。想象一下我们的兔子图像，您可以为兔子添加一顶帽子。实现方法是提供图像、遮罩（标识需要更改的区域）和文本提示说明需要进行的操作。
-> 注意：此功能在 DALL-E 3 中不支持。
-
-以下是使用 GPT 图像的示例：
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  基础图像仅包含带泳池的休息室，但最终图像会有一只火烈鸟：
+# gpt-image 模型返回的是 base64（b64_json），不是 URL - 需要将其解码为字节。
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+使用`python app.py`运行，你将在`images/`目录下得到PNG文件。
+
+> 每次调用`images.generate`即使使用相同提示也会生成不同图像——图像模型没有文本生成的`temperature`参数。想要多样化只需再次调用API；想减少变异，请更加具体地描述提示。
+
+## 编辑图像
+
+`gpt-image`模型可以<strong>编辑</strong>已有图像：提供图像、可选的<strong>掩码</strong>（标记需更改区域），以及描述更改的提示。编辑同样以base64返回。
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/zh-CN/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -268,211 +148,51 @@ _图片来源：维基百科，由 Midjourney 生成_
   <img src="../../../translated_images/zh-CN/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **创建变体**。这个想法是您可以选择一个现有图像并要求创建变体。要创建变体，您需要提供一个图像和一个文本提示，并使用如下代码：
+## 用元提示设定边界
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > 注意：此功能仅在 OpenAI 上支持。
-
-## 温度
-
-温度是一个参数，用于控制生成式 AI 模型输出的随机性。温度值在 0 到 1 之间，其中 0 表示输出是确定性的，1 表示输出是随机的。默认值为 0.7。
-
-让我们通过两次运行以下提示来看看温度如何工作：
-
-> 提示： “兔子骑马，手拿棒棒糖，站在长满水仙花的雾蒙蒙的草地上”
-
-![兔子骑马手拿棒棒糖，版本1](../../../translated_images/zh-CN/v1-generated-image.a295cfcffa3c13c2.webp)
-
-现在我们再次运行相同的提示，看看是否会生成不同的图像：
-
-![兔子骑马生成的图像](../../../translated_images/zh-CN/v2-generated-image.33f55a3714efe61d.webp)
-
-如您所见，图像相似但不完全相同。现在我们尝试将温度值更改为 0.1，看看会发生什么：
+一旦能生成图像，你需要设定防护措施，防止应用产生不安全或不符合品牌调性的内容。<strong>元提示</strong>是预先添加到用户提示前的文本，用以限制模型的输出。
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### 改变温度
-
-让我们尝试使响应更具确定性。从我们生成的两张图像中可以观察到，第一张图像中有一只兔子，而第二张图像中有一匹马，因此图像差异很大。
-
-因此，我们可以更改代码，将温度设置为 0，如下所示：
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-现在运行此代码，您将得到以下两张图像：
-
-- ![温度为0，版本1](../../../translated_images/zh-CN/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![温度为0，版本2](../../../translated_images/zh-CN/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-在这里，您可以清楚地看到两张图像更加相似。
-
-## 如何使用元提示为您的应用程序定义边界
-
-通过我们的演示，我们已经可以为客户生成图像。然而，我们需要为我们的应用程序创建一些边界。
-
-例如，我们不希望生成不适合工作场所或不适合儿童的图像。
-
-我们可以使用 _元提示_ 来实现这一点。元提示是用于控制生成式 AI 模型输出的文本提示。例如，我们可以使用元提示来控制输出，确保生成的图像适合工作场所或适合儿童。
-
-### 它是如何工作的？
-
-那么，元提示是如何工作的呢？
-
-元提示是用于控制生成式 AI 模型输出的文本提示，它们位于文本提示之前，用于控制模型的输出，并嵌入到应用程序中以控制模型的输出。将提示输入和元提示输入封装在一个文本提示中。
-
-元提示的一个示例如下：
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-现在，让我们看看如何在演示中使用元提示。
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-从上述提示中，您可以看到所有生成的图像都考虑了元提示。
-
-## 作业 - 让学生参与
-
-我们在本课开始时介绍了 Edu4All。现在是时候让学生为他们的评估生成图像了。
-
-学生们将为他们的评估创建包含纪念碑的图像，具体选择哪些纪念碑由学生决定。学生们需要在这项任务中发挥他们的创造力，将这些纪念碑置于不同的背景中。
-
-## 解决方案
-
-以下是一个可能的解决方案：
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# 将 `prompt` 传递给 client.images.generate(...)
 ```
 
-## 干得好！继续学习
+现在每张图像都在元提示设定的边界内生成。结合微软Foundry内置内容过滤，可实现多层防护。
 
-完成本课后，查看我们的[生成式AI学习合集](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)，继续提升您的生成式AI知识！
+## 练习 - 让学生参与进来
 
-前往第10课，我们将探讨如何[使用低代码构建AI应用](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)。
+Edu4All的学生需要图像来配合评估。构建一个应用，生成<strong>纪念碑</strong>的图像（纪念碑由你选择），置于不同的、有创意的场景中——例如，一处著名地标在日落时分，有一名儿童在注视。
+
+试试自己实现，然后比对参考方案：
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) 完整生成应用：[aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+也可以完成[python/](../../../09-building-image-applications/python)中的笔记本练习（Azure 用`aoai-assignment.ipynb`，OpenAI 用`oai-assignment.ipynb`）。
+
+## 很棒！继续学习
+
+完成本课后，浏览我们的[生成式AI学习合集](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)，不断提升你的生成式AI技能！
+
+赶快进入第10课继续学习吧。
 
 ---
 
-**免责声明**：  
-本文档使用AI翻译服务[Co-op Translator](https://github.com/Azure/co-op-translator)进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们对因使用此翻译而产生的任何误解或误读不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免责声明**：
+本文件由 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译完成。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言版文件应视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用本翻译而产生的任何误解或误释不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

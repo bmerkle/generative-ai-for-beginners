@@ -1,76 +1,79 @@
-# Function Calling နှင့် ပေါင်းစပ်ခြင်း
+# ဖန်ရှင်ခေါ်ဆိုမှုနှင့် ပေါင်းစည်းခြင်း
 
-[![Function Calling နှင့် ပေါင်းစပ်ခြင်း](../../../translated_images/my/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
+[![ဖန်ရှင်ခေါ်ဆိုမှုနှင့် ပေါင်းစည်းခြင်း](../../../translated_images/my/11-lesson-banner.d78860d3e1f041e2.webp)](https://youtu.be/DgUdCLX8qYQ?si=f1ouQU5HQx6F8Gl2)
 
-ယခင်သင်ခန်းစာများတွင် သင်တော်တော်များများလေ့လာပြီးဖြစ်ပါပြီ။ သို့သော် ကျွန်ုပ်တို့ ပိုမိုကောင်းမွန်စေရန် ဆက်လက်တိုးတက်နိုင်ပါသေးသည်။ ကျွန်ုပ်တို့ လုပ်ဆောင်နိုင်သည့် အချို့သောအရာများမှာ တုံ့ပြန်မှုကို အလွယ်တကူ အလုပ်လုပ်နိုင်ရန် တုံ့ပြန်မှုပုံစံကို ပိုမိုတိကျစေခြင်းနှင့် အခြားအရင်းအမြစ်များမှ ဒေတာများကို ထည့်သွင်းခြင်းဖြင့် ကျွန်ုပ်တို့၏အက်ပလီကေးရှင်းကို ပိုမိုချမ်းသာစေခြင်းတို့ဖြစ်သည်။
+သင်သည် ယခင်သင်ခန်းစာများတွင် များစွာသောအကြောင်းအရာများကို သင်ယူပြီးသားဖြစ်သည်။ သို့သော်၊ ကျွန်ုပ်တို့က တိုးတက်မှုများထပ်မံလုပ်ဆောင်နိုင်ပါသည်။ တချို့သောအချက်များမှာ တုံ့ပြန်ချက်ကို ပိုမိုတိကျသော ဖော်မက်ထွက်အောင် ပြုလုပ်ခြင်းဖြင့် တုံ့ပြန်ချက်ကို ထိပ်ဆုံးနှင့် အောက်ဆုံးတွင် လွယ်ကူစွာသာကုသနိုင်ရန်ဖြစ်သည်။ ထို့အပြင်၊ ကျွန်ုပ်တို့၏ အက်ပလီကေးရှင်းကို ပိုမိုတိုးတက်အောင်ပေါင်းထည့်ရန် အခြားအရင်းအမြစ်များမှ ဒေတာထည့်သွင်းလိုနိုင်သည်။
 
-အထက်ဖော်ပြထားသော ပြဿနာများကို ဒီအခန်းမှာ ဖြေရှင်းရန် ရည်ရွယ်ထားသည်။
+အထက်ပါပြဿနာများသည် ဤအခန်းတွင် ကိုင်တွယ်ကြည့်ရှုမည့် အရာများဖြစ်သည်။
 
-## အကျဉ်းချုပ်
+## မိတ်ဆက်
 
-ဒီသင်ခန်းစာမှာ အောက်ပါအကြောင်းအရာများကို လေ့လာပါမည်-
+ဤသင်ခန်းစာတွင် ကိုင်တွယ်လုပ်ဆောင်မည့်အရာများမှာ-
 
-- Function Calling ဆိုတာဘာလဲ၊ ၎င်း၏ အသုံးချနိုင်မှုများကို ရှင်းပြခြင်း။
-- Azure OpenAI ကို အသုံးပြု၍ Function Call တစ်ခု ဖန်တီးခြင်း။
-- Function Call ကို အက်ပလီကေးရှင်းတစ်ခုထဲတွင် ပေါင်းစပ်အသုံးပြုခြင်း။
+- ဖန်ရှင်ခေါ်ဆိုမှုဆိုသည်မှာဘာဖြစ်ပြီး ၎င်း၏ အသုံးပြုမှုနယ်ပယ်များ။
+- Azure OpenAI ကို အသုံးပြု၍ ဖန်ရှင်ခေါ်ဆိုမှုဖန်တီးခြင်း။
+- ဖန်ရှင်ခေါ်ဆိုမှုကို အက်ပလီကေးရှင်းတွင် ပေါင်းစည်းစက်မှု။
 
-## သင်ယူရမည့်ရည်မှန်းချက်များ
+## သင်ယူမှု ရည်မှန်းချက်များ
 
-ဒီသင်ခန်းစာပြီးဆုံးချိန်တွင် သင်သည်-
+ဤသင်ခန်းစာအပြီးတွင် သင်သည် အောက်ပါအရာများကို ကျွမ်းကျင်နိုင်ပါလိမ့်မည်-
 
-- Function Calling ကို အသုံးပြုရသည့် ရည်ရွယ်ချက်ကို ရှင်းပြနိုင်မည်။
-- Azure OpenAI Service ကို အသုံးပြု၍ Function Call ကို စနစ်တကျတပ်ဆင်နိုင်မည်။
-- သင့်အက်ပလီကေးရှင်း၏ အသုံးပြုမှုအတွက် ထိရောက်သော Function Calls ကို ဒီဇိုင်းဆွဲနိုင်မည်။
+- ဖန်ရှင်ခေါ်ဆိုမှု၏ ရည်ရွယ်ချက်ကို ရှင်းလင်းဖော်ပြနိုင်စွမ်း။
+- Azure OpenAI Service ကိုအသုံးပြုပြီး Function Call ကို စတင်တပ်ဆင်နိုင်ခြင်း။
+- သင့်အက်ပလီကေးရှင်း၏ အသုံးပြုမှုအတွက် ထိရောက်သော ဖန်ရှင်ခေါ်ဆိုမှုများ ဒီဇိုင်းဆွဲနိုင်ခြင်း။
 
-## အခြေအနေ - Function များဖြင့် Chatbot ကို တိုးတက်စေခြင်း
+## နမူနာ - ဖန်ရှင်များဖြင့် ကျွန်ုပ်တို့၏ chatbot ကို တိုးတက်အောင်လုပ်ခြင်း
 
-ဒီသင်ခန်းစာအတွက် ကျွန်ုပ်တို့သည် ကျောင်းသားများကို နည်းပညာသင်တန်းများ ရှာဖွေရန် Chatbot ကို အသုံးပြုနိုင်စေရန် feature တစ်ခု ဖန်တီးလိုပါသည်။ ကျွန်ုပ်တို့သည် ၎င်းတို့၏ ကျွမ်းကျင်မှုအဆင့်၊ လက်ရှိအလုပ်အကိုင်နှင့် စိတ်ဝင်စားသော နည်းပညာများနှင့် ကိုက်ညီသော သင်တန်းများကို အကြံပြုပေးမည်ဖြစ်သည်။
+ဤသင်ခန်းစာအတွက်၊ ကျွန်ုပ်တို့၏ ပညာရေးစတားတပ်လုပ်ငန်းအတွက် အသုံးပြုသူများသည် chatbot ကိုအသုံးပြုပြီး နည်းပညာသင်တန်းများကို ရှာဖွေရန် အင်္ဂါရပ်တစ်ခုကို တည်ဆောက်လိုသည်။ ကျွန်ုပ်တို့သည် သူတို့၏ကျွမ်းကျင်မှုအခြေအနေ၊ လက်ရှိရာထူးနှင့် စိတ်ဝင်စားသောနည်းပညာအပေါ် အခြေခံပြီး သင်တန်းများကို အကြံပြုပါမည်။
 
-ဒီအခြေအနေကို ပြည့်စုံစေရန် ကျွန်ုပ်တို့သည် အောက်ပါအရာများကို ပေါင်းစပ်အသုံးပြုပါမည်-
+ဤနမူနာကို ပြည့်စုံစွာဖြေရှင်းရန် အောက်ပါများကို ပေါင်းစပ်အသုံးပြုသွားပါမည်-
 
-- `Azure OpenAI` ကို အသုံးပြု၍ အသုံးပြုသူအတွက် chat အတွေ့အကြုံ ဖန်တီးခြင်း။
-- `Microsoft Learn Catalog API` ကို အသုံးပြု၍ အသုံးပြုသူ၏ တောင်းဆိုမှုအပေါ် အခြေခံ၍ သင်တန်းများကို ရှာဖွေခြင်း။
-- `Function Calling` ကို အသုံးပြု၍ အသုံးပြုသူ၏ မေးခွန်းကို function သို့ ပို့ပြီး API တောင်းဆိုမှုကို ပြုလုပ်ခြင်း။
+- `Azure OpenAI` ကို အသုံးပြုပြီး အသုံးပြုသူအတွက် စကားပြောအတွေ့အကြုံ တည်ဆောက်ခြင်း။
+- `Microsoft Learn Catalog API` ကို အသုံးပြု၍ အသုံးပြုသူ၏ တောင်းဆိုချက်အပေါ် မူတည်ပြီး သင်တန်းများရှာဖွေရန် ကူညီခြင်း။
+- `Function Calling` ကို အသုံးပြု၍ အသုံးပြုသူ၏ မေးခွန်းကို ဖန်ရှင်သို့ပို့ပြီး API တောင်းဆိုမှုလုပ်ခြင်း။
 
-စတင်ရန်၊ Function Calling ကို ဘာကြောင့် အသုံးပြုလိုသလဲဆိုတာကို ကြည့်လိုက်ရအောင်-
+စတင်ရန်၊ ဖန်ရှင်ခေါ်ဆိုမှုကို အရင်ရွေးချယ်သင့်သည့် အကြောင်းရင်းများကို အောက်တွင် ကြည့်ကြရအောင်-
 
-## Function Calling ကို ဘာကြောင့် အသုံးပြုသင့်သလဲ
+## ဖန်ရှင်ခေါ်ဆိုမှုအား မည်သို့အသုံးချရသလဲ
 
-Function Calling မရှိမီ LLM မှ တုံ့ပြန်မှုများသည် အဆင့်မပြေဘဲ မတူညီမှုများရှိခဲ့သည်။ Developer များသည် တုံ့ပြန်မှု၏ အမျိုးမျိုးကို ကိုင်တွယ်နိုင်ရန် အလွန်ရှုပ်ထွေးသော အတည်ပြုရေး code များရေးရန် လိုအပ်ခဲ့သည်။ "Stockholm ရှိ လက်ရှိရာသီဥတုက ဘာလဲ?" ဆိုသည့် မေးခွန်းများကို အသုံးပြုသူများ မရနိုင်ခဲ့ပါ။ ၎င်းသည် မော်ဒယ်များသည် ဒေတာကို လေ့လာသည့်အချိန်အတိုင်းအတာအတွင်း အကန့်အသတ်ရှိသောကြောင့် ဖြစ်သည်။
+ဖန်ရှင်ခေါ်ဆိုမှုမတိုင်မီ၊ LLM မှရရှိသောတုံ့ပြန်မှုများသည် ပုံမှန်မဟုတ်သော ပုံစံဖြင့်ဖြစ်ပြီး မတူညီမှုများရှိသည်။ ဒါကြောင့် developer များသည် တုံ့ပြန်မှုမျိုးစုံကို ကိုင်တွယ်နိုင်ရန် ရှုပ်ထွေးသော စစ်ဆေးမှုကုဒ်များရေးရန် လိုအပ်ခဲ့သည်။ အသုံးပြုသူများသည် "စတော့ကိုလ်မှ စ বর্তমানရာသီဥတုသည် မည်သနည်း?" ဆိုသော မေးခွန်းများကို အဖြေပေးရန် မရနိုင်ခဲ့ကြောင်း ဖြစ်သည်။ ၎င်းဟာ မော်ဒယ်များသည် သင်ကြားဒေတာ၏ အချိန်ကန့်သတ်ချက်များမှသာ ရှုပ်ထွေးမှုရှိနေသောကြောင့် ဖြစ်သည်။
 
-Function Calling သည် Azure OpenAI Service ၏ feature တစ်ခုဖြစ်ပြီး အောက်ပါ အကန့်အသတ်များကို ကျော်လွှားရန် ရည်ရွယ်ထားသည်-
+Azure OpenAI Service ၏ ဖန်ရှင်ခေါ်ဆိုမှုသည် အောက်ပါ ကန့်သတ်ချက်များကို ကျော်လွှားရာတွင် အထောက်အကူပြုသည်-
 
-- **တုံ့ပြန်မှုပုံစံတိကျမှု** - တုံ့ပြန်မှုပုံစံကို ပိုမိုထိန်းချုပ်နိုင်ပါက တုံ့ပြန်မှုကို အခြားစနစ်များသို့ ပိုမိုလွယ်ကူစွာ ပေါင်းစပ်နိုင်မည်။
-- **အပြင်ပဒေတာ** - Chat context တွင် အက်ပလီကေးရှင်း၏ အခြားအရင်းအမြစ်များမှ ဒေတာကို အသုံးပြုနိုင်စွမ်း။
+- **တုံ့ပြန်မှု ပုံစံကို တိကျမှုရှိစေခြင်း**။ တုံ့ပြန်မှု ပုံစံကို ပိုမိုထိန်းချုပ်နိုင်ပါက တုံ့ပြန်ချက်ကို အခြားစနစ်များတွင် ပေါင်းစည်းရန် ပိုလွယ်ကူပါသည်။
+- **ပြင်ပဒေတာ**။ အက်ပလီကေးရှင်းတွင် အခြားအရင်းအမြစ်များမှ ဒေတာကို စကားပြောအခြေအနေနှင့် တွဲဖက်အသုံးပြုနိုင်မှု။
 
-## ပြဿနာကို အခြေအနေတစ်ခုဖြင့် ရှင်းလင်းပြသခြင်း
+## ပြဿနာကို နမူနာဖြင့် ရှင်းပြခြင်း
 
-> အောက်ပါအခြေအနေကို လုပ်ဆောင်လိုပါက [ထည့်သွင်းထားသော notebook](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) ကို အသုံးပြုရန် ကျွန်ုပ်တို့ အကြံပြုပါသည်။ သို့မဟုတ် function များက ပြဿနာကို ဘယ်လိုဖြေရှင်းနိုင်မည်ကို ဖော်ပြရန် ကျွန်ုပ်တို့ ကြိုးစားနေသောအတိုင်း ဖတ်ရှုနိုင်ပါသည်။
+> အောက်ပါနမူနာကို chạy လုပ်လိုသူများအတွက် [ပါဝင်သော နိုက်ဘူခ်](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) ကို အသုံးပြုရန် အကြံပြုပါသည်။ သို့မဟုတ် function များက ပြဿနာကို ကူညီဖြေရှင်းနိုင်မည့် အခြေအနေကို ဖော်ပြရန် အောက်ပါအတိုင်း ဖတ်ရှုလေ့လာနိုင်သည်။
 
-တုံ့ပြန်မှုပုံစံပြဿနာကို ဖော်ပြသည့် ဥပမာကို ကြည့်လိုက်ရအောင်-
+တုံ့ပြန်မှု ပုံစံပြဿနာကို ရှင်းပြသည့် နမူနာအား ကြည့်မည်-
 
-ကျောင်းသားဒေတာများကို စုစည်းထားသော database တစ်ခု ဖန်တီးလိုသည်ဟု ဆိုပါစို့။ ၎င်းတို့ကို သင်တန်းများအတွက် အကြံပြုရန် အသုံးပြုနိုင်မည်။ အောက်တွင် ကျောင်းသားများ၏ ဖော်ပြချက်နှစ်ခုရှိပြီး ၎င်းတို့တွင် ပါဝင်သော ဒေတာများသည် တူညီမှုများရှိသည်။
+ကျောင်းသားများ၏ ဒေတာဘေ့စ်ကို ဖန်တီးလိုလျှင် သင့်တော်သော သင်တန်းများကို အကြံပြုရန်၊ အောက်တွင် တူညီသော ဒေတာပါရှိသည့် ကျောင်းသားများနှစ်ဦး၏ ဖော်ပြချက်ကို တွဲဖက်ကြည့်ပါ။
 
-1. ကျွန်ုပ်တို့၏ Azure OpenAI resource သို့ ချိတ်ဆက်မှုတစ်ခု ဖန်တီးပါ-
+1။ ကျွန်ုပ်တို့၏ Azure OpenAI အရင်းအမြစ်သို့ ချိတ်ဆက်မှုတစ်ခု ဖန်တီးပါ-
 
    ```python
    import os
    import json
-   from openai import AzureOpenAI
+   from openai import OpenAI
    from dotenv import load_dotenv
    load_dotenv()
 
-   client = AzureOpenAI(
-   api_key=os.environ['AZURE_OPENAI_API_KEY'],  # this is also the default, it can be omitted
-   api_version = "2023-07-01-preview"
+   # Responses API သည် Azure OpenAI (Microsoft Foundry) v1 endpoint မှ ဆာဗ်းပေးပါသည်
+   # ဖြစ်၍ OpenAI client ကို <your-endpoint>/openai/v1/ သို့ ရည်ညွှန်းပါသည်။
+   endpoint = os.environ['AZURE_OPENAI_ENDPOINT']
+   client = OpenAI(
+   api_key=os.environ['AZURE_OPENAI_API_KEY'],
+   base_url=f"{endpoint.rstrip('/')}/openai/v1/",
    )
 
    deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
    ```
 
-   အောက်တွင် `api_type`, `api_base`, `api_version` နှင့် `api_key` ကို သတ်မှတ်ထားသော Azure OpenAI ချိတ်ဆက်မှုကို ဖန်တီးရန် Python code တစ်ချို့ပါရှိသည်။
+   အောက်တွင် Azure OpenAI ချိတ်ဆက်မှုကို ပြုလုပ်ခြင်းအတွက် Python ကုဒ်တစ်စုံရှိသည်။ v1 endpoint ကို အသုံးပြုသောကြောင့် `api_key` နှင့် `base_url` ကိုသာ သတ်မှတ်ရန် လိုအပ်သည် (`api_version` လိုအပ်မှု မရှိပါ)။
 
-1. `student_1_description` နှင့် `student_2_description` variables ကို အသုံးပြု၍ ကျောင်းသားဖော်ပြချက်နှစ်ခု ဖန်တီးခြင်း။
+2။ `student_1_description` နှင့် `student_2_description` မှတစ်ဆင့် ကျောင်းသား ဖော်ပြချက်နှစ်ခု ဖန်တီးပါ။
 
    ```python
    student_1_description="Emily Johnson is a sophomore majoring in computer science at Duke University. She has a 3.7 GPA. Emily is an active member of the university's Chess Club and Debate Team. She hopes to pursue a career in software engineering after graduating."
@@ -78,9 +81,9 @@ Function Calling သည် Azure OpenAI Service ၏ feature တစ်ခုဖ�
    student_2_description = "Michael Lee is a sophomore majoring in computer science at Stanford University. He has a 3.8 GPA. Michael is known for his programming skills and is an active member of the university's Robotics Club. He hopes to pursue a career in artificial intelligence after finishing his studies."
    ```
 
-   အထက်ပါ ကျောင်းသားဖော်ပြချက်များကို LLM သို့ ပို့လိုပါသည်။ ဒီဒေတာကို ကျွန်ုပ်တို့၏အက်ပလီကေးရှင်းတွင် အသုံးပြုနိုင်ပြီး API သို့ ပို့ခြင်း သို့မဟုတ် database တွင် သိမ်းဆည်းနိုင်သည်။
+   ကျောင်းသားဖော်ပြချက်များကို LLM သို့ ပို့ကာ ဒေတာကို အစိတ်အပိုင်းခွဲရန်လိုသည်။ ဤဒေတာကို နောက်ပိုင်းတွင် အက်ပလီကေးရှင်းတွင် အသုံးပြုနိုင်ပြီး API သို့ ပို့သို့မဟုတ် ဒေတာဘေ့စ်တွင် သိမ်းဆည်းနိုင်သည်။
 
-1. LLM ကို ဘာအချက်အလက်များကို ရှာဖွေပြီး JSON ပုံစံဖြင့် တုံ့ပြန်ရန် အမိန့်ပေးသော identical prompts နှစ်ခုကို ဖန်တီးလိုက်ပါ-
+3။ ကျွန်ုပ်တို့ လိုအပ်သော သတင်းအချက်အလက်ကို ရယူရန် LLM ကို သင်ကြားချက်နှစ်မျိုး တူညီစွာ ဖန်တီးပါ-
 
    ```python
    prompt1 = f'''
@@ -110,37 +113,39 @@ Function Calling သည် Azure OpenAI Service ၏ feature တစ်ခုဖ�
    '''
    ```
 
-   အထက်ပါ prompts တွင် LLM ကို အချက်အလက်များကို ထုတ်ယူပြီး JSON ပုံစံဖြင့် တုံ့ပြန်ရန် အမိန့်ပေးထားသည်။
+   အထက်ပါ သင်ကြားချက်များသည် LLM ကို သတင်းအချက်အလက်ထုတ်ယူခြင်းနှင့် JSON ပုံစံဖြင့် ပြန်ပေးရန် လမ်းညွှန်သည်။
 
-1. Prompts များနှင့် Azure OpenAI ချိတ်ဆက်မှုကို စနစ်တကျတပ်ဆင်ပြီးနောက်၊ `openai.ChatCompletion` ကို အသုံးပြု၍ LLM သို့ prompts များကို ပို့လိုက်ပါ။ Prompt ကို `messages` variable တွင် သိမ်းဆည်းပြီး role ကို `user` သတ်မှတ်ပါ။ ၎င်းသည် chatbot သို့ အသုံးပြုသူမှ message ရေးသားခြင်းကို အတုယူရန်ဖြစ်သည်။
+4။ သင်ကြားချက်နှင့် Azure OpenAI ချိတ်ဆက်မှု ပြုလုပ်ပြီးနောက် `client.responses.create` ဖြင့် သင်ကြားချက်များကို LLM ထံ ပို့ပါ။ `input` အဖြစ် သင်ကြားချက်ကို သတ်မှတ်ပြီး `role` ကို `user` သတ်မှတ်သည်။ ၎င်းသည် အသုံးပြုသူမှ စကားပြော chatbot အတွက် စာသားတစ်ခု ဖြစ်သော ကြောင့်ဖြစ်ပါသည်။
 
    ```python
-   # response from prompt one
-   openai_response1 = client.chat.completions.create(
+   # ပရိုမ့့်တစ်ခုနဲ့တုံ့ပြန်ချက်
+   openai_response1 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt1}]
+   input = [{'role': 'user', 'content': prompt1}],
+   store=False,
    )
-   openai_response1.choices[0].message.content
+   openai_response1.output_text
 
-   # response from prompt two
-   openai_response2 = client.chat.completions.create(
+   # ပရိုမ့့်နှစ်ခုနဲ့တုံ့ပြန်ချက်
+   openai_response2 = client.responses.create(
    model=deployment,
-   messages = [{'role': 'user', 'content': prompt2}]
+   input = [{'role': 'user', 'content': prompt2}],
+   store=False,
    )
-   openai_response2.choices[0].message.content
+   openai_response2.output_text
    ```
 
-ယခု LLM သို့ requests နှစ်ခုလုံးကို ပို့ပြီး `openai_response1['choices'][0]['message']['content']` ဖြင့် response ကို ရှာဖွေကြည့်နိုင်ပါသည်။
+ယခု Requests နှစ်ခုအား LLM သို့ ပို့ပြီး `openai_response1.output_text` များဖြင့် တုံ့ပြန်မှုကို စစ်ဆေးနိုင်၏။
 
-1. Response ကို JSON ပုံစံသို့ ပြောင်းရန် `json.loads` ကို ခေါ်ပါ-
+5။ နောက်ဆုံးတွင် `json.loads` ကို ခေါ်၍ တုံ့ပြန်မှုပုံစံကို JSON ဖော်မြူလာသို့ ပြောင်းနိုင်သည်-
 
    ```python
-   # Loading the response as a JSON object
-   json_response1 = json.loads(openai_response1.choices[0].message.content)
+   # တုံ့ပြန်ချက်ကို JSON အရာဝတ္ထုအဖြစ် ဖတ်ယူနေသည်
+   json_response1 = json.loads(openai_response1.output_text)
    json_response1
    ```
 
-   Response 1:
+   တုံ့ပြန်မှု ၁ -
 
    ```json
    {
@@ -152,7 +157,7 @@ Function Calling သည် Azure OpenAI Service ၏ feature တစ်ခုဖ�
    }
    ```
 
-   Response 2:
+   တုံ့ပြန်မှု ၂ -
 
    ```json
    {
@@ -164,59 +169,60 @@ Function Calling သည် Azure OpenAI Service ၏ feature တစ်ခုဖ�
    }
    ```
 
-   Prompts တူညီပြီး ဖော်ပြချက်များ တူညီမှုများရှိသော်လည်း `Grades` property ၏ values မတူညီသော format များဖြင့် ရရှိသည်။ ဥပမာအားဖြင့် `3.7` သို့မဟုတ် `3.7 GPA` အဖြစ် ရရှိနိုင်သည်။
+   သင်ကြားချက်သည် တူညီသော်လည်း ဖော်ပြချက်များက တူညီသော `Grades` ဂုဏ်အတန်း၏ တန်ဖိုးများကို သီးခြားဖော်ပုံတူ မဟုတ်ပဲ `3.7` သို့မဟုတ် `3.7 GPA` ကဲ့သို့ အမျိုးမျိုး ပုံစံဖြစ်၍ တွေ့ရသည်။
 
-   ဒီရလဒ်သည် LLM သည် unstructured data ကို ရေးသားထားသော prompt အဖြစ်ယူပြီး unstructured data ကို ပြန်ပေးသည်ဖြစ်သည်။ ဒီဒေတာကို သိမ်းဆည်းခြင်း သို့မဟုတ် အသုံးပြုခြင်းအတွက် ဘာကိုမျှော်လင့်ရမည်ကို သိရန် structured format တစ်ခုရှိရန် လိုအပ်သည်။
+   ၎င်း၏ရလဒ်သည် LLM သည် စာသားဍာတ်မှ အမျိုးမျိုးသောဖော်မတ်များဖြင့် ဒေတာယူပြီး၊ ထိုအချက်အလက်အတိုင်း မပုံစံတကျ ရည်ညွှန်းထားသော ကုဒ်မဟုတ်သော ဒေတာ များသာ ပြန်ပေးမှသာ ဖြစ်သည်။ ဒါကြောင့် ကျွန်တော်တို့ သဟဇာတဖြစ်သော ဖော်မတ်တစ်ခုလိုအပ်သည်၊ ထိုဒေတာကို သိမ်းဆည်း သို့မဟုတ် အသုံးပြုရာတွင် မျှော်မှန်းချက်ရှိစေရန်။
 
-ဒါဆို formatting ပြဿနာကို ဘယ်လိုဖြေရှင်းမလဲ? Functional calling ကို အသုံးပြုခြင်းဖြင့် structured data ကို ပြန်လည်ရရှိစေရန် သေချာစေနိုင်သည်။ Function calling ကို အသုံးပြုသောအခါ LLM သည် function များကို တကယ်ခေါ်ခြင်း သို့မဟုတ် အလုပ်မလုပ်ပါ။ ၎င်း၏ response များအတွက် LLM ကို လိုက်နာရန် structure တစ်ခု ဖန်တီးသည်။ ထို့နောက် ၎င်း response များကို အသုံးပြု၍ ကျွန်ုပ်တို့၏ အက်ပလီကေးရှင်းများတွင် function ကို အလုပ်လုပ်ရန် သိရှိသည်။
+ဒါဆိုပါက မူပိုင်မှုစနစ်ဖြစ်စေဖို့ ဘယ်လိုပြဿနာရေးဆွဲမလဲ? ဖန်ရှင်ခေါ်ဆိုမှု တို့ကို အသုံးပြု၍ တိကျကျသော ဖော်မတ်ရှိသည့် ဒေတာပြန်လည်ရရှိစေရန် ကျွန်တော်တို့ ကြိုးပမ်းနိုင်ပါသည်။ ဖန်ရှင်ခေါ်ဆိုမှု အသုံးပြုစဉ်တွင် LLM ဟာ တကယ်တမ်း ဖန်ရှင်ကို မခေါ်ဖြစ်ပါ၊ ထို့ကြောင့် ဖန်ရှင်ပြန်ချိန်ခံရန် အစီအစဉ်တစ်ခုကို သတ်မှတ်ပေးသည်။ ထို့နောက် အဲ့ဒီဖော်ပြချက်သတ်မှတ်ထားတဲ့ အတိုင်း function ကို အက်ပလီကေးရှင်းထဲတွင် လုပ်ဆောင်ရန် သုံးနိုင်ပါသည်။
 
 ![function flow](../../../translated_images/my/Function-Flow.083875364af4f4bb.webp)
 
-ထို့နောက် function မှ ပြန်ပေးသောအရာကို ယူပြီး LLM သို့ ပြန်ပို့နိုင်သည်။ ထို့နောက် LLM သည် အသုံးပြုသူ၏ မေးခွန်းကို ဖြေဆိုရန် သဘာဝဘာသာစကားဖြင့် တုံ့ပြန်မည်။
+ထို့နောက် function မှ ပြန်လာသည့် ဒေတာကို ထပ်မံ LLM သို့ ပို့နိုင်ပြီး LLM မှ အသုံးပြုသူ၏ မေးခွန်းကို သဘာဝပုံစံစကားဖြင့် ဖြေကြားမည်။
 
-## Function Calls ကို အသုံးပြုခြင်း၏ အသုံးချနိုင်မှုများ
+## ဖန်ရှင်ခေါ်ဆိုမှုအသုံးပြုမှု နယ်ပယ်များ
 
-Function Calls သည် သင့်အက်ပလီကေးရှင်းကို တိုးတက်စေရန် အမျိုးမျိုးသော အသုံးချနိုင်မှုများရှိသည်-
+ဖန်ရှင်ခေါ်ဆိုမှုများသည် သင်၏ app ကို တိုးတက်စေသည့် အမျိုးမျိုးသော သုံးစွဲမှုနယ်ပယ်များရှိသည်၊ ဥပမာ-
 
-- **အပြင်ပကိရိယာများကို ခေါ်ခြင်း** - Chatbots များသည် အသုံးပြုသူများ၏ မေးခွန်းများကို ဖြေဆိုပေးရန် အလွန်ကောင်းမွန်သည်။ Function Calling ကို အသုံးပြုခြင်းဖြင့် Chatbots များသည် အသုံးပြုသူများ၏ message များကို အသုံးပြု၍ တာဝန်အချို့ကို ပြီးမြောက်စေသည်။ ဥပမာအားဖြင့် ကျောင်းသားတစ်ဦးသည် chatbot ကို "ကျွန်ုပ်၏ဆရာထံ email ပို့ပါ၊ ဒီဘာသာရပ်မှာ အကူအညီပိုလိုပါတယ်လို့ ပြောပါ" ဟု မေးမြန်းနိုင်သည်။ ၎င်းသည် `send_email(to: string, body: string)` ဟုခေါ်သော function call ကို ပြုလုပ်နိုင်သည်။
+- **ပြင်ပကိရိယာခေါ်ဆိုခြင်း**။ Chatbot များသည် အသုံးပြုသူ၏ မေးခွန်းများကို ဖြေဆိုရာတွင် အထူးကောင်းမွန်သည်။ ဖန်ရှင်ခေါ်ဆိုမှုကို အသုံးပြု၍ အသုံးပြုသူမှ ပေးပို့သော စာတိုက်များအား အကောင်အထည်ဖော်ရန် တစ်စုံတစ်ရာလုပ်ဆောင်နိုင်သည်။ ဥပမာ- ကျောင်းသားတစ်ဦးသည် chatbot ကို "ကျွန်တော်၏ စာသင်ကြားသူကို ဒီဘာသာရပ် ခေါင်းစဉ်ကိုပိုအကူအညီလိုပါတယ်ဆိုတဲ့ အီးမေးလ်ပို့ပါ" ဟု တောင်းဆိုနိုင်ပြီး ၎င်းသည် `send_email(to: string, body: string)` ဆိုသည့် function ကို ခေါ်နိုင်သည်။
 
-- **API သို့မဟုတ် Database Queries ဖန်တီးခြင်း** - အသုံးပြုသူများသည် natural language ကို အသုံးပြု၍ formatted query သို့မဟုတ် API request အဖြစ် ပြောင်းလဲပြီး အချက်အလက်များကို ရှာဖွေနိုင်သည်။ ဥပမာအားဖြင့် ဆရာတစ်ဦးသည် "နောက်ဆုံးအလုပ်ကို ပြီးမြောက်ခဲ့သော ကျောင်းသားများ ဘယ်သူတွေလဲ" ဟု မေးမြန်းနိုင်သည်။ ၎င်းသည် `get_completed(student_name: string, assignment: int, current_status: string)` ဟုခေါ်သော function ကို ခေါ်နိုင်သည်။
+- **API သို့ ဒေတာဘေ့စ် စုံစမ်းခြင်း ဖန်တီးခြင်း**။ အသုံးပြုသူများသည် သဘာဝဘာသာစကားသုံး၍ အချက်အလက် ရှာဖွေနိုင်ပြီး အဲဒီကို ပုံစံတကျ မေးခွန်းသို့ API တောင်းဆိုမှုအဖြစ် ပြောင်းလဲသွားသည်။ ဥပမာ - ဆရာမတစ်ဦးသည် "နောက်ဆုံးတာဝန်ယူမှုကိုပြီးစီးခဲ့သည့် ကျောင်းသားများ ဘယ်သူတွေလဲ" ဟုအမေးလို၍ `get_completed(student_name: string, assignment: int, current_status: string)` ဟု function ခေါ်နိုင်သည်။
 
-- **Structured Data ဖန်တီးခြင်း** - အသုံးပြုသူများသည် text block သို့မဟုတ် CSV ကို ယူပြီး LLM ကို အသုံးပြု၍ ၎င်းမှ အရေးပါသော အချက်အလက်များကို ထုတ်ယူနိုင်သည်။ ဥပမာအားဖြင့် ကျောင်းသားတစ်ဦးသည် peace agreements အကြောင်း Wikipedia ဆောင်းပါးတစ်ခုကို AI flashcards ဖန်တီးရန် ပြောင်းလဲနိုင်သည်။ ၎င်းကို `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)` ဟုခေါ်သော function ကို အသုံးပြု၍ ပြုလုပ်နိုင်သည်။
+- **ဖော်မတ်တကျ ဒေတာဖန်တီးခြင်း**။ အသုံးပြုသူများသည် စာပိုဒ်တစ်ခု သို့မဟုတ် CSV ကို ရယူပြီး LLM ကို အသုံးပြု၍ အရေးကြီးသော သတင်းအချက်အလက်များထုတ်ယူနိုင်သည်။ ဥပမာ- ကျောင်းသားတစ်ဦးသည် Wikipedia ပေါ်ရှိ စစ်ဆင်ရေး သဘောတူညီချက်များအကြောင်း ပြုစုထားသည့် ဆောင်းပါးကို ယူ၍ AI flashcards ဖန်တီးနိုင်သည်။ ၎င်းသည် `get_important_facts(agreement_name: string, date_signed: string, parties_involved: list)` ဟု ဖန်ဆင်းနိုင်သော function တစ်ခုဖြစ်သည်။
 
-## သင့်ပထမဆုံး Function Call ကို ဖန်တီးခြင်း
+## သင့်ပထမဖန်ရှင်ခေါ်ဆိုမှု ဖန်တီးခြင်း
 
-Function Call တစ်ခု ဖန်တီးခြင်းလုပ်ငန်းစဉ်တွင် အဓိကအဆင့် ၃ ဆင့်ပါဝင်သည်-
+ဖန်ရှင်ခေါ်ဆိုမှု ဖန်တီးခြင်းလုပ်ငန်းစဉ်သည် အဓိက ၃ ခုပါဝင်သည်-
 
-1. **Calling** - Function များ၏ စာရင်းနှင့် အသုံးပြုသူ message တို့ဖြင့် Chat Completions API ကို ခေါ်ခြင်း။
-2. **Reading** - မော်ဒယ်၏ response ကို ဖတ်၍ တာဝန်တစ်ခုကို အကောင်အထည်ဖော်ခြင်း၊ ဥပမာအားဖြင့် function သို့မဟုတ် API Call ကို အကောင်အထည်ဖော်ခြင်း။
-3. **Making** - Function response မှ အချက်အလက်များကို အသုံးပြု၍ အသုံးပြုသူ message ကို Chat Completions API သို့ ပြန်လည်ခေါ်ခြင်း။
+1။ သင့်ဖန်ရှင် (ကိရိယာများ) နှင့် အသုံးပြုသူစာတိုက်ကို Responses API မှ ခေါ်ဆိုခြင်း။
+2။ မော်ဒယ်၏ တုံ့ပြန်မှုကို ဖတ်ရှု၍ လုပ်ဆောင်ရန် (ဖန်ရှင် သို့ API ခေါ်ကြောင်း) ဆောင်ရွက်ခြင်း။
+3။ ဖန်ရှင်မှ ပြန်လာသော တုံ့ပြန်မှုဖြင့် Responses API ထပ်ခေါ်၍ အသုံးပြုသူအား တုံ့ပြန်မှုတစ်ခု ဖန်တီးခြင်း။
 
 ![LLM Flow](../../../translated_images/my/LLM-Flow.3285ed8caf4796d7.webp)
 
-### အဆင့် ၁ - Messages ဖန်တီးခြင်း
+### အဆင့် ၁ - စာတိုက်ဖန်တီးခြင်း
 
-ပထမအဆင့်မှာ အသုံးပြုသူ message ကို ဖန်တီးခြင်းဖြစ်သည်။ ၎င်းကို text input ၏ value ကို dynamically သတ်မှတ်ခြင်းဖြင့် ပြုလုပ်နိုင်သည် သို့မဟုတ် ဒီနေရာတွင် value ကို သတ်မှတ်နိုင်သည်။ Chat Completions API ကို ပထမဆုံးအကြိမ် အသုံးပြုနေပါက message ၏ `role` နှင့် `content` ကို သတ်မှတ်ရန် လိုအပ်သည်။
+ပထမအဆင့်မှာ အသုံးပြုသူ၏ စာတိုက်ကို ဖန်တီးခြင်းဖြစ်သည်။ ၎င်းကို တိုက်ရိုက် စာသားထည့်သည့်တန်ဖိုးမှ ရယူနိုင်သလို၊ ဒီနေရာတွင်တန်ဖိုးသတ်မှတ်နိုင်ပါသည်။ Responses API နှင့် ပထမဆုံးအကြိမ်လုပ်ဆောင်လျှင် `role` နှင့် `content` တန်ဖိုးများ သတ်မှတ်ရမည်။
 
-`role` သည် `system` (rule ဖန်တီးခြင်း), `assistant` (model) သို့မဟုတ် `user` (end-user) ဖြစ်နိုင်သည်။ Function Calling အတွက် ၎င်းကို `user` အဖြစ် သတ်မှတ်ပြီး ဥပမာမေးခွန်းတစ်ခု ထည့်သွင်းပါမည်။
+`role` သည် `system` (စည်းမျဉ်းထည့်ခြင်း), `assistant` (မော်ဒယ်) သို့မဟုတ် `user` (အဆုံးအသုံးပြုသူ) ဖြစ်နိုင်သည်။ ဖန်ရှင်ခေါ်ဆိုမှုအတွက် `user` အဖြစ် သတ်မှတ်ပြီး မေးခွန်းဥပမာ တစ်ခု ထည့်သွင်းမည်။
 
 ```python
 messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
 ```
 
-Role များကို မတူညီစွာ သတ်မှတ်ခြင်းဖြင့် LLM သို့ system မှ ပြောနေသည်၊ user မှ ပြောနေသည်ကို ရှင်းလင်းစေပြီး LLM သည် conversation history ကို တည်ဆောက်နိုင်သည်။
+ကွဲပြားသော role များ သတ်မှတ်ခြင်းဖြင့် LLM သို့ စနစ် ဖြစ်စဉ်ကို ကျွန်ုပ်ပြောနေသည် သို့မဟုတ် အသုံးပြုသူ ဖြစ်သည်ကို ဖေါ်ပြနိုင်ပြီး LLM သည် ဆက်ဆံရေးမှတ်တမ်း တည်ဆောက်ရာတွင် အထောက်အကူဖြစ်စေသည်။
 
-### အဆင့် ၂ - Functions ဖန်တီးခြင်း
+### အဆင့် ၂ - ဖန်ရှင်ဖန်တီးခြင်း
 
-နောက်တစ်ဆင့်မှာ function ကို သတ်မှတ်ပြီး function ၏ parameters များကို ဖန်တီးခြင်းဖြစ်သည်။ ဒီနေရာမှာ `search_courses` ဟုခေါ်သော function တစ်ခုသာ အသုံးပြုမည်ဖြစ်သော်လည်း function များစွာကို ဖန်တီးနိုင်သည်။
+နောက်တစ်ဆင့်တွင် ဖန်ရှင်တစ်ခုနှင့် ၎င်း၏ ပါရာမီတာများအား သတ်မှတ်မည်။ ၎င်းတို့ထဲတွင် `search_courses` ဟုခေါ်သော ဖန်ရှင်တစ်ခုသာ ထည့်သွင်းမည်ဖြစ်သော်လည်း များစွာဖန်တီးနိုင်သည်။
 
-> **အရေးကြီးသည်** - Functions များကို LLM သို့ system message တွင် ထည့်သွင်းထားပြီး သင့်တွင် ရရှိနိုင်သော tokens အရေအတွက်တွင် ပါဝင်မည်။
+> **အရေးကြီးချက်** : ဖန်ရှင်များကို LLM သို့ ပို့သော စနစ်စာတိုက် မှတစ်ဆင့် တင်ပြသည်၊ ထို့ကြောင့် လက်ကျန် tokens အရေအတွက်၌ပါဝင်သည်။
 
-အောက်တွင် functions များကို items များ၏ array အဖြစ် ဖန်တီးထားသည်။ Item တစ်ခုစီသည် function တစ်ခုဖြစ်ပြီး `name`, `description` နှင့် `parameters` properties များပါရှိသည်-
+အောက်တွင် ထည့်သွင်းထားသော ဖန်ရှင်များသည် မြှုပ်ကွက်ဆောင် Responses API ပုံစံတစ်မျိုးဖြစ်ပြီး `type`, `name`, `description` နှင့် `parameters` ကိုပါဝင်သည်-
 
 ```python
 functions = [
    {
+      "type":"function",
       "name":"search_courses",
       "description":"Retrieves courses from the search index based on the parameters provided",
       "parameters":{
@@ -243,33 +249,222 @@ functions = [
 ]
 ```
 
-Function instance တစ်ခုစီကို အောက်တွင် အသေးစိတ်ဖော်ပြပါ-
+အောက်တွင် ဖန်ရှင်တစ်ခုချင်းစီအား အသေးစိတ် ဖော်ပြထားသည်-
 
-- `name` - Function ကို ခေါ်လိုသော အမည်။
-- `description` - Function ၏ လုပ်ဆောင်ပုံကို ဖော်ပြထားသော ဖော်ပြချက်။ ဒီနေရာမှာ တိကျပြီးရှင်းလင်းဖို့ အရေးကြီးသည်။
-- `parameters` - Model response အတွက် ထုတ်လုပ်လိုသော values နှင့် format ၏ စာရင်း။ Parameters array တွင် items များပါရှိပြီး items များတွင် အောက်ပါ properties များပါဝင်သည်-
-  1.  `type` - Properties များကို သိမ်းဆည်းမည့် data type။
-  1.  `properties` - Model response အတွက် အသုံးပြုမည့် specific values များ၏ စာရင်း။
-      1. `name` - Model response formatted မှာ အသုံးပြုမည့် property ၏ အမည် key, ဥပမာအားဖြင့် `product`။
-      1. `type` - Property ၏ data type, ဥပမာအားဖြင့် `string`။
-      1. `description` - Specific property ၏ ဖော်ပြချက်။
+- `name` - ဖန်ရှင်ခေါ်ဆိုရန် လိုအပ်သော အမည်။
+- `description` - ဖန်ရှင်၏ လုပ်ဆောင်ပုံဖော်ပြချက်။ ဤနေရာတွင် ဖော်ပြချက် ကြည်လင်ရှင်းလင်းမှု မရှိမဖြစ်လိုအပ်သည်။
+- `parameters` - မော်ဒယ်၏ တုံ့ပြန်မှုတွင် ထုတ်ပေးရန် လိုအပ်သည့် တန်ဖိုးများ ရောနှောချက်များ၊ `parameters` အဆိုပါ မော်ဒယ်ဖြင့် လုပ်ဆောင်ရန် နေရာတစ်ခုဖြစ်သည်။
+  1. `type` - သိမ်းဆည်းမည့် ဒေတာအမျိုးအစား။
+  2. `properties` - မော်ဒယ်နှင့် ပြန်ပေးစာတွင် ပါဝင်မည့် ပစ္စည်းများစာရင်း။
+      1. `name` - ပစ္စည်း၏ အမည် (ဥပမာ- `product` ) ။
+      2. `type` - ပစ္စည်း၏ ဒေတာအမျိုးအစား (`string` ကဲ့သို့)။
+      3. `description` - ပစ္စည်း၏ ဖော်ပြချက်။
 
-Optional property `required` - Function call ပြီးမြောက်ရန် လိုအပ်သော property။
+၎င်းနောက် `required` ဆိုသည်မှာ ဖန်ရှင်ခေါ်ဆိုမှုအတွက် အရေးကြီး၍ မဖြစ်မနိမ့်လိုအပ်သောပစ္စည်းများဖြစ်သည်။
 
-### အဆင့် ၃ - Function Call ပြုလုပ်ခြင်း
+### အဆင့် ၃ - ဖန်ရှင်ခေါ်ဆိုမှု ပြုလုပ်ခြင်း
 
-Function ကို သတ်မှတ်ပြီးနောက်၊ Chat Completion API သို့ ခေါ်ဆိုမှုတွင် function ကို ထည့်သွင်းရန် လိုအပ်သည်။ ၎င်းကို request တွင် `functions` ကို ထည့်သွ
-- ဖန်တီးထားသော function call နှင့်/သို့မဟုတ် API call မှ သင့်လျော်သော course မရှိပါက error ကို handle လုပ်ပါ။
+ဖန်ရှင် သတ်မှတ်ပြီးနောက် Responses API ကို ခေါ်ရာတွင် ထည့်သွင်းရမည့္ `tools` ကို ထည့်သွင်းပါမည်။ ဤကိစ္စ၌ `tools=functions` ဖြစ်ပါသည်။
 
-အကြံပြုချက်: [Learn API reference documentation](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) စာမျက်နှာကို လိုက်နာပြီး ဒီ data ကို ဘယ်လို၊ ဘယ်နေရာမှာ ရနိုင်တယ်ဆိုတာ ကြည့်ပါ။
+ထို့အပြင် `tool_choice` ကို `auto` ထားနိုင်သည်။ ၎င်းသည် အသုံးပြုသူ စာတိုက်အပေါ် အခြေခံ၍ စနစ်မှာ ဖန်ရှင်ခေါ်ဆိုမှုကို ချိန်ညှိပေးရန် ဖြစ်သည်။
 
-## အလွန်ကောင်းမွန်တဲ့အလုပ်! ခရီးကို ဆက်လက်လုပ်ဆောင်ပါ
+အောက်တွင် `client.responses.create` ကို ဖန်ဆင်းနေသည့် ကုဒ်တစ်စုံ ရှိပြီး `tools=functions` နှင့် `tool_choice="auto"` သတ်မှတ်ကာ LLM သည် ကြိုက်ရာဖန်ရှင်ကို ခေါ်နိုင်ရန် ရွေးချယ်ထားသည်။
 
-ဒီသင်ခန်းစာကို ပြီးမြောက်ပြီးနောက်မှာ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ကို ကြည့်ပြီး Generative AI အသိပညာကို ဆက်လက်မြှင့်တင်ပါ။
+```python
+response = client.responses.create(model=deployment,
+                                        input=messages,
+                                        tools=functions,
+                                        tool_choice="auto",
+                                        store=False)
 
-Lesson 12 ကို သွားကြည့်ပါ၊ အဲဒီမှာ [AI application များအတွက် UX ကို ဒီဇိုင်းဆွဲနည်း](../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst) ကို လေ့လာပါ!
+print(response.output)
+```
+
+ပြန်လည်ရရှိသည့် တုံ့ပြန်မှုပိုင်းတွင် `function_call` အချက်အလက်が `response.output` ထဲတွင် ပါဝင်သည်၊ ဤကဲ့သို့ပုံစံဖြစ်သည်-
+
+```json
+{
+  "type": "function_call",
+  "name": "search_courses",
+  "call_id": "call_abc123",
+  "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
+}
+```
+
+ဤနေရာတွင် `search_courses` ဖန်ရှင် ခေါ်ဆိုမှုနှင့် `arguments` အတွင်း ပါဝင်သော argument များကို တွေ့ရသည်။
+
+LLM သည် Responses API တွင် `input` parameter အတွက် ပြန်ပေးထားသော တန်ဖိုးမှ ဒေတာကို ထုတ်ယူကာ ဖန်ရှင် argument များဖြည့်စွက်နိုင်ကြောင်း ဤအချက်အလက်မှ သိရသည်။ အောက်တွင် `messages` တန်ဖိုးပြန်လည် သတိပေးပါ-
+
+```python
+messages= [ {"role": "user", "content": "Find me a good course for a beginner student to learn Azure."} ]
+```
+
+ကြည့်လိုက်ပါက `student`, `Azure` နှင့် `beginner` ဆိုသည့် တန်ဖိုးများသည် `messages` မှ ထုတ်ယူ၍ ဖန်ရှင်ထဲသို့ ပေးပို့ထားသည်။ ဤနည်းဖြင့် ဖန်ရှင်များအား ကြားဖြတ်အသုံးပြုခြင်းသည် သတင်းအချက်များ ထုတ်ယူရာတွင်ကောင်းမွန်သလို LLM အတွက် ဖော်မတ်တစ်ခု ဖန်တီးပေးခြင်းနှင့် အသုံးပြုနိုင်စွမ်းရှိသည်။
+
+နောက်တစ်ပိုင်းတွင် အဲဒီ function ကို သင့်အက်ပလီကေးရှင်းတွင် မည်သို့ အသုံးပြုမလဲဆိုသည်ကို သွားကြည့်မည်။
+
+## ဖန်ရှင်ခေါ်ဆိုမှုများကို အက်ပလီကေးရှင်းတွင် ပေါင်းစည်းခြင်း
+
+LLM မှ စတုတျတျတုံ့ပြန်မှုကို စစ်ဆေးပြီးနောက်၊ အခုအခါ ဒါကို အက်ပလီကေးရှင်းနှင့် ပေါင်းစည်းနိုင်ပါပြီ။
+
+### စက်ဝိုင်းစီမံခြင်း
+
+ဤအက်ပလီကေးရှင်းနှင့် ပေါင်းစည်းရန် အောက်ပါအဆင့်များကို ဆောင်ရွက်ရမည်-
+
+၁။ နာမည်ပြော OpenAI ဝန်ဆောင်မှုများသို့ ခေါ်ဆိုပြီး တုံ့ပြန်မှု အပိုင်းပါဝင်သော `output` မှ function call item များကို ထုတ်ယူပါ။
+
+   ```python
+   response_items = response.output
+   tool_calls = [item for item in response_items if item.type == "function_call"]
+   ```
+
+၂။ ယခု မိုက်ခရိုဆော့ဖ့် Learn API ကို ခေါ်၍ သင်တန်းစာရင်း ရယူရန် ဖန်ရှင် ကို သတ်မှတ်မည်-
+
+   ```python
+   import requests
+
+   def search_courses(role, product, level):
+     url = "https://learn.microsoft.com/api/catalog/"
+     params = {
+        "role": role,
+        "product": product,
+        "level": level
+     }
+     response = requests.get(url, params=params)
+     modules = response.json()["modules"]
+     results = []
+     for module in modules[:5]:
+        title = module["title"]
+        url = module["url"]
+        results.append({"title": title, "url": url})
+     return str(results)
+   ```
+
+   ယခုတွင် `functions` အပိုင်းနှင့် ကိုက်ညီသော တကယ် Python function တစ်ခုကို ဖန်တီးထားပြီး လိုအပ်သည့်ဒေတာ ရယူရန် ပြင်ပ API ခေါ်ဆိုမှုများ ပြုလုပ်နေသည်။ ဤကိစ္စ၌ Microsoft Learn API ကို သင်တန်း module များ ရှာဖွေရန် အသုံးပြုသည်။
+
+အိုကေ၊ `functions` ဟုသတ်မှတ်ထားပြီး Python function တစ်ခုကို ဖန်တီးပြီးသော် LLM သို့ မည်သို့ ဆက်သွယ်သင့်သလဲဆိုတာ ကြည့်မည်။
+
+၃။ Python function ကို ခေါ်ရန် လိုအပ်မရှိမရှိ ကြည့်ရန် LLM ၏ တုံ့ပြန်မှု ထဲမှ `function_call` item ကို ရှာဖွေရန်လိုသည်။ အောက်တွင် စစ်ဆေးပုံကို ဖော်ပြထား-
+
+   ```python
+   # မော်ဒယ်သည် ဖังกရှင်ကို ခေါ်လိုပါသလား စစ်ဆေးပါ။
+   if tool_calls:
+    for tool_call in tool_calls:
+     print("Recommended Function call:")
+     print(tool_call.name)
+     print()
+
+     # ဖังกရှင်ကို ခေါ်ပါ။
+     function_name = tool_call.name
+
+     available_functions = {
+             "search_courses": search_courses,
+     }
+     function_to_call = available_functions[function_name]
+
+     function_args = json.loads(tool_call.arguments)
+     function_response = function_to_call(**function_args)
+
+     print("Output of function call:")
+     print(function_response)
+     print(type(function_response))
+
+     # ဖังกရှင်ခေါ်နှင့် ၎င်းရလဒ်ကို ပြန်လည် စကားပြောနေတာထဲသို့ ထည့်ပါ။
+     # မော်ဒယ်ရဲ့ function_call အချက်အလက်ကို ထွက်ရှိမှုထက် မတိုင်မှီ ထည့်သွင်းရပါမည်။
+     messages.append(tool_call)  # အကူအညီလည်းဖန်ခေါ် function_call အချက်အလက်
+     messages.append( # ဖန်ရလဒ်
+         {
+             "type": "function_call_output",
+             "call_id": tool_call.call_id,
+             "output": function_response,
+         }
+     )
+   ```
+
+   အဆိုပါ အကြောင်းသုံးအားဖြင့် function name, အကြောင်းအရာ, ဖန်ရှင်ခေါ်ဆိုမှုလုပ်ဆောင်။
+
+   ```python
+   function_to_call = available_functions[function_name]
+
+   function_args = json.loads(tool_call.arguments)
+   function_response = function_to_call(**function_args)
+   ```
+
+   အောက်တွင် ကျွန်ုပ်တို့၏ ကုဒ် အလုပ်လုပ်ပြီးရရှိသော output ဖြစ်သည်။
+
+**Output**
+
+   ```Recommended Function call:
+   {
+     "name": "search_courses",
+     "arguments": "{\n  \"role\": \"student\",\n  \"product\": \"Azure\",\n  \"level\": \"beginner\"\n}"
+   }
+
+   Output of function call:
+   [{'title': 'Describe concepts of cryptography', 'url': 'https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?
+   WT.mc_id=api_CatalogApi'}, {'title': 'Introduction to audio classification with TensorFlow', 'url': 'https://learn.microsoft.com/en-
+   us/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi'}, {'title': 'Design a Performant Data Model in Azure SQL
+   Database with Azure Data Studio', 'url': 'https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?
+   WT.mc_id=api_CatalogApi'}, {'title': 'Getting started with the Microsoft Cloud Adoption Framework for Azure', 'url':
+   'https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi'}, {'title': 'Set up the
+   Rust development environment', 'url': 'https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi'}]
+   <class 'str'>
+   ```
+
+၄။ update ပြုလုပ်ထားသည့် `messages` ကို LLM သို့ ပို့ကာ API JSON ပုံစံမှ သဘာဝဘာသာစကားဖြင့် တုံ့ပြန်မှု ရရှိစေရန်။
+
+   ```python
+   print("Messages in next request:")
+   print(messages)
+   print()
+
+   second_response = client.responses.create(
+      input=messages,
+      model=deployment,
+      tool_choice="auto",
+      tools=functions,
+      temperature=0,
+      store=False,
+         )  # function response ကိုမြင်နိုင်တဲ့နေရာမှ မော်ဒယ်ထံမှ အသစ်သောတုံ့ပြန်ချက်ကိုရယူပါ။
+
+
+   print(second_response.output_text)
+   ```
+
+**Output**
+
+   ```text
+   I found some good courses for beginner students to learn Azure:
+
+   1. [Describe concepts of cryptography](https://learn.microsoft.com/training/modules/describe-concepts-of-cryptography/?WT.mc_id=api_CatalogApi)
+   2. [Introduction to audio classification with TensorFlow](https://learn.microsoft.com/training/modules/intro-audio-classification-tensorflow/?WT.mc_id=api_CatalogApi)
+   3. [Design a Performant Data Model in Azure SQL Database with Azure Data Studio](https://learn.microsoft.com/training/modules/design-a-data-model-with-ads/?WT.mc_id=api_CatalogApi)
+   4. [Getting started with the Microsoft Cloud Adoption Framework for Azure](https://learn.microsoft.com/training/modules/cloud-adoption-framework-getting-started/?WT.mc_id=api_CatalogApi)
+   5. [Set up the Rust development environment](https://learn.microsoft.com/training/modules/rust-set-up-environment/?WT.mc_id=api_CatalogApi)
+
+   You can click on the links to access the courses.
+   ```
+
+## လေ့ကျင့်မှု
+
+Azure OpenAI Function Calling နောက်ထပ် သင်ယူမှုဆက်လက်လုပ်ရန်-
+
+- သင်တန်းရှာဖွေရန် အထောက်အကူဖြစ်မည့် function ၏ ပါရာမီတာများကို ပိုမိုထည့်သွင်းပါ။
+
+- သင်ယူသူရဲ့ မျိုးနွယ်ဘာသာစကားကဲ့သို့ ပိုမိုသော အချက်အလက်များကို ယူသည့် နောက်ထပ် ဖန်တီးမှု အားခေါ်ဆိုပါ
+- ဖန်တီးမှု အခေါ်နှင့်/သို့မဟုတ် API အခေါ်မှ သင့်တော်သော အတန်းများ မပြန်စစ်သောအခါ အမှားဖြေရှင်းမှု ဖန်တီးပါ
+
+အကြံပြုချက်- [Learn API reference documentation](https://learn.microsoft.com/training/support/catalog-api-developer-reference?WT.mc_id=academic-105485-koreyst) စာမျက်နှာအတိုင်း ဒီဒေတာ ဘယ်လိုနဲ့ ဘယ်မှာ ရနိုင်လဲ ကြည့်ရှုပါ။
+
+## အံ့ဩစရာ! ခရီးကို ဆက်လက်လုပ်ဆောင်ပါ
+
+ဒီသင်ခန်းစာပြီးပါက ကျွန်ုပ်တို့ရဲ့ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ကို လေ့လာပြီး သင့်ရဲ့ Generative AI အသိပညာကို မြင့်တင်ပါ!
+
+သင်ခန်းစာ 12 ဆီသွားပါက AI လျှောက်လွှာများအတွက် UX ဒီဇိုင်းရေးဆွဲနည်းကို ကြည့်ရှုနိုင်ပါသည် (../12-designing-ux-for-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

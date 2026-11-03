@@ -1,266 +1,146 @@
-# చిత్రం సృష్టి అనువర్తనాలు నిర్మించడం
+# చిత్రాల సృష్టి దరఖాస్తులను నిర్మించడం
 
-[![చిత్రం సృష్టి అనువర్తనాలు నిర్మించడం](../../../translated_images/te/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![చిన్న చిత్రాల సృష్టి దరఖాస్తులు](../../../translated_images/te/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-LLMs కేవలం టెక్స్ట్ ఉత్పత్తికి మాత్రమే కాదు. టెక్స్ట్ వివరణల నుండి చిత్రాలను కూడా సృష్టించవచ్చు. చిత్రాలను ఒక మోడ్‌గా కలిగి ఉండటం మెడటెక్, వాస్తుశిల్పం, పర్యాటకం, గేమ్ అభివృద్ధి మరియు మరెన్నో ప్రాంతాలలో చాలా ఉపయోగకరంగా ఉంటుంది. ఈ అధ్యాయంలో, రెండు అత్యంత ప్రాచుర్యం పొందిన చిత్రం సృష్టి మోడల్స్, DALL-E మరియు Midjourney గురించి తెలుసుకుందాం.
+LLMల వద్ద పాఠ్య సృష్టి తప్ప ఇంకొకటి ఉంటుంది. మీరు పాఠ్య వివరణల నుండి కూడా చిత్రాలు సృష్టించవచ్చు. చిత్రాలు ఒక నిర్దిష్ట రూపంలో మెడికల్ టెక్నాలజీ, నిర్మాణం, పర్యటన, గేమ్ డెవలప్‌మెంట్, మార్కెటింగ్ మరియు మరెన్నో రంగాలలో ఉపయోగకరంగా ఉంటాయి. ఈ పాఠంలో మనం ఈ రోజరి **GPT Image** మోడల్స్ ను పరిశీలించి, చిత్రాల సృష్టి యాప్ ను నిర్మించబోతున్నాము.
 
 ## పరిచయం
 
-ఈ పాఠంలో, మనం కవర్ చేయబోతున్నవి:
+చిత్రాల సృష్టి ఒక సహజ-భాషా సంకేతాన్ని చిత్రంగా మార్చుతుంది. ఈ పాఠంలో మనం **`gpt-image`** కుటుంబం నుండి మోడల్స్ తో పని చేస్తాము, ఇవి ఇప్పుడు **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** మరియు OpenAI వేదికపై అందుబాటులో ఉన్న తాజా తరహా చిత్ర మోడల్స్. ఈ మోడల్స్ పాత DALL·E మోడల్స్ (DALL·E 2/3 లెగసీ) కు ప్రత్యామ్నాయంగా ఉన్నాయి.
 
-- చిత్రం సృష్టి మరియు అది ఎందుకు ఉపయోగకరమో.
-- DALL-E మరియు Midjourney, అవి ఏమిటి, మరియు అవి ఎలా పనిచేస్తాయి.
-- మీరు ఎలా చిత్రం సృష్టి అనువర్తనం నిర్మించవచ్చు.
+పాఠం అంతటా మనం ఒక కల్పిత స్టార్టప్, **Edu4All** పై దృష్టి సారిస్తాము, ఇది లెర్నింగ్ సాధనాలను అభివృద్ధి చేస్తుంది. వారి టీమ్ అసైన్‌మెంట్లకు మరియు అధ్యయన పదార్థాలకు ఇలస్ట్రేషన్లను సృష్టించాలనుకుంటోంది.
 
 ## నేర్చుకునే లక్ష్యాలు
 
-ఈ పాఠం పూర్తి చేసిన తర్వాత, మీరు చేయగలుగుతారు:
+ఈ పాఠం ముగింపులో మీరు:  
 
-- చిత్రం సృష్టి అనువర్తనం నిర్మించడం.
-- మీ అనువర్తనానికి మెటా ప్రాంప్ట్‌లతో సరిహద్దులను నిర్వచించడం.
-- DALL-E మరియు Midjourney తో పని చేయడం.
+- చిత్రాల సృష్టి అంటే ఏమిటి, ఇది ఎక్కడ ఉపయోగపడుతుంది అని వివరించడం.  
+- `gpt-image` మోడల్ కుటుంబాన్ని అర్థం చేసుకోవడం మరియు ఇది లెగసీ DALL·E మోడల్స్ నుండి ఎలా భిన్నమైందో తెలుసుకోవడం.  
+- Python (మరియు TypeScript / .NET) లో చిత్రాల సృష్టి యాప్ ను నిర్మించడం.  
+- చిత్రాలను మార్చడం, మరియు సేఫ్టీ గార్డ్రైల్‌లు మాప్రొంప్ట్స్ తో ఎలా వర్తించవచ్చో తెలుసుకోవడం.  
 
-## చిత్రం సృష్టి అనువర్తనం ఎందుకు నిర్మించాలి?
+## చిత్రాల సృష్టి అంటే ఏమిటి?
 
-చిత్రం సృష్టి అనువర్తనాలు జనరేటివ్ AI సామర్థ్యాలను అన్వేషించడానికి అద్భుతమైన మార్గం. అవి, ఉదాహరణకు:
+చిత్రాల సృష్టి మోడల్స్ టెక్స్ట్ ప్రాంప్ట్ నుండి చిత్రాలు ఉత్పత్తి చేస్తాయి. ఆధునిక మోడల్స్ వంటి `gpt-image` ట్రాన్స్ఫార్మర్ + డిఫ్యూజన్ సాంకేతికతలపై నిర్మితమవడం జరిగినవి: మోడల్ శిక్షణ సమయంలో టెక్స్ట్ మరియు చిత్రాల మధ్య సంబంధాన్ని నేర్చుకుంటుంది, తర్వాత ప్రాంప్ట్ ఇచ్చిన సమయంలో, తిరిగివ్వకుండా "డెనాయిజ్" చేసి వివరణ సరిపోయిన చిత్రం తయారు చేస్తుంది.
 
-- **చిత్ర సవరణ మరియు సంశ్లేషణ**. మీరు వివిధ ఉపయోగాల కోసం చిత్రాలను సృష్టించవచ్చు, ఉదాహరణకు చిత్రం సవరణ మరియు చిత్రం సంశ్లేషణ.
+ఇరువురు ప్రఖ్యాత చిత్ర మోడల్ కుటుంబాలు:
 
-- **వివిధ పరిశ్రమలకు వర్తించు**. అవి మెడటెక్, పర్యాటకం, గేమ్ అభివృద్ధి వంటి వివిధ పరిశ్రమలకు చిత్రాలను సృష్టించడానికి కూడా ఉపయోగించవచ్చు.
+- **`gpt-image` (OpenAI)** - ప్రస్తుత తరం మోడల్, ఈ పాఠంలో ఉపయోగించే మోడల్. ఇది టెక్స్ట్-తరువాత చిత్ర సృష్టి మరియు చిత్ర సవరింపు (మాస్క్ తో ఇన్‌పెయింటింగ్) చేయగలదు.  
+- **Midjourney** - ప్రాచుర్యంతో కూడిన తృतीय-పక్షం మోడల్, స్వంత సర్వీస్ మరియు Discord-ఆధారిత వర్క్ఫ్లో కలిగి ఉంది.  
 
-## సన్నివేశం: Edu4All
+> పాత OpenAI చిత్ర మోడల్స్ - **DALL·E 2** మరియు **DALL·E 3** - లెగసీ. DALL·E 3 కొత్త డిప్లాయ్‌మెంట్‌లకు అందుబాటులో లేదు, మరియు `create_variation` వంటి ఫీచర్లు కేవలం DALL·E 2 లో ఉన్నాయి. కొత్త అనువర్తనాలకు `gpt-image` మోడల్స్ ఉపయోగించండి.
 
-ఈ పాఠంలో భాగంగా, మనం Edu4All అనే స్టార్టప్‌తో కొనసాగుతాము. విద్యార్థులు తమ అసెస్మెంట్ల కోసం చిత్రాలను సృష్టిస్తారు, ఏ చిత్రాలు కావాలో విద్యార్థులపై ఆధారపడి ఉంటుంది, కానీ అవి తమ స్వంత కథ కోసం చిత్రాలు కావచ్చు లేదా తమ కథకు కొత్త పాత్రను సృష్టించవచ్చు లేదా తమ ఆలోచనలు మరియు భావనలను దృశ్యరూపంలో చూపించడంలో సహాయపడవచ్చు.
+### నేను ఏ `gpt-image` మోడల్ ని истифода చేయాలి?
 
-క్లాస్‌లో స్మారక చిహ్నాలపై పని చేస్తున్నప్పుడు Edu4All విద్యార్థులు ఉదాహరణకు సృష్టించగలిగే చిత్రాలు ఇక్కడ ఉన్నాయి:
+Microsoft Foundry లో క్రింది మోడల్స్ **సాధారణంగా అందుబాటులో** ఉన్నాయి:
 
-![Edu4All startup, class on monuments, Eiffel Tower](../../../translated_images/te/startup.94d6b79cc4bb3f5a.webp)
+| మోడల్ | వ్యాఖ్యలు |
+| --- | --- |
+| **`gpt-image-2`** | తాజా మరియు అత్యంత సామర్థ్యవంతమైన చిత్రం మోడల్ - సిఫార్సు చేయబడిన డిఫాల్ట్. |
+| `gpt-image-1.5` | సాధారణంగా అందుబాటులో ఉంది; తక్కువ ఖర్చుతో మంచి నాణ్యత. |
+| `gpt-image-1-mini` | సాధారణంగా అందుబాటులో ఉంది; అత్యంత వేగవంతమైనదీ / తక్కువ ఖర్చుతో కూడుకున్నది. |
+| `gpt-image-1` | ప్రివ్యూ మాత్రమే. |
 
-ఈ ప్రాంప్ట్ ఉపయోగించి
+ప్రస్తుత [Foundry చిత్రం మోడల్స్ జాబితా](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) మరియు ప్రాంతాలను ఎప్పుడూ తనిఖీ చేయండి.
 
-> "ప్రారంభ ఉదయం సూర్యకాంతిలో ఎఫిల్ టవర్ పక్కన కుక్క"
+> **ముఖ్యమైనది:** `gpt-image` మోడల్స్ ఉత్పత్తి చేసిన చిత్రాన్ని **base64** (`b64_json`) రూపంలో ఇస్తాయి, URL రూపంలో కాక. మీ కోడ్ base64 స్ట్రింగ్ ను బైట్లుగా డీకోడ్ చేసి సేవ్ చేస్తుంది - చిత్ర URL లేకుండా.
 
-## DALL-E మరియు Midjourney అంటే ఏమిటి?
+## సెటప్
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) మరియు [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) రెండు అత్యంత ప్రాచుర్యం పొందిన చిత్రం సృష్టి మోడల్స్, ఇవి ప్రాంప్ట్‌లను ఉపయోగించి చిత్రాలను సృష్టించడానికి అనుమతిస్తాయి.
+మీరు సాంపిల్స్ ను **Azure OpenAI in Microsoft Foundry** (`aoai-*` సాంపిల్స్) లేదా **OpenAI వేదిక** (`oai-*` సాంపిల్స్) పై నడపవచ్చు.
 
-### DALL-E
+### 1. ఒక మోడల్ క్రియేట్ చేసి డిప్లాయ్ చేయండి
 
-ముందుగా DALL-E తో ప్రారంభిద్దాం, ఇది టెక్స్ట్ వివరణల నుండి చిత్రాలను సృష్టించే జనరేటివ్ AI మోడల్.
+Microsoft Foundry వనరు సృష్టించడానికి [create a resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) గైడ్ పాటించండి, తర్వాత చిత్రం మోడల్ ను డిప్లాయ్ చేయండి - **`gpt-image-2`** సిఫార్సు చేయబడింది.
 
-> [DALL-E అనేది రెండు మోడల్స్, CLIP మరియు diffused attention కలయిక](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. మీ `.env` కాన్ఫిగర్ చేయండి
 
-- **CLIP**, చిత్రాలు మరియు టెక్స్ట్ నుండి డేటా యొక్క సంఖ్యాత్మక ప్రాతినిధ్యాలు అయిన ఎంబెడ్డింగ్స్‌ను సృష్టించే మోడల్.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention**, ఎంబెడ్డింగ్స్ నుండి చిత్రాలను సృష్టించే మోడల్. DALL-E చిత్రాలు మరియు టెక్స్ట్ డేటాసెట్‌పై శిక్షణ పొందింది మరియు టెక్స్ట్ వివరణల నుండి చిత్రాలను సృష్టించడానికి ఉపయోగించవచ్చు. ఉదాహరణకు, DALL-E టోపీ వేసుకున్న పిల్లి లేదా మొహాక్ ఉన్న కుక్క చిత్రాలను సృష్టించవచ్చు.
+మీ వనరు యొక్క **Deployments** పేజీలో [Foundry portal](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) లో ఈ విలువలు కనుగొనండి.
 
-### Midjourney
+### 3. లైబ్రరీలు ఇన్‌స్టాల్ చేయండి
 
-Midjourney DALL-E లాగా పనిచేస్తుంది, ఇది టెక్స్ట్ ప్రాంప్ట్‌ల నుండి చిత్రాలను సృష్టిస్తుంది. Midjourney కూడా “టోపీ వేసుకున్న పిల్లి” లేదా “మోహాక్ ఉన్న కుక్క” వంటి ప్రాంప్ట్‌లను ఉపయోగించి చిత్రాలను సృష్టించవచ్చు.
+ఒక `requirements.txt` సృష్టించండి:
 
-![Midjourney ద్వారా సృష్టించబడిన చిత్రం, యాంత్రిక పావురం](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_చిత్ర క్రెడిట్ వికీపీడియా, Midjourney ద్వారా సృష్టించబడిన చిత్రం_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## DALL-E మరియు Midjourney ఎలా పనిచేస్తాయి
+తర్వాత ఒక వర్చువల్ ఎన్విరాన్‌మెంట్ సృష్టించి యాక్టివేట్ చేసి, ఇన్‌స్టాల్ చేయండి:
 
-ముందుగా, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E అనేది ట్రాన్స్‌ఫార్మర్ ఆర్కిటెక్చర్ ఆధారిత జనరేటివ్ AI మోడల్, ఇది _ఆటోరెగ్రెసివ్ ట్రాన్స్‌ఫార్మర్_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-ఒక _ఆటోరెగ్రెసివ్ ట్రాన్స్‌ఫార్మర్_ మోడల్ టెక్స్ట్ వివరణల నుండి చిత్రాలను ఎలా సృష్టిస్తుందో నిర్వచిస్తుంది, ఇది ఒక్కో పిక్సెల్‌ను ఒకేసారి సృష్టించి, ఆ పిక్సెల్‌లను ఉపయోగించి తదుపరి పిక్సెల్‌ను సృష్టిస్తుంది. న్యూరల్ నెట్‌వర్క్‌లో అనేక లేయర్ల ద్వారా పాస్ అవుతుంది, చివరికి చిత్రం పూర్తవుతుంది.
+## యాప్ ను నిర్మించండి
 
-ఈ ప్రక్రియతో, DALL-E సృష్టించే చిత్రంలో లక్షణాలు, వస్తువులు, లక్షణాలు మరియు మరెన్నో నియంత్రిస్తుంది. అయితే, DALL-E 2 మరియు 3 సృష్టించిన చిత్రంపై మరింత నియంత్రణ కలిగి ఉంటాయి.
+క్రింది కోడ్ తో `app.py` సృష్టించండి. ఇది ఒక చిత్రం సృష్టించి PNG గా సేవ్ చేస్తుంది.
 
-## మీ మొదటి చిత్రం సృష్టి అనువర్తనం నిర్మించడం
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-అప్పుడు చిత్రం సృష్టి అనువర్తనం నిర్మించడానికి ఏమి అవసరం? మీరు ఈ క్రింది లైబ్రరీలను అవసరం:
+dotenv.load_dotenv()
 
-- **python-dotenv**, మీ రహస్యాలను కోడ్ నుండి దూరంగా _.env_ ఫైల్‌లో ఉంచడానికి ఈ లైబ్రరీని ఉపయోగించడం చాలా సిఫార్సు చేయబడింది.
-- **openai**, ఈ లైబ్రరీని మీరు OpenAI APIతో ఇంటరాక్ట్ చేయడానికి ఉపయోగిస్తారు.
-- **pillow**, Pythonలో చిత్రాలతో పని చేయడానికి.
-- **requests**, HTTP అభ్యర్థనలు చేయడానికి సహాయపడుతుంది.
+# క్లయింట్ను మీ Azure OpenAI (Microsoft Foundry) వనరుపై పాయింట్ చేయండి.
+# చిత్రం మోడల్స్ కు సమకాలీన API వర్షన్ అవసరం - మీ మోడల్ అవసరాన్ని తెలుసుకోవడానికి Foundry దస్త్రాలను తనిఖీ చేయండి.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Azure OpenAI మోడల్ సృష్టించి డిప్లాయ్ చేయండి
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # ఉదా: "gpt-image-2"
 
-ఇప్పటికే చేయకపోతే, [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) పేజీలోని సూచనలను అనుసరించి Azure OpenAI వనరును మరియు మోడల్‌ను సృష్టించండి. మోడల్‌గా DALL-E 3 ఎంచుకోండి.
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # అలాగే 1536x1024 (ల్యాండ్‌స్కేప్), 1024x1536 (పోర్ట్రెయిట్), లేదా "ఆటో"
+    n=1,
+)
 
-## అనువర్తనం సృష్టించండి
-
-1. క్రింది కంటెంట్‌తో _.env_ ఫైల్ సృష్టించండి:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   ఈ సమాచారాన్ని Azure OpenAI Foundry పోర్టల్‌లో మీ వనరు "Deployments" విభాగంలో కనుగొనండి.
-
-1. పై లైబ్రరీలను _requirements.txt_ అనే ఫైల్‌లో సేకరించండి:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. తరువాత, వర్చువల్ ఎన్విరాన్‌మెంట్ సృష్టించి లైబ్రరీలను ఇన్‌స్టాల్ చేయండి:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Windows కోసం, వర్చువల్ ఎన్విరాన్‌మెంట్ సృష్టించి యాక్టివేట్ చేయడానికి క్రింది కమాండ్లను ఉపయోగించండి:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. _app.py_ అనే ఫైల్‌లో క్రింది కోడ్ జోడించండి:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # dotenv ను దిగుమతి చేసుకోండి
-    dotenv.load_dotenv()
-    
-    # Azure OpenAI సేవ క్లయింట్‌ను కాన్ఫిగర్ చేయండి
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # ఇమేజ్ జనరేషన్ API ఉపయోగించి చిత్రం సృష్టించండి
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # నిల్వ చేయబడిన చిత్రానికి డైరెక్టరీని సెట్ చేయండి
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # డైరెక్టరీ లేకపోతే, దాన్ని సృష్టించండి
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # చిత్రం మార్గాన్ని ప్రారంభించండి (ఫైల్ రకం png కావాలి)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # సృష్టించబడిన చిత్రాన్ని పొందండి
-        image_url = generation_response.data[0].url  # ప్రతిస్పందన నుండి చిత్రం URL ను తీసుకోండి
-        generated_image = requests.get(image_url).content  # చిత్రాన్ని డౌన్లోడ్ చేయండి
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # డిఫాల్ట్ చిత్రం వీక్షకంలో చిత్రాన్ని ప్రదర్శించండి
-        image = Image.open(image_path)
-        image.show()
-
-    # తప్పిదాలను పట్టుకోండి
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-ఈ కోడ్‌ను వివరించుకుందాం:
-
-- మొదట, మనం అవసరమైన లైబ్రరీలను దిగుమతి చేసుకుంటాము, అందులో OpenAI లైబ్రరీ, dotenv లైబ్రరీ, requests లైబ్రరీ, మరియు Pillow లైబ్రరీ ఉన్నాయి.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- తరువాత, _.env_ ఫైల్ నుండి ఎన్విరాన్‌మెంట్ వేరియబుల్స్‌ను లోడ్ చేస్తాము.
-
-  ```python
-  # డాట్‌ఎన్‌వి ని దిగుమతి చేసుకోండి
-  dotenv.load_dotenv()
-  ```
-
-- ఆ తర్వాత, Azure OpenAI సర్వీస్ క్లయింట్‌ను కాన్ఫిగర్ చేస్తాము
-
-  ```python
-  # ఎండ్పాయింట్ మరియు కీని పర్యావరణ చరాలు నుండి పొందండి
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- తరువాత, చిత్రం సృష్టిస్తాము:
-
-  ```python
-  # ఇమేజ్ జనరేషన్ API ఉపయోగించి ఒక చిత్రం సృష్టించండి
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  పై కోడ్ సృష్టించిన చిత్ర URL కలిగిన JSON ఆబ్జెక్ట్‌తో స్పందిస్తుంది. ఆ URL ఉపయోగించి చిత్రాన్ని డౌన్లోడ్ చేసి ఫైల్‌గా సేవ్ చేయవచ్చు.
-
-- చివరగా, చిత్రాన్ని తెరిచి సాధారణ చిత్రం వీక్షకుడిని ఉపయోగించి ప్రదర్శిస్తాము:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### చిత్రాన్ని సృష్టించే కోడ్ గురించి మరిన్ని వివరాలు
-
-చిత్రాన్ని సృష్టించే కోడ్‌ను మరింత వివరంగా చూద్దాం:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, చిత్రం సృష్టించడానికి ఉపయోగించే టెక్స్ట్ ప్రాంప్ట్. ఈ సందర్భంలో, "Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils" అనే ప్రాంప్ట్ ఉపయోగిస్తున్నాము.
-- **size**, సృష్టించబడే చిత్ర పరిమాణం. ఈ సందర్భంలో, 1024x1024 పిక్సెల్స్ పరిమాణంలో చిత్రం సృష్టిస్తున్నాము.
-- **n**, సృష్టించబడే చిత్రాల సంఖ్య. ఈ సందర్భంలో, రెండు చిత్రాలు సృష్టిస్తున్నాము.
-- **temperature**, జనరేటివ్ AI మోడల్ అవుట్పుట్ యొక్క యాదృచ్ఛికతను నియంత్రించే పారామీటర్. టెంపరేచర్ 0 నుండి 1 మధ్య విలువ, 0 అంటే అవుట్పుట్ నిర్దిష్టంగా ఉంటుంది, 1 అంటే అవుట్పుట్ యాదృచ్ఛికంగా ఉంటుంది. డిఫాల్ట్ విలువ 0.7.
-
-మరిన్ని చిత్రాలతో మీరు చేయగలిగే విషయాలను తదుపరి విభాగంలో కవర్ చేస్తాము.
-
-## చిత్రం సృష్టి అదనపు సామర్థ్యాలు
-
-ఇప్పటివరకు మనం Pythonలో కొన్ని లైన్లతో చిత్రం సృష్టించగలిగిన విధానం చూశాం. అయితే, చిత్రాలతో మరిన్ని పనులు చేయవచ్చు.
-
-మీరు క్రింది పనులు కూడా చేయవచ్చు:
-
-- **సవరణలు చేయండి**. ఇప్పటికే ఉన్న చిత్రానికి మాస్క్ మరియు ప్రాంప్ట్ ఇవ్వడం ద్వారా, మీరు చిత్రాన్ని మార్చవచ్చు. ఉదాహరణకు, చిత్రంలోని ఒక భాగానికి ఏదైనా జోడించవచ్చు. మన బన్నీ చిత్రాన్ని ఊహించండి, బన్నీకి టోపీ జోడించవచ్చు. మీరు ఎలా చేస్తారు అంటే, చిత్రం, మాస్క్ (మార్పు చేయవలసిన ప్రాంతాన్ని గుర్తించే) మరియు టెక్స్ట్ ప్రాంప్ట్ ఇవ్వడం ద్వారా.  
-> గమనిక: ఇది DALL-E 3లో మద్దతు లేదు.
-
-ఇక్కడ GPT Image ఉపయోగించి ఒక ఉదాహరణ ఉంది:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  ప్రాథమిక చిత్రం కేవలం పూల్ ఉన్న లౌంజ్ మాత్రమే ఉంటుంది కానీ తుది చిత్రంలో ఫ్లామింగో ఉంటుంది:
+# gpt-image మోడల్స్ బేస్64 (b64_json) ను తిరిగి ఇస్తాయి, URL కాదు - దాన్ని బైట్స్ గా డీకోడ్ చేయండి.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+`python app.py` తో నడపండి. మీరు `images/` క్రింద ఒక PNG సేవ్ చేయబడినదనిపిస్తారు.
+
+> ప్రతి `images.generate` కాల్ ఒకే ప్రాంప్ట్ కు వేరియేషన్ ఉన్న చిత్రాన్ని ఉత్పత్తి చేస్తుంది - చిత్రం మోడల్స్ `temperature` పారా మీటర్ తీసుకోవు (దీని వాడకం టెక్స్ట్-సృష్టి నియంత్రణకు). వైవిధ్యాన్ని పొందడానికి మళ్ళీ API పిలవండి; వైవిధ్యాన్ని తగ్గించేందుకు ప్రాంప్ట్ మరింత ప్రత్యేకంగా చేయండి.
+
+## చిత్రాలను సవరించడం
+
+`gpt-image` మోడల్స్ ఒక ఉన్న చిత్రం **తమ సవరించవచ్చు**: చిత్రం, ఐచ్చిక **మాస్క్** (మార్పు చేయవలసిన ప్రాంతాన్ని సూచించే) మరియు మార్పుని వివరించే ప్రాంప్ట్ ఇస్తారు. సృష్టి లాగా, సవరింపులు కూడా base64 రూపంలో ఇవ్వబడుతాయి.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/te/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -268,213 +148,51 @@ _చిత్ర క్రెడిట్ వికీపీడియా, Midjou
   <img src="../../../translated_images/te/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **వేరియేషన్లు సృష్టించండి**. మీరు ఇప్పటికే ఉన్న చిత్రాన్ని తీసుకుని వేరియేషన్లు సృష్టించాలని అడగవచ్చు. వేరియేషన్ సృష్టించడానికి, మీరు చిత్రం మరియు టెక్స్ట్ ప్రాంప్ట్ ఇస్తారు, మరియు క్రింది కోడ్ వంటిది ఉపయోగిస్తారు:
+## మెటాప్రాంప్ట్స్ తో సరిచూడకులు ఏర్పాటు చేయడం
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > గమనిక, ఇది కేవలం OpenAIలో మద్దతు పొందింది
-
-## టెంపరేచర్
-
-టెంపరేచర్ అనేది జనరేటివ్ AI మోడల్ అవుట్పుట్ యొక్క యాదృచ్ఛికతను నియంత్రించే పారామీటర్. టెంపరేచర్ 0 నుండి 1 మధ్య విలువ, 0 అంటే అవుట్పుట్ నిర్దిష్టంగా ఉంటుంది, 1 అంటే అవుట్పుట్ యాదృచ్ఛికంగా ఉంటుంది. డిఫాల్ట్ విలువ 0.7.
-
-టెంపరేచర్ ఎలా పనిచేస్తుందో ఒక ఉదాహరణ చూద్దాం, ఈ ప్రాంప్ట్‌ను రెండు సార్లు నడిపించడం ద్వారా:
-
-> ప్రాంప్ట్ : "Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils"
-
-![గాడిదపై బన్నీ, వెర్షన్ 1](../../../translated_images/te/v1-generated-image.a295cfcffa3c13c2.webp)
-
-ఇప్పుడు అదే ప్రాంప్ట్‌ను మరోసారి నడిపించి, రెండు సార్లు అదే చిత్రం రాదు అని చూద్దాం:
-
-![గాడిదపై బన్నీ చిత్రం](../../../translated_images/te/v2-generated-image.33f55a3714efe61d.webp)
-
-మీరు చూడగలిగినట్లుగా, చిత్రాలు సమానంగా ఉన్నా, ఒకేలా లేవు. ఇప్పుడు టెంపరేచర్ విలువను 0.1కి మార్చి చూద్దాం:
+ఒకసారి మీరు చిత్రాలు సృష్టించగలిగాక, మీ యాప్ అసురక్షిత లేదా బ్రాండ్‌కు అనుకూలం కాని విషయం ఉత్పత్తి చేయకుండా గార్డ్రైల్‌లు అవసరం. **మెటాప్రాంప్ట్** అనగా, మోడల్ అవుట్పుట్‌ను పరిమితం చేయడానికి యూజర్ ప్రాంప్ట్ ముందు జత చేసే పాఠ్యం.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # మీ ప్రాంప్ట్ టెక్స్ట్ ఇక్కడ నమోదు చేయండి
-        size='1024x1024',
-        n=2
-    )
-```
-
-### టెంపరేచర్ మార్చడం
-
-కాబట్టి ప్రతిస్పందన మరింత నిర్దిష్టంగా ఉండేలా ప్రయత్నిద్దాం. మనం సృష్టించిన రెండు చిత్రాల నుండి గమనించవచ్చు, మొదటి చిత్రంలో బన్నీ ఉంది, రెండవ చిత్రంలో గాడిద ఉంది, కాబట్టి చిత్రాలు చాలా భిన్నంగా ఉన్నాయి.
-
-అందువల్ల మన కోడ్ మార్చి టెంపరేచర్‌ను 0గా సెట్ చేద్దాం:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # ఇక్కడ మీ ప్రాంప్ట్ టెక్స్ట్‌ను నమోదు చేయండి
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-ఇప్పుడు మీరు ఈ కోడ్ నడిపినప్పుడు, ఈ రెండు చిత్రాలు వస్తాయి:
-
-- ![టెంపరేచర్ 0, వి1](../../../translated_images/te/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![టెంపరేచర్ 0, వి2](../../../translated_images/te/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-ఇక్కడ మీరు స్పష్టంగా చూడవచ్చు, చిత్రాలు ఒకదానితో మరింత సమానంగా ఉన్నాయని.
-
-## మీ అనువర్తనానికి సరిహద్దులను మెటాప్రాంప్ట్‌లతో ఎలా నిర్వచించాలి
-
-మన డెమోతో, మనం ఇప్పటికే క్లయింట్ల కోసం చిత్రాలను సృష్టించగలుగుతున్నాము. అయితే, మన అనువర్తనానికి కొన్ని సరిహద్దులను సృష్టించాలి.
-
-ఉదాహరణకు, పని కోసం సురక్షితంగా లేని లేదా పిల్లలకి అనుకూలంగా లేని చిత్రాలను సృష్టించకూడదు.
-
-ఇది _మెటాప్రాంప్ట్‌లు_ తో చేయవచ్చు. మెటాప్రాంప్ట్‌లు జనరేటివ్ AI మోడల్ అవుట్పుట్‌ను నియంత్రించడానికి ఉపయోగించే టెక్స్ట్ ప్రాంప్ట్‌లు. ఉదాహరణకు, అవుట్పుట్‌ను నియంత్రించడానికి మరియు సృష్టించబడిన చిత్రాలు పని కోసం సురక్షితంగా లేదా పిల్లలకి అనుకూలంగా ఉండేలా నిర్ధారించడానికి మెటాప్రాంప్ట్‌లను ఉపయోగించవచ్చు.
-
-### ఇది ఎలా పనిచేస్తుంది?
-
-ఇప్పుడు, మెటాప్రాంప్ట్‌లు ఎలా పనిచేస్తాయి?
-
-మెటాప్రాంప్ట్‌లు జనరేటివ్ AI మోడల్ అవుట్పుట్‌ను నియంత్రించడానికి ఉపయోగించే టెక్స్ట్ ప్రాంప్ట్‌లు, ఇవి టెక్స్ట్ ప్రాంప్ట్ ముందు ఉంచబడతాయి, మరియు మోడల్ అవుట్పుట్‌ను నియంత్రించడానికి ఉపయోగిస్తారు మరియు అనువర్తనాల్లో మోడల్ అవుట్పుట్‌ను నియంత్రించడానికి ఎంబెడ్ చేయబడతాయి. ప్రాంప్ట్ ఇన్‌పుట్ మరియు మెటాప్రాంప్ట్ ఇన్‌పుట్‌ను ఒకే టెక్స్ట్ ప్రాంప్ట్‌లో కప్పివేస్తాయి.
-
-మెటాప్రాంప్ట్ యొక్క ఒక ఉదాహరణ క్రింది విధంగా ఉంటుంది:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-ఇప్పుడు, మన డెమోలో మెటాప్రాంప్ట్‌లను ఎలా ఉపయోగించవచ్చో చూద్దాం.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO చిత్రం సృష్టించడానికి అభ్యర్థన జోడించండి
-```
-
-పై ప్రాంప్ట్ నుండి, మీరు సృష్టించబడుతున్న అన్ని చిత్రాలు మెటాప్రాంప్ట్‌ను పరిగణలోకి తీసుకుంటున్నాయని చూడవచ్చు.
-
-## అసైన్‌మెంట్ - విద్యార్థులను సక్రియం చేద్దాం
-
-ఈ పాఠం ప్రారంభంలో Edu4All ను పరిచయం చేసాము. ఇప్పుడు విద్యార్థులు తమ అసెస్మెంట్ల కోసం చిత్రాలను సృష్టించగలిగేలా చేయాల్సిన సమయం వచ్చింది.
-
-విద్యార్థులు తమ అసెస్మెంట్ల కోసం స్మారక చిహ్నాలు కలిగిన చిత్రాలను సృష్టిస్తారు, ఏ స్మారక చిహ్నాలు కావాలో విద్యార్థులపై ఆధారపడి ఉంటుంది. విద్యార్థులు ఈ పనిలో తమ సృజనాత్మకతను ఉపయోగించి ఈ స్మారక చిహ్నాలను వివిధ సందర్భాలలో ఉంచాలని అడుగుతారు.
-
-## పరిష్కారం
-
-ఇది ఒక సాధ్యమైన పరిష్కారం:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# dotenv ను దిగుమతి చేసుకోండి
-dotenv.load_dotenv()
-
-# ఎండ్పాయింట్ మరియు కీని వాతావరణ చరాలు నుండి పొందండి
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # ఇమేజ్ జనరేషన్ API ఉపయోగించి ఒక చిత్రం సృష్టించండి
-    generation_response = client.images.generate(
-        prompt=prompt,    # మీ ప్రాంప్ట్ టెక్స్ట్ ఇక్కడ నమోదు చేయండి
-        size='1024x1024',
-        n=1,
-    )
-    # నిల్వ చేయబడిన చిత్రానికి డైరెక్టరీని సెట్ చేయండి
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # డైరెక్టరీ లేకపోతే, దాన్ని సృష్టించండి
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # చిత్రం మార్గాన్ని ప్రారంభించండి (ఫైల్ టైపు png కావాలి)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # సృష్టించబడిన చిత్రాన్ని పొందండి
-    image_url = generation_response.data[0].url  # ప్రతిస్పందన నుండి చిత్రం URL ను తీసుకోండి
-    generated_image = requests.get(image_url).content  # చిత్రాన్ని డౌన్లోడ్ చేయండి
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # డిఫాల్ట్ చిత్రం వీక్షకంలో చిత్రాన్ని ప్రదర్శించండి
-    image = Image.open(image_path)
-    image.show()
-
-# తప్పిదాలను పట్టుకోండి
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# `prompt` ను client.images.generate(...) కు రంపిణీ చేయండి
 ```
 
-## అద్భుతమైన పని! మీ అభ్యాసాన్ని కొనసాగించండి
+ఇపుడు ప్రతి చిత్రం మెటాప్రాంప్ట్ ద్వారా నియంత్రితమైన పరిమితులలో తయారవుతుంది. దీన్ని Microsoft Foundryలో లోపల ఉన్న భద్రతా ఫిల్టర్స్ తో కలిపి ఉపయోగించండి.
 
-ఈ పాఠం పూర్తి చేసిన తర్వాత, మా [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ను పరిశీలించి మీ Generative AI జ్ఞానాన్ని మరింత పెంచుకోండి!
+## అసైన్‌మెంట్ - విద్యార్థులను సహాయపడుదాం
 
-పాఠం 10 కి వెళ్లండి, అక్కడ మేము [తక్కువ కోడ్‌తో AI అనువర్తనాలను ఎలా నిర్మించాలో](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst) చూడబోతున్నాము.
+Edu4All విద్యార్థులకు వారి అసెస్మెంట్‌ల కోసం చిత్రాలు కావాలి. మీరు **స్మారకచిహ్నాలు** (ఏ స్మారకచిహ్నాలు మీరు ఎంచుకోవచ్చు) సంఘటిత, సృజనాత్మక వాతావరణాలలో ఉంచిన చిత్రాలు ఉత్పత్తి చేసే యాప్ ని నిర్మించండి - ఉదాహరణకు, ఒక ప్రసిద్ధ ల్యాండ్‌మార్క్ సూర్యాస్తమయంలో, అందులో ఒక చిన్న పిల్ల పిల్లాడి చూపుతో.
+
+స్వయంగా ప్రయత్నించి, తరువాత సూచిత పరిష్కారాలతో సరిపోల్చండి:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) పూర్తి సృష్టి యాప్: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+అలాగే [python/](../../../09-building-image-applications/python) లో నోట్బుక్స్ ద్వారా పని చేయండి (`aoai-assignment.ipynb` Azure కోసం, `oai-assignment.ipynb` OpenAI కోసం).
+
+## అద్భుతమైన పని! మీ అభ్యాసం కొనసాగించండి
+
+ఈ పాఠం పూర్తి చేసిన తర్వాత, మా [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ను పరిశీలించి మీ గెనరేటివ్ AI జ్ఞానాన్ని మరింత పెంచుకోండి!
+
+పాఠం 10 కు వెళ్లి మీ అభ్యాసాన్ని కొనసాగించండి.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**అస్పష్టత**:  
-ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో పొరపాట్లు లేదా తప్పిదాలు ఉండవచ్చు. మూల పత్రం దాని స్వదేశీ భాషలో అధికారిక మూలంగా పరిగణించాలి. ముఖ్యమైన సమాచారానికి, ప్రొఫెషనల్ మానవ అనువాదం సిఫార్సు చేయబడుతుంది. ఈ అనువాదం వాడకంలో ఏర్పడిన ఏవైనా అపార్థాలు లేదా తప్పుదారుల కోసం మేము బాధ్యత వహించము.
+**అస్వీకరణ**:
+ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నిస్తున్నప్పటికీ, ఆటోమేటెడ్ అనువాదాలు తప్పులు లేదా అసమగ్రతలను కలిగి ఉండవచ్చు. దాని స్వదేశ భాషలో ఉన్న అసలు పత్రాన్ని అధికారం కలిగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదాన్ని సిఫారసు చేస్తాము. ఈ అనువాదం ఉపయోగం వల్ల కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదారులు కోసం మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

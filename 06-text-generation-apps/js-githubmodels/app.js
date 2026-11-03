@@ -1,14 +1,21 @@
 import ModelClient from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
 
-// SECURITY: Validate required environment variable
-const token = process.env["GITHUB_TOKEN"];
+// SECURITY: Validate required environment variables
+// Get these from your Microsoft Foundry project's "Overview" page
+// (GitHub Models is retiring end of July 2026 - see https://ai.azure.com/catalog/models)
+const token = process.env["AZURE_INFERENCE_CREDENTIAL"];
 if (!token) {
-    throw new Error("GITHUB_TOKEN environment variable is required. Please set it before running this application.");
+    throw new Error("AZURE_INFERENCE_CREDENTIAL environment variable is required. Please set it before running this application.");
 }
 
-const endpoint = "https://models.inference.ai.azure.com";
-const modelName = "gpt-4o";
+const endpoint = process.env["AZURE_INFERENCE_ENDPOINT"];
+if (!endpoint) {
+    throw new Error("AZURE_INFERENCE_ENDPOINT environment variable is required. Please set it before running this application.");
+}
+// temperature/top_p need a non-reasoning model (reasoning models like gpt-5 reject them),
+// so use a Llama model via the Microsoft Foundry Models endpoint to demonstrate temperature.
+const modelName = process.env["AZURE_INFERENCE_CHAT_MODEL"] || "Llama-3.3-70B-Instruct";
 
 export async function main() {
 

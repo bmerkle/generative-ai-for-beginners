@@ -1,105 +1,146 @@
-[![Open Source Models](../../../translated_images/pt-PT/18-lesson-banner.f30176815b1a5074.webp)](https://youtu.be/6UAwhL9Q-TQ?si=5jJd8yeQsCfJ97em)
+[![Modelos Open Source](../../../translated_images/pt-PT/18-lesson-banner.f30176815b1a5074.webp)](https://youtu.be/6UAwhL9Q-TQ?si=5jJd8yeQsCfJ97em)
 
-# Ajuste Fino do Seu LLM
+# Ajustar Fintamente o Seu LLM
 
-Usar grandes modelos de linguagem para construir aplicações de IA generativa traz novos desafios. Uma questão chave é garantir a qualidade da resposta (exatidão e relevância) no conteúdo gerado pelo modelo para um dado pedido do utilizador. Nas lições anteriores, discutimos técnicas como engenharia de prompts e geração aumentada por recuperação que tentam resolver o problema ao _modificar a entrada do prompt_ para o modelo existente.
+Utilizar grandes modelos de linguagem para construir aplicações de IA generativa traz novos desafios. Uma questão chave é garantir a qualidade da resposta (exatidão e relevância) no conteúdo gerado pelo modelo para um dado pedido do utilizador. Em lições anteriores, discutimos técnicas como engenharia de prompts e geração aumentada por recuperação, que tentam resolver o problema ao _modificar a entrada do prompt_ para o modelo existente.
 
-Na lição de hoje, discutimos uma terceira técnica, o **ajuste fino**, que tenta abordar o desafio _re-treinando o próprio modelo_ com dados adicionais. Vamos entrar em detalhes.
+Na lição de hoje, discutimos uma terceira técnica, o **ajuste fino (fine-tuning)**, que tenta abordar o desafio ao _retreinar o próprio modelo_ com dados adicionais. Vamos mergulhar nos detalhes.
 
 ## Objetivos de Aprendizagem
 
 Esta lição introduz o conceito de ajuste fino para modelos de linguagem pré-treinados, explora os benefícios e desafios desta abordagem, e fornece orientações sobre quando e como usar o ajuste fino para melhorar o desempenho dos seus modelos de IA generativa.
 
-No final desta lição, deverá ser capaz de responder às seguintes perguntas:
+Ao final desta lição, deverá ser capaz de responder às seguintes perguntas:
 
 - O que é ajuste fino para modelos de linguagem?
 - Quando, e porquê, o ajuste fino é útil?
-- Como posso ajustar um modelo pré-treinado?
+- Como posso ajustar finamente um modelo pré-treinado?
 - Quais são as limitações do ajuste fino?
 
 Pronto? Vamos começar.
 
 ## Guia Ilustrado
 
-Quer ter uma visão geral do que vamos cobrir antes de começarmos? Veja este guia ilustrado que descreve a jornada de aprendizagem para esta lição - desde aprender os conceitos essenciais e a motivação para o ajuste fino, até entender o processo e as melhores práticas para executar a tarefa de ajuste fino. Este é um tópico fascinante para exploração, por isso não se esqueça de consultar a página de [Recursos](./RESOURCES.md?WT.mc_id=academic-105485-koreyst) para links adicionais que apoiem a sua aprendizagem autónoma!
+Quer obter uma visão geral do que vamos cobrir antes de começar? Consulte este guia ilustrado que descreve a jornada de aprendizagem para esta lição — desde aprender os conceitos centrais e a motivação para o ajuste fino, até compreender o processo e as melhores práticas para executar a tarefa de ajuste fino. Este é um tema fascinante para explorar, por isso não se esqueça de consultar a página [Recursos](./RESOURCES.md?WT.mc_id=academic-105485-koreyst) para links adicionais que apoiem a sua aprendizagem autónoma!
 
-![Illustrated Guide to Fine Tuning Language Models](../../../translated_images/pt-PT/18-fine-tuning-sketchnote.11b21f9ec8a70346.webp)
+![Guia Ilustrado para Ajuste Fino de Modelos de Linguagem](../../../translated_images/pt-PT/18-fine-tuning-sketchnote.11b21f9ec8a70346.webp)
 
 ## O que é ajuste fino para modelos de linguagem?
 
-Por definição, grandes modelos de linguagem são _pré-treinados_ com grandes quantidades de texto provenientes de fontes diversas, incluindo a internet. Como aprendemos nas lições anteriores, precisamos de técnicas como _engenharia de prompts_ e _geração aumentada por recuperação_ para melhorar a qualidade das respostas do modelo às perguntas do utilizador ("prompts").
+Por definição, grandes modelos de linguagem são _pré-treinados_ em grandes quantidades de texto provenientes de fontes diversas, incluindo a internet. Como aprendemos em lições anteriores, precisamos de técnicas como _engenharia de prompts_ e _geração aumentada por recuperação_ para melhorar a qualidade das respostas do modelo às perguntas do utilizador ("prompts").
 
-Uma técnica popular de engenharia de prompts envolve dar ao modelo mais orientação sobre o que é esperado na resposta, seja fornecendo _instruções_ (orientação explícita) ou _dando-lhe alguns exemplos_ (orientação implícita). Isto é referido como _few-shot learning_ mas tem duas limitações:
+Uma técnica popular de engenharia de prompts envolve dar ao modelo mais orientação sobre o que se espera na resposta, seja fornecendo _instruções_ (orientação explícita) ou _dando-lhe alguns exemplos_ (orientação implícita). Isto é referido como _aprendizagem com poucos exemplos (few-shot learning)_, mas tem duas limitações:
 
-- Os limites de tokens do modelo podem restringir o número de exemplos que pode dar, limitando a eficácia.
-- Os custos de tokens do modelo podem tornar caro adicionar exemplos a cada prompt, limitando a flexibilidade.
+- Limites de tokens do modelo podem restringir o número de exemplos que pode fornecer e limitar a eficácia.
+- Custos por token do modelo podem tornar caro adicionar exemplos a cada prompt e limitar a flexibilidade.
 
-O ajuste fino é uma prática comum em sistemas de aprendizagem automática onde pegamos num modelo pré-treinado e re-treinamo-lo com novos dados para melhorar o seu desempenho numa tarefa específica. No contexto dos modelos de linguagem, podemos ajustar o modelo pré-treinado _com um conjunto selecionado de exemplos para uma dada tarefa ou domínio de aplicação_ para criar um **modelo personalizado** que pode ser mais preciso e relevante para essa tarefa ou domínio específico. Um benefício adicional do ajuste fino é que pode também reduzir o número de exemplos necessários para few-shot learning - reduzindo o uso de tokens e custos relacionados.
+O ajuste fino é uma prática comum em sistemas de machine learning onde pegamos num modelo pré-treinado e o retreinamos com novos dados para melhorar o seu desempenho numa tarefa específica. No contexto dos modelos de linguagem, podemos ajustar finamente o modelo pré-treinado _com um conjunto selecionado de exemplos para uma dada tarefa ou domínio de aplicação_ para criar um **modelo personalizado** que pode ser mais exato e relevante para essa tarefa ou domínio específico. Um benefício secundário do ajuste fino é que também pode reduzir o número de exemplos necessários para o few-shot learning — reduzindo o uso de tokens e custos relacionados.
 
-## Quando e porquê devemos ajustar os modelos?
+## Quando e porquê devemos ajustar finamente modelos?
 
-Neste _contexto_, quando falamos de ajuste fino, referimo-nos ao ajuste fino **supervisionado** onde o re-treinamento é feito por **adicionar novos dados** que não faziam parte do conjunto de dados original de treino. Isto é diferente de uma abordagem não supervisionada de ajuste fino, onde o modelo é re-treinado nos dados originais, mas com hiperparâmetros diferentes.
+Neste _contexto_, quando falamos em ajuste fino, estamos a referir-nos ao ajuste fino **supervisionado**, onde o retreinamento é feito por **adicionar novos dados** que não faziam parte do conjunto de dados original. Isto é diferente da abordagem de ajuste fino não supervisionado onde o modelo é retreinado com os dados originais, mas com hiperparâmetros diferentes.
 
-A coisa importante a lembrar é que o ajuste fino é uma técnica avançada que requer um certo nível de especialização para obter os resultados desejados. Se feito incorretamente, pode não fornecer as melhorias esperadas, e até deteriorar o desempenho do modelo para o seu domínio alvo.
+O ponto principal a lembrar é que o ajuste fino é uma técnica avançada que requer um certo nível de especialização para obter os resultados desejados. Se feito incorretamente, pode não proporcionar as melhorias esperadas, e até pode degradar o desempenho do modelo para o seu domínio alvo.
 
-Por isso, antes de aprender "como" ajustar modelos de linguagem, precisa de saber "porquê" deve tomar este caminho, e "quando" iniciar o processo de ajuste fino. Comece por fazer a si mesmo estas perguntas:
+Então, antes de aprender "como" ajustar finamente modelos de linguagem, precisa de saber "porquê" deve seguir este caminho, e "quando" iniciar o processo de ajuste fino. Comece por se perguntar estas perguntas:
 
-- **Caso de Uso**: Qual é o seu _caso de uso_ para o ajuste fino? Que aspeto do modelo pré-treinado atual quer melhorar?
-- **Alternativas**: Já experimentou _outras técnicas_ para alcançar os resultados desejados? Use-as para criar uma linha base de comparação.
-  - Engenharia de prompts: Experimente técnicas como few-shot prompting com exemplos de respostas relevantes. Avalie a qualidade das respostas.
-  - Geração Aumentada por Recuperação: Experimente aumentar os prompts com resultados de pesquisa do seu dado. Avalie a qualidade das respostas.
-- **Custos**: Identificou os custos do ajuste fino?
-  - Possibilidade de ajuste - o modelo pré-treinado está disponível para ajuste fino?
+- **Caso de Uso**: Qual é o seu _caso de uso_ para ajuste fino? Que aspeto do modelo pré-treinado atual quer melhorar?
+- **Alternativas**: Já tentou _outras técnicas_ para atingir os resultados desejados? Use-as para criar uma base de comparação.
+  - Engenharia de Prompt: Tente técnicas como few-shot prompting com exemplos de respostas relevantes. Avalie a qualidade das respostas.
+  - Geração Aumentada por Recuperação: Tente aumentar os prompts com resultados de consultas obtidas pela pesquisa dos seus dados. Avalie a qualidade das respostas.
+- **Custos**: Já identificou os custos do ajuste fino?
+  - Tunabilidade - o modelo pré-treinado está disponível para ajuste fino?
   - Esforço - para preparar dados de treino, avaliar e refinar o modelo.
-  - Computação - para executar trabalhos de ajuste fino e implementar o modelo ajustado.
+  - Computação - para correr trabalhos de ajuste fino e implementar o modelo ajustado.
   - Dados - acesso a exemplos de qualidade suficiente para impacto do ajuste fino.
-- **Benefícios**: Confirmou os benefícios do ajuste fino?
-  - Qualidade - o modelo ajustado teve um desempenho superior à linha base?
-  - Custo - reduz o uso de tokens simplificando os prompts?
+- **Benefícios**: Já confirmou os benefícios do ajuste fino?
+  - Qualidade - o modelo ajustado teve desempenho melhor que a linha de base?
+  - Custo - reduz o uso de tokens ao simplificar os prompts?
   - Extensibilidade - pode reutilizar o modelo base para novos domínios?
 
-Respondendo a estas perguntas, deverá ser capaz de decidir se o ajuste fino é a abordagem certa para o seu caso de uso. Idealmente, a abordagem é válida apenas se os benefícios superarem os custos. Depois de decidir avançar, é tempo de pensar _como_ pode ajustar o modelo pré-treinado.
+Ao responder a estas perguntas, deverá ser capaz de decidir se o ajuste fino é a abordagem correta para o seu caso de uso. Idealmente, a abordagem é válida somente se os benefícios superarem os custos. Depois de decidir avançar, é hora de pensar _como_ pode ajustar finamente o modelo pré-treinado.
 
-Quer obter mais insights no processo de decisão? Veja [Ajustar ou não ajustar](https://www.youtube.com/watch?v=0Jo-z-MFxJs)
+Quer obter mais insights sobre o processo de decisão? Veja [Ajustar finamente ou não ajustar finamente](https://www.youtube.com/watch?v=0Jo-z-MFxJs)
 
-## Como podemos ajustar um modelo pré-treinado?
+## Como podemos ajustar finamente um modelo pré-treinado?
 
-Para ajustar um modelo pré-treinado, precisa de ter:
+Para ajustar finamente um modelo pré-treinado, precisa de:
 
 - um modelo pré-treinado para ajustar
 - um conjunto de dados para usar no ajuste fino
-- um ambiente de treino para executar a tarefa de ajuste fino
-- um ambiente de implementação para alojar o modelo ajustado
+- um ambiente de treino para executar o trabalho de ajuste fino
+- um ambiente de hospedagem para implementar o modelo ajustado
+
+## Ajuste Fino na Microsoft Foundry
+
+[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) é onde ajusta finamente, implementa e gere modelos personalizados na Azure hoje (reúne o que antes era Azure OpenAI Studio e Azure AI Studio). Antes de iniciar um trabalho, é útil compreender as escolhas que a Foundry lhe oferece — e as melhores práticas recomendadas pela plataforma. Por trás das cortinas, a Foundry usa **LoRA (low-rank adaptation)** para ajustar modelos eficientemente, o que mantém o treino mais rápido e mais acessível que retreinar cada peso.
+
+### Passo 1: Escolher uma técnica de treino
+
+A Foundry suporta três técnicas de ajuste fino. **Comece com SFT** — cobre a maior variedade de cenários.
+
+| Técnica | O que faz | Quando usar |
+| --- | --- | --- |
+| **Ajuste Fino Supervisionado (SFT)** | Treina em pares exemplo de entrada/saída para que o modelo aprenda a produzir as respostas que deseja. | O padrão para a maioria das tarefas: especialização de domínio, desempenho em tarefas, estilo e tom, seguir instruções, e adaptação linguística. |
+| **Otimização Direta por Preferência (DPO)** | Aprende a partir de pares de resposta _preferida vs. não preferida_ para alinhar saídas com preferências humanas. | Melhorar a qualidade da resposta, segurança e alinhamento quando tem feedback comparativo. |
+| **Ajuste Fino por Reforço (RFT)** | Usa sinais de recompensa de _avaliadores_ para otimizar comportamentos complexos com aprendizagem por reforço. | Domínios objetivos e de raciocínio pesado (matemática, química, física) com respostas claras certas/erradas. Requer mais especialização em ML. |
+
+### Passo 2: Escolher um nível de treino
+
+A Foundry deixa-o escolher como e onde o treino corre:
+
+- **Standard** - treina na região do seu recurso e garante residência dos dados. Use quando os dados devem permanecer numa região específica.
+- **Global** - mais barato e rápido na fila ao usar capacidade para além da sua região (dados e pesos são copiados para a região de treino). Boa opção padrão quando residência de dados não é um requisito.
+- **Developer** - o custo mais baixo, usando capacidade livre sem garantias de latência/SLA (os trabalhos podem ser preteridos e retomados). Ideal para experimentação.
+
+### Passo 3: Escolher um modelo base
+
+Modelos ajustáveis incluem OpenAI `gpt-4o-mini`, `gpt-4o`, `gpt-4.1`, `gpt-4.1-mini` e `gpt-4.1-nano` (SFT; a família 4o/4.1 também suporta DPO), os modelos de raciocínio `o4-mini` e `gpt-5` (RFT), além de modelos open-source como `Ministral-3B`, `Qwen-32B`, `Llama-3.3-70B-Instruct`, e `gpt-oss-20b` (SFT em recursos Foundry). Consulte sempre a atual [Lista de modelos para ajuste fino](https://learn.microsoft.com/azure/ai-foundry/foundry-models/concepts/models-sold-directly-by-azure?WT.mc_id=academic-105485-koreyst#fine-tuning-models) para métodos suportados, regiões e disponibilidade.
+
+> A Foundry oferece duas modalidades: **serverless** (preços baseados no consumo, sem quota GPU para gerir, OpenAI e modelos selecionados) e **computação gerida** (traga suas próprias VMs via Azure Machine Learning para a maior variedade de modelos). A maioria das pessoas deve começar pelo serverless.
+
+### Melhores práticas da Foundry
+
+- **Primeiro a linha de base.** Meça o modelo base com engenharia de prompt e RAG _antes_ de ajustar finamente, para provar a melhoria.
+- **Comece pequeno, depois escale.** Comece com 50-100 exemplos de alta qualidade para validar a abordagem, depois aumente para 500+ para produção. Qualidade vence quantidade — elimine exemplos de baixa qualidade.
+- **Formate os dados corretamente.** Os ficheiros de treino e validação devem ser JSONL, UTF-8 **com BOM**, abaixo de 512 MB, usando o formato de mensagem chat-completions. Inclua sempre um ficheiro de validação para monitorizar o sobreajuste.
+- **Mantenha o prompt de sistema no treino durante a inferência.** Use a mesma mensagem de sistema quando chamar o modelo que usou no treino.
+- **Avalie checkpoints — não implemente cegamente o último.** A Foundry guarda os últimos três epochs como checkpoints implementáveis; escolha aquele que generaliza melhor observando `train_loss` / `valid_loss` e acurácia de token.
+- **Meça custo em tokens juntamente com qualidade** ao comparar o modelo ajustado com a linha de base.
+- **Itere com ajuste fino contínuo.** Pode ajustar finamente um modelo já ajustado em novos dados (suportado para modelos OpenAI).
+- **Tenha atenção aos custos de hospedagem.** Um modelo personalizado implementado cobra por hora, e uma implementação inativa é removida após 15 dias — limpe o que não precisa.
+
+Percorra o tutorial completo em [Personalizar um modelo com ajuste fino](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/fine-tuning?WT.mc_id=academic-105485-koreyst), e veja os guias para [DPO](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/fine-tuning-direct-preference-optimization?WT.mc_id=academic-105485-koreyst) e [RFT](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/reinforcement-fine-tuning?WT.mc_id=academic-105485-koreyst) quando estiver pronto para as outras técnicas.
 
 ## Ajuste Fino em Ação
 
-Os recursos seguintes fornecem tutoriais passo a passo para o guiar por um exemplo real usando um modelo selecionado com um conjunto de dados selecionado. Para trabalhar estes tutoriais, precisa de uma conta no fornecedor específico, juntamente com acesso ao modelo e conjuntos de dados relevantes.
+Os seguintes recursos fornecem tutoriais passo-a-passo que o guiam através de um exemplo real num modelo atualmente suportado com um conjunto de dados selecionado. Para os seguir, precisa de uma conta no fornecedor específico, junto com acesso ao modelo e conjuntos de dados relevantes.
 
-| Fornecedor   | Tutorial                                                                                                                                                                       | Descrição                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Fornecedor     | Tutorial                                                                                                                                                                       | Descrição                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI       | [Como ajustar modelos de chat](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_finetune_chat_models.ipynb?WT.mc_id=academic-105485-koreyst)                | Aprenda a ajustar um `gpt-35-turbo` para um domínio específico ("assistente de receitas") preparando os dados de treino, executando o trabalho de ajuste fino, e usando o modelo ajustado para inferência.                                                                                                                                                                                                                          |
-| Azure OpenAI | [Tutorial de ajuste fino GPT 3.5 Turbo](https://learn.microsoft.com/azure/ai-services/openai/tutorials/fine-tune?tabs=python-new%2Ccommand-line?WT.mc_id=academic-105485-koreyst) | Aprenda a ajustar um modelo `gpt-35-turbo-0613` **na Azure** seguindo os passos para criar e carregar os dados de treino, executar o trabalho de ajuste fino. Implementar e usar o novo modelo.                                                                                                                                                                                                                                      |
-| Hugging Face | [Ajuste fino de LLMs com Hugging Face](https://www.philschmid.de/fine-tune-llms-in-2024-with-trl?WT.mc_id=academic-105485-koreyst)                                               | Este artigo guia o ajuste fino de um _LLM aberto_ (ex: `CodeLlama 7B`) usando a biblioteca [transformers](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) & o [Transformer Reinforcement Learning (TRL)](https://huggingface.co/docs/trl/index?WT.mc_id=academic-105485-koreyst) com [conjuntos de dados](https://huggingface.co/docs/datasets/index?WT.mc_id=academic-105485-koreyst) abertos no Hugging Face. |
+| OpenAI       | [Como ajustar finamente modelos de chat](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_finetune_chat_models.ipynb?WT.mc_id=academic-105485-koreyst)                | Aprenda a ajustar finamente um modelo de chat recente da OpenAI para um domínio específico ("assistente de receitas") preparando dados de treino, executando o trabalho de ajuste fino e usando o modelo ajustado para inferência.                                                                                                                                                                                                                                              |
+| Microsoft Foundry | [Personalizar um modelo com ajuste fino](https://learn.microsoft.com/azure/ai-foundry/openai/tutorials/fine-tune?WT.mc_id=academic-105485-koreyst) | Aprenda a ajustar finamente um modelo atualmente suportado como `gpt-4.1-mini` **na Azure** com a Microsoft Foundry: prepare e carregue dados de treino e validação, execute o trabalho de ajuste fino, depois implemente e use o novo modelo.                                                                                                                                                                                                                                                                 |
+| Hugging Face | [Ajuste fino de LLMs com Hugging Face](https://www.philschmid.de/fine-tune-llms-in-2024-with-trl?WT.mc_id=academic-105485-koreyst)                                               | Esta publicação do blog guia-te no ajuste fino de um _LLM aberto_ (ex: `CodeLlama 7B`) utilizando a biblioteca [transformers](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) e o [Transformer Reinforcement Learning (TRL)](https://huggingface.co/docs/trl/index?WT.mc_id=academic-105485-koreyst) com [datasets](https://huggingface.co/docs/datasets/index?WT.mc_id=academic-105485-koreyst) abertos na Hugging Face. |
 |              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| 🤗 AutoTrain | [Ajuste fino de LLMs com AutoTrain](https://github.com/huggingface/autotrain-advanced/?WT.mc_id=academic-105485-koreyst)                                                         | AutoTrain (ou AutoTrain Advanced) é uma biblioteca python desenvolvida pela Hugging Face que permite ajuste fino para muitas tarefas diferentes incluindo ajuste fino de LLMs. AutoTrain é uma solução sem código e o ajuste fino pode ser feito na sua própria cloud, no Hugging Face Spaces ou localmente. Suporta GUI web, CLI e treino via ficheiros de configuração yaml.                                                                |
+| 🤗 AutoTrain | [Ajuste fino de LLMs com AutoTrain](https://github.com/huggingface/autotrain-advanced/?WT.mc_id=academic-105485-koreyst)                                                         | AutoTrain (ou AutoTrain Advanced) é uma biblioteca python desenvolvida pela Hugging Face que permite o ajuste fino para muitas tarefas diferentes incluindo ajuste fino de LLM. O AutoTrain é uma solução sem código e o ajuste fino pode ser feito na tua própria cloud, nos Hugging Face Spaces ou localmente. Suporta uma GUI baseada na web, CLI e também treino via ficheiros de configuração yaml.                                                                               |
 |              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| 🦥 Unsloth | [Ajuste fino de LLMs com Unsloth](https://github.com/unslothai/unsloth)                                                         | Unsloth é um framework open-source que suporta ajuste fino de LLM e aprendizagem por reforço (RL). Unsloth simplifica treino local, avaliação, e implementação com [notebooks](https://github.com/unslothai/notebooks) prontos a usar. Suporta também text-to-speech (TTS), modelos BERT e multimodais. Para começar, leia o seu guia passo a passo [Fine-tuning LLMs Guide](https://docs.unsloth.ai/get-started/fine-tuning-llms-guide).                                              |
+| 🦥 Unsloth | [Ajuste fino de LLMs com Unsloth](https://github.com/unslothai/unsloth?WT.mc_id=academic-105485-koreyst)                                                         | O Unsloth é um framework open-source que suporta ajuste fino de LLM e aprendizagem por reforço (RL). O Unsloth simplifica o treino local, avaliação e deployment com [notebooks](https://github.com/unslothai/notebooks?WT.mc_id=academic-105485-koreyst) prontos a usar. Suporta também modelos de texto para fala (TTS), BERT e modelos multimodais. Para começar, lê o seu guia passo a passo de [Ajuste fino de LLMs](https://docs.unsloth.ai/get-started/fine-tuning-llms-guide).                                                                          |
 |              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 ## Tarefa
 
-Selecione um dos tutoriais acima e siga-o passo a passo. _Podemos replicar uma versão destes tutoriais em Jupyter Notebooks neste repositório apenas para referência. Por favor, use as fontes originais diretamente para obter as versões mais recentes_.
+Seleciona um dos tutoriais acima e segue-o. _Podemos replicar uma versão destes tutoriais em Jupyter Notebooks neste repositório apenas para referência. Por favor, usa as fontes originais diretamente para obter as versões mais recentes_.
 
-## Excelente Trabalho! Continue a Sua Aprendizagem.
+## Excelente Trabalho! Continua a Aprender.
 
-Depois de completar esta lição, confira a nossa [coleção de Aprendizagem de IA Generativa](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) para continuar a evoluir o seu conhecimento em IA Generativa!
+Depois de completares esta lição, consulta a nossa [coleção de Aprendizagem sobre IA Generativa](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) para continuares a aumentar os teus conhecimentos em IA Generativa!
 
-Parabéns!! Concluiu a última lição da série v2 deste curso! Não pare de aprender e construir. \*\*Consulte a página [RECURSOS](RESOURCES.md?WT.mc_id=academic-105485-koreyst) para uma lista de sugestões adicionais sobre este tema.
+Parabéns!! Concluíste a última lição da série v2 deste curso! Não pares de aprender e construir. \*\*Consulta a página [RECURSOS](RESOURCES.md?WT.mc_id=academic-105485-koreyst) para uma lista de sugestões adicionais exclusivamente sobre este tema.
 
-A nossa série v1 de lições também foi atualizada com mais tarefas e conceitos. Reserve um minuto para refrescar o seu conhecimento - e por favor [partilhe as suas questões e feedback](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst) para nos ajudar a melhorar estas lições para a comunidade.
+A nossa série de lições v1 também foi atualizada com mais tarefas e conceitos. Por isso, dedica um minuto para refrescar os teus conhecimentos – e por favor [partilha as tuas perguntas e feedback](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst) para nos ajudar a melhorar estas lições para toda a comunidade.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:
-Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Apesar dos nossos esforços para garantir a precisão, por favor, tenha em conta que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -4,29 +4,30 @@
 
 #!csharp
 
-#r "nuget: Azure.AI.OpenAI, 1.0.0-beta.8"
+#r "nuget: Azure.AI.OpenAI, 2.1.0"
 
 #!csharp
 
 using Azure;
 using Azure.AI.OpenAI;
+using OpenAI.Chat;
+using System.ClientModel;
 using static System.Environment;
 
 string endpoint = "<replace with endpoint>";
 string key = "<replace with API key>";
 
-// Enter the deployment name you chose when you deployed the model.
-string engine = "<replace with deployment>";
+// Enter the deployment name you chose when you deployed the model (for example: gpt-5-mini).
+string deployment = "<replace with deployment>";
 
-OpenAIClient client = new(new Uri(endpoint), new AzureKeyCredential(key));
+AzureOpenAIClient azureClient = new(new Uri(endpoint), new ApiKeyCredential(key));
+ChatClient chatClient = azureClient.GetChatClient(deployment);
 
 string prompt = "Complete the following: Once upon a time there was a";
 Console.Write($"Input: {prompt}\n");
 
-Response<Completions> completionsResponse = 
-    await client.GetCompletionsAsync(engine, prompt);
-string completion = completionsResponse.Value.Choices[0].Text;
-Console.WriteLine($"Chatbot: {completion}");
+ChatCompletion completion = chatClient.CompleteChat(new UserChatMessage(prompt));
+Console.WriteLine($"Chatbot: {completion.Content[0].Text}");
 
 #!csharp
 
@@ -44,16 +45,18 @@ string prompt = $"Show me {no_recipes} recipes for a dish with the following ing
 
 #!csharp
 
-// engine, prompt, max_tokens, temperature
-CompletionsOptions options = new()
+// gpt-5 reasoning models don't support Temperature/top_p, and need a generous output-token
+// budget so the visible answer isn't truncated by reasoning tokens. To experiment with
+// Temperature in .NET, call a non-reasoning model (for example a Llama model such as
+// Llama-3.3-70B-Instruct) via the Azure.AI.Inference SDK against your Foundry Models endpoint -
+// the same way the js-githubmodels sample uses Llama.
+ChatCompletionOptions options = new()
 {
-    MaxTokens = 150,
-    Temperature = 0.1f,
+    MaxOutputTokenCount = 800,
 };
-options.Prompts.Add(prompt);
 
-Response<Completions> completionsResponse = 
-    await client.GetCompletionsAsync(engine, options);
-string completion = completionsResponse.Value.Choices[0].Text;
+ChatCompletion completion = chatClient.CompleteChat(
+    new[] { new UserChatMessage(prompt) },
+    options);
 Console.WriteLine("==== Recipes ====");
-Console.WriteLine($"Chatbot: {completion}");
+Console.WriteLine($"Chatbot: {completion.Content[0].Text}");

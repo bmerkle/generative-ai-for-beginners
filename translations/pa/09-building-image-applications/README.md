@@ -1,267 +1,146 @@
-# ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ
+# ਇਮেজ ਬਣਾਉਣ ਵਾਲੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ ਬਣਾਉਣਾ
 
-[![ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ](../../../translated_images/pa/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![ਇਮेज ਬਣਾਉਣ ਵਾਲੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ](../../../translated_images/pa/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-LLMs ਸਿਰਫ਼ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਤੱਕ ਹੀ ਸੀਮਿਤ ਨਹੀਂ ਹਨ। ਇਹ ਟੈਕਸਟ ਵਰਣਨ ਤੋਂ ਚਿੱਤਰ ਬਣਾਉਣ ਦੇ ਯੋਗ ਹਨ। ਚਿੱਤਰਾਂ ਨੂੰ ਇੱਕ ਮੋਡੈਲਿਟੀ ਵਜੋਂ ਵਰਤਣਾ ਕਈ ਖੇਤਰਾਂ ਵਿੱਚ ਬਹੁਤ ਲਾਭਦਾਇਕ ਹੋ ਸਕਦਾ ਹੈ ਜਿਵੇਂ ਕਿ ਮੈਡਟੈਕ, ਆਰਕੀਟੈਕਚਰ, ਟੂਰਿਜ਼ਮ, ਗੇਮ ਡਿਵੈਲਪਮੈਂਟ ਅਤੇ ਹੋਰ। ਇਸ ਅਧਿਆਇ ਵਿੱਚ, ਅਸੀਂ ਦੋ ਸਭ ਤੋਂ ਪ੍ਰਸਿੱਧ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਮਾਡਲਾਂ, DALL-E ਅਤੇ Midjourney, ਦੇ ਬਾਰੇ ਜਾਣਾਂਗੇ।
+LLMs ਵਿੱਚ ਸਿਰਫ਼ ਟੈਕਸਟ ਜਨਰੇਸ਼ਨ ਹੀ ਨਹੀਂ ਹੁੰਦਾ। ਤੁਸੀਂ ਟੈਕਸਟ ਵੇਰਵਿਆਂ ਤੋਂ ਤਸਵੀਰਾਂ ਵੀ ਤਿਆਰ ਕਰ ਸਕਦੇ ਹੋ। ਤਸਵੀਰਾਂ ਵੱਖ-ਵੱਖ ਮੋਡੈਲਿਟੀ ਵਜੋਂ MedTech, ਆਰਕੀਟੈਕਚਰ, ਟੂਰਿਜ਼ਮ, ਗੇਮ ਵਿਕਾਸ, ਮਾਰਕੀਟਿੰਗ ਅਤੇ ਹੋਰ ਖੇਤਰਾਂ ਵਿੱਚ ਲਾਭਦਾਇਕ ਹਨ। ਇਸ ਪਾਠ ਵਿੱਚ ਅਸੀਂ ਅੱਜ ਦੇ **GPT Image** ਮਾਡਲਾਂ ਨੂੰ ਦੇਖਦੇ ਹਾਂ ਅਤੇ ਇੱਕ ਤਸਵੀਰ ਬਣਾਉਣ ਵਾਲੀ ਐਪ ਬਣਾਉਂਦੇ ਹਾਂ।
 
-## ਪਰਿਚਯ
+## ਜਾਣ ਪਛਾਣ
 
-ਇਸ ਪਾਠ ਵਿੱਚ, ਅਸੀਂ ਕਵਰ ਕਰਾਂਗੇ:
+ਤਸਵੀਰ ਬਣਾਉਣ ਨਾਲ ਤੁਸੀਂ ਕੁਦਰਤੀ-ਭਾਸ਼ਾ ਪ੍ਰੰਪਟ ਨੂੰ ਇੱਕ ਤਸਵੀਰ ਵਿੱਚ ਬਦਲ ਸਕਦੇ ਹੋ। ਇਸ ਪਾਠ ਵਿੱਚ ਅਸੀਂ OpenAI ਤੋਂ **`gpt-image`** ਮਾਡਲ ਪਰਿਵਾਰ ਨਾਲ ਕੰਮ ਕਰਦੇ ਹਾਂ - ਜੋ **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** ਅਤੇ OpenAI ਪਲੇਟਫਾਰਮ ਉੱਤੇ ਉਪਲਬਧ ਮੌਜੂਦਾ ਜਨਰੇਸ਼ਨ ਦੇ ਤਸਵੀਰ ਮਾਡਲ ਹਨ। ਇਹ ਮਾਡਲ ਪੁਰਾਣੇ DALL·E ਮਾਡਲਾਂ (DALL·E 2/3 ਲੈਗੇਸੀ ਹਨ) ਨੂੰ ਬਦਲਦੇ ਹਨ।
 
-- ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਅਤੇ ਇਹ ਕਿਉਂ ਲਾਭਦਾਇਕ ਹੈ।
-- DALL-E ਅਤੇ Midjourney, ਇਹ ਕੀ ਹਨ ਅਤੇ ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦੇ ਹਨ।
-- ਤੁਸੀਂ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪ ਕਿਵੇਂ ਬਣਾਉਂਦੇ ਹੋ।
+ਪੂਰੇ ਪਾਠ ਵੱਖਰੇ ਸਾਡਾ ਕਲਪਨਾਤਮਕ ਸਟਾਰਟਅਪ, **Edu4All**, ਵਰਤਦੇ ਹਾਂ ਜੋ ਸਿੱਖਣ ਦੇ ਸਾਧਨ ਬਣਾਉਂਦਾ ਹੈ। ਟੀਮ ਅਸਾਈਨਮੈਂਟਾਂ ਅਤੇ ਅਧਿਐਨ ਸਾਮਗਰੀ ਲਈ ਚਿੱਤਰ ਬਣਾਉਣਾ ਚਾਹੁੰਦੀ ਹੈ।
 
-## ਸਿੱਖਣ ਦੇ ਲਕਸ਼
+## ਸਿੱਖਣ ਦੇ ਲਕੜੀ
 
-ਇਹ ਪਾਠ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਤੁਸੀਂ ਯੋਗ ਹੋਵੋਗੇ:
+ਇਸ ਪਾਠ ਦੇ ਅੰਤ ਤੱਕ ਤੁਸੀਂ ਸਕੋਗੇ:
 
-- ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ।
-- ਆਪਣੇ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਮੈਟਾ ਪ੍ਰੋਮਪਟਸ ਨਾਲ ਸੀਮਾਵਾਂ ਨਿਰਧਾਰਤ ਕਰਨਾ।
-- DALL-E ਅਤੇ Midjourney ਨਾਲ ਕੰਮ ਕਰਨਾ।
+- ਸਮਝਾਓ ਕਿ ਤਸਵੀਰ ਬਣਾਉਣ ਕੀ ਹੈ ਅਤੇ ਇਹ ਕਿੱਥੇ ਲਾਭਦਾਇਕ ਹੈ।
+- `gpt-image` ਮਾਡਲ ਪਰਿਵਾਰ ਬਾਰੇ ਸਮਝੋ ਅਤੇ ਇਹ ਲੈਗੇਸੀ DALL·E ਮਾਡਲਾਂ ਨਾਲ ਕਿਵੇਂ ਵੱਖਰਾ ਹੈ।
+- Python (ਅਤੇ TypeScript / .NET) ਵਿੱਚ ਤਸਵੀਰ ਬਣਾਉਣ ਵਾਲੀ ਐਪ ਬਣਾਓ।
+- ਤਸਵੀਰਾਂ ਨੂੰ ਸੰਪਾਦਿਤ ਕਰੋ ਅਤੇ ਮੈਟਾਪ੍ਰੰਪਟਸ ਨਾਲ ਸੁਰੱਖਿਆ ਦੀਆਂ ਰੇਖਾਵਾਂ ਲਗਾਓ।
 
-## ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਕਿਉਂ ਬਣਾਈਏ?
+## ਤਸਵੀਰ ਬਣਾਉਣ ਕੀ ਹੈ?
 
-ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਜਨਰੇਟਿਵ AI ਦੀ ਸਮਰਥਾ ਦੀ ਪੜਚੋਲ ਕਰਨ ਦਾ ਇੱਕ ਸ਼ਾਨਦਾਰ ਤਰੀਕਾ ਹੈ। ਇਹ ਕਈ ਉਦਾਹਰਣਾਂ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ:
+ਤਸਵੀਰ ਬਣਾਉਣ ਵਾਲੇ ਮਾਡਲ ਟੈਕਸਟ ਪ੍ਰੰਪਟ ਤੋਂ ਤਸਵੀਰ ਬਣਾਉਂਦੇ ਹਨ। ਆਧੁਨਿਕ ਮਾਡਲ ਜਿਵੇਂ ਕਿ `gpt-image` ਟ੍ਰਾਂਸਫਾਰਮਰ + ਡਿਫਿਊਜ਼ਨ ਤਕਨਾਲੋਜੀ ਉੱਤੇ ਆਧਾਰਿਤ ਹਨ: ਮਾਡਲ ਟੈਕਸਟ ਅਤੇ ਤਸਵੀਰਾਂ ਵਿਚਕਾਰ ਸਬੰਧ ਸਿੱਖਦਾ ਹੈ, ਫਿਰ ਪ੍ਰੰਪਟ ਦੇਣ ਤੇ ਕ੍ਰਮਵਾਰ "ਡਿਨੋਇਜ਼" ਕਰ ਕੇ ਰੈਂਡਮ ਸ਼ੋਰ ਨੂੰ ਤਸਵੀਰ ਵਿੱਚ ਬਦਲਦਾ ਹੈ ਜੋ ਵੇਰਵੇ ਨੂੰ ਮਿਲਦੀ ਹੈ।
 
-- **ਚਿੱਤਰ ਸੰਪਾਦਨ ਅਤੇ ਸੰਸ਼ਲੇਸ਼ਣ**। ਤੁਸੀਂ ਚਿੱਤਰ ਸੰਪਾਦਨ ਅਤੇ ਚਿੱਤਰ ਸੰਸ਼ਲੇਸ਼ਣ ਵਰਗੇ ਕਈ ਉਪਯੋਗਾਂ ਲਈ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰ ਸਕਦੇ ਹੋ।
+ਦੋ ਪ੍ਰਸਿੱਧ ਤਸਵੀਰ ਮਾਡਲ ਪਰਿਵਾਰ ਹਨ:
 
-- **ਕਈ ਉਦਯੋਗਾਂ ਵਿੱਚ ਲਾਗੂ**। ਇਹ ਮੈਡਟੈਕ, ਟੂਰਿਜ਼ਮ, ਗੇਮ ਡਿਵੈਲਪਮੈਂਟ ਅਤੇ ਹੋਰ ਵਰਗੇ ਕਈ ਉਦਯੋਗਾਂ ਲਈ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵੀ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ।
+- **`gpt-image` (OpenAI)** - ਮੌਜੂਦਾ ਜਨਰੇਸ਼ਨ, ਜਿਸ ਦਾ ਇਸ ਪਾਠ ਵਿੱਚ ਇਸਤੇਮਾਲ ਹੋਇਆ। ਇਹ ਟੈਕਸਟ-ਟੂ-ਇਮੀਜ ਜਨਰੇਸ਼ਨ ਅਤੇ ਤਸਵੀਰ ਸੰਪਾਦਨ (ਮਾਸਕ ਨਾਲ ਇੰਪੇਂਟਿੰਗ) ਨੂੰ ਸਹਾਇਤਾ ਦਿੰਦਾ ਹੈ।
+- **Midjourney** - ਇੱਕ ਪ੍ਰਸਿੱਧ ਤੀਸਰੇ-ਪੱਖੀ ਮਾਡਲ ਜਿਸ ਦੀ ਆਪਣੀ ਸੇਵਾ ਅਤੇ Discord ਨਾਲ ਕੰਮ ਕਰਨ ਦਾ ਤਰੀਕਾ ਹੈ।
 
-## ਸਥਿਤੀ: Edu4All
+> ਪੁਰਾਣੇ OpenAI ਤਸਵੀਰ ਮਾਡਲ - **DALL·E 2** ਅਤੇ **DALL·E 3** - ਲੈਗੇਸੀ ਹਨ। DALL·E 3 ਹੁਣ ਨਵੀਆਂ ਡਿਪਲੋਇਮੈਂਟਸ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ, ਤੇ `create_variation` ਵਰਗੀਆਂ ਖੂਬੀਆਂ ਸਿਰਫ਼ DALL·E 2 ਵਿੱਚ ਸੀ। ਨਵੀਂਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ ਲਈ `gpt-image` ਮਾਡਲ ਵਰਤੋ।
 
-ਇਸ ਪਾਠ ਦੇ ਹਿੱਸੇ ਵਜੋਂ, ਅਸੀਂ ਆਪਣੇ ਸਟਾਰਟਅਪ Edu4All ਨਾਲ ਕੰਮ ਜਾਰੀ ਰੱਖਾਂਗੇ। ਵਿਦਿਆਰਥੀ ਆਪਣੇ ਅਸੈਸਮੈਂਟ ਲਈ ਚਿੱਤਰ ਬਣਾਉਣਗੇ, ਕਿਹੜੇ ਚਿੱਤਰ ਬਣਾਉਣੇ ਹਨ ਇਹ ਵਿਦਿਆਰਥੀਆਂ ਉੱਤੇ ਹੈ, ਪਰ ਉਹ ਆਪਣੇ ਪਰੀਆਂ ਦੀ ਕਹਾਣੀ ਲਈ ਚਿੱਤਰ ਬਣਾਉਣ ਜਾਂ ਆਪਣੇ ਕਹਾਣੇ ਲਈ ਨਵਾਂ ਪਾਤਰ ਬਣਾਉਣ ਜਾਂ ਆਪਣੇ ਵਿਚਾਰਾਂ ਅਤੇ ਧਾਰਨਾਵਾਂ ਨੂੰ ਦ੍ਰਿਸ਼ਮਾਨ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰ ਸਕਦੇ ਹਨ।
+### ਕਿਹੜਾ `gpt-image` ਮਾਡਲ ਮੈਂ ਵਰਤਾਂ?
 
-ਇਹ ਹੈ ਜੋ Edu4All ਦੇ ਵਿਦਿਆਰਥੀ ਜਨਰੇਟ ਕਰ ਸਕਦੇ ਹਨ ਜੇ ਉਹ ਕਲਾਸ ਵਿੱਚ ਸਮਾਰਕਾਂ 'ਤੇ ਕੰਮ ਕਰ ਰਹੇ ਹਨ:
+Microsoft Foundry ਉੱਤੇ ਹੇਠਾਂ ਦਿੱਤੇ ਮਾਡਲ **ਆਮ ਤੌਰ 'ਤੇ ਉਪਲਬਧ** ਹਨ:
 
-![Edu4All ਸਟਾਰਟਅਪ, ਸਮਾਰਕਾਂ 'ਤੇ ਕਲਾਸ, Eiffel Tower](../../../translated_images/pa/startup.94d6b79cc4bb3f5a.webp)
+| ਮਾਡਲ | ਨੋਟਸ |
+| --- | --- |
+| **`gpt-image-2`** | ਸਭ ਤੋਂ ਨਵਾਂ ਅਤੇ ਸਭ ਤੋਂ ਸਮਰੱਥ ਤਸਵੀਰ ਮਾਡਲ - ਸਿਫਾਰਸ਼ੀ ਡਿਫਾਲਟ। |
+| `gpt-image-1.5` | ਆਮ ਤੌਰ 'ਤੇ ਉਪਲਬਧ; ਘਟੇਰੀ ਲਾਗਤ ਉੱਤੇ ਮਜ਼ਬੂਤ ਗੁਣਵੱਤਾ। |
+| `gpt-image-1-mini` | ਆਮ ਤੌਰ 'ਤੇ ਉਪਲਬਧ; ਸਭ ਤੋਂ ਤੇਜ਼ / ਸਭ ਤੋਂ ਘੱਟ ਲਾਗਤ। |
+| `gpt-image-1` | ਸਿਰਫ਼ ਪਰੇਖਣਾ ਲਈ। |
 
-ਇੱਕ ਪ੍ਰੋਮਪਟ ਵਰਤ ਕੇ
+ਹਮੇਸ਼ਾ ਮੌਜੂਦਾ [Foundry ਤਸਵੀਰ ਮਾਡਲ ਸੂਚੀ](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) ਵੱਲੋਂ ਉਪਲਬਧਤਾ ਅਤੇ ਖੇਤਰ ਜਾਂਚੋ।
 
-> "ਸਵੇਰੇ ਦੀ ਰੋਸ਼ਨੀ ਵਿੱਚ Eiffel Tower ਦੇ ਨਾਲ ਕੁੱਤਾ"
+> **ਮਹੱਤਵਪੂਰਣ:** `gpt-image` ਮਾਡਲ ਜਨਰੇਟ ਕੀਤੀ ਗਈ ਤਸਵੀਰ ਨੂੰ **base64** (`b64_json`) ਵੱਜੋਂ ਵਾਪਸ ਕਰਦੇ ਹਨ, URL ਵਜੋਂ ਨਹੀਂ। ਤੁਹਾਡਾ ਕੋਡ base64 ਸਤਰ ਨੂੰ ਬਾਈਟਸ ਵਿਚ ਡੀਕੋਡ ਕਰਕੇ ਸੇਵ ਕਰਦਾ ਹੈ - ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਕੋਈ ਤਸਵੀਰ URL ਨਹੀਂ ਹੁੰਦਾ।
 
-## DALL-E ਅਤੇ Midjourney ਕੀ ਹਨ?
+## ਸੈਟਅਪ
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) ਅਤੇ [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) ਦੋ ਸਭ ਤੋਂ ਪ੍ਰਸਿੱਧ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਮਾਡਲ ਹਨ, ਇਹ ਤੁਹਾਨੂੰ ਪ੍ਰੋਮਪਟਸ ਵਰਤ ਕੇ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਦੀ ਆਗਿਆ ਦਿੰਦੇ ਹਨ।
+ਤੁਸੀਂ ਸੈਂਪਲਾਂ ਨੂੰ **Microsoft Foundry ਵਿੱਚ Azure OpenAI** (ਜਿਸ ਵਿੱਚ `aoai-*` ਸੈਂਪਲ ਹਨ) ਜਾਂ **OpenAI ਪਲੇਟਫਾਰਮ** (ਜਿਸ ਵਿੱਚ `oai-*` ਸੈਂਪਲ ਹਨ) ਉੱਤੇ ਚਲਾ ਸਕਦੇ ਹੋ।
 
-### DALL-E
+### 1. ਇੱਕ ਮਾਡਲ ਬਣਾਓ ਅਤੇ ਡਿਪਲੋਇ ਕਰੋ
 
-DALL-E ਤੋਂ ਸ਼ੁਰੂ ਕਰਦੇ ਹਾਂ, ਜੋ ਕਿ ਇੱਕ ਜਨਰੇਟਿਵ AI ਮਾਡਲ ਹੈ ਜੋ ਟੈਕਸਟ ਵਰਣਨ ਤੋਂ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਦਾ ਹੈ।
+[create a resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) ਗਾਈਡ ਦੀ ਪਾਲਣਾ ਕਰਕੇ Microsoft Foundry ਰਿਸੋਰਸ ਬਣਾਓ, ਫਿਰ ਤਸਵੀਰ ਮਾਡਲ ਡਿਪਲੋਇ ਕਰੋ - **`gpt-image-2`** ਸਿਫਾਰਸ਼ੀ ਹੈ।
 
-> [DALL-E ਦੋ ਮਾਡਲਾਂ, CLIP ਅਤੇ diffused attention, ਦਾ ਸੰਯੋਗ ਹੈ](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst)।
+### 2. ਆਪਣਾ `.env` ਕਾਂਫਿਗਰ ਕਰੋ
 
-- **CLIP**, ਇੱਕ ਮਾਡਲ ਹੈ ਜੋ ਚਿੱਤਰਾਂ ਅਤੇ ਟੈਕਸਟ ਤੋਂ ਐਮਬੈਡਿੰਗਸ, ਜੋ ਡਾਟਾ ਦੇ ਸੰਖਿਆਤਮਕ ਪ੍ਰਤੀਨਿਧਾਨ ਹਨ, ਜਨਰੇਟ ਕਰਦਾ ਹੈ।
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention**, ਇੱਕ ਮਾਡਲ ਹੈ ਜੋ ਐਮਬੈਡਿੰਗਸ ਤੋਂ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਦਾ ਹੈ। DALL-E ਨੂੰ ਚਿੱਤਰਾਂ ਅਤੇ ਟੈਕਸਟ ਦੇ ਡੇਟਾਸੈਟ 'ਤੇ ਟ੍ਰੇਨ ਕੀਤਾ ਗਿਆ ਹੈ ਅਤੇ ਇਸਨੂੰ ਟੈਕਸਟ ਵਰਣਨ ਤੋਂ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ। ਉਦਾਹਰਣ ਲਈ, DALL-E ਨੂੰ ਇੱਕ ਟੋਪੀ ਵਿੱਚ ਬਿੱਲੀ ਜਾਂ ਮੋਹਾਕ ਵਾਲੇ ਕੁੱਤੇ ਦੇ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।
+ਇਹ ਮੁੱਲ ਆਪਣੇ ਰਿਸੋਰਸ ਦੇ **Deployments** ਪੰਨੇ ਤੋਂ [Foundry ਪੋਰਟਲ](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) ਵਿੱਚ ਲੱਭੋ।
 
-### Midjourney
+### 3. ਲਾਇਬ੍ਰੇਰੀਆਂ ਇੰਸਟਾਲ ਕਰੋ
 
-Midjourney DALL-E ਦੇ ਸਮਾਨ ਹੀ ਕੰਮ ਕਰਦਾ ਹੈ, ਇਹ ਟੈਕਸਟ ਪ੍ਰੋਮਪਟਸ ਤੋਂ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਦਾ ਹੈ। Midjourney ਨੂੰ "ਟੋਪੀ ਵਿੱਚ ਬਿੱਲੀ" ਜਾਂ "ਮੋਹਾਕ ਵਾਲਾ ਕੁੱਤਾ" ਵਰਗੇ ਪ੍ਰੋਮਪਟਸ ਵਰਤ ਕੇ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵੀ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।
+ਇੱਕ `requirements.txt` ਬਣਾਓ:
 
-![Midjourney ਦੁਆਰਾ ਜਨਰੇਟ ਕੀਤਾ ਚਿੱਤਰ, ਮਕੈਨਿਕਲ ਕਬੂਤਰ](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_ਚਿੱਤਰ ਕ੍ਰੈਡਿਟ Wikipedia, Midjourney ਦੁਆਰਾ ਜਨਰੇਟ ਕੀਤਾ ਚਿੱਤਰ_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## DALL-E ਅਤੇ Midjourney ਕਿਵੇਂ ਕੰਮ ਕਰਦੇ ਹਨ
+ਫਿਰ ਇਕ ਵਰਚੁਅਲ ਇਨਵਾਇਰੰਮੈਂਟ ਬਣਾਓ ਅਤੇ ਸක්ਰਿਆ ਕਰੋ ਅਤੇ ਇੰਸਟਾਲ ਕਰੋ:
 
-ਸਭ ਤੋਂ ਪਹਿਲਾਂ, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst)। DALL-E ਇੱਕ ਜਨਰੇਟਿਵ AI ਮਾਡਲ ਹੈ ਜੋ ਟ੍ਰਾਂਸਫਾਰਮਰ ਆਰਕੀਟੈਕਚਰ 'ਤੇ ਅਧਾਰਿਤ ਹੈ ਜਿਸ ਵਿੱਚ ਇੱਕ _autoregressive transformer_ ਹੈ।
-
-ਇੱਕ _autoregressive transformer_ ਨਿਰਧਾਰਤ ਕਰਦਾ ਹੈ ਕਿ ਇੱਕ ਮਾਡਲ ਟੈਕਸਟ ਵਰਣਨ ਤੋਂ ਚਿੱਤਰ ਕਿਵੇਂ ਜਨਰੇਟ ਕਰਦਾ ਹੈ, ਇਹ ਇੱਕ ਸਮੇਂ ਵਿੱਚ ਇੱਕ ਪਿਕਸਲ ਜਨਰੇਟ ਕਰਦਾ ਹੈ, ਅਤੇ ਫਿਰ ਜਨਰੇਟ ਕੀਤੇ ਪਿਕਸਲਾਂ ਨੂੰ ਅਗਲੇ ਪਿਕਸਲ ਨੂੰ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵਰਤਦਾ ਹੈ। ਇੱਕ ਨਿਊਰਲ ਨੈਟਵਰਕ ਵਿੱਚ ਕਈ ਲੇਅਰਾਂ ਵਿੱਚੋਂ ਗੁਜ਼ਰਦਾ ਹੈ, ਜਦ ਤੱਕ ਚਿੱਤਰ ਪੂਰਾ ਨਹੀਂ ਹੋ ਜਾਂਦਾ।
-
-ਇਸ ਪ੍ਰਕਿਰਿਆ ਨਾਲ, DALL-E, ਜਨਰੇਟ ਕੀਤੇ ਚਿੱਤਰ ਵਿੱਚ ਗੁਣ, ਵਸਤੂਆਂ, ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਅਤੇ ਹੋਰ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ। ਹਾਲਾਂਕਿ, DALL-E 2 ਅਤੇ 3 ਜਨਰੇਟ ਕੀਤੇ ਚਿੱਤਰ 'ਤੇ ਹੋਰ ਨਿਯੰਤਰਣ ਰੱਖਦੇ ਹਨ।
-
-## ਆਪਣਾ ਪਹਿਲਾ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣਾ
-
-ਤਾਂ ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣ ਲਈ ਤੁਹਾਨੂੰ ਕੀ ਚਾਹੀਦਾ ਹੈ? ਤੁਹਾਨੂੰ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਦੀ ਲੋੜ ਹੈ:
-
-- **python-dotenv**, ਇਹ ਲਾਇਬ੍ਰੇਰੀ ਤੁਹਾਡੇ ਰਾਜ਼ਾਂ ਨੂੰ _.env_ ਫਾਈਲ ਵਿੱਚ ਕੋਡ ਤੋਂ ਦੂਰ ਰੱਖਣ ਲਈ ਵਰਤਣ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।
-- **openai**, ਇਹ ਲਾਇਬ੍ਰੇਰੀ ਤੁਹਾਨੂੰ OpenAI API ਨਾਲ ਸੰਚਾਰ ਕਰਨ ਲਈ ਵਰਤਣੀ ਹੈ।
-- **pillow**, Python ਵਿੱਚ ਚਿੱਤਰਾਂ ਨਾਲ ਕੰਮ ਕਰਨ ਲਈ।
-- **requests**, HTTP ਰਿਕਵੈਸਟ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਨ ਲਈ।
-
-## Azure OpenAI ਮਾਡਲ ਬਣਾਓ ਅਤੇ ਡਿਪਲੌਇ ਕਰੋ
-
-ਜੇਕਰ ਪਹਿਲਾਂ ਨਹੀਂ ਕੀਤਾ, ਤਾਂ [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) ਪੇਜ 'ਤੇ ਦਿੱਤੀਆਂ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ
-Azure OpenAI ਸਰੋਤ ਅਤੇ ਮਾਡਲ ਬਣਾਉਣ ਲਈ। ਮਾਡਲ ਵਜੋਂ DALL-E 3 ਚੁਣੋ।  
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ## ਐਪ ਬਣਾਓ
 
-1. _.env_ ਨਾਮ ਦੀ ਫਾਈਲ ਬਣਾਓ ਜਿਸ ਵਿੱਚ ਹੇਠਾਂ ਦਿੱਤਾ ਸਮੱਗਰੀ ਹੋਵੇ:
+`app.py` ਬਣਾ ਕੇ ਹੇਠਾਂ ਦਿੱਤਾ ਕੋਡ ਰੱਖੋ। ਇਹ ਇੱਕ ਤਸਵੀਰ ਬਣਾਉਂਦਾ ਹੈ ਅਤੇ PNG ਵਜੋਂ ਸੇਵ ਕਰਦਾ ਹੈ।
 
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-   ਇਹ ਜਾਣਕਾਰੀ Azure OpenAI Foundry Portal ਵਿੱਚ ਆਪਣੇ ਸਰੋਤ ਦੇ "Deployments" ਸੈਕਸ਼ਨ ਵਿੱਚ ਲੱਭੋ।
+dotenv.load_dotenv()
 
-1. ਉਪਰੋਕਤ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ _requirements.txt_ ਨਾਮਕ ਫਾਈਲ ਵਿੱਚ ਇਕੱਠਾ ਕਰੋ:
+# ਕਲਾਇਟ ਨੂੰ ਆਪਣੀ Azure OpenAI (Microsoft Foundry) ਸਰੋਤ ਵੱਲ ਇਸ਼ਾਰਾ ਕਰੋ।
+# ਚਿੱਤਰ ਮਾਡਲਾਂ ਨੂੰ ਹਾਲੀਆ API ਵਰਜ਼ਨ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ - ਉਹ ਜੋ ਤੁਹਾਡੇ ਮਾਡਲ ਲਈ ਲੋੜੀਂਦਾ ਹੈ, ਉਸ ਲਈ Foundry ਦਸਤਾਵੇਜ਼ਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # ਉਦਾਹਰਨ ਵਜੋਂ "gpt-image-2"
 
-1. ਅਗਲੇ ਕਦਮ ਵਿੱਚ, ਵਰਚੁਅਲ ਐਨਵਾਇਰਨਮੈਂਟ ਬਣਾਓ ਅਤੇ ਲਾਇਬ੍ਰੇਰੀਆਂ ਇੰਸਟਾਲ ਕਰੋ:
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # ਨਾਲ ਹੀ 1536x1024 (ਦ੍ਰਿਸ਼), 1024x1536 (ਪੋਰਟਰੇਟ), ਜਾਂ "ਆਟੋ"
+    n=1,
+)
 
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
+# gpt-image ਮਾਡਲ ਬੇਸ64 (b64_json) ਵਾਪਸ ਕਰਦੇ ਹਨ, URL ਨਹੀਂ - ਇਸਨੂੰ ਬਾਈਟਸ ਵਿੱਚ ਡੀਕੋਡ ਕਰੋ।
+image_bytes = base64.b64decode(result.data[0].b64_json)
 
-   Windows ਲਈ, ਵਰਚੁਅਲ ਐਨਵਾਇਰਨਮੈਂਟ ਬਣਾਉਣ ਅਤੇ ਐਕਟੀਵੇਟ ਕਰਨ ਲਈ ਹੇਠਾਂ ਦਿੱਤੇ ਕਮਾਂਡ ਵਰਤੋ:
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
 
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
+Image.open(image_path).show()
+```
 
-1. _app.py_ ਨਾਮਕ ਫਾਈਲ ਵਿੱਚ ਹੇਠਾਂ ਦਿੱਤਾ ਕੋਡ ਸ਼ਾਮਲ ਕਰੋ:
+`python app.py` ਨਾਲ ਚਲਾਓ। ਤੁਹਾਨੂੰ `images/` ਹੇਠਾਂ PNG ਸੇਵ ਮਿਲੇਗੀ।
 
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
+> ਹਰ ਕਾਲ `images.generate` ਲਈ ਇੱਕੋ ਪ੍ਰੰਪਟ ਨਾਲ ਵੱਖਰੀ ਤਸਵੀਰ ਤਿਆਰ ਹੁੰਦੀ ਹੈ - ਤਸਵੀਰ ਮਾਡਲ `temperature` ਪੈਰਾਮੀਟਰ ਨਹੀਂ ਲੈਂਦੇ (ਜੋ ਟੈਕਸਟ-ਜਨਰੇਸ਼ਨ ਦੀ ਸੰਭਾਲ ਹੈ)। ਵੱਖਰਾ ਨਤੀਜਾ ਲਈ ਫਿਰੋਂ API ਕਾਲ ਕਰੋ; ਘੱਟ ਜਿਆਦਾ ਨਤੀਜਾ ਲਈ ਆਪਣੇ ਪ੍ਰੰਪਟ ਨੂੰ ਜ਼ਿਆਦਾ ਵਿਸ਼ੇਸ਼ ਬਣਾਓ।
 
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
+## ਤਸਵੀਰਾਂ ਸੰਪਾਦਿਤ ਕਰਨਾ
 
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
+`gpt-image` ਮਾਡਲ ਮੌਜੂਦਾ ਤਸਵੀਰ ਨੂੰ **ਸੰਪਾਦਿਤ** ਕਰ ਸਕਦੇ ਹਨ: ਤਸਵੀਰ ਦਿਓ, ਇੱਕ ਵਿਕਲਪਿਕ **ਮਾਸਕ** (ਜੋ ਬਦਲਣ ਵਾਲੇ ਖੇਤਰ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ), ਅਤੇ ਬਦਲਾਅ ਵੇਖਾਉਂਦਾ ਪ੍ਰੰਪਟ ਦਿਓ। ਜਿਵੇਂ ਜਨਰੇਸ਼ਨ ਵਿੱਚ, ਸੰਪਾਦਨ ਵੀ base64 ਵਜੋਂ ਵਾਪਸ ਆਉਂਦੇ ਹਨ।
 
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-ਇਸ ਕੋਡ ਨੂੰ ਸਮਝਦੇ ਹਾਂ:
-
-- ਸਭ ਤੋਂ ਪਹਿਲਾਂ, ਅਸੀਂ ਲੋੜੀਂਦੇ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੂੰ ਇੰਪੋਰਟ ਕਰਦੇ ਹਾਂ, ਜਿਵੇਂ ਕਿ OpenAI ਲਾਇਬ੍ਰੇਰੀ, dotenv ਲਾਇਬ੍ਰੇਰੀ, requests ਲਾਇਬ੍ਰੇਰੀ, ਅਤੇ Pillow ਲਾਇਬ੍ਰੇਰੀ।
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- ਅਗਲੇ ਕਦਮ ਵਿੱਚ, ਅਸੀਂ _.env_ ਫਾਈਲ ਤੋਂ ਵਾਤਾਵਰਣ ਚਰਾਂ ਨੂੰ ਲੋਡ ਕਰਦੇ ਹਾਂ।
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- ਇਸ ਤੋਂ ਬਾਅਦ, ਅਸੀਂ Azure OpenAI ਸੇਵਾ ਕਲਾਇੰਟ ਨੂੰ ਸੰਰਚਿਤ ਕਰਦੇ ਹਾਂ।
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- ਅਗਲੇ ਕਦਮ ਵਿੱਚ, ਅਸੀਂ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਦੇ ਹਾਂ:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  ਉਪਰੋਕਤ ਕੋਡ JSON ਆਬਜੈਕਟ ਨਾਲ ਜਵਾਬ ਦਿੰਦਾ ਹੈ ਜਿਸ ਵਿੱਚ ਜਨਰੇਟ ਕੀਤੇ ਚਿੱਤਰ ਦਾ URL ਹੁੰਦਾ ਹੈ। ਅਸੀਂ URL ਨੂੰ ਵਰਤ ਕੇ ਚਿੱਤਰ ਡਾਊਨਲੋਡ ਕਰ ਸਕਦੇ ਹਾਂ ਅਤੇ ਇਸਨੂੰ ਫਾਈਲ ਵਿੱਚ ਸੇਵ ਕਰ ਸਕਦੇ ਹਾਂ।
-
-- ਆਖਰੀ ਵਿੱਚ, ਅਸੀਂ ਚਿੱਤਰ ਨੂੰ ਖੋਲ੍ਹਦੇ ਹਾਂ ਅਤੇ ਮਿਆਰੀ ਚਿੱਤਰ ਦਰਸ਼ਕ ਨੂੰ ਵਰਤ ਕੇ ਇਸਨੂੰ ਦਿਖਾਉਂਦੇ ਹਾਂ:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਦੇ ਹੋਰ ਵੇਰਵੇ
-
-ਆਓ ਉਸ ਕੋਡ ਨੂੰ ਵੇਖਦੇ ਹਾਂ ਜੋ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਦਾ ਹੈ:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, ਉਹ ਟੈਕਸਟ ਪ੍ਰੋਮਪਟ ਹੈ ਜੋ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ। ਇਸ ਮਾਮਲੇ ਵਿੱਚ, ਅਸੀਂ "ਘੋੜੇ 'ਤੇ ਖਰਗੋਸ਼, ਲਾਲ ਪੋਪ ਲੇ ਕੇ, ਧੁੰਦਲੇ ਮੈਦਾਨ 'ਤੇ ਜਿੱਥੇ ਡੈਫੋਡਿਲਸ ਉਗਦੇ ਹਨ" ਵਰਤ ਰਹੇ ਹਾਂ।
-- **size**, ਜਨਰੇਟ ਕੀਤੇ ਚਿੱਤਰ ਦਾ ਆਕਾਰ ਹੈ। ਇਸ ਮਾਮਲੇ ਵਿੱਚ, ਅਸੀਂ 1024x1024 ਪਿਕਸਲ ਦਾ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰ ਰਹੇ ਹਾਂ।
-- **n**, ਜਨਰੇਟ ਕੀਤੇ ਚਿੱਤਰਾਂ ਦੀ ਗਿਣਤੀ ਹੈ। ਇਸ ਮਾਮਲੇ ਵਿੱਚ, ਅਸੀਂ ਦੋ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰ ਰਹੇ ਹਾਂ।
-- **temperature**, ਇੱਕ ਪੈਰਾਮੀਟਰ ਹੈ ਜੋ ਜਨਰੇਟਿਵ AI ਮਾਡਲ ਦੇ ਆਉਟਪੁੱਟ ਦੀ ਰੈਂਡਮਨੈਸ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ। temperature 0 ਅਤੇ 1 ਦੇ ਵਿਚਕਾਰ ਇੱਕ ਮੁੱਲ ਹੈ ਜਿੱਥੇ 0 ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਆਉਟਪੁੱਟ ਨਿਰਧਾਰਤ ਹੈ ਅਤੇ 1 ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਆਉਟਪੁੱਟ ਰੈਂਡਮ ਹੈ। ਡਿਫਾਲਟ ਮੁੱਲ 0.7 ਹੈ।
-
-ਚਿੱਤਰਾਂ ਨਾਲ ਹੋਰ ਚੀਜ਼ਾਂ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ ਜੋ ਅਸੀਂ ਅਗਲੇ ਸੈਕਸ਼ਨ ਵਿੱਚ ਕਵਰ ਕਰਾਂਗੇ।
-
-## ਚਿੱਤਰ ਜਨਰੇਸ਼ਨ ਦੀ ਵਾਧੂ ਸਮਰਥਾ
-
-ਤੁਸੀਂ ਹੁਣ ਤੱਕ ਦੇਖਿਆ ਕਿ ਅਸੀਂ ਕੁਝ ਪੰਗਤਾਂ ਦੇ ਕੋਡ ਨਾਲ ਚਿੱਤਰ ਜਨਰੇਟ ਕਰਨ ਦੇ ਯੋਗ ਹੋਏ। ਹਾਲਾਂਕਿ, ਚਿੱਤਰਾਂ ਨਾਲ ਹੋਰ ਚੀਜ਼ਾਂ ਕੀਤੀਆਂ ਜਾ ਸਕਦੀਆਂ ਹਨ।
-
-ਤੁਸੀਂ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਚੀਜ਼ਾਂ ਵੀ ਕਰ ਸਕਦੇ ਹੋ:
-
-- **ਸੰਪਾਦਨ ਕਰੋ**। ਮੌਜੂਦਾ ਚਿੱਤਰ, ਇੱਕ ਮਾਸਕ ਅਤੇ ਇੱਕ ਪ੍ਰੋਮਪਟ ਦੇ ਕੇ, ਤੁਸੀਂ ਚਿੱਤਰ ਨੂੰ ਬਦਲ ਸਕਦੇ ਹੋ। ਉਦਾਹਰਣ ਲਈ, ਤੁਸੀਂ ਚਿੱਤਰ ਦੇ ਕਿਸੇ ਹਿੱਸੇ ਵਿੱਚ ਕੁਝ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ। ਸਾਡੇ ਖਰਗੋਸ਼ ਚਿੱਤਰ ਦੀ ਕਲਪਨਾ ਕਰੋ, ਤੁਸੀਂ ਖਰਗੋਸ਼ ਨੂੰ ਇੱਕ ਟੋਪੀ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ। ਤੁਸੀਂ ਇਹ ਕਿਵੇਂ ਕਰਦੇ ਹੋ ਇਹ ਹੈ ਚਿੱਤਰ, ਇੱਕ ਮਾਸਕ (ਬਦਲਾਅ ਲਈ ਖੇਤਰ ਦੀ ਪਛਾਣ ਕਰਦੇ ਹੋ) ਅਤੇ ਇੱਕ ਟੈਕਸਟ ਪ੍ਰੋਮਪਟ ਦੇ ਕੇ ਕਿਹਾ ਕਿ ਕੀ ਕੀਤਾ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। 
-> ਨੋਟ: ਇਹ DALL-E 3 ਵਿੱਚ ਸਮਰਥਿਤ ਨਹੀਂ ਹੈ। 
- 
-ਇਹ GPT ਚਿੱਤਰ ਵਰਤ ਕੇ ਇੱਕ ਉਦਾਹਰਣ ਹੈ:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  ਬੇਸ ਚਿੱਤਰ ਵਿੱਚ ਸਿਰਫ਼ ਲਾਊਂਜ ਅਤੇ ਪੂਲ ਹੋਵੇਗਾ ਪਰ ਅੰਤਿਮ ਚਿੱਤਰ ਵਿੱਚ ਇੱਕ ਫਲਾਮਿੰਗੋ ਹੋਵੇਗਾ:
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/pa/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -269,112 +148,51 @@ Azure OpenAI ਸਰੋਤ ਅਤੇ ਮਾਡਲ ਬਣਾਉਣ ਲਈ। ਮ�
   <img src="../../../translated_images/pa/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
+## ਮੈਟਾਪ੍ਰੰਪਟ ਨਾਲ ਸਰਹੱਦਾਂ ਸੈੱਟ ਕਰਨਾ
 
-- **ਵੈਰੀਏਸ਼ਨ ਬਣਾਓ**। ਵਿਚਾਰ ਇਹ ਹੈ ਕਿ ਤੁਸੀਂ ਮੌਜੂਦਾ ਚਿੱਤਰ ਲੈਂਦੇ ਹੋ ਅਤੇ ਮੰਗਦੇ ਹੋ ਕਿ ਵੈਰੀਏਸ਼ਨ ਬਣਾਏ ਜਾਣ। ਵੈਰੀਏਸ਼ਨ ਬਣਾਉਣ ਲਈ, ਤੁਸੀਂ ਇੱਕ ਚਿੱਤਰ ਅਤੇ ਇੱਕ ਟੈਕਸਟ ਪ੍ਰੋਮਪਟ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹੋ ਅਤੇ ਹੇਠਾਂ ਦਿੱਤੇ ਕੋਡ ਵਰਗੇ ਕੋਡ:
-
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > ਨੋਟ, ਇਹ ਸਿਰਫ਼ OpenAI 'ਤੇ ਸਮਰਥਿਤ ਹੈ
-
-## Temperature
-
-Temperature ਇੱਕ ਪੈਰਾਮੀਟਰ ਹੈ ਜੋ ਜਨਰੇਟਿਵ AI ਮਾਡਲ ਦੇ ਆਉਟਪੁੱਟ ਦੀ ਰੈਂਡਮਨੈਸ ਨੂੰ ਨਿਯੰਤਰਿਤ ਕਰਦਾ ਹੈ। temperature 0 ਅਤੇ 1 ਦੇ ਵਿਚਕਾਰ ਇੱਕ ਮੁੱਲ ਹੈ ਜਿੱਥੇ 0 ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਆਉਟਪੁੱਟ ਨਿਰਧਾਰਤ ਹੈ ਅਤੇ 1 ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਆਉਟਪੁੱਟ ਰੈਂਡਮ ਹੈ। ਡਿਫਾਲਟ ਮੁੱਲ 0.7 ਹੈ।
-
-ਆਓ ਇੱਕ ਉਦਾਹਰਣ ਦੇਖਦੇ ਹਾਂ ਕਿ temperature ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ, ਇਸ ਪ੍ਰੋਮਪਟ ਨੂੰ ਦੋ ਵਾਰ ਚਲਾਕੇ:
-
-> ਪ੍ਰੋਮਪਟ : "ਘੋੜੇ 'ਤੇ ਖਰਗੋਸ਼, ਲਾਲ ਪੋਪ ਲੇ ਕੇ, ਧੁੰਦਲੇ ਮੈਦਾਨ 'ਤੇ ਜਿੱਥੇ ਡੈਫੋਡਿਲਸ ਉਗਦੇ ਹਨ"
-
-![ਘੋੜੇ 'ਤੇ ਖਰਗੋਸ਼, ਲਾਲ ਪੋਪ ਲੇ ਕੇ, ਵਰਜਨ 1](../../../translated_images/pa/v1-generated-image.a295cfcffa3c13c2.webp)
-
-ਹੁਣ ਆਓ ਉਸੇ ਪ੍ਰੋਮਪਟ ਨੂੰ ਚਲਾਈਏ ਸਿਰਫ਼ ਇਹ ਦੇਖਣ ਲਈ ਕਿ ਅਸੀਂ ਇੱਕੋ ਚਿੱਤਰ ਦੋ ਵਾਰ ਨਹੀਂ ਲੈਂਦੇ:
-
-![Generated image of bunny on horse](../../../translated_images/pa/v2-generated-image.33f55a3714efe61d.webp)
-
+ਜਦੋਂ ਤੁਸੀਂ ਤਸਵੀਰਾਂ ਬਣਾਉਣ ਲੱਗ ਜਾਵੋਗੇ, ਤਾਂ ਤੁਹਾਨੂੰ ਸੁਰੱਖਿਅਤ ਜਾਂ ਬ੍ਰਾਂਡ ਦੇ ਖ਼ਿਲਾਫ ਸਮੱਗਰੀ ਨਿਕਲਣ ਤੋਂ ਬਚਾਉਣ ਲਈ ਗਾਰਡਰੇਲਜ਼ ਦੀ ਲੋੜ ਹੈ। ਇੱਕ **ਮੈਟਾਪ੍ਰੰਪਟ** ਉਹ ਟੈਕਸਟ ਹੁੰਦਾ ਹੈ ਜੋ ਤੁਸੀਂ ਯੂਜ਼ਰ ਦੇ ਪ੍ਰੰਪਟ ਤੋਂ ਪਹਿਲਾਂ ਰੱਖਦੇ ਹੋ ਤਾਂ ਜੋ ਮਾਡਲ ਦੇ ਨਤੀਜੇ ਨੂੰ ਸੀਮਿਤ ਕੀਤਾ ਜਾ ਸਕੇ।
 
 ```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# `prompt` ਨੂੰ client.images.generate(...) ਨੂੰ ਭੇਜੋ
 ```
 
-## ਸ਼ਾਨਦਾਰ ਕੰਮ! ਆਪਣੀ ਸਿੱਖਣ ਜਾਰੀ ਰੱਖੋ
+ਹਰ ਤਸਵੀਰ ਹੁਣ ਮੈਟਾਪ੍ਰੰਪਟ ਦੁਆਰਾ ਸੈੱਟ ਕੀਤੀਆਂ ਸਰਹੱਦਾਂ ਵਿੱਚ ਬਣਾ ਰਹੀ ਹੈ। ਇਸਨੂੰ Microsoft Foundry ਵਿੱਚ ਬਣੇ ਸਮੱਗਰੀ ਫਿਲਟਰਾਂ ਨਾਲ ਮਿਲਾਓ ਜਿਸ ਨਾਲ ਡਿਫੈਂਸ ਇਨ ਡੈਪਥ ਹੁੰਦੀ ਹੈ।
 
-ਇਸ ਪਾਠ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਆਪਣਾ ਜਨਰੇਟਿਵ AI ਗਿਆਨ ਵਧਾਉਣ ਲਈ ਸਾਡੀ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ਨੂੰ ਚੈੱਕ ਕਰੋ!
+## ਅਸਾਈਨਮੈਂਟ - ਆਓ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਸਮਰੱਥ ਬਣਾਈਏ
 
-ਪਾਠ 10 ਵੱਲ ਜਾਓ ਜਿੱਥੇ ਅਸੀਂ [ਘੱਟ-ਕੋਡ ਨਾਲ AI ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਉਣ](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst) ਦੇ ਤਰੀਕੇ ਦੇਖਾਂਗੇ।
+Edu4All ਦੇ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਉਹਨਾਂ ਦੇ ਮੁਲਾਂਕਣਾਂ ਲਈ ਤਸਵੀਰਾਂ ਦੀ ਲੋੜ ਹੈ। ਇੱਕ ਐਪ ਬਣਾਓ ਜੋ **ਸਮਾਰਕਾਂ** (ਕਿਹੜੇ ਸਮਾਰਕ ਤੁਹਾਡੇ ਉੱਤੇ ਹੈ) ਦੀ ਤਸਵੀਰਾਂ ਵੱਖ-ਵੱਖ, ਰਚਨਾਤਮਕ ਸੰਦਰਭਾਂ ਵਿੱਚ ਤਿਆਰ ਕਰੇ - ਉਦਾਹਰਨ ਵੱਜੋਂ, ਦਿਲਕਸ਼ ਸੂਰਜ ਡੁੱਬਦੇ ਸਮੇਂ ਕੋਈ ਪ੍ਰਸਿੱਧ ਨਿਸ਼ਾਨ ਇੱਕ ਬੱਚੇ ਦੇ ਵੇਖਣ ਨਾਲ।
+
+ਖੁਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ, ਫਿਰ ਸੰਦਰਭ ਸਾਲੂਸ਼ਨਾਂ ਨਾਲ ਤੁਲਨਾ ਕਰੋ:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) ਪੂਰੀ ਜਨਰੇਸ਼ਨ ਐਪ: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+[python/](../../../09-building-image-applications/python) ਵਿੱਚ ਨੋਟਬੁਕਾਂ ਨਾਲ ਵੀ ਕੰਮ ਕਰੋ (`aoai-assignment.ipynb` Azure ਲਈ, `oai-assignment.ipynb` OpenAI ਲਈ)।
+
+## ਵਧੀਆ ਕੰਮ! ਆਪਣੀ ਸਿੱਖਿਆ ਜਾਰੀ ਰੱਖੋ
+
+ਇਸ ਪਾਠ ਨੂੰ ਮੁਕੰਮਲ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਸਾਡਾ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ਵੇਖੋ ਤਾਂ ਜੋ ਜਨਰੇਟਿਵ AI ਗਿਆਨ ਵਿੱਚ ਵਾਧਾ ਕਰ ਸਕੋ!
+
+ਲੈਸਨ 10 ਵੱਲ ਜਾਓ ਅਤੇ ਸਿੱਖਣਾ ਜਾਰੀ ਰੱਖੋ।
 
 ---
 
-**ਅਸਵੀਕਰਤੀ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦਾ ਯਤਨ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਚਤਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ਅਸਵੀਕਾਰੋਪਣ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀਤਾਵਾਂ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਮੱਤਿਆਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਆਪਣੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜਵਾਬਦੇਹ ਨਹੀਂ ਹਾਂ।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -6,14 +6,10 @@ protecting against prompt injection and other input-based attacks.
 """
 
 import re
-from typing import Optional
 
 
 def validate_number_input(
-    value: str,
-    min_val: int = 1,
-    max_val: int = 100,
-    field_name: str = "number"
+    value: str, min_val: int = 1, max_val: int = 100, field_name: str = "number"
 ) -> int:
     """
     Validate and convert string input to an integer within bounds.
@@ -37,9 +33,7 @@ def validate_number_input(
     try:
         num = int(value.strip())
         if num < min_val or num > max_val:
-            raise ValueError(
-                f"{field_name} must be between {min_val} and {max_val}, got {num}"
-            )
+            raise ValueError(f"{field_name} must be between {min_val} and {max_val}, got {num}")
         return num
     except (ValueError, AttributeError) as e:
         if "must be between" in str(e):
@@ -54,7 +48,7 @@ def validate_text_input(
     max_length: int = 500,
     min_length: int = 1,
     allow_empty: bool = False,
-    field_name: str = "input"
+    field_name: str = "input",
 ) -> str:
     """
     Validate and sanitize text input.
@@ -82,7 +76,9 @@ def validate_text_input(
 
     trimmed = value.strip()
 
-    if not trimmed and not allow_empty:
+    if not trimmed:
+        if allow_empty:
+            return ""
         raise ValueError(f"{field_name} cannot be empty")
 
     if len(trimmed) > max_length:
@@ -92,18 +88,12 @@ def validate_text_input(
         )
 
     if len(trimmed) < min_length:
-        raise ValueError(
-            f"{field_name} is too short. Minimum {min_length} characters required"
-        )
+        raise ValueError(f"{field_name} is too short. Minimum {min_length} characters required")
 
     return trimmed
 
 
-def sanitize_prompt_input(
-    value: str,
-    max_length: int = 1000,
-    strict: bool = False
-) -> str:
+def sanitize_prompt_input(value: str, max_length: int = 1000, strict: bool = False) -> str:
     """
     Sanitize user input intended for use in LLM prompts.
 
@@ -131,25 +121,28 @@ def sanitize_prompt_input(
     sanitized = value.strip()
 
     # Remove null bytes and control characters (except newlines and tabs)
-    sanitized = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', sanitized)
+    sanitized = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", sanitized)
 
     # Remove potentially dangerous template/injection patterns
     dangerous_patterns = [
-        r'\{\{.*?\}\}',  # Template injection
-        r'\${.*?}',      # Variable substitution
-        r'<script.*?>.*?</script>',  # Script tags
-        r'javascript:',  # JavaScript URLs
+        r"\{\{.*?\}\}",  # Template injection
+        r"\${.*?}",  # Variable substitution
+        r"<script.*?>.*?</script>",  # Script tags
+        r"javascript:",  # JavaScript URLs
     ]
 
     for pattern in dangerous_patterns:
-        sanitized = re.sub(pattern, '', sanitized, flags=re.IGNORECASE | re.DOTALL)
+        sanitized = re.sub(pattern, "", sanitized, flags=re.IGNORECASE | re.DOTALL)
 
     if strict:
-        # In strict mode, only allow safe characters
-        sanitized = re.sub(r'[^\w\s,.\'\"-?!@#$%&*()+=:;]', '', sanitized, flags=re.UNICODE)
+        # In strict mode, only allow safe characters (the hyphen is escaped, not a range)
+        sanitized = re.sub(r"[^\w\s,.\'\"\-/?!@#$%&*()+=:;]", "", sanitized, flags=re.UNICODE)
 
-    # Normalize whitespace
-    sanitized = re.sub(r'\s+', ' ', sanitized)
+    # Normalize line endings and collapse runs of spaces to a single space, but
+    # preserve the newlines and tabs deliberately kept above so multi-line and
+    # tab-indented prompt input keeps its structure.
+    sanitized = sanitized.replace("\r\n", "\n").replace("\r", "\n")
+    sanitized = re.sub(r" {2,}", " ", sanitized)
     sanitized = sanitized.strip()
 
     if len(sanitized) > max_length:
@@ -177,7 +170,7 @@ def validate_email(email: str) -> str:
     email = email.strip().lower()
 
     # Basic email pattern
-    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
     if not re.match(pattern, email):
         raise ValueError(f"Invalid email format: {email}")
@@ -201,14 +194,21 @@ def validate_url(url: str, require_https: bool = True) -> str:
     """
     url = url.strip()
 
-    # Basic URL pattern
+    # Basic URL pattern. An optional ":port" is allowed so local model servers
+    # (e.g. http://localhost:11434, http://127.0.0.1:1234/v1) validate correctly.
+    # The port is restricted to ASCII digits and checked against the valid TCP
+    # range below, matching what standard-library URL parsing accepts.
     if require_https:
-        pattern = r'^https://[a-zA-Z0-9.-]+(?:/[^\s]*)?$'
-        if not re.match(pattern, url):
+        match = re.match(r"^https://[a-zA-Z0-9.-]+(?::([0-9]{1,5}))?(?:/[^\s]*)?$", url)
+        if not match:
             raise ValueError(f"Invalid HTTPS URL: {url}")
     else:
-        pattern = r'^https?://[a-zA-Z0-9.-]+(?:/[^\s]*)?$'
-        if not re.match(pattern, url):
+        match = re.match(r"^https?://[a-zA-Z0-9.-]+(?::([0-9]{1,5}))?(?:/[^\s]*)?$", url)
+        if not match:
             raise ValueError(f"Invalid URL: {url}")
+
+    port = match.group(1)
+    if port is not None and int(port) > 65535:
+        raise ValueError(f"Invalid port in URL: {url}")
 
     return url

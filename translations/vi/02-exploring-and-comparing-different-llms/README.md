@@ -1,19 +1,19 @@
-# Khám phá và so sánh các mô hình ngôn ngữ lớn (LLMs)
+# Khám phá và so sánh các LLM khác nhau
 
-[![Khám phá và so sánh các mô hình ngôn ngữ lớn (LLMs)](../../../translated_images/vi/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
+[![Khám phá và so sánh các LLM khác nhau](../../../translated_images/vi/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
 
-> _Nhấn vào hình ảnh trên để xem video bài học này_
+> _Nhấp vào hình ảnh trên để xem video của bài học này_
 
-Trong bài học trước, chúng ta đã thấy cách AI tạo sinh đang thay đổi bối cảnh công nghệ, cách các mô hình ngôn ngữ lớn (LLMs) hoạt động và cách một doanh nghiệp - như startup của chúng ta - có thể áp dụng chúng vào các trường hợp sử dụng và phát triển! Trong chương này, chúng ta sẽ so sánh và đối chiếu các loại mô hình ngôn ngữ lớn khác nhau để hiểu rõ ưu và nhược điểm của chúng.
+Với bài học trước, chúng ta đã thấy AI Tạo sinh đang thay đổi cảnh quan công nghệ như thế nào, các Mô hình Ngôn ngữ Lớn (LLMs) hoạt động ra sao và một doanh nghiệp - như startup của chúng ta - có thể áp dụng chúng vào các trường hợp sử dụng của họ và phát triển! Trong chương này, chúng ta sẽ so sánh và đối chiếu các loại mô hình ngôn ngữ lớn khác nhau để hiểu ưu nhược điểm của chúng.
 
-Bước tiếp theo trong hành trình của startup chúng ta là khám phá bối cảnh hiện tại của LLMs và hiểu mô hình nào phù hợp với trường hợp sử dụng của chúng ta.
+Bước tiếp theo trong hành trình của startup chúng ta là khám phá cảnh quan hiện tại của các LLM và hiểu rõ loại nào phù hợp với trường hợp sử dụng của chúng ta.
 
 ## Giới thiệu
 
-Bài học này sẽ bao gồm:
+Bài học này sẽ đề cập đến:
 
-- Các loại LLMs khác nhau trong bối cảnh hiện tại.
-- Kiểm tra, lặp lại và so sánh các mô hình khác nhau cho trường hợp sử dụng của bạn trên Azure.
+- Các loại LLM khác nhau trong cảnh quan hiện tại.
+- Thử nghiệm, lặp lại và so sánh các mô hình khác nhau cho trường hợp sử dụng của bạn trên Azure.
 - Cách triển khai một LLM.
 
 ## Mục tiêu học tập
@@ -21,189 +21,191 @@ Bài học này sẽ bao gồm:
 Sau khi hoàn thành bài học này, bạn sẽ có thể:
 
 - Chọn mô hình phù hợp cho trường hợp sử dụng của bạn.
-- Hiểu cách kiểm tra, lặp lại và cải thiện hiệu suất của mô hình.
+- Hiểu cách thử nghiệm, lặp lại và cải thiện hiệu năng của mô hình.
 - Biết cách các doanh nghiệp triển khai mô hình.
 
-## Hiểu các loại LLMs khác nhau
+## Hiểu các loại LLM khác nhau
 
-LLMs có thể được phân loại dựa trên kiến trúc, dữ liệu huấn luyện và trường hợp sử dụng. Hiểu những khác biệt này sẽ giúp startup của chúng ta chọn mô hình phù hợp cho tình huống và hiểu cách kiểm tra, lặp lại và cải thiện hiệu suất.
+LLM có thể được phân loại theo kiến trúc, dữ liệu huấn luyện và trường hợp sử dụng. Hiểu những khác biệt này sẽ giúp startup của chúng ta chọn mô hình phù hợp cho từng kịch bản, cũng như biết cách thử nghiệm, lặp lại và cải thiện hiệu suất.
 
-Có rất nhiều loại mô hình LLM khác nhau, lựa chọn mô hình của bạn phụ thuộc vào mục đích sử dụng, dữ liệu của bạn, ngân sách và nhiều yếu tố khác.
+Có nhiều loại mô hình LLM khác nhau, lựa chọn mô hình của bạn phụ thuộc vào mục đích sử dụng, dữ liệu, khả năng chi trả và nhiều yếu tố khác.
 
-Tùy thuộc vào việc bạn muốn sử dụng các mô hình cho văn bản, âm thanh, video, tạo hình ảnh và các mục đích khác, bạn có thể chọn một loại mô hình khác nhau.
+Tùy thuộc bạn muốn sử dụng mô hình cho văn bản, âm thanh, video, tạo hình ảnh hay những loại khác, bạn sẽ chọn loại mô hình phù hợp.
 
-- **Nhận dạng âm thanh và giọng nói**. Đối với mục đích này, các mô hình loại Whisper là một lựa chọn tuyệt vời vì chúng là mô hình đa năng và hướng đến nhận dạng giọng nói. Nó được huấn luyện trên dữ liệu âm thanh đa dạng và có thể thực hiện nhận dạng giọng nói đa ngôn ngữ. Tìm hiểu thêm về [các mô hình loại Whisper tại đây](https://platform.openai.com/docs/models/whisper?WT.mc_id=academic-105485-koreyst).
+- **Nhận dạng âm thanh và giọng nói**. Các mô hình kiểu Whisper vẫn hữu dụng như các mô hình nhận dạng giọng nói đa năng, nhưng các lựa chọn trong sản xuất bây giờ còn bao gồm các mô hình chuyển giọng nói thành văn bản mới như `gpt-4o-transcribe`, `gpt-4o-mini-transcribe` và các biến thể phân tách người nói. Hãy đánh giá phạm vi ngôn ngữ, phân tách người nói, hỗ trợ thời gian thực, độ trễ và chi phí cho trường hợp của bạn. Tìm hiểu thêm tại tài liệu [OpenAI chuyển giọng nói thành văn bản](https://platform.openai.com/docs/guides/speech-to-text?WT.mc_id=academic-105485-koreyst).
 
-- **Tạo hình ảnh**. Đối với tạo hình ảnh, DALL-E và Midjourney là hai lựa chọn rất nổi tiếng. DALL-E được cung cấp bởi Azure OpenAI. [Đọc thêm về DALL-E tại đây](https://platform.openai.com/docs/models/dall-e?WT.mc_id=academic-105485-koreyst) và cũng trong Chương 9 của chương trình học này.
+- **Tạo hình ảnh**. DALL-E và Midjourney là các lựa chọn tạo hình ảnh nổi tiếng, nhưng các API hình ảnh hiện tại của OpenAI tập trung vào các mô hình GPT Image như `gpt-image-2`, trong khi các gia đình mô hình khác như Stable Diffusion, Imagen, Flux cũng phổ biến. So sánh độ chính xác đáp ứng câu lệnh, hỗ trợ chỉnh sửa, kiểm soát phong cách, yêu cầu an toàn và cấp phép. Tìm hiểu thêm trong [hướng dẫn tạo hình ảnh của OpenAI](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst) và Chương 9 của giáo trình này.
 
-- **Tạo văn bản**. Hầu hết các mô hình đều được huấn luyện để tạo văn bản và bạn có nhiều lựa chọn từ GPT-3.5 đến GPT-4. Chúng có mức giá khác nhau, với GPT-4 là đắt nhất. Đáng để xem xét [Azure OpenAI playground](https://oai.azure.com/portal/playground?WT.mc_id=academic-105485-koreyst) để đánh giá mô hình nào phù hợp nhất với nhu cầu của bạn về khả năng và chi phí.
+- **Tạo văn bản**. Mô hình văn bản hiện nay bao gồm các mô hình tiên tiến, mô hình suy luận, các mô hình nhỏ có độ trễ thấp và các mô hình mã nguồn mở. Ví dụ hiện tại gồm các mô hình OpenAI GPT-5.x, Anthropic Claude 4.x, Google Gemini 3.x, Meta Llama 4 và Mistral. Không chọn chỉ dựa trên ngày phát hành hay giá cả; hãy so sánh chất lượng nhiệm vụ, độ trễ, cửa sổ ngữ cảnh, sử dụng công cụ, hành vi an toàn, khả năng sẵn có theo vùng và tổng chi phí. Danh mục mô hình [Microsoft Foundry](https://ai.azure.com/catalog?WT.mc_id=academic-105485-koreyst) là nơi tốt để so sánh các mô hình trên Azure.
 
-- **Đa phương thức**. Nếu bạn muốn xử lý nhiều loại dữ liệu trong đầu vào và đầu ra, bạn có thể muốn tìm hiểu các mô hình như [gpt-4 turbo với vision hoặc gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models?WT.mc_id=academic-105485-koreyst) - các phiên bản mới nhất của mô hình OpenAI - có khả năng kết hợp xử lý ngôn ngữ tự nhiên với hiểu biết hình ảnh, cho phép tương tác thông qua giao diện đa phương thức.
+- **Đa phương thức**. Nhiều mô hình hiện nay xử lý được hơn chỉ văn bản. Một số nhận đầu vào hình ảnh, âm thanh hoặc video; số khác có thể gọi công cụ; và các mô hình chuyên biệt có thể tạo hình ảnh, âm thanh hoặc video. Ví dụ, các mô hình OpenAI hiện tại hỗ trợ đầu vào văn bản và hình ảnh, các mô hình Gemini hỗ trợ văn bản, mã nguồn, hình ảnh, âm thanh và video tùy biến thể, còn Llama 4 Scout và Maverick là các mô hình đa phương thức mã nguồn mở. Luôn kiểm tra thẻ mô hình để biết các kiểu đầu vào và đầu ra được hỗ trợ trước khi xây dựng quy trình.
 
-Việc chọn một mô hình có nghĩa là bạn sẽ nhận được một số khả năng cơ bản, tuy nhiên điều đó có thể không đủ. Thường thì bạn có dữ liệu cụ thể của công ty mà bạn cần truyền đạt cho LLM. Có một số cách tiếp cận khác nhau để thực hiện điều đó, sẽ được đề cập trong các phần tiếp theo.
+Việc chọn một mô hình nghĩa là bạn sẽ có các khả năng cơ bản, tuy nhiên điều đó có thể chưa đủ. Thường khi bạn có dữ liệu theo đặc thù doanh nghiệp mà cần phải báo cho LLM biết. Có một vài cách tiếp cận khác nhau cho việc này, sẽ được trình bày ở các phần tiếp theo.
 
-### Mô hình nền tảng so với LLMs
+### Mô hình cơ sở (Foundation models) và LLM
 
-Thuật ngữ Mô hình nền tảng được [đặt ra bởi các nhà nghiên cứu Stanford](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst) và được định nghĩa là một mô hình AI tuân theo một số tiêu chí, chẳng hạn như:
+Thuật ngữ Mô hình Cơ sở được [các nhà nghiên cứu Stanford đặt ra](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst) và định nghĩa như một mô hình AI đáp ứng các tiêu chí như sau:
 
-- **Chúng được huấn luyện bằng học không giám sát hoặc học tự giám sát**, nghĩa là chúng được huấn luyện trên dữ liệu đa phương thức không được gắn nhãn và không yêu cầu chú thích hoặc gắn nhãn dữ liệu của con người trong quá trình huấn luyện.
-- **Chúng là các mô hình rất lớn**, dựa trên các mạng nơ-ron rất sâu được huấn luyện trên hàng tỷ tham số.
-- **Chúng thường được thiết kế để làm nền tảng cho các mô hình khác**, nghĩa là chúng có thể được sử dụng làm điểm khởi đầu để xây dựng các mô hình khác, điều này có thể được thực hiện bằng cách tinh chỉnh.
+- **Chúng được huấn luyện bằng học không giám sát hoặc học tự giám sát**, nghĩa là được đào tạo trên dữ liệu đa phương thức chưa có nhãn, và không cần con người đánh dấu hay chú thích dữ liệu trong quá trình huấn luyện.
+- **Chúng là các mô hình rất lớn**, dựa trên các mạng nơ-ron sâu, được huấn luyện trên hàng tỷ tham số.
+- **Chúng thường nhằm phục vụ như một ‘nền tảng’ để xây dựng các mô hình khác**, tức là có thể được dùng làm điểm khởi đầu để phát triển các mô hình khác, thông qua tinh chỉnh (fine-tuning).
 
-![Mô hình nền tảng so với LLMs](../../../translated_images/vi/FoundationModel.e4859dbb7a825c94.webp)
+![Mô hình cơ sở so với LLM](../../../translated_images/vi/FoundationModel.e4859dbb7a825c94.webp)
 
-Nguồn hình ảnh: [Hướng dẫn cơ bản về Mô hình nền tảng và Mô hình ngôn ngữ lớn | bởi Babar M Bhatti | Medium
+Nguồn ảnh: [Essential Guide to Foundation Models and Large Language Models | bởi Babar M Bhatti | Medium
 ](https://thebabar.medium.com/essential-guide-to-foundation-models-and-large-language-models-27dab58f7404)
 
-Để làm rõ hơn sự khác biệt này, hãy lấy ChatGPT làm ví dụ. Để xây dựng phiên bản đầu tiên của ChatGPT, một mô hình gọi là GPT-3.5 đã được sử dụng làm mô hình nền tảng. Điều này có nghĩa là OpenAI đã sử dụng một số dữ liệu cụ thể về trò chuyện để tạo ra một phiên bản tinh chỉnh của GPT-3.5, được chuyên biệt hóa để hoạt động tốt trong các tình huống hội thoại, chẳng hạn như chatbot.
+Để làm rõ hơn sự khác biệt này, hãy lấy ChatGPT làm ví dụ lịch sử. Các phiên bản đầu của ChatGPT dùng GPT-3.5 như một mô hình cơ sở. OpenAI sau đó dùng dữ liệu và kỹ thuật điều chỉnh hội thoại đặc thù để tạo ra một phiên bản tinh chỉnh hoạt động tốt hơn trong các kịch bản trò chuyện, như chatbot. Các dịch vụ AI hiện đại thường sử dụng nhiều biến thể mô hình, vì vậy tên dịch vụ và tên mô hình bên trong không phải lúc nào cũng giống nhau.
 
-![Mô hình nền tảng](../../../translated_images/vi/Multimodal.2c389c6439e0fc51.webp)
+![Mô hình cơ sở](../../../translated_images/vi/Multimodal.2c389c6439e0fc51.webp)
 
-Nguồn hình ảnh: [2108.07258.pdf (arxiv.org)](https://arxiv.org/pdf/2108.07258.pdf?WT.mc_id=academic-105485-koreyst)
+Nguồn ảnh: [2108.07258.pdf (arxiv.org)](https://arxiv.org/pdf/2108.07258.pdf?WT.mc_id=academic-105485-koreyst)
 
-### Mô hình mã nguồn mở so với Mô hình độc quyền
+### Mô hình mã nguồn mở/mở trọng số so với mô hình độc quyền
 
-Một cách khác để phân loại LLMs là liệu chúng có phải mã nguồn mở hay độc quyền.
+Một cách khác để phân loại LLM là dựa vào việc mô hình có mở trọng số, mã nguồn mở hay độc quyền.
 
-Mô hình mã nguồn mở là các mô hình được công khai và có thể được sử dụng bởi bất kỳ ai. Chúng thường được cung cấp bởi công ty tạo ra chúng hoặc cộng đồng nghiên cứu. Các mô hình này cho phép được kiểm tra, sửa đổi và tùy chỉnh cho các trường hợp sử dụng khác nhau trong LLMs. Tuy nhiên, chúng không phải lúc nào cũng được tối ưu hóa cho việc sử dụng trong sản xuất và có thể không hiệu quả như các mô hình độc quyền. Thêm vào đó, nguồn tài trợ cho các mô hình mã nguồn mở có thể bị hạn chế, và chúng có thể không được duy trì lâu dài hoặc không được cập nhật với nghiên cứu mới nhất. Các ví dụ về mô hình mã nguồn mở phổ biến bao gồm [Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html?WT.mc_id=academic-105485-koreyst), [Bloom](https://huggingface.co/bigscience/bloom) và [LLaMA](https://llama.meta.com).
+Mô hình mã nguồn mở và mở trọng số cho phép bạn xem xét, tải xuống hoặc tùy chỉnh mô hình, tuy nhiên giấy phép có thể khác nhau. Một số hoàn toàn mã nguồn mở, trong khi số khác là mô hình mở trọng số với các hạn chế sử dụng. Chúng hữu ích khi doanh nghiệp cần kiểm soát hơn về triển khai, dữ liệu tại chỗ, chi phí hoặc tùy chỉnh. Tuy nhiên, nhóm cần xem xét kỹ các điều khoản cấp phép, chi phí phục vụ, bảo trì, cập nhật bảo mật và chất lượng đánh giá trước khi dùng trong sản xuất. Ví dụ có thể kể đến là [Meta Llama 4](https://ai.meta.com/blog/llama-4-multimodal-intelligence/?WT.mc_id=academic-105485-koreyst), một số [mô hình Mistral](https://docs.mistral.ai/models/overview?WT.mc_id=academic-105485-koreyst) và nhiều mô hình trên [Hugging Face](https://huggingface.co/models?WT.mc_id=academic-105485-koreyst).
 
-Mô hình độc quyền là các mô hình thuộc sở hữu của một công ty và không được công khai. Các mô hình này thường được tối ưu hóa cho việc sử dụng trong sản xuất. Tuy nhiên, chúng không cho phép được kiểm tra, sửa đổi hoặc tùy chỉnh cho các trường hợp sử dụng khác nhau. Thêm vào đó, chúng không phải lúc nào cũng miễn phí và có thể yêu cầu đăng ký hoặc thanh toán để sử dụng. Ngoài ra, người dùng không có quyền kiểm soát dữ liệu được sử dụng để huấn luyện mô hình, điều này có nghĩa là họ phải tin tưởng vào cam kết của chủ sở hữu mô hình về bảo mật dữ liệu và sử dụng AI một cách có trách nhiệm. Các ví dụ về mô hình độc quyền phổ biến bao gồm [OpenAI models](https://platform.openai.com/docs/models/overview?WT.mc_id=academic-105485-koreyst), [Google Bard](https://sapling.ai/llm/bard?WT.mc_id=academic-105485-koreyst) hoặc [Claude 2](https://www.anthropic.com/index/claude-2?WT.mc_id=academic-105485-koreyst).
+Mô hình độc quyền thuộc sở hữu và được lưu trữ bởi nhà cung cấp. Các mô hình này thường được tối ưu cho sản xuất quản lý và có thể cung cấp hỗ trợ mạnh, hệ thống an toàn, tích hợp công cụ và khả năng mở rộng. Tuy nhiên, khách hàng thường không thể xem hay chỉnh sửa trọng số mô hình, và phải xem xét các điều khoản của nhà cung cấp về quyền riêng tư, lưu trữ, tuân thủ và sử dụng hợp lệ. Ví dụ gồm có [mô hình OpenAI](https://platform.openai.com/docs/models?WT.mc_id=academic-105485-koreyst), [Google Gemini](https://deepmind.google/models/gemini/pro/?WT.mc_id=academic-105485-koreyst) và [Anthropic Claude](https://platform.claude.com/docs/en/about-claude/models/overview?WT.mc_id=academic-105485-koreyst).
 
-### Nhúng so với Tạo hình ảnh so với Tạo văn bản và mã
+### Mô hình Nhúng (Embedding) so với Tạo hình ảnh so với Tạo văn bản và mã nguồn
 
-LLMs cũng có thể được phân loại theo đầu ra mà chúng tạo ra.
+LLM cũng có thể được phân loại theo kết quả đầu ra mà chúng tạo ra.
 
-Nhúng là một tập hợp các mô hình có thể chuyển đổi văn bản thành dạng số, gọi là nhúng, là một biểu diễn số của văn bản đầu vào. Nhúng giúp máy móc dễ dàng hiểu mối quan hệ giữa các từ hoặc câu và có thể được sử dụng làm đầu vào cho các mô hình khác, chẳng hạn như mô hình phân loại hoặc mô hình phân cụm có hiệu suất tốt hơn trên dữ liệu số. Các mô hình nhúng thường được sử dụng cho học chuyển giao, nơi một mô hình được xây dựng cho một nhiệm vụ thay thế mà có nhiều dữ liệu, sau đó trọng số của mô hình (nhúng) được tái sử dụng cho các nhiệm vụ tiếp theo. Một ví dụ về danh mục này là [OpenAI embeddings](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst).
+Embedding là tập hợp các mô hình có thể chuyển đổi văn bản thành dạng số, gọi là embedding, là biểu diễn số của văn bản đầu vào. Embedding giúp máy tính dễ hiểu mối quan hệ giữa các từ hoặc câu và có thể được dùng làm đầu vào cho các mô hình khác như mô hình phân loại hoặc mô hình phân cụm, những mô hình này hoạt động tốt hơn với dữ liệu số. Mô hình embedding thường được dùng để học chuyển giao (transfer learning), tức xây dựng mô hình cho một nhiệm vụ thay thế có nhiều dữ liệu, rồi dùng lại trọng số (embedding) cho các nhiệm vụ khác. Ví dụ trong nhóm này là [embedding OpenAI](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst).
 
-![Nhúng](../../../translated_images/vi/Embedding.c3708fe988ccf760.webp)
+![Embedding](../../../translated_images/vi/Embedding.c3708fe988ccf760.webp)
 
-Các mô hình tạo hình ảnh là các mô hình tạo ra hình ảnh. Các mô hình này thường được sử dụng cho chỉnh sửa hình ảnh, tổng hợp hình ảnh và dịch hình ảnh. Các mô hình tạo hình ảnh thường được huấn luyện trên các tập dữ liệu lớn về hình ảnh, chẳng hạn như [LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst), và có thể được sử dụng để tạo hình ảnh mới hoặc chỉnh sửa hình ảnh hiện có với các kỹ thuật như inpainting, siêu phân giải và tô màu. Các ví dụ bao gồm [DALL-E-3](https://openai.com/dall-e-3?WT.mc_id=academic-105485-koreyst) và [Stable Diffusion models](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst).
+Mô hình tạo hình ảnh là các mô hình tạo ra hình ảnh. Các mô hình này thường được dùng cho chỉnh sửa hình ảnh, tổng hợp hình ảnh và chuyển đổi hình ảnh. Mô hình tạo hình ảnh thường được huấn luyện trên các bộ dữ liệu lớn về hình ảnh, như [LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst), và có thể dùng để tạo hình ảnh mới hoặc chỉnh sửa hình ảnh hiện có bằng kỹ thuật inpainting, siêu phân giải và tô màu. Ví dụ gồm có các [mô hình GPT Image](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst), [mô hình Stable Diffusion](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst) và mô hình Imagen.
 
 ![Tạo hình ảnh](../../../translated_images/vi/Image.349c080266a763fd.webp)
 
-Các mô hình tạo văn bản và mã là các mô hình tạo ra văn bản hoặc mã. Các mô hình này thường được sử dụng cho tóm tắt văn bản, dịch thuật và trả lời câu hỏi. Các mô hình tạo văn bản thường được huấn luyện trên các tập dữ liệu lớn về văn bản, chẳng hạn như [BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst), và có thể được sử dụng để tạo văn bản mới hoặc trả lời câu hỏi. Các mô hình tạo mã, như [CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst), thường được huấn luyện trên các tập dữ liệu lớn về mã, chẳng hạn như GitHub, và có thể được sử dụng để tạo mã mới hoặc sửa lỗi trong mã hiện có.
+Mô hình tạo văn bản và mã nguồn là các mô hình tạo ra văn bản hoặc mã. Các mô hình này thường dùng để tóm tắt văn bản, dịch thuật và trả lời câu hỏi. Mô hình tạo văn bản thường được huấn luyện trên các bộ dữ liệu lớn về văn bản, như [BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst), và có thể dùng để tạo ra văn bản mới, hoặc trả lời câu hỏi. Mô hình tạo mã như [CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst) được huấn luyện trên bộ dữ liệu lớn mã nguồn, như GitHub, và có thể tạo mã mới hoặc sửa lỗi trong mã hiện có.
 
-![Tạo văn bản và mã](../../../translated_images/vi/Text.a8c0cf139e5cc2a0.webp)
+![Tạo văn bản và mã nguồn](../../../translated_images/vi/Text.a8c0cf139e5cc2a0.webp)
 
-### Mã hóa-Giải mã so với Chỉ giải mã
+### Kiến trúc Mã hóa - Giải mã so với Chỉ giải mã
 
-Để nói về các loại kiến trúc khác nhau của LLMs, hãy sử dụng một phép so sánh.
+Để nói về các loại kiến trúc LLM khác nhau, hãy dùng một phép tương tự.
 
-Hãy tưởng tượng quản lý của bạn giao cho bạn nhiệm vụ viết một bài kiểm tra cho học sinh. Bạn có hai đồng nghiệp; một người chịu trách nhiệm tạo nội dung và người kia chịu trách nhiệm xem xét chúng.
+Hãy tưởng tượng người quản lý của bạn giao nhiệm vụ viết một bài quiz cho học sinh. Bạn có hai đồng nghiệp; người này chịu trách nhiệm tạo nội dung và người kia chịu trách nhiệm xem lại.
 
-Người tạo nội dung giống như mô hình Chỉ giải mã, họ có thể nhìn vào chủ đề và những gì bạn đã viết, sau đó viết một khóa học dựa trên đó. Họ rất giỏi trong việc viết nội dung hấp dẫn và thông tin, nhưng họ không giỏi trong việc hiểu chủ đề và mục tiêu học tập. Một số ví dụ về mô hình Chỉ giải mã là các mô hình thuộc họ GPT, chẳng hạn như GPT-3.
+Người tạo nội dung giống như mô hình chỉ giải mã: họ có thể nhìn vào chủ đề, xem những gì bạn đã viết, và tiếp tục tạo nội dung dựa trên ngữ cảnh đó. Họ rất giỏi viết nội dung hấp dẫn và thông tin, nhưng không phải lúc nào cũng là lựa chọn tốt nhất khi nhiệm vụ chỉ là phân loại, truy xuất hoặc mã hóa thông tin. Các ví dụ về mô hình chỉ giải mã là các mô hình GPT và Llama.
 
-Người xem xét giống như mô hình Chỉ mã hóa, họ nhìn vào khóa học đã viết và các câu trả lời, nhận thấy mối quan hệ giữa chúng và hiểu ngữ cảnh, nhưng họ không giỏi trong việc tạo nội dung. Một ví dụ về mô hình Chỉ mã hóa là BERT.
+Người xem lại giống như mô hình chỉ mã hóa; họ xem bài học đã viết và câu trả lời, nhận thấy mối quan hệ giữa chúng và hiểu ngữ cảnh, nhưng họ không giỏi tạo nội dung. Ví dụ mô hình chỉ mã hóa là BERT.
 
-Hãy tưởng tượng rằng chúng ta cũng có thể có một người vừa tạo vừa xem xét bài kiểm tra, đây là mô hình Mã hóa-Giải mã. Một số ví dụ là BART và T5.
+Hãy tưởng tượng rằng chúng ta có người có thể tạo và xem lại bài quiz, đây chính là mô hình Mã hóa - Giải mã. Một số ví dụ là BART và T5.
 
 ### Dịch vụ so với Mô hình
 
-Bây giờ, hãy nói về sự khác biệt giữa một dịch vụ và một mô hình. Một dịch vụ là một sản phẩm được cung cấp bởi Nhà cung cấp Dịch vụ Đám mây, và thường là sự kết hợp của các mô hình, dữ liệu và các thành phần khác. Một mô hình là thành phần cốt lõi của một dịch vụ, và thường là một mô hình nền tảng, chẳng hạn như một LLM.
+Bây giờ, hãy nói về sự khác biệt giữa dịch vụ và mô hình. Dịch vụ là sản phẩm do Nhà cung cấp Dịch vụ Đám mây cung cấp, thường là sự kết hợp của mô hình, dữ liệu và các thành phần khác. Mô hình là thành phần cốt lõi của dịch vụ, thường là mô hình cơ sở như LLM.
 
-Các dịch vụ thường được tối ưu hóa cho việc sử dụng trong sản xuất và thường dễ sử dụng hơn các mô hình, thông qua giao diện người dùng đồ họa. Tuy nhiên, các dịch vụ không phải lúc nào cũng miễn phí và có thể yêu cầu đăng ký hoặc thanh toán để sử dụng, đổi lại việc tận dụng thiết bị và tài nguyên của chủ sở hữu dịch vụ, tối ưu hóa chi phí và dễ dàng mở rộng. Một ví dụ về dịch vụ là [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=academic-105485-koreyst), cung cấp kế hoạch giá theo mức sử dụng, nghĩa là người dùng được tính phí tỷ lệ thuận với mức độ sử dụng dịch vụ. Ngoài ra, Azure OpenAI Service cung cấp bảo mật cấp doanh nghiệp và khung AI có trách nhiệm trên các khả năng của mô hình.
+Các dịch vụ thường được tối ưu cho sử dụng trong sản xuất và dễ dùng hơn mô hình qua giao diện đồ họa. Nhưng dịch vụ không luôn miễn phí, và có thể yêu cầu đăng ký hoặc trả phí để sử dụng, đổi lại việc tận dụng thiết bị và tài nguyên của chủ dịch vụ, tối ưu chi phí và mở rộng dễ dàng. Ví dụ về dịch vụ là [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-foundry/openai/overview?WT.mc_id=academic-105485-koreyst), cung cấp gói trả tiền theo mức sử dụng, nghĩa là người dùng bị tính phí tỉ lệ thuận với mức độ sử dụng dịch vụ. Azure OpenAI Service cũng mang đến an ninh cấp doanh nghiệp và khung AI có trách nhiệm trên nền tảng khả năng của mô hình.
 
-Các mô hình chỉ là Mạng Nơ-ron, với các tham số, trọng số và các yếu tố khác. Cho phép các công ty chạy cục bộ, tuy nhiên, sẽ cần mua thiết bị, xây dựng cấu trúc để mở rộng và mua giấy phép hoặc sử dụng mô hình mã nguồn mở. Một mô hình như LLaMA có sẵn để sử dụng, yêu cầu sức mạnh tính toán để chạy mô hình.
+Mô hình là các tác phẩm mạng nơ-ron nhân tạo: tham số, trọng số, kiến trúc, bộ mã hóa token và cấu hình hỗ trợ. Chạy một mô hình cục bộ hoặc trong môi trường riêng yêu cầu phần cứng thích hợp, hạ tầng phục vụ, giám sát, và giấy phép tương thích (mở trọng số/mã nguồn mở hoặc thương mại). Các mô hình mở trọng số như Llama 4 hoặc Mistral có thể được tự lưu trữ, nhưng vẫn cần sức mạnh tính toán và chuyên môn vận hành.
 
-## Cách kiểm tra và lặp lại với các mô hình khác nhau để hiểu hiệu suất trên Azure
+## Cách thử nghiệm và lặp lại với các mô hình khác nhau để hiểu hiệu năng trên Azure
 
-Khi nhóm của chúng ta đã khám phá bối cảnh LLMs hiện tại và xác định một số ứng viên tốt cho các tình huống của họ, bước tiếp theo là kiểm tra chúng trên dữ liệu và khối lượng công việc của họ. Đây là một quá trình lặp lại, được thực hiện thông qua các thí nghiệm và đo lường.
-Hầu hết các mô hình mà chúng tôi đã đề cập trong các đoạn trước (mô hình OpenAI, mô hình mã nguồn mở như Llama2 và Hugging Face transformers) đều có sẵn trong [Danh mục Mô hình](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview?WT.mc_id=academic-105485-koreyst) tại [Azure AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst).
 
-[Azure AI Studio](https://learn.microsoft.com/azure/ai-studio/what-is-ai-studio?WT.mc_id=academic-105485-koreyst) là một nền tảng đám mây được thiết kế dành cho các nhà phát triển để xây dựng ứng dụng AI tạo sinh và quản lý toàn bộ vòng đời phát triển - từ thử nghiệm đến đánh giá - bằng cách kết hợp tất cả các dịch vụ AI của Azure vào một trung tâm duy nhất với giao diện người dùng tiện lợi. Danh mục Mô hình trong Azure AI Studio cho phép người dùng:
+Khi nhóm của chúng tôi đã khám phá bối cảnh các LLM hiện tại và xác định được một số ứng viên tốt cho các tình huống của họ, bước tiếp theo là thử nghiệm chúng trên dữ liệu và khối lượng công việc của họ. Đây là một quá trình lặp đi lặp lại, được thực hiện bằng các thí nghiệm và đo lường.
+Hầu hết các mô hình chúng tôi đã đề cập trong các đoạn trước (mô hình OpenAI, mô hình có trọng số mở như Llama 4 và Mistral, và mô hình Hugging Face) có sẵn trong [Microsoft Foundry Models](https://learn.microsoft.com/azure/foundry/concepts/foundry-models-overview?WT.mc_id=academic-105485-koreyst).
 
-- Tìm kiếm Mô hình Nền tảng mà bạn quan tâm trong danh mục - có thể là mô hình độc quyền hoặc mã nguồn mở, lọc theo nhiệm vụ, giấy phép hoặc tên. Để cải thiện khả năng tìm kiếm, các mô hình được tổ chức thành các bộ sưu tập, như bộ sưu tập Azure OpenAI, bộ sưu tập Hugging Face, và nhiều hơn nữa.
+[Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry?WT.mc_id=academic-105485-koreyst), trước đây là Azure AI Studio/Azure AI Foundry, là nền tảng Azure thống nhất để xây dựng các ứng dụng và tác nhân AI. Nó giúp các nhà phát triển quản lý vòng đời từ thí nghiệm và đánh giá đến triển khai, giám sát và quản trị. Danh mục mô hình trong Microsoft Foundry cho phép người dùng:
 
-![Danh mục mô hình](../../../translated_images/vi/AzureAIStudioModelCatalog.3cf8a499aa8ba031.webp)
+- Tìm mô hình nền tảng quan tâm trong danh mục, bao gồm các mô hình được Azure bán và các mô hình từ các đối tác và nhà cung cấp cộng đồng. Người dùng có thể lọc theo nhiệm vụ, nhà cung cấp, giấy phép, tùy chọn triển khai hoặc tên.
 
-- Xem xét thẻ mô hình, bao gồm mô tả chi tiết về mục đích sử dụng và dữ liệu huấn luyện, mẫu mã và kết quả đánh giá trong thư viện đánh giá nội bộ.
+![Model catalog](../../../translated_images/vi/AzureAIStudioModelCatalog.3cf8a499aa8ba031.webp)
 
-![Thẻ mô hình](../../../translated_images/vi/ModelCard.598051692c6e400d.webp)
+- Xem xét thẻ mô hình, bao gồm mô tả chi tiết về mục đích sử dụng và dữ liệu đào tạo, ví dụ mã và kết quả đánh giá trên thư viện đánh giá nội bộ.
 
-- So sánh các tiêu chuẩn giữa các mô hình và tập dữ liệu có sẵn trong ngành để đánh giá mô hình nào phù hợp với kịch bản kinh doanh, thông qua bảng [Tiêu chuẩn Mô hình](https://learn.microsoft.com/azure/ai-studio/how-to/model-benchmarks?WT.mc_id=academic-105485-koreyst).
+![Model card](../../../translated_images/vi/ModelCard.598051692c6e400d.webp)
 
-![Tiêu chuẩn mô hình](../../../translated_images/vi/ModelBenchmarks.254cb20fbd06c03a.webp)
+- So sánh các điểm chuẩn giữa các mô hình và tập dữ liệu có sẵn trong ngành để đánh giá mô hình nào phù hợp với kịch bản kinh doanh, thông qua bảng [Model Benchmarks](https://learn.microsoft.com/azure/ai-foundry/concepts/model-benchmarks?WT.mc_id=academic-105485-koreyst).
 
-- Tinh chỉnh mô hình trên dữ liệu huấn luyện tùy chỉnh để cải thiện hiệu suất mô hình trong một khối lượng công việc cụ thể, tận dụng khả năng thử nghiệm và theo dõi của Azure AI Studio.
+![Model benchmarks](../../../translated_images/vi/ModelBenchmarks.254cb20fbd06c03a.webp)
 
-![Tinh chỉnh mô hình](../../../translated_images/vi/FineTuning.aac48f07142e36fd.webp)
+- Tinh chỉnh mô hình được hỗ trợ trên dữ liệu đào tạo tùy chỉnh để cải thiện hiệu suất mô hình trong một khối lượng công việc cụ thể, tận dụng khả năng thực nghiệm và theo dõi của Microsoft Foundry.
 
-- Triển khai mô hình đã được huấn luyện trước hoặc phiên bản đã được tinh chỉnh để suy luận thời gian thực từ xa - tính toán được quản lý - hoặc điểm cuối API không máy chủ - [trả phí theo mức sử dụng](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview#model-deployment-managed-compute-and-serverless-api-pay-as-you-go?WT.mc_id=academic-105485-koreyst) - để cho phép các ứng dụng sử dụng nó.
+![Model fine-tuning](../../../translated_images/vi/FineTuning.aac48f07142e36fd.webp)
 
-![Triển khai mô hình](../../../translated_images/vi/ModelDeploy.890da48cbd0bccdb.webp)
+- Triển khai mô hình gốc đã được đào tạo trước hoặc phiên bản đã được tinh chỉnh tới điểm cuối suy luận thời gian thực từ xa, sử dụng các tùy chọn tính toán được quản lý hoặc triển khai không máy chủ, để các ứng dụng có thể sử dụng nó.
+
+![Model deployment](../../../translated_images/vi/ModelDeploy.890da48cbd0bccdb.webp)
 
 > [!NOTE]
-> Không phải tất cả các mô hình trong danh mục hiện đều có sẵn để tinh chỉnh và/hoặc triển khai trả phí theo mức sử dụng. Kiểm tra thẻ mô hình để biết chi tiết về khả năng và hạn chế của mô hình.
+> Không phải tất cả các mô hình trong danh mục hiện đều có sẵn để tinh chỉnh và/hoặc triển khai theo mô hình trả theo mức sử dụng. Kiểm tra thẻ mô hình để biết chi tiết về khả năng và giới hạn của mô hình.
 
 ## Cải thiện kết quả LLM
 
-Chúng tôi đã cùng đội ngũ startup của mình khám phá các loại LLM khác nhau và một nền tảng đám mây (Azure Machine Learning) cho phép chúng tôi so sánh các mô hình khác nhau, đánh giá chúng trên dữ liệu kiểm tra, cải thiện hiệu suất và triển khai chúng trên các điểm cuối suy luận.
+Chúng tôi đã khám phá cùng nhóm khởi nghiệp các loại LLM khác nhau và một nền tảng đám mây (Microsoft Foundry) cho phép chúng tôi so sánh các mô hình, đánh giá chúng trên dữ liệu thử nghiệm, cải thiện hiệu suất và triển khai chúng trên các điểm cuối suy luận.
 
-Nhưng khi nào họ nên cân nhắc việc tinh chỉnh một mô hình thay vì sử dụng mô hình đã được huấn luyện trước? Có những cách tiếp cận nào khác để cải thiện hiệu suất mô hình trên các khối lượng công việc cụ thể?
+Nhưng khi nào họ nên cân nhắc tinh chỉnh một mô hình thay vì sử dụng một mô hình đã được đào tạo trước? Có những phương pháp khác để cải thiện hiệu suất mô hình trên các khối lượng công việc cụ thể không?
 
-Có một số cách tiếp cận mà doanh nghiệp có thể sử dụng để đạt được kết quả mong muốn từ LLM. Bạn có thể chọn các loại mô hình khác nhau với các mức độ huấn luyện khác nhau khi triển khai LLM trong sản xuất, với các mức độ phức tạp, chi phí và chất lượng khác nhau. Dưới đây là một số cách tiếp cận khác nhau:
+Có nhiều phương pháp mà doanh nghiệp có thể sử dụng để đạt được kết quả cần thiết từ LLM. Bạn có thể chọn các loại mô hình khác nhau với mức độ đào tạo khác nhau khi triển khai một LLM vào sản xuất, với các mức độ phức tạp, chi phí, và chất lượng khác nhau. Dưới đây là một số phương pháp khác nhau:
 
-- **Kỹ thuật gợi ý với ngữ cảnh**. Ý tưởng là cung cấp đủ ngữ cảnh khi bạn đưa ra gợi ý để đảm bảo bạn nhận được câu trả lời như mong muốn.
+- **Kỹ thuật gợi ý với bối cảnh**. Ý tưởng là cung cấp đủ bối cảnh khi bạn gợi ý để đảm bảo nhận được phản hồi bạn cần.
 
-- **Tạo nội dung tăng cường truy xuất, RAG**. Dữ liệu của bạn có thể tồn tại trong cơ sở dữ liệu hoặc điểm cuối web chẳng hạn, để đảm bảo dữ liệu này, hoặc một phần của nó, được bao gồm khi đưa ra gợi ý, bạn có thể truy xuất dữ liệu liên quan và thêm nó vào gợi ý của người dùng.
+- **Tạo sinh tăng cường truy xuất, RAG**. Dữ liệu của bạn có thể tồn tại trong cơ sở dữ liệu hoặc điểm cuối web ví dụ, để đảm bảo dữ liệu này, hoặc một phần của nó, được bao gồm tại thời điểm gợi ý, bạn có thể truy xuất dữ liệu liên quan và đưa phần đó vào gợi ý của người dùng.
 
-- **Mô hình đã được tinh chỉnh**. Ở đây, bạn huấn luyện mô hình thêm trên dữ liệu của riêng mình, điều này dẫn đến mô hình trở nên chính xác hơn và đáp ứng nhu cầu của bạn nhưng có thể tốn kém.
+- **Mô hình được tinh chỉnh**. Ở đây, bạn đào tạo thêm mô hình trên dữ liệu của riêng bạn, khiến mô hình chính xác hơn và đáp ứng tốt hơn nhu cầu của bạn nhưng có thể tốn kém.
 
-![Triển khai LLMs](../../../translated_images/vi/Deploy.18b2d27412ec8c02.webp)
+![LLMs deployment](../../../translated_images/vi/Deploy.18b2d27412ec8c02.webp)
 
-Nguồn hình ảnh: [Four Ways that Enterprises Deploy LLMs | Fiddler AI Blog](https://www.fiddler.ai/blog/four-ways-that-enterprises-deploy-llms?WT.mc_id=academic-105485-koreyst)
+Nguồn ảnh: [Four Ways that Enterprises Deploy LLMs | Fiddler AI Blog](https://www.fiddler.ai/blog/four-ways-that-enterprises-deploy-llms?WT.mc_id=academic-105485-koreyst)
 
-### Kỹ thuật gợi ý với ngữ cảnh
+### Kỹ thuật gợi ý với bối cảnh
 
-Các LLM đã được huấn luyện trước hoạt động rất tốt trên các nhiệm vụ ngôn ngữ tự nhiên tổng quát, ngay cả khi chỉ gọi chúng với một gợi ý ngắn, như một câu cần hoàn thành hoặc một câu hỏi – cái gọi là học "zero-shot".
+Các LLM đã được đào tạo trước hoạt động rất tốt trên các nhiệm vụ ngôn ngữ tự nhiên tổng quát, ngay cả khi gọi chúng với một gợi ý ngắn, như một câu để hoàn thiện hoặc một câu hỏi – còn gọi là học “zero-shot”.
 
-Tuy nhiên, càng nhiều thông tin chi tiết mà người dùng có thể cung cấp trong yêu cầu của họ, với một yêu cầu chi tiết và các ví dụ – Ngữ cảnh – thì câu trả lời càng chính xác và gần với mong đợi của người dùng. Trong trường hợp này, chúng ta nói về học "one-shot" nếu gợi ý chỉ bao gồm một ví dụ và "few-shot learning" nếu nó bao gồm nhiều ví dụ. Kỹ thuật gợi ý với ngữ cảnh là cách tiếp cận tiết kiệm chi phí nhất để bắt đầu.
+Tuy nhiên, người dùng càng có thể định dạng câu hỏi của họ, với một yêu cầu chi tiết và các ví dụ – tức Bối cảnh – thì câu trả lời càng chính xác và gần với kỳ vọng của người dùng hơn. Trong trường hợp này, chúng ta gọi là học “one-shot” nếu gợi ý chỉ bao gồm một ví dụ và học “few-shot” nếu bao gồm nhiều ví dụ.
+Kỹ thuật gợi ý với bối cảnh là phương pháp tiết kiệm chi phí nhất để bắt đầu.
 
-### Tạo nội dung tăng cường truy xuất (RAG)
+### Tạo sinh tăng cường truy xuất (RAG)
 
-Các LLM có hạn chế là chúng chỉ có thể sử dụng dữ liệu đã được sử dụng trong quá trình huấn luyện để tạo ra câu trả lời. Điều này có nghĩa là chúng không biết gì về các sự kiện xảy ra sau quá trình huấn luyện của chúng, và chúng không thể truy cập thông tin không công khai (như dữ liệu công ty). 
+LLM có hạn chế là chỉ có thể sử dụng dữ liệu đã được dùng trong quá trình đào tạo để tạo câu trả lời. Điều này có nghĩa là chúng không biết gì về các sự kiện xảy ra sau quá trình đào tạo, và không thể truy cập thông tin không công khai (như dữ liệu công ty).
+Điều này có thể được khắc phục bằng RAG, kỹ thuật tăng cường gợi ý với dữ liệu bên ngoài dưới dạng các đoạn tài liệu, cân nhắc giới hạn độ dài gợi ý. Điều này được hỗ trợ bởi các công cụ cơ sở dữ liệu vector (như [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)) để truy xuất các đoạn hữu ích từ các nguồn dữ liệu đa dạng đã được định nghĩa trước và thêm chúng vào Bối cảnh gợi ý.
 
-Điều này có thể được khắc phục thông qua RAG, một kỹ thuật tăng cường gợi ý với dữ liệu bên ngoài dưới dạng các đoạn tài liệu, xem xét giới hạn độ dài gợi ý. Điều này được hỗ trợ bởi các công cụ cơ sở dữ liệu Vector (như [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)) truy xuất các đoạn hữu ích từ các nguồn dữ liệu được xác định trước và thêm chúng vào Ngữ cảnh gợi ý.
+Kỹ thuật này rất hữu ích khi doanh nghiệp không có đủ dữ liệu, đủ thời gian hoặc nguồn lực để tinh chỉnh LLM, nhưng vẫn muốn cải thiện hiệu suất trên khối lượng công việc cụ thể và giảm rủi ro câu trả lời ảo tưởng, lỗi thời hoặc không được hỗ trợ.
 
-Kỹ thuật này rất hữu ích khi một doanh nghiệp không có đủ dữ liệu, đủ thời gian hoặc nguồn lực để tinh chỉnh một LLM, nhưng vẫn muốn cải thiện hiệu suất trên một khối lượng công việc cụ thể và giảm rủi ro sai lệch, tức là sự bóp méo thực tế hoặc nội dung có hại.
+### Mô hình được tinh chỉnh
 
-### Mô hình đã được tinh chỉnh
+Tinh chỉnh là quá trình tận dụng học chuyển giao để ‘thích ứng’ mô hình với một nhiệm vụ cụ thể hoặc để giải quyết một vấn đề cụ thể. Khác với học few-shot và RAG, nó tạo ra một mô hình mới với các trọng số và độ lệch cập nhật. Nó yêu cầu một tập các ví dụ đào tạo bao gồm một đầu vào (gợi ý) và đầu ra liên quan (hoàn thiện).
+Đây sẽ là phương pháp ưu tiên nếu:
 
-Tinh chỉnh là một quá trình tận dụng học chuyển giao để 'tùy chỉnh' mô hình cho một nhiệm vụ cụ thể hoặc để giải quyết một vấn đề cụ thể. Khác với học few-shot và RAG, nó tạo ra một mô hình mới, với các trọng số và độ lệch được cập nhật. Nó yêu cầu một tập hợp các ví dụ huấn luyện bao gồm một đầu vào duy nhất (gợi ý) và đầu ra liên quan của nó (hoàn thành). 
+- **Sử dụng các mô hình nhỏ hơn chuyên biệt cho nhiệm vụ**. Doanh nghiệp muốn tinh chỉnh một mô hình nhỏ hơn cho một nhiệm vụ hẹp thay vì liên tục gợi ý một mô hình biên lớn hơn, dẫn đến giải pháp tiết kiệm chi phí và nhanh hơn.
 
-Đây sẽ là cách tiếp cận ưu tiên nếu:
+- **Xem xét độ trễ**. Độ trễ quan trọng cho một trường hợp sử dụng cụ thể, nên không thể dùng các gợi ý quá dài hoặc số lượng các ví dụ mà mô hình cần học không phù hợp với giới hạn độ dài gợi ý.
 
-- **Sử dụng mô hình đã được tinh chỉnh**. Một doanh nghiệp muốn sử dụng các mô hình đã được tinh chỉnh nhưng ít khả năng hơn (như các mô hình nhúng) thay vì các mô hình hiệu suất cao, dẫn đến giải pháp tiết kiệm chi phí và nhanh chóng hơn.
+- **Thích ứng hành vi ổn định**. Doanh nghiệp có nhiều ví dụ chất lượng cao và muốn mô hình nhất quán tuân theo mẫu nhiệm vụ, định dạng đầu ra, giọng điệu hoặc phong cách theo miền. Nếu vấn đề chính là thông tin mới hoặc tri thức riêng tư thay đổi thường xuyên, hãy sử dụng RAG thay vì chỉ dựa vào tinh chỉnh.
 
-- **Xem xét độ trễ**. Độ trễ là yếu tố quan trọng đối với một trường hợp sử dụng cụ thể, vì vậy không thể sử dụng các gợi ý quá dài hoặc số lượng ví dụ cần học từ mô hình không phù hợp với giới hạn độ dài gợi ý.
+### Mô hình được đào tạo
 
-- **Luôn cập nhật**. Một doanh nghiệp có rất nhiều dữ liệu chất lượng cao và nhãn sự thật cơ bản cùng với các nguồn lực cần thiết để duy trì dữ liệu này luôn cập nhật theo thời gian.
-
-### Mô hình được huấn luyện
-
-Huấn luyện một LLM từ đầu chắc chắn là cách tiếp cận khó khăn và phức tạp nhất, yêu cầu lượng dữ liệu khổng lồ, nguồn lực có kỹ năng và sức mạnh tính toán phù hợp. Tùy chọn này chỉ nên được xem xét trong trường hợp một doanh nghiệp có một trường hợp sử dụng cụ thể theo lĩnh vực và một lượng lớn dữ liệu tập trung vào lĩnh vực đó.
+Đào tạo một LLM từ đầu không nghi ngờ gì là phương pháp khó khăn và phức tạp nhất để áp dụng, đòi hỏi lượng dữ liệu khổng lồ, nguồn lực có kỹ năng và công suất tính toán phù hợp. Tùy chọn này chỉ nên xem xét trong trường hợp doanh nghiệp có trường hợp sử dụng chuyên ngành và lượng lớn dữ liệu tập trung theo ngành.
 
 ## Kiểm tra kiến thức
 
-Cách tiếp cận nào có thể là tốt để cải thiện kết quả hoàn thành của LLM?
+Phương pháp nào có thể là cách tốt để cải thiện kết quả hoàn thiện LLM?
 
-1. Kỹ thuật gợi ý với ngữ cảnh
+1. Kỹ thuật gợi ý với bối cảnh
 1. RAG
-1. Mô hình đã được tinh chỉnh
+1. Mô hình được tinh chỉnh
 
-A:3, nếu bạn có thời gian và nguồn lực cùng dữ liệu chất lượng cao, tinh chỉnh là lựa chọn tốt hơn để luôn cập nhật. Tuy nhiên, nếu bạn muốn cải thiện và thiếu thời gian, đáng cân nhắc RAG trước.
+A: Cả ba đều có thể giúp. Bắt đầu với kỹ thuật gợi ý và bối cảnh để cải thiện nhanh, và dùng RAG khi mô hình cần thông tin hiện tại hoặc dữ liệu doanh nghiệp riêng. Chọn tinh chỉnh khi bạn có đủ ví dụ chất lượng cao và cần mô hình nhất quán theo nhiệm vụ, định dạng, giọng điệu hoặc mẫu miền.
 
 ## 🚀 Thử thách
 
-Tìm hiểu thêm về cách bạn có thể [sử dụng RAG](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview?WT.mc_id=academic-105485-koreyst) cho doanh nghiệp của mình.
+Đọc thêm về cách bạn có thể [sử dụng RAG](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview?WT.mc_id=academic-105485-koreyst) cho doanh nghiệp của mình.
 
-## Làm tốt lắm, tiếp tục học tập
+## Làm tốt lắm, Tiếp tục Học hỏi
 
-Sau khi hoàn thành bài học này, hãy xem bộ sưu tập [Học về AI Tạo sinh](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) của chúng tôi để tiếp tục nâng cao kiến thức về AI Tạo sinh!
+Sau khi hoàn thành bài học này, hãy xem bộ sưu tập [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) để tiếp tục nâng cao kiến thức về AI Tạo sinh của bạn!
 
-Hãy chuyển sang Bài học 3, nơi chúng ta sẽ tìm hiểu cách [xây dựng với AI Tạo sinh một cách có trách nhiệm](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)!
+Hãy đến bài học 3, nơi chúng ta sẽ xem cách [xây dựng với Generative AI một cách có trách nhiệm](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,62 +1,62 @@
 [![開源模型](../../../translated_images/zh-HK/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
-## 簡介
+## 介紹
 
-AI代理是生成式人工智能的一項令人興奮的發展，它使大型語言模型（LLMs）從助手進化為能夠採取行動的代理。AI代理框架使開發者能夠創建應用程式，讓LLMs能夠訪問工具和狀態管理。這些框架還提高了可見性，使用戶和開發者能夠監控LLMs計劃的行動，從而改善體驗管理。
+AI 代理是生成式 AI 中一個令人興奮的發展，讓大型語言模型（LLM）從助手進化為能夠採取行動的代理。AI 代理框架讓開發者能夠創建應用程式，賦予 LLM 使用工具和狀態管理的能力。這些框架還增強了可視性，使用戶和開發者能夠監控 LLM 計劃的行動，從而提升體驗管理。
 
-本課程將涵蓋以下內容：
+本課程將涵蓋以下領域：
 
-- 了解什麼是AI代理 - AI代理到底是什麼？
-- 探索四種不同的AI代理框架 - 它們有什麼獨特之處？
-- 將這些AI代理應用於不同的使用場景 - 什麼時候應該使用AI代理？
+- 了解什麼是 AI 代理 - AI 代理到底是什麼？
+- 探索五種不同的 AI 代理框架 - 它們的獨特之處是什麼？
+- 將這些 AI 代理應用於不同的用例 - 何時應該使用 AI 代理？
 
 ## 學習目標
 
 完成本課程後，您將能夠：
 
-- 解釋什麼是AI代理以及如何使用它們。
-- 了解一些流行的AI代理框架之間的差異，以及它們的不同之處。
-- 理解AI代理的運作方式，以便使用它們構建應用程式。
+- 解釋什麼是 AI 代理以及它們如何被使用。
+- 了解一些流行的 AI 代理框架之間的差異，以及它們如何不同。
+- 理解 AI 代理的運作方式，從而建立相關應用程式。
 
-## 什麼是AI代理？
+## 什麼是 AI 代理？
 
-AI代理是生成式人工智能領域中非常令人興奮的一個方向。隨著這種興奮，有時也會出現術語和應用上的混淆。為了簡化並涵蓋大多數提到AI代理的工具，我們將使用以下定義：
+AI 代理是生成式 AI 領域中非常令人興奮的一環。隨著興奮而來的，有時也會對術語及其應用產生混淆。為了簡化並涵蓋大部分稱為 AI 代理的工具，我們將採用以下定義：
 
-AI代理通過提供**狀態**和**工具**，使大型語言模型（LLMs）能夠執行任務。
+AI 代理讓大型語言模型（LLM）能透過獲得<strong>狀態</strong>和<strong>工具</strong>來執行任務。
 
 ![代理模型](../../../translated_images/zh-HK/what-agent.21f2893bdfd01e6a.webp)
 
-讓我們定義這些術語：
+我們來定義這些術語：
 
-**大型語言模型** - 這些是本課程中提到的模型，例如GPT-3.5、GPT-4、Llama-2等。
+<strong>大型語言模型</strong> - 指本課程中提及的模型，如 GPT-5、GPT-4o 及 Llama 3.3 等。
 
-**狀態** - 這指的是LLM正在工作的上下文。LLM使用其過去行動的上下文和當前上下文，指導其後續行動的決策。AI代理框架使開發者更容易維護這些上下文。
+<strong>狀態</strong> - 指 LLM 正在運作的上下文情境。LLM 利用過往行動和當前情境指導其後續決策。AI 代理框架讓開發者更容易維護這些上下文。
 
-**工具** - 為了完成用戶要求的任務以及LLM計劃的任務，LLM需要訪問工具。一些工具的例子包括數據庫、API、外部應用程式甚至另一個LLM！
+<strong>工具</strong> - 為完成用戶要求且 LLM 已計劃的任務，LLM 需要使用工具。一些工具範例如資料庫、API、外部應用程式甚至其他 LLM！
 
-這些定義希望能為您提供良好的基礎，接下來我們將探討它們的實現方式。讓我們來看看幾個不同的AI代理框架：
+這些定義希望能為你奠定良好基礎，接下來我們將探討它們如何被實作。讓我們探索幾種不同的 AI 代理框架：
 
-## LangChain代理
+## LangChain 代理
 
-[LangChain代理](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst)是我們上述定義的一個實現。
+[LangChain 代理](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) 是我們上述定義的實作。
 
-為了管理**狀態**，它使用了一個內建函數`AgentExecutor`。這個函數接受定義的`agent`以及可用的`tools`。
+為管理<strong>狀態</strong>，它使用一個內建函式稱為 `AgentExecutor`。此函式接受已定義的 `agent` 和可用的 `tools`。
 
-`AgentExecutor`還存儲聊天記錄，以提供聊天的上下文。
+`AgentExecutor` 同時儲存聊天歷史以提供聊天上下文。
 
-![Langchain代理](../../../translated_images/zh-HK/langchain-agents.edcc55b5d5c43716.webp)
+![Langchain 代理](../../../translated_images/zh-HK/langchain-agents.edcc55b5d5c43716.webp)
 
-LangChain提供了一個[工具目錄](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst)，可以導入到您的應用程式中，讓LLM能夠訪問這些工具。這些工具由社群和LangChain團隊製作。
+LangChain 提供一個可以匯入您的應用程式並供 LLM 使用的 [工具目錄](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst)。這些工具由社群及 LangChain 團隊製作。
 
-您可以定義這些工具並將它們傳遞給`AgentExecutor`。
+您可以定義這些工具並傳入 `AgentExecutor`。
 
-在討論AI代理時，可見性是另一個重要方面。對於應用程式開發者來說，了解LLM正在使用哪個工具以及原因非常重要。為此，LangChain團隊開發了LangSmith。
+可視化是討論 AI 代理時另一重要方面。應用開發者需了解 LLM 使用的是哪個工具及使用原因。為此，LangChain 團隊開發了 LangSmith。
 
 ## AutoGen
 
-接下來我們將討論的AI代理框架是[AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst)。AutoGen的主要重點是對話。代理既可以**進行對話**，也可以**自定義**。
+下一個我們將討論的 AI 代理框架是 [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst)。AutoGen 主要聚焦於對話。代理既是 <strong>可對話的</strong>，又是 <strong>可自定義的</strong>。
 
-**進行對話 -** LLM可以開始並繼續與另一個LLM的對話，以完成任務。這是通過創建`AssistantAgents`並給予它們特定的系統消息來實現的。
+**可對話的 -** LLMs 能與另一個 LLM 開始並持續對話來完成任務。這是透過創建 `AssistantAgents` 並給予其特定的系統訊息來實現。
 
 ```python
 
@@ -64,38 +64,38 @@ autogen.AssistantAgent( name="Coder", llm_config=llm_config, ) pm = autogen.Assi
 
 ```
 
-**自定義** - 代理不僅可以定義為LLM，還可以是用戶或工具。作為開發者，您可以定義一個`UserProxyAgent`，負責與用戶互動以獲得完成任務的反饋。這些反饋可以繼續執行任務或停止執行。
+<strong>可自定義</strong> - 代理不僅可定義為 LLM，也可是使用者或工具。作為開發者，您可以定義一個 `UserProxyAgent`，負責與使用者互動，收集完成任務的回饋。此回饋可用於繼續執行或停止任務。
 
 ```python
 user_proxy = UserProxyAgent(name="user_proxy")
 ```
 
-### 狀態和工具
+### 狀態與工具
 
-為了改變和管理狀態，Assistant Agent生成Python代碼來完成任務。
+要修改和管理狀態，助理代理會生成 Python 代碼來完成任務。
 
-以下是過程的示例：
+以下是流程示例：
 
 ![AutoGen](../../../translated_images/zh-HK/autogen.dee9a25a45fde584.webp)
 
-#### 使用系統消息定義LLM
+#### 用系統訊息定義 LLM
 
 ```python
 system_message="For weather related tasks, only use the functions you have been provided with. Reply TERMINATE when the task is done."
 ```
 
-此系統消息指導特定LLM了解哪些功能與其任務相關。請記住，使用AutoGen，您可以定義多個具有不同系統消息的AssistantAgents。
+此系統訊息指示該 LLM 哪些函數與其任務相關。請記住，在 AutoGen 中您可以定義多個擁有不同系統訊息的 AssistantAgents。
 
-#### 用戶啟動聊天
+#### 聊天由用戶發起
 
 ```python
 user_proxy.initiate_chat( chatbot, message="I am planning a trip to NYC next week, can you help me pick out what to wear? ", )
 
 ```
 
-此來自user_proxy（人類）的消息將啟動代理探索應執行的可能功能的過程。
+這條來自 user_proxy（人類）的訊息將啟動代理探索應執行函數的過程。
 
-#### 執行功能
+#### 執行函數
 
 ```bash
 chatbot (to user_proxy):
@@ -106,61 +106,145 @@ chatbot (to user_proxy):
 
 ```
 
-初始聊天處理完成後，代理將建議調用的工具。在此情況下，建議的功能是`get_weather`。根據您的配置，此功能可以自動由代理執行並讀取，或者根據用戶輸入執行。
+在初始聊天處理後，代理會發送建議調用的工具函數，此例中是 `get_weather`。根據您的配置，該函數可自動由代理執行並讀取結果，或依用戶輸入觸發執行。
 
-您可以查看[AutoGen代碼示例](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst)，進一步探索如何開始構建。
+您可參考一系列 [AutoGen 代碼範例](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst)，進一步探索如何開始構建。
+
+## Microsoft Agent Framework
+
+[Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst) 是微軟開源的 SDK，用於用 **Python** 和 **.NET** 構建 AI 代理及多代理系統。它整合了微軟兩個早期專案的優勢——企業特性的 **Semantic Kernel** 和多代理協調的 **AutoGen** ——成為一個獲得支援的框架。如果您今天開始一個新的代理專案，這是推薦的 AutoGen 後繼方案。
+
+該框架支持從單一<strong>聊天代理</strong>到複雜的<strong>多代理工作流程</strong>擴展，且可直接集成微軟 Foundry、Azure OpenAI、OpenAI。它還透過 OpenTelemetry 提供內建可觀察性，可精確追蹤代理的行為。
+
+### 狀態與工具
+
+<strong>狀態</strong> - 框架透過 **threads** 管理會話上下文。代理追蹤消息歷史（用戶請求、工具調用及其結果），讓每輪對話建立在前次基礎。Threads 可持久保存，允許對話中斷後繼續。
+
+<strong>工具</strong> - 您可通過傳入普通 Python 函數賦予代理工具。帶有類型註解的參數會自動生成結構化模式，讓模型知道如何及何時調用（函數調用）。框架同時支持模型上下文協議（MCP）服務器及代碼解釋器等託管工具。
+
+以下是一個帶有自定義工具的單一代理範例：
+
+```python
+import asyncio
+from typing import Annotated
+
+from pydantic import Field
+from agent_framework import Agent
+from agent_framework.openai import OpenAIChatClient
+
+
+def get_weather(
+    location: Annotated[str, Field(description="The location to get the weather for.")],
+) -> str:
+    """Get the weather for a given location."""
+    return f"The weather in {location} is sunny with a high of 22°C."
+
+
+async def main():
+    agent = Agent(
+        client=OpenAIChatClient(),
+        instructions="You are a helpful assistant that can answer weather questions.",
+        tools=[get_weather],
+    )
+
+    response = await agent.run("What's the weather in Amsterdam?")
+    print(response)
+
+
+asyncio.run(main())
+```
+
+若要連接微軟 Foundry 中的 Azure OpenAI，請將端點和憑證傳入客戶端：
+
+```python
+from azure.identity.aio import AzureCliCredential
+from agent_framework.openai import OpenAIChatClient
+
+client = OpenAIChatClient(
+    model="my-gpt-5-mini-deployment",
+    azure_endpoint="https://my-resource.openai.azure.com",
+    credential=AzureCliCredential(),
+)
+```
+
+### 多代理工作流程
+
+框架的亮點在於協調多個代理。例如，您可以依序執行代理（將上下文傳遞給下一個），或同時發散給多個代理並整合其結果：
+
+```python
+from agent_framework.orchestrations import SequentialBuilder, ConcurrentBuilder
+
+# 按順序運行代理，沿鏈傳遞對話上下文
+sequential = SequentialBuilder(participants=[researcher, writer, editor]).build()
+
+# 並行展開至多個代理，然後彙總它們的回應
+concurrent = ConcurrentBuilder(participants=[analyst_a, analyst_b, analyst_c]).build()
+```
+
+安裝框架並開始使用：
+
+```bash
+pip install agent-framework-core
+# 可選整合
+pip install agent-framework-openai       # OpenAI 及 Azure OpenAI
+pip install agent-framework-foundry      # 微軟 Foundry
+```
+
+您可以在 [Microsoft Agent Framework 倉庫](https://github.com/microsoft/agent-framework?WT.mc_id=academic-105485-koreyst) 及其 [官方文件](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst) 中探索更多。
 
 ## Taskweaver
 
-接下來我們將探討的代理框架是[Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst)。它被稱為“以代碼為主”的代理，因為它不僅僅處理`字符串`，還可以處理Python中的DataFrames。這在數據分析和生成任務中非常有用，例如創建圖表或生成隨機數。
+下一個我們將探索的代理框架是 [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst)。它被稱為「以代碼為先」的代理，因為它不僅處理 `strings`，還能處理 Python 中的 DataFrames，這對資料分析和生成任務非常有用，例如繪製圖表或產生隨機數。
 
-### 狀態和工具
+### 狀態與工具
 
-為了管理對話的狀態，Taskweaver使用了`Planner`的概念。`Planner`是一個LLM，它接收用戶的請求並規劃需要完成的任務。
+為管理對話狀態，TaskWeaver 採用了 `Planner` 的概念。`Planner` 是一個 LLM，接收用戶請求並規劃需完成的任務。
 
-為了完成任務，`Planner`可以訪問一組稱為`Plugins`的工具集合。這些工具可以是Python類或通用代碼解釋器。這些插件以嵌入的形式存儲，便於LLM更好地搜索正確的插件。
+為完成任務，`Planner` 可使用稱為 `Plugins` 的工具集，這些工具可為 Python 類或通用代碼解釋器。這些插件以 embedding 形式存儲，方便 LLM 精準搜尋對應插件。
 
 ![Taskweaver](../../../translated_images/zh-HK/taskweaver.da8559999267715a.webp)
 
-以下是一個處理異常檢測的插件示例：
+以下是一個用於處理異常檢測的插件範例：
 
 ```python
 class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_col_name: str, value_col_name: str):
 ```
 
-代碼在執行前會進行驗證。Taskweaver管理上下文的另一個功能是`experience`。`experience`允許對話的上下文長期存儲在YAML文件中。這可以配置，使得LLM在接觸到之前的對話後，能夠隨時間推進在某些任務上的表現。
+代碼在執行前會被驗證。Taskweaver 中管理上下文的另一功能是 `experience`，它能將對話上下文長期存於 YAML 檔案，配置後讓 LLM 隨時間累積對特定任務的表現提升。
 
 ## JARVIS
 
-最後我們將探討的代理框架是[JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst)。JARVIS的獨特之處在於它使用LLM來管理對話的`狀態`，而`工具`則是其他AI模型。每個AI模型都是專門的模型，用於執行某些任務，例如物件檢測、轉錄或圖像描述。
+最後一個我們探索的代理框架是 [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file&WT.mc_id=academic-105485-koreyst)。JARVIS 的獨特之處在於它使用 LLM 管理對話的 `state`，而 `tools` 則是其他 AI 模型。每個 AI 模型都是專門用於特定任務，如物體偵測、轉錄或圖片說明的專業模型。
 
 ![JARVIS](../../../translated_images/zh-HK/jarvis.762ddbadbd1a3a33.webp)
 
-LLM作為通用模型，接收用戶的請求並識別特定任務以及完成任務所需的任何參數/數據。
+作為通用模型的 LLM 從用戶接收請求，識別具體任務和完成任務所需的參數或資料。
 
 ```python
 [{"task": "object-detection", "id": 0, "dep": [-1], "args": {"image": "e1.jpg" }}]
 ```
 
-LLM然後以專門的AI模型可以解讀的格式（例如JSON）來格式化請求。一旦AI模型根據任務返回其預測，LLM接收響應。
+LLM 將請求格式化成專用 AI 模型能理解的格式，如 JSON。專用 AI 模型完成預測後，LLM 接收該回應。
 
-如果需要多個模型來完成任務，LLM還會解讀這些模型的響應，然後將它們整合起來生成給用戶的最終響應。
+如果完成任務需多個模型，LLM 還會解讀這些模型的回應，然後整合生成回覆給用戶。
 
-以下示例展示了當用戶請求描述和計算圖片中的物件數量時，這一過程的運作方式：
+下述範例展示當用戶要求描述圖片中物件及計數時，該流程如何運作：
 
 ## 作業
 
-為了繼續學習AI代理，您可以使用AutoGen構建：
+為持續學習 AI 代理，您可以使用 Microsoft Agent Framework 建立：
 
-- 一個模擬教育初創公司不同部門商務會議的應用程式。
-- 創建系統消息，指導LLM理解不同角色和優先事項，並使用戶能夠推銷新產品理念。
-- LLM應生成每個部門的後續問題，以改進和完善推銷和產品理念。
+- 一個模擬教育新創公司不同部門的商業會議應用程式。
+- 創建系統訊息，引導 LLM 理解不同角色及優先事項，並讓用戶能推銷新產品構想。
+- LLM 需從各部門產生後續問題以改進推銷與產品構想。
 
 ## 學習不止於此，繼續您的旅程
 
-完成本課程後，請查看我們的[生成式人工智能學習合集](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)，繼續提升您的生成式人工智能知識！
+完成本課程後，請瀏覽我們的 [生成式 AI 學習專輯](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)，持續提升您的生成式 AI 知識！
 
 ---
 
-**免責聲明**：  
-此文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，請注意自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責聲明**：
+本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯而成。雖然我們致力於確保準確性，但請注意，機器自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議進行專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,19 +1,19 @@
 # ローカルセットアップ 🖥️
 
-**すべてを自分のラップトップで実行したい場合は、このガイドを使用してください。**  
-2つの方法があります：**(A) ネイティブPython + virtual-env** または **(B) Dockerを使ったVS Code Dev Container**。  
-どちらでも簡単に感じる方を選んでください—どちらも同じレッスンに進みます。
+**すべてを自分のノートパソコンで実行したい場合は、このガイドを使ってください。**   
+選択肢は2つあります：**(A) ネイティブPython + virtual-env** または **(B) Dockerを使ったVS Code Dev Container**。  
+どちらでも同じレッスンに到達しますので、簡単に感じるほうを選んでください。
 
 ## 1. 前提条件
 
-| ツール               | バージョン / 注意事項                                                                 |
-|--------------------|--------------------------------------------------------------------------------------|
-| **Python**         | 3.10以上（<https://python.org>から入手可能）                                         |
-| **Git**            | 最新（Xcode / Git for Windows / Linuxのパッケージマネージャーに含まれています）       |
-| **VS Code**        | 任意ですが推奨 <https://code.visualstudio.com>                                       |
-| **Docker Desktop** | *オプションBのみ*。無料インストール：<https://docs.docker.com/desktop/>               |
+| ツール               | バージョン / 注意事項                                                         |
+|--------------------|-------------------------------------------------------------------------------|
+| **Python**         | 3.10以上（<https://python.org>から取得）                                      |
+| **Git**            | 最新（Xcode / Git for Windows / Linuxのパッケージマネージャに付属）           |
+| **VS Code**        | 任意ですが推奨 <https://code.visualstudio.com>                               |
+| **Docker Desktop** | *オプションBのみ* 。無料インストール：<https://docs.docker.com/desktop/>     |
 
-> 💡 **ヒント** – ターミナルでツールを確認：  
+> 💡 <strong>ヒント</strong> – ターミナルでツールを確認：  
 > `python --version`, `git --version`, `docker --version`, `code --version`  
 
 ## 2. オプションA – ネイティブPython（最速）
@@ -33,7 +33,7 @@ source .venv/bin/activate     # macOS / Linux
 .\.venv\Scripts\activate      # Windows PowerShell
 ```
 
-✅ プロンプトが (.venv) で始まれば、仮想環境内にいることを意味します。
+✅ プロンプトが (.venv) で始まるようになれば、環境内にいることを意味します。
 
 ### ステップ3 依存関係をインストール
 
@@ -41,37 +41,37 @@ source .venv/bin/activate     # macOS / Linux
 pip install -r requirements.txt
 ```
 
-[APIキーの追加](../../../00-course-setup)のセクション3に進んでください。
+[APIキーの追加](#3-apiキーの追加) セクション3へスキップ可能
 
 ## 2. オプションB – VS Code Dev Container（Docker）
 
-このリポジトリとコースは、Python3、.NET、Node.js、Java開発をサポートするユニバーサルランタイムを備えた[開発コンテナ](https://containers.dev?WT.mc_id=academic-105485-koreyst)でセットアップされています。関連設定は、このリポジトリのルートにある `.devcontainer/` フォルダー内の `devcontainer.json` ファイルに定義されています。
+このリポジトリとコースは、Python3、.NET、Node.js、Java開発をサポートできるユニバーサルランタイムを含む[開発用コンテナ](https://containers.dev?WT.mc_id=academic-105485-koreyst)を使用して構成されています。関連設定はこのリポジトリのルートにある `.devcontainer/` フォルダ内の `devcontainer.json` ファイルに記述されています。
 
->**なぜこれを選ぶのか？**  
->Codespacesと同一の環境で、依存関係のズレがありません。
+>**なぜこれを選ぶの？**
+>Codespacesと同一環境で依存関係のずれが起きません。
 
-### ステップ0 追加ツールのインストール
+### ステップ0 追加のインストール
 
-Docker Desktop – `docker --version` が動作することを確認。  
-VS Code Remote – Containers 拡張機能（ID: ms-vscode-remote.remote-containers）。
+Docker Desktop – ```docker --version``` が動作することを確認してください。
+VS Code Remote – Containers拡張機能（ID: ms-vscode-remote.remote-containers）。
 
 ### ステップ1 VS Codeでリポジトリを開く
 
-ファイル ▸ フォルダーを開く… → generative-ai-for-beginners
+ファイル ▸ フォルダーを開く…  → generative-ai-for-beginners
 
-VS Codeが .devcontainer/ を検出し、プロンプトが表示されます。
+VS Codeが .devcontainer/ を検出してプロンプトを表示します。
 
-### ステップ2 コンテナ内で再オープン
+### ステップ2 コンテナで再オープン
 
-「Reopen in Container」をクリック。Dockerがイメージをビルドします（初回は約3分）。  
-ターミナルのプロンプトが表示されたら、コンテナ内にいます。
+「Reopen in Container」をクリック。Dockerがイメージをビルドします（初回は約3分）。
+ターミナルプロンプトが表示されたら、コンテナ内にいます。
 
 ## 2. オプションC – Miniconda
 
-[Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst)は、[Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst)、Python、およびいくつかのパッケージをインストールするための軽量インストーラーです。  
-Conda自体はパッケージマネージャーで、異なるPythonの[**仮想環境**](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst)やパッケージのセットアップと切り替えを簡単にします。`pip`で入手できないパッケージのインストールにも便利です。
+[Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) は [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst)、Python、およびいくつかのパッケージをインストールするための軽量インストーラーです。
+Conda自体はパッケージマネージャであり、異なるPythonの[<strong>仮想環境</strong>](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst)やパッケージを簡単に設定・切り替えできます。また、`pip`では利用できないパッケージをインストールする際にも役立ちます。
 
-### ステップ0 Minicondaをインストール
+### ステップ0 Minicondaのインストール
 
 [MiniCondaインストールガイド](https://docs.anaconda.com/free/miniconda/#quick-command-line-install?WT.mc_id=academic-105485-koreyst)に従ってセットアップしてください。
 
@@ -79,13 +79,13 @@ Conda自体はパッケージマネージャーで、異なるPythonの[**仮想
 conda --version
 ```
 
-### ステップ1 仮想環境を作成
+### ステップ1 仮想環境ファイルを作成
 
-新しい環境ファイル（*environment.yml*）を作成します。Codespacesを使っている場合は、`.devcontainer`ディレクトリ内に作成し、つまり `.devcontainer/environment.yml` にします。
+新しい環境ファイル(*environment.yml*)を作成します。Codespacesを利用している場合は、`.devcontainer`ディレクトリ内、つまり `.devcontainer/environment.yml` に作成してください。
 
-### ステップ2 環境ファイルに内容を追加
+### ステップ2 環境ファイルの内容を記述
 
-以下のスニペットを `environment.yml` に追加してください。
+下記スニペットを `environment.yml` に追加します
 
 ```yml
 name: <environment-name>
@@ -102,25 +102,25 @@ dependencies:
 
 ```
 
-### ステップ3 Conda環境を作成
+### ステップ3 Conda環境の作成
 
-コマンドライン/ターミナルで以下のコマンドを実行します。
+以下のコマンドをコマンドライン/ターミナルで実行します
 
 ```bash 
-conda env create --name ai4beg --file .devcontainer/environment.yml # .devcontainerのサブパスはCodespaceのセットアップにのみ適用されます
+conda env create --name ai4beg --file .devcontainer/environment.yml # .devcontainer サブパスは Codespace の設定にのみ適用されます
 conda activate ai4beg
 ```
 
-問題が発生した場合は、[Conda環境ガイド](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html?WT.mc_id=academic-105485-koreyst)を参照してください。
+問題があれば [Conda環境のガイド](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html?WT.mc_id=academic-105485-koreyst)を参照してください。
 
-## 2. オプションD – クラシックJupyter / Jupyter Lab（ブラウザで）
+## 2. オプションD – クラシックJupyter / Jupyter Lab（ブラウザ上）
 
-> **対象者**  
-> クラシックなJupyterインターフェースが好きな方、またはVS Codeを使わずにノートブックを実行したい方。
+> **誰向け？**  
+> クラシックなJupyterインターフェースが好きな人、VS Codeを使わずにノートブックを実行したい人向け。  
 
 ### ステップ1 Jupyterがインストールされていることを確認
 
-ローカルでJupyterを起動するには、ターミナル/コマンドラインでコースディレクトリに移動し、以下を実行します。
+Jupyterをローカルで起動するには、ターミナル/コマンドラインでコースディレクトリに移動し、次を実行します：
 
 ```bash
 jupyter notebook
@@ -132,22 +132,24 @@ jupyter notebook
 jupyterhub
 ```
 
-これでJupyterインスタンスが起動し、アクセス用のURLがコマンドラインに表示されます。
+これによりJupyterインスタンスが起動し、アクセス用URLがコマンドラインウィンドウに表示されます。
 
-URLにアクセスすると、コースのアウトラインが表示され、任意の `*.ipynb` ファイルに移動できます。例：`08-building-search-applications/python/oai-solution.ipynb`。
+URLにアクセスすると、コース概要が表示され、`*.ipynb` ファイルを自由に開けます。例えば、`08-building-search-applications/python/oai-solution.ipynb`。
 
 ## 3. APIキーの追加
 
-APIキーを安全に管理することは、どんなアプリケーションを作る上でも重要です。APIキーをコードに直接保存しないことを推奨します。公開リポジトリにコミットすると、セキュリティ問題や悪意のある利用による予期しないコストが発生する可能性があります。  
-ここではPython用の `.env` ファイルを作成し、`GITHUB_TOKEN` を追加する手順を説明します。
+どの種類のアプリケーションを開発する場合でも、APIキーを安全に管理することは重要です。APIキーをコード内に直接保存することは推奨しません。公開リポジトリに鍵情報をコミットすると、セキュリティ問題や悪用による不要な請求が発生する可能性があります。
+Microsoft Foundry Modelsの認証情報をPythonの`.env`ファイルに作成し追加する手順を以下に説明します。
 
-1. **プロジェクトディレクトリに移動**：ターミナルやコマンドプロンプトを開き、`.env` ファイルを作成したいプロジェクトのルートディレクトリに移動します。
+> **注意:** GitHub Models（およびその `GITHUB_TOKEN` 変数）は2026年7月末で終了します。このガイドでは代わりに[Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst)を使用します。完全オフライン作業を希望する方は[Foundry Local](https://foundrylocal.ai?WT.mc_id=academic-105485-koreyst)を参照してください。
+
+1. <strong>プロジェクトディレクトリへ移動</strong>：ターミナルやコマンドプロンプトで、`.env`ファイルを作成するプロジェクトのルートディレクトリに移動します。
 
    ```bash
    cd path/to/your/project
    ```
 
-2. **`.env` ファイルを作成**：お好みのテキストエディタで `.env` という名前の新しいファイルを作成します。コマンドラインの場合、Unix系システムでは `touch`、Windowsでは `echo` を使えます。
+2. **`.env`ファイルを作成**：お好みのテキストエディタで新しいファイル `.env` を作成します。コマンドラインを使う場合は、Unix系システムでは `touch` コマンド、Windowsでは `echo` コマンドを使えます：
 
    Unix系システム：
 
@@ -161,21 +163,22 @@ APIキーを安全に管理することは、どんなアプリケーション�
    echo . > .env
    ```
 
-3. **`.env` ファイルを編集**：テキストエディタ（VS Code、Notepad++、その他）で `.env` ファイルを開き、以下の行を追加します。`your_github_token_here` は実際のGitHubトークンに置き換えてください。
+3. **`.env`ファイルを編集**：テキストエディタ（例：VS Code、Notepad++など）で `.env` を開き、Microsoft FoundryプロジェクトのエンドポイントとAPIキーに置き換えて、以下の行を追加します：
 
    ```env
-   GITHUB_TOKEN=your_github_token_here
+   AZURE_INFERENCE_ENDPOINT=your_foundry_endpoint_here
+   AZURE_INFERENCE_CREDENTIAL=your_foundry_api_key_here
    ```
 
-4. **ファイルを保存**：変更を保存してエディタを閉じます。
+4. <strong>ファイルを保存</strong>：編集内容を保存してテキストエディタを閉じます。
 
-5. **`python-dotenv` をインストール**：まだインストールしていない場合は、`.env` ファイルから環境変数をPythonアプリに読み込むために `python-dotenv` パッケージをインストールします。`pip`でインストール可能です。
+5. **`python-dotenv`をインストール**：まだの場合、`.env`から環境変数をPythonへ読み込むために `python-dotenv` パッケージをインストールします。`pip`でインストール可能です：
 
    ```bash
    pip install python-dotenv
    ```
 
-6. **Pythonスクリプトで環境変数を読み込む**：Pythonスクリプト内で `python-dotenv` パッケージを使い、`.env` ファイルから環境変数を読み込みます。
+6. **Pythonスクリプトで環境変数を読み込み**：Pythonスクリプト内で `python-dotenv` パッケージを使って `.env` ファイルから環境変数をロードします：
 
    ```python
    from dotenv import load_dotenv
@@ -184,40 +187,41 @@ APIキーを安全に管理することは、どんなアプリケーション�
    # .envファイルから環境変数を読み込む
    load_dotenv()
 
-   # GITHUB_TOKEN変数にアクセスする
-   github_token = os.getenv("GITHUB_TOKEN")
+   # Microsoft Foundry Modelsの変数にアクセスする
+   endpoint = os.getenv("AZURE_INFERENCE_ENDPOINT")
+   token = os.getenv("AZURE_INFERENCE_CREDENTIAL")
 
-   print(github_token)
+   print(endpoint)
    ```
 
-これで完了です！ `.env` ファイルを作成し、GitHubトークンを追加し、Pythonアプリに読み込ませることができました。
+これで完了です！`.env`ファイルを作成し、Microsoft Foundry Modelsの認証情報を追加し、Pythonアプリケーションに読み込ませることができました。
 
-🔐 `.env` は絶対にコミットしないでください—すでに `.gitignore` に含まれています。  
-プロバイダーごとの詳細な手順は [`providers.md`](03-providers.md) にあります。
+🔐 `.env`は絶対にコミットしないでください。すでに `.gitignore` に含まれています。
+プロバイダーごとの詳細手順は [`providers.md`](03-providers.md) にあります。
 
-## 4. 次に何をする？
+## 4. 次は何をする？
 
-| やりたいこと           | 移動先                                                                 |
-|---------------------|-------------------------------------------------------------------------|
-| レッスン1を始める      | [`01-introduction-to-genai`](../01-introduction-to-genai/README.md)     |
-| LLMプロバイダーを設定  | [`providers.md`](03-providers.md)                                       |
-| 他の学習者と交流する    | [Discordに参加](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)   |
+| したいこと                 | 行き先                                                              |
+|-------------------------|--------------------------------------------------------------------|
+| レッスン1を始める         | [`01-introduction-to-genai`](../01-introduction-to-genai/README.md) |
+| LLMプロバイダーを設定する | [`providers.md`](03-providers.md)                                   |
+| 他の学習者と交流する       | [Discordに参加](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)  |
 
 ## 5. トラブルシューティング
 
-| 症状                                      | 対処法                                                           |
-|-------------------------------------------|-----------------------------------------------------------------|
-| `python not found`                        | PythonをPATHに追加するか、インストール後にターミナルを再起動してください。 |
-| `pip` がホイールをビルドできない（Windows） | `pip install --upgrade pip setuptools wheel` を実行してから再試行。       |
-| `ModuleNotFoundError: dotenv`             | `pip install -r requirements.txt` を実行（環境がインストールされていません）。 |
-| Dockerビルドで *No space left* エラー     | Docker Desktop ▸ *設定* ▸ *リソース* → ディスクサイズを増やしてください。   |
-| VS Codeが再オープンを繰り返す             | 両方のオプションが有効になっている可能性があります。どちらか一方（venv **または** コンテナ）を選択してください。 |
-| OpenAI 401 / 429 エラー                   | `OPENAI_API_KEY` の値とリクエスト制限を確認してください。           |
-| Conda使用時のエラー                      | `conda install -c microsoft azure-ai-ml` でMicrosoft AIライブラリをインストールしてください。 |
+| 症状                                     | 対応策                                                               |
+|----------------------------------------|---------------------------------------------------------------------|
+| `python not found`                     | PythonをPATHに追加するか、インストール後にターミナルを再起動する      |
+| `pip`がホイールをビルドできない (Windows) | `pip install --upgrade pip setuptools wheel` を実行後、再試行         |
+| `ModuleNotFoundError: dotenv`          | `pip install -r requirements.txt` を実行（環境がインストールされていない場合）|
+| Dockerビルド失敗 *No space left*       | Docker Desktop ▸ *Settings* ▸ *Resources* → ディスクサイズを増やす       |
+| VS Codeが繰り返し再オープンを促す       | 両方のオプションが有効かもしれません。どちらか一方(venv <strong>または</strong> container)を選択|
+| OpenAI 401 / 429 エラー                 | `OPENAI_API_KEY` の値やリクエストのレート制限を確認                    |
+| Conda使用時のエラー                    | Microsoft AIライブラリを `conda install -c microsoft azure-ai-ml` でインストール |
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**：  
-本書類はAI翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されました。正確性の向上に努めておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文の言語による文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や誤訳についても、当方は一切の責任を負いかねます。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

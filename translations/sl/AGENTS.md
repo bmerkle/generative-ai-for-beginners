@@ -2,168 +2,178 @@
 
 ## Pregled projekta
 
-Ta repozitorij vsebuje obsežen učni načrt s 21 lekcijami, ki poučuje osnove generativne umetne inteligence in razvoj aplikacij. Tečaj je zasnovan za začetnike in pokriva vse od osnovnih konceptov do izdelave aplikacij, pripravljenih za produkcijo.
+Ta repozitorij vsebuje obsežen kurikulum z 21 lekcijami, ki poučuje osnove generativne umetne inteligence in razvoj aplikacij. Tečaj je zasnovan za začetnike in pokriva vse od osnovnih konceptov do izdelave aplikacij za proizvodnjo.
 
 **Ključne tehnologije:**
 - Python 3.9+ z knjižnicami: `openai`, `python-dotenv`, `tiktoken`, `azure-ai-inference`, `pandas`, `numpy`, `matplotlib`
-- TypeScript/JavaScript z Node.js in knjižnicami: `@azure/openai`, `@azure-rest/ai-inference`, `openai`
-- Azure OpenAI Service, OpenAI API in GitHub Models
+- TypeScript/JavaScript z Node.js in knjižnicami: `openai` (Azure OpenAI prek v1 končne točke + Responses API), `@azure-rest/ai-inference` (Microsoft Foundry modeli)
+- Azure OpenAI Service, OpenAI API in Microsoft Foundry modeli (GitHub modeli bodo prenehali z delovanjem konec julija 2026)
 - Jupyter Notebooks za interaktivno učenje
-- Dev Containers za dosledno razvojno okolje
+- Dev containerji za konsistentno razvojno okolje
 
 **Struktura repozitorija:**
-- 21 oštevilčenih direktorijev lekcij (00-21), ki vsebujejo README datoteke, primere kode in naloge
+- 21 oštevilčenih map z lekcijami (00-21), ki vsebujejo README-je, primere kode in naloge
 - Več implementacij: Python, TypeScript in včasih .NET primeri
-- Direktorij prevodov z več kot 40 jezikovnimi različicami
-- Centralizirana konfiguracija prek `.env` datoteke (uporabite `.env.copy` kot predlogo)
+- Mapa za prevode z več kot 40 jezikovnimi različicami
+- Centralizirana konfiguracija preko `.env` datoteke (uporabi `.env.copy` kot predlogo)
 
 ## Ukazi za nastavitev
 
 ### Začetna nastavitev repozitorija
 
 ```bash
-# Clone the repository
+# Klonirajte repozitorij
 git clone https://github.com/microsoft/generative-ai-for-beginners.git
 cd generative-ai-for-beginners
 
-# Copy environment template
+# Kopirajte predlogo okolja
 cp .env.copy .env
-# Edit .env with your API keys and endpoints
+# Uredite .env z vašimi API ključi in končnimi točkami
 ```
 
 ### Nastavitev Python okolja
 
 ```bash
-# Create virtual environment
+# Ustvari virtualno okolje
 python3 -m venv venv
 
-# Activate virtual environment
-# On macOS/Linux:
+# Aktiviraj virtualno okolje
+# Na macOS/Linux:
 source venv/bin/activate
-# On Windows:
+# Na Windows:
 venv\Scripts\activate
 
-# Install dependencies
+# Namesti odvisnosti
 pip install -r requirements.txt
 ```
 
 ### Nastavitev Node.js/TypeScript okolja
 
 ```bash
-# Install root-level dependencies (for documentation tooling)
+# Namestite odvisnosti na nivoju root (za orodja za dokumentacijo)
 npm install
 
-# For individual lesson TypeScript examples, navigate to the specific lesson:
+# Za posamezne primere lekcij v TypeScriptu pojdite do določene lekcije:
 cd 06-text-generation-apps/typescript/recipe-app
 npm install
 ```
 
-### Nastavitev Dev Container (priporočeno)
+### Nastavitev dev containerja (priporočeno)
 
 Repozitorij vključuje konfiguracijo `.devcontainer` za GitHub Codespaces ali VS Code Dev Containers:
 
-1. Odprite repozitorij v GitHub Codespaces ali VS Code z razširitvijo Dev Containers
-2. Dev Container bo samodejno:
+1. Odpri repozitorij v GitHub Codespaces ali v VS Code z razširitvijo Dev Containers
+2. Dev container bo samodejno:
    - Namestil Python odvisnosti iz `requirements.txt`
    - Zagnal skripto po ustvarjanju (`.devcontainer/post-create.sh`)
-   - Nastavil Jupyter kernel
+   - Nastavil Jupyter jedro
 
-## Potek razvoja
+## Razvojni potek dela
 
-### Spremenljivke okolja
+### Okoljske spremenljivke
 
-Vse lekcije, ki zahtevajo dostop do API-jev, uporabljajo spremenljivke okolja, definirane v `.env`:
+Vse lekcije, ki zahtevajo dostop do API, uporabljajo okoljske spremenljivke definirane v `.env`:
 
 - `OPENAI_API_KEY` - Za OpenAI API
-- `AZURE_OPENAI_API_KEY` - Za Azure OpenAI Service
-- `AZURE_OPENAI_ENDPOINT` - URL končne točke Azure OpenAI
-- `AZURE_OPENAI_DEPLOYMENT` - Ime modela za dokončanje pogovorov
-- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Ime modela za vdelave
-- `AZURE_OPENAI_API_VERSION` - Različica API-ja (privzeto: `2024-02-01`)
+- `AZURE_OPENAI_API_KEY` - Za Azure OpenAI v Microsoft Foundry (Azure OpenAI Service je zdaj del Microsoft Foundry: https://ai.azure.com)
+- `AZURE_OPENAI_ENDPOINT` - URL končne točke Azure OpenAI (Foundry resource endpoint)
+- `AZURE_OPENAI_DEPLOYMENT` - Ime nameščene različice modela za končni pogovor (privzeto v tečaju: `gpt-5-mini`)
+- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Ime nameščene različice vdelanega modela (privzeto v tečaju: `text-embedding-3-small`)
+- `AZURE_OPENAI_API_VERSION` - Verzija API-ja (privzeto: `2024-10-21`)
 - `HUGGING_FACE_API_KEY` - Za modele Hugging Face
-- `GITHUB_TOKEN` - Za GitHub Models
+- `AZURE_INFERENCE_ENDPOINT` - Končna točka Microsoft Foundry modelov (katalog modelov več ponudnikov)
+- `AZURE_INFERENCE_CREDENTIAL` - API ključ za Microsoft Foundry modele (zamenja upokojeni `GITHUB_TOKEN`)
+- `AZURE_INFERENCE_CHAT_MODEL` - Model brez sklepanja (npr. `Llama-3.3-70B-Instruct`), ki ga uporabljajo primeri z `temperature`, ker modeli s sklepanjem ne podpirajo nadzora vzorčenja
+
+### Konvencije modelov (pomembno)
+
+- **Privzeti model za pogovor je `gpt-5-mini`** - trenutno, neoporečen **model za sklepanje**. Od leta 2026 starejši modeli mini z nadzorom temperature (`gpt-4o-mini`, `gpt-4.1-mini`) izhajajo iz uporabe, zato se tečaj standardizira na družino GPT-5.
+- **Modeli za sklepanje ne sprejemajo `temperature` in `top_p`**, uporabljajo `max_output_tokens` (Responses API) / `max_completion_tokens` (chat completions) namesto `max_tokens`. **Ne dodajajte** `temperature`/`top_p`/`max_tokens` v vzorce, ki kličejo `gpt-5-mini`.
+- **Za prikaz `temperature`** uporabljajo vzorci **Llama** model (`Llama-3.3-70B-Instruct`) preko Microsoft Foundry Models končne točke (`AZURE_INFERENCE_CHAT_MODEL`). Modeli za sklepanje se usmerjajo z inženiringom pozivov in nadzorom sklepanja namesto s kontrolami vzorčenja.
+- **Finetuning (lekcija 18)** ohranja `gpt-4.1-mini`: GPT-5 podpira le učvrstitveni finetuning (RFT), ne pa nadzorovanega finetuninga (SFT), prikazanega tam.
+- Lekciji 20 (Mistral) in 21 (Meta) ohranita `temperature`/`max_tokens`, ker ciljajo modele Mistral/Llama, ki jih podpirajo.
 
 ### Zagon Python primerov
 
 ```bash
-# Navigate to lesson directory
+# Pomaknite se do imenika lekcije
 cd 06-text-generation-apps/python
 
-# Run a Python script
+# Zaženite Python skripto
 python aoai-app.py
 ```
 
 ### Zagon TypeScript primerov
 
 ```bash
-# Navigate to TypeScript app directory
+# Pojdite v imenik aplikacije TypeScript
 cd 06-text-generation-apps/typescript/recipe-app
 
-# Build the TypeScript code
+# Sestavite kodo TypeScript
 npm run build
 
-# Run the application
+# Zaženite aplikacijo
 npm start
 ```
 
-### Zagon Jupyter Notebooks
+### Zagon Jupyter novičnikov
 
 ```bash
-# Start Jupyter in the repository root
+# Zaženite Jupyter v korenski mapi repozitorija
 jupyter notebook
 
-# Or use VS Code with Jupyter extension
+# Ali uporabite VS Code z razširitvijo Jupyter
 ```
 
-### Delo z različnimi vrstami lekcij
+### Delo z različnimi tipi lekcij
 
-- **Lekcije "Learn"**: Osredotočajo se na README.md dokumentacijo in koncepte
-- **Lekcije "Build"**: Vključujejo delujoče primere kode v Pythonu in TypeScriptu
-- Vsaka lekcija ima README.md z teorijo, pregledom kode in povezavami do video vsebin
+- **Lekcije "Learn"**: Osredotočene na dokumentacijo README.md in koncepte
+- **Lekcije "Build"**: Vključujejo delujoče primere kode v Python in TypeScript
+- Vsaka lekcija ima README.md z teorijo, razlago kode in povezavami na video gradivo
 
-## Smernice za slog kode
+## Smernice za stil kode
 
 ### Python
 
-- Uporabite `python-dotenv` za upravljanje spremenljivk okolja
-- Uvozite knjižnico `openai` za interakcije z API-jem
-- Uporabite `pylint` za preverjanje kode (nekateri primeri vključujejo `# pylint: disable=all` za preprostost)
-- Upoštevajte konvencije po PEP 8
-- Shranite API poverilnice v `.env` datoteko, nikoli v kodo
+- Uporabljajte `python-dotenv` za upravljanje okoljskih spremenljivk
+- Uvoz knjižnice `openai` za interakcije z API
+- Uporabljajte `pylint` za preverjanje kode (nekateri primeri vsebujejo `# pylint: disable=all` za preprostost)
+- Sledite konvencijam poimenovanja PEP 8
+- Shranjujte API poverilnice v `.env` datoteko, nikoli v kodo
 
 ### TypeScript
 
-- Uporabite paket `dotenv` za spremenljivke okolja
+- Uporabljajte paket `dotenv` za okoljske spremenljivke
 - Konfiguracija TypeScript v `tsconfig.json` za vsako aplikacijo
-- Uporabite `@azure/openai` ali `@azure-rest/ai-inference` za Azure storitve
-- Uporabite `nodemon` za razvoj z samodejnim ponovnim zagonom
-- Pred zagonom izvedite gradnjo: `npm run build` nato `npm start`
+- Uporabljajte paket `openai` za Azure OpenAI (narekujte klienta na `/openai/v1/` končno točko in pokličite `client.responses.create`); za Microsoft Foundry modele pa `@azure-rest/ai-inference`
+- Uporabljajte `nodemon` za razvoj z avtomatskim ponovnim zagonom
+- Gradite pred zagonom: `npm run build` nato `npm start`
 
 ### Splošne konvencije
 
-- Ohranite primere kode preproste in poučne
-- Vključite komentarje, ki pojasnjujejo ključne koncepte
-- Koda vsake lekcije mora biti samostojna in izvedljiva
-- Uporabite dosledno poimenovanje: `aoai-` za Azure OpenAI, `oai-` za OpenAI API, `githubmodels-` za GitHub Models
+- Ohranite primere kode preproste in izobraževalne
+- Vključite komentarje, ki razlagajo ključne koncepte
+- Koda vsake lekcije naj bo samostojna in zaganjljiva
+- Uporabljajte konsistentno poimenovanje: predpona `aoai-` za Azure OpenAI, `oai-` za OpenAI API, `githubmodels-` za Microsoft Foundry modele (ohranjen zastareli GitHub prefix)
 
 ## Smernice za dokumentacijo
 
-### Slog Markdown
+### Stil Markdown
 
-- Vsi URL-ji morajo biti oviti v format `[besedilo](../../url)` brez dodatnih presledkov
+- Vse URL-je je treba zaviti v obliko `[besedilo](../../url)` brez dodatnih presledkov
 - Relativne povezave morajo začeti z `./` ali `../`
-- Vse povezave do Microsoft domen morajo vključevati ID za sledenje: `?WT.mc_id=academic-105485-koreyst`
-- Brez lokaliziranih URL-jev (izogibajte se `/en-us/`)
+- Vse povezave do Microsoft domen morajo vključevati ID sledenja: `?WT.mc_id=academic-105485-koreyst`
+- Brez jezikovno specifičnih lokacij v URL-jih (izogibajte se `/en-us/`)
 - Slike shranjene v mapi `./images` z opisnimi imeni
-- Uporabite angleške znake, številke in vezaje v imenih datotek
+- Uporabljajte angleške znake, številke in pomišljaje v imenih datotek
 
-### Podpora za prevode
+### Podpora za prevajanje
 
 - Repozitorij podpira več kot 40 jezikov prek avtomatiziranih GitHub Actions
-- Prevodi so shranjeni v direktoriju `translations/`
-- Ne oddajajte delnih prevodov
+- Prevodi so shranjeni v mapi `translations/`
+- Ne pošiljajte delnih prevodov
 - Strojni prevodi niso sprejeti
-- Prevedene slike so shranjene v direktoriju `translated_images/`
+- Prevedene slike so shranjene v mapi `translated_images/`
 
 ## Testiranje in validacija
 
@@ -171,100 +181,100 @@ jupyter notebook
 
 Ta repozitorij uporablja GitHub Actions za validacijo. Pred oddajo PR-jev:
 
-1. **Preverite povezave v Markdownu**:
+1. **Preveri Markdown povezave**:
    ```bash
-   # The validate-markdown.yml workflow checks:
-   # - Broken relative paths
-   # - Missing tracking IDs on paths
-   # - Missing tracking IDs on URLs
-   # - URLs with country locale
-   # - Broken external URLs
+   # Delovni tok validate-markdown.yml preverja:
+   # - Pokvarjene relativne poti
+   # - Manjkajoče sledenje ID-jev na poteh
+   # - Manjkajoče sledenje ID-jev na URL-jih
+   # - URL-ji z lokalizacijo države
+   # - Pokvarjeni zunanji URL-ji
    ```
 
 2. **Ročno testiranje**:
-   - Testirajte Python primere: Aktivirajte venv in zaženite skripte
+   - Testirajte Python primere: aktivirajte venv in zaženite skripte
    - Testirajte TypeScript primere: `npm install`, `npm run build`, `npm start`
-   - Preverite, da so spremenljivke okolja pravilno nastavljene
-   - Preverite, da API ključi delujejo s primeri kode
+   - Preverite pravilno konfiguracijo okoljskih spremenljivk
+   - Preverite, ali API ključi delujejo s primeri kode
 
 3. **Primeri kode**:
-   - Preverite, da vsa koda deluje brez napak
-   - Testirajte z Azure OpenAI in OpenAI API, kjer je to primerno
-   - Preverite, da primeri delujejo z GitHub Models, kjer je to podprto
+   - Zagotovite, da se vsa koda izvaja brez napak
+   - Testirajte z Azure OpenAI in OpenAI API, kjer je primerno
+   - Preverite, ali primeri delujejo z Microsoft Foundry modeli, kjer so podprti
 
 ### Brez avtomatiziranih testov
 
-To je izobraževalni repozitorij, osredotočen na vadnice in primere. Ni enotnih testov ali integracijskih testov za zagon. Validacija je predvsem:
+To je izobraževalni repozitorij, osredotočen na vodiče in primere. Ni enotnih testov ali integracijskih testov za zagon. Validacija je predvsem:
 - Ročno testiranje primerov kode
 - GitHub Actions za validacijo Markdowna
-- Pregled izobraževalne vsebine s strani skupnosti
+- Skupnostni pregled izobraževalne vsebine
 
 ## Smernice za Pull Requeste
 
 ### Pred oddajo
 
-1. Testirajte spremembe kode v Pythonu in TypeScriptu, kjer je to primerno
-2. Zaženite validacijo Markdowna (samodejno sprožena ob PR)
-3. Preverite, da so ID-ji za sledenje prisotni na vseh Microsoft URL-jih
-4. Preverite, da so relativne povezave veljavne
-5. Preverite, da so slike pravilno referencirane
+1. Testirajte spremembe kode v Python in TypeScript, kjer je to primerno
+2. Zaženite validacijo Markdowna (samodejno sproženo ob PR)
+3. Prepričajte se, da so ID-ji za sledenje prisotni na vseh Microsoft URL-jih
+4. Preverite veljavnost relativnih povezav
+5. Preverite pravilno referenciranje slik
 
-### Format naslova PR
+### Oblika naslova PR
 
-- Uporabite opisne naslove: `[Lekcija 06] Popravek tipkarske napake v Python primeru` ali `Posodobitev README za lekcijo 08`
-- Navedite številke težav, kjer je to primerno: `Odpravljeno #123`
+- Uporabljajte opisne naslove: `[Lesson 06] Popravi tipkarsko napako v Python primeru` ali `Posodobitev README za lekcijo 08`
+- Navedite številke težav, kadar so povezane: `Fixes #123`
 
 ### Opis PR
 
 - Pojasnite, kaj je bilo spremenjeno in zakaj
-- Povezava na povezane težave
+- Navedite povezane težave
 - Za spremembe kode navedite, kateri primeri so bili testirani
-- Za prevodne PR-je vključite vse datoteke za popoln prevod
+- Za prevodne PR-je vključite vse datoteke za celovit prevod
 
-### Zahteve za prispevanje
+### Zahteve za prispevke
 
 - Podpišite Microsoft CLA (samodejno ob prvem PR)
-- Pred spremembami forkajte repozitorij na svoj račun
-- En PR na logično spremembo (ne združujte nepovezanih popravkov)
-- PR naj bo osredotočen in čim manjši
+- Razvejajte repozitorij na svoj račun pred spreminjanjem
+- Po en PR na logično spremembo (ne združujte nepovezanih popravkov)
+- PR-ji naj bodo čim bolj osredotočeni in majhni
 
-## Pogosti postopki
+## Pogosti delovni poteki
 
 ### Dodajanje novega primera kode
 
-1. Pojdite v ustrezen direktorij lekcije
-2. Ustvarite primer v poddirektoriju `python/` ali `typescript/`
-3. Upoštevajte konvencijo poimenovanja: `{ponudnik}-{ime-primerka}.{py|ts|js}`
+1. Pomaknite se v ustrezno mapo z lekcijo
+2. Ustvarite primer v podmapi `python/` ali `typescript/`
+3. Sledite konvenciji poimenovanja: `{provider}-{example-name}.{py|ts|js}`
 4. Testirajte z dejanskimi API poverilnicami
-5. Dokumentirajte vse nove spremenljivke okolja v README lekcije
+5. Dokumentirajte vse nove okoljske spremenljivke v README lekcije
 
 ### Posodabljanje dokumentacije
 
-1. Uredite README.md v direktoriju lekcije
-2. Upoštevajte smernice za Markdown (ID-ji za sledenje, relativne povezave)
-3. Posodobitve prevodov obravnavajo GitHub Actions (ne urejajte ročno)
-4. Preverite, da so vse povezave veljavne
+1. Uredite README.md v mapi lekcije
+2. Sledite Markdown smernicam (ID-ji za sledenje, relativne povezave)
+3. Posodobitve prevodov upravlja GitHub Actions (ne urejajte ročno)
+4. Preverite, da so povezave veljavne
 
-### Delo z Dev Containers
+### Delo z Dev containerji
 
 1. Repozitorij vključuje `.devcontainer/devcontainer.json`
-2. Skripta po ustvarjanju samodejno namesti Python odvisnosti
-3. Razširitve za Python in Jupyter so predhodno konfigurirane
+2. Skripta po ustvarjanju namesti odvisnosti Pythona samodejno
+3. Razširitve za Python in Jupyter so vnaprej konfigurirane
 4. Okolje temelji na `mcr.microsoft.com/devcontainers/universal:2.11.2`
 
-## Namestitev in objava
+## Implementacija in objava
 
-To je izobraževalni repozitorij - ni postopka za namestitev. Učni načrt se uporablja prek:
+To je učni repozitorij - ni procesa implementacije. Kurikulum je dostopen preko:
 
-1. **GitHub repozitorij**: Neposreden dostop do kode in dokumentacije
-2. **GitHub Codespaces**: Takojšnje razvojno okolje s predhodno konfiguracijo
-3. **Microsoft Learn**: Vsebina je lahko objavljena na uradni učni platformi
-4. **docsify**: Spletno mesto dokumentacije, zgrajeno iz Markdown datotek (glejte `docsifytopdf.js` in `package.json`)
+1. **GitHub Repozitorij**: neposreden dostop do kode in dokumentacije
+2. **GitHub Codespaces**: takojšnje razvojno okolje s prednastavljeno namestitvijo
+3. **Microsoft Learn**: vsebine se lahko razširijo na uradno platformo za učenje
+4. **docsify**: spletno mesto dokumentacije, zgrajeno iz Markdowna (glej `docsifytopdf.js` in `package.json`)
 
-### Gradnja spletnega mesta dokumentacije
+### Izdelava spletnega mesta dokumentacije
 
 ```bash
-# Generate PDF from documentation (if needed)
+# Ustvari PDF iz dokumentacije (če je potrebno)
 npm run convert
 ```
 
@@ -275,19 +285,19 @@ npm run convert
 **Napake pri uvozu v Pythonu**:
 - Preverite, da je virtualno okolje aktivirano
 - Zaženite `pip install -r requirements.txt`
-- Preverite, da je različica Pythona 3.9+
+- Preverite, da je različica Pythona 3.9 ali novejša
 
-**Napake pri gradnji TypeScript**:
-- Zaženite `npm install` v specifičnem direktoriju aplikacije
-- Preverite, da je različica Node.js združljiva
-- Po potrebi izbrišite `node_modules` in ponovno namestite
+**Napake pri gradnji TypeScripta**:
+- Zaženite `npm install` v ustrezni mapi aplikacije
+- Preverite združljivost verzije Node.js
+- Po potrebi počistite `node_modules` in ponovno namestite
 
 **Napake pri avtentikaciji API-ja**:
-- Preverite, da `.env` datoteka obstaja in ima pravilne vrednosti
+- Preverite, da obstaja `.env` datoteka in da vsebuje pravilne vrednosti
 - Preverite, da so API ključi veljavni in niso potekli
-- Preverite, da so URL-ji končnih točk pravilni za vašo regijo
+- Preverite pravilne URL-je končnih točk glede na vašo regijo
 
-**Manjkajoče spremenljivke okolja**:
+**Manjkajoče okoljske spremenljivke**:
 - Kopirajte `.env.copy` v `.env`
 - Izpolnite vse zahtevane vrednosti za lekcijo, na kateri delate
 - Po posodobitvi `.env` znova zaženite aplikacijo
@@ -295,23 +305,25 @@ npm run convert
 ## Dodatni viri
 
 - [Vodnik za nastavitev tečaja](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)
-- [Smernice za prispevanje](./CONTRIBUTING.md)
-- [Kodeks ravnanja](./CODE_OF_CONDUCT.md)
+- [Smernice za prispevke](./CONTRIBUTING.md)
+- [Kodeks vedenja](./CODE_OF_CONDUCT.md)
 - [Varnostna politika](./SECURITY.md)
 - [Azure AI Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
 - [Zbirka naprednih primerov kode](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
 
-## Opombe o projektu
+## Opombe specifične za projekt
 
-- To je **izobraževalni repozitorij**, osredotočen na učenje, ne na produkcijsko kodo
-- Primeri so namerno preprosti in osredotočeni na poučevanje konceptov
-- Kakovost kode je uravnotežena z izobraževalno jasnostjo
-- Vsaka lekcija je samostojna in jo je mogoče zaključiti neodvisno
-- Repozitorij podpira več ponudnikov API-jev: Azure OpenAI, OpenAI in GitHub Models
+- To je **izobraževalni repozitorij**, namenjen učenju, ne produkcijski kodi
+- Primeri so namenoma preprosti in osredotočeni na poučevanje konceptov
+- Kakovost kode je uravnotežena z jasnostjo izobraževalne vsebine
+- Vsaka lekcija je samostojna in se lahko dokonča neodvisno
+- Repozitorij podpira več ponudnikov API: Azure OpenAI, OpenAI, Microsoft Foundry modeli in offline ponudnike, kot sta Foundry Local in Ollama
 - Vsebina je večjezična z avtomatiziranimi delovnimi tokovi za prevajanje
 - Aktivna skupnost na Discordu za vprašanja in podporo
 
 ---
 
-**Izjava o omejitvi odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovno človeško prevajanje. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

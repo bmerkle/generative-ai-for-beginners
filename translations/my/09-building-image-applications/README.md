@@ -1,266 +1,146 @@
-# ပုံဖန်တီးမှုအက်ပလီကေးရှင်းများ တည်ဆောက်ခြင်း
+# ရုပ်ပုံ ဖန်တီးခြင်း အပလီကေးရှင်းများ တည်ဆောက်ခြင်း
 
-[![ပုံဖန်တီးမှုအက်ပလီကေးရှင်းများ တည်ဆောက်ခြင်း](../../../translated_images/my/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Building Image Generation Applications](../../../translated_images/my/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-LLMs တွေဟာ စာသားဖန်တီးမှုထက်ပိုပြီး အသုံးဝင်ပါတယ်။ စာသားဖော်ပြချက်တွေကနေ ပုံတွေကိုလည်း ဖန်တီးနိုင်ပါတယ်။ ပုံတွေကို modality အနေနဲ့ အသုံးပြုခြင်းဟာ MedTech, အိမ်ဆောက်လုပ်ရေး, ခရီးသွားလုပ်ငန်း, ဂိမ်းဖွံ့ဖြိုးရေးနဲ့ အခြားသော နေရာများစွာမှာ အလွန်အသုံးဝင်ပါတယ်။ ဒီအခန်းမှာတော့ DALL-E နဲ့ Midjourney ဆိုတဲ့ ပုံဖန်တီးမှုမော်ဒယ်တွေကို လေ့လာကြမယ်။
+LLMs တွင် စာသားဖန်တီးမှုထက်ပိုသော အရာများရှိသည်။ သင်သည် စာသားဖော်ပြချက်မှ ရုပ်ပုံများကိုလည်း ဖန်တီးနိုင်သည်။ ရုပ်ပုံများသည် MedTech, အင်ဂျင်နီယာ, ခရီးသွားလုပ်ငန်း, ဂိမ်းဖွံ့ဖြိုးတိုးတက်မှု, မားကက်တင်းနှင့် အခြားများတွင် အသုံးဝင်သည်။ ဒီသင်ခန်းစာတွင် ကျွန်တော်တို့သည် ဒီနေ့ခေတ် **GPT Image** မော်ဒယ်များကို ကြည့်ရှု၍ ရုပ်ပုံဖန်တီးမှု အပလီကေးရှင်းတစ်ခု တည်ဆောက်ပါမည်။
 
-## အကျဉ်းချုပ်
+## မိတ်ဆက်
 
-ဒီသင်ခန်းစာမှာ ကျွန်တော်တို့ လေ့လာမယ့်အရာတွေကတော့ -
+ရုပ်ပုံဖန်တီးခြင်းသည် သဘာဝဘာသာစကား အမိန့်တစ်ခုကို ဓာတ်ပုံတစ်ပုံ ပြောင်းလဲပေးစေသည်။ ဒီသင်ခန်းစာတွင် ကျွန်တော်တို့သည် OpenAI မှ **`gpt-image`** မော်ဒယ်များ မျိုးစုံကို အသုံးပြုပါမည် - ယခုအချိန်တွင် **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** နှင့် OpenAI ပလက်ဖောင်းပေါ်တွင် ရရှိနိုင်သော မော်ဒယ်များဖြစ်သည်။ ဒီမော်ဒယ်များသည် ယခင် DALL·E မော်ဒယ်များ (DALL·E 2/3 သည် ဆက်ခံ မော်ဒယ်များ) ကို အစားထိုးသည်။
 
-- ပုံဖန်တီးမှုနဲ့ အဘယ်ကြောင့် အရေးကြီးသလဲ။
-- DALL-E နဲ့ Midjourney, အဲဒါတွေက ဘာလဲ၊ ဘယ်လိုအလုပ်လုပ်လဲ။
-- ပုံဖန်တီးမှုအက်ပလီကေးရှင်းတစ်ခုကို ဘယ်လိုတည်ဆောက်မလဲ။
+သင်ခန်းစာတစ်လျှောက်လုံး Edu4All လို့ခေါ်တဲ့ ကန့်ကော် Startup တစ်ခုကို အသုံးပြုပြီး သင်ယူအရာများဖန်တီးနေကြသည်။ အဖွဲ့သည် အလုပ်အပ်အတွက် နှင့် သင်ခန်းစာအတွက် ရုပ်ပုံများဖန်တီးရန် ဆန္ဒရှိသည်။
 
-## သင်ယူရမယ့်ရည်မှန်းချက်များ
+## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-ဒီသင်ခန်းစာကို ပြီးမြောက်ပြီးနောက်မှာ သင်တစ်ဦးက -
+ဒီသင်ခန်းစာ အဆုံးတွင် သင်သည်
 
-- ပုံဖန်တီးမှုအက်ပလီကေးရှင်းတစ်ခုကို တည်ဆောက်နိုင်မယ်။
-- meta prompts တွေကို အသုံးပြုပြီး သင့်အက်ပလီကေးရှင်းအတွက် အကန့်အသတ်တွေ သတ်မှတ်နိုင်မယ်။
-- DALL-E နဲ့ Midjourney ကို အသုံးပြုနိုင်မယ်။
+- ရုပ်ပုံဖန်တီးခြင်း ဆိုသည်မှာဘာ၊ ဘယ်နေရာတွင် အသုံးဝင်သည်ကို ရှင်းပြနိုင်မည်။
+- `gpt-image` မော်ဒယ် မျိုးစုံကို နားလည်ပြီး ယခင် DALL·E မော်ဒယ်များနှင့် ဘယ်လိုကွာခြားသည်ကို သိရှိနိုင်မည်။
+- Python (နှင့် TypeScript / .NET) တို့တွင် ရုပ်ပုံဖန်တီးမှု အပလီကေးရှင်း တည်ဆောက်နိုင်မည်။
+- ရုပ်ပုံများကို တည်းဖြတ်နိုင်ပြီး metaprompt များဖြင့် လုံခြုံရေး ကာကွယ်မှုများ သတ်မှတ်နိုင်မည်။
 
-## အဘယ်ကြောင့် ပုံဖန်တီးမှုအက်ပလီကေးရှင်းတစ်ခုကို တည်ဆောက်သင့်သလဲ?
+## ရုပ်ပုံဖန်တီးခြင်းဆိုတာဘာလဲ?
 
-ပုံဖန်တီးမှုအက်ပလီကေးရှင်းတွေဟာ Generative AI ရဲ့ စွမ်းရည်တွေကို စူးစမ်းဖို့ အကောင်းဆုံးနည်းလမ်းတစ်ခုဖြစ်ပါတယ်။ အဲဒါတွေကို အောက်ပါအတိုင်း အသုံးပြုနိုင်ပါတယ် -
+ရုပ်ပုံဖန်တီးမှု မော်ဒယ်များသည် စာသားအမိန့်မှ ဓာတ်ပုံများကို ဖန်တီးပေးသည်။ ယနေ့ခေတ် မော်ဒယ်များဖြစ်သည့် `gpt-image` မော်ဒယ်များသည် transformer နှင့် diffusion နည်းပညာများပေါ် အခြေခံထားပြီး၊ မော်ဒယ်သည် စာသားနှင့် ရုပ်ပုံတို့အကြား ဆက်နွယ်မှုကို သင်ယူပြီးနောက် အမိန့်တစ်ခုကို ပေးပို့လျှင် အော်စလိုချုပ်သော သံသရာမှ ဓာတ်ပုံတစ်ပုံအထိ စဉ်ဆက်မပြတ် "denoise" ပြုလုပ်သည်။
 
-- **ပုံတည်းဖြတ်ခြင်းနဲ့ ပုံပေါင်းစပ်ခြင်း**။ ပုံတည်းဖြတ်ခြင်းနဲ့ ပုံပေါင်းစပ်ခြင်းလို အမျိုးမျိုးသော အသုံးအဆောင်များအတွက် ပုံတွေကို ဖန်တီးနိုင်ပါတယ်။
+ရုပ်ပုံမော်ဒယ်နှစ်ခုကို လူသိများသော မျိုးစုံမှာ:
 
-- **စက်မှုလုပ်ငန်းအမျိုးမျိုးမှာ အသုံးချနိုင်ခြင်း**။ MedTech, ခရီးသွားလုပ်ငန်း, ဂိမ်းဖွံ့ဖြိုးရေးနဲ့ အခြားသော စက်မှုလုပ်ငန်းအမျိုးမျိုးအတွက် ပုံတွေကို ဖန်တီးနိုင်ပါတယ်။
+- **`gpt-image` (OpenAI)** - ယခုအချိန်၏ မော်ဒယ်များ၊ ဒီသင်ခန်းစာတွင် အသုံးပြုသည်။ စာသားမှ ရုပ်ပုံဖန်တီးခြင်းနှင့် ရုပ်ပုံတည်းဖြတ်ခြင်း (mask ဖြင့် inpainting) ကို ပံ့ပိုးသည်။
+- **Midjourney** - ကိုယ်ပိုင်ဝန်ဆောင်မှုနှင့် Discord အခြေခံ လုပ်ငန်းစဉ်ရှိတဲ့ လူကြိုက်များသော သုံးပွဲပိုင် မော်ဒယ်။
 
-## အခြေအနေ - Edu4All
+> ယခင် OpenAI ရုပ်ပုံ မော်ဒယ်များ - **DALL·E 2** နှင့် **DALL·E 3** သည် ဆက်ငြင်း တပ်ဆင်မှု မရရှိသော Legacy မော်ဒယ်များဖြစ်ကြသည်။ DALL·E 3 သည် အသစ်တပ်ဆင်ရာတွင် မရရှိတော့ပါ၊ `create_variation` ကဲ့သို့ Feature များကို DALL·E 2 မှသာ ရရှိခဲ့သည်။ အသစ်ဆန်းသော app များအတွက် `gpt-image` မော်ဒယ် အား အသုံးပြုပါ။
 
-ဒီသင်ခန်းစာရဲ့ အစိတ်အပိုင်းတစ်ခုအနေနဲ့ ကျွန်တော်တို့ရဲ့ စတတ်အပ်ဖြစ်တဲ့ Edu4All နဲ့ ဆက်လက်လုပ်ဆောင်သွားမှာဖြစ်ပါတယ်။ ကျောင်းသားတွေဟာ သူတို့ရဲ့ အကဲဖြတ်မှုအတွက် ပုံတွေကို ဖန်တီးမှာဖြစ်ပြီး၊ ဘယ်လိုပုံတွေဖန်တီးမယ်ဆိုတာ ကျောင်းသားတွေကို အပ်နှံထားပါတယ်။ သူတို့ရဲ့ fairytale အတွက် ပုံတွေဖန်တီးတာဖြစ်စေ၊ သူတို့ရဲ့ ဇာတ်လမ်းအတွက် ဇာတ်ကောင်အသစ်တစ်ခု ဖန်တီးတာဖြစ်စေ၊ သူတို့ရဲ့ အကြံဉာဏ်နဲ့ အယူအဆတွေကို ရှင်းလင်းဖော်ပြဖို့ အကူအညီပေးတာဖြစ်စေ၊ သူတို့ကိုယ်တိုင် ဆုံးဖြတ်နိုင်ပါတယ်။
+### ငါ ဘယ် `gpt-image` မော်ဒယ်ကို အသုံးပြုသင့်လဲ?
 
-ဥပမာအားဖြင့် Edu4All ရဲ့ ကျောင်းသားတွေဟာ အတန်းထဲမှာ အထိမ်းအမှတ်တွေကို လေ့လာနေကြတယ်ဆိုရင် -
+Microsoft Foundry တွင် အောက်ပါ မော်ဒယ်များသည် **ပြည့်စုံ၍ ရရှိနိုင်သော** မော်ဒယ်များ ဖြစ်သည်။
 
-![Edu4All စတတ်အပ်၊ အထိမ်းအမှတ်အတန်း၊ Eiffel Tower](../../../translated_images/my/startup.94d6b79cc4bb3f5a.webp)
+| မော်ဒယ် | မှတ်ချက်များ |
+| --- | --- |
+| **`gpt-image-2`** | နောက်ဆုံးထွက်ပြီး အရည်အသွေးအမြင့်ဆုံးမော်ဒယ် - သုံးရန် အကြံပြုသည်။ |
+| `gpt-image-1.5` | ပြည့်စုံ၍ ရရှိနိုင်ပြီး; အရည်အသွေး ကောင်းပြီး အသုံးစရိတ် အနည်းငယ်နဲ့။ |
+| `gpt-image-1-mini` | ပြည့်စုံ၍ ရရှိနိုင်ပြီး; အမြန်ဆုံးနှင့် အကြာမမြင့်သော ကုန်ကျစရိတ်။ |
+| `gpt-image-1` | မျက်နှာပြင် စမ်းသပ်ရန်သာ ရရှိနိုင်သည်။ |
 
-ဒီလို prompt တစ်ခုကို အသုံးပြုနိုင်ပါတယ် -
+အဆက်မပြတ် [Foundry image models စာရင်း](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) ကို စစ်ဆေးပါ။
 
-> "နံနက်စောစောအလင်းရောင်မှာ Eiffel Tower အနားမှာ ခွေး"
+> **အရေးကြီးချက်:** `gpt-image` မော်ဒယ်များသည် ဖန်တီးသောရုပ်ပုံကို **base64** (`b64_json`) အဖြစ် ပြန်ပေးပို့သည်၊ URL မဟုတ်ပါ။ သင်၏ ကိုဒ်သည် base64 string ကို ကွမ် bytes ပြောင်း၍ သိမ်းဆည်းပေးရမည် - ရုပ်ပုံ URL မရှိပါ။
 
-## DALL-E နဲ့ Midjourney ဆိုတာဘာလဲ?
+## ပြင်ဆင်မှုများ
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) နဲ့ [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) ဟာ ပုံဖန်တီးမှုမော်ဒယ်တွေထဲမှာ အလွန်လူကြိုက်များတဲ့ မော်ဒယ်နှစ်ခုဖြစ်ပြီး၊ prompt တွေကို အသုံးပြုပြီး ပုံတွေကို ဖန်တီးနိုင်ပါတယ်။
+သင်သည် **Azure OpenAI in Microsoft Foundry** ( `aoai-*` စမ်းသပ်မှုများ) သို့မဟုတ် **OpenAI ပလက်ဖောင်း** ( `oai-*` စမ်းသပ်မှုများ) တို့ကို ကိုင်တွယ် လုပ်ဆောင်နိုင်သည်။
 
-### DALL-E
+### 1. မော်ဒယ် တည်ဆောက်ပြီး ထုတ်လုပ်ပါ
 
-DALL-E ကို စတင်လေ့လာကြရအောင်။ DALL-E ဟာ Generative AI မော်ဒယ်တစ်ခုဖြစ်ပြီး စာသားဖော်ပြချက်တွေကနေ ပုံတွေကို ဖန်တီးပါတယ်။
+[create a resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) လမ်းညွှန်အတိုင်း Microsoft Foundry resource တစ်ခု ဖန်တီးပြီး ပြီးနောက် ဓာတ်ပုံ မော်ဒယ်တစ်ခု ထပ်မံထုတ်လုပ်ပါ - **`gpt-image-2`** ကို အကြံပြုသည်။
 
-> [DALL-E ဟာ CLIP နဲ့ diffused attention ဆိုတဲ့ မော်ဒယ်နှစ်ခုရဲ့ ပေါင်းစပ်မှုဖြစ်ပါတယ်](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst)။
+### 2. သင်၏ `.env` ကို ပြင်ဆင်ပါ
 
-- **CLIP** ဟာ ပုံနဲ့ စာသားတွေကနေ data တွေကို နံပါတ်ပုံစံအဖြစ် ဖန်တီးပေးတဲ့ မော်ဒယ်တစ်ခုဖြစ်ပါတယ်။
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention** ဟာ embeddings တွေကနေ ပုံတွေကို ဖန်တီးပေးတဲ့ မော်ဒယ်တစ်ခုဖြစ်ပါတယ်။ DALL-E ဟာ ပုံနဲ့ စာသား dataset တွေကို သင်ကြားထားပြီး စာသားဖော်ပြချက်တွေကနေ ပုံတွေကို ဖန်တီးနိုင်ပါတယ်။ ဥပမာအားဖြင့် DALL-E ကို ဦးထုပ်ဝတ်ထားတဲ့ ကြောင်တစ်ကောင်၊ ဒါမှမဟုတ် mohawk ရှိတဲ့ ခွေးတစ်ကောင်ရဲ့ ပုံတွေကို ဖန်တီးဖို့ အသုံးပြုနိုင်ပါတယ်။
+သင်၏ resource တွင် [Foundry portal](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) ထဲ အောက်ပါ **Deployments** စာမျက်နှာတွင် တန်ဖိုးများကို ရှာဖွေပါ။
 
-### Midjourney
+### 3. စာကြည့်တိုက်များ ထည့်သွင်းပါ
 
-Midjourney ဟာ DALL-E နဲ့ တူညီတဲ့နည်းလမ်းနဲ့ အလုပ်လုပ်ပြီး စာသား prompt တွေကနေ ပုံတွေကို ဖန်တီးပါတယ်။ Midjourney ကိုလည်း “ဦးထုပ်ဝတ်ထားတဲ့ ကြောင်တစ်ကောင်” ဒါမှမဟုတ် “mohawk ရှိတဲ့ ခွေးတစ်ကောင်” ဆိုတဲ့ prompt တွေကို အသုံးပြုပြီး ပုံတွေ ဖန်တီးနိုင်ပါတယ်။
+`requirements.txt` ဖိုင်တစ်ခု ဖန်တီးပါ:
 
-![Midjourney ဖန်တီးထားတဲ့ ပုံ၊ mechanical pigeon](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_ပုံအခွင့်အရေး Wikipedia, Midjourney ဖန်တီးထားတဲ့ ပုံ_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## DALL-E နဲ့ Midjourney ဘယ်လိုအလုပ်လုပ်သလဲ
+ပြီးနောက် virtual environment တစ်ခု ဖန်တီးပြီး ဖွင့်၍ အောက်ပါကို ထည့်သွင်းပါ:
 
-ပထမဆုံး [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst) ကို ကြည့်ပါ။ DALL-E ဟာ transformer architecture အပေါ်မှာ အခြေခံထားတဲ့ Generative AI မော်ဒယ်ဖြစ်ပြီး _autoregressive transformer_ ပါရှိပါတယ်။
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate ကို အသုံးပြုပါ
+pip install -r requirements.txt
+```
 
-_autoregressive transformer_ ဟာ မော်ဒယ်တစ်ခုက စာသားဖော်ပြချက်တွေကနေ ပုံတွေကို ဘယ်လိုဖန်တီးမလဲဆိုတာ သတ်မှတ်ပေးပြီး pixel တစ်ခုချင်းစီကို ဖန်တီးပါတယ်။ ဖန်တီးထားတဲ့ pixel တွေကို အသုံးပြုပြီး နောက် pixel ကို ဖန်တီးပါတယ်။ neural network ရဲ့ အလွှာများစွာကို ဖြတ်သွားပြီး ပုံကို ပြည့်စုံအောင် ဖန်တီးပါတယ်။
+## အပလီကေးရှင်း တည်ဆောက်ခြင်း
 
-ဒီလုပ်ငန်းစဉ်နဲ့ DALL-E ဟာ ဖန်တီးထားတဲ့ ပုံထဲမှာ attribute, object, characteristic တွေကို ထိန်းချုပ်ပါတယ်။ သို့သော် DALL-E 2 နဲ့ 3 ဟာ ဖန်တီးထားတဲ့ ပုံကို ပိုမိုထိန်းချုပ်နိုင်ပါတယ်။
+အောက်ပါ ကုဒ်ဖြင့် `app.py` ဖိုင်ကို ဖန်တီးပါ။ ဟုအဆိုအရ ရုပ်ပုံ ဖန်တီးပြီး PNG အဖြစ် သိမ်းဆည်းသည်။
 
-## ပုံဖန်တီးမှုအက်ပလီကေးရှင်းကို ပထမဆုံးတည်ဆောက်ခြင်း
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-ပုံဖန်တီးမှုအက်ပလီကေးရှင်းတစ်ခုကို တည်ဆောက်ဖို့ ဘာတွေလိုအပ်သလဲဆိုရင် အောက်ပါ library တွေလိုအပ်ပါတယ် -
+dotenv.load_dotenv()
 
-- **python-dotenv**, သင့်ရဲ့ secrets တွေကို _.env_ ဖိုင်ထဲမှာ code ကနေ ခွဲထားဖို့ ဒီ library ကို အသုံးပြုဖို့ အကြံပြုပါတယ်။
-- **openai**, ဒီ library ဟာ OpenAI API နဲ့ ဆက်သွယ်ဖို့ အသုံးပြုမယ့် library ဖြစ်ပါတယ်။
-- **pillow**, Python မှာ ပုံတွေနဲ့ အလုပ်လုပ်ဖို့။
-- **requests**, HTTP requests တွေကို လုပ်ဆောင်ဖို့ အကူအညီပေးပါတယ်။
-
-## Azure OpenAI မော်ဒယ်တစ်ခုကို ဖန်တီးပြီး deploy လုပ်ခြင်း
-
-မလုပ်ဆောင်ရသေးပါက [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) စာမျက်နှာမှာ လမ်းညွှန်ချက်တွေကို လိုက်နာပြီး Azure OpenAI resource နဲ့ မော်ဒယ်တစ်ခုကို ဖန်တီးပါ။ မော်ဒယ်အဖြစ် DALL-E 3 ကို ရွေးချယ်ပါ။
-
-## အက်ပလီကေးရှင်းကို ဖန်တီးခြင်း
-
-1. _.env_ ဆိုတဲ့ ဖိုင်တစ်ခုကို အောက်ပါအကြောင်းအရာနဲ့ ဖန်တီးပါ -
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   ဒီအချက်အလက်တွေကို Azure OpenAI Foundry Portal မှာ သင့်ရဲ့ resource ရဲ့ "Deployments" အပိုင်းမှာ ရှာပါ။
-
-1. အထက်ပါ library တွေကို _requirements.txt_ ဆိုတဲ့ ဖိုင်တစ်ခုထဲမှာ စုစည်းပါ -
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. နောက်တစ်ဆင့်မှာ virtual environment ကို ဖန်တီးပြီး library တွေကို install လုပ်ပါ -
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Windows အတွက်တော့ virtual environment ကို ဖန်တီးပြီး activate လုပ်ဖို့ အောက်ပါ command တွေကို အသုံးပြုပါ -
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. _app.py_ ဆိုတဲ့ ဖိုင်ထဲမှာ အောက်ပါ code ကို ထည့်ပါ -
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-ဒီ code ကို ရှင်းပြပါ -
-
-- ပထမဆုံး OpenAI library, dotenv library, requests library, Pillow library အပါအဝင် လိုအပ်တဲ့ library တွေကို import လုပ်ပါတယ်။
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- နောက်တစ်ဆင့် _.env_ ဖိုင်က environment variables တွေကို load လုပ်ပါတယ်။
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- အဲဒီနောက်မှာ Azure OpenAI service client ကို configure လုပ်ပါတယ်။
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- နောက်တစ်ဆင့်မှာ ပုံကို ဖန်တီးပါတယ် -
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  အထက်ပါ code ဟာ ဖန်တီးထားတဲ့ ပုံရဲ့ URL ပါဝင်တဲ့ JSON object ကို ပြန်လည်တုံ့ပြန်ပါတယ်။ ဒီ URL ကို အသုံးပြုပြီး ပုံကို download လုပ်ပြီး ဖိုင်အဖြစ် သိမ်းဆည်းနိုင်ပါတယ်။
-
-- နောက်ဆုံးမှာ ပုံကို ဖွင့်ပြီး standard image viewer ကို အသုံးပြုပြီး ပြသပါတယ် -
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### ပုံကို ဖန်တီးခြင်းအကြောင်း အခြေခံအချက်များ
-
-ပုံကို ဖန်တီးတဲ့ code ကို ပိုမိုအသေးစိတ်ကြည့်ရအောင် -
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt** ဟာ ပုံကို ဖန်တီးဖို့ အသုံးပြုတဲ့ စာသား prompt ဖြစ်ပါတယ်။ ဒီအခါမှာ "Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils" ဆိုတဲ့ prompt ကို အသုံးပြုထားပါတယ်။
-- **size** ဟာ ဖန်တီးထားတဲ့ ပုံရဲ့ အရွယ်အစားဖြစ်ပါတယ်။ ဒီအခါမှာ 1024x1024 pixels အရွယ်အစားရှိတဲ့ ပုံကို ဖန်တီးထားပါတယ်။
-- **n** ဟာ ဖန်တီးထားတဲ့ ပုံအရေအတွက်ဖြစ်ပါတယ်။ ဒီအခါမှာ ပုံနှစ်ပုံကို ဖန်တီးထားပါတယ်။
-- **temperature** ဟာ Generative AI မော်ဒယ်ရဲ့ output ရဲ့ random ဖြစ်မှုကို ထိန်းချုပ်တဲ့ parameter ဖြစ်ပါတယ်။ temperature ဟာ 0 နဲ့ 1 ကြားမှာရှိပြီး 0 ဆိုတာ output ဟာ deterministic ဖြစ်တယ်ဆိုတာကို ဆိုလိုပါတယ်။ 1 ဆိုတာ output ဟာ random ဖြစ်တယ်ဆိုတာကို ဆိုလိုပါတယ်။ default value က 0.7 ဖြစ်ပါတယ်။
-
-ပုံတွေနဲ့ ပိုပြီးလုပ်ဆောင်နိုင်တဲ့ အရာတွေကို နောက်အပိုင်းမှာ ဆက်လက်လေ့လာပါမယ်။
-
-## ပုံဖန်တီးမှုရဲ့ ထပ်ဆင့်စွမ်းရည်များ
-
-Python မှာ အကြောင်းအရာအနည်းငယ်နဲ့ ပုံတစ်ပုံကို ဖန်တီးနိုင်တာကို သင်တွေ့မြင်ခဲ့ပါပြီ။ သို့သော် ပုံတွေနဲ့ ပိုပြီးလုပ်ဆောင်နိုင်တဲ့ အရာတွေရှိပါတယ်။
-
-သင်လုပ်ဆောင်နိုင်တဲ့ အခြားအရာတွေကတော့ -
-
-- **တည်းဖြတ်မှုများလုပ်ဆောင်ခြင်း**။ ရှိပြီးသားပုံတစ်ပုံကို mask နဲ့ prompt တစ်ခုကို ပေးပြီး ပုံကို ပြောင်းလဲနိုင်ပါတယ်။ ဥပမာအားဖြင့် ပုံတစ်ပုံရဲ့ တစ်စိတ်တစ်ပိုင်းကို အရာတစ်ခုခု ထည့်သွင်းနိုင်ပါတယ်။ ဥပမာအားဖြင့် ကျွန်တော်တို့ Bunny ပုံမှာ Bunny ကို ဦးထုပ်တစ်လုံး ထည့်သွင်းနိုင်ပါတယ်။ အဲဒါကို ပုံ, mask (ပြောင်းလဲမှုအတွက် အပိုင်းကို သတ်မှတ်ခြင်း) နဲ့ ဘာလုပ်ဆောင်သင့်တယ်ဆိုတာကို ပြောတဲ့ စာသား prompt တစ်ခုကို ပေးပြီး လုပ်ဆောင်နိုင်ပါတယ်။
-> မှတ်ချက် - ဒီ feature ဟာ DALL-E 3 မှာ မပံ့ပိုးထားပါဘူး။
-
-GPT Image ကို အသုံးပြုတဲ့ ဥပမာကတော့ -
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  အခြေခံပုံဟာ lounge နဲ့ pool ကိုသာ ပါဝင်မှာဖြစ်ပြီး နောက်ဆုံးပုံမှာ flamingo ပါဝင်မှာဖြစ်ပါတယ် -
+# သုံးစွဲသူ client ကို သင့် Azure OpenAI (Microsoft Foundry) အရင်းအမြစ်ဆီ ဦးတည်ပါ။
+# ပုံစံပုံတူစနစ်များအတွက် နောက်ဆုံး API ဗားရှင်းလိုအပ်သည် - သင့်ပုံစံလိုအပ်ချက်အတွက် Foundry စာတမ်းများကို စစ်ဆေးပါ။
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
+
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # ဥပမာ "gpt-image-2"
+
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # 1536x1024 (ရုပ်ပုံကျယ်), 1024x1536 (ရုပ်ပုံရှည်), သို့မဟုတ် "auto"
+    n=1,
+)
+
+# gpt-image ပုံစံများသည် URL မဟုတ်ဘဲ base64 (b64_json) ပြန်လည်ပေးဆောင်သည် - ဒါကို bytes အဖြစ် decode ဆောင်ရွက်ပါ။
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+`python app.py` ဖြင့် ပြေးဆွဲပါ။ `images/` ဖိုဒါအောက်တွင် PNG ဖိုင်ကို သိမ်းဆည်းထားလိမ့်မည်။
+
+> `images.generate` ကို တစ်ရက်ခေါ်တိုင်း တူညီသောအမိန့်အတွက် ကွဲပြားသော ရုပ်ပုံများကို ထုတ်ပေးသည် - ရုပ်ပုံမော်ဒယ်များတွင် `temperature` ဆိုသည့် parameter မရှိပါ (ဒါဟာ စာသားဖန်တီးမှုထိန်းချုပ်မှု ဖြစ်သည်)။ မတူညီမှုရရှိရန် API ကို ထပ်မံ ခေါ်ဆောင်ပါ၊ မတူညီမှုလျော့ချရန် အမိန့်ကို ပိုမိုသေချာစွာရေးပါ။
+
+## ရုပ်ပုံများကို တည်းဖြတ်ခြင်း
+
+`gpt-image` မော်ဒယ်များသည် ရှိပြီးသားရုပ်ပုံကို **တည်းဖြတ်** နိုင်ပါသည်။ ဓာတ်ပုံနှင့် မိမိလိုချင်သော ပိုင်းတစ်ခုကို သတ်မှတ်ထားသော **mask** တစ်ခု၊ ပြုပြင်လိုသော အကြောင်းအရာ အမိန့်ဖြင့် ရေးပြီး ပေးပါ။ ဖန်တီးခြင်းကဲ့သို့ base64 အဖြစ် ပြန်ပေးပို့သည်။
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/my/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -268,111 +148,51 @@ GPT Image ကို အသုံးပြုတဲ့ ဥပမာကတော�
   <img src="../../../translated_images/my/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **အမျိုးမျိုးသောပုံတွေ ဖန်တီးခြင်း**။ အဓိကအကြောင်းအရာက ရှိပြီးသားပုံတစ်ပုံကို ယူပြီး အမျိုးမျိုးသော variation တွေကို ဖန်တီးဖို့ တောင်းဆိုတာဖြစ်ပါတယ်။ variation တစ်ခုကို ဖန်တီးဖို့ ပုံတစ်ပုံနဲ့ စာသား prompt တစ်ခုကို ပေးပြီး အောက်ပါ code ကို အသုံးပြုနိုင်ပါတယ် -
+## metaprompts ဖြင့် ကန့်သတ်ခြင်း သတ်မှတ်ခြင်း
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
+ရုပ်ပုံဖန်တီးမှုကို သင်ပြုလုပ်ပြီးနောက်၊ သင့်အပလီကေးရှင်းမှ မလုံခြုံသော သို့မဟုတ် ကုန်အမှတ်တံဆိပ်မကျုန်သော အကြောင်းအရာ မထုတ်ပေးရန် guardrails လိုအပ်ပါတယ်။ **metaprompt** ဆိုသည်မှာ အသုံးပြုသူ၏ အမိန့်ဝင်မတိုင်မီ အသစ်ထည့်အပ်သော စာသားတစ်ခုဖြစ်ပြီး မော်ဒယ်ထုတ်လွှင့်မှုကို ကန့်သတ်ပေးသည်။
 
-  > မှတ်ချက် - ဒီ feature ဟာ OpenAI မှာသာ ပံ့ပိုးထားပါတယ်။
-
-## Temperature
-
-Temperature ဟာ Generative AI မော်ဒယ်ရဲ့ output ရဲ့ random ဖြစ်မှုကို ထိန်းချုပ်တဲ့ parameter ဖြစ်ပါတယ်။ Temperature ဟာ 0 နဲ့ 1 ကြားမှာရှိပြီး 0 ဆိုတာ output ဟာ deterministic ဖြစ်တယ်ဆိုတာကို ဆိုလိုပါတယ်။ 1 ဆိုတာ output ဟာ random ဖြစ်တယ်ဆိုတာကို ဆိုလိုပါတယ်။ Default value က 0.7 ဖြစ်ပါတယ်။
-
-Temperature ဘယ်လိုအလုပ်လုပ်လဲဆိုတာကို ဥပမာတစ်ခုနဲ့ ကြည့်ရအောင် -
-
-> Prompt : "Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils"
-
-![Bunny on a horse holding a lollipop, version 1](../../../translated_images/my/v1-generated-image.a295cfcffa3c13c2.webp)
-
-အဲဒီ prompt ကို ထပ်ပြီး run လုပ်ကြည့်ရင် ပုံတစ်ပုံတည်းကို မရနိုင်ဘဲ -
-
-![Generated image of bunny on horse](../../../translated_images/my/v2-generated-image.33f55a3714efe61d.webp)
-
-သင်မြ
 ```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# `prompt` ကို client.images.generate(...) သို့ပို့ပါ
 ```
 
-## အလွန်ကောင်းမွန်သောအလုပ်! သင့်ရဲ့သင်ယူမှုကို ဆက်လက်လုပ်ဆောင်ပါ
+ယခုမှာ မော်ဒယ်ထုတ်ပေးသော ရုပ်ပုံတိုင်းသည် metaprompt ဖြင့် သတ်မှတ်ထားသော နယ်နိမိတ်တွင်း ဖြစ်နေပါသည်။ Microsoft Foundry တွင် ပါဝင်သော အကြောင်းအရာ စစ်ကျပ်မှုများနှင့်ပေါင်းစပ်၍ ခိုင်မာစွာ ကာကွယ်ပေးပါမည်။
 
-ဒီသင်ခန်းစာကိုပြီးမြောက်ပြီးနောက်မှာ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ကိုကြည့်ရှုပြီး Generative AI အသိပညာကို ဆက်လက်မြှင့်တင်ပါ!
+## အလုပ်အပ် - ကျောင်းသားများအတွက် အားဖြည့်ကြကြမည်
 
-Lesson 10 ကိုသွားပြီး [low-code ဖြင့် AI applications တည်ဆောက်ခြင်း](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst) ကိုလေ့လာကြမယ်!
+Edu4All ကျောင်းသားများသည် ၎င်းတို့၏ တန်းအစီရင်ခံစာများအတွက် ရုပ်ပုံများလိုအပ်သည်။ အနုပညာမြင်ကွင်းမျိုးစုံရှိသော **ဗိမာန်အဆောက်အအုံများ** (ဘယ်ဗိမာန်များကို ရွေးချယ်မည်ဆိုတာ သင့်ပေါ် မူတည်သည်) ရုပ်ပုံများ ဖန်တီးသော အပလီကေးရှင်း တစ်ခု ဆောက်လုပ်ပါ - ဥပမာအားဖြင့် နေဝင်ချိန်၌ ကလေးနှင့် အတူ ထင်ရှားသော ဒေသတစ်ခုကို ဖော်ပြခြင်း။
+
+ကိုယ်တိုင် စမ်းသပ်ပြီးနောက် အောက်ပါ အညွှန်းဖြေရှင်းချက်များနှင့် နှိုင်းယှဉ်ကြည့်ပါ:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) အပြည့်အဝ ဖန်တီးမှု app: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+[python/](../../../09-building-image-applications/python) ထဲက notebook များကိုလည်း လေ့လာဆောင်ရွက်ပါ (`aoai-assignment.ipynb` - Azure အတွက်၊ `oai-assignment.ipynb` - OpenAI အတွက်)။
+
+## ကောင်းပါတယ်! သင်ယူမှုကို ဆက်လက်လုပ်ဆောင်ပါ
+
+ဒီသင်ခန်းစာပြီးဆုံးပြီးနောက် ကျွန်တော်တို့ရဲ့ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ကို လေ့လာပြီး သင့် Generative AI ကျွမ်းကျင်မှုကို တိုးတက်စေပါ။
+
+သင်ခန်းစာ ၁၀ ကို ဆက်လက်လေ့လာရန် ကြိုဆိုပါတယ်။
 
 ---
 
-**အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

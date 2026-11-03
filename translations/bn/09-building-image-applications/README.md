@@ -1,267 +1,146 @@
-# ইমেজ জেনারেশন অ্যাপ্লিকেশন তৈরি করা
+# ইমেজ জেনারেশন অ্যাপ্লিকেশন তৈরি
 
-[![ইমেজ জেনারেশন অ্যাপ্লিকেশন তৈরি করা](../../../translated_images/bn/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![ইমেজ জেনারেশন অ্যাপ্লিকেশন তৈরি](../../../translated_images/bn/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-টেক্সট জেনারেশনের বাইরে LLM-এর আরও অনেক কিছু আছে। টেক্সট বর্ণনা থেকে ইমেজ তৈরি করাও সম্ভব। ইমেজ একটি মাধ্যম হিসেবে বিভিন্ন ক্ষেত্রে যেমন মেডটেক, স্থাপত্য, পর্যটন, গেম ডেভেলপমেন্ট এবং আরও অনেক কিছুতে অত্যন্ত কার্যকর হতে পারে। এই অধ্যায়ে, আমরা দুটি জনপ্রিয় ইমেজ জেনারেশন মডেল, DALL-E এবং Midjourney সম্পর্কে আলোচনা করব।
+LLMs শুধুমাত্র টেক্সট জেনারেশন নয়। আপনি টেক্সট বর্ণনা থেকে চিত্রও তৈরি করতে পারেন। চিত্র একটি মাধ্যম হিসেবে মেডটেক, আর্কিটেকচার, পর্যটন, গেম ডেভেলপমেন্ট, মার্কেটিং এবং আরও অনেক ক্ষেত্রে ব্যবহারযোগ্য। এই পাঠে আমরা আজকের **GPT Image** মডেলগুলি দেখি এবং একটি চিত্র জেনারেশন অ্যাপ তৈরি করি।
 
 ## পরিচিতি
 
-এই পাঠে আমরা আলোচনা করব:
+ইমেজ জেনারেশন আপনাকে একটি প্রাকৃতিক-ভাষার প্রম্পট থেকে একটি ছবি তৈরি করতে দেয়। এই পাঠে আমরা OpenAI-এর **`gpt-image`** পরিবারের মডেলগুলি নিয়ে কাজ করি - যা বর্তমানে **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** এবং OpenAI প্ল্যাটফর্মে উপলব্ধ ইমেজ মডেলগুলির বর্তমান প্রজন্ম। এই মডেলগুলি পুরানো DALL·E মডেল (DALL·E 2/3 হল লিগ্যাসি) গুলোর স্থান নিচ্ছে।
 
-- ইমেজ জেনারেশন এবং কেন এটি গুরুত্বপূর্ণ।
-- DALL-E এবং Midjourney, তারা কী এবং কীভাবে কাজ করে।
-- কীভাবে আপনি একটি ইমেজ জেনারেশন অ্যাপ তৈরি করবেন।
+পুরো পাঠজুড়ে আমরা একটি কাল্পনিক স্টার্টআপ, **Edu4All**, এর গল্প বলব, যেটি শেখার সরঞ্জাম তৈরি করে। টিমটি অ্যাসাইনমেন্ট এবং স্টাডি ম্যাটিরিয়ালের জন্য চিত্র তৈরি করতে চায়।
 
-## শেখার লক্ষ্য
+## শেখার লক্ষ্যসমূহ
 
-এই পাঠ শেষ করার পর, আপনি সক্ষম হবেন:
+এই পাঠ শেষ হলে আপনি পারবেন:
 
-- একটি ইমেজ জেনারেশন অ্যাপ্লিকেশন তৈরি করতে।
-- মেটা প্রম্পট দিয়ে আপনার অ্যাপ্লিকেশনের সীমা নির্ধারণ করতে।
-- DALL-E এবং Midjourney এর সাথে কাজ করতে।
+- ব্যাখ্যা করতে কি ইমেজ জেনারেশন এবং কোথায় এটি উপকারি।
+- `gpt-image` মডেল পরিবার বুঝতে এবং কীভাবে এটি লিগ্যাসি DALL·E মডেল থেকে পৃথক।
+- পাইথন (এবং টাইপস্ক্রিপ্ট / .NET) ব্যবহার করে একটি ইমেজ জেনারেশন অ্যাপ তৈরি করা।
+- চিত্র সম্পাদনা করা এবং মেটাপ্রম্পট ব্যবহার করে সেফটি গার্ডরেইল প্রয়োগ করা।
 
-## কেন ইমেজ জেনারেশন অ্যাপ্লিকেশন তৈরি করবেন?
+## ইমেজ জেনারেশন কী?
 
-ইমেজ জেনারেশন অ্যাপ্লিকেশন জেনারেটিভ AI-এর ক্ষমতা অন্বেষণ করার একটি চমৎকার উপায়। এগুলো ব্যবহার করা যেতে পারে, যেমন:
+ইমেজ জেনারেশন মডেলগুলি একটি টেক্সট প্রম্পট থেকে চিত্র তৈরি করে। আধুনিক মডেল যেমন `gpt-image` ট্রান্সফরমার + ডিফিউশন প্রযুক্তির ওপর নির্মিত: মডেলটি প্রশিক্ষণের সময় টেক্সট এবং চিত্রের মধ্যকার সম্পর্ক শিখে, পরে একটি প্রম্পট পেলে ধাপে ধাপে এলোমেলো শব্দকে একটি বর্ণনার সাথে মিলানো চিত্রে "ডিনয়েজ" করে।
 
-- **ইমেজ সম্পাদনা এবং সংশ্লেষণ**। বিভিন্ন ব্যবহারের জন্য ইমেজ তৈরি করা যেতে পারে, যেমন ইমেজ সম্পাদনা এবং ইমেজ সংশ্লেষণ।
+দুটি সুপরিচিত ইমেজ মডেল পরিবার হল:
 
-- **বিভিন্ন শিল্পে প্রয়োগ**। এগুলো মেডটেক, পর্যটন, গেম ডেভেলপমেন্ট এবং আরও অনেক শিল্পের জন্য ইমেজ তৈরি করতে ব্যবহার করা যেতে পারে।
+- **`gpt-image` (OpenAI)** - বর্তমান প্রজন্ম, যেটি এই পাঠে ব্যবহৃত। এটি টেক্সট-টু-ইমেজ জেনারেশন এবং চিত্র সম্পাদনা (মাস্ক দিয়ে ইনপেইন্টিং) সমর্থন করে।
+- **Midjourney** - একটি জনপ্রিয় তৃতীয় পক্ষের মডেল যার নিজস্ব সার্ভিস এবং Discord ভিত্তিক ওয়ার্কফ্লো আছে।
 
-## দৃশ্যপট: Edu4All
+> পুরানো OpenAI ইমেজ মডেল - **DALL·E 2** এবং **DALL·E 3** - হল লিগ্যাসি। DALL·E 3 নতুন ডিপ্লয়মেন্টের জন্য আর উপলব্ধ নয়, এবং `create_variation` ফিচারটি শুধুমাত্র DALL·E 2 তে ছিল। নতুন অ্যাপ্লিকেশনের জন্য `gpt-image` মডেল ব্যবহার করুন।
 
-এই পাঠের অংশ হিসেবে, আমরা আমাদের স্টার্টআপ Edu4All-এর সাথে কাজ চালিয়ে যাব। শিক্ষার্থীরা তাদের মূল্যায়নের জন্য ইমেজ তৈরি করবে, ঠিক কী ধরনের ইমেজ তা শিক্ষার্থীদের উপর নির্ভর করবে, তবে তারা তাদের নিজস্ব রূপকথার জন্য চিত্র তৈরি করতে পারে বা তাদের গল্পের জন্য একটি নতুন চরিত্র তৈরি করতে পারে বা তাদের ধারণা এবং ধারণাগুলি চিত্রিত করতে সাহায্য করতে পারে।
+### কোন `gpt-image` মডেলটি ব্যবহার করব?
 
-যদি তারা ক্লাসে স্মৃতিস্তম্ভ নিয়ে কাজ করে, তাহলে Edu4All-এর শিক্ষার্থীরা উদাহরণস্বরূপ এটি তৈরি করতে পারে:
+Microsoft Foundry তে নিম্নলিখিতগুলি **সাধারণভাবে উপলব্ধ**:
 
-![Edu4All স্টার্টআপ, ক্লাসে স্মৃতিস্তম্ভ, আইফেল টাওয়ার](../../../translated_images/bn/startup.94d6b79cc4bb3f5a.webp)
+| মডেল | নোটস |
+| --- | --- |
+| **`gpt-image-2`** | সর্বশেষ এবং সবচেয়ে সক্ষম ইমেজ মডেল - সুপারিশকৃত ডিফল্ট। |
+| `gpt-image-1.5` | সাধারণভাবে উপলব্ধ; কম খরচে শক্তিশালী গুণমান। |
+| `gpt-image-1-mini` | সাধারণভাবে উপলব্ধ; দ্রুততম / সর্বনিম্ন খরচ। |
+| `gpt-image-1` | পূর্বাভাস মাত্র। |
 
-একটি প্রম্পট ব্যবহার করে যেমন:
+সর্বদা বর্তমান [Foundry ইমেজ মডেল তালিকা](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) চেক করুন উপলব্ধতা এবং অঞ্চল সম্পর্কে।
 
-> "সকালবেলার সূর্যের আলোতে আইফেল টাওয়ারের পাশে একটি কুকুর"
+> **গুরুত্বপূর্ণ:** `gpt-image` মডেলগুলি তৈরি করা চিত্র **base64** (`b64_json`) ফর্ম্যাটে ফেরত দেয়, URL নয়। আপনার কোড base64 স্ট্রিংকে বাইটে ডিকোড করে সংরক্ষণ করে - ডাউনলোডের জন্য কোনো ইমেজ URL নাই।
 
-## DALL-E এবং Midjourney কী?
+## সেটআপ
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) এবং [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) দুটি জনপ্রিয় ইমেজ জেনারেশন মডেল, যা আপনাকে প্রম্পট ব্যবহার করে ইমেজ তৈরি করতে দেয়।
+আপনি উদাহরণগুলো চালাতে পারেন **Microsoft Foundry এর Azure OpenAI**-র বিরুদ্ধে ( `aoai-*` উদাহরণ) অথবা **OpenAI প্ল্যাটফর্ম**-এ ( `oai-*` উদাহরণ)।
 
-### DALL-E
+### 1. মডেল তৈরি ও ডিপ্লয় করুন
 
-চলুন শুরু করি DALL-E দিয়ে, এটি একটি জেনারেটিভ AI মডেল যা টেক্সট বর্ণনা থেকে ইমেজ তৈরি করে।
+[রিসোর্স তৈরি](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) গাইড অনুসরণ করে Microsoft Foundry রিসোর্স তৈরি করুন, তারপর একটি ইমেজ মডেল ডিপ্লয় করুন - **`gpt-image-2`** সুপারিশকৃত।
 
-> [DALL-E দুটি মডেল, CLIP এবং diffused attention-এর সংমিশ্রণ](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst)।
+### 2. আপনার `.env` কনফিগার করুন
 
-- **CLIP**, একটি মডেল যা ইমেজ এবং টেক্সট থেকে এমবেডিং তৈরি করে, যা ডেটার সংখ্যাসূচক উপস্থাপনা।
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention**, একটি মডেল যা এমবেডিং থেকে ইমেজ তৈরি করে। DALL-E একটি ইমেজ এবং টেক্সটের ডেটাসেটে প্রশিক্ষিত এবং এটি টেক্সট বর্ণনা থেকে ইমেজ তৈরি করতে ব্যবহার করা যেতে পারে। উদাহরণস্বরূপ, DALL-E একটি টুপি পরা বিড়াল বা একটি মোহক সহ কুকুরের ইমেজ তৈরি করতে ব্যবহার করা যেতে পারে।
+এই মানগুলো আপনার রিসোর্সের [Foundry পোর্টাল](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) এর **Deployments** পেজে পাবেন।
 
-### Midjourney
+### 3. লাইব্রেরি ইনস্টল করুন
 
-Midjourney DALL-E-এর মতোই কাজ করে, এটি টেক্সট প্রম্পট থেকে ইমেজ তৈরি করে। Midjourney প্রম্পট ব্যবহার করে ইমেজ তৈরি করতে পারে যেমন "একটি টুপি পরা বিড়াল" বা "মোহক সহ একটি কুকুর"।
+একটি `requirements.txt` তৈরি করুন:
 
-![Midjourney দ্বারা তৈরি ইমেজ, যান্ত্রিক কবুতর](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_চিত্র ক্রেডিট উইকিপিডিয়া, Midjourney দ্বারা তৈরি ইমেজ_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## DALL-E এবং Midjourney কীভাবে কাজ করে
+তারপর একটি ভার্চুয়াল এনভায়রনমেন্ট তৈরি ও সক্রিয় করুন এবং ইনস্টল করুন:
 
-প্রথমে, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst)। DALL-E একটি জেনারেটিভ AI মডেল যা ট্রান্সফর্মার আর্কিটেকচারের উপর ভিত্তি করে তৈরি এবং একটি _অটোরিগ্রেসিভ ট্রান্সফর্মার_।
-
-একটি _অটোরিগ্রেসিভ ট্রান্সফর্মার_ সংজ্ঞায়িত করে কীভাবে একটি মডেল টেক্সট বর্ণনা থেকে ইমেজ তৈরি করে, এটি একবারে একটি পিক্সেল তৈরি করে এবং তারপর পরবর্তী পিক্সেল তৈরি করতে তৈরি পিক্সেলগুলি ব্যবহার করে। একটি নিউরাল নেটওয়ার্কের একাধিক স্তর পেরিয়ে, যতক্ষণ না ইমেজ সম্পূর্ণ হয়।
-
-এই প্রক্রিয়ার মাধ্যমে, DALL-E, তৈরি করা ইমেজে বৈশিষ্ট্য, বস্তু, বৈশিষ্ট্য এবং আরও অনেক কিছু নিয়ন্ত্রণ করে। তবে, DALL-E 2 এবং 3 তৈরি করা ইমেজের উপর আরও বেশি নিয়ন্ত্রণ প্রদান করে।
-
-## আপনার প্রথম ইমেজ জেনারেশন অ্যাপ্লিকেশন তৈরি করা
-
-তাহলে একটি ইমেজ জেনারেশন অ্যাপ্লিকেশন তৈরি করতে কী লাগে? আপনাকে নিম্নলিখিত লাইব্রেরিগুলোর প্রয়োজন হবে:
-
-- **python-dotenv**, আপনার গোপনীয়তাগুলি _.env_ ফাইলে কোড থেকে দূরে রাখতে এই লাইব্রেরি ব্যবহার করার পরামর্শ দেওয়া হয়।
-- **openai**, এই লাইব্রেরি OpenAI API-এর সাথে ইন্টারঅ্যাক্ট করতে ব্যবহার করা হবে।
-- **pillow**, পাইথনে ইমেজ নিয়ে কাজ করার জন্য।
-- **requests**, HTTP অনুরোধ করতে সাহায্য করার জন্য।
-
-## একটি Azure OpenAI মডেল তৈরি এবং ডিপ্লয় করুন
-
-যদি এখনও না করা হয়, [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) পৃষ্ঠার নির্দেশাবলী অনুসরণ করুন
-একটি Azure OpenAI রিসোর্স এবং মডেল তৈরি করতে। মডেল হিসেবে DALL-E 3 নির্বাচন করুন।  
+```bash
+python3 -m venv venv
+source venv/bin/activate        # উইন্ডোজ: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ## অ্যাপ তৈরি করুন
 
-1. _.env_ নামে একটি ফাইল তৈরি করুন নিম্নলিখিত বিষয়বস্তু সহ:
+নিচের কোড সহ `app.py` তৈরি করুন। এটি একটিচিত্র তৈরি করে PNG হিসেবে সংরক্ষণ করে।
 
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-   আপনার রিসোর্সের "Deployments" বিভাগে Azure OpenAI Foundry Portal-এ এই তথ্যটি খুঁজুন।
+dotenv.load_dotenv()
 
-1. উপরের লাইব্রেরিগুলি _requirements.txt_ নামে একটি ফাইলে সংগ্রহ করুন:
+# ক্লায়েন্টকে আপনার Azure OpenAI (Microsoft Foundry) রিসোর্সে নির্দেশ দিন।
+# ইমেজ মডেলগুলির জন্য সাম্প্রতিক API সংস্করণ প্রয়োজন - আপনার মডেলের জন্য প্রয়োজনীয় সংস্করণটি জানার জন্য Foundry ডকুমেন্টেশন দেখুন।
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # যেমন "gpt-image-2"
 
-1. এরপর, ভার্চুয়াল এনভায়রনমেন্ট তৈরি করুন এবং লাইব্রেরিগুলি ইনস্টল করুন:
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # এছাড়াও ১৫৩৬x১০২৪ (ল্যান্ডস্কেপ), ১০২৪x১৫৩৬ (পোর্ট্রেট), অথবা "auto"
+    n=1,
+)
 
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
+# gpt-image মডেলগুলো base64 (b64_json) রিটার্ন করে, URL নয় - এটি বাইটে ডিকোড করুন।
+image_bytes = base64.b64decode(result.data[0].b64_json)
 
-   উইন্ডোজের জন্য, আপনার ভার্চুয়াল এনভায়রনমেন্ট তৈরি এবং সক্রিয় করতে নিম্নলিখিত কমান্ডগুলি ব্যবহার করুন:
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
 
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
+Image.open(image_path).show()
+```
 
-1. _app.py_ নামে একটি ফাইলে নিম্নলিখিত কোড যোগ করুন:
+`python app.py` দিয়ে চালান। `images/` ফোল্ডারের মধ্যে একটি PNG ফাইল পাবেন।
 
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
+> `images.generate` প্রতিটি কল একই প্রম্পটের জন্য ভিন্ন চিত্র তৈরি করে - ইমেজ মডেলগুলোতে `temperature` প্যারামিটার নেই (এটি টেক্সট জেনারেশন নিয়ন্ত্রণ)। ভিন্নতা পেতে আবার API কল করুন; কমাতে চাইলে আপনার প্রম্পট নির্দিষ্ট করুন।
 
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
+## চিত্র সম্পাদনা
 
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
+`gpt-image` মডেলগুলি বিদ্যমান একটি চিত্র **সম্পাদনা** করতে পারে: চিত্র দিন, ঐচ্ছিক **মাস্ক** দিন (যা পরিবর্তন করার এলাকা চিহ্নিত করে), এবং পরিবর্তনের বর্ণনা দেয় এমন প্রম্পট দিন। যেমন জেনারেশন, এডিটও base64 হিসাবে ফেরত আসে।
 
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-এই কোডটি ব্যাখ্যা করা যাক:
-
-- প্রথমে, আমরা প্রয়োজনীয় লাইব্রেরিগুলি আমদানি করি, যার মধ্যে OpenAI লাইব্রেরি, dotenv লাইব্রেরি, requests লাইব্রেরি এবং Pillow লাইব্রেরি রয়েছে।
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- এরপর, আমরা _.env_ ফাইল থেকে পরিবেশ ভেরিয়েবলগুলি লোড করি।
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- তারপর, আমরা Azure OpenAI সার্ভিস ক্লায়েন্ট কনফিগার করি 
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- এরপর, আমরা ইমেজ তৈরি করি:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  উপরের কোডটি একটি JSON অবজেক্টের সাথে সাড়া দেয় যা তৈরি করা ইমেজের URL ধারণ করে। আমরা ইমেজটি ডাউনলোড করতে এবং একটি ফাইলে সংরক্ষণ করতে URL ব্যবহার করতে পারি।
-
-- সর্বশেষে, আমরা ইমেজটি খুলে স্ট্যান্ডার্ড ইমেজ ভিউয়ার ব্যবহার করে এটি প্রদর্শন করি:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### ইমেজ তৈরি করার আরও বিস্তারিত
-
-চলুন ইমেজ তৈরি করার কোডটি আরও বিস্তারিতভাবে দেখি:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, টেক্সট প্রম্পট যা ইমেজ তৈরি করতে ব্যবহৃত হয়। এই ক্ষেত্রে, আমরা প্রম্পট ব্যবহার করছি "ঘোড়ার উপর খরগোশ, ললিপপ ধরে আছে, কুয়াশাচ্ছন্ন মাঠে যেখানে ড্যাফোডিল জন্মায়"।
-- **size**, তৈরি করা ইমেজের আকার। এই ক্ষেত্রে, আমরা 1024x1024 পিক্সেলের একটি ইমেজ তৈরি করছি।
-- **n**, তৈরি করা ইমেজের সংখ্যা। এই ক্ষেত্রে, আমরা দুটি ইমেজ তৈরি করছি।
-- **temperature**, একটি প্যারামিটার যা জেনারেটিভ AI মডেলের আউটপুটের র্যান্ডমনেস নিয়ন্ত্রণ করে। টেম্পারেচার 0 থেকে 1 এর মধ্যে একটি মান যেখানে 0 মানে আউটপুট নির্ধারিত এবং 1 মানে আউটপুট র্যান্ডম। ডিফল্ট মান 0.7।
-
-ইমেজের সাথে আরও অনেক কিছু করা যায় যা আমরা পরবর্তী বিভাগে আলোচনা করব।
-
-## ইমেজ জেনারেশনের অতিরিক্ত ক্ষমতা
-
-আপনি এখন পর্যন্ত দেখেছেন কীভাবে আমরা পাইথনে কয়েকটি লাইনের মাধ্যমে একটি ইমেজ তৈরি করতে সক্ষম হয়েছি। তবে, ইমেজের সাথে আরও অনেক কিছু করা যায়।
-
-আপনি নিম্নলিখিত কাজগুলোও করতে পারেন:
-
-- **সম্পাদনা করুন**। একটি বিদ্যমান ইমেজ, একটি মাস্ক এবং একটি প্রম্পট প্রদান করে, আপনি একটি ইমেজ পরিবর্তন করতে পারেন। উদাহরণস্বরূপ, আপনি একটি ইমেজের একটি অংশে কিছু যোগ করতে পারেন। আমাদের খরগোশের ইমেজ কল্পনা করুন, আপনি খরগোশের মাথায় একটি টুপি যোগ করতে পারেন। এটি করার জন্য আপনাকে ইমেজ, একটি মাস্ক (পরিবর্তনের জন্য অংশটি চিহ্নিত করে) এবং একটি টেক্সট প্রম্পট প্রদান করতে হবে যা কী করা উচিত তা বলে। 
-> নোট: এটি DALL-E 3-এ সমর্থিত নয়। 
- 
-এখানে GPT Image ব্যবহার করে একটি উদাহরণ:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  বেস ইমেজটি শুধুমাত্র পুল সহ লাউঞ্জটি ধারণ করবে কিন্তু চূড়ান্ত ইমেজে একটি ফ্লেমিঙ্গো থাকবে:
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/bn/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -269,212 +148,51 @@ _চিত্র ক্রেডিট উইকিপিডিয়া, Midjou
   <img src="../../../translated_images/bn/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
+## মেটাপ্রম্পট দিয়ে সীমানা নির্ধারণ
 
-- **ভ্যারিয়েশন তৈরি করুন**। ধারণাটি হল আপনি একটি বিদ্যমান ইমেজ নেন এবং অনুরোধ করেন যে ভিন্ন ভিন্ন সংস্করণ তৈরি করা হয়। একটি ভ্যারিয়েশন তৈরি করতে, আপনি একটি ইমেজ এবং একটি টেক্সট প্রম্পট প্রদান করেন এবং কোডটি নিম্নরূপ:
-
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > নোট, এটি শুধুমাত্র OpenAI-এ সমর্থিত
-
-## টেম্পারেচার
-
-টেম্পারেচার একটি প্যারামিটার যা জেনারেটিভ AI মডেলের আউটপুটের র্যান্ডমনেস নিয়ন্ত্রণ করে। টেম্পারেচার 0 থেকে 1 এর মধ্যে একটি মান যেখানে 0 মানে আউটপুট নির্ধারিত এবং 1 মানে আউটপুট র্যান্ডম। ডিফল্ট মান 0.7।
-
-চলুন একটি উদাহরণ দেখি কীভাবে টেম্পারেচার কাজ করে, এই প্রম্পটটি দুইবার চালিয়ে:
-
-> প্রম্পট: "ঘোড়ার উপর খরগোশ, ললিপপ ধরে আছে, কুয়াশাচ্ছন্ন মাঠে যেখানে ড্যাফোডিল জন্মায়"
-
-![ঘোড়ার উপর ললিপপ ধরে থাকা খরগোশ, সংস্করণ 1](../../../translated_images/bn/v1-generated-image.a295cfcffa3c13c2.webp)
-
-এখন একই প্রম্পটটি চালিয়ে দেখি যে আমরা একই ইমেজ দুইবার পাই না:
-
-![ঘোড়ার উপর খরগোশের তৈরি ইমেজ](../../../translated_images/bn/v2-generated-image.33f55a3714efe61d.webp)
-
-আপনি দেখতে পাচ্ছেন, ইমেজগুলো একই রকম, কিন্তু একেবারে এক নয়। এবার টেম্পারেচার মান 0.1-এ পরিবর্তন করে দেখি কী ঘটে:
+চিত্র জেনারেট করতে পারার পর, আপনাকে গার্ডরেইল লাগবে যেন আপনার অ্যাপ নিরাপদ বা অবৈধ বিষয়বস্তু তৈরি না করে। একটি **মেটাপ্রম্পট** হলো এমন টেক্সট যা আপনি ব্যবহারকারীর প্রম্পটের আগে যুক্ত করেন মডেলের আউটপুট সীমাবদ্ধ করতে।
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### টেম্পারেচার পরিবর্তন করা
-
-তাহলে চলুন প্রতিক্রিয়াকে আরও নির্ধারিত করার চেষ্টা করি। আমরা যে দুটি ইমেজ তৈরি করেছি তা থেকে পর্যবেক্ষণ করতে পারি যে প্রথম ইমেজে একটি খরগোশ আছে এবং দ্বিতীয় ইমেজে একটি ঘোড়া আছে, তাই ইমেজগুলো অনেকটা ভিন্ন।
-
-তাহলে আমাদের কোড পরিবর্তন করে টেম্পারেচার 0 সেট করি, যেমন:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-এখন আপনি এই কোডটি চালালে, আপনি এই দুটি ইমেজ পাবেন:
-
-- ![টেম্পারেচার 0, v1](../../../translated_images/bn/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![টেম্পারেচার 0, v2](../../../translated_images/bn/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-এখানে আপনি স্পষ্টভাবে দেখতে পারেন কীভাবে ইমেজগুলো আরও বেশি একে অপরের সাথে সাদৃশ্যপূর্ণ।
-
-## মেটাপ্রম্পট দিয়ে আপনার অ্যাপ্লিকেশনের সীমা নির্ধারণ করার উপায়
-
-আমাদের ডেমো দিয়ে, আমরা ইতিমধ্যে আমাদের ক্লায়েন্টদের জন্য ইমেজ তৈরি করতে পারি। তবে, আমাদের অ্যাপ্লিকেশনের জন্য কিছু সীমা তৈরি করতে হবে।
-
-উদাহরণস্বরূপ, আমরা এমন ইমেজ তৈরি করতে চাই না যা কাজের জন্য নিরাপদ নয় বা যা শিশুদের জন্য উপযুক্ত নয়।
-
-আমরা এটি _মেটাপ্রম্পট_ দিয়ে করতে পারি। মেটাপ্রম্পট হল টেক্সট প্রম্পট যা জেনারেটিভ AI মডেলের আউটপুট নিয়ন্ত্রণ করতে ব্যবহৃত হয়। উদাহরণস্বরূপ, আমরা মেটাপ্রম্পট ব্যবহার করে আউটপুট নিয়ন্ত্রণ করতে পারি এবং নিশ্চিত করতে পারি যে তৈরি করা ইমেজগুলো কাজের জন্য নিরাপদ বা শিশুদের জন্য উপযুক্ত।
-
-### এটি কীভাবে কাজ করে?
-
-তাহলে, মেটাপ্রম্পট কীভাবে কাজ করে?
-
-মেটাপ্রম্পট হল টেক্সট প্রম্পট যা জেনারেটিভ AI মডেলের আউটপুট নিয়ন্ত্রণ করতে ব্যবহৃত হয়, এগুলো টেক্সট প্রম্পটের আগে অবস্থান করে এবং মডেলের আউটপুট নিয়ন্ত্রণ করতে ব্যবহৃত হয় এবং মডেলের আউটপুট নিয়ন্ত্রণ করতে অ্যাপ্লিকেশনে এম্বেড করা হয়। প্রম্পট ইনপুট এবং মেটাপ্রম্পট ইনপুটকে একটি একক টেক্সট প্রম্পটে আবদ্ধ করে।
-
-একটি মেটাপ্রম্পটের একটি উদাহরণ হতে পারে নিম্নলিখিত:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-এখন, চলুন দেখি কীভাবে আমরা আমাদের ডেমোতে মেটাপ্রম্পট ব্যবহার করতে পারি।
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-উপরের প্রম্পট থেকে, আপনি দেখতে পারেন কীভাবে তৈরি করা সমস্ত ইমেজ মেটাপ্রম্পট বিবেচনা করে।
-
-## অ্যাসাইনমেন্ট - শিক্ষার্থীদের সক্ষম করুন
-
-আমরা এই পাঠের শুরুতে Edu4All পরিচয় করিয়েছি। এখন সময় এসেছে শিক্ষার্থীদের তাদের মূল্যায়নের জন্য ইমেজ তৈরি করতে সক্ষম করার।
-
-শিক্ষার্থীরা তাদের মূল্যায়নের জন্য স্মৃতিস্তম্ভের ইমেজ তৈরি করবে, ঠিক কোন স্মৃতিস্তম্ভ তা শিক্ষার্থীদের উপর নির্ভর করবে। শিক্ষার্থীদের এই কাজে তাদের সৃজনশীলতা ব্যবহার করতে বলা হয়েছে যাতে তারা বিভিন্ন প্রেক্ষাপটে এই স্মৃতিস্তম্ভগুলো স্থাপন করতে পারে।
-
-## সমাধান
-
-এখানে একটি সম্ভাব্য সমাধান:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# `prompt` কে client.images.generate(...) এ পাঠান
 ```
 
-## চমৎকার কাজ! আপনার শেখা চালিয়ে যান
+এখন প্রতিটি চিত্র মেটাপ্রম্পট দ্বারা নির্ধারিত সীমার মধ্যে তৈরি হয়। এটি Microsoft Foundry তে বিল্ট-ইন কনটেন্ট ফিল্টারগুলোর সাথে মিলিয়ে ডিফেন্স ইন ডেপথ গঠন করে।
 
-এই পাঠটি সম্পন্ন করার পর, আমাদের [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) দেখুন, যাতে আপনার Generative AI জ্ঞানের স্তর আরও উন্নত করতে পারেন!
+## অ্যাসাইনমেন্ট - শিক্ষার্থীদের সক্রিয় করা যাক
 
-পাঠ ১০-এ যান, যেখানে আমরা দেখব কীভাবে [কম-কোড ব্যবহার করে AI অ্যাপ্লিকেশন তৈরি করা যায়](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Edu4All শিক্ষার্থীরা তাদের মূল্যায়নের জন্য চিত্র প্রয়োজন। এমন একটি অ্যাপ তৈরি করুন যা **স্মৃতিস্তম্ভ** এর (কোন স্মৃতিস্তম্ভ হবে তা আপনি নির্ধারণ করবেন) চিত্র তৈরি করে, বিভিন্ন সৃজনশীল প্রেক্ষাপটে স্থাপন করে - উদাহরণস্বরূপ, একটি বিখ্যাত ল্যান্ডমার্ক সূর্যাস্তে আর একটি শিশু তাকিয়ে আছে।
+
+নিজে চেষ্টা করুন, তারপর রেফারেন্স সমাধানগুলোর সঙ্গে তুলনা করুন:
+
+- পাইথন (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- পাইথন (Azure) পূর্ণ জেনারেশন অ্যাপ: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- পাইথন (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- টাইপস্ক্রিপ্ট (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+[python/](../../../09-building-image-applications/python) এর নোটবুকগুলোও কাজ করুন (`aoai-assignment.ipynb` Azure এর জন্য, `oai-assignment.ipynb` OpenAI এর জন্য)।
+
+## অসাধারণ কাজ! আপনার শিখন চালিয়ে যান
+
+এই পাঠ শেষ করার পর, আমাদের [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) দেখুন আপনার Generative AI জ্ঞান উন্নত করার জন্য!
+
+পরবর্তী পাঠ 10 এর জন্য এগিয়ে যান।
 
 ---
 
-**অস্বীকৃতি**:  
-এই নথিটি AI অনুবাদ পরিষেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা যথাসাধ্য সঠিকতার জন্য চেষ্টা করি, তবে অনুগ্রহ করে মনে রাখবেন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল ভাষায় থাকা নথিটিকে প্রামাণিক উৎস হিসেবে বিবেচনা করা উচিত। গুরুত্বপূর্ণ তথ্যের জন্য, পেশাদার মানব অনুবাদ সুপারিশ করা হয়। এই অনুবাদ ব্যবহারের ফলে কোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়ী থাকব না।
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**অস্বীকৃতি**:
+এই নথিটি AI অনুবাদ পরিষেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনূদিত হয়েছে। যদিও আমরা শুদ্ধতার জন্য চেষ্টা করি, অনুগ্রহ করে মনে রাখবেন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল নথিটি তার স্বভাষায় কর্তৃত্বপূর্ণ উৎস হিসেবে বিবেচিত হওয়া উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ সুপারিশ করা হয়। এই অনুবাদের ব্যবহারে প্রয়োজনীয় ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়বদ্ধ নই।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,267 +1,146 @@
-# Изградња апликација за генерисање слика
+# Прављење апликација за генерисање слика
 
-[![Изградња апликација за генерисање слика](../../../translated_images/sr/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Прављење апликација за генерисање слика](../../../translated_images/sr/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-Генеративни језички модели (LLM) нису ограничени само на генерисање текста. Могуће је генерисати и слике на основу текстуалних описа. Имање слика као модалитета може бити изузетно корисно у бројним областима као што су медицинска технологија, архитектура, туризам, развој игара и многе друге. У овом поглављу, погледаћемо два најпопуларнија модела за генерисање слика, DALL-E и Midjourney.
+ЛЛМ модели нису само за генерисање текста. Можете такође генерисати слике из текстуалних описа. Слике као модалитет су корисне у МедТеху, архитектури, туризму, развоју игара, маркетингу и још много тога. У овој лекцији погледаћемо данашње **GPT Image** моделе и направити апликацију за генерисање слика.
 
 ## Увод
 
-У овој лекцији ћемо обрадити:
+Генерисање слика вам омогућава да претворите природно језичке упите у слику. У овој лекцији користимо породицу модела **`gpt-image`** компаније OpenAI - тренутну генерацију модела за слике доступних на **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** и OpenAI платформи. Ови модели замењују старије DALL·E моделе (DALL·E 2/3 су наслеђе).
 
-- Генерисање слика и зашто је корисно.
-- DALL-E и Midjourney, шта су и како функционишу.
-- Како можете направити апликацију за генерисање слика.
+Током лекције користимо имагинарни стартап, **Edu4All**, који прави алате за учење. Тим жели да генерише илустрације за задатке и материјале за учење.
 
 ## Циљеви учења
 
-Након завршетка ове лекције, моћи ћете:
+До краја ове лекције моћи ћете да:
 
-- Направити апликацију за генерисање слика.
-- Дефинисати границе за вашу апликацију помоћу мета промптова.
-- Радити са DALL-E и Midjourney.
+- Објасните шта је генерисање слика и где је корисно.
+- Разумете породицу модела `gpt-image` и како се разликује од старих DALL·E модела.
+- Направите апликацију за генерисање слика у Python-у (и TypeScript / .NET).
+- Уређујете слике и примењујете безбедносне мере користећи метапромпте.
 
-## Зашто направити апликацију за генерисање слика?
+## Шта је генерисање слика?
 
-Апликације за генерисање слика су одличан начин за истраживање могућности генеративне вештачке интелигенције. Могу се користити, на пример, за:
+Модели за генерисање слика стварају слике из текстуалног упита. Модерни модели као што је `gpt-image` базирани су на техникама трансформера + дифузије: модел учи везу између текста и слика током тренинга, а затим, дати упит, итеративно "отстрањује шум" из насумичног шума до слике која одговара опису.
 
-- **Уређивање и синтезу слика**. Можете генерисати слике за различите намене, као што су уређивање слика и синтеза слика.
+Две добро познате породице модела за слике су:
 
-- **Примена у различитим индустријама**. Такође се могу користити за генерисање слика за различите индустрије као што су медицинска технологија, туризам, развој игара и друге.
+- **`gpt-image` (OpenAI)** - тренутна генерација, користи се у овој лекцији. Подржава генерисање слика из текста и уређивање слика (inpainting са маском).
+- **Midjourney** - популарни модел треће стране са својом услугом и Discord-базираним радним током.
 
-## Сценарио: Edu4All
+> Старији OpenAI модели за слике - **DALL·E 2** и **DALL·E 3** - су наслеђе. DALL·E 3 више није доступан за нове имплементације, а функције као `create_variation` су постојале само у DALL·E 2. За нове апликације користите `gpt-image` моделе.
 
-У оквиру ове лекције, настављамо рад са нашим стартапом, Edu4All. Студенти ће креирати слике за своје задатке, а које слике ће креирати зависи од њих самих. Могу, на пример, креирати илустрације за своју бајку, нови лик за своју причу или им помоћи да визуализују своје идеје и концепте.
+### Који `gpt-image` модел да користим?
 
-Ево шта би студенти Edu4All-а могли да креирају, на пример, ако раде на часу о споменицима:
+На Microsoft Foundry следећи су **Опште доступни**:
 
-![Edu4All стартап, час о споменицима, Ајфелова кула](../../../translated_images/sr/startup.94d6b79cc4bb3f5a.webp)
+| Модел | Белешке |
+| --- | --- |
+| **`gpt-image-2`** | Најновији и најспособнији модел за слике - препоручени подразумевани. |
+| `gpt-image-1.5` | Опште доступан; јака квалитета уз мање трошкове. |
+| `gpt-image-1-mini` | Опште доступан; најбржи / најјефтинији. |
+| `gpt-image-1` | Само преглед. |
 
-користећи промпт као што је:
+Увек проверите тренутни [списак модела за слике Foundry](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) за доступност и регионе.
 
-> "Пас поред Ајфелове куле у јутарњем сунцу"
+> **Важно:** `gpt-image` модели враћају генерисану слику као **base64** (`b64_json`), а не као URL. Ваш код декодира base64 стринг у бајтове и сачува - нема URL слике за преузимање.
 
-## Шта су DALL-E и Midjourney?
+## Подешавање
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) и [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) су два најпопуларнија модела за генерисање слика, који вам омогућавају да користите промптове за генерисање слика.
+Можете покренути примерке против **Azure OpenAI на Microsoft Foundry-у** (примерци `aoai-*`) или **OpenAI платформе** (примерци `oai-*`).
 
-### DALL-E
+### 1. Креирање и распоређивање модела
 
-Почнимо са DALL-E, који је генеративни AI модел који генерише слике на основу текстуалних описа.
+Следите водич [како направити ресурс](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) да направите Microsoft Foundry ресурс, затим распоредите модел за слике - препоручује се **`gpt-image-2`**.
 
-> [DALL-E је комбинација два модела, CLIP и дифузне пажње](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. Конфигуришите ваш `.env`
 
-- **CLIP**, је модел који генерише ембединг, што су нумерички прикази података, из слика и текста.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Дифузна пажња**, је модел који генерише слике из ембединга. DALL-E је обучен на скупу података слика и текста и може се користити за генерисање слика на основу текстуалних описа. На пример, DALL-E може да генерише слике мачке са шеширом или пса са ирокезом.
+Пронађите ове вредности на страници **Deployments** вашег ресурса у [Foundry порталу](https://ai.azure.com?WT.mc_id=academic-105485-koreyst).
 
-### Midjourney
+### 3. Инсталирајте библиотеке
 
-Midjourney функционише на сличан начин као DALL-E, генерише слике на основу текстуалних промптова. Midjourney се такође може користити за генерисање слика помоћу промптова као што су „мачка са шеширом“ или „пас са ирокезом“.
+Направите `requirements.txt`:
 
-![Слика генерисана помоћу Midjourney, механичка голубица](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Аутор слике Википедија, слика генерисана помоћу Midjourney_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Како функционишу DALL-E и Midjourney
+Онда направите и активирајте виртуелно окружење и инсталирајте:
 
-Прво, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E је генеративни AI модел заснован на архитектури трансформера са _ауторегресивним трансформером_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-_Ауторегресивни трансформер_ дефинише како модел генерише слике на основу текстуалних описа, генерише један пиксел по пиксел, а затим користи генерисане пикселе за генерисање следећег пиксела. Процес пролази кроз више слојева у неуронској мрежи, све док слика не буде комплетна.
+## Направите апликацију
 
-Овим процесом, DALL-E контролише атрибуте, објекте, карактеристике и још много тога у слици коју генерише. Међутим, DALL-E 2 и 3 имају већу контролу над генерисаном сликом.
+Направите `app.py` са следећим кодом. Генерише слику и сачува је као PNG.
 
-## Изградња ваше прве апликације за генерисање слика
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-Шта је потребно за изградњу апликације за генерисање слика? Потребне су вам следеће библиотеке:
+dotenv.load_dotenv()
 
-- **python-dotenv**, препоручује се коришћење ове библиотеке за чување ваших тајни у _.env_ датотеци, одвојено од кода.
-- **openai**, ова библиотека се користи за интеракцију са OpenAI API-јем.
-- **pillow**, за рад са сликама у Python-у.
-- **requests**, за помоћ при прављењу HTTP захтева.
+# Usmerite klijenta na vaš Azure OpenAI (Microsoft Foundry) resurs.
+# Modeli za slike zahtevaju noviju verziju API-ja - proverite Foundry dokumentaciju za verziju koju vaš model zahteva.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Креирање и постављање Azure OpenAI модела
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # npr. "gpt-image-2"
 
-Ако то већ нисте урадили, пратите упутства на [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) страници
-да креирате Azure OpenAI ресурс и модел. Изаберите DALL-E 3 као модел.  
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # takođe 1536x1024 (pejzaž), 1024x1536 (portret), ili "auto"
+    n=1,
+)
 
-## Креирање апликације
-
-1. Креирајте датотеку _.env_ са следећим садржајем:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   Пронађите ову информацију у Azure OpenAI Foundry Portal-у за ваш ресурс у одељку "Deployments".
-
-1. Сакупите горе наведене библиотеке у датотеци _requirements.txt_ овако:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. Затим, креирајте виртуелно окружење и инсталирајте библиотеке:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   За Windows, користите следеће команде за креирање и активирање вашег виртуелног окружења:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. Додајте следећи код у датотеку названу _app.py_:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Објашњење кода:
-
-- Прво, увозимо библиотеке које су нам потребне, укључујући OpenAI библиотеку, dotenv библиотеку, requests библиотеку и Pillow библиотеку.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Затим учитавамо променљиве окружења из _.env_ датотеке.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Након тога, конфигуришемо клијента за Azure OpenAI услугу.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Затим генеришемо слику:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Горњи код враћа JSON објекат који садржи URL генерисане слике. Можемо користити URL за преузимање слике и њено чување у датотеци.
-
-- На крају, отварамо слику и користимо стандардни прегледач слика да је прикажемо:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Детаљније о генерисању слике
-
-Погледајмо код који генерише слику детаљније:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, је текстуални промпт који се користи за генерисање слике. У овом случају, користимо промпт "Зец на коњу, држи лизалицу, на магловитој ливади где расту нарциси".
-- **size**, је величина генерисане слике. У овом случају, генеришемо слику величине 1024x1024 пиксела.
-- **n**, је број генерисаних слика. У овом случају, генеришемо две слике.
-- **temperature**, је параметар који контролише случајност излазног резултата генеративног AI модела. Температура је вредност између 0 и 1 где 0 значи да је излаз детерминистички, а 1 значи да је излаз случајан. Подразумевана вредност је 0.7.
-
-Постоје још многе ствари које можете радити са сликама, а о томе ћемо говорити у следећем одељку.
-
-## Додатне могућности генерисања слика
-
-До сада сте видели како смо успели да генеришемо слику користећи неколико линија кода у Python-у. Међутим, постоје још многе ствари које можете радити са сликама.
-
-Такође можете урадити следеће:
-
-- **Извршити измене**. Пружањем постојеће слике, маске и промпта, можете изменити слику. На пример, можете додати нешто на део слике. Замислите нашу слику зеца, можете му додати шешир. Како бисте то урадили је да пружите слику, маску (која идентификује део области за промену) и текстуални промпт који каже шта треба урадити. 
-> Напомена: ово није подржано у DALL-E 3. 
- 
-Ево примера користећи GPT Image:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Основна слика би садржавала само салон са базеном, али коначна слика би имала фламинга:
+# gpt-image modeli vraćaju base64 (b64_json), a ne URL - dekodirajte ga u bajtove.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+Покрените је са `python app.py`. Добићете PNG сачуван у `images/`.
+
+> Сваки позив `images.generate` производи различиту слику за исти упит - модели за слике не користе параметар `temperature` (то је контролa за генерисање текста). Да бисте добили варијанте, једноставно позовите API поново; да бисте смањили варијанте, учините ваш упит специфичнијим.
+
+## Уређивање слика
+
+`gpt-image` модели могу **уредити** постојећу слику: доставите слику, опционалну **маску** (која означава област за промену) и упит који описује промену. Као и код генерисања, уређења се враћају као base64.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/sr/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -269,212 +148,51 @@ _Ауторегресивни трансформер_ дефинише како 
   <img src="../../../translated_images/sr/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
+## Постављање граница помоћу метапромптова
 
-- **Креирање варијација**. Идеја је да узмете постојећу слику и затражите да се креирају варијације. Да бисте креирали варијацију, пружате слику и текстуални промпт и код као што је следеће:
-
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Напомена, ово је подржано само на OpenAI
-
-## Температура
-
-Температура је параметар који контролише случајност излазног резултата генеративног AI модела. Температура је вредност између 0 и 1 где 0 значи да је излаз детерминистички, а 1 значи да је излаз случајан. Подразумевана вредност је 0.7.
-
-Погледајмо пример како температура функционише, покретањем овог промпта два пута:
-
-> Промпт: "Зец на коњу, држи лизалицу, на магловитој ливади где расту нарциси"
-
-![Зец на коњу држи лизалицу, верзија 1](../../../translated_images/sr/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Сада покренимо исти промпт само да видимо да нећемо добити исту слику два пута:
-
-![Генерисана слика зеца на коњу](../../../translated_images/sr/v2-generated-image.33f55a3714efe61d.webp)
-
-Као што видите, слике су сличне, али нису исте. Покушајмо да променимо вредност температуре на 0.1 и видимо шта ће се десити:
+Када можете да генеришете слике, требате безбедносне мере да ваша апликација не би производила несигуран или ван бренд садржај. **Метапромпт** је текст који додате испред упита корисника да ограничите излаз модела.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Промена температуре
-
-Покушајмо да направимо одговор детерминистичкији. Могли смо да приметимо из две генерисане слике да на првој слици постоји зец, а на другој коњ, тако да се слике значајно разликују.
-
-Зато променимо наш код и поставимо температуру на 0, овако:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Сада када покренете овај код, добијате ове две слике:
-
-- ![Температура 0, в1](../../../translated_images/sr/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Температура 0 , в2](../../../translated_images/sr/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Овде јасно можете видети како се слике више међусобно подударају.
-
-## Како дефинисати границе за вашу апликацију помоћу мета промптова
-
-Са нашим демоом, већ можемо генерисати слике за наше клијенте. Међутим, потребно је да креирамо одређене границе за нашу апликацију.
-
-На пример, не желимо да генеришемо слике које нису прикладне за радно окружење или које нису прикладне за децу.
-
-Ово можемо урадити помоћу _мета промптова_. Мета промптови су текстуални промптови који се користе за контролу излазног резултата генеративног AI модела. На пример, можемо користити мета промптове за контролу излазног резултата и осигурати да генерисане слике буду прикладне за радно окружење или за децу.
-
-### Како то функционише?
-
-Како функционишу мета промптови?
-
-Мета промптови су текстуални промптови који се користе за контролу излазног резултата генеративног AI модела, позиционирани су пре текстуалног промпта и користе се за контролу излазног резултата модела, уграђени у апликације ради контроле излазног резултата модела. Инкапсулирају улаз промпта и улаз мета промпта у један текстуални промпт.
-
-Један пример мета промпта би био следећи:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Сада, погледајмо како можемо користити мета промптове у нашем демоу.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Из горњег промпта, можете видети како све генерисане слике узимају у обзир мета промпт.
-
-## Задатак - омогућимо студентима
-
-На почетку ове лекције представили смо Edu4All. Сада је време да омогућимо студентима да генеришу слике за своје задатке.
-
-Студенти ће креирати слике за своје задатке који садрже споменике, а који споменици ће бити изабрани зависи од студената. Од студената се тражи да користе своју креативност у овом задатку и поставе те споменике у различите контексте.
-
-## Решење
-
-Ево једног могућег решења:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# проследити `prompt` функцији client.images.generate(...)
 ```
 
-## Одличан рад! Наставите са учењем
+Свака слика сада се генерише у оквиру граница постављених метапромптом. Комбинујте ово са филтерима садржаја уграђеним у Microsoft Foundry ради вишеструке заштите.
 
-Након што завршите ову лекцију, погледајте нашу [колекцију за учење о генеративној вештачкој интелигенцији](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) како бисте наставили да унапређујете своје знање о генеративној вештачкој интелигенцији!
+## Задатак - омогућимо студентима
 
-Прелазите на лекцију 10 где ћемо истражити како [изградити AI апликације уз помоћ low-code алата](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Студенти Edu4All-а требају слике за своје задатке. Направите апликацију која генерише слике **споменика** (то који споменици је на вама) смештених у различите, креативне контексте - на пример, познати споменик на заласку сунца и дете које гледа.
+
+Испробајте сами, затим упоредите са референтним решењима:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) потпуно решење за генерисање: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Такође прођите кроз свеске у [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` за Azure, `oai-assignment.ipynb` за OpenAI).
+
+## Одличан посао! Наставите са учењем
+
+Након завршетка ове лекције, погледајте нашу [Колекцију за учење генеративне АИ](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) да бисте наставили да унапређујете своје знање о генеративној АИ!
+
+Пређите на лекцију 10 да бисте наставили учење.
 
 ---
 
-**Одрицање од одговорности**:  
-Овај документ је преведен помоћу услуге за превођење уз помоћ вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако настојимо да обезбедимо тачност, молимо вас да имате у виду да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални превод од стране људи. Не сносимо одговорност за било каква погрешна тумачења или неспоразуме који могу настати услед коришћења овог превода.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Изјава о одрицању одговорности**:
+Овај документ је преведен коришћењем услуге за аутоматски превод [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неспоразума или погрешна тумачења која произилазе из коришћења овог превода.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

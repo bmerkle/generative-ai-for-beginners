@@ -1,248 +1,282 @@
-# Madal koodiga tehisintellekti rakenduste loomine
+# Vähe koodi AI rakenduste loomine
 
-[![Madal koodiga tehisintellekti rakenduste loomine](../../../translated_images/et/10-lesson-banner.a01ac8fe3fd86310.webp)](https://youtu.be/1vzq3Nd8GBA?si=h6LHWJXdmqf6mhDg)
+[![Vähe koodi AI rakenduste loomine](../../../translated_images/et/10-lesson-banner.a01ac8fe3fd86310.webp)](https://youtu.be/1vzq3Nd8GBA?si=h6LHWJXdmqf6mhDg)
 
 > _(Klõpsake ülaloleval pildil, et vaadata selle õppetunni videot)_
 
 ## Sissejuhatus
 
-Nüüd, kui oleme õppinud, kuidas luua pildigeneratsiooni rakendusi, räägime madalast koodist. Generatiivset tehisintellekti saab kasutada mitmesugustes valdkondades, sealhulgas madala koodiga arenduses, kuid mis on madal kood ja kuidas saame sellele tehisintellekti lisada?
+Nüüd, kui oleme õppinud pildigeneratsiooni rakenduste loomist, räägime vähekoodist. Generatiivset tehisintellekti saab kasutada mitmesugustes valdkondades, sealhulgas vähekoodi puhul, kuid mis on vähekood ja kuidas saame AI selle hulka lisada?
 
-Rakenduste ja lahenduste loomine on muutunud traditsioonilistele arendajatele ja mitte-arendajatele lihtsamaks madala koodiga arendusplatvormide abil. Madala koodiga arendusplatvormid võimaldavad luua rakendusi ja lahendusi vähese või üldse ilma koodita. See saavutatakse visuaalse arenduskeskkonna abil, mis võimaldab rakenduste ja lahenduste loomiseks komponente lohistada ja paigutada. See võimaldab rakendusi ja lahendusi luua kiiremini ja väiksemate ressurssidega. Selles õppetunnis süveneme madala koodiga arendusse ja uurime, kuidas täiustada madala koodiga arendust tehisintellekti abil, kasutades Power Platformi.
+Rakenduste ja lahenduste loomine on traditsioonilistele arendajatele ja mitte-arendajatele muutunud lihtsamaks tänu Vähe Koodi Arenduse Platvormidele. Vähe Koodi Arenduse Platvormid võimaldavad teil luua rakendusi ja lahendusi vähese või üldse mitte koodiga. See saavutatakse, pakkudes visuaalset arenduskeskkonda, kus saate lohistada komponente rakenduste ja lahenduste ehitamiseks. See võimaldab teil luua rakendusi ja lahendusi kiiremini ja vähemate ressurssidega. Selles õppetunnis sukeldume sügavale, kuidas kasutada Vähe Koodi ja kuidas täiustada vähekoodi arendust AI abil Power Platvormi kaudu.
 
-Power Platform pakub organisatsioonidele võimalust anda oma meeskondadele võimalus luua oma lahendusi intuitiivses madala koodiga või koodivabas keskkonnas. See keskkond aitab lihtsustada lahenduste loomise protsessi. Power Platformi abil saab lahendusi luua päevade või nädalate jooksul, mitte kuude või aastate jooksul. Power Platform koosneb viiest põhitootest: Power Apps, Power Automate, Power BI, Power Pages ja Copilot Studio.
+Power Platform annab organisatsioonidele võimaluse anda oma meeskondadele võimu luua oma lahendusi intuitiivse vähekoodi või üldse mitte-koodi keskkonna kaudu. See keskkond aitab lihtsustada lahenduste loomise protsessi. Power Platformiga saab lahendusi luua päevade või nädalate jooksul, mitte kuude või aastate pärast. Power Platvorm koosneb viiest võtmetoodest: Power Apps, Power Automate, Power BI, Power Pages ja Copilot Studio.
 
 Selles õppetunnis käsitletakse:
 
-- Generatiivse tehisintellekti tutvustust Power Platformis
-- Copiloti tutvustust ja selle kasutamist
-- Generatiivse tehisintellekti kasutamist rakenduste ja voogude loomiseks Power Platformis
-- AI Builderi abil Power Platformi tehisintellekti mudelite mõistmist
+- Sissejuhatus generatiivse AI kasutamisse Power Platvormil
+- Sissejuhatus Copilot'i ja kuidas seda kasutada
+- Generatiivse AI kasutamine rakenduste ja voogude ehitamiseks Power Platvormil
+- AI mudelite mõistmine Power Platvormis AI Builderi abil
+- Tarkade agentide loomine Microsoft Copilot Studio abil
 
-## Õppeeesmärgid
+## Õpieesmärgid
 
-Selle õppetunni lõpuks oskate:
+Selle õppetunni lõpuks suudate:
 
-- Mõista, kuidas Copilot töötab Power Platformis.
+- Mõista, kuidas Copilot töötab Power Platvormis.
 
-- Luua õpilaste ülesannete jälgimise rakenduse meie hariduse idufirma jaoks.
+- Luua õppurite ülesannete jälgimise rakendus meie haridusettevõttele.
 
-- Luua arve töötlemise voo, mis kasutab tehisintellekti arvete andmete eraldamiseks.
+- Luua arve töötlemise voog, mis kasutab AI andmete väljavõtmiseks arvete põhjal.
 
-- Rakendada parimaid praktikaid GPT tehisintellekti mudeli tekstiloome kasutamisel.
+- Rakendada parimaid tavasid GPT AI malli "Create Text" kasutamisel.
+
+- Mõista, mis on Microsoft Copilot Studio ja kuidas luua sellega targad agentid.
 
 Selles õppetunnis kasutatavad tööriistad ja tehnoloogiad on:
 
-- **Power Apps**, õpilaste ülesannete jälgimise rakenduse jaoks, mis pakub madala koodiga arenduskeskkonda rakenduste loomiseks, et jälgida, hallata ja suhelda andmetega.
+- **Power Apps**, õppurite ülesannete jälgimise rakenduse jaoks, mis pakub vähekoodi arenduskeskkonda rakenduste loomiseks andmete jälgimiseks, haldamiseks ja nendega suhtlemiseks.
 
-- **Dataverse**, õpilaste ülesannete jälgimise rakenduse andmete salvestamiseks, kus Dataverse pakub madala koodiga andmeplatvormi rakenduse andmete salvestamiseks.
+- **Dataverse**, õppurite ülesannete jälgimise rakenduse andmete salvestamiseks, kus Dataverse pakub vähekoodi andmeplatvormi rakenduse andmete hoidmiseks.
 
-- **Power Automate**, arve töötlemise voo jaoks, kus on madala koodiga arenduskeskkond töövoogude loomiseks, et automatiseerida arve töötlemise protsessi.
+- **Power Automate**, arve töötlemise voo jaoks, kus teil on vähekoodi arenduskeskkond töövoogude loomiseks arvete töötlemise protsessi automatiseerimiseks.
 
-- **AI Builder**, arve töötlemise tehisintellekti mudeli jaoks, kus kasutatakse eelnevalt loodud tehisintellekti mudeleid meie idufirma arvete töötlemiseks.
+- **AI Builder**, arve töötlemise AI mudeli jaoks, kus kasutate eelnevalt ehitatud AI mudeleid arvete töötlemiseks meie idufirma jaoks.
 
-## Generatiivne tehisintellekt Power Platformis
+## Generatiivne AI Power Platvormil
 
-Madala koodiga arenduse ja rakenduste täiustamine generatiivse tehisintellektiga on Power Platformi üks peamisi fookusvaldkondi. Eesmärk on võimaldada kõigil luua tehisintellektiga rakendusi, saite, juhtpaneele ja automatiseerida protsesse tehisintellekti abil, _ilma et oleks vaja andmeteaduse ekspertiisi_. See eesmärk saavutatakse generatiivse tehisintellekti integreerimisega madala koodiga arenduskogemusse Power Platformis Copiloti ja AI Builderi kujul.
+Vähekoodi arenduse ja rakenduse täiustamine generatiivse AI abil on Power Platvormi peamine fookus. Eesmärk on võimaldada kõigil luua AI-toega rakendusi, saite, armatuurlauasid ja automatiseerida protsesse AI abil, _ilma vajaduseta andmeteaduse teadmiste järele_. See eesmärk saavutatakse generatiivse AI integreerimisega vähekoodi arenduskogemusse Power Platvormil Copilot'i ja AI Builderi vormis.
 
 ### Kuidas see töötab?
 
-Copilot on tehisintellekti assistent, mis võimaldab teil luua Power Platformi lahendusi, kirjeldades oma nõudeid loomuliku keele abil vestluslike sammude kaudu. Näiteks saate anda oma tehisintellekti assistendile juhiseid, milliseid välju teie rakendus kasutab, ja see loob nii rakenduse kui ka aluseks oleva andmemudeli. Samuti saate määrata, kuidas seadistada voogu Power Automate'is.
+Copilot on AI-assistent, mis võimaldab teil luua Power Platvormi lahendusi, kirjeldades oma nõudeid mitmes kõneluspõhises sammus loomulikus keeles. Näiteks võite juhendada oma AI-assistenti sõnastama, milliseid välju teie rakendus kasutab, ja see loob nii rakenduse kui ka aluseks oleva andmemudeli või võite täpsustada, kuidas seadistada voogu Power Automates.
 
-Copiloti juhitud funktsioone saab kasutada rakenduse ekraanidel, et võimaldada kasutajatel vestluslike interaktsioonide kaudu teadmisi avastada.
+Võite kasutada Copilot'i võimalusi ka oma rakenduse ekraanidel funktsioonidena, võimaldades kasutajatel avastada teadmisi vestluslike interaktsioonide kaudu.
 
-AI Builder on madala koodiga tehisintellekti võimekus, mis on saadaval Power Platformis ja võimaldab kasutada tehisintellekti mudeleid, et aidata automatiseerida protsesse ja ennustada tulemusi. AI Builderi abil saate tuua tehisintellekti oma rakendustesse ja voogudesse, mis ühenduvad teie andmetega Dataverses või erinevates pilveandmeallikates, nagu SharePoint, OneDrive või Azure.
+AI Builder on Power Platvormis saadaval olev vähekoodi AI-võimekus, mis võimaldab AI mudelite abil automatiseerida protsesse ja prognoosida tulemusi. AI Builderiga saate tuua AI oma rakendustesse ja voogudesse, mis ühenduvad teie andmetega Dataverse'is või erinevates pilvandmetöötluse allikates, nagu SharePoint, OneDrive või Azure.
 
-Copilot on saadaval kõigis Power Platformi toodetes: Power Apps, Power Automate, Power BI, Power Pages ja Power Virtual Agents. AI Builder on saadaval Power Appsis ja Power Automate'is. Selles õppetunnis keskendume sellele, kuidas kasutada Copilotit ja AI Builderit Power Appsis ja Power Automate'is, et luua lahendus meie hariduse idufirma jaoks.
+Copilot on saadaval kõigis Power Platvormi toodetes: Power Apps, Power Automate, Power BI, Power Pages ja Copilot Studio (endine Power Virtual Agents). AI Builder on saadaval Power Appsis ja Power Automatess. Selles õppetunnis keskendume Copilot'i ja AI Builderi kasutamisele Power Appsis ja Power Automatess, et ehitada lahendus meie haridusstartupi jaoks.
 
 ### Copilot Power Appsis
 
-Power Platformi osana pakub Power Apps madala koodiga arenduskeskkonda rakenduste loomiseks, et jälgida, hallata ja suhelda andmetega. See on rakenduste arendamise teenuste komplekt koos skaleeritava andmeplatvormiga ja võimalusega ühendada pilveteenuseid ja kohapealseid andmeid. Power Apps võimaldab luua rakendusi, mis töötavad brauserites, tahvelarvutites ja telefonides ning mida saab jagada kolleegidega. Power Apps lihtsustab kasutajate jaoks rakenduste arendamist lihtsa liidesega, nii et iga ärikasutaja või professionaalne arendaja saab luua kohandatud rakendusi. Rakenduste arendamise kogemust täiustatakse ka generatiivse tehisintellekti abil Copiloti kaudu.
+Power Apps on osa Power Platvormist ja pakub vähekoodi arenduskeskkonda rakenduste loomiseks andmete jälgimiseks, haldamiseks ja nendega suhtlemiseks. See on rakenduste arendamise teenuste komplekt koos skaleeruva andmeplatvormi ja võimalusega ühendada pilveteenuste ning kohalike andmetega. Power Apps võimaldab teil luua rakendusi, mis töötavad brauserites, tahvelarvutites ja telefonides ning mida saab jagada kolleegidega. Power Apps muudab rakenduste arendamise lihtsaks lihtsa liidese kaudu, nii et iga ärikasutaja või professionaalne arendaja saab luua kohandatud rakendusi. Rakenduse arenduse kogemust täiustatakse ka generatiivse AI abil Copilot'i kaudu.
 
-Copiloti tehisintellekti assistendi funktsioon Power Appsis võimaldab teil kirjeldada, millist tüüpi rakendust vajate ja millist teavet soovite, et teie rakendus jälgiks, koguks või kuvaks. Copilot genereerib seejärel teie kirjelduse põhjal reageeriva Canvas-rakenduse. Seejärel saate rakendust oma vajadustele vastavaks kohandada. AI Copilot genereerib ja soovitab ka Dataverse'i tabeli koos vajalike väljadega, et salvestada andmeid, mida soovite jälgida, ja mõned näidisandmed. Selles õppetunnis vaatame hiljem, mis on Dataverse ja kuidas saate seda Power Appsis kasutada. Seejärel saate tabelit kohandada vastavalt oma vajadustele, kasutades AI Copiloti assistendi funktsiooni vestluslike sammude kaudu. See funktsioon on saadaval otse Power Appsi avalehelt.
+Copilot AI assistendi funktsioon Power Appsis võimaldab teil kirjeldada, millist rakendust vajate ja millist teavet soovite oma rakenduse kaudu jälgida, koguda või kuvada. Copilot genereerib seejärel teie kirjelduse põhjal vastava Canvas-rakenduse. Seda rakendust saate seejärel vastavalt vajadusele kohandada. AI Copilot genereerib ja soovitab ka Dataverse'i tabelit koos vajalike väljadega teie jälgitavate andmete salvestamiseks ja mõningate näidisandmetega. Selles õppetunnis vaatame hiljem, mis on Dataverse ja kuidas saate seda Power Appsis kasutada. Seejärel saate tabelit vastavalt vajadustele kohandada AI Copilot assistendi funktsiooni kaudu vestluslike sammude abil. See funktsioon on hõlpsasti kättesaadav Power Apps koduekraanilt.
 
-### Copilot Power Automate'is
+### Copilot Power Automatess
 
-Power Platformi osana võimaldab Power Automate kasutajatel luua automatiseeritud töövooge rakenduste ja teenuste vahel. See aitab automatiseerida korduvaid äriprotsesse, nagu suhtlus, andmete kogumine ja otsuste kinnitamine. Selle lihtne liides võimaldab igasuguse tehnilise tasemega kasutajatel (alates algajatest kuni kogenud arendajateni) automatiseerida tööülesandeid. Töövoogude arendamise kogemust täiustatakse ka generatiivse tehisintellekti abil Copiloti kaudu.
+Power Automate, mis on osa Power Platvormist, võimaldab kasutajatel luua automatiseeritud töövooge rakenduste ja teenuste vahel. See aitab automatiseerida korduvaid äriprotsesse, nagu kommunikatsioon, andmete kogumine ja otsuste kinnitamine. Selle lihtne liides lubab iga tasemega kasutajatel (alates algajatest kuni kogenud arendajateni) automatiseerida tööülesandeid. Töövoo loomise kogemust täiustatakse ka generatiivse AI abil Copilot'i kaudu.
 
-Copiloti tehisintellekti assistendi funktsioon Power Automate'is võimaldab teil kirjeldada, millist tüüpi voogu vajate ja milliseid toiminguid soovite, et teie voog teeks. Copilot genereerib seejärel voogu teie kirjelduse põhjal. Seejärel saate voogu oma vajadustele vastavaks kohandada. AI Copilot genereerib ja soovitab ka toiminguid, mida vajate ülesande automatiseerimiseks. Selles õppetunnis vaatame hiljem, mis on vood ja kuidas saate neid Power Automate'is kasutada. Seejärel saate toiminguid kohandada vastavalt oma vajadustele, kasutades AI Copiloti assistendi funktsiooni vestluslike sammude kaudu. See funktsioon on saadaval otse Power Automate'i avalehelt.
+Copilot AI assistendi funktsioon Power Automatess võimaldab teil kirjeldada, millist töövoogu vajate ja milliseid toiminguid soovite, et teie töövoog täidaks. Copilot genereerib seejärel teie kirjelduse põhjal töövoo. Seda töövoogu saate vastavalt oma vajadustele kohandada. AI Copilot genereerib ja soovitab ka toiminguid, mida vajate soovitud töö automatiseerimiseks. Selles õppetunnis vaatame hiljem, mis on töövood ja kuidas neid Power Automatess kasutada. Seejärel saate toiminguid AI Copilot assistendi funktsiooni kaudu vestluslike sammude abil kohandada. See funktsioon on hõlpsasti kättesaadav Power Automate koduekraanilt.
 
-## Ülesanne: Halda õpilaste ülesandeid ja arveid meie idufirma jaoks, kasutades Copilotit
+## Tarkade agentide loomine Microsoft Copilot Studio abil
 
-Meie idufirma pakub õpilastele veebikursusi. Idufirma on kiiresti kasvanud ja nüüd on neil raske kursuste nõudlusega sammu pidada. Idufirma palkas teid Power Platformi arendajaks, et aidata neil luua madala koodiga lahendus, mis aitaks hallata õpilaste ülesandeid ja arveid. Lahendus peaks aitama neil jälgida ja hallata õpilaste ülesandeid rakenduse kaudu ning automatiseerida arvete töötlemise protsessi töövoo kaudu. Teilt palutakse kasutada generatiivset tehisintellekti lahenduse arendamiseks.
+[Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio?WT.mc_id=academic-105485-koreyst) (endine Power Virtual Agents) on Power Platvormi vähekoodi liige, mis võimaldab ehitada **AI-agente** — vestluskaaslasi, kes suudavad vastata küsimustele, võtta meetmeid ja automatiseerida ülesandeid teie kasutajate nimel. Nagu ülejäänud Power Platvorm, ehitate neid agente visuaalse, loomulikul keelel põhineva kogemuse kaudu: kirjeldage, mida agent tegema peab, ja Copilot Studio aitab juhiste, teadmiste ja toimingute skeemi koostada.
 
-Kui hakkate Copilotit kasutama, saate alustada [Power Platform Copilot Prompt Library](https://github.com/pnp/powerplatform-prompts?WT.mc_id=academic-109639-somelezediko) abil, et tutvuda juhistega. See raamatukogu sisaldab loetelu juhistest, mida saate kasutada Copilotiga rakenduste ja voogude loomiseks. Samuti saate kasutada raamatukogu juhiseid, et saada aimu, kuidas oma nõudeid Copilotile kirjeldada.
+Meie haridusettevõtte jaoks võiksite ehitada agendi, kes vastab õpilaste küsimustele kursuste kohta, kontrollib ülesannete tähtaegu ja saadab isegi e-kirju juhendajale — kõik ilma koodi kirjutamata.
 
-### Looge õpilaste ülesannete jälgimise rakendus meie idufirma jaoks
+Siin on mõned uusimad võimalused, mis teevad Copilot Studio võimsaks:
 
-Meie idufirma õpetajatel on olnud raskusi õpilaste ülesannete jälgimisega. Nad on kasutanud tabelarvutust ülesannete jälgimiseks, kuid see on muutunud keeruliseks, kuna õpilaste arv on suurenenud. Nad on palunud teil luua rakenduse, mis aitaks neil õpilaste ülesandeid jälgida ja hallata. Rakendus peaks võimaldama neil lisada uusi ülesandeid, vaadata ülesandeid, uuendada ülesandeid ja kustutada ülesandeid. Rakendus peaks võimaldama ka õpetajatel ja õpilastel vaadata, millised ülesanded on hinnatud ja millised mitte.
+- **Generatiivsed vastused teie teadmistest**. Selle asemel, et iga vestlust käsitsi kirjutada, saate ühendada **teadmiste allikad** — avalikud veebisaidid, SharePoint, OneDrive, Dataverse, üleslaaditud failid või ettevõtte andmed konnektorite kaudu — ja agent genereerib neist põhjendatud vastused.
 
-Loote rakenduse Copilotiga Power Appsis, järgides alltoodud samme:
+- **Generatiivne orkestreerimine**. Selle asemel, et tugineda jäikadele käivitusfraasidele, kasutab agent AI-d päringu mõistmiseks ja dünaamiliselt otsustab, milliseid teadmisi, teemasid ja toiminguid kombineerida selle täitmiseks, sealhulgas mitme sammu ahelat.
 
-1. Minge [Power Appsi](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) avalehele.
+- **Toimingud ja konnektorid**. Agendid saavad *tegutseda*, mitte ainult vestelda. Võite anda agendile toiminguid, mida toetavad 1500+ eelnevalt ehitatud Power Platvormi konnektorid, Power Automate vood, kohandatud REST API-d, promptid või **Model Context Protocol (MCP)** serverid.
 
-1. Kasutage avalehel olevat tekstiala, et kirjeldada rakendust, mida soovite luua. Näiteks **_Soovin luua rakenduse õpilaste ülesannete jälgimiseks ja haldamiseks_**. Klõpsake nuppu **Saada**, et saata juhis AI Copilotile.
+- **Iseseisvad agendid**. Agendid ei ole piiratud vaid vestlusaknas vastamisega. Võite ehitada **iseseisvaid agente**, keda käivitavad sündmused — näiteks uus e-kiri, uus kirje Dataverse'is või faili üleslaadimine — ja kes siis taustal tegutsevad, et ülesande lõpetada.
+
+- **Mitme agendi orkestreerimine**. Agendid saavad kutsuda teisi agente. Copilot Studio agent saab üle anda või seda laiendada teiste agentidega, sealhulgas agentidega, mis on avaldatud Microsoft 365 Copilot'is ja Microsoft Foundrys loodud agentidega.
+
+- **Mudeli valik**. Lisaks sisseehitatud mudelitele saate tuua mudeleid Microsoft Foundry mudelikataloogist, et kohandada, kuidas teie agent mõtleb ja vastab.
+
+- **Avalda kõikjal**. Kui agent on loodud, saab selle avaldada mitmel kanalil — Microsoft Teams, Microsoft 365 Copilot, veebisaitil või kohandatud rakenduses ja mujal — koos turvalisuse, autentimise ja analüütika haldamisega läbi Power Platvormi haldustööriistade.
+
+Esimese agendi loomisega saate alustada aadressil [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com?WT.mc_id=academic-105485-koreyst) ja lisateavet leiate [Microsoft Copilot Studio dokumentatsioonist](https://learn.microsoft.com/microsoft-copilot-studio/?WT.mc_id=academic-105485-koreyst).
+
+## Ülesanne: Halda meie idufirma õppurite ülesandeid ja arveid, kasutades Copilot'i
+
+Meie idufirma pakub õppuritele veebikursusi. Ettevõte on kiiresti kasvanud ja kogu nõudlusega kursustele on raske sammu pidada. Idufirma palkas teid Power Platvormi arendajana, et aidata neil luua vähekoodi lahendus õppurite ülesannete ja arvete haldamiseks. Nende lahendus peaks aitama jälgida ja hallata õppurite ülesandeid rakenduse kaudu ning automatiseerida arve töötlemise protsessi töövoo kaudu. Teil palutakse kasutada generatiivset AI-d lahenduse väljatöötamiseks.
+
+Kui alustate Copilot'i kasutamist, võite alustada [Power Platform Copilot Prompt Library](https://github.com/pnp/powerplatform-prompts?WT.mc_id=academic-109639-somelezediko) abil. See teek sisaldab nimekirja promptidest, mida saate kasutada rakenduste ja voogude loomiseks Co-pilot'iga. Võite kasutada ka teegi prompte, et saada aimu, kuidas oma nõudeid Copilot'ile kirjeldada.
+
+### Looge meie idufirma jaoks õppurite ülesannete jälgimise rakendus
+
+Meie idufirma haridustöötajad on vaeva näinud õppurite ülesannete jälgimisega. Nad on kasutanud tabelarvutit ülesannete jälgimiseks, kuid see on muutunud keeruliseks hallata, kui õppurite arv on kasvanud. Nad palusid teil ehitada rakendus, mis aitab neil õppurite ülesandeid jälgida ja hallata. Rakendus peaks võimaldama lisada uusi ülesandeid, vaadata ülesandeid, uuendada ülesandeid ja kustutada ülesandeid. Rakendus peaks samuti võimaldama haridustöötajatel ja õppuritel vaadata hinnatud ja hindamata ülesandeid.
+
+Loote rakenduse Copilot'i abil Power Appsis järgides alljärgnevaid samme:
+
+1. Navigeerige [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) avakuvale.
+
+1. Kasutage avakuval tekstiala rakenduse kirjeldamiseks, mida soovite luua. Näiteks **_Ma tahan luua rakendust, et jälgida ja hallata õppurite ülesandeid_**. Klõpsake AI Copilot'ile prompti saatmiseks nuppu **Saada**.
 
 ![Kirjeldage rakendust, mida soovite luua](../../../translated_images/et/copilot-chat-prompt-powerapps.84250f341d060830.webp)
 
-1. AI Copilot soovitab Dataverse'i tabelit koos vajalike väljadega, et salvestada andmeid, mida soovite jälgida, ja mõned näidisandmed. Seejärel saate tabelit kohandada vastavalt oma vajadustele, kasutades AI Copiloti assistendi funktsiooni vestluslike sammude kaudu.
+1. AI Copilot soovitab Dataverse'i tabelit koos vajalike väljadega teie jälgitavate andmete salvestamiseks ja mõningate näidisandmetega. Seejärel saate tabelit kohandada vastavalt oma vajadustele AI Copilot assistendi funktsiooni kaudu vestluslike sammude abil.
 
-   > **Oluline**: Dataverse on Power Platformi aluseks olev andmeplatvorm. See on madala koodiga andmeplatvorm rakenduse andmete salvestamiseks. See on täielikult hallatav teenus, mis salvestab andmeid turvaliselt Microsofti pilves ja on teie Power Platformi keskkonnas ette nähtud. Sellega kaasnevad sisseehitatud andmehalduse võimalused, nagu andmete klassifikatsioon, andmete päritolu, peeneteraline juurdepääsukontroll ja palju muud. Lisateavet Dataverse'i kohta leiate [siit](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
+   > **Tähtis**: Dataverse on Power Platvormi aluseks olev andmeplatvorm. See on vähekoodi andmeplatvorm rakenduse andmete hoidmiseks. See on täielikult hallatav teenus, mis salvestab andmeid turvaliselt Microsofti pilves ning on teie Power Platvormi keskkonnas. Sellega kaasnevad sisseehitatud andmehalduskeskused, nagu andmete klassifikatsioon, päritolu jälgimine, peenhäälestatud juurdepääsukontroll ja palju muud. Lisateavet Dataverse'i kohta leiate [siit](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
 
-   ![Soovitatud väljad teie uues tabelis](../../../translated_images/et/copilot-dataverse-table-powerapps.f4cc07b5d5f9327b.webp)
+   ![Uue tabeli soovitatud väljad](../../../translated_images/et/copilot-dataverse-table-powerapps.f4cc07b5d5f9327b.webp)
 
-1. Õpetajad soovivad saata e-kirju õpilastele, kes on oma ülesanded esitanud, et hoida neid kursis nende ülesannete edenemisega. Saate kasutada Copilotit, et lisada tabelisse uus väli õpilaste e-posti aadressi salvestamiseks. Näiteks saate kasutada järgmist juhist, et lisada tabelisse uus väli: **_Soovin lisada veeru õpilaste e-posti aadressi salvestamiseks_**. Klõpsake nuppu **Saada**, et saata juhis AI Copilotile.
+1. Haridustöötajad soovivad saata e-kirju õppuritele, kes on ülesanded esitanud, et hoida neid kursis ülesannete edenemisega. Võite kasutada Copilot'i, et lisada tabelisse uus veerg õppuri e-posti aadressi salvestamiseks. Näiteks võite kasutada järgmist prompti: **_Ma tahan lisada veeru õppuri e-posti salvestamiseks_**. Klõpsake AI Copilot'ile prompti saatmiseks nuppu **Saada**.
 
 ![Uue välja lisamine](../../../translated_images/et/copilot-new-column.35e15ff21acaf274.webp)
 
-1. AI Copilot genereerib uue välja ja seejärel saate välja oma vajadustele vastavaks kohandada.
+1. AI Copilot genereerib uue välja ja seejärel saate välja kohandada vastavalt oma vajadustele.
 
-1. Kui olete tabeliga valmis, klõpsake nuppu **Loo rakendus**, et rakendus luua.
 
-1. AI Copilot genereerib teie kirjelduse põhjal reageeriva Canvas-rakenduse. Seejärel saate rakendust oma vajadustele vastavaks kohandada.
+1. Kui olete tabeli koostamisega lõpetanud, klõpsake rakenduse loomiseks nuppu **Create app**.
 
-1. Selleks, et õpetajad saaksid õpilastele e-kirju saata, saate kasutada Copilotit, et lisada rakendusele uus ekraan. Näiteks saate kasutada järgmist juhist, et lisada rakendusele uus ekraan: **_Soovin lisada ekraani õpilastele e-kirjade saatmiseks_**. Klõpsake nuppu **Saada**, et saata juhis AI Copilotile.
+1. AI Copilot loob teie kirjelduse põhjal reageeriva Canvas rakenduse. Seejärel saate rakendust oma vajadustele kohandada.
 
-![Uue ekraani lisamine juhise kaudu](../../../translated_images/et/copilot-new-screen.2e0bef7132a17392.webp)
+1. Õpetajate jaoks, kes soovivad saata õpilastele e-kirju, saate Copiloti abil rakendusele uue ekraani lisada. Näiteks võite järgmise juhise abil rakendusele ekraani lisada: **_Ma tahan lisada ekraani õpilastele e-kirjade saatmiseks_**. Klõpsake juhise saatmiseks AI Copilotile nuppu **Send**.
 
-1. AI Copilot genereerib uue ekraani ja seejärel saate ekraani oma vajadustele vastavaks kohandada.
+![Uue ekraani lisamine juhise abil](../../../translated_images/et/copilot-new-screen.2e0bef7132a17392.webp)
 
-1. Kui olete rakendusega valmis, klõpsake nuppu **Salvesta**, et rakendus salvestada.
+1. AI Copilot loob uue ekraani ja seejärel saate seda vastavalt oma vajadustele kohandada.
 
-1. Rakenduse õpetajatega jagamiseks klõpsake nuppu **Jaga** ja seejärel klõpsake uuesti nuppu **Jaga**. Seejärel saate rakenduse õpetajatega jagada, sisestades nende e-posti aadressid.
+1. Kui olete rakendusega valmis, klõpsake selle salvestamiseks nuppu **Save**.
 
-> **Teie kodutöö**: Rakendus, mille te just lõite, on hea algus, kuid seda saab täiustada. E-posti funktsiooni puhul saavad õpetajad õpilastele e-kirju saata ainult käsitsi, sisestades nende e-posti aadressid. Kas saate kasutada Copilotit, et luua automatiseerimine, mis võimaldab õpetajatel õpilastele e-kirju automaatselt saata, kui nad oma ülesanded esitavad? Teie vihje: õige juhisega saate kasutada Copilotit Power Automate'is, et seda luua.
+1. Rakenduse õpetajatega jagamiseks klõpsake nuppu **Share** ja seejärel uuesti nuppu **Share**. Seejärel saate rakenduse jagada, sisestades nende e-posti aadressid.
 
-### Looge meie idufirma jaoks arvete andmetabel
+> **Teie ülesanne**: äsjavalminud rakendus on hea algus, kuid seda saab täiustada. E-posti funktsiooni puhul saavad õpetajad saata e-kirju õpilastele käsitsi, sisestades nende e-posti aadresse. Kas saate Copiloti abil luua automatiseerimise, mis võimaldab õpetajatel saata e-kirju õpilastele automaatselt, kui nad esitlevad oma ülesandeid? Teie vihje on, et õige juhise abil saate Copiloti kasutada Power Automate'is selle ülesande lahendamiseks.
 
-Meie idufirma finantsmeeskonnal on olnud raskusi arvete jälgimisega. Nad on kasutanud tabelarvutust arvete jälgimiseks, kuid see on muutunud keeruliseks, kuna arvete arv on suurenenud. Nad on palunud teil luua tabeli, mis aitaks neil salvestada, jälgida ja hallata saadud arvete teavet. Tabelit tuleks kasutada automatiseerimise loomiseks, mis eraldab kõik arvete andmed ja salvestab need tabelisse. Tabel peaks võimaldama finantsmeeskonnal vaadata arveid, mis on tasutud, ja neid, mis ei ole tasutud.
+### Arendame meie idufirmale arvete info tabeli
 
-Power Platformil on aluseks olev andmeplatvorm nimega Dataverse, mis võimaldab salvestada andmeid teie rakenduste ja lahenduste jaoks. Dataverse pakub madala koodiga andmeplatvormi rakenduse andmete salvestamiseks. See on täielikult hallatav teenus, mis salvestab andmeid turvaliselt Microsofti pilves ja on teie Power Platformi keskkonnas ette nähtud. Sellega kaasnevad sisseehitatud andmehalduse võimalused, nagu andmete klassifikatsioon, andmete päritolu, peeneteraline juurdepääsukontroll ja palju muud. Lisateavet [Dataverse'i kohta leiate siit](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
-Miks peaksime kasutama Dataverse'i oma idufirma jaoks? Dataverse'i standardsed ja kohandatud tabelid pakuvad turvalist ja pilvepõhist andmesalvestusvõimalust. Tabelid võimaldavad salvestada erinevat tüüpi andmeid, sarnaselt sellele, kuidas kasutate mitut töölehte ühes Exceli töövihikus. Tabeleid saab kasutada andmete salvestamiseks, mis on spetsiifilised teie organisatsiooni või ärivajaduste jaoks. Mõned eelised, mida meie idufirma Dataverse'i kasutamisest saab, hõlmavad muu hulgas järgmist:
+Meie idufirma finantstiim on vaeva näinud arvete jälgimisega. Nad on kasutanud arvete jälgimiseks kalkuleerimislehte, kuid kui arvete arv on kasvanud, on hakanud see muutuma raskesti hallatavaks. Nad palusid teil üles ehitada tabel, mis aitab neil salvestada, jälgida ja hallata saabunud arvete andmeid. Tabelit tuleks kasutada automatiseerimise loomiseks, mis tõmbab kõik arveandmed välja ja salvestab need tabelisse. Samuti peaks tabel võimaldama finantstiimil näha, millised arved on tasutud ja millised mitte.
 
-- **Lihtne hallata**: Nii metaandmed kui ka andmed salvestatakse pilves, seega ei pea te muretsema selle pärast, kuidas neid hallatakse või salvestatakse. Saate keskenduda oma rakenduste ja lahenduste loomisele.
+Power Platform sisaldab aluseks olevat andmeplatvormi nimega Dataverse, mis võimaldab teil oma rakenduste ja lahenduste andmeid talletada. Dataverse pakub madala koodiga andmeplatvormi rakenduseandmete salvestamiseks. See on täielikult hallatav teenus, mis turvaliselt salvestab andmed Microsofti pilves ja mis on häälestatud teie Power Platformi keskkonnas. See sisaldab sisseehitatud andmevalitsemise funktsioone, nagu andmete klassifikatsioon, andmejoonised, peenhäälestatud juurdepääsukontroll jpm. Lisateavet saate lugeda [Dataverse'i kohta siit](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
 
-- **Turvaline**: Dataverse pakub turvalist ja pilvepõhist andmesalvestusvõimalust. Saate kontrollida, kes pääseb teie tabelites olevatele andmetele ligi ja kuidas nad sellele ligi pääsevad, kasutades rollipõhist turvalisust.
+Miks peaksime meie idufirma jaoks kasutama Dataverse'i? Dataverse'i standard- ja kohandatud tabelid pakuvad teie andmete turvalist ja pilvepõhist salvestusvõimalust. Tabelid võimaldavad talletada erinevat tüüpi andmeid, sarnaselt mitme töölehe kasutamisele ühes Exceli töövihikus. Tabelid võimaldavad teil salvestada andmeid, mis on spetsiifilised teie organisatsiooni või ettevõtte vajadustele. Mõned eelised, mida meie idufirma Dataverse'i kasutamisest saab, on järgmised, kuid mitte ainult:
 
-- **Rikkalikud metaandmed**: Andmetüüpe ja seoseid kasutatakse otse Power Appsis.
+- **Lihtne hallata**: nii metaandmed kui ka andmed salvestatakse pilves, nii et te ei pea muretsema nende salvestamise ega haldamise detailide pärast. Võite keskenduda oma rakenduste ja lahenduste loomisele.
 
-- **Loogika ja valideerimine**: Saate kasutada ärireegleid, arvutatud välju ja valideerimisreegleid, et rakendada äriloogikat ja säilitada andmete täpsust.
+- **Turvaline**: Dataverse pakub teie andmete jaoks turvalist ja pilvepõhist salvestusvõimalust. Te saate kontrollida, kes pääseb teie tabelite andmetele ligi ja kuidas nad sellele ligi pääsevad, kasutades rollipõhist turvalisust.
 
-Nüüd, kui teate, mis on Dataverse ja miks peaksite seda kasutama, vaatame, kuidas saate Copilot'i abil luua Dataverse'is tabeli, mis vastab meie finantsmeeskonna nõuetele.
+- **Rikkalikud metaandmed**: andmetüübid ja -seosed on kasutatavad otse Power Appsis.
 
-> **Note**: Kasutate seda tabelit järgmises osas, et luua automatiseerimine, mis eraldab kõik arveandmed ja salvestab need tabelisse.
+- **Loogika ja valideerimine**: ärireeglite, arvutatud väljade ja valideerimisreeglite abil saate rakendada äriloogikat ja tagada andmete täpsuse.
 
-Tabeli loomiseks Dataverse'is Copilot'i abil järgige alltoodud samme:
+Nüüd, kui teate, mis on Dataverse ja miks seda kasutada, vaatame, kuidas saate Copiloti abil Dataverse'i tabeli luua meie finantstiimi vajaduste jaoks.
+
+> **Märkus** : Järgmises osas kasutate seda tabelit automatiseerimise loomiseks, mis tõmbab kõik arveandmed välja ja salvestab need tabelisse.
+
+Dataverse'is tabeli loomiseks Copiloti abil järgige alltoodud samme:
 
 1. Minge [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) avalehele.
 
-2. Vasakpoolses navigeerimisribal valige **Tables** ja klõpsake **Describe the new Table**.
+2. Vasakul navigeerimisribalt valige **Tables** ja seejärel klõpsake **Describe the new Table**.
 
 ![Vali uus tabel](../../../translated_images/et/describe-new-table.0792373eb757281e.webp)
 
-3. **Describe the new Table** ekraanil kasutage tekstiala, et kirjeldada tabelit, mida soovite luua. Näiteks: **_Soovin luua tabeli arveandmete salvestamiseks_**. Klõpsake **Send** nuppu, et saata päring AI Copilot'ile.
+1. Ekraanil **Describe the new Table** kasutage tekstiala, et kirjeldada loodavat tabelit. Näiteks: **_Ma tahan luua tabeli arveandmete salvestamiseks_**. Klõpsake juhise AI Copilotile saatmiseks nuppu **Send**.
 
 ![Kirjelda tabelit](../../../translated_images/et/copilot-chat-prompt-dataverse.feb2f81e5872b9d2.webp)
 
-4. AI Copilot soovitab Dataverse'i tabelit koos vajalike väljadega, et salvestada andmeid, mida soovite jälgida, ja lisab näidisandmeid. Seejärel saate tabelit kohandada vastavalt oma vajadustele, kasutades AI Copilot'i abifunktsiooni vestluse kaudu.
+1. AI Copilot pakub välja Dataverse tabeli koos väljadega, mida vajate andmete salvestamiseks, mida soovite jälgida, ning mõningate näidandmetega. Seejärel saate kasutades AI Copiloti vestlusassistendi funktsiooni tabelit vastavalt vajadusele kohandada.
 
-![Soovitatud Dataverse'i tabel](../../../translated_images/et/copilot-dataverse-table.b3bc936091324d9d.webp)
+![Soovitatud Dataverse tabel](../../../translated_images/et/copilot-dataverse-table.b3bc936091324d9d.webp)
 
-5. Finantsmeeskond soovib saata tarnijale e-kirja, et teavitada neid arve praegusest olekust. Saate kasutada Copilot'i, et lisada tabelisse uus väli tarnija e-posti salvestamiseks. Näiteks saate kasutada järgmist päringut, et lisada tabelisse uus väli: **_Soovin lisada veeru tarnija e-posti salvestamiseks_**. Klõpsake **Send** nuppu, et saata päring AI Copilot'ile.
+1. Finantstiim soovib saata tarnijale e-kirja, et neid teavitada arve hetkeseisust. Copiloti abil saate tabelile uue välja lisada, kuhu salvestada tarnija e-posti aadress. Näiteks võite kasutada järgmist juhist: **_Ma tahan lisada veeru tarnija e-posti salvestamiseks_**. Klõpsake juhise saatmiseks AI Copilotile nuppu **Send**.
 
-6. AI Copilot genereerib uue välja ja seejärel saate välja kohandada vastavalt oma vajadustele.
+1. AI Copilot lisab uue välja ja seejärel saate seda vastavalt vajadusele kohandada.
 
-7. Kui olete tabeliga valmis, klõpsake **Create** nuppu, et tabel luua.
+1. Kui olete tabeli koostamise lõpetanud, klõpsake tabeli loomiseks nuppu **Create**.
 
-## AI mudelid Power Platformis koos AI Builderiga
+## AI mudelid Power Platformis AI Builderiga
 
-AI Builder on madala koodiga AI võimekus, mis on saadaval Power Platformis ja võimaldab teil kasutada AI mudeleid, et aidata automatiseerida protsesse ja ennustada tulemusi. AI Builderiga saate tuua AI oma rakendustesse ja voogudesse, mis ühenduvad teie andmetega Dataverse'is või erinevates pilveandmeallikates, nagu SharePoint, OneDrive või Azure.
+AI Builder on madala koodiga tehisintellekti võimekus Power Platformis, mis võimaldab kasutada AI-mudeleid protsesside automatiseerimiseks ja tulemuste ennustamiseks. AI Builderiga saate lisada tehisintellekti oma rakendustesse ja voogudesse, mis ühenduvad teie andmetega Dataverse'is või erinevates pilvandmeallikates, nagu SharePoint, OneDrive või Azure.
 
-## Eelvalmistatud AI mudelid vs Kohandatud AI mudelid
+## Eelnevalt valmis AI mudelid vs kohandatud AI mudelid
 
-AI Builder pakub kahte tüüpi AI mudeleid: eelvalmistatud AI mudelid ja kohandatud AI mudelid. Eelvalmistatud AI mudelid on valmis kasutamiseks ja treenitud Microsofti poolt ning saadaval Power Platformis. Need aitavad teil lisada intelligentsust oma rakendustesse ja voogudesse, ilma et peaksite andmeid koguma ja seejärel oma mudeleid looma, treenima ja avaldama. Neid mudeleid saab kasutada protsesside automatiseerimiseks ja tulemuste ennustamiseks.
+AI Builder pakub kahte tüüpi AI mudeleid: eelnevalt valmiskujundatud AI mudelid ja kohandatud AI mudelid. Eelnevalt valmiskujundatud mudelid on Microsofti treenitud ja Power Platformis valmis kasutamiseks. Need aitavad teil lisada oma rakendustele ja voogudele intelligentsust ilma, et peaksite ise andmeid koguma ning oma mudeleid looma, treenima ja avaldama. Nende mudelite abil saate automatiseerida protsesse ja ennustada tulemusi.
 
-Mõned eelvalmistatud AI mudelid, mis on saadaval Power Platformis, hõlmavad:
+Mõned eelnevalt valmis AI mudelid, mis on Power Platformis saadaval:
 
-- **Oluliste fraaside tuvastamine**: See mudel tuvastab tekstist olulised fraasid.
-- **Keele tuvastamine**: See mudel tuvastab teksti keele.
-- **Sentimendi analüüs**: See mudel tuvastab tekstis positiivse, negatiivse, neutraalse või segatud sentimendi.
-- **Visiitkaardi lugeja**: See mudel eraldab visiitkaartidelt teavet.
-- **Teksti tuvastamine**: See mudel eraldab pilte tekstist.
-- **Objektide tuvastamine**: See mudel tuvastab ja eraldab pilte objekte.
-- **Dokumentide töötlemine**: See mudel eraldab vormidelt teavet.
-- **Arvete töötlemine**: See mudel eraldab arvetelt teavet.
+- **Põhiväljendite väljavõtmine**: see mudel väljastab tekstist põhilised väljendid.
+- **Keele tuvastamine**: see mudel tuvastab tekstikeele.
+- **Sentimendi analüüs**: see mudel tuvastab teksti positiivse, negatiivse, neutraalse või segatud meeleolu.
+- **Visiitkaardi lugeja**: see mudel väljastab infot visiitkaartidelt.
+- **Teksti äratundmine**: see mudel loeb tekstipilte.
+- **Objektide tuvastamine**: see mudel tuvastab ja eraldab objekte piltidelt.
+- **Dokumentide töötlemine**: see mudel väljastab infot vormidelt.
+- **Arvete töötlemine**: see mudel väljastab infot arvete põhjal.
 
-Kohandatud AI mudelitega saate tuua oma mudeli AI Builderisse, et see toimiks nagu iga AI Builderi kohandatud mudel, võimaldades teil mudelit treenida oma andmetega. Neid mudeleid saab kasutada protsesside automatiseerimiseks ja tulemuste ennustamiseks nii Power Appsis kui ka Power Automates. Oma mudeli kasutamisel kehtivad teatud piirangud. Lisateavet nende [piirangute kohta](https://learn.microsoft.com/ai-builder/byo-model#limitations?WT.mc_id=academic-105485-koreyst).
+Kohandatud AI mudelitega saate tuua AI Builderisse oma mudeli, mis töötab nagu iga AI Builderi kohandatud mudel, võimaldades teil mudelit treenida oma andmete abil. Neid mudeleid saab kasutada nii Power Appsis kui ka Power Automates protsesside automatiseerimiseks ja tulemuste ennustamiseks. Oma mudeli kasutamisel kehtivad piirangud. Loe lisaks nendest [piirangutest](https://learn.microsoft.com/ai-builder/byo-model#limitations?WT.mc_id=academic-105485-koreyst).
 
-![AI Builder mudelid](../../../translated_images/et/ai-builder-models.8069423b84cfc47f.webp)
+![AI Builderi mudelid](../../../translated_images/et/ai-builder-models.8069423b84cfc47f.webp)
 
-## Ülesanne #2 - Loo arve töötlemise voog meie idufirma jaoks
+## Ülesanne #2 - arendage meie idufirma jaoks arve töötlemise voog
 
-Finantsmeeskonnal on olnud raskusi arvete töötlemisega. Nad on kasutanud arvutustabelit arvete jälgimiseks, kuid see on muutunud keeruliseks, kuna arvete arv on suurenenud. Nad on palunud teil luua töövoo, mis aitaks neil arveid AI abil töödelda. Töövoog peaks võimaldama neil arvetelt teavet eraldada ja salvestada see Dataverse'i tabelisse. Töövoog peaks võimaldama neil saata e-kirja finantsmeeskonnale koos eraldatud teabega.
+Finantstiim on vaeva näinud arvete töötlemisega. Nad on kasutanud arvete jälgimiseks kalkuleerimislehte, kuid suure arvearvu tõttu on see muutunud raskesti hallatavaks. Nad palusid teil luua töövoog, mis aitab neil AI abil arveid töödelda. Töövoog peaks võimaldama neil arveldokumentidest info välja võtta ja salvestada see Dataverse'i tabelisse. Samuti peaks töövoog võimaldama saata ekstraktitud teabega e-kirja finantstiimile.
 
-Nüüd, kui teate, mis on AI Builder ja miks peaksite seda kasutama, vaatame, kuidas saate kasutada AI Builderi arve töötlemise AI mudelit, mida käsitlesime varem, et luua töövoog, mis aitab finantsmeeskonnal arveid töödelda.
+Nüüd, kui teate, mis on AI Builder ja miks kasutada, vaatame, kuidas kasutada varem käsitletud arve töötlemise AI mudelit AI Builderis, et arendada töövoog, mis aitab finantstiimil arveid töödelda.
 
-Töövoo loomiseks, mis aitab finantsmeeskonnal arveid töödelda, kasutades AI Builderi arve töötlemise AI mudelit, järgige alltoodud samme:
+Arve töötlemiseks AI mudelit kasutava töövoo loomiseks järgige alljärgnevaid samme:
 
 1. Minge [Power Automate](https://make.powerautomate.com?WT.mc_id=academic-105485-koreyst) avalehele.
 
-2. Kasutage avalehel olevat tekstiala, et kirjeldada töövoogu, mida soovite luua. Näiteks: **_Töötle arvet, kui see saabub minu postkasti_**. Klõpsake **Send** nuppu, et saata päring AI Copilot'ile.
+2. Kasutage avalehel tekstiala, et kirjeldada loomist soovitud töövoogu. Näiteks: **_Töötle arve, kui see jõuab minu postkasti_**. Klõpsake juhise AI Copilotile saatmiseks nuppu **Send**.
 
-   ![Copilot Power Automate](../../../translated_images/et/copilot-chat-prompt-powerautomate.f377e478cc8412de.webp)
+   ![Copilot power automate](../../../translated_images/et/copilot-chat-prompt-powerautomate.f377e478cc8412de.webp)
 
-3. AI Copilot soovitab toiminguid, mida vajate ülesande automatiseerimiseks. Saate klõpsata **Next** nupul, et liikuda järgmistele sammudele.
+3. AI Copilot pakub ülesande täitmiseks vajalikke samme. Klõpsake edasiliikumiseks nuppu **Next**.
 
-4. Järgmises etapis palub Power Automate teil seadistada voo jaoks vajalikud ühendused. Kui olete valmis, klõpsake **Create flow** nuppu, et voog luua.
+4. Järgmisel sammul kutsub Power Automate teid üles seadistama ühendused, mida voog vajab. Kui olete lõpetanud, klõpsake nuppu **Create flow**, et voog luua.
 
-5. AI Copilot genereerib voo ja seejärel saate voogu kohandada vastavalt oma vajadustele.
+5. AI Copilot loob voo ning saate seda vastavalt oma vajadustele kohandada.
 
-6. Uuendage voo käivitajat ja määrake **Folder** kaustaks, kuhu arved salvestatakse. Näiteks saate määrata kaustaks **Inbox**. Klõpsake **Show advanced options** ja määrake **Only with Attachments** väärtuseks **Yes**. See tagab, et voog käivitub ainult siis, kui kausta saabub e-kiri koos manusega.
+6. Uuendage voo käivitajat, seadistades kaustaks selle kausta, kuhu arved salvestatakse. Näiteks seadistage kaustaks **Inbox**. Klõpsake **Show advanced options** ja seadistage **Only with Attachments** väärtuseks **Yes**. See tagab, et voog töötab ainult siis, kui kaustas saabub manus.
 
-7. Eemaldage voost järgmised toimingud: **HTML to text**, **Compose**, **Compose 2**, **Compose 3** ja **Compose 4**, kuna te ei kasuta neid.
+7. Eemaldage voost järgmised toimingud: **HTML to text**, **Compose**, **Compose 2**, **Compose 3** ja **Compose 4**, sest neid te ei kasuta.
 
-8. Eemaldage voost **Condition** toiming, kuna te ei kasuta seda. See peaks välja nägema nagu järgmine ekraanipilt:
+8. Eemaldage voost ka toiming **Condition**, sest seda te ei kasuta. See peaks välja nägema nagu järgmises ekraanipildis:
 
-   ![Power Automate, eemalda toimingud](../../../translated_images/et/powerautomate-remove-actions.7216392fe684ceba.webp)
+   ![power automate, eemalda toimingud](../../../translated_images/et/powerautomate-remove-actions.7216392fe684ceba.webp)
 
-9. Klõpsake **Add an action** nuppu ja otsige **Dataverse**. Valige **Add a new row** toiming.
+9. Klõpsake nuppu **Add an action** ja otsige **Dataverse**. Valige toiming **Add a new row**.
 
-10. **Extract Information from invoices** toimingus uuendage **Invoice File**, et see osutaks e-kirja **Attachment Content**-ile. See tagab, et voog eraldab teavet arve manusest.
+10. Toimingus **Extract Information from invoices** seadistage **Invoice File** viitama e-kirja manuselt pärit **Attachment Content** peale. See tagab, et voog tõmbab info välja arve manuselt.
 
-11. Valige varem loodud **Table**. Näiteks saate valida **Invoice Information** tabeli. Valige eelmisest toimingust dünaamiline sisu, et täita järgmised väljad:
+11. Valige tabel, mille varem lõite. Näiteks võite valida tabeli **Invoice Information**. Täitke alljärgnevad väljad eelneva toimingu dünaamilise sisuga:
 
     - ID
     - Summa
     - Kuupäev
     - Nimi
-    - Olek - Määrake **Status** väärtuseks **Pending**.
-    - Tarnija e-post - Kasutage **From** dünaamilist sisu **When a new email arrives** käivitajast.
+    - Staatus - seadistage **Status** väärtuseks **Pending**.
+    - Tarnija e-post - kasutage dünaamilist sisu **From** **When a new email arrives** käivitajast.
 
-    ![Power Automate lisa rida](../../../translated_images/et/powerautomate-add-row.5edce45e5dd3d51e.webp)
+    ![power automate lisa rida](../../../translated_images/et/powerautomate-add-row.5edce45e5dd3d51e.webp)
 
-12. Kui olete vooga valmis, klõpsake **Save** nuppu, et voog salvestada. Seejärel saate voogu testida, saates e-kirja koos arvega kausta, mille määrasite käivitajas.
+12. Kui voog on lõplikult valmis, klõpsake selle salvestamiseks nuppu **Save**. Voo testimiseks saatke e-kiri arvega kausta, mille varem käivitajas määrasite.
 
-> **Teie kodutöö**: Voo, mille just ehitasite, on hea algus, nüüd peate mõtlema, kuidas saaksite luua automatiseerimise, mis võimaldab meie finantsmeeskonnal saata tarnijale e-kirja, et teavitada neid arve praegusest olekust. Teie vihje: voog peab käivituma, kui arve olek muutub.
+> **Teie ülesanne**: äsjaloodud voog on hea algus, nüüd peate välja mõtlema, kuidas luua automatiseerimine, mis võimaldab meie finantstiimil saata tarnijale e-kirja, et neid teavitada arve hetkeseisust. Vihje: voog peab käivituma siis, kui arve staatus muutub.
 
-## Teksti genereerimise AI mudeli kasutamine Power Automates
+## Kasutage Power Automate’is tekstigeneratsiooni AI mudelit
 
-AI Builderi Create Text with GPT AI mudel võimaldab teil genereerida teksti vastavalt päringule ja seda toetab Microsoft Azure OpenAI teenus. Selle võimekuse abil saate integreerida GPT (Generative Pre-Trained Transformer) tehnoloogiat oma rakendustesse ja voogudesse, et luua mitmesuguseid automatiseeritud vooge ja informatiivseid rakendusi.
+AI Builderi GPT mudel Create Text võimaldab teil teksti genereerida juhise põhjal ning töötab Microsoft Azure OpenAI teenusega. Selle võimekuse abil saate integreerida GPT (Generative Pre-Trained Transformer) tehnoloogia oma rakendustesse ja voogudesse, luues mitmesuguseid automatiseeritud voo ja tarkarakendusi.
 
-GPT mudelid läbivad ulatusliku treeningu suurel hulgal andmetel, mis võimaldab neil toota teksti, mis sarnaneb inimkeelele, kui neile esitatakse päring. Kui integreerida töövoo automatiseerimisega, saab AI mudeleid nagu GPT kasutada mitmesuguste ülesannete sujuvamaks muutmiseks ja automatiseerimiseks.
+GPT mudelid käivad läbi põhjaliku treeningu suurte andmehulkadega, võimaldades neil genereerida teksti, mis sarnaneb inimkeelele, kui neile antakse juhis. Töövoo automatiseerimisse ühendatuna saab GPT-tüüpi AI mudeleid kasutada paljude ülesannete efektiivseks automatiseerimiseks.
 
-Näiteks saate luua vooge, mis genereerivad automaatselt teksti erinevateks kasutusjuhtudeks, nagu e-kirjade mustandid, tootekirjeldused ja palju muud. Samuti saate mudelit kasutada teksti genereerimiseks erinevates rakendustes, nagu vestlusrobotid ja klienditeenindusrakendused, mis võimaldavad klienditeenindajatel tõhusalt ja tulemuslikult klientide päringutele vastata.
+Näiteks saate luua vooge, mis automaatselt genereerivad tekste mitmesugusteks eesmärkideks, nagu e-kirjade mustandid, toodete kirjeldused jms. Mudelit saate kasutada ka näiteks vestlusrobotites ja klienditeeninduse rakendustes, võimaldades tugispetsialistidel tõhusamalt ja kiiremini vastata klientide päringutele.
 
-![Loo päring](../../../translated_images/et/create-prompt-gpt.69d429300c2e870a.webp)
+![loo juhis](../../../translated_images/et/create-prompt-gpt.69d429300c2e870a.webp)
 
-Et õppida, kuidas seda AI mudelit Power Automates kasutada, minge läbi [Add intelligence with AI Builder and GPT](https://learn.microsoft.com/training/modules/ai-builder-text-generation/?WT.mc_id=academic-109639-somelezediko) mooduli.
 
-## Suurepärane töö! Jätkake õppimist
+Selle AI-mudeli kasutamise õppimiseks Power Automates, vaadake läbi [Lisa intelligentsust AI Builderi ja GPT abil](https://learn.microsoft.com/training/modules/ai-builder-text-generation/?WT.mc_id=academic-109639-somelezediko) moodul.
 
-Pärast selle õppetunni lõpetamist tutvuge meie [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), et jätkata oma generatiivse AI teadmiste arendamist!
+## Suurepärane töö! Jätka õppimist
 
-Liikuge edasi 11. õppetundi, kus vaatame, kuidas [integreerida generatiivset AI-d funktsioonide kutsumisega](../11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst)!
+Pärast selle õppetüki läbimist vaata meie [Generatiivse AI õppimise kollektsiooni](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), et jätkata oma generatiivse AI teadmiste tõstmist!
+
+Kas soovid kohandada ja saada Copilotist rohkem kasu? Avastage [Awesome Copilot](https://github.com/github/awesome-copilot?WT.mc_id=academic-105485-koreyst) — kogukonna panustatud juhiste, agentide, oskuste ja konfiguratsioonide kogu, mis aitab teil GitHub Copilotist maksimumi võtta.
+
+Liigu õppetüki 11 juurde, kus vaatame, kuidas [integreerida generatiivset AI funktsioonikõnega](../11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta arusaamatuste või valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamise tõttu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

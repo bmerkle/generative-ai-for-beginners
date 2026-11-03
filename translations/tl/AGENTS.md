@@ -2,297 +2,307 @@
 
 ## Pangkalahatang-ideya ng Proyekto
 
-Ang repository na ito ay naglalaman ng isang komprehensibong kurikulum na binubuo ng 21 aralin na nagtuturo ng mga pangunahing kaalaman sa Generative AI at pagbuo ng mga aplikasyon. Ang kurso ay idinisenyo para sa mga baguhan at sumasaklaw mula sa mga pangunahing konsepto hanggang sa paggawa ng mga aplikasyon na handa para sa produksyon.
+Ang repositoryong ito ay naglalaman ng komprehensibong 21-lesson na kurikulum na nagtuturo ng mga pundasyon ng Generative AI at pagbuo ng aplikasyon. Ang kurso ay idinisenyo para sa mga baguhan at sumasaklaw mula sa mga batayang konsepto hanggang sa paggawa ng mga aplikasyon na handa na para sa produksyon.
 
 **Pangunahing Teknolohiya:**
 - Python 3.9+ na may mga library: `openai`, `python-dotenv`, `tiktoken`, `azure-ai-inference`, `pandas`, `numpy`, `matplotlib`
-- TypeScript/JavaScript gamit ang Node.js at mga library: `@azure/openai`, `@azure-rest/ai-inference`, `openai`
-- Azure OpenAI Service, OpenAI API, at GitHub Models
+- TypeScript/JavaScript na may Node.js at mga library: `openai` (Azure OpenAI sa pamamagitan ng v1 endpoint + Responses API), `@azure-rest/ai-inference` (Microsoft Foundry Models)
+- Azure OpenAI Service, OpenAI API, at Microsoft Foundry Models (Ang GitHub Models ay magreretiro sa katapusan ng Hulyo 2026)
 - Jupyter Notebooks para sa interaktibong pag-aaral
-- Dev Containers para sa pare-parehong kapaligiran sa pag-develop
+- Dev Containers para sa pare-parehong development environment
 
-**Struktura ng Repository:**
-- 21 na may numerong direktoryo ng aralin (00-21) na naglalaman ng mga README, halimbawa ng code, at mga takdang-aralin
-- Maramihang implementasyon: Python, TypeScript, at paminsan-minsan .NET na mga halimbawa
-- Direktoryo ng mga pagsasalin na may higit sa 40 bersyon ng wika
-- Sentralisadong konfigurasyon gamit ang `.env` file (gamitin ang `.env.copy` bilang template)
+**Estruktura ng Repositoryo:**
+- 21 naka-number na lesson directories (00-21) na naglalaman ng mga README, halimbawa ng code, at mga asignatura
+- Maramihang implementasyon: Python, TypeScript, at kung minsan ay mga halimbawa sa .NET
+- Translations directory na may 40+ bersyon ng wika
+- Sentralisadong konfigurasyon gamit ang `.env` na file (gamitin ang `.env.copy` bilang template)
 
 ## Mga Utos sa Setup
 
-### Paunang Setup ng Repository
+### Paunang Setup ng Repositoryo
 
 ```bash
-# Clone the repository
+# Kopyahin ang repositoryo
 git clone https://github.com/microsoft/generative-ai-for-beginners.git
 cd generative-ai-for-beginners
 
-# Copy environment template
+# Kopyahin ang template ng kapaligiran
 cp .env.copy .env
-# Edit .env with your API keys and endpoints
+# I-edit ang .env gamit ang iyong mga API key at mga endpoint
 ```
 
 ### Setup ng Python Environment
 
 ```bash
-# Create virtual environment
+# Gumawa ng virtual na kapaligiran
 python3 -m venv venv
 
-# Activate virtual environment
-# On macOS/Linux:
+# I-activate ang virtual na kapaligiran
+# Sa macOS/Linux:
 source venv/bin/activate
-# On Windows:
+# Sa Windows:
 venv\Scripts\activate
 
-# Install dependencies
+# I-install ang mga dependencies
 pip install -r requirements.txt
 ```
 
 ### Setup ng Node.js/TypeScript
 
 ```bash
-# Install root-level dependencies (for documentation tooling)
+# I-install ang mga root-level na dependencies (para sa mga tool sa dokumentasyon)
 npm install
 
-# For individual lesson TypeScript examples, navigate to the specific lesson:
+# Para sa mga indibidwal na halimbawa ng TypeScript ng aralin, pumunta sa partikular na aralin:
 cd 06-text-generation-apps/typescript/recipe-app
 npm install
 ```
 
 ### Setup ng Dev Container (Inirerekomenda)
 
-Ang repository ay may kasamang `.devcontainer` na konfigurasyon para sa GitHub Codespaces o VS Code Dev Containers:
+Kasama sa repositoryo ang `.devcontainer` na konfigurasyon para sa GitHub Codespaces o VS Code Dev Containers:
 
-1. Buksan ang repository sa GitHub Codespaces o VS Code gamit ang Dev Containers extension
-2. Ang Dev Container ay awtomatikong:
-   - Mag-i-install ng mga dependency ng Python mula sa `requirements.txt`
-   - Magpapatakbo ng post-create script (`.devcontainer/post-create.sh`)
-   - Magse-set up ng Jupyter kernel
+1. Buksan ang repositoryo sa GitHub Codespaces o VS Code gamit ang Dev Containers extension
+2. Awtomatikong gagawin ng Dev Container ang mga sumusunod:
+   - I-install ang mga dependensiya ng Python mula sa `requirements.txt`
+   - Patakbuhin ang post-create script (`.devcontainer/post-create.sh`)
+   - I-set up ang kernel ng Jupyter
 
-## Workflow ng Pag-develop
+## Daloy ng Pag-develop
 
 ### Mga Environment Variable
 
-Ang lahat ng aralin na nangangailangan ng API access ay gumagamit ng mga environment variable na tinukoy sa `.env`:
+Ang lahat ng mga leksyon na nangangailangan ng access sa API ay gumagamit ng mga environment variable na nakasaad sa `.env`:
 
 - `OPENAI_API_KEY` - Para sa OpenAI API
-- `AZURE_OPENAI_API_KEY` - Para sa Azure OpenAI Service
-- `AZURE_OPENAI_ENDPOINT` - URL ng endpoint ng Azure OpenAI
-- `AZURE_OPENAI_DEPLOYMENT` - Pangalan ng deployment ng chat completion model
-- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Pangalan ng deployment ng embeddings model
-- `AZURE_OPENAI_API_VERSION` - Bersyon ng API (default: `2024-02-01`)
+- `AZURE_OPENAI_API_KEY` - Para sa Azure OpenAI sa Microsoft Foundry (Ang Azure OpenAI Service ay bahagi na ng Microsoft Foundry ngayon: https://ai.azure.com)
+- `AZURE_OPENAI_ENDPOINT` - URL ng Azure OpenAI endpoint (Foundry resource endpoint)
+- `AZURE_OPENAI_DEPLOYMENT` - Pangalan ng chat completion model deployment (default ng kurso: `gpt-5-mini`)
+- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Pangalan ng embeddings model deployment (default ng kurso: `text-embedding-3-small`)
+- `AZURE_OPENAI_API_VERSION` - Bersyon ng API (default: `2024-10-21`)
 - `HUGGING_FACE_API_KEY` - Para sa Hugging Face models
-- `GITHUB_TOKEN` - Para sa GitHub Models
+- `AZURE_INFERENCE_ENDPOINT` - Endpoint para sa Microsoft Foundry Models (catalog ng multi-provider models)
+- `AZURE_INFERENCE_CREDENTIAL` - API key para sa Microsoft Foundry Models (pumapalit sa magreretirong `GITHUB_TOKEN`)
+- `AZURE_INFERENCE_CHAT_MODEL` - Isang non-reasoning model (hal. `Llama-3.3-70B-Instruct`) na ginagamit sa mga halimbawa ng `temperature`, dahil ang mga reasoning model ay hindi sumusuporta sa sampling controls
 
-### Pagpapatakbo ng Python Examples
+### Mga Palatuntunan sa Modelo (mahalaga)
+
+- **Default chat model ay `gpt-5-mini`** - isang kasalukuyan, hindi deprecated na **reasoning** model. Simula 2026, ang mga lumang temperature-capable na "mini" models (`gpt-4o-mini`, `gpt-4.1-mini`) ay *pinapawalang-saysay*, kaya ang kurikulum ay nagsasaayos sa pamilya ng GPT-5.
+- **Ang mga reasoning models ay tinatanggihan ang `temperature` at `top_p`**, at gumagamit ng `max_output_tokens` (Responses API) / `max_completion_tokens` (chat completions) sa halip na `max_tokens`. Huwag magdagdag ng `temperature`/`top_p`/`max_tokens` sa mga sample na tumatawag sa `gpt-5-mini`.
+- **Para ipakita ang `temperature`**, ang mga sample ay gumagamit ng isang **Llama** model (`Llama-3.3-70B-Instruct`) sa pamamagitan ng Microsoft Foundry Models endpoint (`AZURE_INFERENCE_CHAT_MODEL`). I-steer ang reasoning models gamit ang prompt engineering + reasoning controls sa halip na sampling knobs.
+- **Fine-tuning (lesson 18)** ay nananatili sa `gpt-4.1-mini`: Ang GPT-5 ay sumusuporta lamang sa reinforcement fine-tuning (RFT), hindi sa supervised fine-tuning (SFT) na ipinapakita doon.
+- Ang Lessons 20 (Mistral) at 21 (Meta) ay nananatili sa `temperature`/`max_tokens` dahil tinatarget nila ang Mistral/Llama models, na sumusuporta rito.
+
+### Pagpapatakbo ng Mga Halimbawa ng Python
 
 ```bash
-# Navigate to lesson directory
+# Mag-navigate sa direktoryo ng aralin
 cd 06-text-generation-apps/python
 
-# Run a Python script
+# Patakbuhin ang isang Python na script
 python aoai-app.py
 ```
 
-### Pagpapatakbo ng TypeScript Examples
+### Pagpapatakbo ng Mga Halimbawa ng TypeScript
 
 ```bash
-# Navigate to TypeScript app directory
+# Mag-navigate sa direktoryo ng TypeScript app
 cd 06-text-generation-apps/typescript/recipe-app
 
-# Build the TypeScript code
+# I-build ang TypeScript code
 npm run build
 
-# Run the application
+# Patakbuhin ang aplikasyon
 npm start
 ```
 
 ### Pagpapatakbo ng Jupyter Notebooks
 
 ```bash
-# Start Jupyter in the repository root
+# Simulan ang Jupyter sa ugat ng repositoryo
 jupyter notebook
 
-# Or use VS Code with Jupyter extension
+# O gamitin ang VS Code na may Jupyter extension
 ```
 
-### Paggawa sa Iba't Ibang Uri ng Aralin
+### Paggawa sa Iba't ibang Uri ng mga Leksyon
 
-- **"Learn" lessons**: Nakatuon sa README.md na dokumentasyon at mga konsepto
-- **"Build" lessons**: May kasamang gumaganang halimbawa ng code sa Python at TypeScript
-- Ang bawat aralin ay may README.md na naglalaman ng teorya, walkthrough ng code, at mga link sa video content
+- **"Learn" na mga leksyon**: Nakatuon sa dokumentasyon ng README.md at mga konsepto
+- **"Build" na mga leksyon**: May kasamang gumaganang mga halimbawa ng code sa Python at TypeScript
+- Bawat leksyon ay may README.md na may teorya, walkthroughs ng code, at mga link sa video content
 
 ## Mga Alituntunin sa Estilo ng Code
 
 ### Python
 
-- Gumamit ng `python-dotenv` para sa pamamahala ng environment variable
+- Gamitin ang `python-dotenv` para sa pamamahala ng environment variable
 - I-import ang `openai` library para sa API interactions
-- Gumamit ng `pylint` para sa linting (ang ilang mga halimbawa ay may kasamang `# pylint: disable=all` para sa pagiging simple)
-- Sundin ang PEP 8 naming conventions
-- Itago ang mga kredensyal ng API sa `.env` file, huwag sa code
+- Gamitin ang `pylint` para sa linting (ang ilang mga halimbawa ay may `# pylint: disable=all` para sa pagiging simple)
+- Sundin ang PEP 8 na panuntunan sa pangalan
+- Itago ang mga API kredensyal sa `.env` file, huwag ilagay sa code
 
 ### TypeScript
 
-- Gumamit ng `dotenv` package para sa environment variables
-- TypeScript configuration sa `tsconfig.json` para sa bawat app
-- Gumamit ng `@azure/openai` o `@azure-rest/ai-inference` para sa Azure services
-- Gumamit ng `nodemon` para sa pag-develop na may auto-reload
-- I-build bago patakbuhin: `npm run build` pagkatapos `npm start`
+- Gamitin ang `dotenv` package para sa mga environment variable
+- TypeScript konfigurasyon sa `tsconfig.json` para sa bawat app
+- Gamitin ang `openai` package para sa Azure OpenAI (ita-target ang client sa `/openai/v1/` endpoint at tawagan ang `client.responses.create`); gamitin ang `@azure-rest/ai-inference` para sa Microsoft Foundry Models
+- Gamitin ang `nodemon` para sa development na may auto-reload
+- I-build bago patakbuhin: `npm run build` pagkatapos ay `npm start`
 
-### Pangkalahatang Konbensyon
+### Mga Pangkalahatang Palatuntunan
 
 - Panatilihing simple at pang-edukasyon ang mga halimbawa ng code
-- Isama ang mga komento na nagpapaliwanag ng mga pangunahing konsepto
-- Ang code ng bawat aralin ay dapat na self-contained at runnable
-- Gumamit ng pare-parehong naming: `aoai-` prefix para sa Azure OpenAI, `oai-` para sa OpenAI API, `githubmodels-` para sa GitHub Models
+- Isama ang mga komento na nagpapaliwanag ng mahahalagang konsepto
+- Dapat ang code ng bawat leksyon ay self-contained at maaaring patakbuhin
+- Gumamit ng pare-parehong pangalan: `aoai-` prefix para sa Azure OpenAI, `oai-` para sa OpenAI API, `githubmodels-` para sa Microsoft Foundry Models (legacy na prefix mula sa GitHub Models era)
 
 ## Mga Alituntunin sa Dokumentasyon
 
 ### Estilo ng Markdown
 
-- Ang lahat ng URL ay dapat nakabalot sa `[text](../../url)` format na walang sobrang espasyo
-- Ang mga relative link ay dapat magsimula sa `./` o `../`
-- Ang lahat ng link sa Microsoft domains ay dapat may kasamang tracking ID: `?WT.mc_id=academic-105485-koreyst`
-- Walang country-specific locales sa mga URL (iwasan ang `/en-us/`)
-- Ang mga imahe ay nakaimbak sa `./images` folder na may mga deskriptibong pangalan
-- Gumamit ng English characters, numbers, at dashes sa mga pangalan ng file
+- Lahat ng URL ay dapat balutin sa format na `[text](../../url)` na walang sobrang espasyo
+- Ang mga relative na link ay dapat magsimula sa `./` o `../`
+- Lahat ng link patungo sa Microsoft domains ay dapat may tracking ID: `?WT.mc_id=academic-105485-koreyst`
+- Iwasan ang mga country-specific na lokal sa URL (iwasan ang `/en-us/`)
+- Ang mga larawan ay nakaimbak sa `./images` folder na may mga deskriptibong pangalan
+- Gamitin ang mga English na karakter, numero, at gitling sa mga pangalan ng file
 
 ### Suporta sa Pagsasalin
 
-- Ang repository ay sumusuporta sa higit sa 40 wika sa pamamagitan ng automated GitHub Actions
-- Ang mga pagsasalin ay nakaimbak sa `translations/` directory
-- Huwag magsumite ng partial translations
-- Hindi tinatanggap ang machine translations
-- Ang mga isinaling imahe ay nakaimbak sa `translated_images/` directory
+- Sinusuportahan ng repositoryo ang 40+ na wika gamit ang automated GitHub Actions
+- Ang mga pagsasalin ay nakaimbak sa `translations/` na direktoryo
+- Huwag magsumite ng mga bahagyang pagsasalin
+- Hindi tinatanggap ang mga machine translations
+- Ang mga isinalin na larawan ay nakaimbak sa `translated_images/` na direktoryo
 
 ## Pagsusuri at Pagpapatunay
 
-### Mga Pre-submission Checks
+### Mga Pre-submission Check
 
-Ang repository na ito ay gumagamit ng GitHub Actions para sa validation. Bago magsumite ng PRs:
+Ang repositoryong ito ay gumagamit ng GitHub Actions para sa pagpapatunay. Bago magsumite ng PRs:
 
 1. **Suriin ang Markdown Links**:
    ```bash
-   # The validate-markdown.yml workflow checks:
-   # - Broken relative paths
-   # - Missing tracking IDs on paths
-   # - Missing tracking IDs on URLs
-   # - URLs with country locale
-   # - Broken external URLs
+   # Sinusuri ng validate-markdown.yml na workflow:
+   # - Mga sirang relative path
+   # - Nawawalang mga tracking ID sa mga path
+   # - Nawawalang mga tracking ID sa mga URL
+   # - Mga URL na may country locale
+   # - Mga sirang panlabas na URL
    ```
 
-2. **Manwal na Pagsusuri**:
-   - Subukan ang mga halimbawa ng Python: I-activate ang venv at patakbuhin ang mga script
-   - Subukan ang mga halimbawa ng TypeScript: `npm install`, `npm run build`, `npm start`
-   - Siguraduhing tama ang pagkaka-configure ng mga environment variable
-   - Suriin na gumagana ang mga API keys sa mga halimbawa ng code
+2. **Manwal na Pagsubok**:
+   - Subukan ang mga Python halimbawa: I-activate ang venv at patakbuhin ang mga script
+   - Subukan ang mga TypeScript halimbawa: `npm install`, `npm run build`, `npm start`
+   - Siguraduhing tama ang pagkaka-konfigura ng mga environment variable
+   - Suriin kung gumagana ang mga API key sa mga halimbawa ng code
 
 3. **Mga Halimbawa ng Code**:
-   - Siguraduhing gumagana ang lahat ng code nang walang error
+   - Siguraduhing ang lahat ng code ay tumatakbo nang walang error
    - Subukan gamit ang parehong Azure OpenAI at OpenAI API kung naaangkop
-   - Suriin na gumagana ang mga halimbawa gamit ang GitHub Models kung suportado
+   - Siguraduhin na gumagana ang mga halimbawa sa Microsoft Foundry Models kapag suportado
 
-### Walang Automated Tests
+### Walang Awtomatikong Pagsubok
 
-Ito ay isang educational repository na nakatuon sa tutorials at mga halimbawa. Walang unit tests o integration tests na kailangang patakbuhin. Ang validation ay pangunahing:
+Ito ay isang edukasyonal na repositoryo na nakatuon sa mga tutorial at halimbawa. Walang unit test o integration test na ipinatatakbo. Ang pagpapatunay ay pangunahing:
 - Manwal na pagsusuri ng mga halimbawa ng code
-- GitHub Actions para sa Markdown validation
-- Pagsusuri ng komunidad sa educational content
+- GitHub Actions para sa pagpapatunay ng Markdown
+- Pagsusuri ng komunidad sa nilalaman ng edukasyon
 
 ## Mga Alituntunin sa Pull Request
 
 ### Bago Magsumite
 
 1. Subukan ang mga pagbabago sa code sa parehong Python at TypeScript kung naaangkop
-2. Patakbuhin ang Markdown validation (awtomatikong na-trigger sa PR)
-3. Siguraduhing may tracking IDs ang lahat ng Microsoft URLs
-4. Suriin na valid ang mga relative links
-5. Siguraduhing tama ang pag-refer sa mga imahe
+2. Patakbuhin ang pagpapatunay ng Markdown (awtomatikong pinapalakad sa PR)
+3. Siguraduhing naroroon ang mga tracking ID sa lahat ng Microsoft URLs
+4. Suriin na valid ang mga relative na link
+5. Siguraduhin na tama ang pag-reference ng mga larawan
 
-### Format ng PR Title
+### Format ng Pamagat ng PR
 
-- Gumamit ng mga deskriptibong pamagat: `[Lesson 06] Fix Python example typo` o `Update README for lesson 08`
-- I-refer ang mga numero ng isyu kung naaangkop: `Fixes #123`
+- Gumamit ng mga deskriptibong pamagat: `[Lesson 06] Ayusin ang typo sa halimbawa ng Python` o `I-update ang README para sa lesson 08`
+- Banggitin ang numero ng isyu kung naaangkop: `Ayusin ang #123`
 
 ### Deskripsyon ng PR
 
 - Ipaliwanag kung ano ang binago at bakit
-- Mag-link sa mga kaugnay na isyu
-- Para sa mga pagbabago sa code, tukuyin kung aling mga halimbawa ang nasubukan
-- Para sa mga PR ng pagsasalin, isama ang lahat ng file para sa kumpletong pagsasalin
+- Magbigay ng link sa mga kaugnay na isyu
+- Para sa mga pagbabago sa code, tukuyin kung aling mga halimbawa ang sinubukan
+- Para sa mga PR ng pagsasalin, isama ang lahat ng mga file para sa kumpletong pagsasalin
 
 ### Mga Kinakailangan sa Kontribusyon
 
-- Pirmahan ang Microsoft CLA (awtomatiko sa unang PR)
-- I-fork ang repository sa iyong account bago gumawa ng mga pagbabago
-- Isang PR bawat lohikal na pagbabago (huwag pagsamahin ang hindi kaugnay na mga pag-aayos)
-- Panatilihing nakatuon at maliit ang mga PR kung maaari
+- Pumirma sa Microsoft CLA (awtomatiko sa unang PR)
+- I-fork ang repositoryo sa iyong account bago gumawa ng mga pagbabago
+- Isang PR kada lohikal na pagbabago (huwag paghaluin ang mga hindi magkaugnay na pag-aayos)
+- Panatilihing pokus at maliit ang mga PR kapag posible
 
-## Karaniwang Workflow
+## Karaniwang Daloy ng Trabaho
 
 ### Pagdaragdag ng Bagong Halimbawa ng Code
 
-1. Pumunta sa naaangkop na direktoryo ng aralin
+1. Pumunta sa angkop na lesson directory
 2. Gumawa ng halimbawa sa `python/` o `typescript/` subdirectory
 3. Sundin ang naming convention: `{provider}-{example-name}.{py|ts|js}`
-4. Subukan gamit ang aktwal na mga kredensyal ng API
-5. Idokumento ang anumang bagong environment variable sa README ng aralin
+4. Subukan gamit ang aktwal na API credentials
+5. Idokumento ang anumang bagong environment variable sa lesson README
 
 ### Pag-update ng Dokumentasyon
 
-1. I-edit ang README.md sa direktoryo ng aralin
-2. Sundin ang mga alituntunin sa Markdown (tracking IDs, relative links)
-3. Ang mga update sa pagsasalin ay pinangangasiwaan ng GitHub Actions (huwag i-edit nang manu-mano)
-4. Subukan na valid ang lahat ng link
+1. I-edit ang README.md sa loob ng lesson directory
+2. Sundin ang mga alituntuning Markdown (tracking IDs, relative links)
+3. Ang mga pag-update sa pagsasalin ay hinahawakan ng GitHub Actions (huwag manual na i-edit)
+4. Subukan na lahat ng link ay valid
 
-### Paggawa gamit ang Dev Containers
+### Paggawa sa Dev Containers
 
-1. Ang repository ay may kasamang `.devcontainer/devcontainer.json`
-2. Ang post-create script ay awtomatikong nag-i-install ng mga dependency ng Python
-3. Ang mga extension para sa Python at Jupyter ay naka-pre-configure
+1. Kasama sa repositoryo ang `.devcontainer/devcontainer.json`
+2. Awtomatikong ini-install ng post-create script ang mga dependensiya ng Python
+3. Mga extension para sa Python at Jupyter ay naka-pre-configure
 4. Ang environment ay nakabase sa `mcr.microsoft.com/devcontainers/universal:2.11.2`
 
-## Deployment at Pag-publish
+## Pag-deploy at Paglathala
 
-Ito ay isang learning repository - walang proseso ng deployment. Ang kurikulum ay ginagamit sa pamamagitan ng:
+Ito ay isang learning repository - walang proseso ng pag-deploy. Ang kurikulum ay maaaring gamitin sa pamamagitan ng:
 
 1. **GitHub Repository**: Direktang access sa code at dokumentasyon
-2. **GitHub Codespaces**: Instant dev environment na may pre-configured setup
-3. **Microsoft Learn**: Ang content ay maaaring i-syndicate sa opisyal na learning platform
-4. **docsify**: Documentation site na binuo mula sa Markdown (tingnan ang `docsifytopdf.js` at `package.json`)
+2. **GitHub Codespaces**: Instant na dev environment na may naka-pre-configure na setup
+3. **Microsoft Learn**: Maaaring mai-syndicate ang nilalaman sa opisyal na learning platform
+4. **docsify**: Site ng dokumentasyon na gawa mula sa Markdown (tingnan ang `docsifytopdf.js` at `package.json`)
 
-### Pagbuo ng Documentation Site
+### Pagbuo ng Dokumentasyon na Site
 
 ```bash
-# Generate PDF from documentation (if needed)
+# Gumawa ng PDF mula sa dokumentasyon (kung kinakailangan)
 npm run convert
 ```
 
 ## Pag-troubleshoot
 
-### Karaniwang Isyu
+### Mga Karaniwang Isyu
 
-**Python Import Errors**:
-- Siguraduhing naka-activate ang virtual environment
+**Mga Error sa Pag-import ng Python**:
+- Siguraduhin na naka-activate ang virtual environment
 - Patakbuhin ang `pip install -r requirements.txt`
 - Suriin na ang bersyon ng Python ay 3.9+
 
-**TypeScript Build Errors**:
-- Patakbuhin ang `npm install` sa partikular na direktoryo ng app
-- Suriin na ang bersyon ng Node.js ay compatible
-- I-clear ang `node_modules` at i-reinstall kung kinakailangan
+**Mga Error sa Build ng TypeScript**:
+- Patakbuhin ang `npm install` sa partikular na app directory
+- Suriin na compatible ang bersyon ng Node.js
+- Linisin ang `node_modules` at i-reinstall kung kinakailangan
 
-**API Authentication Errors**:
-- Siguraduhing may `.env` file at may tamang mga halaga
-- Suriin na valid at hindi expired ang mga API keys
-- Siguraduhing tama ang endpoint URLs para sa iyong rehiyon
+**Mga Error sa API Authentication**:
+- Siguraduhing umiiral ang `.env` file at may tamang mga halaga
+- Suriin na valid ang mga API key at hindi expired
+- Siguraduhing tama ang mga endpoint URL para sa iyong rehiyon
 
-**Missing Environment Variables**:
-- Kopyahin ang `.env.copy` sa `.env`
-- Punan ang lahat ng kinakailangang halaga para sa aralin na iyong ginagawa
+**Nawawalang mga Environment Variable**:
+- Kopyahin ang `.env.copy` bilang `.env`
+- Punan ang lahat ng kinakailangang mga halaga para sa leksyon na iyong ginagawang
 - I-restart ang iyong aplikasyon pagkatapos i-update ang `.env`
 
-## Karagdagang Resources
+## Karagdagang Mga Mapagkukunan
 
 - [Course Setup Guide](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)
 - [Contributing Guidelines](./CONTRIBUTING.md)
@@ -301,17 +311,19 @@ npm run convert
 - [Azure AI Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
 - [Collection of Advanced Code Samples](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
 
-## Mga Tala Tungkol sa Proyekto
+## Mga Tiyak na Tala sa Proyekto
 
-- Ito ay isang **educational repository** na nakatuon sa pag-aaral, hindi production code
+- Ito ay isang **edukasyonal na repositoryo** na nakatuon sa pag-aaral, hindi sa code para sa produksyon
 - Ang mga halimbawa ay sadyang simple at nakatuon sa pagtuturo ng mga konsepto
-- Ang kalidad ng code ay balanse sa edukasyonal na kalinawan
-- Ang bawat aralin ay self-contained at maaaring kumpletuhin nang mag-isa
-- Ang repository ay sumusuporta sa maramihang API providers: Azure OpenAI, OpenAI, at GitHub Models
-- Ang content ay multilingual na may automated translation workflows
-- Aktibong komunidad sa Discord para sa mga tanong at suporta
+- Ang kalidad ng code ay balanseng may kalinawan para sa edukasyon
+- Bawat leksyon ay self-contained at maaaring tapusin nang independente
+- Sinusuportahan ng repositoryo ang maramihang API provider: Azure OpenAI, OpenAI, Microsoft Foundry Models, at offline providers tulad ng Foundry Local at Ollama
+- Multilingual ang nilalaman na may automated na workflows sa pagsasalin
+- Aktibo ang komunidad sa Discord para sa mga tanong at suporta
 
 ---
 
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

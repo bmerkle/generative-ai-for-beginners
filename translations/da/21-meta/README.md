@@ -1,58 +1,61 @@
-# Byg med Meta Family-modellerne
+# Bygning med Meta-familie modellerne 
 
-## Introduktion
+## Introduktion 
 
-Denne lektion vil dække:
+Denne lektion vil dække: 
 
-- Gennemgang af de to hovedmodeller i Meta-familien - Llama 3.1 og Llama 3.2  
-- Forståelse af anvendelsestilfælde og scenarier for hver model  
-- Kodeeksempel, der viser de unikke funktioner i hver model  
+- Udforskning af de to hoved Meta-familie modeller - Llama 3.1 og Llama 3.2 
+- Forståelse af brugsscenarier og anvendelser for hver model 
+- Kodeeksempel for at vise de unikke funktioner ved hver model 
 
-## Meta-familien af modeller
 
-I denne lektion vil vi udforske 2 modeller fra Meta-familien eller "Llama Herd" - Llama 3.1 og Llama 3.2
+## Meta-familien af modeller 
 
-Disse modeller findes i forskellige varianter og er tilgængelige på GitHub Model-markedspladsen. Her er flere detaljer om brugen af GitHub Models til at [prototype med AI-modeller](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+I denne lektion vil vi udforske 2 modeller fra Meta-familien eller "Llama-flokken" - Llama 3.1 og Llama 3.2.
 
-Modelvarianter:  
-- Llama 3.1 - 70B Instruct  
-- Llama 3.1 - 405B Instruct  
-- Llama 3.2 - 11B Vision Instruct  
-- Llama 3.2 - 90B Vision Instruct  
+Disse modeller kommer i forskellige varianter og er tilgængelige i [Microsoft Foundry Models kataloget](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
 
-*Bemærk: Llama 3 er også tilgængelig på GitHub Models, men vil ikke blive dækket i denne lektion*
+> **Note:** GitHub Models udfases ved slutningen af juli 2026. Her er flere detaljer om brugen af [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) til prototyping med AI-modeller.
 
-## Llama 3.1
+Modelvarianter: 
+- Llama 3.1 - 70B Instruct 
+- Llama 3.1 - 405B Instruct 
+- Llama 3.2 - 11B Vision Instruct 
+- Llama 3.2 - 90B Vision Instruct 
 
-Med 405 milliarder parametre hører Llama 3.1 til i kategorien open source LLM.
+*Note: Llama 3 er også tilgængelig i Microsoft Foundry Models, men vil ikke blive dækket i denne lektion*
 
-Modellen er en opgradering af den tidligere udgave Llama 3 og tilbyder:
+## Llama 3.1 
 
-- Større kontekstvindue - 128k tokens mod 8k tokens  
-- Større maks. output tokens - 4096 mod 2048  
-- Bedre flersproget support - takket være flere træningstokens  
+Med 405 milliarder parametre hører Llama 3.1 til kategorien af open source LLM'er. 
 
-Disse forbedringer gør Llama 3.1 i stand til at håndtere mere komplekse anvendelsestilfælde, når man bygger GenAI-applikationer, herunder:  
-- Native Function Calling - evnen til at kalde eksterne værktøjer og funktioner uden for LLM-arbejdsgangen  
-- Bedre RAG-ydeevne - takket være det større kontekstvindue  
-- Syntetisk datagenerering - evnen til at skabe effektiv data til opgaver som finjustering  
+Modellen er en opgradering fra den tidligere udgivelse Llama 3 ved at tilbyde: 
 
-### Native Function Calling
+- Større kontekstvindue - 128k tokens vs 8k tokens 
+- Større maks output tokens - 4096 vs 2048 
+- Bedre flersproget support - på grund af flere træningstokens 
 
-Llama 3.1 er finjusteret til at være mere effektiv til at foretage funktions- eller værktøjskald. Den har også to indbyggede værktøjer, som modellen kan identificere som nødvendige at bruge baseret på brugerens prompt. Disse værktøjer er:
+Disse gør det muligt for Llama 3.1 at håndtere mere komplekse anvendelsesscenarier ved opbygning af GenAI-applikationer inklusive: 
+- Indbygget funktion opkald - evnen til at kalde eksterne værktøjer og funktioner uden for LLM-arbejdsgangen
+- Bedre RAG-ydeevne - på grund af det større kontekstvindue 
+- Syntetisk datagenerering - evnen til at skabe effektiv data til opgaver som finjustering 
 
-- **Brave Search** - Kan bruges til at hente opdaterede oplysninger som vejret ved at udføre en web-søgning  
-- **Wolfram Alpha** - Kan bruges til mere komplekse matematiske beregninger, så du ikke behøver at skrive dine egne funktioner  
+### Indbygget funktion opkald 
 
-Du kan også oprette dine egne brugerdefinerede værktøjer, som LLM kan kalde.
+Llama 3.1 er finjusteret til at være mere effektiv til funktion- eller værktøjsopkald. Den har også to indbyggede værktøjer, som modellen kan identificere som nødvendige at bruge baseret på brugerens prompt. Disse værktøjer er: 
 
-I kodeeksemplet nedenfor:
+- **Brave Search** - Kan bruges til at få opdaterede oplysninger som vejret via et web-søgning 
+- **Wolfram Alpha** - Kan bruges til mere komplekse matematiske beregninger, så det ikke er nødvendigt at skrive egne funktioner. 
 
-- Definerer vi de tilgængelige værktøjer (brave_search, wolfram_alpha) i systemprompten.  
-- Sender en brugerprompt, der spørger om vejret i en bestemt by.  
-- LLM vil svare med et værktøjskald til Brave Search-værktøjet, som vil se sådan ud `<|python_tag|>brave_search.call(query="Stockholm weather")`  
+Du kan også skabe dine egne brugerdefinerede værktøjer, som LLM kan kalde. 
 
-*Bemærk: Dette eksempel foretager kun værktøjskaldet. Hvis du vil have resultaterne, skal du oprette en gratis konto på Brave API-siden og definere funktionen selv*  
+I kodeeksemplet nedenfor: 
+
+- Definerer vi de tilgængelige værktøjer (brave_search, wolfram_alpha) i systemprompten. 
+- Sender et brugerprompt, som spørger om vejret i en bestemt by. 
+- LLM vil svare med et værktøjsopkald til Brave Search-værktøjet, som vil se sådan ud `<|python_tag|>brave_search.call(query="Stockholm weather")` 
+
+*Note: Dette eksempel foretager kun værktøjsopkaldet, hvis du ønsker at få resultaterne, skal du oprette en gratis konto på Brave API-siden og definere funktionen selv.
 
 ```python 
 import os
@@ -60,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Få disse fra din Microsoft Foundry-projekts "Oversigt" side
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -92,15 +96,16 @@ response = client.complete(messages=messages, model=model_name)
 print(response.choices[0].message.content)
 ```
 
-## Llama 3.2
+## Llama 3.2 
 
-Selvom Llama 3.1 er en LLM, har den en begrænsning i forhold til multimodalitet. Det vil sige evnen til at bruge forskellige typer input som billeder som prompts og give svar. Denne evne er en af hovedfunktionerne i Llama 3.2. Disse funktioner inkluderer også:
+Selvom den er en LLM, er en begrænsning ved Llama 3.1 dens manglende multimodalitet. Det vil sige evnen til at bruge forskellige typer input som billeder som prompt og give svar. Denne evne er en af hovedfunktionerne i Llama 3.2. Andre funktioner inkluderer: 
 
-- Multimodalitet - evnen til at evaluere både tekst- og billedprompter  
-- Små til mellemstore varianter (11B og 90B) - giver fleksible implementeringsmuligheder  
-- Tekst-only varianter (1B og 3B) - gør det muligt at implementere modellen på edge-/mobilenheder med lav latenstid  
+- Multimodalitet - har evnen til at evaluere både tekst- og billed frembringelser 
+- Små til mellemstore varianter (11B og 90B) - hvilket giver fleksible udrulningsmuligheder 
+- Tekst-only varianter (1B og 3B) - giver mulighed for udrulning på edge / mobile enheder og giver lav latenstid 
 
-Den multimodale support repræsenterer et stort skridt i open source-modellernes verden. Kodeeksemplet nedenfor tager både et billede og en tekstprompt for at få en analyse af billedet fra Llama 3.2 90B.
+Den multimodale support repræsenterer et stort skridt inden for open source modeller. Kodeeksemplet nedenfor tager både et billede og tekstprompt for at få en analyse af billedet fra Llama 3.2 90B. 
+
 
 ### Multimodal support med Llama 3.2
 
@@ -117,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Hent disse fra din Microsoft Foundry-projekts "Oversigt" side
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -151,7 +157,11 @@ print(response.choices[0].message.content)
 
 ## Læringen stopper ikke her, fortsæt rejsen
 
-Efter at have gennemført denne lektion, kan du tjekke vores [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) for at fortsætte med at udvikle din viden om Generative AI!
+Efter at have gennemført denne lektion, så tjek vores [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) for at fortsætte med at øge din viden om Generative AI!
 
-**Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

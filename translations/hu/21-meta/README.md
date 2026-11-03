@@ -1,58 +1,61 @@
-# Építés a Meta család modelljeivel
+# Építés a Meta család modelleivel 
 
-## Bevezetés
+## Bevezetés 
 
-Ebben a leckében a következőkről lesz szó:
+Ez a lecke a következőket fogja lefedni: 
 
-- A két fő Meta család modell felfedezése - Llama 3.1 és Llama 3.2
-- Az egyes modellek használati eseteinek és helyzeteinek megértése
-- Kódpélda, amely bemutatja az egyedi jellemzőket
+- A két fő Meta család modell felfedezése - Llama 3.1 és Llama 3.2 
+- Mindkét modell felhasználási eseteinek és szcenárióinak megértése 
+- Kódpélda, amely bemutatja mindkét modell egyedi jellemzőit 
 
-## A Meta család modelljei
 
-Ebben a leckében két modellt vizsgálunk meg a Meta családból, vagyis a "Llama Herd"-ből - Llama 3.1 és Llama 3.2
+## A Meta család modelljei 
 
-Ezek a modellek különböző változatokban érhetők el, és megtalálhatók a GitHub Model piacterén. További részletek a GitHub Modellek használatáról az [AI modellekkel való prototípus készítéshez](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+Ebben a leckében két modellt fogunk felfedezni a Meta családból, azaz a "Llama Herd"-ból – Llama 3.1 és Llama 3.2.
 
-Modellváltozatok:
-- Llama 3.1 - 70B Instruct
-- Llama 3.1 - 405B Instruct
-- Llama 3.2 - 11B Vision Instruct
-- Llama 3.2 - 90B Vision Instruct
+Ezek a modellek különböző variánsokban érhetők el, és megtalálhatók a [Microsoft Foundry Models katalógusában](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
 
-*Megjegyzés: Llama 3 is elérhető a GitHub Modelleken, de ezt a leckét nem tárgyaljuk*
+> **Megjegyzés:** A GitHub Models 2026 júliusának végén megszűnik. Itt további részleteket talál a [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) használatáról az AI modellekkel való prototípuskészítéshez.
 
-## Llama 3.1
+Modellváltozatok: 
+- Llama 3.1 - 70B Instruktív 
+- Llama 3.1 - 405B Instruktív 
+- Llama 3.2 - 11B Vision Instruktív 
+- Llama 3.2 - 90B Vision Instruktív 
 
-A 405 milliárd paraméterével a Llama 3.1 az open source LLM kategóriába tartozik.
+*Megjegyzés: A Llama 3 szintén elérhető a Microsoft Foundry Modelseiben, de ez a lecke nem foglalkozik vele*
 
-Ez a modell az előző, Llama 3-as verzió továbbfejlesztése, amely a következőket kínálja:
+## Llama 3.1 
 
-- Nagyobb kontextusablak - 128k token az 8k token helyett
-- Nagyobb maximális kimeneti tokenek száma - 4096 az 2048 helyett
-- Jobb többnyelvű támogatás - a megnövelt tanító tokenek miatt
+A 405 milliárd paraméterével a Llama 3.1 az open source nagyméretű nyelvi modellek (LLM) kategóriájába tartozik. 
 
-Ezek lehetővé teszik, hogy a Llama 3.1 összetettebb feladatokat is kezeljen GenAI alkalmazások fejlesztésekor, például:
-- Natív függvényhívás - külső eszközök és funkciók meghívásának képessége az LLM munkafolyamatán kívül
-- Jobb RAG teljesítmény - a nagyobb kontextusablak miatt
-- Szintetikus adatgenerálás - hatékony adatok létrehozása például finomhangoláshoz
+A modell fejlesztés a korábbi Llama 3 kiadáshoz képest, az alábbiakat kínálja: 
 
-### Natív függvényhívás
+- Nagyobb kontextusablak - 128k token vs 8k token 
+- Nagyobb maximális kimeneti tokenek száma - 4096 vs 2048 
+- Jobb többnyelvű támogatás - a megnövelt tanító token mennyiség miatt 
 
-A Llama 3.1 finomhangolt, hogy hatékonyabban tudjon függvényeket vagy eszközöket hívni. Két beépített eszközt is tartalmaz, amelyeket a modell a felhasználói prompt alapján azonosítani tud, hogy használni kell őket. Ezek az eszközök:
+Ezek lehetővé teszik, hogy a Llama 3.1 összetettebb feladatokat kezeljen GenAI alkalmazások fejlesztésekor, beleértve: 
+- Natív függvényhívás - a képesség külső eszközök és függvények meghívására az LLM munkafolyamatán kívül
+- Jobb RAG teljesítmény - a nagyobb kontextusablak miatt 
+- Szintetikus adat generálás - hatékony adatok létrehozásának képessége olyan feladatokhoz, mint a finomhangolás 
 
-- **Brave Search** - friss információk, például időjárás lekérdezésére alkalmas webes keresés segítségével
-- **Wolfram Alpha** - összetettebb matematikai számításokhoz, így nem szükséges saját függvényeket írni
+### Natív függvényhívás 
 
-Saját egyedi eszközöket is létrehozhatsz, amelyeket az LLM hívhat.
+A Llama 3.1 finomhangoltabb, hogy hatékonyabban hívhasson meg függvényeket vagy eszközöket. Két beépített eszközt is tartalmaz, amelyeket a modell azonosítani tud, hogy a felhasználói prompt alapján használnia kell. Ezek az eszközök: 
 
-Az alábbi kódpéldában:
+- **Brave Search** - használható az aktuális információkhoz, például az időjárás lekérdezéséhez, webes keresést végezve 
+- **Wolfram Alpha** - összetettebb matematikai számításokra használható, így nem szükséges saját függvények írása. 
 
-- Meghatározzuk a rendelkezésre álló eszközöket (brave_search, wolfram_alpha) a rendszer promptban.
-- Küldünk egy felhasználói promptot, amely egy adott város időjárására kérdez rá.
-- Az LLM válasza egy eszközhívás lesz a Brave Search eszközhöz, ami így néz ki: `<|python_tag|>brave_search.call(query="Stockholm weather")`
+Saját egyéni eszközöket is létrehozhatsz, amelyeket az LLM hívhat. 
 
-*Megjegyzés: Ez a példa csak az eszközhívást mutatja be, ha az eredményeket is szeretnéd megkapni, ingyenes fiókot kell létrehoznod a Brave API oldalán, és definiálnod kell magát a függvényt*
+Az alábbi kódpéldában: 
+
+- Meghatározzuk a rendelkezésre álló eszközöket (brave_search, wolfram_alpha) a rendszerpromptban. 
+- Küldünk egy felhasználói promptot, amely az időjárásról kérdez egy adott városban. 
+- Az LLM válasza egy eszközhívás lesz a Brave Search eszközre, amely így néz ki: `<|python_tag|>brave_search.call(query="Stockholm weather")` 
+
+*Megjegyzés: Ez a példa csak az eszközhívást hajtja végre, ha az eredményeket is szeretnéd megkapni, ingyenes fiókot kell létrehoznod a Brave API oldalon, és magát a függvényt is definiálnod kell.
 
 ```python 
 import os
@@ -60,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Ezeket a Microsoft Foundry projekted „Áttekintés” oldaláról szerezd be
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -92,15 +96,16 @@ response = client.complete(messages=messages, model=model_name)
 print(response.choices[0].message.content)
 ```
 
-## Llama 3.2
+## Llama 3.2 
 
-Bár LLM-ről van szó, a Llama 3.1 egyik korlátja a multimodalitás hiánya. Ez azt jelenti, hogy nem képes különböző típusú bemeneteket, például képeket promptként használni és válaszokat adni rájuk. Ez a képesség a Llama 3.2 egyik fő jellemzője. További jellemzői:
+Habár LLM, a Llama 3.1 egy korlátja, hogy nincs multimodális képessége. Ez azt jelenti, hogy nem képes különböző típusú bemeneteket használni, például képeket promptként, és választ adni rájuk. Ez a képesség a Llama 3.2 egyik fő jellemzője. Ezek a jellemzők a következők is: 
 
-- Multimodalitás - képes szöveges és képi promptokat is értékelni
-- Kis- és közepes méretű változatok (11B és 90B) - rugalmas telepítési lehetőségeket kínál
-- Csak szöveges változatok (1B és 3B) - lehetővé teszi a modell telepítését élőhelyi / mobil eszközökön, alacsony késleltetéssel
+- Multimodalitás - képes mind szöveg, mind kép promptokat értékelni 
+- Kicsi és közepes méretű változatok (11B és 90B) - rugalmas telepítési lehetőségeket biztosítanak, 
+- Csak szöveges változatok (1B és 3B) - lehetővé teszi a modell telepítését élvonalbeli / mobil eszközökön és alacsony késleltetést biztosít 
 
-A multimodális támogatás nagy előrelépést jelent az open source modellek világában. Az alábbi kódpélda egy képet és egy szöveges promptot is használ, hogy a Llama 3.2 90B elemezze a képet.
+A multimodális támogatás nagy előrelépést jelent a nyílt forráskódú modellek világában. Az alábbi kódpélda egy képet és szöveges promptot is használ, hogy elemzést kapjunk a Llama 3.2 90B-től a képről. 
+
 
 ### Multimodális támogatás a Llama 3.2-vel
 
@@ -117,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Szerezd be ezeket a Microsoft Foundry projekted „Áttekintés” oldaláról
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -149,9 +155,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## A tanulás itt nem ér véget, folytasd az utat
+## A tanulás itt nem áll meg, folytasd az utat
 
-A lecke elvégzése után nézd meg a [Generatív AI tanulási gyűjteményünket](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy tovább fejleszd a generatív AI ismereteidet!
+A lecke befejeztével tekintsd meg [Generatív AI tanulási gyűjteményünket](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), hogy folytasd a Generatív AI ismereteid fejlesztését!
 
-**Jogi nyilatkozat**:  
-Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

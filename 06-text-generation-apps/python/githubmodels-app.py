@@ -3,10 +3,12 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Get these from your Microsoft Foundry project's "Overview" page
+# (GitHub Models is retiring end of July 2026 - see https://ai.azure.com/catalog/models)
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 
-model_name = "gpt-4o"
+model_name = "gpt-5-mini"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -27,10 +29,8 @@ response = client.complete(
         },
     ],
     model=model_name,
-    # Optional parameters
-    temperature=1.,
-    max_tokens=1000,
-    top_p=1.    
+    # Note: gpt-5 reasoning models don't accept temperature/top_p; leave them at their defaults.
 )
 
-print(response.choices[0].message.content)
+if response.choices and response.choices[0].message is not None:
+    print(response.choices[0].message.content)

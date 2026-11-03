@@ -17,15 +17,12 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.10.8",
-    "nodemon": "^3.0.2",
+    "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
-  "@azure-rest/ai-inference": "latest",
-  "@azure/core-auth": "latest",
-  "@azure/core-sse": "latest",
-    "@azure/openai": "^1.0.0-beta.10",
+    "openai": "^4.77.0",
     "dotenv": "^16.3.1",
     "rimraf": "^6.1.0"
   },

@@ -1,266 +1,146 @@
 # Pildigeneratsiooni rakenduste loomine
 
-[![Pildigeneratsiooni rakenduste loomine](../../../translated_images/et/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Pildigeneratsiooni rakenduste loomine](../../../translated_images/et/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-LLM-id ei piirdu ainult tekstide genereerimisega. Samuti on võimalik luua pilte tekstikirjelduste põhjal. Pildid kui meedium võivad olla väga kasulikud mitmes valdkonnas, nagu meditsiinitehnoloogia, arhitektuur, turism, mänguarendus ja palju muud. Selles peatükis vaatleme kahte populaarseimat pildigeneratsiooni mudelit, DALL-E ja Midjourney.
+Suurte keelemudelite (LLM) võimekus ei piirdu vaid teksti genereerimisega. Saad luua ka pilte tekstikirjelduste põhjal. Pildid kui andmekandja on kasulikud MedTechi, arhitektuuri, turismi, mänguarenduse, turunduse ja paljude teiste valdkondade jaoks. Selles õppetükis vaatleme tänaseid **GPT pildimudeleid** ja ehitame pildigeneratsiooni rakenduse.
 
 ## Sissejuhatus
 
-Selles õppetükis käsitleme:
+Pildigeneratsioon võimaldab muuta loomuliku keelelise viite pildiks. Selles õppetükis kasutame OpenAI **`gpt-image`** mudelite pere — praeguse põlvkonna pildimudelid, mis on saadaval **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** ja OpenAI platvormil. Need mudelid asendavad vanemad DALL·E mudelid (DALL·E 2/3 on päritolu).
 
-- Pildigeneratsiooni ja selle kasulikkust.
-- DALL-E ja Midjourney: mis need on ja kuidas need töötavad.
-- Kuidas luua pildigeneratsiooni rakendust.
+Kogu õppetüki vältel kasutame väljamõeldud idufirmat **Edu4All**, mis arendab õppevahendeid. Meeskond soovib genereerida joonistusi ülesannete ja õppematerjalide jaoks.
 
-## Õppeeesmärgid
+## Õpieesmärgid
 
-Pärast selle õppetüki läbimist oskad:
+Selle õppetüki lõpuks oskad sa:
 
-- Luua pildigeneratsiooni rakendust.
-- Määratleda oma rakenduse piirid metaküsimuste abil.
-- Töötada DALL-E ja Midjourneyga.
+- Selgitada, mis on pildigeneratsioon ja kus see on kasulik.
+- Mõista `gpt-image` mudelite perekonda ja kuidas see erineb päritolu DALL·E mudelitest.
+- Ehitada pildigeneratsiooni rakendus Pythonis (ja TypeScript / .NET-is).
+- Muuta pilte ja rakendada ohutuspiire metavättidega.
 
-## Miks luua pildigeneratsiooni rakendust?
+## Mis on pildigeneratsioon?
 
-Pildigeneratsiooni rakendused on suurepärane viis uurida generatiivse tehisintellekti võimalusi. Neid saab kasutada näiteks:
+Pildigeneraatormudelid loovad pilte tekstilise viite põhjal. Moodsaid mudeleid nagu `gpt-image` ehitatakse transformer- ja difusioonitehnikate kombinatsioonina: mudel õpib välja tekstide ja piltide seosed treeningu käigus ning seejärel, saades viite, "puhastab" juhusliku müra iteratiivselt pildiks, mis vastab kirjeldusele.
 
-- **Pilditöötlus ja süntees**. Saad luua pilte erinevateks kasutusjuhtudeks, nagu pilditöötlus ja pildisüntees.
+Kaks hästi tuntud pildimudelite perekonda on:
 
-- **Rakendatav erinevates tööstusharudes**. Neid saab kasutada piltide loomiseks erinevates tööstusharudes, nagu meditsiinitehnoloogia, turism, mänguarendus ja palju muud.
+- **`gpt-image` (OpenAI)** – praegune põlvkond, kasutusel selles õppetükis. Toetab tekstist pildiks genereerimist ja piltide muutmist (inpainting maskiga).
+- **Midjourney** – populaarne kolmanda osapoole mudel, oma teenusega ja Discord-põhise töövooga.
 
-## Stsenaarium: Edu4All
+> Vanemad OpenAI pildimudelid – **DALL·E 2** ja **DALL·E 3** – on päritolu. DALL·E 3 pole enam saadaval uutesse juurutustesse, ja funktsioonid nagu `create_variation` olid olemas ainult DALL·E 2-s. Uute rakenduste jaoks kasuta `gpt-image` mudeleid.
 
-Selle õppetüki osana jätkame tööd oma idufirmaga Edu4All. Õpilased loovad pilte oma ülesannete jaoks. Milliseid pilte täpselt, jääb õpilaste otsustada, kuid need võivad olla illustratsioonid nende enda muinasjuttude jaoks, uue tegelase loomine nende loole või nende ideede ja kontseptsioonide visualiseerimine.
+### Millist `gpt-image` mudelit kasutada?
 
-Näiteks, kui Edu4Alli õpilased töötavad klassis monumentide teemal, võivad nad luua selliseid pilte:
+Microsoft Foundrys on järgmised mudelid **üldiselt saadaval**:
 
-![Edu4All idufirma, klass monumentide teemal, Eiffeli torn](../../../translated_images/et/startup.94d6b79cc4bb3f5a.webp)
+| Mudel | Märkused |
+| --- | --- |
+| **`gpt-image-2`** | Viimane ja võimsaim pildimudel – soovitatav vaikimisi. |
+| `gpt-image-1.5` | Üldiselt saadaval; hea kvaliteet madalama hinnaga. |
+| `gpt-image-1-mini` | Üldiselt saadaval; kiireim / madalaim hind. |
+| `gpt-image-1` | Ainult eelvaade. |
 
-kasutades sellist küsimust nagu
+Kontrolli alati praegust [Foundry pildimudelite nimekirja](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) saadavuse ja regioonide kohta.
 
-> "Koer Eiffeli torni kõrval varahommikuses päikesevalguses"
+> **Oluline:** `gpt-image` mudelid tagastavad genereeritud pildi **base64** kujul (`b64_json`), mitte URL-ina. Sinu kood dekodeerib base64 stringi baitideks ja salvestab selle – pildi URL-i ei ole allalaadimiseks.
 
-## Mis on DALL-E ja Midjourney?
+## Seadistamine
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) ja [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) on kaks populaarseimat pildigeneratsiooni mudelit, mis võimaldavad kasutada küsimusi piltide loomiseks.
+Võid proovida näiteid käitada **Azure OpenAI Microsoft Foundrys** (näited `aoai-*`) või **OpenAI platvormil** (näited `oai-*`).
 
-### DALL-E
+### 1. Loo ja juuruta mudel
 
-Alustame DALL-E mudelist, mis on generatiivse tehisintellekti mudel, mis loob pilte tekstikirjelduste põhjal.
+Järgi juhist [kuidas luua ressursi](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) Microsoft Foundry ressursi loomiseks, seejärel juuruta pildimudel – soovituslik on **`gpt-image-2`**.
 
-> [DALL-E on kahe mudeli, CLIP ja hajutatud tähelepanu kombinatsioon](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. Konfigureeri oma `.env`
 
-- **CLIP** on mudel, mis genereerib sisenditest (piltidest ja tekstist) numbrilisi esitlusi ehk vektoreid.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Hajutatud tähelepanu** on mudel, mis genereerib pilte vektorite põhjal. DALL-E on treenitud piltide ja tekstide andmekogumiga ning seda saab kasutada piltide loomiseks tekstikirjelduste põhjal. Näiteks saab DALL-E abil luua pilte kassist mütsiga või koerast mohawk-soenguga.
+Leia need väärtused oma ressursi **Juurutuste** leheküljel [Foundry portaali](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) kaudu.
 
-### Midjourney
+### 3. Paigalda teegid
 
-Midjourney töötab sarnaselt DALL-E mudelile, luues pilte tekstiküsimuste põhjal. Midjourney abil saab samuti luua pilte, kasutades küsimusi nagu "kass mütsiga" või "koer mohawk-soenguga".
+Loo `requirements.txt`:
 
-![Midjourney loodud pilt, mehaaniline tuvi](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Pildi autor Wikipedia, pilt loodud Midjourney abil_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Kuidas DALL-E ja Midjourney töötavad
+Seejärel loo ja aktiveeri virtuaalne keskkond ning paigalda vajalikud paketid:
 
-Esiteks, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E on generatiivse tehisintellekti mudel, mis põhineb transformerite arhitektuuril ja kasutab _autoregressiivset transformerit_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\aktiveeri
+pip install -r requirements.txt
+```
 
-_Autoregressiivne transformer_ määratleb, kuidas mudel genereerib pilte tekstikirjelduste põhjal, luues ühe piksli korraga ja kasutades genereeritud piksleid järgmise piksli loomiseks. See protsess kordub läbi mitme närvivõrgu kihi, kuni pilt on valmis.
+## Rakenduse ehitamine
 
-Selle protsessi abil suudab DALL-E kontrollida pildi omadusi, objekte, karakteristikuid ja palju muud. Kuid DALL-E 2 ja 3 pakuvad veelgi suuremat kontrolli loodud pildi üle.
+Loo fail `app.py` järgmise koodiga. See genereerib pildi ja salvestab selle PNG-na.
 
-## Esimese pildigeneratsiooni rakenduse loomine
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-Mida on vaja pildigeneratsiooni rakenduse loomiseks? Vajalikud on järgmised teegid:
+dotenv.load_dotenv()
 
-- **python-dotenv**, soovitatav kasutada seda teeki, et hoida oma salajasi andmeid _.env_ failis, eemal koodist.
-- **openai**, teek, mida kasutatakse OpenAI API-ga suhtlemiseks.
-- **pillow**, piltidega töötamiseks Pythonis.
-- **requests**, HTTP-päringute tegemiseks.
+# Suunake klient oma Azure OpenAI (Microsoft Foundry) ressursile.
+# Pildimudelid vajavad uusimat API versiooni - kontrollige Foundry dokumentatsioonist, millist versiooni teie mudel nõuab.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Azure OpenAI mudeli loomine ja juurutamine
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # nt "gpt-image-2"
 
-Kui seda pole veel tehtud, järgige juhiseid [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) lehel, et luua Azure OpenAI ressurss ja mudel. Valige mudeliks DALL-E 3.
-
-## Rakenduse loomine
-
-1. Looge fail _.env_ järgmise sisuga:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   Leidke see teave Azure OpenAI Foundry portaalist oma ressursi "Deployments" sektsioonis.
-
-1. Koguge ülaltoodud teegid faili _requirements.txt_, näiteks:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. Järgmiseks looge virtuaalne keskkond ja installige teegid:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Windowsi puhul kasutage virtuaalse keskkonna loomiseks ja aktiveerimiseks järgmisi käske:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. Lisage järgmine kood faili nimega _app.py_:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Selgitame seda koodi:
-
-- Esiteks impordime vajalikud teegid, sealhulgas OpenAI teegi, dotenv teegi, requests teegi ja Pillow teegi.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Järgmisena laadime keskkonnamuutujad _.env_ failist.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Seejärel konfigureerime Azure OpenAI teenuse kliendi.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Järgmisena genereerime pildi:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Ülaltoodud kood tagastab JSON-objekti, mis sisaldab loodud pildi URL-i. Saame kasutada URL-i pildi allalaadimiseks ja selle faili salvestamiseks.
-
-- Lõpuks avame pildi ja kasutame standardset pildivaaturit selle kuvamiseks:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Pildi genereerimise üksikasjad
-
-Vaatame lähemalt koodi, mis pilti genereerib:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt** on tekstiküsimus, mida kasutatakse pildi loomiseks. Antud juhul kasutame küsimust "Jänes hobuse seljas, hoides pulgakommi, udusel niidul, kus kasvavad nartsissid".
-- **size** on loodava pildi suurus. Antud juhul loome pildi, mille suurus on 1024x1024 pikslit.
-- **n** on loodavate piltide arv. Antud juhul loome kaks pilti.
-- **temperature** on parameeter, mis kontrollib generatiivse tehisintellekti mudeli väljundi juhuslikkust. Temperatuur on väärtus vahemikus 0 kuni 1, kus 0 tähendab, et väljund on deterministlik, ja 1 tähendab, et väljund on juhuslik. Vaikeväärtus on 0.7.
-
-Piltidega saab teha veel palju muud, mida käsitleme järgmises osas.
-
-## Pildigeneratsiooni täiendavad võimalused
-
-Olete näinud, kuidas saime Pythonis mõne koodirea abil pildi genereerida. Kuid piltidega saab teha veel palju muud.
-
-Samuti saate teha järgmist:
-
-- **Teha muudatusi**. Andes olemasoleva pildi, maski ja küsimuse, saate pilti muuta. Näiteks saate lisada midagi pildi osale. Kujutage ette meie jänese pilti, saate lisada jänesele mütsi. Seda tehakse, andes pildi, maski (muutuse ala identifitseerimiseks) ja tekstiküsimuse, mis ütleb, mida tuleks teha.  
-> Märkus: see ei ole toetatud DALL-E 3 puhul.
-
-Siin on näide GPT Image'i kasutamisest:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Algne pilt sisaldaks ainult basseini ja puhkenurka, kuid lõplik pilt sisaldaks flamingot:
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # samuti 1536x1024 (maastik), 1024x1536 (portree) või "auto"
+    n=1,
+)
+
+# gpt-image mudelid tagastavad base64 (b64_json), mitte URL-i - dekodeerige see baitideks.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+Käivita see käsuga `python app.py`. PNG-fail salvestatakse kataloogi `images/`.
+
+> Iga kutsung `images.generate` meetodile loob sama viite puhul erineva pildi – pildimudelid ei kasuta `temperature` parameetrit (see on teksti genereerimise juhtimise jaoks). Mitmekesisuse saamiseks kutsuge API uuesti; erinevuse vähendamiseks täpsusta oma viidet.
+
+## Piltide muutmine
+
+`gpt-image` mudelid suudavad olemasolevat pilti ka **muuta**: edastad pildi, valikulise **maski** (mis märgib piirkonna muutmiseks) ja viite, mis kirjeldab muudatust. Nagu genereerimisel, tagastatakse muutused base64 vormingus.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/et/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -268,211 +148,51 @@ Siin on näide GPT Image'i kasutamisest:
   <img src="../../../translated_images/et/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **Loo variatsioone**. Idee seisneb selles, et võtate olemasoleva pildi ja palute luua variatsioone. Variatsiooni loomiseks annate pildi ja tekstiküsimuse ning koodi, näiteks:
+## Piiride seadmine metavättidega
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Märkus: see on toetatud ainult OpenAI poolt.
-
-## Temperatuur
-
-Temperatuur on parameeter, mis kontrollib generatiivse tehisintellekti mudeli väljundi juhuslikkust. Temperatuur on väärtus vahemikus 0 kuni 1, kus 0 tähendab, et väljund on deterministlik, ja 1 tähendab, et väljund on juhuslik. Vaikeväärtus on 0.7.
-
-Vaatame näidet, kuidas temperatuur töötab, käivitades selle küsimuse kaks korda:
-
-> Küsimus: "Jänes hobuse seljas, hoides pulgakommi, udusel niidul, kus kasvavad nartsissid"
-
-![Jänes hobuse seljas, hoides pulgakommi, versioon 1](../../../translated_images/et/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Nüüd käivitame sama küsimuse uuesti, et näha, et me ei saa kaks korda täpselt sama pilti:
-
-![Loodud pilt jänesest hobuse seljas](../../../translated_images/et/v2-generated-image.33f55a3714efe61d.webp)
-
-Nagu näete, on pildid sarnased, kuid mitte identsed. Proovime muuta temperatuuri väärtust 0.1 ja vaatame, mis juhtub:
+Kui oled pildid genereerimisvalmis teinud, vajad ohutuspiirdeid, et su rakendus ei looks ebaohutut ega kaubamärgivälist sisu. **Metaväide** on tekst, mille lisad kasutaja viite ees, et mudeli väljundit piirata.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Temperatuuri muutmine
-
-Proovime muuta vastuse deterministlikumaks. Võime täheldada, et kahes loodud pildis on esimesel pildil jänes ja teisel pildil hobune, seega pildid erinevad oluliselt.
-
-Muudame seetõttu oma koodi ja määrame temperatuuri väärtuseks 0, nagu nii:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Nüüd, kui käivitate selle koodi, saate need kaks pilti:
-
-- ![Temperatuur 0, v1](../../../translated_images/et/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Temperatuur 0, v2](../../../translated_images/et/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Siin näete selgelt, kuidas pildid sarnanevad rohkem.
-
-## Kuidas määratleda rakenduse piirid metaküsimustega
-
-Meie demo abil saame juba luua pilte oma klientidele. Kuid peame looma oma rakendusele mõned piirid.
-
-Näiteks me ei soovi luua pilte, mis ei ole tööks sobivad või mis ei ole lastele sobilikud.
-
-Seda saame teha _metaküsimuste_ abil. Metaküsimused on tekstiküsimused, mida kasutatakse generatiivse tehisintellekti mudeli väljundi kontrollimiseks. Näiteks saame kasutada metaküsimusi väljundi kontrollimiseks ja tagada, et loodud pildid oleksid tööks sobivad või lastele sobilikud.
-
-### Kuidas see töötab?
-
-Kuidas siis metaküsimused töötavad?
-
-Metaküsimused on tekstiküsimused, mida kasutatakse generatiivse tehisintellekti mudeli väljundi kontrollimiseks. Need paigutatakse enne tekstiküsimust ja neid kasutatakse mudeli väljundi kontrollimiseks ning rakendustesse integreerimiseks, et kontrollida mudeli väljundit. Metaküsimus ja tekstiküsimus ühendatakse ühte tekstiküsimusse.
-
-Üks näide metaküsimusest võiks olla järgmine:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Nüüd vaatame, kuidas saame metaküsimusi oma demos kasutada.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Ülaltoodud küsimusest näete, kuidas kõik loodud pildid arvestavad metaküsimust.
-
-## Ülesanne - aitame õpilasi
-
-Selle õppetüki alguses tutvustasime Edu4Alli. Nüüd on aeg aidata õpilastel luua pilte oma ülesannete jaoks.
-
-Õpilased loovad pilte oma ülesannete jaoks, mis sisaldavad monumente. Millised monumendid täpselt, jääb õpilaste otsustada. Õpilastel palutakse kasutada oma loovust selles ülesandes, et paigutada need monumendid erinevatesse kontekstidesse.
-
-## Lahendus
-
-Siin on üks võimalik lahendus:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# edasta `prompt` kliendile images.generate(...)
 ```
 
-## Suurepärane töö! Jätka õppimist
+Nüüd genereeritakse iga pilt metaväite poolt seatud piirides. Ühenda see Microsoft Foundry sisseehitatud sisufiltritega kaitseks põhjalikumalt.
 
-Pärast selle õppetunni lõpetamist tutvu meie [Generatiivse tehisintellekti õppekollektsiooniga](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), et jätkata oma teadmiste arendamist generatiivse tehisintellekti valdkonnas!
+## Ülesanne – võimaldame õpilastel
 
-Liigu edasi 10. õppetundi, kus uurime, kuidas [luua tehisintellekti rakendusi madala koodiga](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst).
+Edu4Alli õpilased vajavad pilte oma ülesannete jaoks. Ehitada rakendus, mis genereerib pilte **monumentidest** (millised monumentidest, otsustad sina) erinevates loovates kontekstides – näiteks kuulus maamärk päikeseloojangul lapse silmade all.
+
+Proovi ise, seejärel järgi võrdluseks lahendusi:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) täielik genereerimisrakendus: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Töötle ka läbi märkmikud kaustas [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` Azure jaoks ja `oai-assignment.ipynb` OpenAI jaoks).
+
+## Väga hea töö! Jätka õppimist
+
+Pärast selle õppetüki läbimist vaata meie [Generatiivse tehisintellekti õppimise kogu](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), et jätkata oma generatiivse tehisintellekti teadmiste tõstmist!
+
+Liigu järgmisele, 10. õppetükile, et edasi õppida.
 
 ---
 
-**Lahtiütlus**:  
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palume arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle algses keeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta arusaamatuste või valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamise tõttu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Lahtiütlus**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüdleme täpsuse poole, palun pange tähele, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud eksimustest või valesti mõistmistest.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

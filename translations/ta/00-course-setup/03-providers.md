@@ -1,122 +1,155 @@
-# LLM வழங்குநரை தேர்வு செய்தல் மற்றும் கட்டமைத்தல் 🔑
+# LLM வழங்குநரை தேர்வு செய்தல் & அமைத்தல் 🔑
 
-பணிகள் **சாத்தியமாக** ஒரு அல்லது அதற்கு மேற்பட்ட பெரிய மொழி மாதிரி (LLM) அமர்வுகளுக்கு ஆதரவு வழங்குநர்களான OpenAI, Azure அல்லது Hugging Face போன்ற சேவையகங்களின் மூலம் அமைக்கப்படலாம். இவை நமக்கு சரியான அங்கீகாரத்துடன் (API விசை அல்லது டோக்கன்) நிரலாக்கமாக அணுகக்கூடிய _ஹோஸ்ட் செய்யப்பட்ட முடிவுக்குறிப்பை_ (API) வழங்குகின்றன. இந்த பாடத்தில், நாம் இந்த வழங்குநர்களைப் பற்றி விவாதிக்கிறோம்:
+பணிகள் **எனினும்** OpenAI, Azure அல்லது Hugging Face போன்ற ஆதரவு வழங்குநர்களின் மூலம் ஒரே அல்லது பல பெரும் மொழி மாதிரி (LLM) உருவாக்கங்கள் மீது வேலை செய்ய உருவாக்கப்படலாம். இவை நமக்கு சரியான प्रमाणங்கள் (API விசை அல்லது டோக்கன்) உடன் நிரல் மூலம் அணுகக்கூடிய _வழங்கப்பட்டி முனையம்_ (API) வழங்குகின்றன. இந்தப் பாடத்தில், இந்த வழங்குநர்களை விவரிக்கின்றோம்:
 
- - [OpenAI](https://platform.openai.com/docs/models?WT.mc_id=academic-105485-koreyst) பல்வேறு மாதிரிகளுடன், முக்கியமான GPT தொடர் உட்பட.
- - [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/?WT.mc_id=academic-105485-koreyst) OpenAI மாதிரிகளுக்கான, நிறுவன தயாரிப்புக்கு கவனம் செலுத்தி
- - [Hugging Face](https://huggingface.co/docs/hub/index?WT.mc_id=academic-105485-koreyst) திறந்த மூல மாதிரிகள் மற்றும் ஊக சேவையகம்
+ - [OpenAI](https://platform.openai.com/docs/models?WT.mc_id=academic-105485-koreyst) பல்வேறு மாதிரிகள் உட்பட முக்கிய GPT தொடர்.
+ - [Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/?WT.mc_id=academic-105485-koreyst) நிறுவன தயாரார் நோக்கில் OpenAI மாதிரிகள்
+ - [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) OpenAI, Meta, Mistral, Cohere, Microsoft மற்றும் பிற நிறுவுநர்களின் நூற்றுக்கணக்கான மாதிரிகளுக்கு ஒரே முனையம் மற்றும் API விசை (GitHub Models ஐ மாற்றுகிறது, அது 2026 ஜூலை முடிவில் ஓய்வு பெறுகிறது)
+ - [Hugging Face](https://huggingface.co/docs/hub/index?WT.mc_id=academic-105485-koreyst) துவக்க மூல மாதிரிகள் மற்றும் அறிவுரைக் காரியத் தொகுதி
+ - [Foundry Local](https://foundrylocal.ai?WT.mc_id=academic-105485-koreyst) அல்லது [Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst) நீங்கள் பூரணமாக உங்கள் சொந்த சாதனத்தில் மாதிரிகளை குளவுட் சந்தா இல்லாமல் இயக்க விரும்பினால்
 
-**இந்த பயிற்சிகளுக்கு உங்கள் சொந்த கணக்குகளை பயன்படுத்த வேண்டும்**. பணிகள் விருப்பமானவை ஆகும், எனவே உங்கள் ஆர்வத்தின் அடிப்படையில் ஒரு, எல்லா அல்லது எதுவும் இல்லாமல் வழங்குநர்களை அமைக்க முடியும். பதிவு செய்ய சில வழிகாட்டுதல்கள்:
+**இந்த பயிற்சிகளுக்கு உங்கள் சொந்த கணக்குகளைப் பயன்படுத்த வேண்டும்**. பணிகள் விருப்பமாக உள்ளதால் நீங்கள் உங்கள் விருப்பத்திற்கு ஏற்ப ஒரோ, அனைத்தோ அல்லது எதுவும் அமைக்கலாம். பதிவு செய்ய சில வழிகாட்டி:
 
-| பதிவு | செலவு | API விசை | விளையாட்டு மைதானம் | கருத்துக்கள் |
+| பதிவு | செலவு | API விசை | விளையாட்டு மேடை | குறிப்புகள் |
 |:---|:---|:---|:---|:---|
-| [OpenAI](https://platform.openai.com/signup?WT.mc_id=academic-105485-koreyst)| [விலை நிர்ணயம்](https://openai.com/pricing#language-models?WT.mc_id=academic-105485-koreyst)| [திட்ட அடிப்படையிலானது](https://platform.openai.com/api-keys?WT.mc_id=academic-105485-koreyst) | [கோடில்லா, வலை](https://platform.openai.com/playground?WT.mc_id=academic-105485-koreyst) | பல மாதிரிகள் கிடைக்கும் |
-| [Azure](https://aka.ms/azure/free?WT.mc_id=academic-105485-koreyst)| [விலை நிர்ணயம்](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/?WT.mc_id=academic-105485-koreyst)| [SDK விரைவு தொடக்கம்](https://learn.microsoft.com/azure/ai-services/openai/quickstart?WT.mc_id=academic-105485-koreyst)| [ஸ்டுடியோ விரைவு தொடக்கம்](https://learn.microsoft.com/azure/ai-services/openai/quickstart?WT.mc_id=academic-105485-koreyst) |  [அணுகலுக்கு முன்பே விண்ணப்பிக்க வேண்டும்](https://learn.microsoft.com/azure/ai-services/openai/?WT.mc_id=academic-105485-koreyst)|
-| [Hugging Face](https://huggingface.co/join?WT.mc_id=academic-105485-koreyst) | [விலை நிர்ணயம்](https://huggingface.co/pricing) | [அணுகல் டோக்கன்கள்](https://huggingface.co/docs/hub/security-tokens?WT.mc_id=academic-105485-koreyst) | [Hugging Chat](https://huggingface.co/chat/?WT.mc_id=academic-105485-koreyst)| [Hugging Chatக்கு வரையறுக்கப்பட்ட மாதிரிகள் உள்ளன](https://huggingface.co/chat/models?WT.mc_id=academic-105485-koreyst) |
+| [OpenAI](https://platform.openai.com/signup?WT.mc_id=academic-105485-koreyst)| [விலை நிர்ணயம்](https://openai.com/pricing#language-models?WT.mc_id=academic-105485-koreyst)| [திட்டம் அடிப்படையில்](https://platform.openai.com/api-keys?WT.mc_id=academic-105485-koreyst) | [கோடு இல்லாமல், வலை](https://platform.openai.com/playground?WT.mc_id=academic-105485-koreyst) | பல மாதிரிகள் கிடைக்கும் |
+| [Azure](https://aka.ms/azure/free?WT.mc_id=academic-105485-koreyst)| [விலை நிர்ணயம்](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/?WT.mc_id=academic-105485-koreyst)| [SDK ஆரம்பம்](https://learn.microsoft.com/azure/ai-foundry/openai/quickstart?WT.mc_id=academic-105485-koreyst)| [ஸ்டூடியோ ஆரம்பம்](https://learn.microsoft.com/azure/ai-foundry/openai/quickstart?WT.mc_id=academic-105485-koreyst) |  [முன்கூட்டியே அணுகலுக்கான விண்ணப்பம் அவசியம்](https://learn.microsoft.com/azure/ai-foundry/openai/?WT.mc_id=academic-105485-koreyst)|
+| [Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) | [விலை நிர்ணயம்](https://azure.microsoft.com/pricing/details/ai-foundry/?WT.mc_id=academic-105485-koreyst) | [திட்ட அறிமுக பக்கம்](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) | [Foundry விளையாட்டு மேடை](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) | இலவச நிலை; பல மாதிரி வழங்குநர்களுக்கான ஒரு முனையம் + விசை |
+| [Hugging Face](https://huggingface.co/join?WT.mc_id=academic-105485-koreyst) | [விலை நிர்ணயம்](https://huggingface.co/pricing) | [அணுகல் டோக்கன்கள்](https://huggingface.co/docs/hub/security-tokens?WT.mc_id=academic-105485-koreyst) | [Hugging Chat](https://huggingface.co/chat/?WT.mc_id=academic-105485-koreyst)| [Hugging Chatக்கு மிதமான மாதிரிகள் உள்ளன](https://huggingface.co/chat/models?WT.mc_id=academic-105485-koreyst) |
+| [Foundry Local](https://foundrylocal.ai?WT.mc_id=academic-105485-koreyst) | இலவசம் (உங்கள் சாதனத்தில் இயங்கும்) | தேவையில்லை | [உள்ளூர் CLI/SDK](https://learn.microsoft.com/azure/ai-foundry/foundry-local/get-started?WT.mc_id=academic-105485-koreyst) | பூரணமான ஆஃப்லைன், OpenAI-உதவிய முனையம் |
 | | | | | |
 
-வழிமுறைகளை பின்பற்றி இந்த சேமிப்பகத்தை வெவ்வேறு வழங்குநர்களுடன் பயன்படுத்த _கட்டமைக்கவும்_. குறிப்பிட்ட வழங்குநரை தேவைப்படுத்தும் பணிகள், அவற்றின் கோப்பு பெயரில் கீழ்க்காணும் குறிச்சொற்களில் ஒன்றை கொண்டிருக்கும்:
+வெவ்வேறு வழங்குநர்களுடன் இந்த தொகுப்பகம் பயன்படுத்த _கட்டமைக்க_ கீழே உள்ள வழிமுறைகளை பின்பற்றவும். குறிப்பிட்ட வழங்குநரை தேவைப்படும் பணிகளில் அந்த பெயரில் கீழ்காணும் குறிச்சொற்களில் ஒன்று இருக்கும்:
 
-- `aoai` - Azure OpenAI முடிவுக்குறிப்பு, விசை தேவை
-- `oai` - OpenAI முடிவுக்குறிப்பு, விசை தேவை
+- `aoai` - Azure OpenAI முனையம், விசை தேவை
+- `oai` - OpenAI முனையம், விசை தேவை
 - `hf` - Hugging Face டோக்கன் தேவை
+- `githubmodels` - Microsoft Foundry Models முனையம், விசை தேவை (GitHub Models ஜூலை 2026 முடிவில் ஓய்வு பெறும்)
 
-நீங்கள் ஒரு, எதுவும் இல்லாமல் அல்லது எல்லா வழங்குநர்களையும் கட்டமைக்கலாம். தொடர்புடைய பணிகள் அங்கீகாரங்கள் இல்லாமல் பிழை காட்டும்.
+நீங்கள் ஒரேவொரு வழங்குநர், ஒன்றுமில்லை, அனைத்தையும் அமைக்கலாம். தொடர்புடைய பணிகள் தேவையான प्रमாணங்கள் இல்லாவிட்டால் பிழை நிகழும்.
 
-## `.env` கோப்பை உருவாக்குதல்
+## `.env` கோப்பை உருவாக்குக
 
-மேலே உள்ள வழிகாட்டுதலை நீங்கள் ஏற்கனவே படித்து, தொடர்புடைய வழங்குநருடன் பதிவு செய்து, தேவையான அங்கீகார அங்கீகாரங்களை (API_KEY அல்லது டோக்கன்) பெற்றிருப்பதாக நாம் கருதுகிறோம். Azure OpenAI என்றால், குறைந்தது ஒரு GPT மாதிரி உரையாடல் நிறைவு செய்யும் வகையில் Azure OpenAI சேவையின் (முடிவுக்குறிப்பு) செல்லுபடியான அமர்வு உங்களிடம் இருக்க வேண்டும்.
+மேலுள்ள வழிகாட்டியின்படி பொருந்தும் வழங்குநருடன் நீங்கள் பதிவு செய்யப்பட்டு தேவையான அங்கீகார प्रमாணங்கள் (API_KEY அல்லது டோக்கன்) பெற்றுள்ளதாக நாம் எண்ணுகிறோம். Azure OpenAI இல், குறைந்தது ஒரு GPT மாதிரி பளிங்கு சாத்தியத்துக்காக Azure OpenAI சேவை (முனையம்) வழங்கப்பட்டிருக்கும் என்றும் நினைக்கின்றோம்.
 
-அடுத்த படி உங்கள் **உள்ளூர் சூழல் மாறிலிகளை** பின்வருமாறு கட்டமைக்க வேண்டும்:
+அடுத்த படி உங்கள் **உள்ளூர் சூழல் மாறிலிகள்** பின்வருமாறு கட்டமைக்கப்பட வேண்டும்:
 
-1. ரூட் கோப்பகத்தில் `.env.copy` என்ற கோப்பு இருக்கிறதா என்று பாருங்கள். அதில் பின்வருமாறு உள்ளடக்கம் இருக்கும்:
+1. அடிப்படை அடைவில் `.env.copy` என்ற கோப்பை தேடுங்கள், அதில் இதுபோன்ற உள்ளடக்கம் இருக்கும்:
 
    ```bash
    # OpenAI வழங்குநர்
    OPENAI_API_KEY='<add your OpenAI API key here>'
 
-   ## அசுரே OpenAI
-   AZURE_OPENAI_API_VERSION='2024-02-01' # இயல்புநிலை அமைக்கப்பட்டுள்ளது!
-   AZURE_OPENAI_API_KEY='<add your AOAI key here>'
-   AZURE_OPENAI_ENDPOINT='<add your AOIA service endpoint here>'
-   AZURE_OPENAI_DEPLOYMENT='<add your chat completion model name here>' 
-   AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT='<add your embeddings model name here>'
+   ## மைக்ரோசாஃப்ட் ஃபவுண்டிரியில் Azure OpenAI
+   ## (Azure OpenAI சேவை இப்போது மைக்ரோசாஃப்ட் ஃபவுண்ட்ரியின் பகுதி: https://ai.azure.com)
+   AZURE_OPENAI_API_VERSION='2024-10-21' # இயல்பானது அமைக்கப்பட்டுள்ளது! (தற்போதைய நிலையான GA API பதிப்பு)
+   AZURE_OPENAI_API_KEY='<add your Foundry resource key here>'
+   AZURE_OPENAI_ENDPOINT='<add your Foundry resource endpoint here, e.g. https://<resource-name>.openai.azure.com>'
+   AZURE_OPENAI_DEPLOYMENT='<add your chat completion model deployment name here, e.g. gpt-5-mini>'
+   AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT='<add your embeddings model deployment name here, e.g. text-embedding-3-small>'
+
+   ## மைக்ரோசாஃப்ட் ஃபவுண்ட்ரி மாடல்கள் (பன்முக வழங்குநர் மாடல் பட்டியல், GitHub மாடல்களை மாற்றுகிறது, 2026 ஜூலை இறுதியில் ஓய்வுபெறும்)
+   AZURE_INFERENCE_ENDPOINT='<add your Microsoft Foundry project endpoint here>'
+   AZURE_INFERENCE_CREDENTIAL='<add your Microsoft Foundry Models API key here>'
 
    ## ஹக்கிங் பேஸ்
    HUGGING_FACE_API_KEY='<add your HuggingFace API or token here>'
    ```
 
-2. கீழ்காணும் கட்டளையை பயன்படுத்தி அந்த கோப்பை `.env` ஆக நகலெடுக்கவும். இந்த கோப்பு _gitignore-இல்_ உள்ளது, ரகசியங்களை பாதுகாக்கிறது.
+2. கீழ்காணும் கட்டளையை பயன்படுத்தி அந்த கோப்பை `.env` என நகலெடுக்கவும். இந்த கோப்பு _gitignore-ஆகும்_, ரகசியங்கள் பாதுகாக்கப்படுகிறது.
 
    ```bash
    cp .env.copy .env
    ```
 
-3. அடுத்த பகுதியில் விவரிக்கப்பட்டபடி மதிப்புகளை (=`இடதுபுறம் உள்ள இடமாற்றிகளை மாற்றவும்) நிரப்பவும்.
+3. அடுத்த பகுதியில் விவரிக்கப்பட்டபடி மதிப்புகளை நிரப்பவும் (`=`-இன் வலது பக்கத்தில் உள்ள இடமாற்றியுள்ளவற்றை மாற்றவும்).
 
-4. (விருப்பம்) நீங்கள் GitHub Codespaces பயன்படுத்தினால், இந்த சேமிப்பகத்துடன் தொடர்புடைய _Codespaces ரகசியங்கள்_ ஆக சூழல் மாறிலிகளை சேமிக்கலாம். அந்த நிலையில், உள்ளூர் .env கோப்பை அமைக்க தேவையில்லை. **ஆனால், இந்த விருப்பம் GitHub Codespaces பயன்படுத்தும் போது மட்டுமே வேலை செய்கிறது என்பதை கவனிக்கவும்.** Docker Desktop பயன்படுத்தினால் .env கோப்பை அமைக்கவேண்டும்.
+4. (விருப்பம்) நீங்கள் GitHub Codespaces ஐ பயன்படுத்தினால், இந்த தொகுப்பகத்துடன் தொடர்புடைய _Codespaces ரகசியமாக_ சூழல் மாறிலிகளை சேமிக்க வாய்ப்பு உண்டு. அந்த நிலையில், உள்ளூர் .env கோப்பை அமைக்க தேவையில்லை. **ஆனால், இந்த விருப்பம் GitHub Codespaces பயன்படுத்தினால் மட்டுமே வேலை செய்கிறது.** Docker Desktop பயன்படுத்தினாலும் .env கோப்பை நீங்கள் அமைக்கவேண்டும்.
 
-## `.env` கோப்பை நிரப்புதல்
+## `.env` கோப்பை நிரப்புக
 
-மாறிலி பெயர்களை விரைவாக பார்ப்போம், அவை என்ன குறிக்கின்றன என்று புரிந்து கொள்வோம்:
+அவைகளை என்ன உருவாக்கப்படுகிறது என்பதை புரிந்துகொள்ள நாம் மாறிலி பெயர்களைக் கவனிக்கலாம்:
 
 | மாறிலி  | விளக்கம்  |
 | :--- | :--- |
-| HUGGING_FACE_API_KEY | இது உங்கள் சுயவிவரத்தில் அமைத்த பயனர் அணுகல் டோக்கன் |
-| OPENAI_API_KEY | Azure அல்லாத OpenAI முடிவுக்குறிப்புகளுக்கான சேவை பயன்படுத்தும் அங்கீகார விசை |
-| AZURE_OPENAI_API_KEY | அந்த சேவையை பயன்படுத்தும் அங்கீகார விசை |
-| AZURE_OPENAI_ENDPOINT | Azure OpenAI வளத்திற்கான அமர்வு முடிவுக்குறிப்பு |
-| AZURE_OPENAI_DEPLOYMENT | _உரை உருவாக்கும்_ மாதிரி அமர்வு முடிவுக்குறிப்பு |
-| AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT | _உரை நுழைவுகள்_ மாதிரி அமர்வு முடிவுக்குறிப்பு |
+| HUGGING_FACE_API_KEY | இது உங்கள் சுயவிவரத்தில் உங்கள் அணுகல் டோக்கன் |
+| OPENAI_API_KEY | அச்சாவற்ற OpenAI முனைகளுக்கான சேவை பயன்படுத்தும் அங்கீகாரம் விசை |
+| AZURE_OPENAI_API_KEY | அந்த சேவைக்கு அங்கு அங்கீகாரம் விசை |
+| AZURE_OPENAI_ENDPOINT | Azure OpenAI வளத்துக்கான முனைய முகவரி |
+| AZURE_OPENAI_DEPLOYMENT | _உரை உருவாக்கும்_ மாதிரி வழங்கல் முனைய முகவரி |
+| AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT | _உரை இணைப்புகள்_ மாதிரி வழங்கல் முனைய முகவரி |
+| AZURE_INFERENCE_ENDPOINT | உங்கள் Microsoft Foundry திட்டத்திற்கான முனைய முகவரி, Microsoft Foundry மாதிரிகளுக்காகப் பயன்படுத்தப்படுகிறது |
+| AZURE_INFERENCE_CREDENTIAL | உங்கள் Microsoft Foundry திட்டத்திற்கான API விசை |
 | | |
 
-குறிப்பு: கடைசி இரண்டு Azure OpenAI மாறிலிகள் உரையாடல் நிறைவு (உரை உருவாக்கல்) மற்றும் வெக்டர் தேடல் (நுழைவுகள்) ஆகியவற்றுக்கான இயல்புநிலை மாதிரியை பிரதிபலிக்கின்றன. அவற்றை அமைக்கும் வழிமுறைகள் தொடர்புடைய பணிகளில் வரையறுக்கப்படும்.
+குறிப்புரை: கடைசி இரண்டு Azure OpenAI மாறிலிகள் உரை உருவாக்கும் (chat completion) மற்றும் வெக்டர் தேடல் (embeddings) க்கான இயல்புநிலை மாதிரியின் பிரதிபலிப்பாகும். அவற்றை அமைக்கும் வழிமுறைகள் தொடர்புடைய பணிகளில் வரையறுக்கப்படும்.
 
-## Azure ஐ கட்டமைத்தல்: போர்டல் மூலம்
+## Azure OpenAI அமைப்பு: போர்டல் மூலம்
 
-Azure OpenAI முடிவுக்குறிப்பு மற்றும் விசை மதிப்புகள் [Azure போர்டல்](https://portal.azure.com?WT.mc_id=academic-105485-koreyst) இல் காணப்படும், ஆகவே அங்கிருந்து தொடங்குவோம்.
+> **குறிப்பு:** Azure OpenAI சேவை இப்பொழுது [Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) இன் பகுதியாக உள்ளது. வளங்கள் மற்றும் நிறுவல்கள் Azure போர்டலில் தோன்றினாலும், தினசரி மாதிரி மேலாண்மை (நிறுவல்கள், விளையாட்டு மேடை, கண்காணிப்பு) பழைய தனித்த Azure OpenAI ஸ்டூடியோவுக்கு பதிலாக Foundry போர்டலில் நடைபெறும்.
+
+Azure OpenAI முனையம் மற்றும் விசைப் மதிப்பைக் [Azure போர்டல்](https://portal.azure.com?WT.mc_id=academic-105485-koreyst)ல் காணலாம்; அதுவைக் கொண்டு தொடங்குவோம்.
 
 1. [Azure போர்டல்](https://portal.azure.com?WT.mc_id=academic-105485-koreyst) செல்லவும்
-1. பக்கவாட்டில் (இடது மெனு) **Keys and Endpoint** விருப்பத்தை கிளிக் செய்யவும்.
-1. **Show Keys** கிளிக் செய்யவும் - KEY 1, KEY 2 மற்றும் Endpoint காணப்படும்.
-1. AZURE_OPENAI_API_KEY க்காக KEY 1 மதிப்பை பயன்படுத்தவும்
-1. AZURE_OPENAI_ENDPOINT க்காக Endpoint மதிப்பை பயன்படுத்தவும்
+1. இடது பக்க மெனுவில் **Keys and Endpoint** விருப்பத்தை கிளிக் செய்யவும்.
+1. **Show Keys** என்பதனை கிளிக் செய்யவும் - KEY 1, KEY 2 மற்றும் முனைய முகவரி காண்பிக்கப்படும்.
+1. AZURE_OPENAI_API_KEYக்கு KEY 1 மதிப்பைக் கொண்டு பயன்படுத்துங்கள்
+1. AZURE_OPENAI_ENDPOINTக்கு முனைய முகவரியைப் பயன்படுத்துங்கள்
 
-அடுத்து, நாம் அமர்த்திய குறிப்பிட்ட மாதிரிகளுக்கான முடிவுக்குறிப்புகளை தேவைப்படுத்துகிறோம்.
+அடுத்ததாக, நாம் நிறுவியுள்ள குறிப்பிட்ட மாதிரிகளுக்கான முனைய முகவரிகள் தேவை.
 
-1. Azure OpenAI வளத்திற்கான பக்கவாட்டில் (இடது மெனு) **Model deployments** விருப்பத்தை கிளிக் செய்யவும்.
-1. இலக்கு பக்கத்தில் **Manage Deployments** கிளிக் செய்யவும்
+1. Azure OpenAI வளத்தின் இடது பக்க மெனுவில் **Model deployments** விருப்பத்தை கிளிக் செய்யவும்.
+1. இலக்கப் பக்கத்தில், **Go to Microsoft Foundry portal** (அல்லது உங்கள் வளத்துக்கு ஏற்ப **Manage Deployments**) கிளிக் செய்யவும்
 
-இது Azure OpenAI ஸ்டுடியோ இணையதளத்திற்கு கொண்டு செல்லும், அங்கு கீழே விவரிக்கப்பட்ட மற்ற மதிப்புகளை காணலாம்.
+இது Microsoft Foundry போர்டலைத் திறக்கும், அங்கே நாம் பிற மதிப்புகளை பெறுவோம்.
 
-## Azure ஐ கட்டமைத்தல்: ஸ்டுடியோ மூலம்
+## Azure OpenAI அமைப்பு: Microsoft Foundry போர்டல் மூலம்
 
-1. மேலே விவரிக்கப்பட்டபடி உங்கள் வளத்திலிருந்து [Azure OpenAI Studio](https://oai.azure.com?WT.mc_id=academic-105485-koreyst) செல்லவும்.
-1. தற்போது அமர்த்தப்பட்ட மாதிரிகளை காண **Deployments** தாவலை (பக்கவாட்டில், இடது) கிளிக் செய்யவும்.
-1. உங்கள் விருப்பமான மாதிரி அமர்த்தப்படவில்லை என்றால், **Create new deployment** பயன்படுத்தி அதை அமர்த்தவும்.
-1. நீங்கள் _உரை உருவாக்கும்_ மாதிரியை தேவைப்படுத்துவீர்கள் - பரிந்துரைக்கப்படுகிறது: **gpt-35-turbo**
-1. நீங்கள் _உரை நுழைவுகள்_ மாதிரியை தேவைப்படுத்துவீர்கள் - பரிந்துரைக்கப்படுகிறது **text-embedding-ada-002**
+1. மேலே கூறியுள்ளீர்கள் போல் உங்கள் வளத்திலிருந்து [Microsoft Foundry போர்டல்](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) செல்.
+1. தற்போது நிறுவியுள்ள மாதிரிகளை காண **Deployments** தாவலை (இடது பக்கம்) கிளிக் செய்யவும்.
+1. உங்கள் விருப்பமான மாதிரி நிறுவப்படவில்லை என்றால், [மாதிரி இன்வென்டரி](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) இலிருந்து அதை நிறுவ **Deploy model** ஐ பயன்படுத்தவும்.
+1. நீங்கள் _உரை உருவாக்கும்_ மாதிரி தேவை - நாங்கள் பரிந்துரைக்கிறோம்: **gpt-5-mini**
+1. நீங்கள் _உரை இணைப்புகள்_ மாதிரி தேவை - பரிந்துரை: **text-embedding-3-small**
 
-இப்போது, _Deployment name_ பயன்படுத்தியதை பிரதிபலிக்க சூழல் மாறிலிகளை புதுப்பிக்கவும். இது பொதுவாக மாதிரி பெயருடன் ஒரே மாதிரியாக இருக்கும், நீங்கள் அதை தெளிவாக மாற்றவில்லை என்றால். உதாரணமாக, நீங்கள் இதுபோன்றதாக இருக்கலாம்:
+இப்போது சூழல் மாறிலிகளை நிறுவலில் பயன்படுத்திய _Deployment name_ இன்படி புதுப்பிக்கவும். பொதுவாக இது மாதிரி பெயருடன் ஒத்திருக்கும், நீங்கள் எடுத்து மாற்றவில்லை என்றால். உதாரணமாக:
 
 ```bash
-AZURE_OPENAI_DEPLOYMENT='gpt-35-turbo'
-AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT='text-embedding-ada-002'
+AZURE_OPENAI_DEPLOYMENT='gpt-5-mini'
+AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT='text-embedding-3-small'
 ```
 
-**முடிந்தவுடன் .env கோப்பை சேமிப்பதை மறக்காதீர்கள்**. இப்போது கோப்பை மூடி நோட்புக் இயக்கும் வழிமுறைகளுக்கு திரும்பலாம்.
+**செயலை முடித்த பின் .env கோப்பை சேமிப்பதை மறவாதீர்கள்**. இப்போது கோப்பை மூடி நோட்ட்புக் ஓட படி நடைமுறைகளுக்கு திரும்பலாம்.
 
-## OpenAI ஐ கட்டமைத்தல்: சுயவிவரத்திலிருந்து
+## OpenAI அமைப்பு: சுயவிவரத்திலிருந்து
 
-உங்கள் OpenAI API விசை உங்கள் [OpenAI கணக்கில்](https://platform.openai.com/api-keys?WT.mc_id=academic-105485-koreyst) காணலாம். இல்லையெனில், கணக்கு பதிவு செய்து API விசை உருவாக்கலாம். விசையை பெற்றவுடன், `.env` கோப்பில் `OPENAI_API_KEY` மாறிலியை நிரப்ப பயன்படுத்தலாம்.
+உங்கள் OpenAI API விசை உங்கள் [OpenAI கணக்கில்](https://platform.openai.com/api-keys?WT.mc_id=academic-105485-koreyst) காணலாம். இல்லையெனில், கணக்கு திறக்கும் மற்றும் API விசை உருவாக்கலாம். விசையை பெற்ற பிறகு `.env` கோப்பில் `OPENAI_API_KEY` மாறிலிக்குள் பதிக்கலாம்.
 
-## Hugging Face ஐ கட்டமைத்தல்: சுயவிவரத்திலிருந்து
+## Hugging Face அமைப்பு: சுயவிவரத்திலிருந்து
 
-உங்கள் Hugging Face டோக்கன் உங்கள் சுயவிவரத்தில் [Access Tokens](https://huggingface.co/settings/tokens?WT.mc_id=academic-105485-koreyst) பகுதியில் காணலாம். இதை பொது இடங்களில் பகிர வேண்டாம். பதிலாக, இந்த திட்ட பயன்பாட்டிற்காக புதிய டோக்கன் உருவாக்கி அதை `.env` கோப்பில் `HUGGING_FACE_API_KEY` மாறிலியில் நகலெடுக்கவும். _குறிப்பு:_ இது தொழில்நுட்ப ரீதியாக API விசை அல்ல, ஆனால் அங்கீகாரத்திற்காக பயன்படுத்தப்படுகிறது, எனவே ஒரே பெயரிடல் நடைமுறையை தொடர்கிறோம்.
+உங்கள் Hugging Face டோக்கன் உங்கள் சுயவிவரத்தில் [Access Tokens](https://huggingface.co/settings/tokens?WT.mc_id=academic-105485-koreyst) பகுதியில் காணலாம். இவை பொதுவாக பகிர வேண்டாம். இதற்கான பரிந்துரையாக, இந்தத் திட்டம் பயன்பாட்டிற்கு புதிதாக ஒரு டோக்கன் உருவாக்கி அதை `.env` கோப்பில் `HUGGING_FACE_API_KEY` என்ற மாறிலியில் சேர்க்கவும். _குறிப்பு:_ இது API விசை அல்ல, ஆனாலும் அங்கீகாரம் கொள்ள பயன்படும் என்பதால் ஒரே பெயரிடல் வழக்கம் பின்பற்றப்படுகிறது.
+
+## Microsoft Foundry மாதிரிகள் அமைப்பு: போர்டல் மூலம்
+
+> **குறிப்பு:** GitHub Models ஜூலை 2026 முடிவில் ஓய்வு பெறுகிறது. Microsoft Foundry Models நேரடி மாற்று, அதே இலவச முயற்சி மாதிரி இன்வென்டரி மற்றும் Azure AI Inference SDK / OpenAI SDK அனுபவத்தை வழங்குகிறது.
+
+1. [Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) சென்று Foundry திட்டம் உருவாக்கவும் (அல்லது திறக்கவும்).
+1. [மாதிரி இன்வென்டரி](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) பார்வையிட்டு மாதிரியை (உதாரணம் `gpt-5-mini`) நிறுவவும்.
+1. திட்டத்தின் **Overview** பக்கத்தில் இருந்து **முனைய முகவரி** மற்றும் **API விசை** ஐ நகலெடுக்கவும்.
+1. இந்த முகவரி `AZURE_INFERENCE_ENDPOINT` மற்றும் விசை `AZURE_INFERENCE_CREDENTIAL` என்ற மாறிலிகளுக்கு `.env` கோப்பில் சேர்க்கவும்.
+
+## ஆஃப்லைன் / உள்ளூர் வழங்குநர்கள்
+
+நீங்கள் குளவுட் சந்தாவைப் பயன்படுத்த விரும்பாவிட்டால், ஒத்த மாதிரிகளை நேரடியாக உங்கள் சொந்த சாதனத்தில் இயக்கலாம்:
+
+- **[Foundry Local](https://foundrylocal.ai?WT.mc_id=academic-105485-koreyst)** - Microsoft க்கான சாதனத்தில் இயங்கும் மாதிரி. இது சிறந்த செயல்பாட்டு வழங்குநரை தானாகத் தேர்ந்தெடுத்து OpenAI-உருப்படியான முனையத்தை வெளிப்படுத்துகிறது. இந்த பாடத்திற்கான பெரும்பாலான மாதிரி குறியீடுகளை குறைந்த மாற்றத்துடன் பயன்படுத்தலாம். துவங்க [Foundry Local ஆவணத்தை](https://learn.microsoft.com/azure/ai-foundry/foundry-local/get-started?WT.mc_id=academic-105485-koreyst) பாருங்கள், அல்லது `winget install Microsoft.FoundryLocal` (விண்டோஸ்) / `brew install microsoft/foundrylocal/foundrylocal` (மெக்) கட்டளையை பயன்படுத்தி நிறுவவும்.
+- **[Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst)** - Llama, Phi, Mistral மற்றும் Gemma போன்ற திறந்த மாதிரிகளை உள்ளூரிலேயே இயக்க விமான பிரபல மாற்று.
+
+
+இரு விருப்பங்களையும் பயன்படுத்தி கைமுறை எடுத்துக்காட்டுகளுக்கு [பாடம் 19: SLMகளுடன் கட்டமைத்தல்](../19-slm/README.md?WT.mc_id=academic-105485-koreyst) ஐப் பார்க்கவும்.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**குறிப்பு**:  
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கக்கூடும் என்பதை தயவுசெய்து கவனிக்கவும். அசல் ஆவணம் அதன் சொந்த மொழியில் அதிகாரப்பூர்வ மூலமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பின் பயன்பாட்டால் ஏற்படும் எந்த தவறான புரிதல்கள் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
+**மறுப்பு**:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) பயன்படுத்தி மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சி செய்துள்ளோம், ஆனால் தானாக செய்யப்படும் மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கலாம் என்பதை கவனத்தில் கொள்ளவும். அசல் ஆவணம் அதன் தாய்மொழியில் அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்நுட்பமான மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்த தவறான புரிதல்கள் அல்லது தவறான விளக்கத்திற்கும் நாங்கள் பொறுப்பில்வில்லை.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

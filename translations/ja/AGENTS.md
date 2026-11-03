@@ -2,269 +2,279 @@
 
 ## プロジェクト概要
 
-このリポジトリは、生成AIの基礎とアプリケーション開発を教える21レッスンの包括的なカリキュラムを含んでいます。このコースは初心者向けに設計されており、基本的な概念から実用的なアプリケーションの構築までをカバーしています。
+このリポジトリには、生成AIの基礎と応用開発を教える21回の包括的なカリキュラムが含まれています。このコースは初心者向けに設計されており、基本概念から本番対応アプリケーションの構築までを網羅しています。
 
-**主要技術:**
-- Python 3.9+ と以下のライブラリ: `openai`, `python-dotenv`, `tiktoken`, `azure-ai-inference`, `pandas`, `numpy`, `matplotlib`
-- TypeScript/JavaScript (Node.js) と以下のライブラリ: `@azure/openai`, `@azure-rest/ai-inference`, `openai`
-- Azure OpenAI Service、OpenAI API、GitHub Models
-- 対話型学習のための Jupyter Notebooks
-- 一貫した開発環境を提供する Dev Containers
+**主要技術：**
+- ライブラリ付きPython 3.9+：`openai`、`python-dotenv`、`tiktoken`、`azure-ai-inference`、`pandas`、`numpy`、`matplotlib`
+- Node.js用TypeScript/JavaScriptとライブラリ：`openai`（Azure OpenAIのv1エンドポイント+Responses API）、`@azure-rest/ai-inference`（Microsoft Foundry Models）
+- Azure OpenAI Service、OpenAI API、Microsoft Foundry Models（GitHub Modelsは2026年7月末で廃止予定）
+- インタラクティブラーニング用Jupyterノートブック
+- 一貫した開発環境のためのDev Containers
 
-**リポジトリ構成:**
-- 21の番号付きレッスンディレクトリ (00-21)、各ディレクトリにはREADME、コード例、課題が含まれます
-- Python、TypeScript、時には .NET の実装例
-- 40以上の言語バージョンを含む翻訳ディレクトリ
-- `.env` ファイルを使用した集中管理設定 (`.env.copy` をテンプレートとして使用)
+**リポジトリ構成：**
+- 21の番号付きレッスンディレクトリ（00-21）にはREADME、コード例、課題を含む
+- 複数の実装：Python、TypeScript、時に.NET例
+- 40以上の言語版を含むtranslationsディレクトリ
+- `.env`ファイルによる集中設定（テンプレートとして`.env.copy`を使用）
 
 ## セットアップコマンド
 
-### リポジトリの初期セットアップ
+### 初期リポジトリセットアップ
 
 ```bash
-# Clone the repository
+# リポジトリをクローンする
 git clone https://github.com/microsoft/generative-ai-for-beginners.git
 cd generative-ai-for-beginners
 
-# Copy environment template
+# 環境テンプレートをコピーする
 cp .env.copy .env
-# Edit .env with your API keys and endpoints
+# APIキーとエンドポイントを含む.envファイルを編集する
 ```
 
-### Python 環境のセットアップ
+### Python環境セットアップ
 
 ```bash
-# Create virtual environment
+# 仮想環境を作成する
 python3 -m venv venv
 
-# Activate virtual environment
-# On macOS/Linux:
+# 仮想環境を有効にする
+# macOS/Linuxの場合：
 source venv/bin/activate
-# On Windows:
+# Windowsの場合：
 venv\Scripts\activate
 
-# Install dependencies
+# 依存関係をインストールする
 pip install -r requirements.txt
 ```
 
-### Node.js/TypeScript のセットアップ
+### Node.js/TypeScriptセットアップ
 
 ```bash
-# Install root-level dependencies (for documentation tooling)
+# ルートレベルの依存関係をインストールします（ドキュメント用ツールのため）
 npm install
 
-# For individual lesson TypeScript examples, navigate to the specific lesson:
+# 個々のレッスンのTypeScript例については、特定のレッスンに移動してください：
 cd 06-text-generation-apps/typescript/recipe-app
 npm install
 ```
 
-### Dev Container セットアップ (推奨)
+### Dev Containerセットアップ（推奨）
 
-このリポジトリには、GitHub Codespaces または VS Code Dev Containers 用の `.devcontainer` 設定が含まれています:
+このリポジトリにはGitHub CodespacesやVS Code Dev Containers用の`.devcontainer`設定が含まれています：
 
-1. GitHub Codespaces または Dev Containers 拡張機能を使用して VS Code でリポジトリを開く
-2. Dev Container が自動的に以下を実行:
-   - `requirements.txt` から Python 依存関係をインストール
-   - ポスト作成スクリプト (`.devcontainer/post-create.sh`) を実行
-   - Jupyter カーネルをセットアップ
+1. GitHub CodespacesまたはDev Containers拡張付きVS Codeでリポジトリを開く
+2. Dev Containerが自動的に以下を行います：
+   - `requirements.txt`からPython依存関係をインストール
+   - ポストクリエイトスクリプト（`.devcontainer/post-create.sh`）を実行
+   - Jupyterカーネルをセットアップ
 
 ## 開発ワークフロー
 
 ### 環境変数
 
-API アクセスを必要とするすべてのレッスンでは、`.env` に定義された環境変数を使用します:
+APIアクセスを必要とするすべてのレッスンは`.env`で定義された環境変数を使用します：
 
-- `OPENAI_API_KEY` - OpenAI API 用
-- `AZURE_OPENAI_API_KEY` - Azure OpenAI Service 用
-- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI エンドポイント URL
-- `AZURE_OPENAI_DEPLOYMENT` - チャット補完モデルのデプロイメント名
-- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - 埋め込みモデルのデプロイメント名
-- `AZURE_OPENAI_API_VERSION` - API バージョン (デフォルト: `2024-02-01`)
-- `HUGGING_FACE_API_KEY` - Hugging Face モデル用
-- `GITHUB_TOKEN` - GitHub Models 用
+- `OPENAI_API_KEY` - OpenAI API用
+- `AZURE_OPENAI_API_KEY` - Microsoft FoundryのAzure OpenAI用（Azure OpenAI Serviceは現在Microsoft Foundryの一部です: https://ai.azure.com）
+- `AZURE_OPENAI_ENDPOINT` - Azure OpenAIエンドポイントURL（Foundryリソースエンドポイント）
+- `AZURE_OPENAI_DEPLOYMENT` - チャット完了モデルのデプロイ名（コースデフォルト：`gpt-5-mini`）
+- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - 埋め込みモデルのデプロイ名（コースデフォルト：`text-embedding-3-small`）
+- `AZURE_OPENAI_API_VERSION` - APIバージョン（デフォルト：`2024-10-21`）
+- `HUGGING_FACE_API_KEY` - Hugging Faceモデル用
+- `AZURE_INFERENCE_ENDPOINT` - Microsoft Foundry Modelsエンドポイント（マルチプロバイダモデルカタログ）
+- `AZURE_INFERENCE_CREDENTIAL` - Microsoft Foundry Models APIキー（廃止予定の`GITHUB_TOKEN`に代わるもの）
+- `AZURE_INFERENCE_CHAT_MODEL` - サンプリング制御をサポートしない推論モデル以外のモデル（例：`Llama-3.3-70B-Instruct`）、`temperature`例で使用
 
-### Python の例を実行
+### モデルの慣例（重要）
+
+- **デフォルトチャットモデルは`gpt-5-mini`<strong> - 現行の非廃止済みの</strong>推論**モデル。2026年時点で古い`gpt-4o-mini`、`gpt-4.1-mini`の温度対応モデルは<em>廃止予定</em>なので、カリキュラムはGPT-5系に標準化しています。
+- **推論モデルは`temperature`や`top_p`を拒否**し、`max_output_tokens`（Responses API）/`max_completion_tokens`（チャット完了）を`max_tokens`の代わりに使用しています。`gpt-5-mini`を呼び出すサンプルには`temperature`/`top_p`/`max_tokens`を追加しないでください。
+- **`temperature`を示すために<strong>、サンプルはMicrosoft Foundry Modelsエンドポイントの</strong>Llama**モデル（`Llama-3.3-70B-Instruct`）を使用し（`AZURE_INFERENCE_CHAT_MODEL`）、推論モデルはプロンプトエンジニアリング＋推論制御で操作し、サンプリングノブは使いません。
+- <strong>ファインチューニング（レッスン18）</strong>は`gpt-4.1-mini`を保持：GPT-5は強化学習ファインチューニング（RFT）のみ対応し、そこで示された教師ありファインチューニング（SFT）は非対応です。
+- レッスン20（Mistral）と21（Meta）は`temperature`/`max_tokens`を保持、対象モデルであるMistral/Llamaはこれをサポートしています。
+
+### Python例の実行方法
 
 ```bash
-# Navigate to lesson directory
+# レッスンディレクトリに移動する
 cd 06-text-generation-apps/python
 
-# Run a Python script
+# Pythonスクリプトを実行する
 python aoai-app.py
 ```
 
-### TypeScript の例を実行
+### TypeScript例の実行方法
 
 ```bash
-# Navigate to TypeScript app directory
+# TypeScriptアプリのディレクトリに移動する
 cd 06-text-generation-apps/typescript/recipe-app
 
-# Build the TypeScript code
+# TypeScriptコードをビルドする
 npm run build
 
-# Run the application
+# アプリケーションを実行する
 npm start
 ```
 
-### Jupyter Notebooks の実行
+### Jupyterノートブックの実行方法
 
 ```bash
-# Start Jupyter in the repository root
+# リポジトリのルートでJupyterを開始する
 jupyter notebook
 
-# Or use VS Code with Jupyter extension
+# またはJupyter拡張機能を使用してVS Codeを使用する
 ```
 
-### レッスンの種類に応じた作業
+### 複数タイプのレッスンでの作業
 
-- **「学ぶ」レッスン**: README.md のドキュメントと概念に焦点を当てる
-- **「構築する」レッスン**: Python と TypeScript の動作するコード例を含む
-- 各レッスンには、理論、コードの解説、ビデオコンテンツへのリンクを含む README.md が付属
+- **「学ぶ」レッスン**：README.mdのドキュメントと概念に注力
+- **「作る」レッスン**：PythonとTypeScriptの動作するコード例を含む
+- 各レッスンには理論、コード解説、ビデオリンクを含むREADME.mdがある
 
 ## コードスタイルガイドライン
 
 ### Python
 
-- 環境変数管理に `python-dotenv` を使用
-- API インタラクションには `openai` ライブラリをインポート
-- リンティングには `pylint` を使用 (一部の例では簡略化のため `# pylint: disable=all` を含む)
-- PEP 8 の命名規則に従う
-- API 資格情報は `.env` ファイルに保存し、コード内には含めない
+- 環境変数管理に`python-dotenv`を使用
+- API操作に`openai`ライブラリをインポート
+- リンターに`pylint`を使用（一部例では簡易のため`# pylint: disable=all`あり）
+- PEP 8のネーミング規約に従う
+- API認証情報は`.env`に保存し、コード内には記述しない
 
 ### TypeScript
 
-- 環境変数には `dotenv` パッケージを使用
-- 各アプリの `tsconfig.json` で TypeScript を設定
-- Azure サービスには `@azure/openai` または `@azure-rest/ai-inference` を使用
-- 開発時の自動リロードには `nodemon` を使用
-- 実行前にビルド: `npm run build` の後に `npm start`
+- 環境変数に`dotenv`パッケージを使用
+- 各アプリで`tsconfig.json`にてTypeScript設定
+- Azure OpenAIには`openai`パッケージ（クライアントを`/openai/v1/`エンドポイントに設定し`client.responses.create`呼び出し）、Microsoft Foundry Modelsには`@azure-rest/ai-inference`を使用
+- 開発には`nodemon`で自動リロード
+- 実行前に`npm run build`、次に`npm start`
 
-### 一般的な規約
+### 一般的慣例
 
-- コード例はシンプルで教育的なものにする
-- 重要な概念を説明するコメントを含める
-- 各レッスンのコードは自己完結型で実行可能であること
-- 一貫した命名を使用: Azure OpenAI 用に `aoai-`、OpenAI API 用に `oai-`、GitHub Models 用に `githubmodels-`
+- コード例はシンプルかつ教育的に
+- 主要概念はコメントで説明
+- 各レッスンのコードは自己完結的で実行可能
+- Azure OpenAIには`aoai-`プレフィックス、OpenAI APIには`oai-`、Microsoft Foundry Modelsには`githubmodels-`プレフィックス（GitHub Models時代からのレガシーネーム）を使う
 
 ## ドキュメントガイドライン
 
-### Markdown スタイル
+### Markdownスタイル
 
-- すべての URL は `[テキスト](../../url)` 形式で余分なスペースを含めない
-- 相対リンクは `./` または `../` で始める
-- Microsoft ドメインへのリンクには必ずトラッキング ID を含める: `?WT.mc_id=academic-105485-koreyst`
-- URL に国別ロケールを含めない (例: `/en-us/` を避ける)
-- 画像は `./images` フォルダに保存し、説明的な名前を付ける
-- ファイル名には英数字とハイフンを使用
+- URLはすべて`[text](../../url)`形式で余分なスペースなしに記述
+- 相対リンクは`./`または`../`から始める
+- Microsoftドメインのリンクには追跡ID`?WT.mc_id=academic-105485-koreyst`を必ず含める
+- 国別ロケールはURLに含めない（例：`/en-us/`は避ける）
+- 画像は`./images`フォルダーに説明的な名前で保存
+- ファイル名は英数字とダッシュのみ使用
 
 ### 翻訳サポート
 
-- リポジトリは GitHub Actions を使用して40以上の言語をサポート
-- 翻訳は `translations/` ディレクトリに保存
-- 部分的な翻訳は提出しない
+- リポジトリは40言語以上のGitHub Actionsによる自動翻訳をサポート
+- 翻訳は`translations/`ディレクトリに格納
+- 部分翻訳は提出しない
 - 機械翻訳は受け付けない
-- 翻訳された画像は `translated_images/` ディレクトリに保存
+- 翻訳済み画像は`translated_images/`ディレクトリに保存
 
 ## テストと検証
 
-### 提出前のチェック
+### 提出前チェック
 
-このリポジトリは GitHub Actions を使用して検証を行います。PR を提出する前に:
+このリポジトリは検証にGitHub Actionsを使用しています。PRを提出する前に：
 
-1. **Markdown リンクのチェック**:
+1. **Markdownリンクをチェック**：
    ```bash
-   # The validate-markdown.yml workflow checks:
-   # - Broken relative paths
-   # - Missing tracking IDs on paths
-   # - Missing tracking IDs on URLs
-   # - URLs with country locale
-   # - Broken external URLs
+   # validate-markdown.yml ワークフローは以下をチェックします:
+   # - 壊れた相対パス
+   # - パスのトラッキングIDの欠如
+   # - URLのトラッキングIDの欠如
+   # - 国別ロケール付きURL
+   # - 壊れた外部URL
    ```
 
-2. **手動テスト**:
-   - Python の例をテスト: 仮想環境を有効化してスクリプトを実行
-   - TypeScript の例をテスト: `npm install`、`npm run build`、`npm start`
-   - 環境変数が正しく設定されていることを確認
-   - API キーがコード例で動作することを確認
+2. <strong>手動テスト</strong>：
+   - Python例をテスト：仮想環境をアクティブにしてスクリプトを実行
+   - TypeScript例をテスト：`npm install`、`npm run build`、`npm start`
+   - 環境変数が正しく設定されているか確認
+   - APIキーがコード例で機能するか確認
 
-3. **コード例**:
-   - すべてのコードがエラーなく実行されることを確認
-   - 必要に応じて Azure OpenAI と OpenAI API の両方でテスト
-   - GitHub Models がサポートされている場合は例を確認
+3. <strong>コード例</strong>：
+   - 全てのコードがエラーなしで動作するか確認
+   - 対応する場合はAzure OpenAIとOpenAI API両方でテスト
+   - Microsoft Foundry Models対応例も検証
 
-### 自動テストなし
+### 自動化テストは無し
 
-このリポジトリは教育目的のものであり、チュートリアルと例に焦点を当てています。そのため、ユニットテストや統合テストはありません。検証は主に以下を通じて行います:
+このリポジトリはチュートリアルと例に焦点を当てた教育用で、ユニットテストや統合テストはありません。検証は主に：
 - コード例の手動テスト
-- GitHub Actions による Markdown 検証
+- Markdown検証のためのGitHub Actions
 - 教育コンテンツのコミュニティレビュー
 
 ## プルリクエストガイドライン
 
-### 提出前
+### 提出前に
 
-1. Python と TypeScript の両方でコード変更をテスト (該当する場合)
-2. Markdown 検証を実行 (PR 時に自動トリガー)
-3. Microsoft URL にトラッキング ID が含まれていることを確認
-4. 相対リンクが有効であることを確認
-5. 画像が正しく参照されていることを確認
+1. 可能な場合はPythonとTypeScript両方でコード変更をテスト
+2. Markdown検証を実行（PRで自動トリガー）
+3. MicrosoftのURLに追跡IDがあることを確認
+4. 相対リンクが正しいことを確認
+5. 画像の参照が正しいか確認
 
-### PR タイトル形式
+### PRタイトル形式
 
-- 説明的なタイトルを使用: `[Lesson 06] Fix Python example typo` または `Update README for lesson 08`
-- 該当する場合は問題番号を参照: `Fixes #123`
+- 説明的なタイトルを使う：例 `[Lesson 06] Python例のタイポ修正` または `レッスン08のREADME更新`
+- 該当する場合はイシュー番号を参照：`Fixes #123`
 
-### PR 説明
+### PR説明
 
-- 変更内容とその理由を説明
-- 関連する問題へのリンクを含める
+- 何が変更され、なぜかを説明
+- 関連するイシューへのリンク
 - コード変更の場合、どの例をテストしたかを明記
-- 翻訳 PR の場合、完全な翻訳ファイルを含める
+- 翻訳PRの場合は完全な翻訳のためすべてのファイルを含める
 
 ### 貢献要件
 
-- Microsoft CLA に署名 (最初の PR 時に自動)
-- リポジトリを自分のアカウントにフォークしてから変更を行う
-- 論理的な変更ごとに1つの PR を作成 (無関係な修正を組み合わせない)
-- PR は可能な限り小さく、焦点を絞る
+- Microsoft CLAに署名（初回PRで自動的に）
+- 変更前にリポジトリをフォーク
+- 論理的な変更ごとに1つのPR（無関係な修正をまとめない）
+- 可能な限りPRは集中かつ小規模に保つ
 
-## 一般的なワークフロー
+## よくあるワークフロー
 
 ### 新しいコード例の追加
 
-1. 該当するレッスンディレクトリに移動
+1. 該当のレッスンディレクトリに移動
 2. `python/` または `typescript/` サブディレクトリに例を作成
-3. 命名規則に従う: `{provider}-{example-name}.{py|ts|js}`
-4. 実際の API 資格情報でテスト
-5. 新しい環境変数がある場合はレッスン README に記載
+3. 命名規則に従う：`{provider}-{example-name}.{py|ts|js}`
+4. 実際のAPI認証情報でテスト
+5. 新しい環境変数があればレッスンREADMEに記述
 
 ### ドキュメントの更新
 
-1. レッスンディレクトリ内の README.md を編集
-2. Markdown ガイドラインに従う (トラッキング ID、相対リンク)
-3. 翻訳の更新は GitHub Actions によって処理される (手動で編集しない)
-4. すべてのリンクが有効であることをテスト
+1. レッスンディレクトリのREADME.mdを編集
+2. Markdownガイドラインに従う（追跡ID、相対リンク）
+3. 翻訳はGitHub Actionsで処理（手動編集禁止）
+4. リンクがすべて有効かテスト
 
-### Dev Containers の使用
+### Dev Containersの利用
 
-1. リポジトリには `.devcontainer/devcontainer.json` が含まれる
-2. ポスト作成スクリプトが自動的に Python 依存関係をインストール
-3. Python と Jupyter 用の拡張機能が事前設定済み
-4. 環境は `mcr.microsoft.com/devcontainers/universal:2.11.2` に基づく
+1. リポジトリには`.devcontainer/devcontainer.json`が含まれる
+2. ポストクリエイトスクリプトでPython依存関係自動インストール
+3. PythonとJupyter用の拡張が事前設定済み
+4. 環境は`mcr.microsoft.com/devcontainers/universal:2.11.2`ベース
 
 ## デプロイと公開
 
-これは学習用リポジトリであり、デプロイプロセスはありません。このカリキュラムは以下で利用されます:
+これは学習用リポジトリであり、デプロイプロセスはありません。カリキュラムは以下で利用されます：
 
-1. **GitHub リポジトリ**: コードとドキュメントへの直接アクセス
-2. **GitHub Codespaces**: 事前設定された即時開発環境
-3. **Microsoft Learn**: 公式学習プラットフォームへのコンテンツ配信
-4. **docsify**: Markdown から構築されたドキュメントサイト (`docsifytopdf.js` と `package.json` を参照)
+1. **GitHubリポジトリ**：コードとドキュメントに直接アクセス
+2. **GitHub Codespaces**：事前設定済みの即時開発環境
+3. **Microsoft Learn**：公式学習プラットフォームへ配信される可能性
+4. **docsify**：Markdownから構築されたドキュメントサイト（`docsifytopdf.js`と`package.json`を参照）
 
 ### ドキュメントサイトの構築
 
 ```bash
-# Generate PDF from documentation (if needed)
+# ドキュメントからPDFを生成（必要に応じて）
 npm run convert
 ```
 
@@ -272,46 +282,48 @@ npm run convert
 
 ### よくある問題
 
-**Python のインポートエラー**:
-- 仮想環境が有効化されていることを確認
-- `pip install -r requirements.txt` を実行
-- Python のバージョンが 3.9+ であることを確認
+**Pythonインポートエラー**：
+- 仮想環境がアクティブか確認
+- `pip install -r requirements.txt`を実行
+- Pythonバージョンが3.9以上か確認
 
-**TypeScript のビルドエラー**:
-- 特定のアプリディレクトリで `npm install` を実行
-- Node.js のバージョンが互換性があることを確認
-- `node_modules` をクリアして再インストール
+**TypeScriptビルドエラー**：
+- 該当アプリディレクトリで`npm install`を実行
+- Node.jsバージョンが対応しているか確認
+- `node_modules`をクリアし再インストールを試みる
 
-**API 認証エラー**:
-- `.env` ファイルが存在し、正しい値が設定されていることを確認
-- API キーが有効で期限切れでないことを確認
-- エンドポイント URL が地域に適していることを確認
+**API認証エラー**：
+- `.env`ファイルが存在し正しい値か確認
+- APIキーが有効か期限切れでないか確認
+- エンドポイントURLが地域に合っているか確認
 
-**環境変数が不足している**:
-- `.env.copy` を `.env` にコピー
-- 作業中のレッスンに必要な値をすべて入力
-- `.env` を更新後、アプリケーションを再起動
+<strong>環境変数が不足している場合</strong>：
+- `.env.copy`を`.env`にコピー
+- 作業中のレッスンに必要な値をすべて填入
+- `.env`を更新後アプリを再起動
 
 ## 追加リソース
 
-- [コースセットアップガイド](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)
-- [貢献ガイドライン](./CONTRIBUTING.md)
-- [行動規範](./CODE_OF_CONDUCT.md)
-- [セキュリティポリシー](./SECURITY.md)
+- [Course Setup Guide](./00-course-setup/README.md?WT.mc_id=academic-105485-koreyst)
+- [Contributing Guidelines](./CONTRIBUTING.md)
+- [Code of Conduct](./CODE_OF_CONDUCT.md)
+- [Security Policy](./SECURITY.md)
 - [Azure AI Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
-- [高度なコードサンプル集](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
+- [Collection of Advanced Code Samples](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
 
-## プロジェクト固有の注意事項
+## プロジェクト特記事項
 
-- このリポジトリは **教育目的** に特化しており、実運用コードではありません
-- 例は意図的にシンプルで、概念の理解に焦点を当てています
-- コード品質は教育的な明確さとバランスを取っています
-- 各レッスンは自己完結型で、独立して完了可能です
-- リポジトリは複数の API プロバイダーをサポート: Azure OpenAI、OpenAI、GitHub Models
-- コンテンツは多言語対応で、自動翻訳ワークフローを備えています
-- 質問やサポートのための活発な Discord コミュニティがあります
+- これは<strong>教育用リポジトリ</strong>であり、本番コードではありません
+- 例は意図的にシンプルで概念理解に集中しています
+- コードの品質は教育的明瞭性とバランスを取っています
+- 各レッスンは自己完結型で独立して完了可能
+- 複数のAPIプロバイダをサポート：Azure OpenAI、OpenAI、Microsoft Foundry Models、Foundry LocalやOllamaなどのオフラインプロバイダも含む
+- コンテンツは多言語対応で自動翻訳ワークフローを採用
+- Discord上に活発なコミュニティがあり、質問やサポートが可能
 
 ---
 
-**免責事項**:  
-この文書は、AI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を追求しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知ください。元の言語で記載された文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤解釈について、当方は責任を負いません。
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,34 +1,34 @@
-# Kuandaa data za uandishi wa maneno
+# Maandalizi ya data ya uandishi wa maandishi
 
-Skripti za kuandaa data za uandishi wa maneno hupakua manukuu ya video za YouTube na kuziandaa kwa matumizi na mfano wa Semantic Search with OpenAI Embeddings and Functions.
+Skripti za maandalizi ya data ya uandishi wa maandishi hupakua maandishi ya video za YouTube na kuziandaa kwa matumizi na mfano wa Semantic Search with OpenAI Embeddings and Functions.
 
-Skripti za kuandaa data za uandishi wa maneno zimeshahakikiwa kwenye toleo la hivi karibuni la Windows 11, macOS Ventura na Ubuntu 22.04 (na zaidi).
+Skripti za maandalizi ya data ya uandishi wa maandishi zimejaribiwa kwenye matoleo ya hivi karibuni ya Windows 11, macOS Ventura na Ubuntu 22.04 (na juu zaidi).
 
-## Tengeneza rasilimali zinazohitajika za Azure OpenAI Service
+## Tengeneza rasilimali za huduma ya Azure OpenAI zinazohitajika
 
 > [!IMPORTANT]
-> Tunapendekeza usasishaji wa Azure CLI hadi toleo la hivi karibuni ili kuhakikisha ulinganifu na OpenAI
-> Angalia [Documentation](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
+> Tunapendekeza uusasishe Azure CLI hadi toleo la hivi karibuni ili kuhakikisha ulinganifu na OpenAI
+> Tazama [Documentation](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
 1. Tengeneza kundi la rasilimali
 
 > [!NOTE]
-> Kwa maelekezo haya tunatumia kundi la rasilimali linaloitwa "semantic-video-search" katika East US.
-> Unaweza kubadilisha jina la kundi la rasilimali, lakini unapobadilisha eneo la rasilimali,
-> angalia [model availability table](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
+> Kwa maelekezo haya tunatumia kundi la rasilimali linaloitwa "semantic-video-search" kusini mwa Mashariki ya Marekani.
+> Unaweza kubadilisha jina la kundi la rasilimali, lakini unapotoboa eneo la rasilimali, 
+> angalia [jedwali la upatikanaji wa modeli](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
 ```
 
-1. Tengeneza rasilimali ya Azure OpenAI Service.
+1. Tengeneza rasimali ya huduma ya Azure OpenAI.
 
 ```console
 az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. Pata endpoint na funguo kwa matumizi katika programu hii
+1. Pata kiunganishi na funguo kwa matumizi katika programu hii
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -37,9 +37,9 @@ az cognitiveservices account keys list --name semantic-video-openai \
    --resource-group semantic-video-search | jq -r .key1
 ```
 
-1. Sambaza mifano ifuatayo:
-   - `text-embedding-ada-002` toleo `2` au zaidi, liitwe `text-embedding-ada-002`
-   - `gpt-35-turbo` toleo `0613` au zaidi, liitwe `gpt-35-turbo`
+1. Sambaza modeli zifuatazo:
+   - toleo la `text-embedding-ada-002` `2` au zaidi, jina `text-embedding-ada-002`
+   - `gpt-5-mini` jina `gpt-5-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -53,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-5-mini \
+    --model-name gpt-5-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -67,11 +66,11 @@ az cognitiveservices account deployment create \
 
 ## Mabadiliko ya mazingira
 
-Mabadiliko yafuatayo ya mazingira yanahitajika kuendesha skripti za kuandaa data za uandishi wa maneno za YouTube.
+Mabadiliko ya mazingira yafuatayo yanahitajika kuendesha skripti za maandalizi ya data ya uandishi wa maandishi wa YouTube.
 
 ### Kwenye Windows
 
-Inashauriwa kuongeza mabadiliko haya kwenye mabadiliko ya mazingira ya `user`.
+Tunapendekeza kuongeza mabadiliko kwenye mabadiliko ya mazingira ya `user`.
 `Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` kwa [USER] > `New`.
 
 ```text
@@ -81,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
+<!-- Unaweza kuongeza mabadiliko ya mazingira kwenye wasifu wako wa PowerShell.
+
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<funguo yako ya API ya Huduma ya Azure OpenAI>"
+$env:AZURE_OPENAI_ENDPOINT = "<kiunganishi chako cha Huduma ya Azure OpenAI>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<jina la usambazaji wa modeli ya Huduma ya Azure OpenAI>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<funguo yako ya API ya mtengenezaji wa Google>"
+``` -->
+
 ### Kwenye Linux na macOS
 
-Inashauriwa kuongeza amri zifuatazo za export kwenye faili yako ya `~/.bashrc` au `~/.zshrc`.
+Tunapendekeza kuongeza amri zifuatazo kwenye faili yako ya `~/.bashrc` au `~/.zshrc`.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -94,8 +102,8 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 ## Sakinisha maktaba za Python zinazohitajika
 
-1. Sakinisha [git client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst) kama bado haijasakinishwa.
-1. Kutoka kwenye dirisha la `Terminal`, nakili mfano hadi folda yako unayopendelea ya repo.
+1. Sakinisha [klenti ya git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst ikiwa bado haijasakinishwa.
+1. Kutoka kwenye dirisha la `Terminal`, nakili mfano katika folda ya repo unayopendelea.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -107,7 +115,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    cd semanic-search-openai-embeddings-functions/src/data_prep
    ```
 
-1. Tengeneza mazingira ya virtual ya Python.
+1. Tengeneza mazingira ya dhihirisho ya Python.
 
     Kwenye Windows:
 
@@ -121,7 +129,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
     python3 -m venv .venv
     ```
 
-1. Washa mazingira ya virtual ya Python.
+1. Washa mazingira ya dhihirisho ya Python.
 
    Kwenye Windows:
 
@@ -137,7 +145,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Sakinisha maktaba zinazohitajika.
 
-   Kwenye Windows:
+   Kwenye windows:
 
    ```powershell
    pip install -r requirements.txt
@@ -149,9 +157,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    pip3 install -r requirements.txt
    ```
 
-## Endesha skripti za kuandaa data za uandishi wa maneno za YouTube
+## Endesha skripti za maandalizi ya data ya uandishi wa maandishi wa YouTube
 
-### Kwenye Windows
+### Kwenye windows
 
 ```powershell
 .\transcripts_prepare.ps1
@@ -163,5 +171,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ./transcripts_prepare.sh
 ```
 
-**Kiarifu cha Kutotegemea**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatubebei dhamana kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

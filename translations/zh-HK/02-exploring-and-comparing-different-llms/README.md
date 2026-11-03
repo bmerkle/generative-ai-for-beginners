@@ -1,207 +1,211 @@
-# 探索及比較不同的大型語言模型 (LLM)
+# 探索及比較不同大型語言模型 (LLMs)
 
-[![探索及比較不同的LLM](../../../translated_images/zh-HK/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
+[![探索及比較不同大型語言模型 (LLMs)](../../../translated_images/zh-HK/02-lesson-banner.ef94c84979f97f60.webp)](https://youtu.be/KIRUeDKscfI?si=8BHX1zvwzQBn-PlK)
 
-> _點擊上方圖片觀看本課程的影片_
+> _點擊上方圖片觀看本課程影片_
 
-在上一課中，我們已經了解了生成式人工智能如何改變科技領域，了解了大型語言模型（LLM）的運作方式，以及企業（例如我們的初創公司）如何將其應用於業務案例並實現增長！在本章中，我們將比較和對比不同類型的大型語言模型（LLM），以了解它們的優劣。
+透過上一課程，我們已了解生成式人工智能如何改變科技格局、大型語言模型（LLMs）的工作原理，以及企業（像我們的初創公司）如何應用它們以解決用例和成長！本章節將比較不同類型的大型語言模型，了解它們的優缺點。
 
-我們初創公司的下一步是探索目前的LLM領域，並了解哪些模型適合我們的業務需求。
+我們初創公司的下一步是探索現有LLM的狀況，並了解哪些適合我們的用例。
 
 ## 簡介
 
 本課程將涵蓋：
 
-- 當前領域中的不同類型LLM。
-- 在Azure上測試、迭代及比較不同模型以適應您的業務需求。
+- 現時不同類型的LLM。
+- 在Azure上測試、迭代及比較不同模型以配合你的用例。
 - 如何部署LLM。
 
 ## 學習目標
 
-完成本課程後，您將能夠：
+完成本課程後，你將能：
 
-- 選擇適合您業務需求的模型。
-- 了解如何測試、迭代及提升模型的性能。
-- 知道企業如何部署模型。
+- 為你的用例選擇合適的模型。
+- 了解如何測試、迭代並提升模型的表現。
+- 了解企業如何部署模型。
 
 ## 了解不同類型的LLM
 
-LLM可以根據其架構、訓練數據及用途進行多種分類。了解這些差異將幫助我們的初創公司選擇適合的模型，並了解如何測試、迭代及提升性能。
+LLM可依據架構、訓練數據及用例被分類。理解這些差異有助我們的初創公司為情境選擇合適模型，並懂得如何測試、迭代及提升性能。
 
-LLM有許多不同的類型，選擇模型取決於您的使用目的、數據需求、預算等因素。
+LLM種類繁多，所選模型取決於你的用途、數據、支付意願等因素。
 
-根據您是否希望使用模型進行文本、音頻、視頻、圖像生成等，您可能會選擇不同類型的模型。
+根據你打算使用模型於文字、音訊、影片、圖像生成等用途，可能會選擇不同類型的模型。
 
-- **音頻及語音識別**。對於此用途，Whisper類型的模型是一個很好的選擇，因為它們是通用型且專注於語音識別。它基於多樣化的音頻進行訓練，能夠執行多語言的語音識別。了解更多關於[Whisper類型模型](https://platform.openai.com/docs/models/whisper?WT.mc_id=academic-105485-koreyst)。
+- <strong>音訊和語音識別</strong>。Whisper類模型仍是通用語音識別模型，但生產環境中亦有較新語音轉文字模型，例如 `gpt-4o-transcribe`、`gpt-4o-mini-transcribe` 及分話者識別版本。根據語言覆蓋範圍、分話者識別、實時支持、延遲及成本進行評估。詳見 [OpenAI 語音轉文字文檔](https://platform.openai.com/docs/guides/speech-to-text?WT.mc_id=academic-105485-koreyst)。
 
-- **圖像生成**。對於圖像生成，DALL-E和Midjourney是兩個非常知名的選擇。DALL-E由Azure OpenAI提供。[了解更多關於DALL-E](https://platform.openai.com/docs/models/dall-e?WT.mc_id=academic-105485-koreyst)，以及本課程第9章。
+- <strong>圖像生成</strong>。DALL-E及Midjourney是著名圖像生成選項，目前OpenAI圖像API中心是基於GPT圖像模型如 `gpt-image-2`，同時Stable Diffusion、Imagen、Flux及其他模型系列也常用。比較提示響應度、編輯支援、風格控制、安全要求及授權。詳見 [OpenAI 圖像生成指南](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst) 及本課程第9章。
 
-- **文本生成**。大多數模型都基於文本生成進行訓練，您可以選擇從GPT-3.5到GPT-4的多種模型。它們的成本各不相同，其中GPT-4最昂貴。值得探索[Azure OpenAI playground](https://oai.azure.com/portal/playground?WT.mc_id=academic-105485-koreyst)，以評估哪種模型在能力和成本方面最符合您的需求。
+- <strong>文字生成</strong>。文字模型涵蓋前沿模型、推理模型、小型低延遲模型及開放權重模型。例子包括OpenAI GPT-5.x、Anthropic Claude 4.x、Google Gemini 3.x、Meta Llama 4、Mistral模型。選擇時不要只看發布日期或價格，需比較任務質量、延遲、上下文視窗、工具使用、安全行為、區域可用性及總成本。可參考 [Microsoft Foundry 模型目錄](https://ai.azure.com/catalog?WT.mc_id=academic-105485-koreyst) 比較Azure上的模型。
 
-- **多模態**。如果您希望處理多種類型的輸入和輸出數據，您可能需要考慮像[gpt-4 turbo with vision或gpt-4o](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-4-and-gpt-4-turbo-models?WT.mc_id=academic-105485-koreyst)這樣的模型——OpenAI最新發布的模型，能夠結合自然語言處理和視覺理解，實現通過多模態界面進行交互。
+- <strong>多模態</strong>。許多現有模型可處理多於文字輸入。有些接受圖像、音訊或影片輸入，有些可調用工具，專門模型可生成圖像、音訊及影片。例如，現有OpenAI模型支援文字與圖像輸入，Gemini模型視版本支援文字、程式碼、圖像、音訊及影片輸入，Llama 4 Scout與Maverick是原生多模態的開放權重模型。構建工作流程前，須檢查每個模型卡支持的輸入及輸出模態。
 
-選擇模型意味著您獲得了一些基本功能，但這可能還不夠。通常，您擁有公司特定的數據，您需要以某種方式告訴LLM這些數據。關於如何處理這些數據，有幾種不同的選擇，更多內容將在接下來的部分中介紹。
+選擇模型意味著獲得某些基本能力，但這可能不足。通常企業有特定數據需要告知LLM。處理方法有幾種選擇，將在接下來章節詳述。
 
-### 基礎模型與LLM的區別
+### 基礎模型與大型語言模型 (LLMs)
 
-基礎模型這個術語是由[斯坦福研究人員提出](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst)，並定義為符合某些標準的人工智能模型，例如：
+「基礎模型」一詞由[史丹福研究員首次提出](https://arxiv.org/abs/2108.07258?WT.mc_id=academic-105485-koreyst)，定義為符合某些標準的AI模型，如：
 
-- **使用無監督學習或自監督學習進行訓練**，即基於未標記的多模態數據進行訓練，且不需要人工註釋或標記數據。
-- **非常大的模型**，基於非常深的神經網絡，訓練參數達數十億。
-- **通常作為其他模型的“基礎”**，即可以作為其他模型的起點，通過微調進一步構建。
+- <strong>以無監督學習或自監督學習訓練</strong>，即基於無標籤的多模態數據訓練，無需人工標注。
+- <strong>模型非常龐大</strong>，基於深度神經網絡訓練，涉及數十億參數。
+- **通常作為其他模型的「基礎」**，可作為其他模型基礎，通過微調延伸功能。
 
-![基礎模型與LLM的區別](../../../translated_images/zh-HK/FoundationModel.e4859dbb7a825c94.webp)
+![基礎模型與大型語言模型 (LLMs)](../../../translated_images/zh-HK/FoundationModel.e4859dbb7a825c94.webp)
 
 圖片來源：[Essential Guide to Foundation Models and Large Language Models | by Babar M Bhatti | Medium
 ](https://thebabar.medium.com/essential-guide-to-foundation-models-and-large-language-models-27dab58f7404)
 
-為了進一步澄清這一區別，讓我們以ChatGPT為例。要構建ChatGPT的第一版，OpenAI使用了一個名為GPT-3.5的模型作為基礎模型。這意味著OpenAI使用了一些特定於聊天的數據，創建了一個專門針對對話場景（如聊天機器人）表現良好的GPT-3.5版本。
+為釐清區別，以ChatGPT為例。早期版本ChatGPT用GPT-3.5作為基礎模型，OpenAI再利用聊天專屬數據與對齊技術，打造適合對話場景（如聊天機械人）表現更佳的微調版本。現代AI服務通常在多種模型變體間切換，服務名稱與底層模型名稱未必相同。
 
 ![基礎模型](../../../translated_images/zh-HK/Multimodal.2c389c6439e0fc51.webp)
 
 圖片來源：[2108.07258.pdf (arxiv.org)](https://arxiv.org/pdf/2108.07258.pdf?WT.mc_id=academic-105485-koreyst)
 
-### 開源模型與專有模型
+### 開放權重／開源模型與私有模型
 
-另一種分類LLM的方法是看它們是開源還是專有。
+另一種分類方式是根據模型是否開放權重、開源或私有。
 
-開源模型是公開提供給大眾使用的模型。它們通常由創建它們的公司或研究社群提供。這些模型可以被檢查、修改及定制以適應LLM的各種使用場景。然而，它們並不總是為生產使用而優化，性能可能不如專有模型。此外，開源模型的資金可能有限，可能不會長期維護或更新最新的研究成果。流行的開源模型包括[Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html?WT.mc_id=academic-105485-koreyst)、[Bloom](https://huggingface.co/bigscience/bloom)和[LLaMA](https://llama.meta.com)。
+開源及開放權重模型允許查看、下載或自訂模型檔案，但授權條件不同。有些完全開源，有些開放權重但有使用限制。當企業需更多部署控制、數據本地化、成本或定制化需求時很有用。然團隊仍需審查授權條款、服務成本、維護、安全更新及評估品質，才能用於生產環境。例子有[Meta Llama 4](https://ai.meta.com/blog/llama-4-multimodal-intelligence/?WT.mc_id=academic-105485-koreyst)、部分[Mistral模型](https://docs.mistral.ai/models/overview?WT.mc_id=academic-105485-koreyst)，及許多托管於[Hugging Face](https://huggingface.co/models?WT.mc_id=academic-105485-koreyst)上的模型。
 
-專有模型是由公司擁有且不向公眾提供的模型。這些模型通常為生產使用而優化。然而，它們不能被檢查、修改或定制以適應不同的使用場景。此外，它們並不總是免費提供，可能需要訂閱或付費使用。此外，使用者無法控制用於訓練模型的數據，這意味著他們需要信任模型所有者能夠承諾保護數據隱私及負責任地使用人工智能。流行的專有模型包括[OpenAI模型](https://platform.openai.com/docs/models/overview?WT.mc_id=academic-105485-koreyst)、[Google Bard](https://sapling.ai/llm/bard?WT.mc_id=academic-105485-koreyst)或[Claude 2](https://www.anthropic.com/index/claude-2?WT.mc_id=academic-105485-koreyst)。
+私有模型由供應商擁有及托管，常為管理式生產優化，可提供強大支援、安全系統、工具整合及擴充。客戶通常無法檢視或修改模型權重，必須審查供應商的隱私、保留、合規與可接受使用條款。例子有[OpenAI模型](https://platform.openai.com/docs/models?WT.mc_id=academic-105485-koreyst)、[Google Gemini](https://deepmind.google/models/gemini/pro/?WT.mc_id=academic-105485-koreyst)及[Anthropic Claude](https://platform.claude.com/docs/en/about-claude/models/overview?WT.mc_id=academic-105485-koreyst)。
 
-### 嵌入式模型、圖像生成模型及文本與代碼生成模型
+### 向量嵌入 (Embedding)、圖像生成及文字與程式碼生成
 
-LLM也可以根據其生成的輸出進行分類。
+LLM亦可依輸出類型分類。
 
-嵌入式模型是一組可以將文本轉換為數值形式（稱為嵌入）的模型，這是一種輸入文本的數值表示。嵌入使機器更容易理解單詞或句子之間的關係，並可以作為其他模型的輸入，例如分類模型或在數值數據上表現更好的聚類模型。嵌入模型通常用於遷移學習，模型為一個有大量數據的替代任務構建，然後模型權重（嵌入）被重新用於其他下游任務。此類模型的例子包括[OpenAI嵌入](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst)。
+向量嵌入是一類能將文字轉為數值形式的模型，稱為嵌入 (embedding)，是輸入文字的數值化表徵。嵌入讓機器更易理解字詞或句子間的關係，且可作為其他模型（如分類模型或數值表現優異的聚類模型）的輸入。嵌入模型常用於遷移學習：先建立具大量數據的代理任務模型，然後其模型權重（嵌入）可重用於其他下游任務。此類別例子為[OpenAI embeddings](https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst)。
 
-![嵌入](../../../translated_images/zh-HK/Embedding.c3708fe988ccf760.webp)
+![向量嵌入](../../../translated_images/zh-HK/Embedding.c3708fe988ccf760.webp)
 
-圖像生成模型是生成圖像的模型。這些模型通常用於圖像編輯、圖像合成及圖像翻譯。圖像生成模型通常基於大型圖像數據集進行訓練，例如[LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst)，並可用於生成新圖像或使用修補、超分辨率及著色技術編輯現有圖像。例子包括[DALL-E-3](https://openai.com/dall-e-3?WT.mc_id=academic-105485-koreyst)和[Stable Diffusion模型](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst)。
+圖像生成模型用於生成圖像，常被用於圖像編輯、合成及轉換。其訓練資料集常大規模，如[LAION-5B](https://laion.ai/blog/laion-5b/?WT.mc_id=academic-105485-koreyst)，能生成新圖像或用修補、超解析度、上色技巧編輯現有圖像。例子有[GPT圖像模型](https://platform.openai.com/docs/guides/images?WT.mc_id=academic-105485-koreyst)、[Stable Diffusion模型](https://github.com/Stability-AI/StableDiffusion?WT.mc_id=academic-105485-koreyst)及Imagen模型。
 
 ![圖像生成](../../../translated_images/zh-HK/Image.349c080266a763fd.webp)
 
-文本及代碼生成模型是生成文本或代碼的模型。這些模型通常用於文本摘要、翻譯及問答。文本生成模型通常基於大型文本數據集進行訓練，例如[BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst)，並可用於生成新文本或回答問題。代碼生成模型，例如[CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst)，通常基於大型代碼數據集進行訓練，例如GitHub，並可用於生成新代碼或修復現有代碼中的錯誤。
+文字與程式碼生成模型用於生成文字或程式碼，常應用於文字摘要、翻譯及問答。文字生成模型訓練於大規模文字資料，例如[BookCorpus](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/Zhu_Aligning_Books_and_ICCV_2015_paper.html?WT.mc_id=academic-105485-koreyst)，能生成新文字或回答問題。程式碼生成模型如[CodeParrot](https://huggingface.co/codeparrot?WT.mc_id=academic-105485-koreyst)訓練於大型程式碼資料集如GitHub，能生成新程式碼或修復現有程式碼漏洞。
 
-![文本及代碼生成](../../../translated_images/zh-HK/Text.a8c0cf139e5cc2a0.webp)
+![文字與程式碼生成](../../../translated_images/zh-HK/Text.a8c0cf139e5cc2a0.webp)
 
-### 編碼器-解碼器模型與僅解碼器模型
+### 編碼器-解碼器 (Encoder-Decoder) 與 僅解碼器 (Decoder-only)
 
-要討論LLM的不同架構類型，我們可以用一個比喻來說明。
+談及LLM不同架構，讓我們用類比說明。
 
-假設您的經理給您一個任務，要求您為學生編寫一份測驗。您有兩位同事，一位負責創建內容，另一位負責審核內容。
+想像你的主管委派你為學生編寫小測驗，你有兩位同事：一位負責內容創作，另一位負責審核。
 
-內容創建者就像僅解碼器模型，他可以查看主題及您已經寫的內容，然後基於此編寫課程。他非常擅長撰寫引人入勝且信息豐富的內容，但不太擅長理解主題及學習目標。僅解碼器模型的例子包括GPT系列模型，例如GPT-3。
+內容創作者就像僅有解碼器模型：他們能看主題、觀察你所寫的內容，然後根據上下文繼續生成內容。他們擅長寫吸引人且具資訊性的內容，但任務只是分類、檢索或編碼信息時，不一定是最佳選擇。例子為GPT及Llama等僅解碼器模型系列。
 
-審核者就像僅編碼器模型，他查看已編寫的課程及答案，注意它們之間的關係並理解上下文，但不擅長生成內容。僅編碼器模型的例子包括BERT。
+審核者則像僅編碼器模型，查看所寫課程與答案，理解彼此關聯與上下文，但不擅長生成內容。典型編碼器模型為BERT。
 
-想像一下，我們也可以有一個既能創建又能審核測驗的人，這就是編碼器-解碼器模型。例子包括BART和T5。
+想像也有可創作及審核小測的人，這便是編碼器-解碼器模型。例子有BART及T5。
 
-### 服務與模型的區別
+### 服務 (Service) 與 模型 (Model)
 
-現在，我們來談談服務與模型的區別。服務是由雲服務提供商提供的產品，通常是模型、數據及其他組件的組合。模型是服務的核心組件，通常是基礎模型，例如LLM。
+現談服務與模型差異。服務是雲端供應商提供的產品，通常結合了多個模型、數據及其他組件。模型是服務的核心組件，常為基礎模型如LLM。
 
-服務通常為生產使用而優化，並且通常比模型更容易使用，通過圖形用戶界面即可操作。然而，服務並不總是免費提供，可能需要訂閱或付費使用，以利用服務提供商的設備及資源，從而優化成本並輕鬆擴展。服務的例子包括[Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview?WT.mc_id=academic-105485-koreyst)，它提供按使用量付費的計費方案，意味著使用者根據使用服務的量進行收費。此外，Azure OpenAI Service在模型功能之上提供企業級安全性及負責任的人工智能框架。
+服務通常為生產優化，使用介面也比模型友好，帶有圖形用戶介面。但服務未必免費，需訂閱或付費以使用，換取使用服務擁有者的設備與資源，優化開支及輕鬆擴充。例子為[Azure OpenAI 服務](https://learn.microsoft.com/azure/ai-foundry/openai/overview?WT.mc_id=academic-105485-koreyst)，採用按用量付費方案，讓用戶按照實際使用量付費。Azure OpenAI 服務亦提供企業級安全及負責任AI框架，涵蓋模型能力之上。
 
-模型僅僅是神經網絡，包括參數、權重等。允許公司在本地運行，但需要購買設備、構建擴展結構及購買許可證或使用開源模型。像LLaMA這樣的模型可以使用，但需要計算能力來運行模型。
+模型為神經網路的產物，包括參數、權重、架構、分詞器及配置。要在本地或私有環境運行模型，需合適硬件、服務基礎設施、監控，以及兼容的開源/開權授權或商用授權。開權模型如Llama 4或Mistral可自託管，惟仍需計算能力與運營專業知識。
 
-## 如何在Azure上測試及迭代不同模型以了解性能
+## 如何在Azure上測試及迭代不同模型以理解性能
 
-當我們的團隊探索了當前的LLM領域並識別了一些適合其場景的候選模型後，下一步就是在其數據及工作負載上進行測試。這是一個通過實驗及測量進行的迭代過程。
-我們在前面段落中提到的大多數模型（如 OpenAI 模型、開源模型 Llama2 和 Hugging Face transformers）都可以在 [Azure AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst) 的 [模型目錄](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview?WT.mc_id=academic-105485-koreyst) 中找到。
 
-[Azure AI Studio](https://learn.microsoft.com/azure/ai-studio/what-is-ai-studio?WT.mc_id=academic-105485-koreyst) 是一個雲端平台，專為開發者設計，用於構建生成式 AI 應用程式並管理整個開發生命周期——從實驗到評估——將所有 Azure AI 服務整合到一個便捷的圖形化界面中。Azure AI Studio 的模型目錄使用戶能夠：
+當我們團隊探索現有的大語言模型（LLM）現況並為其場景挑選出合適的候選模型後，下一步是用他們的數據和工作負載對模型進行測試。這是一個通過實驗和測量進行的反覆過程。
+我們之前提及的大多數模型（OpenAI 模型、類似 Llama 4 和 Mistral 的開放權重模型，以及 Hugging Face 模型）都可以在 [Microsoft Foundry Models](https://learn.microsoft.com/azure/foundry/concepts/foundry-models-overview?WT.mc_id=academic-105485-koreyst) 中找到。
 
-- 在目錄中找到感興趣的基礎模型——無論是專有模型還是開源模型，並根據任務、許可證或名稱進行篩選。為了提高搜索效率，模型被組織成不同的集合，例如 Azure OpenAI 集合、Hugging Face 集合等。
+[Microsoft Foundry](https://learn.microsoft.com/azure/foundry/what-is-foundry?WT.mc_id=academic-105485-koreyst)，前稱 Azure AI Studio/Azure AI Foundry，是一個統一的 Azure 平台，用於構建 AI 應用和代理。它幫助開發者管理從實驗評估到部署、監控和治理的整個生命週期。Microsoft Foundry 中的模型目錄允許用戶：
+
+- 在目錄中尋找感興趣的基礎模型，涵蓋 Azure 銷售的模型以及合作夥伴和社群提供的模型。用戶可以根據任務、提供者、授權、部署選項或名稱進行篩選。
 
 ![Model catalog](../../../translated_images/zh-HK/AzureAIStudioModelCatalog.3cf8a499aa8ba031.webp)
 
-- 查看模型卡，包括詳細的用途描述和訓練數據、代碼範例以及內部評估庫的評估結果。
+- 查看模型卡，其中包含詳細的預期用途和訓練數據描述、程式碼範例，以及內部評估庫的評估結果。
 
 ![Model card](../../../translated_images/zh-HK/ModelCard.598051692c6e400d.webp)
 
-- 通過 [模型基準測試](https://learn.microsoft.com/azure/ai-studio/how-to/model-benchmarks?WT.mc_id=academic-105485-koreyst) 面板，比較行業內可用模型和數據集的基準測試，評估哪一個最符合業務場景。
+- 通過 [Model Benchmarks](https://learn.microsoft.com/azure/ai-foundry/concepts/model-benchmarks?WT.mc_id=academic-105485-koreyst) 面板比較業界的模型和數據集基準，評估哪一個最符合業務場景需求。
 
 ![Model benchmarks](../../../translated_images/zh-HK/ModelBenchmarks.254cb20fbd06c03a.webp)
 
-- 利用 Azure AI Studio 的實驗和追蹤功能，基於自定義訓練數據微調模型，以提高模型在特定工作負載中的性能。
+- 在自訂訓練數據上微調支持的模型，以提升特定工作負載的模型表現，利用 Microsoft Foundry 的實驗和追蹤功能。
 
 ![Model fine-tuning](../../../translated_images/zh-HK/FineTuning.aac48f07142e36fd.webp)
 
-- 部署原始預訓練模型或微調版本到遠程實時推理——管理計算——或無伺服器 API 端點——[按使用量付費](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview#model-deployment-managed-compute-and-serverless-api-pay-as-you-go?WT.mc_id=academic-105485-koreyst)——以便應用程式能夠使用它。
+- 將原始的預訓練模型或微調版本部署到遠端的實時推理端點，使用託管計算或無伺服器部署選項，讓應用程式能夠調用。
 
 ![Model deployment](../../../translated_images/zh-HK/ModelDeploy.890da48cbd0bccdb.webp)
 
 > [!NOTE]
-> 目錄中的所有模型目前並不都支持微調和/或按使用量付費的部署。請查看模型卡以了解模型的功能和限制。
+> 並非目錄中所有模型目前都支持微調和/或按需付費部署。請查看模型卡以了解模型的功能和限制詳情。
 
-## 改善 LLM 的結果
+## 改善 LLM 結果
 
-我們與初創團隊一起探索了不同類型的 LLM 和一個雲端平台（Azure Machine Learning），該平台使我們能夠比較不同模型、在測試數據上進行評估、提高性能並將其部署到推理端點。
+我們的創業團隊嘗試過多種 LLM 以及一個雲端平台（Microsoft Foundry），該平台可讓我們比較不同模型、在測試數據上評估它們、提升效能，並部署到推理端點。
 
-但什麼時候應該考慮微調模型而不是使用預訓練模型？是否有其他方法可以改善模型在特定工作負載上的性能？
+那麼，他們應該在何時考慮微調模型，而非使用預訓練模型？還有其他方法可以提升特定工作負載的模型表現嗎？
 
-企業可以採用多種方法來從 LLM 中獲得所需的結果。當在生產環境中部署 LLM 時，可以選擇不同類型的模型，這些模型具有不同的訓練程度、複雜性、成本和質量。以下是一些不同的方法：
+業務可採用多種方式從 LLM 獲取所需結果。部署 LLM 時，可以選擇不同類型的模型與不同程度的訓練，這些方案在複雜度、成本和質量上各有不同。以下列出幾種不同做法：
 
-- **使用上下文進行提示工程**。這個方法的核心是提供足夠的上下文，以確保您獲得所需的回應。
+- <strong>帶上下文的提示工程</strong>。目的是在提示時提供足夠的上下文，以確保得到需要的回答。
 
-- **檢索增強生成（RAG）**。您的數據可能存在於數據庫或網絡端點中，例如，為了確保這些數據或其子集在提示時被包含，您可以提取相關數據並將其作為用戶提示的一部分。
+- **檢索增強生成（Retrieval Augmented Generation，RAG）**。例如，您的數據可能存在於資料庫或網路端點中，為了確保在提示時包含這些數據或其子集，可以檢索相關數據並將其納入用戶提示中。
 
-- **微調模型**。在這種情況下，您可以基於自己的數據進一步訓練模型，使其更準確地響應您的需求，但可能會增加成本。
+- <strong>微調模型</strong>。即您在自己的數據上進一步訓練模型，使其更精確並更符合您的需求，但可能成本較高。
 
 ![LLMs deployment](../../../translated_images/zh-HK/Deploy.18b2d27412ec8c02.webp)
 
-圖片來源：[企業部署 LLM 的四種方式 | Fiddler AI Blog](https://www.fiddler.ai/blog/four-ways-that-enterprises-deploy-llms?WT.mc_id=academic-105485-koreyst)
+圖片來源：[Four Ways that Enterprises Deploy LLMs | Fiddler AI Blog](https://www.fiddler.ai/blog/four-ways-that-enterprises-deploy-llms?WT.mc_id=academic-105485-koreyst)
 
-### 使用上下文進行提示工程
+### 帶上下文的提示工程
 
-預訓練的 LLM 在處理一般自然語言任務時表現非常出色，即使僅使用簡短的提示，例如完成句子或回答問題——這就是所謂的“零樣本”學習。
+預訓練的 LLM 在通用自然語言任務中表現良好，即使只用簡短提示（如要完成的句子或問題）調用，也稱為「零射學習」。
 
-然而，使用者越能夠框定自己的查詢，提供詳細的請求和示例——即上下文——回應就越準確，越符合使用者的期望。在這種情況下，如果提示僅包含一個示例，我們稱之為“單樣本”學習；如果包含多個示例，則稱為“少樣本”學習。使用上下文進行提示工程是啟動的最具成本效益的方法。
+然而，使用者越能建構出詳細且含有範例的查詢——即上下文，回答就會越準確且越符合使用者期望。當提示中包含一個範例時，我們稱之為「單射學習」，如果包含多個範例則稱為「少射學習」。
+帶上下文的提示工程是最具成本效益的起步方法。
 
 ### 檢索增強生成（RAG）
 
-LLM 的局限性在於它們只能使用訓練過程中使用的數據來生成答案。這意味著它們對訓練過程之後發生的事實一無所知，並且無法訪問非公開信息（例如公司數據）。
-這可以通過 RAG 技術來克服，該技術通過考慮提示長度限制，將外部數據以文檔片段的形式增強到提示中。這得益於向量數據庫工具（例如 [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)），它可以從預定義的數據源中檢索有用的片段並將其添加到提示上下文中。
+LLM 有一個限制，就是它們只能根據訓練時所使用的數據來生成回答。這意味著它們對訓練後發生的事實一無所知，且無法訪問非公開資訊（例如公司數據）。
+可以通過 RAG 技術來克服這一限制，該技術會將外部數據以文件片段形式增添到提示中，同時考慮提示長度限制。這由向量資料庫工具支援，例如 [Azure Vector Search](https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst)，該工具從多種預定義資料源中檢索有用片段，並加入提示上下文。
 
-當企業沒有足夠的數據、時間或資源來微調 LLM，但仍希望在特定工作負載上提高性能並降低虛構風險（即扭曲現實或有害內容）時，這種技術非常有用。
+當業務沒有足夠數據、時間或資源微調 LLM，但仍希望在特定工作負載上提升表現並降低產生幻覺、過時或不支持回答的風險時，這項技術非常有用。
 
 ### 微調模型
 
-微調是一個利用遷移學習的過程，用於使模型“適應”下游任務或解決特定問題。與少樣本學習和 RAG 不同，微調會生成一個新模型，並更新其權重和偏差。它需要一組訓練示例，包括單個輸入（提示）及其相關的輸出（完成）。
-以下情況下可以優先考慮此方法：
+微調是利用遷移學習的方法來「適應」模型至下游任務或特定問題。與少射學習和 RAG 不同，微調會產生一個新的模型，帶有更新的權重與偏差。這需要一組訓練範例，包括單一輸入（提示）及其對應輸出（完成內容）。
+若符合以下情況，這是首選方法：
 
-- **使用微調模型**。企業希望使用微調的能力較低的模型（例如嵌入模型）而不是高性能模型，從而實現更具成本效益和更快速的解決方案。
+- <strong>使用較小的任務專用模型</strong>。業務希望對較小模型進行微調以聚焦狹窄任務，而非反覆提示更大型前沿模型，從而達到更具成本效益和更快的解決方案。
 
-- **考慮延遲**。延遲對於特定用例非常重要，因此無法使用非常長的提示，或者模型需要學習的示例數量超出了提示長度限制。
+- <strong>考慮延遲</strong>。延遲對某些用例非常重要，因此無法使用非常長的提示，或者需要模型學習的範例數量超出提示長度限制。
 
-- **保持最新**。企業擁有大量高質量數據和真實標籤，以及需要隨時間推移保持這些數據最新的資源。
+- <strong>調整穩定行為</strong>。業務擁有大量高品質範例，且希望模型持續遵循任務模式、輸出格式、語氣或特定領域風格。如果主要問題是新鮮事實或經常變動的私有知識，則應用 RAG 代替單靠微調。
 
-### 訓練模型
+### 從頭訓練模型
 
-從零開始訓練 LLM無疑是最困難和最複雜的方法，需要大量數據、專業資源和適當的計算能力。只有在企業擁有特定領域的用例和大量領域相關數據的情況下，才應考慮此選項。
+從頭訓練 LLM 無疑是最困難且複雜的方式，需要大量數據、專業人力以及充足計算能力。此選項只適用於業務有特定領域用例及大量領域相關數據的情況。
 
 ## 知識檢查
 
-什麼是改善 LLM 完成結果的好方法？
+什麼方法可以有效提升 LLM 的完成結果？
 
-1. 使用上下文進行提示工程
+1. 帶上下文的提示工程
 1. RAG
 1. 微調模型
 
-A:3，如果您有時間、資源和高質量數據，微調是保持最新的更好選擇。然而，如果您希望改善結果但缺乏時間，首先考慮 RAG 是值得的。
+答案：以上三種方法均可幫助。可先從帶上下文的提示工程開始，快速提升；當模型需要最新事實或商業私有數據時，使用 RAG；當擁有足夠高品質範例且希望模型持續遵循任務、格式、語氣或領域模式時，選擇微調。
 
 ## 🚀 挑戰
 
-深入了解如何為您的業務 [使用 RAG](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview?WT.mc_id=academic-105485-koreyst)。
+深入閱讀如何為您的業務[使用 RAG](https://learn.microsoft.com/azure/search/retrieval-augmented-generation-overview?WT.mc_id=academic-105485-koreyst)。
 
-## 出色的工作，繼續學習
+## 做得好，繼續學習
 
-完成本課程後，請查看我們的 [生成式 AI 學習集合](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)，繼續提升您的生成式 AI 知識！
+完成本課程後，查看我們的[生成式 AI 學習集合](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst)，持續提升您的生成式 AI 知識！
 
-前往第 3 課，我們將探討如何[負責任地使用生成式 AI](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)！
+前往第 3 課，瞭解如何[負責任地使用生成式 AI](../03-using-generative-ai-responsibly/README.md?WT.mc_id=academic-105485-koreyst)！
 
 ---
 
-**免責聲明**：  
-此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於關鍵信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責聲明**：
+本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯而成。雖然我們致力於確保準確性，但請注意，機器自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議進行專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋承擔責任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,10 +1,10 @@
 # Przygotowanie danych transkrypcji
 
-Skrypty do przygotowania danych transkrypcji pobierają transkrypcje filmów z YouTube i przygotowują je do użycia z przykładem Semantic Search z OpenAI Embeddings i Functions.
+Skrypty do przygotowania danych transkrypcyjnych pobierają transkrypcje z filmów YouTube i przygotowują je do użycia z przykładem Semantic Search z OpenAI Embeddings i Functions.
 
-Skrypty do przygotowania danych transkrypcji zostały przetestowane na najnowszych wersjach Windows 11, macOS Ventura oraz Ubuntu 22.04 (i nowszych).
+Skrypty do przygotowania danych transkrypcyjnych były testowane na najnowszych wersjach Windows 11, macOS Ventura oraz Ubuntu 22.04 (i wyższych).
 
-## Utwórz wymagane zasoby Azure OpenAI Service
+## Utwórz wymagane zasoby usługi Azure OpenAI
 
 > [!IMPORTANT]
 > Zalecamy zaktualizowanie Azure CLI do najnowszej wersji, aby zapewnić kompatybilność z OpenAI
@@ -14,14 +14,14 @@ Skrypty do przygotowania danych transkrypcji zostały przetestowane na najnowszy
 
 > [!NOTE]
 > W tych instrukcjach używamy grupy zasobów o nazwie "semantic-video-search" w regionie East US.
-> Możesz zmienić nazwę grupy zasobów, ale przy zmianie lokalizacji zasobów,
+> Możesz zmienić nazwę grupy zasobów, ale zmieniając lokalizację zasobów, 
 > sprawdź [tabelę dostępności modeli](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
 ```
 
-1. Utwórz zasób Azure OpenAI Service.
+1. Utwórz zasób usługi Azure OpenAI.
 
 ```console
 az cognitiveservices account create --name semantic-video-openai --resource-group semantic-video-search \
@@ -38,8 +38,8 @@ az cognitiveservices account keys list --name semantic-video-openai \
 ```
 
 1. Wdróż następujące modele:
-   - `text-embedding-ada-002` w wersji `2` lub wyższej, o nazwie `text-embedding-ada-002`
-   - `gpt-35-turbo` w wersji `0613` lub wyższej, o nazwie `gpt-35-turbo`
+   - `text-embedding-ada-002` w wersji `2` lub wyższej, nazwany `text-embedding-ada-002`
+   - `gpt-5-mini` nazwany `gpt-5-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -53,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-5-mini \
+    --model-name gpt-5-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -67,11 +66,11 @@ az cognitiveservices account deployment create \
 
 ## Zmienne środowiskowe
 
-Do uruchomienia skryptów przygotowujących dane transkrypcji z YouTube wymagane są następujące zmienne środowiskowe.
+Do uruchomienia skryptów przygotowujących dane transkrypcji YouTube wymagane są następujące zmienne środowiskowe.
 
 ### Na Windows
 
-Zalecamy dodanie zmiennych do zmiennych środowiskowych użytkownika.
+Zalecamy dodanie zmiennych do zmiennych środowiskowych `user`.
 `Start Windows` > `Edytuj zmienne środowiskowe systemu` > `Zmienne środowiskowe` > `Zmienne użytkownika` dla [USER] > `Nowa`.
 
 ```text
@@ -81,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
+<!-- Możesz dodać zmienne środowiskowe do swojego profilu PowerShell.
+
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<twój klucz API usługi Azure OpenAI>"
+$env:AZURE_OPENAI_ENDPOINT = "<twój punkt końcowy usługi Azure OpenAI>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<twoja nazwa wdrożenia modelu usługi Azure OpenAI>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<twój klucz API developera Google>"
+``` -->
+
 ### Na Linux i macOS
 
-Zalecamy dodanie poniższych poleceń export do pliku `~/.bashrc` lub `~/.zshrc`.
+Zalecamy dodanie poniższych eksportów do pliku `~/.bashrc` lub `~/.zshrc`.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -94,8 +102,8 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 ## Instalacja wymaganych bibliotek Pythona
 
-1. Zainstaluj [klienta git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst), jeśli nie jest jeszcze zainstalowany.
-1. W oknie `Terminal` sklonuj przykład do wybranego folderu repozytorium.
+1. Zainstaluj [klient git](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst), jeśli nie jest jeszcze zainstalowany.
+1. Z okna `Terminal` sklonuj przykład do preferowanego folderu repozytorium.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
@@ -149,7 +157,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    pip3 install -r requirements.txt
    ```
 
-## Uruchom skrypty przygotowujące dane transkrypcji z YouTube
+## Uruchom skrypty przygotowujące dane transkrypcji YouTube
 
 ### Na Windows
 
@@ -163,5 +171,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ./transcripts_prepare.sh
 ```
 
-**Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony przy użyciu automatycznej usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dokładamy starań, aby tłumaczenie było jak najbardziej precyzyjne, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy traktować jako źródło wiarygodne i autorytatywne. W przypadku informacji o kluczowym znaczeniu zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym należy uznawać za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

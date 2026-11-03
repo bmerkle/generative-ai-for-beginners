@@ -1,267 +1,146 @@
-# Membina Aplikasi Penjanaan Imej
+# Membangun Aplikasi Penjanaan Imej
 
-[![Membina Aplikasi Penjanaan Imej](../../../translated_images/ms/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Membangun Aplikasi Penjanaan Imej](../../../translated_images/ms/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-LLM bukan hanya untuk penjanaan teks. Ia juga boleh digunakan untuk menjana imej daripada deskripsi teks. Mempunyai imej sebagai satu modaliti boleh sangat berguna dalam pelbagai bidang seperti MedTech, seni bina, pelancongan, pembangunan permainan dan banyak lagi. Dalam bab ini, kita akan melihat dua model penjanaan imej yang paling popular, DALL-E dan Midjourney.
+Terdapat lebih banyak lagi pada LLM berbanding penjanaan teks sahaja. Anda juga boleh menjana imej daripada deskripsi teks. Imej sebagai satu mod adalah berguna dalam bidang MedTech, seni bina, pelancongan, pembangunan permainan, pemasaran, dan banyak lagi. Dalam pelajaran ini kita melihat model **GPT Image** hari ini dan membina aplikasi penjanaan imej.
 
 ## Pengenalan
 
-Dalam pelajaran ini, kita akan membincangkan:
+Penjanaan imej membolehkan anda menukar petunjuk bahasa semula jadi kepada gambar. Dalam pelajaran ini kita menggunakan keluarga model **`gpt-image`** dari OpenAI - generasi model imej semasa yang tersedia di **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** dan platform OpenAI. Model ini menggantikan model DALL·E yang lama (DALL·E 2/3 adalah warisan).
 
-- Penjanaan imej dan mengapa ia berguna.
-- DALL-E dan Midjourney, apa itu dan bagaimana ia berfungsi.
-- Bagaimana anda boleh membina aplikasi penjanaan imej.
+Sepanjang pelajaran kita menggunakan syarikat permulaan rekaan, **Edu4All**, yang membina alat pembelajaran. Pasukan ini mahu menjana ilustrasi untuk tugasan dan bahan kajian.
 
-## Matlamat Pembelajaran
+## Matlamat pembelajaran
 
-Selepas menyelesaikan pelajaran ini, anda akan dapat:
+Menjelang akhir pelajaran ini anda akan dapat:
 
-- Membina aplikasi penjanaan imej.
-- Menentukan sempadan untuk aplikasi anda dengan meta prompt.
-- Bekerja dengan DALL-E dan Midjourney.
+- Menjelaskan apa itu penjanaan imej dan di mana ia berguna.
+- Memahami keluarga model `gpt-image` dan bagaimana ia berbeza daripada model DALL·E warisan.
+- Membina aplikasi penjanaan imej dalam Python (dan TypeScript / .NET).
+- Mengedit imej dan menerapkan kawalan keselamatan dengan metaprompt.
 
-## Mengapa membina aplikasi penjanaan imej?
+## Apa itu penjanaan imej?
 
-Aplikasi penjanaan imej adalah cara yang hebat untuk meneroka keupayaan AI Generatif. Ia boleh digunakan untuk, sebagai contoh:
+Model penjanaan imej mencipta imej dari petunjuk teks. Model moden seperti `gpt-image` dibina menggunakan teknik transformer + diffusion: model belajar hubungan antara teks dan imej semasa latihan, kemudian, diberikan petunjuk, secara iteratif "membersihkan" bunyi rawak menjadi imej yang sepadan dengan deskripsi.
 
-- **Penyuntingan dan sintesis imej**. Anda boleh menjana imej untuk pelbagai kegunaan seperti penyuntingan imej dan sintesis imej.
+Dua keluarga model imej yang terkenal adalah:
 
-- **Digunakan dalam pelbagai industri**. Ia juga boleh digunakan untuk menjana imej untuk pelbagai industri seperti MedTech, Pelancongan, Pembangunan Permainan dan banyak lagi.
+- **`gpt-image` (OpenAI)** - generasi semasa, digunakan dalam pelajaran ini. Ia menyokong penjanaan teks ke imej dan penyuntingan imej (inpainting dengan topeng).
+- **Midjourney** - model pihak ketiga popular dengan perkhidmatan sendiri dan aliran kerja berasaskan Discord.
 
-## Senario: Edu4All
+> Model imej OpenAI lama - **DALL·E 2** dan **DALL·E 3** - adalah warisan. DALL·E 3 tidak lagi tersedia untuk penerapan baru, dan ciri seperti `create_variation` hanya wujud di DALL·E 2. Gunakan model `gpt-image` untuk aplikasi baru.
 
-Sebagai sebahagian daripada pelajaran ini, kita akan terus bekerja dengan startup kita, Edu4All. Pelajar akan mencipta imej untuk penilaian mereka, jenis imej yang dihasilkan bergantung kepada pelajar, tetapi mereka boleh membuat ilustrasi untuk cerita dongeng mereka sendiri atau mencipta watak baru untuk cerita mereka atau membantu mereka menggambarkan idea dan konsep mereka.
+### Model `gpt-image` mana yang harus saya gunakan?
 
-Berikut adalah contoh apa yang pelajar Edu4All boleh hasilkan jika mereka sedang belajar tentang monumen:
+Di Microsoft Foundry berikut adalah **Tersedia Umum**:
 
-![Startup Edu4All, kelas tentang monumen, Menara Eiffel](../../../translated_images/ms/startup.94d6b79cc4bb3f5a.webp)
+| Model | Nota |
+| --- | --- |
+| **`gpt-image-2`** | Model imej terkini dan paling berkuasa - disyorkan sebagai pilihan lalai. |
+| `gpt-image-1.5` | Tersedia umum; kualiti kuat dengan kos lebih rendah. |
+| `gpt-image-1-mini` | Tersedia umum; paling pantas / kos paling rendah. |
+| `gpt-image-1` | Pratonton sahaja. |
 
-menggunakan prompt seperti
+Sentiasa semak [senarai model imej Foundry](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) terkini untuk ketersediaan dan wilayah.
 
-> "Anjing di sebelah Menara Eiffel pada waktu pagi yang cerah"
+> **Penting:** model `gpt-image` mengembalikan imej yang dijana sebagai **base64** (`b64_json`), bukan sebagai URL. Kod anda mengekodkan rentetan base64 ke bait dan menyimpannya - tiada URL imej untuk dimuat turun.
 
-## Apa itu DALL-E dan Midjourney?
+## Persediaan
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) dan [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) adalah dua model penjanaan imej yang paling popular, mereka membolehkan anda menggunakan prompt untuk menjana imej.
+Anda boleh jalankan contoh-contoh menggunakan **Azure OpenAI di Microsoft Foundry** (contoh `aoai-*`) atau **platform OpenAI** (contoh `oai-*`).
 
-### DALL-E
+### 1. Cipta dan pasang model
 
-Mari kita mulakan dengan DALL-E, yang merupakan model AI Generatif yang menjana imej daripada deskripsi teks.
+Ikut panduan [mencipta sumber](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) untuk buat sumber Microsoft Foundry, kemudian pasang model imej - **`gpt-image-2`** disyorkan.
 
-> [DALL-E adalah gabungan dua model, CLIP dan perhatian tersebar](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. Konfigurasi `.env` anda
 
-- **CLIP**, adalah model yang menjana embedding, iaitu representasi data secara numerik, daripada imej dan teks.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Perhatian tersebar**, adalah model yang menjana imej daripada embedding. DALL-E dilatih menggunakan dataset imej dan teks dan boleh digunakan untuk menjana imej daripada deskripsi teks. Sebagai contoh, DALL-E boleh digunakan untuk menjana imej kucing memakai topi, atau anjing dengan gaya rambut mohawk.
+Cari nilai-nilai ini di halaman **Deployments** sumber anda dalam [portal Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst).
 
-### Midjourney
+### 3. Pasang perpustakaan
 
-Midjourney berfungsi dengan cara yang sama seperti DALL-E, ia menjana imej daripada prompt teks. Midjourney juga boleh digunakan untuk menjana imej menggunakan prompt seperti "kucing memakai topi", atau "anjing dengan gaya rambut mohawk".
+Cipta `requirements.txt`:
 
-![Imej yang dijana oleh Midjourney, burung merpati mekanikal](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Kredit imej Wikipedia, imej dijana oleh Midjourney_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Bagaimana DALL-E dan Midjourney Berfungsi
+Kemudian cipta dan aktifkan persekitaran maya dan pasang:
 
-Pertama, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E adalah model AI Generatif berdasarkan seni bina transformer dengan _transformer autoregresif_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-_Transformer autoregresif_ menentukan bagaimana model menjana imej daripada deskripsi teks, ia menjana satu piksel pada satu masa, dan kemudian menggunakan piksel yang dijana untuk menjana piksel seterusnya. Melalui beberapa lapisan dalam rangkaian neural, sehingga imej selesai.
+## Bina aplikasi
 
-Dengan proses ini, DALL-E mengawal atribut, objek, ciri, dan banyak lagi dalam imej yang dijana. Walau bagaimanapun, DALL-E 2 dan 3 mempunyai lebih banyak kawalan ke atas imej yang dijana.
+Cipta `app.py` dengan kod berikut. Ia menjana imej dan menyimpannya sebagai PNG.
 
-## Membina aplikasi penjanaan imej pertama anda
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-Jadi, apa yang diperlukan untuk membina aplikasi penjanaan imej? Anda memerlukan perpustakaan berikut:
+dotenv.load_dotenv()
 
-- **python-dotenv**, sangat disarankan untuk menggunakan perpustakaan ini untuk menyimpan rahsia anda dalam fail _.env_ jauh daripada kod.
-- **openai**, perpustakaan ini adalah apa yang anda akan gunakan untuk berinteraksi dengan API OpenAI.
-- **pillow**, untuk bekerja dengan imej dalam Python.
-- **requests**, untuk membantu anda membuat permintaan HTTP.
+# Arahkan klien ke sumber Azure OpenAI (Microsoft Foundry) anda.
+# Model imej memerlukan versi API terkini - semak dokumen Foundry untuk versi yang diperlukan oleh model anda.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Cipta dan terapkan model Azure OpenAI
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # contohnya "gpt-image-2"
 
-Jika belum dilakukan, ikuti arahan di halaman [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) 
-untuk mencipta sumber dan model Azure OpenAI. Pilih DALL-E 3 sebagai model.  
-
-## Cipta aplikasi
-
-1. Cipta fail _.env_ dengan kandungan berikut:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   Cari maklumat ini di Portal Azure OpenAI Foundry untuk sumber anda di bahagian "Deployments".
-
-1. Kumpulkan perpustakaan di atas dalam fail bernama _requirements.txt_ seperti berikut:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. Seterusnya, cipta persekitaran maya dan pasang perpustakaan:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Untuk Windows, gunakan arahan berikut untuk mencipta dan mengaktifkan persekitaran maya anda:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. Tambahkan kod berikut dalam fail bernama _app.py_:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Mari kita jelaskan kod ini:
-
-- Pertama, kita import perpustakaan yang kita perlukan, termasuk perpustakaan OpenAI, perpustakaan dotenv, perpustakaan requests, dan perpustakaan Pillow.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Seterusnya, kita muatkan pembolehubah persekitaran daripada fail _.env_.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Selepas itu, kita konfigurasikan klien perkhidmatan Azure OpenAI 
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Seterusnya, kita menjana imej:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Kod di atas memberikan respons dengan objek JSON yang mengandungi URL imej yang dijana. Kita boleh menggunakan URL untuk memuat turun imej dan menyimpannya ke fail.
-
-- Akhir sekali, kita buka imej dan gunakan penonton imej standard untuk memaparkannya:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Maklumat lanjut tentang penjanaan imej
-
-Mari kita lihat kod yang menjana imej dengan lebih terperinci:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, adalah teks prompt yang digunakan untuk menjana imej. Dalam kes ini, kita menggunakan prompt "Arnab di atas kuda, memegang lolipop, di padang berkabus di mana tumbuh bunga daffodil".
-- **size**, adalah saiz imej yang dijana. Dalam kes ini, kita menjana imej bersaiz 1024x1024 piksel.
-- **n**, adalah bilangan imej yang dijana. Dalam kes ini, kita menjana dua imej.
-- **temperature**, adalah parameter yang mengawal kebarangkalian output model AI Generatif. Nilai temperature adalah antara 0 dan 1 di mana 0 bermaksud output adalah deterministik dan 1 bermaksud output adalah rawak. Nilai lalai adalah 0.7.
-
-Terdapat lebih banyak perkara yang boleh anda lakukan dengan imej yang akan kita bincangkan dalam bahagian seterusnya.
-
-## Keupayaan tambahan penjanaan imej
-
-Anda telah melihat bagaimana kita dapat menjana imej menggunakan beberapa baris kod dalam Python. Walau bagaimanapun, terdapat lebih banyak perkara yang boleh anda lakukan dengan imej.
-
-Anda juga boleh melakukan perkara berikut:
-
-- **Melakukan penyuntingan**. Dengan memberikan imej sedia ada, topeng dan prompt, anda boleh mengubah imej. Sebagai contoh, anda boleh menambah sesuatu pada bahagian imej. Bayangkan imej arnab kita, anda boleh menambah topi pada arnab. Cara anda melakukannya adalah dengan memberikan imej, topeng (mengenal pasti bahagian kawasan untuk perubahan) dan prompt teks untuk mengatakan apa yang perlu dilakukan. 
-> Nota: ini tidak disokong dalam DALL-E 3. 
- 
-Berikut adalah contoh menggunakan GPT Image:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Imej asas hanya akan mengandungi ruang santai dengan kolam tetapi imej akhir akan mempunyai flamingo:
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # juga 1536x1024 (landskap), 1024x1536 (potret), atau "auto"
+    n=1,
+)
+
+# model gpt-image mengembalikan base64 (b64_json), bukan URL - nyahsulitkan kepada bait.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+Jalankan dengan `python app.py`. Anda akan mendapat PNG disimpan di bawah `images/`.
+
+> Setiap panggilan ke `images.generate` menghasilkan imej berbeza untuk petunjuk yang sama - model imej tidak mengambil parameter `temperature` (itu kawalan penjanaan teks). Untuk dapatkan variasi, panggil API lagi; untuk kurangkan variasi, buat petunjuk anda lebih spesifik.
+
+## Mengedit imej
+
+Model `gpt-image` boleh **mengedit** imej sedia ada: sediakan imej, **topeng** pilihan (menandakan kawasan yang mahu diubah), dan petunjuk yang menerangkan perubahan. Seperti penjanaan, suntingan dikembalikan sebagai base64.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/ms/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -269,212 +148,51 @@ Berikut adalah contoh menggunakan GPT Image:
   <img src="../../../translated_images/ms/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
+## Menetapkan had dengan metaprompt
 
-- **Cipta variasi**. Ideanya adalah anda mengambil imej sedia ada dan meminta variasi dicipta. Untuk mencipta variasi, anda memberikan imej dan prompt teks serta kod seperti berikut:
-
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Nota, ini hanya disokong pada OpenAI
-
-## Temperature
-
-Temperature adalah parameter yang mengawal kebarangkalian output model AI Generatif. Nilai temperature adalah antara 0 dan 1 di mana 0 bermaksud output adalah deterministik dan 1 bermaksud output adalah rawak. Nilai lalai adalah 0.7.
-
-Mari kita lihat contoh bagaimana temperature berfungsi, dengan menjalankan prompt ini dua kali:
-
-> Prompt : "Arnab di atas kuda, memegang lolipop, di padang berkabus di mana tumbuh bunga daffodil"
-
-![Arnab di atas kuda memegang lolipop, versi 1](../../../translated_images/ms/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Sekarang mari kita jalankan prompt yang sama untuk melihat bahawa kita tidak akan mendapat imej yang sama dua kali:
-
-![Imej dijana arnab di atas kuda](../../../translated_images/ms/v2-generated-image.33f55a3714efe61d.webp)
-
-Seperti yang anda lihat, imej-imej itu serupa, tetapi tidak sama. Mari cuba ubah nilai temperature kepada 0.1 dan lihat apa yang berlaku:
+Setelah anda boleh menjana imej, anda perlukan kawalan supaya aplikasi anda tidak menghasilkan kandungan yang tidak selamat atau tidak mengikut jenama. **Metaprompt** adalah teks yang anda letakkan di depan petunjuk pengguna untuk mengehadkan output model.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Mengubah temperature
-
-Jadi mari kita cuba membuat respons lebih deterministik. Kita dapat melihat daripada dua imej yang kita hasilkan bahawa dalam imej pertama, terdapat arnab dan dalam imej kedua, terdapat kuda, jadi imej-imej itu sangat berbeza.
-
-Oleh itu, mari kita ubah kod kita dan tetapkan temperature kepada 0, seperti berikut:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Sekarang apabila anda menjalankan kod ini, anda akan mendapat dua imej ini:
-
-- ![Temperature 0, v1](../../../translated_images/ms/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Temperature 0 , v2](../../../translated_images/ms/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Di sini anda dapat melihat dengan jelas bagaimana imej-imej itu lebih menyerupai satu sama lain.
-
-## Bagaimana untuk menentukan sempadan untuk aplikasi anda dengan metaprompt
-
-Dengan demo kita, kita sudah boleh menjana imej untuk pelanggan kita. Walau bagaimanapun, kita perlu mencipta beberapa sempadan untuk aplikasi kita.
-
-Sebagai contoh, kita tidak mahu menjana imej yang tidak sesuai untuk kerja, atau yang tidak sesuai untuk kanak-kanak.
-
-Kita boleh melakukan ini dengan _metaprompt_. Metaprompt adalah teks prompt yang digunakan untuk mengawal output model AI Generatif. Sebagai contoh, kita boleh menggunakan metaprompt untuk mengawal output, dan memastikan imej yang dijana sesuai untuk kerja, atau sesuai untuk kanak-kanak.
-
-### Bagaimana ia berfungsi?
-
-Sekarang, bagaimana metaprompt berfungsi?
-
-Metaprompt adalah teks prompt yang digunakan untuk mengawal output model AI Generatif, ia diletakkan sebelum teks prompt, dan digunakan untuk mengawal output model serta disematkan dalam aplikasi untuk mengawal output model. Menggabungkan input prompt dan input metaprompt dalam satu teks prompt.
-
-Satu contoh metaprompt adalah seperti berikut:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Sekarang, mari kita lihat bagaimana kita boleh menggunakan metaprompt dalam demo kita.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Daripada prompt di atas, anda dapat melihat bagaimana semua imej yang dihasilkan mengambil kira metaprompt.
-
-## Tugasan - mari bantu pelajar
-
-Kami memperkenalkan Edu4All pada permulaan pelajaran ini. Sekarang tiba masanya untuk membantu pelajar menjana imej untuk penilaian mereka.
-
-Pelajar akan mencipta imej untuk penilaian mereka yang mengandungi monumen, jenis monumen yang dihasilkan bergantung kepada pelajar. Pelajar diminta menggunakan kreativiti mereka dalam tugasan ini untuk meletakkan monumen ini dalam konteks yang berbeza.
-
-## Penyelesaian
-
-Berikut adalah satu penyelesaian yang mungkin:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# hantar `prompt` ke client.images.generate(...)
 ```
 
-## Kerja Hebat! Teruskan Pembelajaran Anda
+Setiap imej kini dijana dalam had yang ditetapkan oleh metaprompt. Gabungkan ini dengan penapis kandungan terbina dalam Microsoft Foundry untuk pertahanan berlapis.
 
-Selepas menyelesaikan pelajaran ini, lihat koleksi [Pembelajaran AI Generatif](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) kami untuk terus meningkatkan pengetahuan anda tentang AI Generatif!
+## Tugasan - mari kita bantu pelajar
 
-Pergi ke Pelajaran 10 di mana kita akan melihat cara [membina aplikasi AI dengan kod rendah](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Pelajar Edu4All memerlukan imej untuk penilaian mereka. Bina aplikasi yang menjana imej **monumen** (monumen yang mana terpulang kepada anda) diletakkan dalam konteks kreatif yang berbeza - contohnya, mercu tanda terkenal pada waktu matahari terbenam dengan seorang kanak-kanak melihat.
+
+Cuba sendiri, kemudian bandingkan dengan penyelesaian rujukan:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) aplikasi penjanaan penuh: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Juga kerjakan buku nota dalam [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` untuk Azure, `oai-assignment.ipynb` untuk OpenAI).
+
+## Kerja bagus! Teruskan pembelajaran anda
+
+Selepas melengkapkan pelajaran ini, lihat koleksi kami [Pembelajaran AI Generatif](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) untuk terus meningkatkan pengetahuan AI Generatif anda!
+
+Teruskan ke pelajaran 10 untuk terus belajar.
 
 ---
 
-**Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang berwibawa. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan oleh manusia profesional adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

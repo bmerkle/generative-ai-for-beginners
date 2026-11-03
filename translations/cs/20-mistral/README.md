@@ -1,40 +1,42 @@
-# Práce s modely Mistral
+# Tvorba s modely Mistral 
 
-## Úvod
+## Úvod 
 
-Tato lekce pokrývá:  
-- Prozkoumání různých modelů Mistral  
-- Pochopení použití a scénářů pro každý model  
-- Ukázky kódu, které demonstrují jedinečné vlastnosti jednotlivých modelů.
+Tato lekce pokryje: 
+- Prozkoumání různých modelů Mistral 
+- Pochopení případů užití a scénářů pro každý model 
+- Prozkoumání ukázek kódu, které ukazují jedinečné vlastnosti každého modelu. 
 
-## Modely Mistral
+## Modely Mistral 
 
-V této lekci si představíme 3 různé modely Mistral:  
-**Mistral Large**, **Mistral Small** a **Mistral Nemo**.
+V této lekci prozkoumáme 3 různé modely Mistral: 
+**Mistral Large**, **Mistral Small** a **Mistral Nemo**. 
 
-Všechny tyto modely jsou zdarma dostupné na Github Model marketplace. Kód v tomto notebooku bude používat právě tyto modely. Více informací o používání Github Modelů pro [prototypování s AI modely](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst) najdete zde.
+Každý z těchto modelů je k dispozici zdarma na [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst). Kód v tomto notebooku bude používat tyto modely ke spuštění kódu.
+
+> **Poznámka:** GitHub Models bude ukončen na konci července 2026. Zde jsou další podrobnosti o používání [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) pro prototypování s AI modely. 
+
 
 ## Mistral Large 2 (2407)
+Mistral Large 2 je aktuálně vlajkový model od Mistral a je navržen pro podnikové použití. 
 
-Mistral Large 2 je v současnosti vlajkový model od Mistral a je navržen pro podnikové využití.
+Model je vylepšením původního Mistral Large tím, že nabízí 
+-  Větší kontextové okno - 128k vs 32k 
+-  Lepší výkon v matematických a programovacích úlohách - průměrná přesnost 76,9 % vs 60,4 % 
+-  Zvýšený vícejazyčný výkon - jazyky zahrnují: angličtinu, francouzštinu, němčinu, španělštinu, italštinu, portugalštinu, nizozemštinu, ruštinu, čínštinu, japonštinu, korejštinu, arabštinu a hindštinu.
 
-Model je vylepšením původního Mistral Large a nabízí:  
-- Větší kontextové okno – 128k oproti 32k  
-- Lepší výkon v matematických a programovacích úlohách – průměrná přesnost 76,9 % oproti 60,4 %  
-- Zvýšený vícejazyčný výkon – podporované jazyky zahrnují: angličtinu, francouzštinu, němčinu, španělštinu, italštinu, portugalštinu, nizozemštinu, ruštinu, čínštinu, japonštinu, korejštinu, arabštinu a hindštinu.
+Díky těmto vlastnostem Mistral Large vyniká v 
+- *Generování podporované vyhledáváním (RAG)* - díky většímu kontextovému oknu
+- *Volání funkcí* - tento model má nativní volání funkcí, které umožňuje integraci s externími nástroji a API. Tato volání mohou být prováděna paralelně nebo za sebou v sekvenčním pořadí. 
+- *Generování kódu* - tento model exceluje v generování Pythonu, Javy, TypeScriptu a C++. 
 
-Díky těmto vlastnostem Mistral Large vyniká v:  
-- *Retrieval Augmented Generation (RAG)* – díky většímu kontextovému oknu  
-- *Volání funkcí* – tento model má nativní podporu volání funkcí, což umožňuje integraci s externími nástroji a API. Volání lze provádět paralelně i sekvenčně.  
-- *Generování kódu* – model exceluje v generování kódu v Pythonu, Javě, TypeScriptu a C++.
+### Příklad RAG s použitím Mistral Large 2 
 
-### Příklad RAG s Mistral Large 2
+V tomto příkladu používáme Mistral Large 2 ke spuštění vzoru RAG nad textovým dokumentem. Otázka je napsána v korejštině a ptá se na autorovy aktivity před vysokou školou. 
 
-V tomto příkladu používáme Mistral Large 2 k provedení RAG vzoru nad textovým dokumentem. Otázka je napsaná v korejštině a ptá se na aktivity autora před nástupem na vysokou školu.
+Používá model Cohere Embeddings k vytvoření embeddingů textového dokumentu i otázky. Pro tento vzorek používá jako vektorové úložiště Python balíček faiss. 
 
-Používá Cohere Embeddings Model k vytvoření embeddingů textového dokumentu i otázky. Pro tento příklad je jako vektorové úložiště použita Python knihovna faiss.
-
-Prompt zaslaný modelu Mistral obsahuje jak otázky, tak nalezené části textu podobné otázce. Model pak poskytne odpověď v přirozeném jazyce.
+Výzva poslaná modelu Mistral obsahuje jak otázky, tak nalezené úryvky podobné otázce. Model pak poskytuje odpověď v přirozeném jazyce. 
 
 ```python 
 pip install faiss-cpu
@@ -51,9 +53,10 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference import EmbeddingsClient
 
-endpoint = "https://models.inference.ai.azure.com"
+# Získejte je z stránky "Přehled" vašeho projektu Microsoft Foundry
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -92,7 +95,7 @@ d = text_embeddings.shape[1]
 index = faiss.IndexFlatL2(d)
 index.add(text_embeddings)
 
-question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?？"
+question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?"
 
 question_embedding = embed_client.embed(
     input=[question],
@@ -102,7 +105,7 @@ question_embedding = embed_client.embed(
 question_embeddings = np.array(question_embedding.data[0].embedding)
 
 
-D, I = index.search(question_embeddings.reshape(1, -1), k=2) # distance, index
+D, I = index.search(question_embeddings.reshape(1, -1), k=2) # vzdálenost, index
 retrieved_chunks = [chunks[i] for i in I.tolist()[0]]
 
 prompt = f"""
@@ -130,30 +133,30 @@ chat_response = client.complete(
 print(chat_response.choices[0].message.content)
 ```
 
-## Mistral Small
+## Mistral Small 
+Mistral Small je další model v rodině modelů Mistral v kategorii premier/podnikových. Jak název napovídá, tento model je Malý jazykový model (SLM). Výhody používání Mistral Small jsou: 
+- Úspora nákladů ve srovnání s LLM modely Mistral jako Mistral Large a NeMo - pokles ceny o 80 %
+- Nízká latence - rychlejší odezva ve srovnání s LLM Mistral
+- Flexibilita - může být nasazen v různých prostředích s menšími omezeními na požadované zdroje. 
 
-Mistral Small je další model z rodiny Mistral v kategorii premier/enterprise. Jak název napovídá, jedná se o malý jazykový model (SLM). Výhody používání Mistral Small jsou:  
-- Úspora nákladů oproti větším modelům Mistral jako Mistral Large a NeMo – cena až o 80 % nižší  
-- Nízká latence – rychlejší odezva než u větších modelů Mistral  
-- Flexibilita – lze nasadit v různých prostředích s menšími nároky na zdroje.
 
-Mistral Small je ideální pro:  
-- Textové úlohy jako shrnutí, analýzu sentimentu a překlad  
-- Aplikace s častými požadavky díky své cenové efektivitě  
-- Úlohy s nízkou latencí, například kontrolu kódu a návrhy úprav
+Mistral Small je vhodný pro: 
+- Úlohy založené na textu, jako je shrnutí, analýza sentimentu a překlad. 
+- Aplikace, kde jsou časté požadavky díky jeho nákladové efektivitě 
+- Úlohy s nízkou latencí týkající se kódu, jako je revize a návrhy kódu 
 
-## Porovnání Mistral Small a Mistral Large
+## Porovnání Mistral Small a Mistral Large 
 
-Pro zobrazení rozdílů v latenci mezi Mistral Small a Large spusťte níže uvedené buňky.
+Pro zobrazení rozdílů v latenci mezi Mistral Small a Large spusťte níže uvedené buňky. 
 
-Měli byste vidět rozdíl v časech odezvy mezi 3–5 sekundami. Také si všimněte délky a stylu odpovědí na stejný prompt.
+Měli byste vidět rozdíl v časech odezvy mezi 3-5 sekundami. Všimněte si také délky a stylu odpovědí na stejnou výzvu.  
 
 ```python 
 
 import os 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-small"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -182,9 +185,9 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -208,30 +211,31 @@ print(response.choices[0].message.content)
 
 ## Mistral NeMo
 
-Ve srovnání s ostatními dvěma modely zmíněnými v této lekci je Mistral NeMo jediný bezplatný model s licencí Apache2.
+Ve srovnání s dalšími dvěma modely diskutovanými v této lekci je Mistral NeMo jediný bezplatný model s licencí Apache2. 
 
-Je považován za vylepšení dřívějšího open source LLM od Mistral, modelu Mistral 7B.
+Je považován za vylepšení dřívějšího open source LLM od Mistral, Mistral 7B. 
 
-Další vlastnosti modelu NeMo jsou:
+Některé další vlastnosti modelu NeMo jsou: 
 
-- *Efektivnější tokenizace:* Tento model používá tokenizer Tekken místo běžně používaného tiktoken. To umožňuje lepší výkon v různých jazycích a kódu.
+- *Efektivnější tokenizace:* Tento model používá tokenizer Tekken místo běžně používaného tiktoken. To umožňuje lepší výkon v různých jazycích a kódech. 
 
-- *Doladění (finetuning):* Základní model je dostupný pro doladění, což přináší větší flexibilitu pro případy, kdy je doladění potřeba.
+- *Ladění:* Základní model je k dispozici pro ladění. To umožňuje větší flexibilitu pro případy použití, kde je ladění potřeba. 
 
-- *Nativní volání funkcí* – Stejně jako Mistral Large, i tento model byl trénován na volání funkcí. Díky tomu je jedním z prvních open source modelů s touto schopností.
+- *Nativní volání funkcí* - Stejně jako Mistral Large, tento model byl trénován na volání funkcí. To z něj dělá unikát, protože je jedním z prvních open source modelů, který to umožňuje. 
 
-### Porovnání tokenizerů
 
-V tomto příkladu se podíváme, jak Mistral NeMo zpracovává tokenizaci ve srovnání s Mistral Large.
+### Porovnání tokenizerů 
 
-Oba příklady používají stejný prompt, ale uvidíte, že NeMo vrací méně tokenů než Mistral Large.
+V tomto příkladu se podíváme, jak Mistral NeMo zvládá tokenizaci ve srovnání s Mistral Large. 
+
+Oba příklady používají stejnou výzvu, ale měli byste vidět, že NeMo vrací méně tokenů než Mistral Large. 
 
 ```bash
 pip install mistral-common
 ```
 
 ```python 
-# Import needed packages:
+# Importujte potřebné balíčky:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -242,13 +246,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# Načtěte tokenizer Mistral
 
-model_name = "open-mistral-nemo	"
+model_name = "open-mistral-nemo"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# Tokenizujte seznam zpráv
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -266,7 +270,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -282,12 +286,12 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# Spočítejte počet tokenů
 print(len(tokens))
 ```
 
 ```python
-# Import needed packages:
+# Importujte potřebné balíčky:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -298,13 +302,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# Načtěte Mistral tokenizer
 
 model_name = "mistral-large-latest"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# Tokenizujte seznam zpráv
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -322,7 +326,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -338,13 +342,17 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# Spočítejte počet tokenů
 print(len(tokens))
 ```
 
-## Učení zde nekončí, pokračujte na své cestě
+## Učení tím nekončí, pokračujte v cestě
 
-Po dokončení této lekce si prohlédněte naši [kolekci Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) a pokračujte v rozšiřování svých znalostí o generativní AI!
+Po dokončení této lekce navštivte naši [kolekci pro učení Generative AI](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), kde můžete pokračovat v rozšiřování svých znalostí o generativní AI!
 
-**Prohlášení o vyloučení odpovědnosti**:  
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoliv nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o co největší přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vzniklé použitím tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

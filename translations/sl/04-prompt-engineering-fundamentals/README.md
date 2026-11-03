@@ -3,139 +3,141 @@
 [![Osnove oblikovanja pozivov](../../../translated_images/sl/04-lesson-banner.a2c90deba7fedacd.webp)](https://youtu.be/GElCu2kUlRs?si=qrXsBvXnCW12epb8)
 
 ## Uvod
-Ta modul pokriva osnovne koncepte in tehnike za ustvarjanje učinkovitih pozivov v generativnih modelih umetne inteligence. Način, kako napišete svoj poziv za LLM, je pomemben. Previdno oblikovan poziv lahko prinese bolj kakovostne odgovore. Toda kaj točno pomenijo izrazi, kot sta _poziv_ in _oblikovanje pozivov_? In kako lahko izboljšam vhodni _poziv_, ki ga pošljem LLM? To so vprašanja, na katera bomo poskušali odgovoriti v tem poglavju in naslednjem.
+Ta modul pokriva osnovne pojme in tehnike za ustvarjanje učinkovitih pozivov v generativnih modelih AI. Pomemben je tudi način, kako napišete svoj poziv za LLM. Dobro oblikovan poziv lahko doseže boljšo kakovost odgovora. Kaj pa pravzaprav pomenita izraza _poziv_ in _oblikovanje pozivov_? In kako izboljšati vhodni poziv, ki ga pošljem LLM? Na ta vprašanja bomo poskušali odgovoriti v tem in naslednjem poglavju.
 
-_Generativna umetna inteligenca_ je sposobna ustvarjati nove vsebine (npr. besedila, slike, zvoke, kodo itd.) kot odgovor na zahteve uporabnikov. To dosega z uporabo _velikih jezikovnih modelov_ (LLM), kot je serija GPT ("Generative Pre-trained Transformer") podjetja OpenAI, ki so usposobljeni za uporabo naravnega jezika in kode.
+_Generativna AI_ je sposobna ustvarjati novo vsebino (npr. besedilo, slike, zvok, kodo itd.) kot odziv na uporabniške zahteve. To doseže z uporabo _velikih jezikovnih modelov_ (LLM), kot je serija GPT podjetja OpenAI ("Generative Pre-trained Transformer"), ki so usposobljeni za uporabo naravnega jezika in kode.
 
-Uporabniki lahko zdaj komunicirajo s temi modeli z uporabo znanih paradigm, kot je klepet, brez potrebe po tehničnem znanju ali usposabljanju. Ti modeli so _osredotočeni na pozive_ - uporabniki pošljejo besedilni vnos (poziv) in prejmejo odgovor umetne inteligence (dokončanje). Nato lahko "klepetajo z umetno inteligenco" iterativno, v več zavojih pogovorov, in izpopolnjujejo svoj poziv, dokler odgovor ne ustreza njihovim pričakovanjem.
+Uporabniki lahko zdaj z modeli komunicirajo z uporabo znanih paradigm, kot je klepet, brez potrebe po kakršnemkoli tehničnem znanju ali usposabljanju. Modeli so _pozivno temelječi_ - uporabniki pošljejo besedilni vhod (poziv) in dobijo AI odgovor (dokončanje). Nato lahko iterativno "klepetajo z AI" v večkrogovnih pogovorih, izboljšujejo svoj poziv, dokler odgovor ne ustreza njihovim pričakovanjem.
 
-"Pozivi" zdaj postajajo primarni _programski vmesnik_ za aplikacije generativne umetne inteligence, ki modelom povedo, kaj naj storijo, in vplivajo na kakovost vrnjenih odgovorov. "Oblikovanje pozivov" je hitro rastoče področje študija, ki se osredotoča na _oblikovanje in optimizacijo_ pozivov za zagotavljanje doslednih in kakovostnih odgovorov v večjem obsegu.
+"Pozivi" postanejo primarni _programski vmesnik_ za generativne AI aplikacije, saj modelom povedo, kaj naj naredijo, in vplivajo na kakovost vrnjenih odgovorov. "Oblikovanje pozivov" je hitro rastoče področje, ki se osredotoča na _načrtovanje in optimizacijo_ pozivov za zagotavljanje doslednih in kakovostnih odgovorov v obsegu.
 
 ## Cilji učenja
 
-V tej lekciji bomo spoznali, kaj je oblikovanje pozivov, zakaj je pomembno in kako lahko oblikujemo učinkovitejše pozive za določen model in cilje aplikacije. Razumeli bomo osnovne koncepte in najboljše prakse za oblikovanje pozivov - ter spoznali interaktivno okolje "sandbox" v Jupyter Notebooku, kjer bomo te koncepte uporabili na resničnih primerih.
+V tej lekciji se bomo naučili, kaj je oblikovanje pozivov, zakaj je pomembno in kako lahko ustvarimo učinkovitejše pozive za določen model in namen aplikacije. Spoznali bomo osnovne pojme in dobre prakse oblikovanja pozivov ter spoznali interaktivno okolje Jupyter zvezkov "peskovnik", kjer lahko vidimo to znanje uporabljeno na dejanskih primerih.
 
-Na koncu te lekcije bomo lahko:
+Do konca te lekcije bomo znali:
 
-1. Razložili, kaj je oblikovanje pozivov in zakaj je pomembno.
-2. Opisali sestavne dele poziva in njihovo uporabo.
-3. Spoznali najboljše prakse in tehnike za oblikovanje pozivov.
-4. Uporabili naučene tehnike na resničnih primerih z uporabo OpenAI vmesnika.
+1. Razložiti, kaj je oblikovanje pozivov in zakaj je pomembno.
+2. Opisati sestavine poziva in kako se uporabljajo.
+3. Spoznati najboljše prakse in tehnike oblikovanja pozivov.
+4. Uporabiti naučene tehnike na resničnih primerih z uporabo OpenAI končne točke.
 
-## Ključni pojmi
+## Ključni izrazi
 
-Oblikovanje pozivov: Praksa oblikovanja in izpopolnjevanja vhodnih podatkov za usmerjanje modelov umetne inteligence k ustvarjanju želenih rezultatov.  
-Tokenizacija: Proces pretvorbe besedila v manjše enote, imenovane tokeni, ki jih model lahko razume in obdela.  
-LLM-ji, prilagojeni za navodila: Veliki jezikovni modeli (LLM), ki so bili dodatno prilagojeni s specifičnimi navodili za izboljšanje natančnosti in ustreznosti njihovih odgovorov.
+Oblikovanje pozivov: Postopek načrtovanja in izboljševanja vhodov, ki usmerjajo AI modele k ustvarjanju želenih izhodov.
+Tokenizacija: Postopek pretvarjanja besedila v manjše enote, imenovane tokeni, ki jih model lahko razume in obdela.
+Modeli LLM s prilagojenimi navodili: Veliki jezikovni modeli (LLM), ki so dodatno prilagojeni z določenimi navodili za izboljšanje natančnosti in relevantnosti odgovorov.
 
-## Učno okolje
+## Okolje za učenje
 
-Oblikovanje pozivov je trenutno bolj umetnost kot znanost. Najboljši način za izboljšanje intuicije na tem področju je _več vadbe_ in pristop poskusov in napak, ki združuje strokovno znanje na področju aplikacij z priporočenimi tehnikami in optimizacijami, specifičnimi za model.
+Oblikovanje pozivov je trenutno bolj umetnost kot znanost. Najboljši način za izboljšanje intuicije je _več vaje_ in sprejetje pristopa poskusov in napak, ki združuje strokovno znanje domene uporabe s priporočenimi tehnikami in optimizacijami, specifičnimi za model.
 
-Jupyter Notebook, ki spremlja to lekcijo, ponuja okolje _sandbox_, kjer lahko preizkusite, kar ste se naučili - sproti ali kot del izziva s kodo na koncu. Za izvajanje vaj boste potrebovali:
+Jupyter zvezek, ki spremlja to lekcijo, ponuja _peskovnik_, kjer lahko preizkusite, kar se naučite - sproti ali kot del kodnega izziva na koncu. Za izvajanje vaj boste potrebovali:
 
-1. **Azure OpenAI API ključ** - končno točko storitve za nameščen LLM.  
-2. **Python okolje** - v katerem lahko zaženete Notebook.  
-3. **Lokalne okoljske spremenljivke** - _dokončajte korake [SETUP](./../00-course-setup/02-setup-local.md?WT.mc_id=academic-105485-koreyst), da se pripravite_.  
+1. **Azure OpenAI API ključ** - končno točko storitve za nameščeni LLM.
+2. **Python izvajalno okolje** - v katerem lahko zaženete zvezek.
+3. **Lokalne okoljske spremenljivke** - _zaključite [SETUP](./../00-course-setup/02-setup-local.md?WT.mc_id=academic-105485-koreyst) korake zdaj, da boste pripravljeni_.
 
-Notebook vsebuje _začetne_ vaje - vendar vas spodbujamo, da dodate svoje _Markdown_ (opisne) in _Code_ (pozivne zahteve) odseke, da preizkusite več primerov ali idej - in razvijete svojo intuicijo za oblikovanje pozivov.
+Zvezek vsebuje _začetne_ vaje - a spodbujamo vas, da dodate lastne _Markdown_ (opisne) in _Kode_ (pozivne zahtevke) razdelke za preizkušanje več primerov ali idej - in si tako zgradite intuicijo za oblikovanje pozivov.
 
-## Ilustrirani vodnik
+## Ilustriran vodnik
 
-Želite dobiti celovito sliko o tem, kaj ta lekcija zajema, preden se poglobite? Oglejte si ta ilustrirani vodnik, ki vam daje občutek glavnih tem, ki jih pokriva lekcija, in ključnih spoznanj, o katerih lahko razmislite pri vsaki. Načrt lekcije vas vodi od razumevanja osnovnih konceptov in izzivov do njihovega reševanja z ustreznimi tehnikami oblikovanja pozivov in najboljšimi praksami. Upoštevajte, da se odsek "Napredne tehnike" v tem vodniku nanaša na vsebino, ki je zajeta v _naslednjem_ poglavju tega učnega načrta.
+Želite pred začetkom lekcije dobiti velik pregled tem, ki jih ta zajema? Oglejte si ta ilustriran vodnik, ki vam poda občutek glavnih tem in ključnih spoznanj, o katerih razmislite pri vsaki od njih. Načrt lekcije vas vodi od razumevanja osnovnih pojmov in izzivov do njihove obravnave z relevantnimi tehnikami oblikovanja pozivov in najboljšimi praksami. Upoštevajte, da se razdelek "Napredne tehnike" v tem vodniku nanaša na vsebino, zajeto v _naslednjem_ poglavju tega kurikuluma.
 
-![Ilustrirani vodnik za oblikovanje pozivov](../../../translated_images/sl/04-prompt-engineering-sketchnote.d5f33336957a1e4f.webp)
+![Ilustriran vodnik po oblikovanju pozivov](../../../translated_images/sl/04-prompt-engineering-sketchnote.d5f33336957a1e4f.webp)
 
 ## Naš startup
 
-Zdaj pa se pogovorimo o tem, kako je _ta tema_ povezana z našim poslanstvom startupa [prinašati inovacije umetne inteligence v izobraževanje](https://educationblog.microsoft.com/2023/06/collaborating-to-bring-ai-innovation-to-education?WT.mc_id=academic-105485-koreyst). Želimo graditi aplikacije, ki temeljijo na umetni inteligenci in omogočajo _personalizirano učenje_ - zato razmislimo, kako bi lahko različni uporabniki naše aplikacije "oblikovali" pozive:
+Pogovorimo se zdaj, kako se _ta tema_ povezuje z našim poslanstvom startup podjetja, da [prinesemo AI inovacije v izobraževanje](https://educationblog.microsoft.com/2023/06/collaborating-to-bring-ai-innovation-to-education?WT.mc_id=academic-105485-koreyst). Želimo ustvarjati AI-podprte aplikacije za _personalizirano učenje_ - razmislimo torej, kako bi različni uporabniki naše aplikacije lahko "načrtovali" pozive:
 
-- **Administratorji** bi lahko prosili umetno inteligenco, da _analizira podatke o učnem načrtu za prepoznavanje vrzeli v pokritosti_. Umetna inteligenca lahko povzame rezultate ali jih vizualizira s kodo.  
-- **Učitelji** bi lahko prosili umetno inteligenco, da _ustvari učni načrt za ciljno občinstvo in temo_. Umetna inteligenca lahko pripravi personaliziran načrt v določenem formatu.  
-- **Študenti** bi lahko prosili umetno inteligenco, da jih _uči težkega predmeta_. Umetna inteligenca lahko zdaj vodi študente z lekcijami, namigi in primeri, prilagojenimi njihovi ravni.  
+- **Administratorji** lahko AI prosijo, naj _analizira podatke učnih načrtov za ugotavljanje vrzeli v pokritosti_. AI lahko povzame rezultate ali jih prikaže s kodo.
+- **Učitelji** lahko AI prosijo, naj _ustvari učni načrt za ciljno skupino in temo_. AI lahko zgradi personaliziran načrt v določenem formatu.
+- **Učenci** lahko AI prosijo, naj jih _poučuje v zahtevni snovi_. AI zdaj lahko vodi učence z lekcijami, namigi in primeri, prilagojenimi njihovi ravni.
 
-To je le vrh ledene gore. Oglejte si [Prompts For Education](https://github.com/microsoft/prompts-for-edu/tree/main?WT.mc_id=academic-105485-koreyst) - odprtokodno knjižnico pozivov, ki so jo pripravili strokovnjaki za izobraževanje - da dobite širši vpogled v možnosti! _Poskusite zagnati nekaj teh pozivov v sandboxu ali z uporabo OpenAI Playground in preverite, kaj se zgodi!_
+To je šele vrh ledene gore. Oglejte si [Pozive za izobraževanje](https://github.com/microsoft/prompts-for-edu/tree/main?WT.mc_id=academic-105485-koreyst) - odprtokodno knjižnico pozivov, ki jo urejajo strokovnjaki za izobraževanje - da dobite širši vpogled v možnosti! _Poskusite zagnati nekaj teh pozivov v peskovniku ali uporabite OpenAI Playground, da vidite, kaj se zgodi!_
 
 <!--
 PREDLOGA LEKCIJE:
-Ta enota naj pokriva osnovni koncept #1.
-Okrepite koncept s primeri in referencami.
+Ta enota naj pokriva osnovni pojem #1.
+Pojem okrepite s primeri in referencami.
 
-KONCEPT #1:
+POJEM #1:
 Oblikovanje pozivov.
-Definirajte ga in razložite, zakaj je potreben.
+Opredelite in razložite, zakaj je potrebno.
 -->
 
 ## Kaj je oblikovanje pozivov?
 
-To lekcijo smo začeli z definicijo **oblikovanja pozivov** kot procesa _oblikovanja in optimizacije_ besedilnih vhodov (pozivov) za zagotavljanje doslednih in kakovostnih odgovorov (dokončanj) za določen cilj aplikacije in model. To lahko razumemo kot dvofazni proces:
+Lekcijo smo začeli z definicijo **oblikovanja pozivov** kot procesa _načrtovanja in optimizacije_ besedilnih vhodov (pozivov) za zagotavljanje doslednih in kakovostnih odgovorov (dokončanj) za določen namen aplikacije in model. Ta postopek lahko razdelimo na 2 koraka:
 
-- _oblikovanje_ začetnega poziva za določen model in cilj  
-- _izpopolnjevanje_ poziva z iteracijami za izboljšanje kakovosti odgovora  
+- _načrtovanje_ začetnega poziva za določen model in namen
+- _izboljšave_ poziva iterativno, da se izboljša kakovost odgovora
 
-To je nujno proces poskusov in napak, ki zahteva intuicijo in trud uporabnika za dosego optimalnih rezultatov. Zakaj je torej pomembno? Da bi odgovorili na to vprašanje, moramo najprej razumeti tri koncepte:
+Gre za proces poskusov in napak, ki zahteva uporabniško intuicijo in trud za dosego optimalnih rezultatov. Zakaj je torej pomembno? Za odgovor najprej moramo razumeti tri pojme:
 
-- _Tokenizacija_ = kako model "vidi" poziv  
-- _Osnovni LLM-ji_ = kako osnovni model "obdeluje" poziv  
-- _LLM-ji, prilagojeni za navodila_ = kako model zdaj vidi "naloge"  
+- _Tokenizacija_ = kako model "vidi" poziv
+- _Osnovni LLM_ = kako temeljni model "obdeluje" poziv
+- _LLM s prilagojenimi navodili_ = kako model zdaj vidi "naloge"
 
 ### Tokenizacija
 
-LLM vidi pozive kot _zaporedje tokenov_, pri čemer lahko različni modeli (ali različice modela) isti poziv tokenizirajo na različne načine. Ker so LLM-ji usposobljeni na tokenih (in ne na surovem besedilu), ima način, kako se pozivi tokenizirajo, neposreden vpliv na kakovost ustvarjenega odgovora.
+LLM pozive vidi kot _sekvenco tokenov_, kjer različni modeli (ali različice modela) iste pozive razdelijo na tokene različno. Ker so LLM usposobljeni na tokenih (ne na surovem besedilu), način tokenizacije pozivov neposredno vpliva na kakovost ustvarjenega odgovora.
 
-Da bi dobili občutek, kako deluje tokenizacija, poskusite orodja, kot je [OpenAI Tokenizer](https://platform.openai.com/tokenizer?WT.mc_id=academic-105485-koreyst), prikazano spodaj. Kopirajte svoj poziv - in si oglejte, kako se pretvori v tokene, pri čemer bodite pozorni na to, kako se obravnavajo presledki in ločila. Upoštevajte, da ta primer prikazuje starejši LLM (GPT-3) - zato lahko uporaba novejšega modela prinese drugačen rezultat.
+Za intuitivno razumevanje tokenizacije preizkusite orodja, kot je [OpenAI Tokenizer](https://platform.openai.com/tokenizer?WT.mc_id=academic-105485-koreyst) prikazan spodaj. Vnesite svoj poziv in opazujte, kako se pretvori v tokene, pri tem bodite pozorni na obravnavo presledkov in ločil. Upoštevajte, da ta primer prikazuje starejši LLM (GPT-3) - zato lahko uporaba novejšega modela da drugačen rezultat.
 
 ![Tokenizacija](../../../translated_images/sl/04-tokenizer-example.e71f0a0f70356c5c.webp)
 
-### Koncept: Osnovni modeli
+### Pojem: Temeljni modeli
 
-Ko je poziv tokeniziran, je primarna funkcija ["osnovnega LLM"](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) (ali osnovnega modela) napovedovanje naslednjega tokena v tem zaporedju. Ker so LLM-ji usposobljeni na ogromnih zbirkah besedil, imajo dober občutek za statistične odnose med tokeni in lahko to napoved naredijo z določeno stopnjo zaupanja. Upoštevajte, da ne razumejo _pomena_ besed v pozivu ali tokenu; vidijo le vzorec, ki ga lahko "dopolnijo" z naslednjo napovedjo. Nadaljujejo lahko z napovedovanjem zaporedja, dokler jih uporabnik ne prekine ali dokler ne dosežejo vnaprej določenega pogoja.
+Ko je poziv razdeljen na tokene, je glavna funkcija ["Osnovnega LLM"](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) (temeljnega modela) napovedovanje naslednjega tokena v zaporedju. Ker so LLM trenirani na obsežnih besedilnih podatkih, razumejo statistične zveze med tokeni in lahko napovedujejo z določeno gotovostjo. Opomba: ne razumejo _pomena_ besed v pozivu ali tokenu; vidijo le vzorec, ki ga lahko "dokončajo" z naslednjo napovedjo. Napoved lahko nadaljujejo, dokler jih uporabnik ne prekine ali ne nastopi vnaprej določen pogoj.
 
-Želite videti, kako deluje dokončanje na podlagi pozivov? Vnesite zgornji poziv v [_Chat Playground_](https://oai.azure.com/playground?WT.mc_id=academic-105485-koreyst) v Azure OpenAI Studio z privzetimi nastavitvami. Sistem je konfiguriran tako, da obravnava pozive kot zahteve za informacije - zato bi morali videti dokončanje, ki ustreza temu kontekstu.
+Želite videti, kako deluje dokončanje na podlagi poziva? Vnesite zgornji poziv v [Microsoft Foundry playground](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) z privzetimi nastavitvami. Sistem obravnava pozive kot zahteve po informacijah - zato boste dobili odgovor, ki ustreza temu kontekstu.
 
-Kaj pa, če bi uporabnik želel videti nekaj specifičnega, kar ustreza določenim kriterijem ali cilju naloge? Tukaj pridejo v poštev _LLM-ji, prilagojeni za navodila_.
+Kaj pa, če bi uporabnik želel videti nekaj specifičnega, kar ustreza določenim kriterijem ali cilju naloge? Takrat vstopijo na sceno modeli LLM s prilagojenimi navodili.
 
-![Osnovno LLM dokončanje klepeta](../../../translated_images/sl/04-playground-chat-base.65b76fcfde0caa67.webp)
+![Dokončanje klepeta z osnovnim LLM](../../../translated_images/sl/04-playground-chat-base.65b76fcfde0caa67.webp)
 
-### Koncept: LLM-ji, prilagojeni za navodila
+### Pojem: LLM s prilagojenimi navodili
 
-[LLM, prilagojen za navodila](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) začne z osnovnim modelom in ga dodatno prilagodi s primeri ali pari vhod/izhod (npr. večzavojni "sporočili"), ki lahko vsebujejo jasna navodila - in odgovor umetne inteligence poskuša slediti tem navodilom.
+[LLM s prilagojenimi navodili](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) začne z osnovnim modelom in ga dodatno prilagodi z uporabo primerov ali vhodno/izhodnih parov (npr. večkrogovnih "sporočil"), ki vsebujejo jasna navodila - in AI skuša slediti temu navodilu.
 
-To uporablja tehnike, kot je učenje z okrepitvijo s povratnimi informacijami ljudi (RLHF), ki lahko model usposobijo za _sledenje navodilom_ in _učenje iz povratnih informacij_, tako da proizvaja odgovore, ki so bolj primerni za praktične aplikacije in bolj ustrezajo ciljem uporabnikov.
+Uporablja tehnike, kot je okrepljeno učenje z človekovim povratnim informacijam (RLHF), ki model nauči _sledenja navodilom_ in _učenja iz povratnih informacij_, da so odgovori bolje prilagojeni praktičnim aplikacijam in bolj relevantni za uporabniške cilje.
 
-Poskusimo - ponovno uporabite zgornji poziv, vendar zdaj spremenite _sistemsko sporočilo_, da zagotovite naslednje navodilo kot kontekst:
+Preizkusimo to - vrnite se k zgornjemu pozivu, a spremenite _sistemsko sporočilo_ in kot kontekst dodajte naslednje navodilo:
 
-> _Povzemi vsebino, ki ti je bila posredovana, za učenca drugega razreda. Rezultat naj bo en odstavek s 3-5 točkami._
+> _Povzemite vsebino, ki vam je dana, za učenca drugega razreda. Rezultat naj bo en odstavek s 3-5 ključnimi točkami._
 
-Opazite, kako je rezultat zdaj prilagojen, da odraža želeni cilj in format? Učitelj lahko zdaj neposredno uporabi ta odgovor v svojih predstavitvah za razred.
+Vidite, kako je rezultat zdaj usklajen z željenim ciljem in formatom? Učitelj lahko ta odgovor neposredno uporabi v svojih diapozitivih za tisti razred.
 
-![LLM, prilagojen za navodila, dokončanje klepeta](../../../translated_images/sl/04-playground-chat-instructions.b30bbfbdf92f2d05.webp)
+![Dokončanje klepeta z LLM s prilagojenimi navodili](../../../translated_images/sl/04-playground-chat-instructions.b30bbfbdf92f2d05.webp)
 
 ## Zakaj potrebujemo oblikovanje pozivov?
 
-Zdaj, ko vemo, kako LLM-ji obdelujejo pozive, se pogovorimo o _tem, zakaj_ potrebujemo oblikovanje pozivov. Odgovor leži v dejstvu, da trenutni LLM-ji predstavljajo številne izzive, zaradi katerih je _zanesljivo in dosledno dokončanje_ težje doseči brez truda pri oblikovanju in optimizaciji pozivov. Na primer:
+Ko razumemo, kako LLM obdelujejo pozive, se pogovorimo, _zakaj_ potrebujemo oblikovanje pozivov. Odgovor je v tem, da trenutni LLM postavljajo več izzivov, ki otežujejo doseganje _zanesljivih in doslednih dokončanj_ brez truda pri ustvarjanju in optimizaciji pozivov. Na primer:
 
-1. **Odgovori modela so stohastični.** _Isti poziv_ bo verjetno prinesel različne odgovore z različnimi modeli ali različicami modelov. In lahko celo prinese različne rezultate z _istim modelom_ ob različnih časih. _Tehnike oblikovanja pozivov nam lahko pomagajo zmanjšati te razlike z zagotavljanjem boljših varoval_.  
+1. **Odgovori modela so stohastični.** _Isti poziv_ bo verjetno z različnimi modeli ali različicami modela ustvaril različne odgovore. Lahko se zgodi celo, da isti model ob različnih časih poda različne rezultate. _Tehnike oblikovanja pozivov nam lahko pomagajo zmanjšati te variacije z boljšimi varovali_.
 
-1. **Modeli lahko izmišljajo odgovore.** Modeli so predhodno usposobljeni z _velikimi, vendar omejenimi_ zbirkami podatkov, kar pomeni, da jim primanjkuje znanja o konceptih zunaj tega obsega usposabljanja. Posledično lahko ustvarijo dokončanja, ki so netočna, izmišljena ali neposredno v nasprotju z znanimi dejstvi. _Tehnike oblikovanja pozivov pomagajo uporabnikom prepoznati in ublažiti takšne izmišljotine, npr. z zahtevo po citatih ali razlagi od umetne inteligence_.  
+1. **Modeli lahko izmišljajo odgovore.** Modeli so predhodno usposobljeni na _velikih, a omejenih_ naborih podatkov, zato nimajo znanja o pojmih zunaj tega obsega usposabljanja. Posledično lahko ustvarijo odgovore, ki so netočni, izmišljeni ali direktno nasprotujoči se znanim dejstvom. _Tehnike oblikovanja pozivov uporabnikom pomagajo prepoznati in blažiti takšne izmišljotine, npr. z zahtevo po navedbah virov ali razlogovanju_.
 
-1. **Zmožnosti modelov se razlikujejo.** Novejši modeli ali generacije modelov bodo imeli bogatejše zmožnosti, vendar bodo prinesli tudi edinstvene posebnosti in kompromise v stroških in kompleksnosti. _Oblikovanje pozivov nam lahko pomaga razviti najboljše prakse in delovne tokove, ki abstrahirajo razlike in se prilagodijo specifičnim zahtevam modela na skalabilen in brezhiben način_.  
+1. **Zmožnosti modelov se razlikujejo.** Novejši modeli ali generacije modelov imajo bogatejše zmogljivosti, a prinesejo tudi edinstvene posebnosti in kompromis med stroški in kompleksnostjo. _Oblikovanje pozivov nam lahko pomaga razviti najboljše prakse in delovne tokove, ki abstraktno premagujejo razlike in se prilagajajo posebnim zahtevam modelov na načine, ki so razširljivi in nemoteči_.
 
-Poglejmo to v praksi v OpenAI ali Azure OpenAI Playground:
+Poglejmo to v akciji v OpenAI ali Azure OpenAI Playground:
 
-- Uporabite isti poziv z različnimi LLM implementacijami (npr. OpenAI, Azure OpenAI, Hugging Face) - ste opazili razlike?  
-- Uporabite isti poziv večkrat z _istim_ LLM (npr. Azure OpenAI Playground) - kako so se te razlike razlikovale?  
+- Uporabite isti poziv z različnimi nameščenimi LLM (npr., OpenAI, Azure OpenAI, Hugging Face) - ste opazili razlike?
+- Uporabite isti poziv večkrat z _istim_ nameščenim LLM (npr., Azure OpenAI playground) - kako so se razlikovale variacije?
 
 ### Primer izmišljotin
 
-V tem tečaju uporabljamo izraz **"izmišljotina"** za poimenovanje pojava, ko LLM-ji včasih ustvarijo dejansko napačne informacije zaradi omejitev v njihovem usposabljanju ali drugih omejitev. Morda ste ta pojav v popularnih člankih ali raziskovalnih člankih slišali imenovati tudi _"halucinacije"_. Vendar močno priporočamo uporabo izraza _"izmišljotina"_, da ne bi nehote pripisali človeških lastnosti rezultatu, ki ga je ustvaril stroj. To prav tako krepi [smernice za odgovorno umetno inteligenco](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) z vidika terminologije, saj odstranjuje izraze, ki bi lahko bili v nekaterih kontekstih žaljivi ali neprimerni.
+V tem tečaju uporabljamo izraz **"izmišljotina"**, da označimo pojav, ko LLM včasih generirajo dejansko netočne informacije zaradi omejitev usposabljanja ali drugih razlogov. Lahko ste slišali tudi izraz _"halucinacije"_ v popularnih člankih ali raziskovalnih prispevkih. Vendar močno priporočamo uporabo _"izmišljotina"_, da ne antropomorfiziramo vedenja tako, da človeku podobno lastnost pripisujemo strojno generiranemu izidu. To tudi krepi [Smernice odgovorne AI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) iz vidika terminologije, saj odstranjuje izraze, ki bi lahko bili v nekaterih kontekstih žaljivi ali neinkluzivni.
 
-Želite dobiti občutek, kako delujejo izmišljotine? Pomislite na poziv, ki umetni inteligenci naroča, naj ustvari vsebino za neobstoječo temo (da zagotovite, da ni vključena v zbirko podatkov za usposabljanje). Na primer - poskusil sem ta poziv:
+Želite razumeti, kako izmišljotine delujejo? Pomislite na poziv, ki AI naroča, naj ustvari vsebino za neobstoječo temo (da zagotovimo, da ni v podatkih za usposabljanje). Na primer - preizkusil sem naslednji poziv:
 
-> **Poziv:** ustvari učni načrt o Marsovski vojni leta 2076.
-Spletno iskanje mi je pokazalo, da obstajajo izmišljeni zapisi (npr. televizijske serije ali knjige) o vojnah na Marsu - vendar nobena iz leta 2076. Zdrava pamet nam tudi pove, da je leto 2076 _v prihodnosti_ in zato ne more biti povezano z resničnim dogodkom.
+> **Poziv:** ustvarite učni načrt o Marsovski vojni leta 2076.
 
-Kaj se zgodi, ko ta poziv izvedemo z različnimi ponudniki LLM?
+Iskanje po spletu mi je pokazalo, da obstajajo fiktivni zapisi (npr., TV serije ali knjige) o marsovskih vojnah - a nobenih za leto 2076. Zdrava pamet nam pove, da je 2076 _v prihodnosti_ in zato ne more biti povezan z resničnim dogodkom.
+
+
+Kaj se torej zgodi, ko ta poziv zaženemo z različnimi ponudniki LLM?
 
 > **Odgovor 1**: OpenAI Playground (GPT-35)
 
@@ -145,58 +147,68 @@ Kaj se zgodi, ko ta poziv izvedemo z različnimi ponudniki LLM?
 
 ![Odgovor 2](../../../translated_images/sl/04-fabrication-aoai.b14268e9ecf25caf.webp)
 
-> **Odgovor 3**: Hugging Face Chat Playground (LLama-2)
+> **Odgovor 3**: : Hugging Face Chat Playground (LLama-2)
 
 ![Odgovor 3](../../../translated_images/sl/04-fabrication-huggingchat.faf82a0a51278956.webp)
 
-Kot pričakovano, vsak model (ali različica modela) ustvari nekoliko drugačne odgovore zaradi stohastičnega vedenja in razlik v zmogljivostih modela. Na primer, en model cilja na občinstvo osmega razreda, medtem ko drugi predvideva dijake srednje šole. Vendar so vsi trije modeli ustvarili odgovore, ki bi lahko prepričali neinformiranega uporabnika, da je dogodek resničen.
+Kot je pričakovano, vsak model (ali različica modela) nekoliko drugače odgovarja zaradi stohastičnega vedenja in razlik v zmogljivostih modela. Na primer, en model cilja na občinstvo 8. razreda, medtem ko drugi predvideva dijaka srednje šole. Vsi trije modeli pa so ustvarili odgovore, ki lahko prepričajo neinformiranega uporabnika, da je dogodek resničen.
 
-Tehnike oblikovanja pozivov, kot sta _metaprompting_ in _konfiguracija temperature_, lahko do neke mere zmanjšajo izmišljanje modelov. Nove arhitekture za oblikovanje pozivov prav tako vključujejo nova orodja in tehnike v tok pozivov, da bi ublažili ali zmanjšali nekatere od teh učinkov.
+Tehnike oblikovanja poziva, kot so _metapodajanje_ in _nastavitev temperature_, lahko do neke mere zmanjšajo nastajanje lažnih vsebin s strani modela. Novi _arhitekturi_ oblikovanja pozivov tudi brezhibno vključujejo nova orodja in tehnike v potek poziva, da omilijo ali zmanjšajo nekatere od teh učinkov.
 
-## Študija primera: GitHub Copilot
+## Primer študije primera: GitHub Copilot
 
-To poglavje zaključimo z vpogledom v to, kako se oblikovanje pozivov uporablja v resničnih rešitvah, tako da si ogledamo eno študijo primera: [GitHub Copilot](https://github.com/features/copilot?WT.mc_id=academic-105485-koreyst).
+Zaključimo ta del s pregledom, kako se oblikovanje pozivov uporablja v rešitvah iz resničnega sveta, z ogledom enega primera študije: [GitHub Copilot](https://github.com/features/copilot?WT.mc_id=academic-105485-koreyst).
 
-GitHub Copilot je vaš "AI parni programer" - pretvori besedilne pozive v predloge kode in je integriran v vaše razvojno okolje (npr. Visual Studio Code) za brezhibno uporabniško izkušnjo. Kot je dokumentirano v seriji spodnjih blogov, je bila najzgodnejša različica zasnovana na modelu OpenAI Codex - inženirji pa so hitro ugotovili potrebo po prilagoditvi modela in razvoju boljših tehnik oblikovanja pozivov za izboljšanje kakovosti kode. Julija so [predstavili izboljšan AI model, ki presega Codex](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst) za še hitrejše predloge.
+GitHub Copilot je vaš "AI partner programer" – pretvarja besedilne pozive v dokončanja kode in je integriran v vaše razvojno okolje (npr. Visual Studio Code) za neprekinjeno uporabniško izkušnjo. Kot je dokumentirano v spodnji seriji blogov, je bila najzgodnejša različica osnovana na modelu OpenAI Codex - inženirji so hitro spoznali potrebo po fino nastavitvi modela in razvoju boljših tehnik oblikovanja pozivov za izboljšanje kakovosti kode. Julija so predstavili [izboljšan AI model, ki presega Codex](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst) za še hitrejše predloge.
 
-Preberite objave po vrsti, da sledite njihovi poti učenja.
+Berite prispevke po vrstnem redu, da sledite njihovemu učnemu potovanju.
 
-- **Maj 2023** | [GitHub Copilot postaja boljši pri razumevanju vaše kode](https://github.blog/2023-05-17-how-github-copilot-is-getting-better-at-understanding-your-code/?WT.mc_id=academic-105485-koreyst)
-- **Maj 2023** | [Znotraj GitHuba: Delo z LLM-ji za GitHub Copilot](https://github.blog/2023-05-17-inside-github-working-with-the-llms-behind-github-copilot/?WT.mc_id=academic-105485-koreyst).
-- **Junij 2023** | [Kako napisati boljše pozive za GitHub Copilot](https://github.blog/2023-06-20-how-to-write-better-prompts-for-github-copilot/?WT.mc_id=academic-105485-koreyst).
-- **Julij 2023** | [.. GitHub Copilot presega Codex z izboljšanim AI modelom](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst)
-- **Julij 2023** | [Razvijalčev vodič za oblikovanje pozivov in LLM-je](https://github.blog/2023-07-17-prompt-engineering-guide-generative-ai-llms/?WT.mc_id=academic-105485-koreyst)
-- **September 2023** | [Kako zgraditi podjetniško aplikacijo LLM: Lekcije iz GitHub Copilot](https://github.blog/2023-09-06-how-to-build-an-enterprise-llm-application-lessons-from-github-copilot/?WT.mc_id=academic-105485-koreyst)
+- **maj 2023** | [GitHub Copilot izboljšuje razumevanje vaše kode](https://github.blog/2023-05-17-how-github-copilot-is-getting-better-at-understanding-your-code/?WT.mc_id=academic-105485-koreyst)
+- **maj 2023** | [Notranjost GitHub: delo z LLM-ji za GitHub Copilot](https://github.blog/2023-05-17-inside-github-working-with-the-llms-behind-github-copilot/?WT.mc_id=academic-105485-koreyst).
+- **jun 2023** | [Kako pisati boljše pozive za GitHub Copilot](https://github.blog/2023-06-20-how-to-write-better-prompts-for-github-copilot/?WT.mc_id=academic-105485-koreyst).
+- **jul 2023** | [.. GitHub Copilot presega Codex z izboljšanim AI modelom](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst)
+- **jul 2023** | [Vodnik za razvijalce o oblikovanju pozivov in LLM-jih](https://github.blog/2023-07-17-prompt-engineering-guide-generative-ai-llms/?WT.mc_id=academic-105485-koreyst)
+- **sep 2023** | [Kako zgraditi aplikacijo podjetniškega LLM: Lekcije iz GitHub Copilot](https://github.blog/2023-09-06-how-to-build-an-enterprise-llm-application-lessons-from-github-copilot/?WT.mc_id=academic-105485-koreyst)
 
-Lahko si ogledate tudi njihov [inženirski blog](https://github.blog/category/engineering/?WT.mc_id=academic-105485-koreyst) za več objav, kot je [ta](https://github.blog/2023-09-27-how-i-used-github-copilot-chat-to-build-a-reactjs-gallery-prototype/?WT.mc_id=academic-105485-koreyst), ki prikazuje, kako se ti modeli in tehnike _uporabljajo_ za poganjanje resničnih aplikacij.
+Lahko si tudi ogledate njihov [inženirski blog](https://github.blog/category/engineering/?WT.mc_id=academic-105485-koreyst) za več prispevkov, kot je [ta](https://github.blog/2023-09-27-how-i-used-github-copilot-chat-to-build-a-reactjs-gallery-prototype/?WT.mc_id=academic-105485-koreyst), ki prikazuje, kako se ti modeli in tehnike _uporabljajo_ za pogon rešitev iz resničnega sveta.
 
 ---
 
-## Oblikovanje pozivov
+<!--
+PREDLOGA ZA LEKCIJO:
+Ta enota naj pokriva osnovni koncept #2.
+Koncept utrdite z zgledi in referencami.
 
-Videli smo, zakaj je oblikovanje pozivov pomembno - zdaj pa razumimo, kako so pozivi _sestavljeni_, da lahko ocenimo različne tehnike za bolj učinkovito oblikovanje pozivov.
+KONCEPT #2:
+Oblikovanje pozivov.
+Ponazorjeno z zgledi.
+-->
+
+## Konstrukcija poziva
+
+Videli smo, zakaj je oblikovanje pozivov pomembno - zdaj pa razumimo, kako so pozivi _konstruirani_, da lahko ocenimo različne tehnike za učinkovitejše oblikovanje poziva.
 
 ### Osnovni poziv
 
-Začnimo z osnovnim pozivom: besedilni vnos, poslan modelu brez dodatnega konteksta. Tukaj je primer - ko pošljemo prvih nekaj besed ameriške državne himne OpenAI [Completion API](https://platform.openai.com/docs/api-reference/completions?WT.mc_id=academic-105485-koreyst), takoj _dokonča_ odgovor z naslednjimi vrsticami, kar ponazarja osnovno napovedno vedenje.
+Začnimo z osnovnim pozivom: besedilnim vnosom, poslanim modelu brez drugega konteksta. Tukaj je primer - ko pošljemo prvih nekaj besed ameriške himne OpenAI [Completion API](https://platform.openai.com/docs/api-reference/completions?WT.mc_id=academic-105485-koreyst), takoj _dokonča_ odgovor z naslednjimi vrsticami, kar ponazarja osnovno napovedno vedenje.
 
-| Poziv (Vnos)     | Dokončanje (Izhod)                                                                                                                        |
-| :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| Oh say can you see | Zdi se, da začenjate besedilo "The Star-Spangled Banner", državne himne Združenih držav Amerike. Celotno besedilo je ... |
+| Poziv (vhod)      | Dokončanje (izhod)                                                                                                                        |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| Oh say can you see | Zdi se, da ste začeli z besedilom "The Star-Spangled Banner", ameriške nacionalne himne. Polno besedilo je ...                              |
 
-### Kompleksen poziv
+### Kompleksni poziv
 
-Zdaj dodajmo kontekst in navodila k temu osnovnemu pozivu. [Chat Completion API](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt?WT.mc_id=academic-105485-koreyst) nam omogoča, da sestavimo kompleksen poziv kot zbirko _sporočil_ z:
+Zdaj dodajmo kontekst in navodila osnovnemu pozivu. [Chat Completion API](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/chatgpt?WT.mc_id=academic-105485-koreyst) nam omogoča konstrukcijo kompleksnega poziva kot zbirko _sporočil_ z:
 
-- Pari vnos/izhod, ki odražajo _uporabniški_ vnos in _odgovor asistenta_.
-- Sistemskim sporočilom, ki določa kontekst za vedenje ali osebnost asistenta.
+- Pari vhod/izhod, ki odražajo _uporabnikov_ vnos in _pomočnikov_ odgovor.
+- Sistemskim sporočilom, ki nastavi kontekst za obnašanje ali osebnost asistenta.
 
-Zahteva je zdaj v spodnji obliki, kjer _tokenizacija_ učinkovito zajame ustrezne informacije iz konteksta in pogovora. Sprememba sistemskega konteksta je lahko enako vplivna na kakovost dokončanj kot podani uporabniški vnosi.
+Zahteva je sedaj v spodnji obliki, kjer _tokenizacija_ učinkovito zajema relevantne informacije iz konteksta in pogovora. Sprememba sistemskega konteksta je lahko tako vplivna na kakovost dokončanj kot podani uporabniški vnosi.
 
 ```python
-response = openai.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
+response = client.responses.create(
+    model="gpt-5-mini",
+    input=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Who won the world series in 2020?"},
         {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
@@ -205,193 +217,195 @@ response = openai.chat.completions.create(
 )
 ```
 
-### Poziv z navodili
+### Navodilo poziva
 
-V zgornjih primerih je bil uporabniški poziv preprost besedilni poizvedba, ki jo je mogoče interpretirati kot zahtevo za informacije. Z _navodili_ v pozivih lahko uporabimo besedilo za podrobnejšo specifikacijo naloge, kar AI-ju omogoči boljše usmerjanje. Tukaj je primer:
+V zgornjih primerih je bil uporabniški poziv preprosto besedilno vprašanje, ki ga je mogoče interpretirati kot zahtevo po informaciji. Z _navodili_ pozivov lahko uporabimo ta tekst za podrobnejšo določitev naloge, kar AI-ju omogoči boljše usmerjanje. Tukaj je primer:
 
-| Poziv (Vnos)                                                                                                                                                                                                                         | Dokončanje (Izhod)                                                                                                        | Tip navodila        |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ | :------------------ |
-| Napiši opis državljanske vojne                                                                                                                                                                                                       | _vrnjen je bil preprost odstavek_                                                                                         | Preprosto           |
-| Napiši opis državljanske vojne. Navedi ključne datume in dogodke ter opiši njihov pomen                                                                                                                                              | _vrnjen je bil odstavek, ki mu je sledil seznam ključnih datumov dogodkov z opisi_                                        | Kompleksno          |
-| Napiši opis državljanske vojne v enem odstavku. Navedi 3 točke s ključnimi datumi in njihovim pomenom. Navedi še 3 točke s ključnimi zgodovinskimi osebnostmi in njihovimi prispevki. Vrni izhod v obliki datoteke JSON.                | _vrnjen je bil obsežnejši opis v besedilnem polju, formatiran kot JSON, ki ga lahko kopirate in prilepite v datoteko ter po potrebi preverite_ | Kompleksno. Formatirano. |
+| Poziv (vhod)                                                                                                                                                                                                                         | Dokončanje (izhod)                                                                                                        | Tip navodila        |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :------------------ |
+| Napiši opis Ameriške državljanske vojne                                                                                                                                                                                           | _vrne preprost odstavek_                                                                                                  | Preprosto           |
+| Napiši opis Ameriške državljanske vojne. Navedi ključne datume in dogodke ter opiši njihov pomen                                                                                                                                      | _vrne odstavek, sledi pa seznam ključnih datumov dogodkov z opisi_                                                        | Kompleksno          |
+| Napiši opis Ameriške državljanske vojne v 1 odstavku. Navedi 3 ključne točke z datumi in njihovim pomenom. Navedi še 3 točke o pomembnih zgodovinskih osebnostih in njihovih prispevkih. Izpis vrni kot JSON datoteko                        | _vrne bolj obsežne podrobnosti v besedilnem polju, formatirano kot JSON, ki ga lahko kopiraš in prilepiš v datoteko ter preveriš_ | Kompleksno. Formatirano. |
 
 ## Primarna vsebina
 
-V zgornjih primerih je bil poziv še vedno precej odprt, kar je omogočilo LLM-ju, da se sam odloči, kateri del njegovega predhodno usposobljenega nabora podatkov je ustrezen. Z oblikovalskim vzorcem _primarne vsebine_ je vhodno besedilo razdeljeno na dva dela:
+V zgornjih primerih je bil poziv še vedno precej odprt, kar je omogočalo LLM-ju, da sam odloči, kateri del njegovega vnaprej usposobljenega nabora podatkov je relevanten. Z oblikovnim vzorcem _primarna vsebina_ je besedilo vnosa razdeljeno na dve deli:
 
 - navodilo (dejanje)
-- ustrezna vsebina (ki vpliva na dejanje)
+- relevantna vsebina (ki vpliva na dejanje)
 
-Tukaj je primer, kjer je navodilo "povzemi to v 2 stavkih".
+Tukaj je primer, kjer je navodilo "strni to v 2 povedi".
 
-| Poziv (Vnos)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Dokončanje (Izhod)                                                                                                                                                                                                                                                                             |
+| Poziv (vhod)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Dokončanje (izhod)                                                                                                                                                                                                                                                                             |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Jupiter je peti planet od Sonca in največji v Osončju. Je plinasti velikan z maso, ki je tisočinka mase Sonca, vendar dvainpolkrat večja od mase vseh drugih planetov v Osončju skupaj. Jupiter je eden najsvetlejših objektov, vidnih s prostim očesom na nočnem nebu, in je znan starodavnim civilizacijam že pred zapisano zgodovino. Imenovan je po rimskem bogu Jupitru.[19] Ko ga opazujemo z Zemlje, je Jupiter lahko tako svetel, da njegova odbita svetloba meče vidne sence,[20] in je povprečno tretji najsvetlejši naravni objekt na nočnem nebu po Luni in Veneri. <br/> **Povzemi to v 2 kratkih stavkih** | Jupiter, peti planet od Sonca, je največji v Osončju in je znan kot eden najsvetlejših objektov na nočnem nebu. Imenovan po rimskem bogu Jupitru, je plinasti velikan, katerega masa je dvainpolkrat večja od mase vseh drugih planetov v Osončju skupaj. |
+| Jupiter je peti planet od Sonca in največji v Osončju. Je plinski velikan z maso eno tisočinko mase Sonca, a dvakrat in pol večjo od vseh drugih planetov Osončja skupaj. Jupiter je eden najsvetlejših predmetov, ki jih lahko vidimo z golim očesom ponoči, in je bil poznan starodavnim civilizacijam že pred zapisano zgodovino. Ime je dobil po rimskem bogu Jupiterju.[19] Ko ga opazujemo z Zemlje, je Jupiter lahko dovolj svetel, da njegova odbita svetloba meče vidne sence,[20] in je povprečno tretji najsvetlejši naravni predmet na nočnem nebu za Luno in Venero. <br/> **Strni to v 2 kratki povedi** | Jupiter, peti planet od Sonca, je največji v Osončju in je znan kot eden najsvetlejših predmetov na nočnem nebu. Poimenovan po rimskem bogu Jupiterju, je plinski velikan z maso, ki je dvakrat in pol večja od vseh drugih planetov Osončja skupaj. |
 
-Segment primarne vsebine se lahko uporablja na različne načine za bolj učinkovita navodila:
+Segment primarne vsebine se lahko uporablja na različne načine za učinkovitejša navodila:
 
-- **Primeri** - namesto da modelu izrecno povemo, kaj naj naredi, mu podamo primere želenega izhoda in mu omogočimo, da sam sklepa vzorec.
-- **Namigi** - sledimo navodilu z "namigom", ki model usmeri k bolj ustreznim odgovorom.
-- **Predloge** - to so ponovljivi 'recepti' za pozive z mestoma za vnos (spremenljivke), ki jih je mogoče prilagoditi z podatki za specifične primere uporabe.
+- **Primeri** - namesto da modelu izrecno povemo, kaj naj stori, mu damo primere, kaj naj stori in naj sam sklepa vzorec.
+- **Namigi** - sledi navodilu "namig", ki pripravlja dokončanje in usmerja model k bolj relevantnim odgovorom.
+- **Predloge** - to so ponovljive "recepture" pozivov z držali (spremenljivkami), ki jih lahko prilagodimo z podatki za posebne primere uporabe.
 
-Raziskujmo te tehnike v praksi.
+Raziskajmo te primere v praksi.
 
 ### Uporaba primerov
 
-To je pristop, kjer uporabimo primarno vsebino, da modelu "nahranimo" nekaj primerov želenega izhoda za dano navodilo in mu omogočimo, da sklepa vzorec za želeni izhod. Glede na število podanih primerov lahko imamo pozivanje brez primerov, z enim primerom, z nekaj primeri itd.
+To je pristop, kjer uporabimo primarno vsebino, da modelu "nahranimo" nekaj primerov želenega izhoda za dano navodilo in mu dovolimo, da sam sklepa vzorec željenega izhoda. Glede na število danih primerov imamo zero-shot, one-shot, few-shot pozivanje itd.
 
-Poziv zdaj vsebuje tri komponente:
+Poziv zdaj sestoji iz treh komponent:
 
-- Opis naloge
+- Opisa naloge
 - Nekaj primerov želenega izhoda
-- Začetek novega primera (ki postane implicitni opis naloge)
+- Začetka novega primera (kar postane implicitni opis naloge)
 
-| Tip učenja | Poziv (Vnos)                                                                                                                                        | Dokončanje (Izhod)         |
-| :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------- |
-| Brez primerov | "Sonce sije". Prevedi v španščino                                                                                                            | "El Sol está brillando".    |
-| En primer      | "Sonce sije" => ""El Sol está brillando". <br> "Dan je hladen in vetroven" =>                                                                 | "Es un día frío y ventoso". |
-| Nekaj primerov      | Igralec je tekel po bazah => Baseball <br/> Igralec je zadel as => Tenis <br/> Igralec je zadel šestico => Kriket <br/> Igralec je dosegel slam-dunk => | Košarka                  |
+| Vrsta učenja | Poziv (vhod)                                                                                                                                        | Dokončanje (izhod)         |
+| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------- |
+| Zero-shot     | "The Sun is Shining". Prevedi v španščino                                                                                                           | "El Sol está brillando".    |
+| One-shot      | "The Sun is Shining" => ""El Sol está brillando". <br> "It's a Cold and Windy Day" =>                                                                 | "Es un día frío y ventoso". |
+| Few-shot      | Igralec je tekel okoli baz => Baseball <br/> Igralec je zadel asa => Tenis <br/> Igralec je zadel šestko => Kriket <br/> Igralec je naredil zabijanje => | Košarka                    |
 |               |                                                                                                                                                       |                             |
 
-Opazite, kako smo morali podati izrecno navodilo ("Prevedi v španščino") pri pozivanju brez primerov, vendar se to sklepa v primeru z enim primerom. Primer z nekaj primeri prikazuje, kako dodajanje več primerov omogoča modelom, da naredijo bolj natančne sklepe brez dodatnih navodil.
+Opazite, da smo morali pri zero-shot pozivanju navesti izrecno navodilo ("Prevedi v španščino"), medtem ko je to v one-shot primeru dobljeno implicitno. Primer few-shot pokaže, kako dodajanje več primerov omogoča modelom natančnejše sklepe brez dodatnih navodil.
 
-### Namigi v pozivu
+### Namigi pri pozivu
 
-Druga tehnika za uporabo primarne vsebine je podajanje _namigov_ namesto primerov. V tem primeru modelu podamo _začetek_, ki odraža želeno obliko odgovora. Model nato "sprejme namig" in nadaljuje v tej smeri.
+Druga tehnika za uporabo primarne vsebine je dajanje _namigov_ namesto primerov. V tem primeru modelu damo spodbudni _zagon_ z odlomkom, ki odraža željeni format odgovora. Model nato "sprejme namig" in nadaljuje v isti smeri.
 
-| Število namigov | Poziv (Vnos)                                                                                                                                                                                                                                                                                                                                                                                                                                               | Dokončanje (Izhod)                                                                                                                                                                                                                                                                                       |
+| Število namigov | Poziv (vhod)                                                                                                                                                                                                                                                                                                                                                                                                                                               | Dokončanje (izhod)                                                                                                                                                                                                                                                                                       |
 | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0              | Jupiter je peti planet od Sonca in največji v Osončju. Je plinasti velikan z maso, ki je tisočinka mase Sonca, vendar dvainpolkrat večja od mase vseh drugih planetov v Osončju skupaj. Jupiter je eden najsvetlejših objektov, vidnih s prostim očesom na nočnem nebu, in je znan starodavnim civilizacijam že pred zapisano zgodovino. <br/>**Povzemi to**                                       | Jupiter je največji planet v našem Osončju in peti od Sonca. Je plinasti velikan z maso 1/1000 Sončeve mase, vendar je težji od vseh drugih planetov skupaj. Starodavne civilizacije so Jupiter poznale že dolgo časa, saj je na nočnem nebu lahko vidno svetel. |
-| 1              | Jupiter je peti planet od Sonca in največji v Osončju. Je plinasti velikan z maso, ki je tisočkrat manjša od Sončeve, vendar dva in pol krat večja od mase vseh drugih planetov v Osončju skupaj. Jupiter je eden najsvetlejših objektov, vidnih s prostim očesom na nočnem nebu, in je bil znan starodavnim civilizacijam že pred zapisano zgodovino. <br/>**Povzemi to** <br/> Naučili smo se, da je Jupiter | peti planet od Sonca in največji v Osončju. Je plinasti velikan z maso, ki je tisočkrat manjša od Sončeve, vendar dva in pol krat večja od mase vseh drugih planetov skupaj. Je zlahka viden s prostim očesom in je bil znan že v starodavnih časih.                        |
-| 2              | Jupiter je peti planet od Sonca in največji v Osončju. Je plinasti velikan z maso, ki je tisočkrat manjša od Sončeve, vendar dva in pol krat večja od mase vseh drugih planetov v Osončju skupaj. Jupiter je eden najsvetlejših objektov, vidnih s prostim očesom na nočnem nebu, in je bil znan starodavnim civilizacijam že pred zapisano zgodovino. <br/>**Povzemi to** <br/> Top 3 dejstva, ki smo jih izvedeli:         | 1. Jupiter je peti planet od Sonca in največji v Osončju. <br/> 2. Je plinasti velikan z maso, ki je tisočkrat manjša od Sončeve...<br/> 3. Jupiter je bil viden s prostim očesom že od starodavnih časov ...                                                                       |
+| 0              | Jupiter je peti planet od Sonca in največji v Osončju. Je plinski velikan z maso eno tisočinko mase Sonca, a dvakrat in pol večjo od vseh drugih planetov Osončja skupaj. Jupiter je eden najsvetlejših predmetov, ki jih lahko vidimo z golim očesom ponoči, in je bil poznan starodavnim civilizacijam že pred zapisano zgodovino. <br/>**Strni to**                                       | Jupiter je največji planet v našem Osončju in peti od Sonca. Je plinski velikan z maso 1/1000 mase Sonca, vendar je težji od vseh drugih planetov skupaj. Stare civilizacije so Jupitra poznale že dolgo, in ga z lahkoto vidimo na nočnem nebu.. |
+| 1              | Jupiter je peti planet od Sonca in največji v Osončju. Je plinski velikan z maso eno tisočinko mase Sonca, a dvakrat in pol večjo od vseh drugih planetov Osončja skupaj. Jupiter je eden najsvetlejših predmetov, ki jih lahko vidimo z golim očesom ponoči, in je bil poznan starodavnim civilizacijam že pred zapisano zgodovino. <br/>**Strni to** <br/> Kar smo izvedeli je, da je Jupiter | peti planet od Sonca in največji v Osončju. Je plinski velikan z maso eno tisočinko mase Sonca, a dvakrat in pol večjo od vseh drugih planetov skupaj. Je lahko viden z golim očesom in poznan že od antičnih časov.                        |
+| 2              | Jupiter je peti planet od Sonca in največji v Osončju. Je plinski velikanko z maso eno tisočinko Sončeve, a dvakrat in pol večjo kot vsota vseh ostalih planetov v Osončju. Jupiter je eden najsvetlejših objektov, ki so vidni s prostim očesom ponoči na nebu, in je bil znan antičnim civilizacijam že pred zapisano zgodovino. <br/>**Povzetek** <br/> Top 3 dejstva, ki smo jih izvedeli:         | 1. Jupiter je peti planet od Sonca in največji v Osončju. <br/> 2. Je plinski velikanko z maso eno tisočinko Sončeve...<br/> 3. Jupiter je bil s prostim očesom viden že v antičnih časih ...                                                                       |
 |                |                                                                                                                                                                                                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                           |
 
 ### Predloge za pozive
 
-Predloga za poziv je _vnaprej določena receptura za poziv_, ki jo je mogoče shraniti in ponovno uporabiti po potrebi, da se zagotovi bolj dosledna uporabniška izkušnja na večji ravni. V svoji najpreprostejši obliki je to preprosto zbirka primerov pozivov, kot je [ta primer iz OpenAI](https://platform.openai.com/examples?WT.mc_id=academic-105485-koreyst), ki zagotavlja interaktivne komponente poziva (sporočila uporabnika in sistema) ter format zahteve, ki temelji na API-ju - za podporo ponovni uporabi.
+Predloga poziva je _vnaprej določena receptura za poziv_, ki jo je mogoče shraniti in po potrebi ponovno uporabiti, da se zagotovi bolj dosledna uporabniška izkušnja v obsegu. V najpreprostejši obliki je to preprosto zbirka primerov pozivov, kot je [ta od OpenAI](https://cookbook.openai.com/examples/gpt4-1_prompting_guide?WT.mc_id=academic-105485-koreyst), ki zagotavlja tako interaktivne komponente poziva (uporabniška in sistemska sporočila) kot tudi format zahteve prek API – za podporo ponovni uporabi.
 
-V bolj kompleksni obliki, kot je [ta primer iz LangChain](https://python.langchain.com/docs/concepts/prompt_templates/?WT.mc_id=academic-105485-koreyst), vsebuje _nadomestne oznake_, ki jih je mogoče zamenjati s podatki iz različnih virov (uporabniški vnos, kontekst sistema, zunanji viri podatkov itd.), da se poziv dinamično ustvari. To nam omogoča ustvarjanje knjižnice ponovno uporabnih pozivov, ki jih je mogoče uporabiti za zagotavljanje doslednih uporabniških izkušenj **programsko** na večji ravni.
+V bolj zapleteni obliki, kot je [ta primer iz LangChain](https://python.langchain.com/docs/concepts/prompt_templates/?WT.mc_id=academic-105485-koreyst), vsebuje _rezerve_ (placeholders), ki jih je mogoče zamenjati z podatki iz različnih virov (uporabniški vnos, sistemski kontekst, zunanji viri podatkov itd.) za dinamično ustvarjanje poziva. To nam omogoča ustvarjanje knjižnice ponovnih uporabnih pozivov, ki jih je mogoče **programsko** uporabljati za zagotavljanje doslednih uporabniških izkušenj v obsegu.
 
-Nazadnje, prava vrednost predlog leži v sposobnosti ustvarjanja in objavljanja _knjižnic pozivov_ za vertikalne aplikacijske domene - kjer je predloga poziva zdaj _optimizirana_, da odraža aplikacijsko specifičen kontekst ali primere, ki naredijo odgovore bolj relevantne in natančne za ciljno uporabniško občinstvo. [Prompts For Edu](https://github.com/microsoft/prompts-for-edu?WT.mc_id=academic-105485-koreyst) je odličen primer tega pristopa, saj kurira knjižnico pozivov za izobraževalno področje s poudarkom na ključnih ciljih, kot so načrtovanje lekcij, oblikovanje učnega načrta, tutorstvo študentov itd.
+Končno je prava vrednost predlog v zmožnosti ustvarjanja in objavljanja _knjižnic pozivov_ za vertikalna področja uporabe – kjer je predloga poziva zdaj _optimizirana_, da odraža kontekst ali primere, specifične za aplikacijo, zaradi česar so odgovori bolj relevantni in natančni za ciljno uporabniško publiko. Repozitorij [Prompts For Edu](https://github.com/microsoft/prompts-for-edu?WT.mc_id=academic-105485-koreyst) je odličen primer tega pristopa, saj ureja knjižnico pozivov za področje izobraževanja z osredotočenostjo na ključne cilje, kot so načrtovanje učnih ur, oblikovanje kurikula, študentsko tutorstvo itd.
 
 ## Podporna vsebina
 
-Če razmišljamo o konstrukciji pozivov kot o navodilu (nalogi) in cilju (primarni vsebini), potem je _sekundarna vsebina_ kot dodatni kontekst, ki ga zagotovimo, da **vplivamo na izhod na nek način**. To so lahko parametri za prilagajanje, navodila za formatiranje, taksonomije tem itd., ki lahko modelu pomagajo _prilagoditi_ svoj odgovor, da ustreza želenim ciljem ali pričakovanjem uporabnika.
+Če razmišljamo o konstrukciji poziva kot navodilu (nalogi) in cilju (primarni vsebini), potem je _sekundarna vsebina_ kot dodaten kontekst, ki ga zagotovimo, da **na nek način vplivamo na izhod**. To so lahko nastavitveni parametri, navodila za oblikovanje, taksonomije tem itd., ki lahko pomagajo modelu _prilagoditi_ njegov odgovor tako, da ustreza željenim uporabniškim ciljem ali pričakovanjem.
 
-Na primer: Glede na katalog tečajev z obsežnimi metapodatki (ime, opis, raven, oznake metapodatkov, inštruktor itd.) o vseh razpoložljivih tečajih v učnem načrtu:
+Na primer: Glede na katalog tečajev z obsežnimi metapodatki (ime, opis, raven, oznake metapodatkov, inštruktor itd.) o vseh razpoložljivih tečajih v kurikulu:
 
-- lahko definiramo navodilo za "povzemi katalog tečajev za jesen 2023"
-- lahko uporabimo primarno vsebino za zagotavljanje nekaj primerov želenega izhoda
-- lahko uporabimo sekundarno vsebino za identifikacijo top 5 "oznak" interesa.
+- lahko določimo navodilo, da "povzamemo katalog tečajev za jesen 2023"
+- lahko uporabimo primarno vsebino, da zagotovimo nekaj primerov želenega izhoda
+- lahko uporabimo sekundarno vsebino za opredelitev top 5 "oznak" zanimanja.
 
-Zdaj lahko model zagotovi povzetek v formatu, prikazanem v nekaj primerih - vendar če rezultat vsebuje več oznak, lahko prioritizira 5 oznak, identificiranih v sekundarni vsebini.
+Sedaj lahko model zagotovi povzetek v formatu, ki ga pokaže nekaj primerov – vendar če ima rezultat več oznak, lahko prednostno obravnava teh 5 oznak, določenih v sekundarni vsebini.
 
 ---
 
 <!--
-PREDLOGA LEKCIJE:
-Ta enota naj pokriva osnovni koncept #1.
+PREDLOGA UČNE URE:
+Ta enota naj zajema osrednji koncept #1.
 Okrepite koncept s primeri in referencami.
 
 KONCEPT #3:
-Tehnike za oblikovanje pozivov.
-Katere so osnovne tehnike za oblikovanje pozivov?
-Ponazorite jih z vajami.
+Tehnike za inženiring pozivov.
+Katere so osnovne tehnike za inženiring pozivov?
+Prikažite z nekaj vajami.
 -->
 
-## Najboljše prakse za oblikovanje pozivov
+## Najboljše prakse pri pozivanju
 
-Zdaj, ko vemo, kako lahko pozive _konstruiramo_, lahko začnemo razmišljati o tem, kako jih _oblikovati_, da odražajo najboljše prakse. O tem lahko razmišljamo v dveh delih - imeti pravo _miselnost_ in uporabljati prave _tehnike_.
+Zdaj, ko vemo, kako lahko pozive _konstruiramo_, lahko začnemo razmišljati, kako jih _zasnovati_, da odražajo najboljše prakse. Lahko razmišljamo o tem v dveh delih – imeti pravo _miselnost_ in uporabiti prave _tehnike_.
 
-### Miselnost pri oblikovanju pozivov
+### Miselnost pri inženiringu pozivov
 
-Oblikovanje pozivov je proces poskusov in napak, zato imejte v mislih tri široke vodilne dejavnike:
+Inženiring pozivov je proces poskušanja in popravljanja, zato imejte v mislih tri široke vodilne dejavnike:
 
-1. **Razumevanje domene je pomembno.** Natančnost in ustreznost odgovora sta funkciji _domene_, v kateri aplikacija ali uporabnik deluje. Uporabite svojo intuicijo in strokovno znanje o domeni, da **dodatno prilagodite tehnike**. Na primer, definirajte _osebnosti specifične za domeno_ v sistemskih pozivih ali uporabite _predloge specifične za domeno_ v uporabniških pozivih. Zagotovite sekundarno vsebino, ki odraža kontekste specifične za domeno, ali uporabite _namige in primere specifične za domeno_, da model usmerite k znanim vzorcem uporabe.
+1. **Razumevanje domene je pomembno.** Natančnost in relevantnost odgovora sta funkciji _domena_, v kateri aplikacija ali uporabnik deluje. Uporabite svojo intuicijo in strokovno znanje domene, da **še bolj prilagodite tehnike**. Na primer, določite _osebnosti, specifične za domeno_ v svojih sistemskih pozivih ali uporabite _predloge, specifične za domeno_ v uporabniških pozivih. Zagotovite sekundarno vsebino, ki odraža kontekste, specifične za domeno, ali uporabite _namige in primere, specifične za domeno_, da usmerite model k znanim vzorcem uporabe.
 
-2. **Razumevanje modela je pomembno.** Vemo, da so modeli po naravi stohastični. Toda implementacije modelov se lahko razlikujejo glede na podatkovne nabore, ki jih uporabljajo (predhodno naučeno znanje), zmogljivosti, ki jih zagotavljajo (npr. prek API-ja ali SDK-ja), in vrsto vsebine, za katero so optimizirani (npr. koda proti slikam proti besedilu). Razumite prednosti in omejitve modela, ki ga uporabljate, ter uporabite to znanje za _prioritizacijo nalog_ ali gradnjo _prilagojenih predlog_, ki so optimizirane za zmogljivosti modela.
+2. **Razumevanje modela je pomembno.** Vemo, da so modeli po naravi stohastični. Ampak implementacije modelov se lahko razlikujejo glede na učne podatkovne nize, ki jih uporabljajo (predhodno naučeno znanje), zmogljivosti, ki jih nudijo (npr. preko API ali SDK) in tip vsebine, za katero so optimizirani (npr. koda proti slikam proti besedilu). Razumite prednosti in omejitve modela, ki ga uporabljate, in uporabite to znanje, da _prioritizirate naloge_ ali ustvarite _prilagojene predloge_, ki so optimizirane za zmogljivosti modela.
 
-3. **Iteracija in validacija sta pomembni.** Modeli se hitro razvijajo, prav tako pa tudi tehnike za oblikovanje pozivov. Kot strokovnjak za domeno imate morda druge kontekste ali kriterije za _vašo_ specifično aplikacijo, ki morda ne veljajo za širšo skupnost. Uporabite orodja in tehnike za oblikovanje pozivov, da "začnete" konstrukcijo pozivov, nato iterirajte in validirajte rezultate z uporabo svoje intuicije in strokovnega znanja o domeni. Zabeležite svoje vpoglede in ustvarite **bazo znanja** (npr. knjižnice pozivov), ki jo lahko drugi uporabijo kot novo izhodišče za hitrejše iteracije v prihodnosti.
+3. **Pomembna je iteracija in validacija.** Modeli se hitro razvijajo, prav tako tehnike za inženiring pozivov. Kot strokovnjak za domeno imate morda dodatne kontekste ali kriterije za _vašo_ specifično aplikacijo, ki morda ne veljajo za širšo skupnost. Uporabite orodja in tehnike inženiringa pozivov za "hitri začetek" konstrukcije poziva, nato iterirajte in validirajte rezultate s svojo intuicijo in strokovnim znanjem domene. Zabeležite svoje ugotovitve in ustvarite **bazo znanja** (npr. knjižnice pozivov), ki jo lahko drugi uporabijo kot novo izhodišče za hitrejše iteracije v prihodnosti.
 
 ## Najboljše prakse
 
-Zdaj si poglejmo običajne najboljše prakse, ki jih priporočajo [OpenAI](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api?WT.mc_id=academic-105485-koreyst) in [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering#best-practices?WT.mc_id=academic-105485-koreyst) praktiki.
+Zdaj si ogledajmo običajne najboljše prakse, ki jih priporočajo strokovnjaki [OpenAI](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api?WT.mc_id=academic-105485-koreyst) in [Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/prompt-engineering#best-practices?WT.mc_id=academic-105485-koreyst).
 
-| Kaj                               | Zakaj                                                                                                                                                                                                                                               |
+| Kaj                              | Zakaj                                                                                                                                                                                                                                               |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Ocenite najnovejše modele.        | Nove generacije modelov verjetno imajo izboljšane funkcije in kakovost - vendar lahko povzročijo tudi višje stroške. Ocenite njihov vpliv, nato pa sprejmite odločitve o migraciji.                                                                |
-| Ločite navodila in kontekst       | Preverite, ali vaš model/ponudnik definira _ločilnike_, da bolj jasno loči navodila, primarno in sekundarno vsebino. To lahko pomaga modelom bolj natančno dodeliti uteži tokenom.                                                         |
-| Bodite specifični in jasni        | Podajte več podrobnosti o želenem kontekstu, izidu, dolžini, formatu, slogu itd. To bo izboljšalo tako kakovost kot doslednost odgovorov. Zajemite recepture v ponovno uporabnih predlogah.                                                          |
-| Bodite opisni, uporabite primere  | Modeli se lahko bolje odzovejo na pristop "pokaži in povej". Začnite z `zero-shot` pristopom, kjer mu podate navodilo (brez primerov), nato poskusite `few-shot` kot izboljšavo, pri čemer podate nekaj primerov želenega izhoda. Uporabite analogije. |
-| Uporabite namige za začetek       | Usmerite ga k želenemu izidu tako, da mu podate nekaj začetnih besed ali fraz, ki jih lahko uporabi kot izhodišče za odgovor.                                                                                                               |
-| Poudarite                         | Včasih boste morali modelu ponoviti navodila. Podajte navodila pred in po primarni vsebini, uporabite navodilo in namig itd. Iterirajte in validirajte, da vidite, kaj deluje.                                                         |
-| Vrstni red je pomemben            | Vrstni red, v katerem modelu predstavite informacije, lahko vpliva na izhod, tudi v učnih primerih, zaradi pristranskosti do nedavnosti. Poskusite različne možnosti, da vidite, kaj najbolje deluje.                                                               |
-| Dajte modelu "izhod"              | Modelu omogočite _rezervni_ odgovor, ki ga lahko poda, če naloge ne more dokončati iz kakršnega koli razloga. To lahko zmanjša možnosti, da modeli ustvarijo napačne ali izmišljene odgovore.                                                         |
+| Ocenite najnovejše modele.       | Nove generacije modelov verjetno prinašajo izboljšane funkcije in kakovost – vendar lahko povzročijo višje stroške. Ocenite jih glede vpliva in se nato odločite o migraciji.                                                                          |
+| Ločite navodila in kontekst      | Preverite, ali vaš model/ponudnik določa _ločila_, da bolj jasno loči navodila, primarno in sekundarno vsebino. To lahko pomaga modelom natančneje dodeliti teže nizom (tokenom).                                                                     |
+| Bodite specifični in jasni       | Podajte več podrobnosti o želenem kontekstu, rezultatu, dolžini, formatu, slogu itd. To bo izboljšalo tako kakovost kot konsistentnost odgovorov. Zajamčite recepte v ponovnih uporabnih predlogah.                                                 |
+| Bodite opisni, uporabite primere  | Modeli morda bolje odgovorijo na pristop "pokaži in povej". Začnite z `zero-shot` pristopom, kjer mu daste navodilo (brez primerov), nato poskusite `few-shot` kot izboljšavo, kjer zagotovite nekaj primerov želenega izhoda. Uporabite analogije.      |
+| Uporabite namige za začetek dopolnitev | Spodbudite model k želenemu rezultatu tako, da mu daste nekaj uvodnih besed ali fraz, ki jih lahko uporabi kot izhodišče za odgovor.                                                                                                             |
+| Ponovite                        | Včasih boste morali modele nekajkrat ponoviti. Dajte navodila pred in po primarni vsebini, uporabite navodilo in namig itd. Iterirajte in validirajte, da vidite, kaj deluje.                                                                      |
+| Pomemben je vrstni red          | Vrstni red, v katerem modelu podate informacije, lahko vpliva na izhod, tudi pri učnih primerih, zaradi pristranskosti na nedavnost. Poskusite različne možnosti, da vidite, kaj najbolje deluje.                                                    |
+| Dajte modelu možnost "izhoda"    | Modelu dajte _izhodni_ odgovor, ki ga lahko poda, če iz kakršnega koli razloga ne more dokončati naloge. To lahko zmanjša možnost, da model generira napačne ali izmišljene odgovore.                                                               |
 |                                   |                                                                                                                                                                                                                                                   |
 
-Kot pri vsaki najboljši praksi, ne pozabite, da _vaša izkušnja lahko variira_ glede na model, nalogo in domeno. Uporabite jih kot izhodišče in iterirajte, da ugotovite, kaj najbolje deluje za vas. Nenehno ponovno ocenjujte svoj proces oblikovanja pozivov, ko postanejo na voljo novi modeli in orodja, s poudarkom na skalabilnosti procesa in kakovosti odgovorov.
+Kot pri vsaki najboljši praksi se spomnite, da _se lahko vaša uporabniška izkušnja razlikuje_ glede na model, nalogo in domeno. Uporabite jih kot izhodišče in iterirajte, da najdete, kaj vam najbolj ustreza. Nenehno ponovno ocenjujte svoj proces inženiringa pozivov, ko so na voljo novi modeli in orodja, s poudarkom na razširljivosti procesa in kakovosti odgovorov.
 
 <!--
-PREDLOGA LEKCIJE:
-Ta enota naj zagotovi izziv s kodo, če je primerno.
+PREDLOGA UČNE URE:
+Ta enota naj ponudi izziv s kodo, če je primerno
 
 IZZIV:
-Povezava do Jupyter Notebooka z le komentarji kode v navodilih (odseki kode so prazni).
+Povezava do Jupyter zvezka, ki vsebuje samo komentarje v kodi v navodilih (delavnice so prazne).
 
 REŠITEV:
-Povezava do kopije tega Notebooka z izpolnjenimi in izvedenimi pozivi, ki prikazuje, kaj bi lahko bil en primer.
+Povezava do kopije tega zvezka z izpolnjenimi pozivi in zagonom, ki prikazuje, kaj bi bil lahko en primer.
 -->
 
 ## Naloga
 
-Čestitke! Prišli ste do konca lekcije! Čas je, da preizkusite nekatere od teh konceptov in tehnik z resničnimi primeri!
+Čestitamo! Prišli ste do konca lekcije! Čas je, da nekatere koncepte in tehnike preizkusite z resničnimi primeri!
 
-Za našo nalogo bomo uporabili Jupyter Notebook z vajami, ki jih lahko interaktivno dokončate. Notebook lahko razširite tudi z lastnimi Markdown in Code celicami, da sami raziščete ideje in tehnike.
+Za našo nalogo bomo uporabili Jupyter zvezek z vajami, ki jih lahko izpolnite interaktivno. Zvezek lahko tudi razširite s svojimi Markdown in Code celicami, da sami raziskujete ideje in tehnike.
 
-### Za začetek, forkajte repozitorij, nato
+### Za začetek, naredite fork repozitorija, nato
 
 - (Priporočeno) Zaženite GitHub Codespaces
-- (Alternativno) Klonirajte repozitorij na svojo lokalno napravo in ga uporabite z Docker Desktop
-- (Alternativno) Odprite Notebook z vašim najljubšim okoljem za zagon Notebookov.
+- (Alternativno) Klonirajte repozitorij na svoj lokalni računalnik in ga uporabljajte z Docker Desktop
+- (Alternativno) Odprite zvezek v vašem priljubljenem okolju za zagon zvezkov.
 
 ### Nato konfigurirajte svoje okoljske spremenljivke
 
-- Kopirajte datoteko `.env.copy` v korenu repozitorija v `.env` in izpolnite vrednosti `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_ENDPOINT` in `AZURE_OPENAI_DEPLOYMENT`. Vrnite se na [oddelek Učni peskovnik](../../../04-prompt-engineering-fundamentals/04-prompt-engineering-fundamentals), da se naučite kako.
+- Kopirajte datoteko `.env.copy` iz korena repozitorija v `.env` in izpolnite vrednosti `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_ENDPOINT` in `AZURE_OPENAI_DEPLOYMENT`. Nato se vrnite na [oddelek Learning Sandbox](#okolje-za-učenje), da izveste kako.
 
-### Nato odprite Jupyter Notebook
+### Nato odprite Jupyter zvezek
 
-- Izberite jedro za zagon. Če uporabljate možnosti 1 ali 2, preprosto izberite privzeto jedro Python 3.10.x, ki ga zagotavlja razvojna vsebina.
+- Izberite jedro za zagon. Če uporabljate možnosti 1 ali 2, preprosto izberite privzeto Python 3.10.x jedro, ki ga zagotavlja razvojni kontejner.
 
-Pripravljeni ste za izvajanje vaj. Upoštevajte, da tukaj ni _pravih in napačnih_ odgovorov - gre le za raziskovanje možnosti s poskusi in napakami ter gradnjo intuicije za to, kaj deluje za določen model in aplikacijsko domeno.
+Pripravljeni ste za izvajanje vaj. Opozarjamo, da tukaj ni _pravih in napačnih_ odgovorov – gre za raziskovanje možnosti z metodo poskušanja in napake ter razvijanje intuicije, kaj deluje za določen model in domeno uporabe.
 
-_Zaradi tega v tej lekciji ni segmentov z rešitvami kode. Namesto tega bo Notebook imel Markdown celice z naslovom "Moja rešitev:", ki prikazuje en primer izhoda za referenco._
+_Zato tukaj ni segmentov z rešitvami kode. Namesto tega bo v zvezku nekaj Markdown celic z naslovom "Moja rešitev:", ki prikazujejo en primer izhoda za referenco._
 
  <!--
-PREDLOGA LEKCIJE:
-Zaključite razdelek s povzetkom in viri za samostojno učenje.
+PREDLOGA UČNE URE:
+Zaključite poglavje s povzetkom in viri za samostojno učenje.
 -->
 
 ## Preverjanje znanja
 
-Kateri od naslednjih pozivov je dober primer, ki sledi nekaterim razumnim najboljšim praksam?
+Kateri od naslednjih je dober poziv, ki sledi nekaterim razumnim najboljšim praksam?
 
 1. Pokaži mi sliko rdečega avtomobila
-2. Pokaži mi sliko rdečega avtomobila znamke Volvo in modela XC90, parkiranega ob pečini ob sončnem zahodu
+2. Pokaži mi sliko rdečega avtomobila znamke Volvo in modela XC90 parkiranega ob pečini med sončnim zahodom
 3. Pokaži mi sliko rdečega avtomobila znamke Volvo in modela XC90
 
-A: 2, to je najboljši poziv, saj podaja podrobnosti o "kaj" in gre v specifike (ne le kateri koli avto, ampak specifična znamka in model), prav tako pa opisuje celotno okolje. 3 je naslednji najboljši, saj vsebuje veliko opisov.
+Odgovor: 2, ker je najboljši poziv, saj poda podrobnosti o "čemu" in gre v specifičnosti (ne gre samo za katerikoli avto, ampak specifično znamko in model) ter opisuje celotno okolje. Najbližje temu je 3, ki prav tako vsebuje veliko opisov.
 
 ## 🚀 Izziv
 
-Poskusite uporabiti tehniko "namiga" s pozivom: Dokončajte stavek "Pokaži mi sliko rdečega avtomobila znamke Volvo in ". Kaj odgovori, in kako bi to izboljšali?
+Poskusite uporabiti tehniko "namiga" s pozivom: Dokončaj stavek "Pokaži mi sliko rdečega avtomobila znamke Volvo in ". Kako odgovori, in kako bi ga izboljšali?
 
 ## Odlično delo! Nadaljujte z učenjem
 
-Želite izvedeti več o različnih konceptih oblikovanja pozivov? Obiščite [stran za nadaljnje učenje](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), da najdete druge odlične vire na to temo.
+Želite izvedeti več o različnih konceptih inženiringa pozivov? Obiščite [stran za nadaljnje učenje](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), kjer najdete druge odlične vire o tej temi.
 
-Pojdite na Lekcijo 5, kjer bomo obravnavali [napredne tehnike oblikovanja pozivov](../05-advanced-prompts/README.md?WT.mc_id=academic-105485-koreyst)!
+Nato pojdite na Lekcijo 5, kjer bomo pogledali [napredne tehnike pozivanja](../05-advanced-prompts/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

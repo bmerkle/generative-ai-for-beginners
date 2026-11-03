@@ -1,58 +1,61 @@
-# Gradnja z modeli družine Meta
+# Gradnja z modeli Meta družine 
 
-## Uvod
+## Uvod 
 
-Ta lekcija bo zajemala:
+Ta lekcija bo obravnavala: 
 
-- Raziskovanje dveh glavnih modelov družine Meta - Llama 3.1 in Llama 3.2  
-- Razumevanje primerov uporabe in scenarijev za vsak model  
-- Primer kode, ki prikazuje edinstvene lastnosti vsakega modela  
+- Raziskovanje dveh glavnih Meta družinskih modelov - Llama 3.1 in Llama 3.2 
+- Razumevanje primerov uporabe in scenarijev za vsak model 
+- Primer kode, ki prikazuje edinstvene lastnosti vsakega modela 
 
-## Družina modelov Meta
 
-V tej lekciji bomo raziskali 2 modela iz družine Meta ali "Llama Herd" - Llama 3.1 in Llama 3.2
+## Meta družina modelov 
 
-Ti modeli so na voljo v različnih različicah in jih najdete na GitHub Model marketplace. Tukaj so podrobnosti o uporabi GitHub Modelov za [prototipiranje z AI modeli](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+V tej lekciji bomo raziskali 2 modela iz Meta družine ali "Llama črede" - Llama 3.1 in Llama 3.2.
 
-Različice modelov:  
-- Llama 3.1 - 70B Instruct  
-- Llama 3.1 - 405B Instruct  
-- Llama 3.2 - 11B Vision Instruct  
-- Llama 3.2 - 90B Vision Instruct  
+Ti modeli so na voljo v različnih različicah in so na voljo v [Microsoft Foundry Models katalogu](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
 
-*Opomba: Llama 3 je prav tako na voljo na GitHub Modelih, vendar v tej lekciji ne bo obravnavan*
+> **Opomba:** GitHub modeli se bodo prenehali uporabljati konec julija 2026. Tukaj so podrobnosti o uporabi [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) za prototipiranje z AI modeli.
 
-## Llama 3.1
+Različice modelov: 
+- Llama 3.1 - 70B Instruct 
+- Llama 3.1 - 405B Instruct 
+- Llama 3.2 - 11B Vision Instruct 
+- Llama 3.2 - 90B Vision Instruct 
 
-Z 405 milijardami parametrov spada Llama 3.1 v kategorijo odprtokodnih LLM-jev.
+*Opomba: Llama 3 je na voljo tudi v Microsoft Foundry Models, a ne bo obravnavan v tej lekciji*
 
-Model je nadgradnja prejšnje različice Llama 3 in prinaša:
+## Llama 3.1 
 
-- Večje kontekstno okno - 128k tokenov v primerjavi z 8k tokeni  
-- Večje maksimalno število izhodnih tokenov - 4096 v primerjavi z 2048  
-- Boljšo večjezično podporo - zaradi povečanja števila učnih tokenov  
+Z 405 milijardami parametrov spada Llama 3.1 v kategorijo odprtokodnih velikih jezikovnih modelov. 
 
-To omogoča Llama 3.1, da obvladuje bolj zahtevne primere uporabe pri gradnji GenAI aplikacij, vključno z:  
-- Native Function Calling - možnost klicanja zunanjih orodij in funkcij izven LLM delovnega toka  
-- Boljšo RAG zmogljivost - zaradi večjega kontekstnega okna  
-- Generiranje sintetičnih podatkov - možnost ustvarjanja učinkovitih podatkov za naloge, kot je fino prilagajanje  
+Model je nadgradnja prej izdanega Llama 3 z izboljšavami: 
 
-### Native Function Calling
+- Večje kontekstno okno - 128k tokenov v primerjavi z 8k tokeni 
+- Večje največje število izhodnih tokenov - 4096 v primerjavi z 2048 
+- Boljša večjezična podpora - zaradi povečanja števila učnih tokenov 
 
-Llama 3.1 je fino prilagojen, da je učinkovitejši pri klicanju funkcij ali orodij. Ima tudi dve vgrajeni orodji, ki jih model prepozna kot potrebni za uporabo glede na uporabniški poziv. Ta orodja sta:
+To omogoča Llama 3.1, da obravnava bolj kompleksne primere uporabe pri gradnji GenAI aplikacij, vključno z: 
+- Nativno klicanje funkcij - možnost klicanja zunanjih orodij in funkcij zunaj delovnega toka LLM
+- Boljšimi RAG zmogljivostmi - zaradi večjega kontekstnega okna 
+- Generiranjem sintetičnih podatkov - možnost ustvarjanja učinkovitih podatkov za naloge, kot je fino prilagajanje 
 
-- **Brave Search** - omogoča pridobivanje ažurnih informacij, kot je vreme, z iskanjem po spletu  
-- **Wolfram Alpha** - omogoča izvajanje zahtevnejših matematičnih izračunov, zato ni treba pisati lastnih funkcij  
+### Nativno klicanje funkcij 
 
-Lahko pa ustvarite tudi svoja lastna orodja, ki jih lahko LLM kliče.
+Llama 3.1 je fino prilagojen, da je učinkovitejši pri klicanju funkcij ali orodij. Ima tudi dve vgrajeni orodji, ki jih model lahko prepozna kot potrebni uporabi glede na uporabniški poziv. Ti orodji sta: 
 
-V spodnjem primeru kode:
+- **Brave Search** - lahko se uporablja za pridobitev aktualnih informacij, kot je vreme, s spletnim iskanjem 
+- **Wolfram Alpha** - lahko se uporablja za kompleksnejše matematične izračune, tako da ni potrebno pisati lastnih funkcij. 
 
-- Določimo razpoložljiva orodja (brave_search, wolfram_alpha) v sistemskem pozivu.  
-- Pošljemo uporabniški poziv, ki sprašuje o vremenu v določenem mestu.  
-- LLM bo odgovoril s klicem orodja Brave Search, ki bo izgledal takole `<|python_tag|>brave_search.call(query="Stockholm weather")`  
+Prav tako lahko ustvarite lastna prilagojena orodja, ki jih lahko LLM kliče. 
 
-*Opomba: Ta primer samo izvede klic orodja, če želite dobiti rezultate, boste morali ustvariti brezplačen račun na strani Brave API in definirati funkcijo*  
+V spodnjem primer kode: 
+
+- Določimo na voljo orodji (brave_search, wolfram_alpha) v sistemskem pozivu. 
+- Pošljemo uporabniški poziv, ki sprašuje o vremenu v določenem mestu. 
+- LLM bo odgovoril s klicem orodja Brave Search, ki bo izgledal takole `<|python_tag|>brave_search.call(query="Stockholm weather")` 
+
+*Opomba: Ta primer samo naredi klic orodja, če želite dobiti rezultate, boste morali ustvariti brezplačen račun na strani Brave API in definirati funkcijo samega klica.
 
 ```python 
 import os
@@ -60,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Pridobite jih s strani "Pregled" vašega Microsoft Foundry projekta
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -92,15 +96,16 @@ response = client.complete(messages=messages, model=model_name)
 print(response.choices[0].message.content)
 ```
 
-## Llama 3.2
+## Llama 3.2 
 
-Čeprav je LLM, ima Llama 3.1 eno omejitev – multimodalnost. To pomeni, da lahko uporablja različne vrste vhodov, kot so slike kot pozivi, in na njih odgovarja. Ta sposobnost je ena glavnih lastnosti Llama 3.2. Druge lastnosti vključujejo:
+Kljub temu, da je LLM, je ena omejitev Llama 3.1 njegova pomanjkljivost multimodalnosti. To pomeni, da ni sposoben uporabljati različnih vrst vhodov, kot so slike za pozive in podajati odgovore. Ta sposobnost je ena glavnih lastnosti Llama 3.2. Te lastnosti vključujejo tudi: 
 
-- Multimodalnost - zmožnost ocenjevanja tako besedilnih kot slikovnih pozivov  
-- Majhne do srednje velike različice (11B in 90B) - kar omogoča prilagodljive možnosti nameščanja  
-- Samo besedilne različice (1B in 3B) - omogočajo namestitev na robne/mobilne naprave in zagotavljajo nizko zakasnitev  
+- Multimodalnost - ima sposobnost ocene tako besedilnih kot slikovnih pozivov 
+- Majhne do srednje velikosti različice (11B in 90B) - to nudi fleksibilne možnosti namestitve, 
+- Samo besedilne različice (1B in 3B) - to omogoča namestitev modela na edge / mobilne naprave in zagotavlja nizko zakasnitev 
 
-Podpora multimodalnosti predstavlja velik korak v svetu odprtokodnih modelov. Spodnji primer kode uporablja tako sliko kot besedilni poziv za analizo slike z Llama 3.2 90B.
+Podpora multimodalnosti predstavlja velik korak v svetu odprtokodnih modelov. Spodnji primer kode uporabi tako sliko kot besedilni poziv za pridobitev analize slike iz Llama 3.2 90B. 
+
 
 ### Multimodalna podpora z Llama 3.2
 
@@ -117,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Pridobite jih na strani "Pregled" vašega projekta Microsoft Foundry
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -149,9 +155,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## Učenje se tukaj ne konča, nadaljujte pot
+## Učenje se tukaj ne ustavi, nadaljujte pot
 
-Po zaključku te lekcije si oglejte našo [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), da še naprej nadgrajujete svoje znanje o Generativni AI!
+Po zaključku te lekcije si oglejte našo [Zbirko za učenje Generativne umetne inteligence](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), da nadaljujete nadgrajevanje svojega znanja o Generativni umetni inteligenci!
 
-**Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za avtomatski prevod AI [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas opozarjamo, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda, ne odgovarjamo.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za kritične informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

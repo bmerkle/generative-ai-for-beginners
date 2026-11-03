@@ -1,267 +1,146 @@
-# Kujenga Programu za Kutengeneza Picha
+# Kujenga Programu za Uzalishaji Picha
 
-[![Kujenga Programu za Kutengeneza Picha](../../../translated_images/sw/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Kujenga Programu za Uzalishaji Picha](../../../translated_images/sw/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-Kuna zaidi ya LLMs kuliko kutengeneza maandishi tu. Inawezekana pia kutengeneza picha kutoka kwa maelezo ya maandishi. Kuwa na picha kama njia ya mawasiliano kunaweza kuwa na manufaa makubwa katika maeneo mbalimbali kama MedTech, usanifu, utalii, ukuzaji wa michezo na zaidi. Katika sura hii, tutachunguza mifano miwili maarufu ya kutengeneza picha, DALL-E na Midjourney.
+Kuna zaidi kuhusu LLMs kuliko uzalishaji wa maandishi. Unaweza pia kuzalisha picha kutoka kwa maelezo ya maandishi. Picha kama moja ya njia ni muhimu katika MedTech, usanifu, utalii, maendeleo ya michezo, masoko, na zaidi. Katika somo hili tunatazama mifano ya **GPT Image** ya leo na kujenga programu ya uzalishaji picha.
 
 ## Utangulizi
 
-Katika somo hili, tutajadili:
+Uzalishaji picha unakuwezesha kubadilisha ombi la lugha ya asili kuwa picha. Katika somo hili tunafanya kazi na familia ya mifano ya **`gpt-image`** kutoka OpenAI - kizazi cha sasa cha mifano ya picha kinachopatikana kwenye **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** na jukwaa la OpenAI. Mifano hii inachukua nafasi ya mifano ya zamani ya DALL·E (DALL·E 2/3 ni za urithi).
 
-- Utengenezaji wa picha na umuhimu wake.
-- DALL-E na Midjourney, ni nini, na jinsi zinavyofanya kazi.
-- Jinsi ya kujenga programu ya kutengeneza picha.
+Katika somo hili tunatumia kampuni ya kubuni ya kubuni, **Edu4All**, ambayo huunda zana za kujifunza. Timu inataka kuzalisha michoro kwa ajili ya kazi za nyumbani na vifaa vya masomo.
 
-## Malengo ya Kujifunza
+## Malengo ya kujifunza
 
-Baada ya kukamilisha somo hili, utaweza:
+Mwishoni mwa somo hili utaweza:
 
-- Kujenga programu ya kutengeneza picha.
-- Kufafanua mipaka ya programu yako kwa kutumia meta prompts.
-- Kufanya kazi na DALL-E na Midjourney.
+- Eleza ni nini uzalishaji wa picha na wapi unafaa.
+- Elewa familia ya mifano ya `gpt-image` na jinsi inavyotofautiana na mifano ya urithi ya DALL·E.
+- Jenga programu ya uzalishaji picha kwa Python (na TypeScript / .NET).
+- Hariri picha na tumia metaprompts kuweka mipaka ya usalama.
 
-## Kwa nini kujenga programu ya kutengeneza picha?
+## Uzalishaji picha ni nini?
 
-Programu za kutengeneza picha ni njia nzuri ya kuchunguza uwezo wa AI ya Kizazi. Zinatumika kwa mfano:
+Mifano ya uzalishaji picha huunda picha kutoka kwa ombi la maandishi. Mifano ya kisasa kama `gpt-image` hutumia mbinu za transformer + diffusion: mfano hujifunza uhusiano kati ya maandishi na picha wakati wa mafunzo, kisha, ukipata ombi, huziondoa kelele taratibu hadi picha inayoendana na maelezo.
 
-- **Uhariri na muundo wa picha**. Unaweza kutengeneza picha kwa matumizi mbalimbali, kama vile uhariri wa picha na muundo wa picha.
+Familia mbili maarufu za mifano ya picha ni:
 
-- **Kutumika katika sekta mbalimbali**. Pia zinaweza kutumika kutengeneza picha kwa sekta mbalimbali kama MedTech, Utalii, ukuzaji wa michezo na zaidi.
+- **`gpt-image` (OpenAI)** - kizazi cha sasa, kinachotumika katika somo hili. Kinaunga mkono uzalishaji wa picha kutoka kwa maandishi na uhariri wa picha (inpainting na kaskazi).
+- **Midjourney** - mfano maarufu wa mtu wa tatu mwenye huduma yake na mtiririko wa kazi wa Discord.
 
-## Hali: Edu4All
+> Mifano ya zamani ya OpenAI ya picha - **DALL·E 2** na **DALL·E 3** - ni za urithi. DALL·E 3 haipatikani tena kwa uanzishaji mpya, na vipengele kama `create_variation` vilikuwepo tu kwenye DALL·E 2. Tumia mifano ya `gpt-image` kwa programu mpya.
 
-Kama sehemu ya somo hili, tutaendelea kufanya kazi na kampuni yetu ya kuanzisha, Edu4All, katika somo hili. Wanafunzi wataunda picha kwa ajili ya tathmini zao, ni picha gani hasa ni juu yao, lakini wanaweza kuwa ni michoro ya hadithi yao ya kufikirika au kuunda tabia mpya kwa hadithi yao au kuwasaidia kuona mawazo na dhana zao.
+### Ni mfano gani wa `gpt-image` ninapaswa kutumia?
 
-Hapa kuna mfano wa kile wanafunzi wa Edu4All wanaweza kutengeneza ikiwa wanajifunza darasani kuhusu makaburi:
+Kwenye Microsoft Foundry zifuatazo ni **zinazopatikana kwa ujumla**:
 
-![Kampuni ya Edu4All, darasa kuhusu makaburi, Mnara wa Eiffel](../../../translated_images/sw/startup.94d6b79cc4bb3f5a.webp)
+| Mfano | Maelezo |
+| --- | --- |
+| **`gpt-image-2`** | Mfano mpya zaidi na wenye uwezo mkubwa - chaguo la ushauri. |
+| `gpt-image-1.5` | Inapatikana kwa ujumla; ubora mzuri kwa gharama ndogo. |
+| `gpt-image-1-mini` | Inapatikana kwa ujumla; kasi zaidi / gharama ndogo zaidi. |
+| `gpt-image-1` | Maonyesho tu. |
 
-wakitumia prompt kama
+Hakikisha unakagua orodha ya [mifano ya picha ya Foundry](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) sasa kwa upatikanaji na maeneo.
 
-> "Mbwa karibu na Mnara wa Eiffel katika mwanga wa asubuhi mapema"
+> **Muhimu:** mifano ya `gpt-image` hurudisha picha iliyozalishwa kama **base64** (`b64_json`), si kama URL. Kodu yako hutafsiri mfululizo wa base64 kuwa biti na kuihifadhi - hakuna URL ya picha ya kupakua.
 
-## DALL-E na Midjourney ni nini?
+## Usanidi
 
-[DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) na [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) ni mifano miwili maarufu ya kutengeneza picha, zinakuruhusu kutumia prompts kutengeneza picha.
+Unaweza kuendesha mifano dhidi ya **Azure OpenAI katika Microsoft Foundry** (mifano `aoai-*`) au **jukwaa la OpenAI** (mifano `oai-*`).
 
-### DALL-E
+### 1. Tengeneza na weka mfano
 
-Tuanzie na DALL-E, ambayo ni mfano wa AI ya Kizazi inayotengeneza picha kutoka kwa maelezo ya maandishi.
+Fuata mwongozo wa [kutengeneza rasilimali](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) kuunda rasilimali ya Microsoft Foundry, kisha weka mfano wa picha - **`gpt-image-2`** inashauriwa.
 
-> [DALL-E ni mchanganyiko wa mifano miwili, CLIP na diffused attention](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. Sanidi `.env` yako
 
-- **CLIP**, ni mfano unaotengeneza embeddings, ambazo ni uwakilishi wa namba wa data, kutoka kwa picha na maandishi.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention**, ni mfano unaotengeneza picha kutoka kwa embeddings. DALL-E imefundishwa kwa seti ya data ya picha na maandishi na inaweza kutumika kutengeneza picha kutoka kwa maelezo ya maandishi. Kwa mfano, DALL-E inaweza kutumika kutengeneza picha ya paka aliyevaa kofia, au mbwa mwenye mohawk.
+Pata thamani hizi kwenye ukurasa wa **Deployments** wa rasilimali yako kwenye [portal ya Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst).
 
-### Midjourney
+### 3. Sakinisha maktaba
 
-Midjourney inafanya kazi kwa njia sawa na DALL-E, inatengeneza picha kutoka kwa prompts za maandishi. Midjourney, pia inaweza kutumika kutengeneza picha kwa kutumia prompts kama “paka aliyevaa kofia”, au “mbwa mwenye mohawk”.
+Tengeneza faili `requirements.txt`:
 
-![Picha iliyotengenezwa na Midjourney, njiwa wa mitambo](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Picha kwa hisani ya Wikipedia, picha iliyotengenezwa na Midjourney_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Jinsi DALL-E na Midjourney Zinavyofanya Kazi
+Kisha tengeneza na uanzishe mazingira pepe na sakinisha:
 
-Kwanza, [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). DALL-E ni mfano wa AI ya Kizazi unaotegemea usanifu wa transformer na _autoregressive transformer_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-_Autoregressive transformer_ hufafanua jinsi mfano unavyotengeneza picha kutoka kwa maelezo ya maandishi, inatengeneza pixel moja kwa wakati, na kisha hutumia pixel zilizotengenezwa kutengeneza pixel inayofuata. Kupitia tabaka nyingi katika mtandao wa neva, hadi picha ikamilike.
+## Jenga programu
 
-Kwa mchakato huu, DALL-E, inadhibiti sifa, vitu, tabia, na zaidi katika picha inayotengeneza. Hata hivyo, DALL-E 2 na 3 zina udhibiti zaidi juu ya picha inayotengenezwa.
+Tengeneza `app.py` na kodu ifuatayo. Huzalisha picha na kuihifadhi kama PNG.
 
-## Kujenga programu yako ya kwanza ya kutengeneza picha
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-Kwa hivyo inachukua nini kujenga programu ya kutengeneza picha? Unahitaji maktaba zifuatazo:
+dotenv.load_dotenv()
 
-- **python-dotenv**, inashauriwa sana kutumia maktaba hii kuweka siri zako katika faili ya _.env_ mbali na msimbo.
-- **openai**, maktaba hii ndiyo utatumia kuingiliana na API ya OpenAI.
-- **pillow**, kufanya kazi na picha katika Python.
-- **requests**, kusaidia kufanya maombi ya HTTP.
+# Elekeza mteja kwenye rasilimali yako ya Azure OpenAI (Microsoft Foundry).
+# Mifano ya picha inahitaji toleo jipya la API - angalia nyaraka za Foundry kwa ile inayohitajika na mfano wako.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Unda na peleka mfano wa Azure OpenAI
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # kwa mfano "gpt-image-2"
 
-Ikiwa bado hujafanya, fuata maelekezo kwenye ukurasa wa [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) 
-kuunda rasilimali ya Azure OpenAI na mfano. Chagua DALL-E 3 kama mfano.  
-
-## Unda programu
-
-1. Unda faili _.env_ yenye maudhui yafuatayo:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   Tafuta taarifa hii katika Azure OpenAI Foundry Portal kwa rasilimali yako katika sehemu ya "Deployments".
-
-1. Kusanya maktaba zilizo hapo juu katika faili inayoitwa _requirements.txt_ kama ifuatavyo:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. Kisha, unda mazingira ya kawaida na usakinishe maktaba:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Kwa Windows, tumia amri zifuatazo kuunda na kuamsha mazingira yako ya kawaida:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. Ongeza msimbo ufuatao katika faili inayoitwa _app.py_:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Hebu tueleze msimbo huu:
-
-- Kwanza, tunaleta maktaba tunazohitaji, ikiwa ni pamoja na maktaba ya OpenAI, maktaba ya dotenv, maktaba ya requests, na maktaba ya Pillow.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Kisha, tunapakia vigezo vya mazingira kutoka kwa faili ya _.env_.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Baada ya hapo, tunasanidi mteja wa huduma ya Azure OpenAI 
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Kisha, tunatengeneza picha:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Msimbo hapo juu unajibu na kitu cha JSON kinachojumuisha URL ya picha iliyotengenezwa. Tunaweza kutumia URL kupakua picha na kuihifadhi kwenye faili.
-
-- Mwisho, tunafungua picha na kutumia kionyeshi cha picha cha kawaida kuionyesha:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Maelezo zaidi kuhusu kutengeneza picha
-
-Hebu tuangalie msimbo unaotengeneza picha kwa undani zaidi:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, ni prompt ya maandishi inayotumika kutengeneza picha. Katika kesi hii, tunatumia prompt "Sungura juu ya farasi, ameshikilia lollipop, kwenye uwanja wa ukungu ambapo maua ya daffodils yanamea".
-- **size**, ni ukubwa wa picha inayotengenezwa. Katika kesi hii, tunatengeneza picha yenye ukubwa wa 1024x1024 pixels.
-- **n**, ni idadi ya picha zinazotengenezwa. Katika kesi hii, tunatengeneza picha mbili.
-- **temperature**, ni kipengele kinachodhibiti nasibu ya matokeo ya mfano wa AI ya Kizazi. Temperature ni thamani kati ya 0 na 1 ambapo 0 inamaanisha kuwa matokeo ni ya uhakika na 1 inamaanisha kuwa matokeo ni ya nasibu. Thamani ya kawaida ni 0.7.
-
-Kuna mambo zaidi unayoweza kufanya na picha ambayo tutajadili katika sehemu inayofuata.
-
-## Uwezo wa ziada wa kutengeneza picha
-
-Umeona hadi sasa jinsi tulivyoweza kutengeneza picha kwa mistari michache katika Python. Hata hivyo, kuna mambo zaidi unayoweza kufanya na picha.
-
-Unaweza pia kufanya yafuatayo:
-
-- **Kufanya uhariri**. Kwa kutoa picha iliyopo, mask na prompt, unaweza kubadilisha picha. Kwa mfano, unaweza kuongeza kitu kwenye sehemu ya picha. Fikiria picha yetu ya sungura, unaweza kuongeza kofia kwa sungura. Jinsi unavyoweza kufanya hivyo ni kwa kutoa picha, mask (inayotambua sehemu ya eneo la mabadiliko) na prompt ya maandishi kusema nini kinapaswa kufanyika. 
-> Kumbuka: hii haijaungwa mkono katika DALL-E 3. 
- 
-Hapa kuna mfano wa kutumia GPT Image:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Picha ya msingi ingekuwa na chumba cha kupumzika na bwawa tu lakini picha ya mwisho ingekuwa na flamingo:
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # pia 1536x1024 (mtaa), 1024x1536 (mshale), au "auto"
+    n=1,
+)
+
+# mifano ya gpt-image hurudisha base64 (b64_json), si URL - ifasiri kuwa baiti.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+Iendeshe kwa `python app.py`. Utapata PNG imehifadhiwa chini ya `images/`.
+
+> Kila wito kwa `images.generate` hutengeneza picha tofauti kwa ombi lile lile - mifano ya picha hachukui vigezo vya `temperature` (hiyo ni udhibiti wa uzalishaji wa maandishi). Ili kupata utofauti, itaje API tena; kupunguza utofauti, fanya ombi lako liwe maalum zaidi.
+
+## Kuhariri picha
+
+Mifano ya `gpt-image` inaweza **kuhariri** picha iliyo tayari: toa picha, **mask** hiari (inayosema eneo la kubadilisha), na ombi linaloelezea mabadiliko. Kama uzalishaji, uhariri hurudishwa kama base64.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/sw/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -269,212 +148,51 @@ Hapa kuna mfano wa kutumia GPT Image:
   <img src="../../../translated_images/sw/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
+## Kuweka mipaka kwa metaprompts
 
-- **Unda tofauti**. Wazo ni kwamba unachukua picha iliyopo na kuomba kwamba tofauti zitengezwe. Ili kuunda tofauti, unatoa picha na prompt ya maandishi na msimbo kama ifuatavyo:
-
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Kumbuka, hii inaungwa mkono tu kwenye OpenAI
-
-## Temperature
-
-Temperature ni kipengele kinachodhibiti nasibu ya matokeo ya mfano wa AI ya Kizazi. Temperature ni thamani kati ya 0 na 1 ambapo 0 inamaanisha kuwa matokeo ni ya uhakika na 1 inamaanisha kuwa matokeo ni ya nasibu. Thamani ya kawaida ni 0.7.
-
-Hebu tuangalie mfano wa jinsi temperature inavyofanya kazi, kwa kuendesha prompt hii mara mbili:
-
-> Prompt : "Sungura juu ya farasi, ameshikilia lollipop, kwenye uwanja wa ukungu ambapo maua ya daffodils yanamea"
-
-![Sungura juu ya farasi ameshikilia lollipop, toleo la 1](../../../translated_images/sw/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Sasa hebu tuendeshe prompt hiyo hiyo ili tuone kwamba hatutapata picha sawa mara mbili:
-
-![Picha iliyotengenezwa ya sungura juu ya farasi](../../../translated_images/sw/v2-generated-image.33f55a3714efe61d.webp)
-
-Kama unavyoona, picha zinafanana, lakini si sawa. Hebu jaribu kubadilisha thamani ya temperature kuwa 0.1 na tuone kinachotokea:
+Mara utakapoweza kuzalisha picha, unahitaji mipaka ili programu yako isizalishe maudhui yasiyo salama au yasiyoendana na chapa. **Metaprompt** ni maandishi unaoweka mbele ya ombi la mtumiaji ili kuzuia matokeo ya mfano.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Kubadilisha temperature
-
-Kwa hivyo hebu jaribu kufanya majibu yawe ya uhakika zaidi. Tunaweza kuona kutoka kwa picha mbili tulizotengeneza kwamba katika picha ya kwanza, kuna sungura na katika picha ya pili, kuna farasi, kwa hivyo picha zinatofautiana sana.
-
-Kwa hivyo hebu tubadilishe msimbo wetu na kuweka temperature kuwa 0, kama ifuatavyo:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Sasa unapokimbia msimbo huu, unapata picha hizi mbili:
-
-- ![Temperature 0, v1](../../../translated_images/sw/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Temperature 0 , v2](../../../translated_images/sw/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Hapa unaweza kuona wazi jinsi picha zinavyofanana zaidi.
-
-## Jinsi ya kufafanua mipaka ya programu yako kwa metaprompts
-
-Kwa demo yetu, tunaweza tayari kutengeneza picha kwa wateja wetu. Hata hivyo, tunahitaji kuunda mipaka kwa programu yetu.
-
-Kwa mfano, hatutaki kutengeneza picha ambazo si salama kwa kazi, au ambazo si sahihi kwa watoto.
-
-Tunaweza kufanya hivi kwa _metaprompts_. Metaprompts ni prompts za maandishi zinazotumika kudhibiti matokeo ya mfano wa AI ya Kizazi. Kwa mfano, tunaweza kutumia metaprompts kudhibiti matokeo, na kuhakikisha kwamba picha zinazotengenezwa ni salama kwa kazi, au sahihi kwa watoto.
-
-### Inafanyaje kazi?
-
-Sasa, metaprompts zinafanyaje kazi?
-
-Metaprompts ni prompts za maandishi zinazotumika kudhibiti matokeo ya mfano wa AI ya Kizazi, zinapangwa kabla ya prompt ya maandishi, na zinatumika kudhibiti matokeo ya mfano na kuingizwa katika programu kudhibiti matokeo ya mfano. Kuunganisha prompt ya pembejeo na prompt ya meta katika prompt moja ya maandishi.
-
-Mfano mmoja wa metaprompt ungekuwa kama ifuatavyo:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Sasa, hebu tuone jinsi tunavyoweza kutumia metaprompts katika demo yetu.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Kutoka kwa prompt hapo juu, unaweza kuona jinsi picha zote zinazotengenezwa zinazingatia metaprompt.
-
-## Kazi - hebu tuwawezeshe wanafunzi
-
-Tulianzisha Edu4All mwanzoni mwa somo hili. Sasa ni wakati wa kuwawezesha wanafunzi kutengeneza picha kwa tathmini zao.
-
-Wanafunzi wataunda picha kwa tathmini zao zinazohusiana na makaburi, ni makaburi gani hasa ni juu yao. Wanafunzi wanahimizwa kutumia ubunifu wao katika kazi hii kuweka makaburi haya katika muktadha tofauti.
-
-## Suluhisho
-
-Hapa kuna suluhisho moja linalowezekana:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# pita `prompt` kwa client.images.generate(...)
 ```
 
-## Kazi Nzuri! Endelea Kujifunza
+Kila picha sasa inazalishwa ndani ya mipaka iliyowekwa na metaprompt. Changanya hii na vichujio vya maudhui vilivyojengwa ndani ya Microsoft Foundry kwa ulinzi wa kina.
 
-Baada ya kumaliza somo hili, angalia [Mkusanyiko wa Kujifunza kuhusu AI ya Kizazi](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ili kuendelea kukuza maarifa yako kuhusu AI ya Kizazi!
+## Kazi ya nyumbani - tuwezeshe wanafunzi
 
-Nenda kwenye Somo la 10 ambapo tutachunguza jinsi ya [kuunda programu za AI kwa kutumia low-code](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Wanafunzi wa Edu4All wanahitaji picha kwa tathmini zao. Jenga programu inayozalisha picha za **monumenti** (mamuenti gani ni kwako) zilizowekwa katika muktadha tofauti, wa ubunifu - kwa mfano, alama maarufu wakati wa machweo na mtoto akitazama.
+
+Jaribu wewe mwenyewe, kisha linganisha na suluhisho za marejeleo:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) programu kamili ya uzalishaji: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Pia fanyia kazi vitabu vya kumbukumbu katika [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` kwa Azure, `oai-assignment.ipynb` kwa OpenAI).
+
+## Kazi nzuri! Endelea kujifunza
+
+Baada ya kumaliza somo hili, angalia mkusanyiko wetu wa [Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) kuongeza zaidi maarifa yako ya AI Inayozalisha!
+
+Nenda kwenye somo la 10 kuendelea na kujifunza.
 
 ---
 
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya kiasili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

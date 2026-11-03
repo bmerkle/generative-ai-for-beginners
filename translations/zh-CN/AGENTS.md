@@ -1,296 +1,306 @@
 # AGENTS.md
 
-## 项目概述
+## 项目概览
 
-此代码库包含一个全面的21课课程，教授生成式人工智能的基础知识和应用开发。课程专为初学者设计，涵盖从基本概念到构建生产级应用的所有内容。
+本仓库包含一个全面的21课课程，教授生成式人工智能基础知识及应用开发。该课程为初学者设计，涵盖从基础概念到构建生产就绪应用的所有内容。
 
 **关键技术：**
-- Python 3.9+及以下库：`openai`、`python-dotenv`、`tiktoken`、`azure-ai-inference`、`pandas`、`numpy`、`matplotlib`
-- TypeScript/JavaScript及Node.js库：`@azure/openai`、`@azure-rest/ai-inference`、`openai`
-- Azure OpenAI服务、OpenAI API和GitHub模型
-- Jupyter Notebooks用于交互式学习
-- Dev Containers提供一致的开发环境
+- Python 3.9+和库：`openai`、`python-dotenv`、`tiktoken`、`azure-ai-inference`、`pandas`、`numpy`、`matplotlib`
+- TypeScript/JavaScript 搭配 Node.js 和库：`openai`（通过v1端点+Responses API使用 Azure OpenAI），`@azure-rest/ai-inference`（微软 Foundry 模型）
+- Azure OpenAI 服务、OpenAI API 和微软 Foundry 模型（GitHub Models 将于2026年7月底退役）
+- 用于交互式学习的 Jupyter 笔记本
+- 用于一致开发环境的开发容器
 
-**代码库结构：**
-- 21个编号的课程目录（00-21），包含README文件、代码示例和作业
-- 多种实现方式：Python、TypeScript，有时还有.NET示例
-- 翻译目录，支持40多种语言版本
-- 通过`.env`文件集中配置（使用`.env.copy`作为模板）
+**仓库结构：**
+- 21个编号课程目录（00-21），包含 README、代码示例和作业
+- 多种实现：Python、TypeScript，有时还包括.NET示例
+- 翻译目录，包含40多种语言版本
+- 通过 `.env` 文件集中配置（使用 `.env.copy` 作为模板）
 
 ## 设置命令
 
-### 初始代码库设置
+### 初始仓库设置
 
 ```bash
-# Clone the repository
+# 克隆仓库
 git clone https://github.com/microsoft/generative-ai-for-beginners.git
 cd generative-ai-for-beginners
 
-# Copy environment template
+# 复制环境模板
 cp .env.copy .env
-# Edit .env with your API keys and endpoints
+# 使用你的API密钥和端点编辑.env
 ```
 
-### Python环境设置
+### Python 环境设置
 
 ```bash
-# Create virtual environment
+# 创建虚拟环境
 python3 -m venv venv
 
-# Activate virtual environment
-# On macOS/Linux:
+# 激活虚拟环境
+# 在 macOS/Linux 上：
 source venv/bin/activate
-# On Windows:
+# 在 Windows 上：
 venv\Scripts\activate
 
-# Install dependencies
+# 安装依赖项
 pip install -r requirements.txt
 ```
 
-### Node.js/TypeScript设置
+### Node.js/TypeScript 设置
 
 ```bash
-# Install root-level dependencies (for documentation tooling)
+# 安装根级依赖（用于文档工具）
 npm install
 
-# For individual lesson TypeScript examples, navigate to the specific lesson:
+# 对于单个课程的 TypeScript 示例，导航到特定课程：
 cd 06-text-generation-apps/typescript/recipe-app
 npm install
 ```
 
-### Dev Container设置（推荐）
+### 开发容器设置（推荐）
 
-代码库包含一个`.devcontainer`配置文件，可用于GitHub Codespaces或VS Code Dev Containers：
+仓库包含 `.devcontainer` 配置，可用于 GitHub Codespaces 或 VS Code 开发容器：
 
-1. 在GitHub Codespaces或VS Code中打开代码库，安装Dev Containers扩展
-2. Dev Container将自动：
-   - 从`requirements.txt`安装Python依赖项
+1. 在 GitHub Codespaces 或安装了开发容器扩展的 VS Code 中打开仓库
+2. 开发容器将自动：
+   - 从 `requirements.txt` 安装 Python 依赖
    - 运行创建后脚本（`.devcontainer/post-create.sh`）
-   - 设置Jupyter内核
+   - 设置 Jupyter 内核
 
 ## 开发工作流程
 
 ### 环境变量
 
-所有需要API访问的课程都使用`.env`中定义的环境变量：
+所有需要 API 访问的课程都使用在 `.env` 中定义的环境变量：
 
-- `OPENAI_API_KEY` - 用于OpenAI API
-- `AZURE_OPENAI_API_KEY` - 用于Azure OpenAI服务
-- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI端点URL
-- `AZURE_OPENAI_DEPLOYMENT` - 聊天完成模型的部署名称
-- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - 嵌入模型的部署名称
-- `AZURE_OPENAI_API_VERSION` - API版本（默认：`2024-02-01`）
-- `HUGGING_FACE_API_KEY` - 用于Hugging Face模型
-- `GITHUB_TOKEN` - 用于GitHub模型
+- `OPENAI_API_KEY` - OpenAI API 密钥
+- `AZURE_OPENAI_API_KEY` - Microsoft Foundry 中 Azure OpenAI 的密钥（Azure OpenAI 服务现为 Microsoft Foundry 的一部分：https://ai.azure.com）
+- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI 端点 URL（Foundry 资源端点）
+- `AZURE_OPENAI_DEPLOYMENT` - 聊天补全模型部署名称（课程默认：`gpt-5-mini`）
+- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - 嵌入模型部署名称（课程默认：`text-embedding-3-small`）
+- `AZURE_OPENAI_API_VERSION` - API 版本（默认：`2024-10-21`）
+- `HUGGING_FACE_API_KEY` - Hugging Face 模型密钥
+- `AZURE_INFERENCE_ENDPOINT` - Microsoft Foundry 模型端点（多提供者模型目录）
+- `AZURE_INFERENCE_CREDENTIAL` - Microsoft Foundry 模型 API 密钥（替代即将退役的 `GITHUB_TOKEN`）
+- `AZURE_INFERENCE_CHAT_MODEL` - 一个非推理模型（例如 `Llama-3.3-70B-Instruct`），用于 `temperature` 示例，因为推理模型不支持采样控制
 
-### 运行Python示例
+### 模型约定（重要）
+
+- **默认聊天模型为 `gpt-5-mini`<strong> - 当前非弃用的 </strong>推理** 模型。自2026年起，旧的支持 temperature 的“迷你”模型（`gpt-4o-mini`、`gpt-4.1-mini`）将<em>弃用</em>，课程统一采用 GPT-5 家族。
+- **推理模型拒绝 `temperature` 和 `top_p`**，使用 `max_output_tokens`（Responses API） / `max_completion_tokens`（聊天补全）替代 `max_tokens`。调用 `gpt-5-mini` 的示例中切勿添加 `temperature`/`top_p`/`max_tokens`。
+- **为演示 `temperature`**，示例使用 Microsoft Foundry 模型端点的 **Llama** 模型（`Llama-3.3-70B-Instruct`，通过 `AZURE_INFERENCE_CHAT_MODEL`）。推理模型请通过提示工程和推理控制代替采样调节。
+- **微调（第18课）** 保留 `gpt-4.1-mini`：GPT-5 仅支持强化学习微调（RFT），不支持该处展示的监督式微调（SFT）。
+- 第20（Mistral）和21课（Meta）保留 `temperature`/`max_tokens`，因为它们面向支持这些参数的 Mistral/Llama 模型。
+
+### 运行 Python 示例
 
 ```bash
-# Navigate to lesson directory
+# 导航到课程目录
 cd 06-text-generation-apps/python
 
-# Run a Python script
+# 运行一个Python脚本
 python aoai-app.py
 ```
 
-### 运行TypeScript示例
+### 运行 TypeScript 示例
 
 ```bash
-# Navigate to TypeScript app directory
+# 导航到 TypeScript 应用目录
 cd 06-text-generation-apps/typescript/recipe-app
 
-# Build the TypeScript code
+# 构建 TypeScript 代码
 npm run build
 
-# Run the application
+# 运行应用程序
 npm start
 ```
 
-### 运行Jupyter Notebooks
+### 运行 Jupyter 笔记本
 
 ```bash
-# Start Jupyter in the repository root
+# 在仓库根目录启动 Jupyter
 jupyter notebook
 
-# Or use VS Code with Jupyter extension
+# 或使用带有 Jupyter 扩展的 VS Code
 ```
 
-### 处理不同类型的课程
+### 各类课程作业方式
 
-- **“学习”课程**：专注于README.md文档和概念
-- **“构建”课程**：包含Python和TypeScript的工作代码示例
-- 每节课程都有一个README.md文件，包含理论、代码讲解和视频内容链接
+- **“学习”课程**：专注于 README.md 文档和概念讲解
+- **“构建”课程**：包含 Python 和 TypeScript 工作代码示例
+- 每节课均含有包含理论、代码讲解及视频内容链接的 README.md
 
 ## 代码风格指南
 
 ### Python
 
-- 使用`python-dotenv`管理环境变量
-- 导入`openai`库进行API交互
-- 使用`pylint`进行代码检查（某些示例包含`# pylint: disable=all`以简化）
-- 遵循PEP 8命名规范
-- 将API凭据存储在`.env`文件中，切勿直接写入代码
+- 使用 `python-dotenv` 管理环境变量
+- 导入 `openai` 库进行 API 交互
+- 使用 `pylint` 进行代码检查（部分示例为了简单使用了 `# pylint: disable=all`）
+- 遵循 PEP 8 命名规范
+- 将 API 凭证存储在 `.env` 文件，代码中绝不硬编码
 
 ### TypeScript
 
-- 使用`dotenv`包管理环境变量
-- 每个应用的TypeScript配置存储在`tsconfig.json`中
-- 使用`@azure/openai`或`@azure-rest/ai-inference`与Azure服务交互
-- 使用`nodemon`进行开发，支持自动重载
-- 运行前需构建：`npm run build`然后`npm start`
+- 使用 `dotenv` 包管理环境变量
+- 每个应用在 `tsconfig.json` 中配置 TypeScript
+- 使用 `openai` 包调用 Azure OpenAI（客户端指向 `/openai/v1/` 端点并调用 `client.responses.create`）；使用 `@azure-rest/ai-inference` 调用微软 Foundry 模型
+- 使用 `nodemon` 进行开发，支持自动重载
+- 运行前先构建：`npm run build` 然后 `npm start`
 
 ### 通用约定
 
-- 保持代码示例简单且具有教育意义
-- 包含解释关键概念的注释
-- 每节课程的代码应独立且可运行
-- 使用一致的命名：`aoai-`前缀用于Azure OpenAI，`oai-`用于OpenAI API，`githubmodels-`用于GitHub模型
+- 保持示例代码简单且具教育性
+- 添加注释解释关键概念
+- 每节课的代码应相互独立且可直接运行
+- 命名风格统一：`aoai-` 前缀表示 Azure OpenAI，`oai-` 表示 OpenAI API，`githubmodels-` 表示微软 Foundry 模型（保留 GitHub Models 时代的遗留前缀）
 
 ## 文档指南
 
-### Markdown风格
+### Markdown 风格
 
-- 所有URL必须使用`[文本](../../url)`格式包裹，且无额外空格
-- 相对链接必须以`./`或`../`开头
-- 所有指向Microsoft域的链接必须包含跟踪ID：`?WT.mc_id=academic-105485-koreyst`
-- URL中不得包含国家/地区特定的语言代码（避免`/en-us/`）
-- 图片存储在`./images`文件夹中，文件名需具有描述性
-- 文件名使用英文字符、数字和短横线
+- 所有 URL 必须使用 `[文本](../../链接)` 格式，不得有额外空格
+- 相对链接必须以 `./` 或 `../` 开头
+- 所有指向 Microsoft 域名的链接必须包含跟踪 ID：`?WT.mc_id=academic-105485-koreyst`
+- 不使用针对特定国家的 URL 语言路径（避免 `/en-us/`）
+- 图片存于 `./images` 文件夹，文件名具描述性
+- 文件名使用英文字母、数字和短横线
 
 ### 翻译支持
 
-- 代码库通过自动化GitHub Actions支持40多种语言
-- 翻译存储在`translations/`目录中
-- 不接受部分翻译
+- 仓库通过自动化 GitHub Actions 支持40多种语言
+- 翻译文件位于 `translations/` 目录
+- 不接受部分翻译提交
 - 不接受机器翻译
-- 翻译后的图片存储在`translated_images/`目录中
+- 翻译后的图片存放于 `translated_images/` 目录
 
 ## 测试与验证
 
 ### 提交前检查
 
-此代码库使用GitHub Actions进行验证。在提交PR之前：
+本仓库使用 GitHub Actions 进行验证。提交 PR 前：
 
-1. **检查Markdown链接**：
+1. **检查 Markdown 链接：**
    ```bash
-   # The validate-markdown.yml workflow checks:
-   # - Broken relative paths
-   # - Missing tracking IDs on paths
-   # - Missing tracking IDs on URLs
-   # - URLs with country locale
-   # - Broken external URLs
+   # validate-markdown.yml 工作流检查：
+   # - 断开的相对路径
+   # - 路径上缺失的跟踪ID
+   # - URL上缺失的跟踪ID
+   # - 带有国家/地区语言代码的URL
+   # - 断开的外部URL
    ```
 
-2. **手动测试**：
-   - 测试Python示例：激活虚拟环境并运行脚本
-   - 测试TypeScript示例：`npm install`，`npm run build`，`npm start`
-   - 确保环境变量配置正确
-   - 检查API密钥是否与代码示例匹配
+2. **人工测试：**
+   - 测试 Python 示例：激活虚拟环境并运行脚本
+   - 测试 TypeScript 示例：`npm install`，`npm run build`，`npm start`
+   - 检查环境变量是否正确配置
+   - 确认 API 密钥对代码示例有效
 
-3. **代码示例**：
-   - 确保所有代码运行无错误
-   - 在适用时测试Azure OpenAI和OpenAI API
-   - 验证示例是否支持GitHub模型
+3. **代码示例：**
+   - 确保所有代码无错误运行
+   - 涉及时同时测试 Azure OpenAI 和 OpenAI API
+   - 验证受支持时的微软 Foundry 模型示例有效
 
 ### 无自动化测试
 
-这是一个以教程和示例为重点的教育代码库，没有单元测试或集成测试。验证主要包括：
-- 手动测试代码示例
-- GitHub Actions进行Markdown验证
-- 社区对教育内容的审查
+这是一个专注于教程和示例的教育仓库，无单元测试或集成测试。验证主要通过：
+- 代码示例的人工测试
+- GitHub Actions 的 Markdown 验证
+- 教育内容的社区审核
 
-## Pull Request指南
+## 拉取请求指南
 
 ### 提交前
 
-1. 在适用时测试Python和TypeScript代码更改
-2. 运行Markdown验证（PR自动触发）
-3. 确保所有Microsoft URL包含跟踪ID
-4. 检查相对链接是否有效
-5. 验证图片引用是否正确
+1. 在 Python 和 TypeScript 中测试代码更改（适用时）
+2. 运行 Markdown 验证（PR 提交自动触发）
+3. 确保所有 Microsoft URL 带有跟踪 ID
+4. 检查相对链接有效
+5. 确认图片引用正确
 
-### PR标题格式
+### PR 标题格式
 
-- 使用描述性标题：`[Lesson 06] 修复Python示例中的拼写错误`或`更新第08课的README`
-- 在适用时引用问题编号：`Fixes #123`
+- 使用描述性标题：`[Lesson 06] 修正 Python 示例拼写错误` 或 `更新第08课 README`
+- 相关时引用 Issue 号码：`Fixes #123`
 
-### PR描述
+### PR 描述
 
 - 说明更改内容及原因
-- 链接相关问题
-- 对于代码更改，说明测试了哪些示例
-- 对于翻译PR，包含所有文件以完成翻译
+- 链接相关 Issue
+- 对代码更改说明测试覆盖示例
+- 语言翻译 PR 包含所有相关文件以完成翻译
 
 ### 贡献要求
 
-- 签署Microsoft CLA（首次PR时自动完成）
-- 在修改前将代码库Fork到您的账户
-- 每个逻辑更改提交一个PR（不要合并不相关的修复）
-- 尽量保持PR专注且小型化
+- 签署 Microsoft CLA（第一次 PR 自动）
+- 更改前先 Fork 仓库至个人账户
+- 每个逻辑变更一个 PR（避免合并不相关修复）
+- 尽量保持 PR 简洁聚焦
 
-## 常见工作流程
+## 常用工作流程
 
-### 添加新的代码示例
+### 添加新代码示例
 
-1. 转到相应的课程目录
-2. 在`python/`或`typescript/`子目录中创建示例
-3. 遵循命名规范：`{provider}-{example-name}.{py|ts|js}`
-4. 使用实际API凭据进行测试
-5. 在课程README中记录任何新的环境变量
+1. 进入相应的课程目录
+2. 在 `python/` 或 `typescript/` 子目录创建示例
+3. 遵循命名规则：`{provider}-{example-name}.{py|ts|js}`
+4. 使用真实 API 凭证测试
+5. 在课程 README 中记录任何新增环境变量
 
 ### 更新文档
 
-1. 编辑课程目录中的README.md
-2. 遵循Markdown指南（跟踪ID、相对链接）
-3. 翻译由GitHub Actions处理（不要手动编辑）
-4. 测试所有链接是否有效
+1. 编辑课程目录下的 README.md
+2. 遵循 Markdown 指南（跟踪 ID、相对链接）
+3. 翻译由 GitHub Actions 处理（请勿手动编辑）
+4. 测试所有链接有效
 
-### 使用Dev Containers
+### 使用开发容器
 
-1. 代码库包含`.devcontainer/devcontainer.json`
-2. 创建后脚本自动安装Python依赖项
-3. 预配置Python和Jupyter扩展
-4. 环境基于`mcr.microsoft.com/devcontainers/universal:2.11.2`
+1. 仓库包含 `.devcontainer/devcontainer.json`
+2. 创建后脚本自动安装 Python 依赖
+3. 预配置了 Python 和 Jupyter 扩展
+4. 环境基于 `mcr.microsoft.com/devcontainers/universal:2.11.2`
 
 ## 部署与发布
 
-这是一个学习代码库，没有部署流程。课程内容通过以下方式使用：
+这是一个学习型仓库 - 无部署流程。课程使用方式：
 
-1. **GitHub代码库**：直接访问代码和文档
-2. **GitHub Codespaces**：预配置的即时开发环境
-3. **Microsoft Learn**：内容可能会同步到官方学习平台
-4. **docsify**：从Markdown构建的文档网站（参见`docsifytopdf.js`和`package.json`）
+1. **GitHub 仓库**：直接访问代码和文档
+2. **GitHub Codespaces**：即时预配置的开发环境
+3. **Microsoft Learn**：内容可能被联合发布到官方学习平台
+4. **docsify**：基于 Markdown 构建的文档网站（见 `docsifytopdf.js` 和 `package.json`）
 
 ### 构建文档网站
 
 ```bash
-# Generate PDF from documentation (if needed)
+# 从文档生成 PDF（如果需要）
 npm run convert
 ```
 
-## 故障排除
+## 故障排查
 
 ### 常见问题
 
-**Python导入错误**：
+**Python 导入错误**：
 - 确保虚拟环境已激活
-- 运行`pip install -r requirements.txt`
-- 检查Python版本是否为3.9+
+- 运行 `pip install -r requirements.txt`
+- 检查 Python 版本是否为 3.9+
 
-**TypeScript构建错误**：
-- 在特定应用目录中运行`npm install`
-- 检查Node.js版本是否兼容
-- 清除`node_modules`并重新安装
+**TypeScript 构建错误**：
+- 在具体应用目录运行 `npm install`
+- 检查 Node.js 版本兼容性
+- 如有需要清空 `node_modules` 并重新安装
 
-**API认证错误**：
-- 验证`.env`文件是否存在且值正确
-- 检查API密钥是否有效且未过期
-- 确保端点URL与您的区域匹配
+**API 认证错误**：
+- 确认 `.env` 文件存在且配置正确
+- 确认 API 密钥有效且未过期
+- 确认端点 URL 适合所在区域
 
-**缺少环境变量**：
-- 将`.env.copy`复制为`.env`
-- 填写您正在处理的课程所需的所有值
-- 更新`.env`后重启应用
+<strong>缺少环境变量</strong>：
+- 复制 `.env.copy` 为 `.env`
+- 填写当前课程所需的所有值
+- 更新 `.env` 后重启应用
 
 ## 其他资源
 
@@ -299,19 +309,21 @@ npm run convert
 - [行为准则](./CODE_OF_CONDUCT.md)
 - [安全政策](./SECURITY.md)
 - [Azure AI Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
-- [高级代码示例集合](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
+- [高级代码示例合集](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
 
 ## 项目特定说明
 
-- 这是一个**教育代码库**，专注于学习而非生产代码
-- 示例有意保持简单，专注于教学概念
-- 代码质量与教育清晰度之间保持平衡
-- 每节课程都是独立的，可单独完成
-- 代码库支持多个API提供商：Azure OpenAI、OpenAI和GitHub模型
-- 内容支持多语言，具有自动化翻译工作流
-- Discord社区活跃，可用于提问和支持
+- 本仓库为<strong>教育用途</strong>，侧重学习，不是生产代码
+- 示例代码设计简单，专注于教学概念
+- 代码质量与教学清晰性保持平衡
+- 每节课代码自成体系，能独立完成
+- 支持多种 API 提供者：Azure OpenAI、OpenAI、微软 Foundry 模型，以及离线提供者如 Foundry Local 和 Ollama
+- 内容多语言化，支持自动翻译工作流
+- Discord 社区活跃，提供问答与支持
 
 ---
 
-**免责声明**：  
-本文档使用AI翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保翻译的准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用此翻译而产生的任何误解或误读承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免责声明**：
+本文件由 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译完成。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言版文件应视为权威来源。对于重要信息，建议使用专业人工翻译。我们对因使用本翻译而产生的任何误解或误释不承担责任。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

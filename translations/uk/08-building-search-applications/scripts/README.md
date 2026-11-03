@@ -1,20 +1,20 @@
 # Підготовка даних транскрипції
 
-Скрипти підготовки даних транскрипції завантажують транскрипти відео з YouTube і готують їх для використання з прикладом Semantic Search з OpenAI Embeddings та Functions.
+Скрипти підготовки даних транскрипції завантажують транскрипції відео з YouTube і готують їх для використання з прикладом Семантичного пошуку з OpenAI Embeddings і Functions.
 
-Скрипти підготовки даних транскрипції були протестовані на останніх версіях Windows 11, macOS Ventura та Ubuntu 22.04 (і новіших).
+Скрипти підготовки даних транскрипції були протестовані на останніх випусках Windows 11, macOS Ventura та Ubuntu 22.04 (та вище).
 
 ## Створення необхідних ресурсів Azure OpenAI Service
 
 > [!IMPORTANT]
 > Рекомендуємо оновити Azure CLI до останньої версії для забезпечення сумісності з OpenAI
-> Дивіться [Документацію](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
+> Див. [Документація](https://learn.microsoft.com/cli/azure/update-azure-cli?WT.mc_id=academic-105485-koreyst)
 
 1. Створіть групу ресурсів
 
 > [!NOTE]
-> У цих інструкціях ми використовуємо групу ресурсів з назвою "semantic-video-search" у регіоні East US.
-> Ви можете змінити назву групи ресурсів, але при зміні розташування ресурсів,
+> Для цих інструкцій ми використовуємо групу ресурсів під назвою "semantic-video-search" в регіоні East US.
+> Ви можете змінити назву групи ресурсів, але при зміні місця розташування ресурсів,
 > перевірте [таблицю доступності моделей](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
@@ -28,7 +28,7 @@ az cognitiveservices account create --name semantic-video-openai --resource-grou
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. Отримайте endpoint та ключі для використання в цьому додатку
+1. Отримайте кінцеву точку та ключі для використання в цьому додатку
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -38,8 +38,8 @@ az cognitiveservices account keys list --name semantic-video-openai \
 ```
 
 1. Розгорніть наступні моделі:
-   - `text-embedding-ada-002` версії `2` або вище, з назвою `text-embedding-ada-002`
-   - `gpt-35-turbo` версії `0613` або вище, з назвою `gpt-35-turbo`
+   - `text-embedding-ada-002` версії `2` або вище, назва `text-embedding-ada-002`
+   - `gpt-5-mini` з назвою `gpt-5-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -53,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-5-mini \
+    --model-name gpt-5-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -67,12 +66,12 @@ az cognitiveservices account deployment create \
 
 ## Змінні середовища
 
-Для запуску скриптів підготовки даних транскрипції YouTube потрібні наступні змінні середовища.
+Наступні змінні середовища потрібні для запуску скриптів підготовки даних транскрипції YouTube.
 
-### У Windows
+### На Windows
 
-Рекомендується додати змінні до змінних середовища користувача.
-`Пуск Windows` > `Змінити системні змінні середовища` > `Змінні середовища` > `Змінні користувача` для [USER] > `Створити`.
+Рекомендується додати змінні до ваших змінних середовища користувача.
+`Windows Start` > `Edit the system environment variables` > `Environment Variables` > `User variables` для [USER] > `New`.
 
 ```text
 AZURE_OPENAI_API_KEY  \<your Azure OpenAI Service API key>
@@ -81,11 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
+<!-- Ви можете додати змінні середовища у профіль PowerShell.
 
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<your Azure OpenAI Service API key>"
+$env:AZURE_OPENAI_ENDPOINT = "<your Azure OpenAI Service endpoint>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<your Azure OpenAI Service model deployment name>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<your Google developer API key>"
+``` -->
 
-### У Linux та macOS
+### На Linux та macOS
 
-Рекомендується додати наступні експорти у файл `~/.bashrc` або `~/.zshrc`.
+Рекомендується додати наступні експорти у ваш файл `~/.bashrc` або `~/.zshrc`.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -94,16 +100,16 @@ export AZURE_OPENAI_MODEL_DEPLOYMENT_NAME=<your Azure OpenAI Service model deplo
 export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ```
 
-## Встановлення необхідних бібліотек Python
+## Встановіть необхідні бібліотеки Python
 
 1. Встановіть [git клієнт](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst), якщо він ще не встановлений.
-1. У вікні `Терміналу` склонуйте приклад у бажану папку репозиторію.
+1. У вікні `Терміналу` склонуйте приклад у ваш улюблений каталог репозиторію.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
     ```
 
-1. Перейдіть у папку `data_prep`.
+1. Перейдіть до папки `data_prep`.
 
    ```bash
    cd semanic-search-openai-embeddings-functions/src/data_prep
@@ -111,13 +117,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Створіть віртуальне середовище Python.
 
-    У Windows:
+    На Windows:
 
     ```powershell
     python -m venv .venv
     ```
 
-    У macOS та Linux:
+    На macOS та Linux:
 
     ```bash
     python3 -m venv .venv
@@ -125,13 +131,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Активуйте віртуальне середовище Python.
 
-   У Windows:
+   На Windows:
 
    ```powershell
    .venv\Scripts\activate
    ```
 
-   У macOS та Linux:
+   На macOS та Linux:
 
    ```bash
    source .venv/bin/activate
@@ -139,13 +145,13 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 1. Встановіть необхідні бібліотеки.
 
-   У Windows:
+   На Windows:
 
    ```powershell
    pip install -r requirements.txt
    ```
 
-   У macOS та Linux:
+   На macOS та Linux:
 
    ```bash
    pip3 install -r requirements.txt
@@ -153,17 +159,21 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 ## Запуск скриптів підготовки даних транскрипції YouTube
 
-### У Windows
+### На Windows
 
 ```powershell
 .\transcripts_prepare.ps1
 ```
 
-### У macOS та Linux
+### На macOS та Linux
 
 ```bash
 ./transcripts_prepare.sh
 ```
 
-**Відмова від відповідальності**:  
-Цей документ було перекладено за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується звертатися до професійного людського перекладу. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Відмова від відповідальності**:
+Цей документ було перекладено за допомогою сервісу штучного інтелекту для перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

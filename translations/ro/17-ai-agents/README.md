@@ -1,62 +1,62 @@
-[![Modele Open Source](../../../translated_images/ro/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
+[![Open Source Models](../../../translated_images/ro/17-lesson-banner.a5b918fb0920e4e6.webp)](https://youtu.be/yAXVW-lUINc?si=bOtW9nL6jc3XJgOM)
 
 ## Introducere
 
-Agenții AI reprezintă o dezvoltare captivantă în domeniul AI Generativ, permițând modelelor lingvistice mari (LLMs) să evolueze de la simple asistenți la agenți capabili să ia decizii și să acționeze. Framework-urile pentru agenți AI permit dezvoltatorilor să creeze aplicații care oferă LLM-urilor acces la instrumente și gestionarea stării. Aceste framework-uri îmbunătățesc, de asemenea, vizibilitatea, permițând utilizatorilor și dezvoltatorilor să monitorizeze acțiunile planificate de LLM-uri, îmbunătățind astfel gestionarea experienței.
+Agenții AI reprezintă o dezvoltare interesantă în AI Generativă, permițând modelelor mari de limbaj (LLMs) să evolueze de la asistenți la agenți capabili să întreprindă acțiuni. Cadrele pentru Agenții AI permit dezvoltatorilor să creeze aplicații care oferă LLM-urilor acces la unelte și gestionarea stării. Aceste cadre îmbunătățesc și vizibilitatea, permițând utilizatorilor și dezvoltatorilor să monitorizeze acțiunile planificate de LLM-uri, îmbunătățind astfel gestionarea experienței.
 
 Lecția va acoperi următoarele aspecte:
 
-- Înțelegerea conceptului de Agent AI - Ce este exact un Agent AI?
-- Explorarea a patru framework-uri diferite pentru Agenți AI - Ce le face unice?
-- Aplicarea acestor Agenți AI în diverse cazuri de utilizare - Când ar trebui să folosim Agenți AI?
+- Înțelegerea ce este un Agent AI - Ce este exact un Agent AI?
+- Explorarea a cinci cadre diferite pentru Agenți AI - Ce le face unice?
+- Aplicarea acestor Agenți AI în diferite cazuri de utilizare - Când ar trebui să folosim Agenți AI?
 
 ## Obiective de învățare
 
-După parcurgerea acestei lecții, vei putea:
+După parcurgerea acestei lecții, vei putea să:
 
-- Explica ce sunt Agenții AI și cum pot fi utilizați.
-- Înțelege diferențele dintre unele dintre cele mai populare framework-uri pentru Agenți AI și ce le face diferite.
-- Înțelege cum funcționează Agenții AI pentru a construi aplicații cu ajutorul lor.
+- Explici ce sunt Agenții AI și cum pot fi folosiți.
+- Înțelegi diferențele între unele dintre cadrele populare pentru Agenți AI și cum diferă acestea.
+- Înțelegi cum funcționează Agenții AI pentru a putea construi aplicații cu ei.
 
 ## Ce sunt Agenții AI?
 
-Agenții AI reprezintă un domeniu foarte interesant în lumea AI Generativ. Cu acest entuziasm vine uneori și o confuzie legată de termeni și aplicarea lor. Pentru a simplifica lucrurile și pentru a include majoritatea instrumentelor care se referă la Agenți AI, vom folosi următoarea definiție:
+Agenții AI reprezintă un domeniu foarte interesant în lumea AI Generativă. Odată cu această entuziasmare apare uneori o confuzie privind termenii și aplicațiile lor. Pentru a menține lucrurile simple și incluzive pentru majoritatea uneltelor care se referă la Agenți AI, vom folosi această definiție:
 
-Agenții AI permit modelelor lingvistice mari (LLMs) să îndeplinească sarcini oferindu-le acces la un **context** și **instrumente**.
+Agenții AI permit modelelor mari de limbaj (LLMs) să execute sarcini oferindu-le acces la un **stare** și **unelte**.
 
-![Model Agent](../../../translated_images/ro/what-agent.21f2893bdfd01e6a.webp)
+![Agent Model](../../../translated_images/ro/what-agent.21f2893bdfd01e6a.webp)
 
 Să definim acești termeni:
 
-**Modele lingvistice mari** - Acestea sunt modelele menționate pe parcursul acestui curs, cum ar fi GPT-3.5, GPT-4, Llama-2 etc.
+**Modele Mari de Limbaj** - Acestea sunt modelele menționate pe parcursul acestui curs, cum ar fi GPT-5, GPT-4o și Llama 3.3, etc.
 
-**Context** - Se referă la contextul în care LLM-ul lucrează. LLM-ul folosește contextul acțiunilor sale anterioare și contextul curent pentru a-și ghida deciziile în acțiunile ulterioare. Framework-urile pentru Agenți AI permit dezvoltatorilor să gestioneze mai ușor acest context.
+**Stare** - Aceasta se referă la contextul în care lucrează LLM-ul. LLM-ul folosește contextul acțiunilor sale anterioare și contextul curent pentru a-și ghida luarea deciziilor pentru acțiunile următoare. Cadrele pentru Agenți AI permit dezvoltatorilor să întrețină mai ușor acest context.
 
-**Instrumente** - Pentru a finaliza sarcina solicitată de utilizator și planificată de LLM, acesta are nevoie de acces la instrumente. Exemple de instrumente pot fi o bază de date, un API, o aplicație externă sau chiar un alt LLM!
+**Unelte** - Pentru a îndeplini sarcina solicitată de utilizator și planificată de LLM, acesta are nevoie de acces la unelte. Exemple de unelte pot fi o bază de date, o API, o aplicație externă sau chiar un alt LLM!
 
-Aceste definiții sperăm să îți ofere o bază solidă pe măsură ce explorăm modul în care sunt implementate. Să explorăm câteva framework-uri diferite pentru Agenți AI:
+Aceste definiții sperăm să îți ofere o bază bună pe măsură ce vom vedea cum sunt implementate. Să explorăm câteva cadre diferite pentru Agenți AI:
 
-## Agenți LangChain
+## Agenții LangChain
 
-[Agenții LangChain](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) reprezintă o implementare a definițiilor pe care le-am oferit mai sus.
+[Agenții LangChain](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) reprezintă o implementare a definițiilor oferite mai sus.
 
-Pentru a gestiona **contextul**, folosește o funcție încorporată numită `AgentExecutor`. Aceasta acceptă `agentul` definit și `instrumentele` disponibile pentru acesta.
+Pentru a gestiona **starea**, folosește o funcție încorporată numită `AgentExecutor`. Aceasta acceptă agenții definiți și `uneltele` disponibile.
 
-`AgentExecutor` stochează, de asemenea, istoricul conversațiilor pentru a oferi contextul discuției.
+`AgentExecutor` stochează și istoricul conversațiilor pentru a oferi contextul discuției.
 
-![Agenți LangChain](../../../translated_images/ro/langchain-agents.edcc55b5d5c43716.webp)
+![Langchain Agents](../../../translated_images/ro/langchain-agents.edcc55b5d5c43716.webp)
 
-LangChain oferă un [catalog de instrumente](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) care pot fi importate în aplicația ta, oferind LLM-ului acces la ele. Acestea sunt create de comunitate și de echipa LangChain.
+LangChain oferă un [catalog de unelte](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) care pot fi importate în aplicația ta și la care LLM-ul poate avea acces. Acestea sunt create de comunitate și de echipa LangChain.
 
-Poți defini aceste instrumente și să le transmiți către `AgentExecutor`.
+Poți apoi defini aceste unelte și să le transmiți către `AgentExecutor`.
 
-Vizibilitatea este un alt aspect important atunci când vorbim despre Agenți AI. Este esențial pentru dezvoltatorii de aplicații să înțeleagă ce instrument folosește LLM-ul și de ce. Pentru aceasta, echipa LangChain a dezvoltat LangSmith.
+Vizibilitatea este un alt aspect important când vorbim despre Agenți AI. Este esențial pentru dezvoltatorii aplicațiilor să înțeleagă ce unealtă folosește LLM-ul și de ce. Pentru asta, echipa LangChain a creat LangSmith.
 
 ## AutoGen
 
-Următorul framework pentru Agenți AI pe care îl vom discuta este [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). Principalul său obiectiv este conversația. Agenții sunt atât **conversabili**, cât și **personalizabili**.
+Următorul cadru pentru Agenți AI despre care vom discuta este [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). Accentul principal al AutoGen îl reprezintă conversațiile. Agenții sunt atât **conversabili** cât și **personalizabili**.
 
-**Conversabili -** LLM-urile pot iniția și continua o conversație cu un alt LLM pentru a finaliza o sarcină. Acest lucru se realizează prin crearea de `AssistantAgents` și oferindu-le un mesaj specific de sistem.
+**Conversabili -** LLM-urile pot începe și continua o conversație cu un alt LLM pentru a îndeplini o sarcină. Acest lucru se face prin crearea de `AssistantAgents` și oferindu-le un mesaj de sistem specific.
 
 ```python
 
@@ -64,15 +64,15 @@ autogen.AssistantAgent( name="Coder", llm_config=llm_config, ) pm = autogen.Assi
 
 ```
 
-**Personalizabili** - Agenții pot fi definiți nu doar ca LLM-uri, ci și ca utilizatori sau instrumente. Ca dezvoltator, poți defini un `UserProxyAgent`, care este responsabil pentru interacțiunea cu utilizatorul pentru feedback în finalizarea unei sarcini. Acest feedback poate continua execuția sarcinii sau o poate opri.
+**Personalizabili** - Agenții pot fi definiți nu doar ca LLM-uri, ci pot fi utilizatori sau unelte. Ca dezvoltator, poți defini un `UserProxyAgent` responsabil de interacțiunea cu utilizatorul pentru feedback în îndeplinirea unei sarcini. Acest feedback poate continua execuția sarcinii sau o poate opri.
 
 ```python
 user_proxy = UserProxyAgent(name="user_proxy")
 ```
 
-### Context și Instrumente
+### Stare și Unelte
 
-Pentru a schimba și gestiona contextul, un Agent asistent generează cod Python pentru a finaliza sarcina.
+Pentru a modifica și gestiona starea, un Agent asistent generează cod Python pentru a îndeplini sarcina.
 
 Iată un exemplu al procesului:
 
@@ -84,7 +84,7 @@ Iată un exemplu al procesului:
 system_message="For weather related tasks, only use the functions you have been provided with. Reply TERMINATE when the task is done."
 ```
 
-Acest mesaj de sistem direcționează acest LLM specific către funcțiile relevante pentru sarcina sa. Amintește-ți, cu AutoGen poți avea mai mulți AssistantAgents definiți cu mesaje de sistem diferite.
+Acest mesaj de sistem direcționează acest LLM specific către funcțiile relevante pentru sarcina sa. Reține, cu AutoGen poți avea mai multe AssistantAgents definiți, fiecare cu mesaje de sistem diferite.
 
 #### Conversația este inițiată de utilizator
 
@@ -93,7 +93,7 @@ user_proxy.initiate_chat( chatbot, message="I am planning a trip to NYC next wee
 
 ```
 
-Acest mesaj de la user_proxy (Utilizatorul) este cel care va începe procesul prin care Agentul explorează funcțiile posibile pe care ar trebui să le execute.
+Acest mesaj din partea user_proxy (uman) este ceea ce va începe procesul Agentului de a explora funcțiile posibile pe care ar trebui să le execute.
 
 #### Funcția este executată
 
@@ -106,61 +106,145 @@ chatbot (to user_proxy):
 
 ```
 
-Odată ce conversația inițială este procesată, Agentul va sugera instrumentul care trebuie apelat. În acest caz, este o funcție numită `get_weather`. În funcție de configurația ta, această funcție poate fi executată automat și citită de Agent sau poate fi executată pe baza inputului utilizatorului.
+Odată ce conversația inițială este procesată, Agentul va sugera unealta de apelat. În acest caz, este o funcție numită `get_weather`. În funcție de configurația ta, această funcție poate fi executată automat și citită de Agent sau executată în baza inputului utilizatorului.
 
-Poți găsi o listă de [exemple de cod AutoGen](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) pentru a explora mai departe cum să începi să construiești.
+Poți găsi o listă de [exemple de cod AutoGen](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) pentru a explora mai mult începutul construirii de aplicații.
+
+## Microsoft Agent Framework
+
+[Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst) este SDK-ul open-source de la Microsoft pentru crearea de Agenți AI și sisteme multi-agent în **Python** și **.NET**. Reunește punctele forte ale două proiecte Microsoft anterioare — funcționalitățile enterprise ale **Semantic Kernel** și orchestrarea multi-agent a **AutoGen** — într-un singur cadru susținut. Dacă începi un nou proiect de agent astăzi, acesta este succesorul recomandat al AutoGen.
+
+Cadrul scalează de la un singur **agent de chat** până la fluxuri de lucru complexe **multi-agent**, și se integrează direct cu Microsoft Foundry, Azure OpenAI și OpenAI. De asemenea, oferă observabilitate încorporată prin OpenTelemetry, astfel încât poți urmări exact ce fac agenții tăi.
+
+### Stare și Unelte
+
+**Stare** - cadrul gestionează contextul conversației pentru tine prin intermediul **firelor**. Un agent păstrează istoricul mesajelor (cererile utilizatorului, apelurile uneltelor și rezultatele lor), astfel fiecare schimb continuă pe baza celor anterioare. Firele pot fi și persistente, permițând conversației să fie întreruptă și reluată mai târziu.
+
+**Unelte** - îi oferi agentului unelte trecând funcții Python simple. Parametrii cu tipuri adnotate sunt transformați automat într-un schemă, astfel modelul știe cum și când să le apeleze (apelarea funcțiilor). Cadrul suportă și servere Model Context Protocol (MCP) și unelte gazduite, cum ar fi un interpret de cod.
+
+Iată un exemplu de agent unic cu o unealtă personalizată:
+
+```python
+import asyncio
+from typing import Annotated
+
+from pydantic import Field
+from agent_framework import Agent
+from agent_framework.openai import OpenAIChatClient
+
+
+def get_weather(
+    location: Annotated[str, Field(description="The location to get the weather for.")],
+) -> str:
+    """Get the weather for a given location."""
+    return f"The weather in {location} is sunny with a high of 22°C."
+
+
+async def main():
+    agent = Agent(
+        client=OpenAIChatClient(),
+        instructions="You are a helpful assistant that can answer weather questions.",
+        tools=[get_weather],
+    )
+
+    response = await agent.run("What's the weather in Amsterdam?")
+    print(response)
+
+
+asyncio.run(main())
+```
+
+Pentru a te conecta la Azure OpenAI în Microsoft Foundry în schimb, transmite punctul tău final și acreditările către client:
+
+```python
+from azure.identity.aio import AzureCliCredential
+from agent_framework.openai import OpenAIChatClient
+
+client = OpenAIChatClient(
+    model="my-gpt-5-mini-deployment",
+    azure_endpoint="https://my-resource.openai.azure.com",
+    credential=AzureCliCredential(),
+)
+```
+
+### Fluxuri de lucru multi-agent
+
+Acolo unde cadrul iese cu adevărat în evidență este orchestrarea mai multor agenți împreună. De exemplu, poți rula agenți unul după altul (fiecare transferând contextul său următorului) sau poți ramifica la mai mulți agenți în paralel și agrega rezultatele lor:
+
+```python
+from agent_framework.orchestrations import SequentialBuilder, ConcurrentBuilder
+
+# Rulați agenții în secvență, trecând contextul conversației de-a lungul lanțului
+sequential = SequentialBuilder(participants=[researcher, writer, editor]).build()
+
+# Distribuiți către agenți în paralel, apoi agregați răspunsurile lor
+concurrent = ConcurrentBuilder(participants=[analyst_a, analyst_b, analyst_c]).build()
+```
+
+Pentru a instala cadrul și a începe:
+
+```bash
+pip install agent-framework-core
+# Integrări opționale
+pip install agent-framework-openai       # OpenAI și Azure OpenAI
+pip install agent-framework-foundry      # Microsoft Foundry
+```
+
+Poți explora mai mult în [repositorul Microsoft Agent Framework](https://github.com/microsoft/agent-framework?WT.mc_id=academic-105485-koreyst) și în [documentația oficială](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst).
 
 ## Taskweaver
 
-Următorul framework pentru agenți pe care îl vom explora este [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). Este cunoscut ca un agent "code-first" deoarece, în loc să lucreze strict cu `șiruri de caractere`, poate lucra cu DataFrames în Python. Acest lucru devine extrem de util pentru sarcini de analiză și generare de date, cum ar fi crearea de grafice și diagrame sau generarea de numere aleatorii.
+Următorul cadru pentru agenți pe care îl vom explora este [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). Este cunoscut ca un agent "code-first" deoarece în loc să lucreze strict cu `șiruri de caractere` , poate lucra cu DataFrames în Python. Acesta devine extrem de util pentru sarcini de analiză și generare de date. Poate fi vorba despre crearea de grafice și diagrame sau generarea de numere aleatoare.
 
-### Context și Instrumente
+### Stare și Unelte
 
-Pentru a gestiona contextul conversației, TaskWeaver folosește conceptul de `Planner`. `Planner` este un LLM care preia cererea utilizatorilor și planifică sarcinile care trebuie îndeplinite pentru a satisface această cerere.
+Pentru a gestiona starea conversației, TaskWeaver folosește conceptul de `Planner`. `Planner` este un LLM care preia cererea utilizatorilor și trasează sarcinile ce trebuie îndeplinite pentru a satisface această cerere.
 
-Pentru a finaliza sarcinile, `Planner` are acces la o colecție de instrumente numite `Plugins`. Acestea pot fi clase Python sau un interpret general de cod. Aceste plugin-uri sunt stocate ca embeddings pentru ca LLM-ul să poată căuta mai bine plugin-ul corect.
+Pentru a îndeplini sarcinile, `Planner` este conectat la colecția de unelte numite `Plugins`. Acestea pot fi clase Python sau un interpret general de cod. Aceste pluginuri sunt stocate ca embeddings pentru ca LLM să poată căuta mai bine pluginul corect.
 
 ![Taskweaver](../../../translated_images/ro/taskweaver.da8559999267715a.webp)
 
-Iată un exemplu de plugin pentru detectarea anomaliilor:
+Iată un exemplu de plugin pentru gestionarea detectării de anomalii:
 
 ```python
 class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_col_name: str, value_col_name: str):
 ```
 
-Codul este verificat înainte de a fi executat. O altă caracteristică pentru gestionarea contextului în Taskweaver este `experience`. Aceasta permite ca contextul unei conversații să fie stocat pe termen lung într-un fișier YAML. Acest lucru poate fi configurat astfel încât LLM-ul să se îmbunătățească în timp pe anumite sarcini, având în vedere că este expus la conversații anterioare.
+Codul este verificat înainte de executare. O altă caracteristică de gestionare a contextului în Taskweaver este `experience`. Experiența permite ca contextul unei conversații să fie salvat pe termen lung într-un fișier YAML. Acest lucru poate fi configurat astfel încât LLM să se îmbunătățească în timp pentru anumite sarcini, având acces la conversațiile anterioare.
 
 ## JARVIS
 
-Ultimul framework pentru agenți pe care îl vom explora este [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). Ce face JARVIS unic este faptul că folosește un LLM pentru a gestiona `contextul` conversației, iar `instrumentele` sunt alte modele AI. Fiecare dintre modelele AI sunt modele specializate care îndeplinesc anumite sarcini, cum ar fi detectarea obiectelor, transcrierea sau descrierea imaginilor.
+Ultimul cadru pentru agenți pe care îl vom explora este [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file&WT.mc_id=academic-105485-koreyst). Ce face JARVIS unic este că folosește un LLM pentru a gestiona `starea` conversației, iar `uneltele` sunt alte modele AI. Fiecare model AI este un model specializat care realizează anumite sarcini, cum ar fi detectarea obiectelor, transcrierea sau generarea de subtitrări pentru imagini.
 
 ![JARVIS](../../../translated_images/ro/jarvis.762ddbadbd1a3a33.webp)
 
-LLM-ul, fiind un model cu scop general, primește cererea de la utilizator și identifică sarcina specifică și orice argumente/date necesare pentru a finaliza sarcina.
+LLM-ul, fiind un model cu scop general, primește cererea utilizatorului și identifică sarcina specifică și orice argumente/date necesare pentru îndeplinirea sarcinii.
 
 ```python
 [{"task": "object-detection", "id": 0, "dep": [-1], "args": {"image": "e1.jpg" }}]
 ```
 
-LLM-ul formatează apoi cererea într-un mod pe care modelul AI specializat îl poate interpreta, cum ar fi JSON. Odată ce modelul AI a returnat predicția sa bazată pe sarcină, LLM-ul primește răspunsul.
+LLM-ul formatează apoi cererea într-un mod pe care modelul AI specializat îl poate interpreta, cum ar fi JSON. După ce modelul AI returnează predicția sa bazată pe sarcină, LLM-ul primește răspunsul.
 
-Dacă sunt necesare mai multe modele pentru a finaliza sarcina, LLM-ul va interpreta, de asemenea, răspunsurile de la acele modele înainte de a le combina pentru a genera răspunsul pentru utilizator.
+Dacă sunt necesare mai multe modele pentru îndeplinirea sarcinii, LLM-ul va interpreta și răspunsurile acestora înainte de a le aduce împreună pentru a genera răspunsul către utilizator.
 
-Exemplul de mai jos arată cum ar funcționa acest lucru atunci când un utilizator solicită o descriere și numărul de obiecte dintr-o imagine:
+Exemplul de mai jos arată cum ar funcționa asta când un utilizator cere o descriere și numărarea obiectelor dintr-o imagine:
 
 ## Temă
 
-Pentru a-ți continua învățarea despre Agenții AI, poți construi cu AutoGen:
+Pentru a continua învățarea despre Agenții AI, poți construi cu Microsoft Agent Framework:
 
-- O aplicație care simulează o întâlnire de afaceri cu diferite departamente ale unui startup educațional.
-- Creează mesaje de sistem care să ghideze LLM-urile în înțelegerea diferitelor personalități și priorități și să permită utilizatorului să prezinte o idee de produs nou.
-- LLM-ul ar trebui apoi să genereze întrebări suplimentare din partea fiecărui departament pentru a rafina și îmbunătăți ideea de produs.
+- O aplicație care simulează o întâlnire de afaceri cu diferite departamente ale unei startup educaționale.
+- Crează mesaje de sistem care ghidează LLM-urile în înțelegerea diferitelor persoane și priorități și permite utilizatorului să propună o idee nouă de produs.
+- LLM-ul ar trebui apoi să genereze întrebări de urmărire de la fiecare departament pentru a rafina și îmbunătăți pitch-ul și ideea produsului.
 
-## Învățarea nu se oprește aici, continuă călătoria
+## Învățarea nu se oprește aici, continuă Călătoria
 
-După ce ai finalizat această lecție, consultă [colecția noastră de învățare AI Generativ](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) pentru a-ți dezvolta în continuare cunoștințele despre AI Generativ!
+După ce finalizezi această lecție, verifică colecția noastră [Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) pentru a continua să-ți crești cunoștințele despre AI Generativ!
 
 ---
 
-**Declinare de responsabilitate**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să fiți conștienți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de oameni. Nu ne asumăm responsabilitatea pentru neînțelegerile sau interpretările greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

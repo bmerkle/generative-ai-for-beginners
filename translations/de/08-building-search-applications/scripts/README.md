@@ -1,8 +1,8 @@
-# Vorbereitung der Transkriptionsdaten
+# Transkriptionsdatenvorbereitung
 
-Die Skripte zur Vorbereitung der Transkriptionsdaten laden YouTube-Video-Transkripte herunter und bereiten sie für die Verwendung mit dem Beispiel Semantic Search mit OpenAI Embeddings und Funktionen vor.
+Die Skripte zur Vorbereitung der Transkriptionsdaten laden YouTube-Video-Transkripte herunter und bereiten sie für die Verwendung mit dem Beispiel „Semantische Suche mit OpenAI-Embeddings und Funktionen“ vor.
 
-Die Skripte zur Vorbereitung der Transkriptionsdaten wurden auf den neuesten Versionen von Windows 11, macOS Ventura und Ubuntu 22.04 (und höher) getestet.
+Die Skripte zur Vorbereitung der Transkriptionsdaten wurden unter den neuesten Versionen von Windows 11, macOS Ventura und Ubuntu 22.04 (und höher) getestet.
 
 ## Erstellen der erforderlichen Azure OpenAI Service-Ressourcen
 
@@ -13,9 +13,9 @@ Die Skripte zur Vorbereitung der Transkriptionsdaten wurden auf den neuesten Ver
 1. Erstellen Sie eine Ressourcengruppe
 
 > [!NOTE]
-> Für diese Anleitung verwenden wir die Ressourcengruppe mit dem Namen "semantic-video-search" in East US.
-> Sie können den Namen der Ressourcengruppe ändern, aber wenn Sie den Standort der Ressourcen ändern, 
-> prüfen Sie die [Modellverfügbarkeitstabelle](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
+> Für diese Anleitung verwenden wir die Ressourcengruppe mit dem Namen „semantic-video-search“ in East US.
+> Sie können den Namen der Ressourcengruppe ändern, aber wenn Sie den Speicherort der Ressourcen ändern,
+> überprüfen Sie die [Modellverfügbarkeitstabelle](https://aka.ms/oai/models?WT.mc_id=academic-105485-koreyst).
 
 ```console
 az group create --name semantic-video-search --location eastus
@@ -28,7 +28,7 @@ az cognitiveservices account create --name semantic-video-openai --resource-grou
     --location eastus --kind OpenAI --sku s0
 ```
 
-1. Holen Sie sich den Endpunkt und die Schlüssel zur Verwendung in dieser Anwendung
+1. Holen Sie sich den Endpunkt und die Schlüssel für die Nutzung in dieser Anwendung
 
 ```console
 az cognitiveservices account show --name semantic-video-openai \
@@ -38,8 +38,8 @@ az cognitiveservices account keys list --name semantic-video-openai \
 ```
 
 1. Stellen Sie die folgenden Modelle bereit:
-   - `text-embedding-ada-002` Version `2` oder höher, benannt `text-embedding-ada-002`
-   - `gpt-35-turbo` Version `0613` oder höher, benannt `gpt-35-turbo`
+   - `text-embedding-ada-002` Version `2` oder höher, genannt `text-embedding-ada-002`
+   - `gpt-5-mini`, genannt `gpt-5-mini`
 
 ```console
 az cognitiveservices account deployment create \
@@ -53,9 +53,8 @@ az cognitiveservices account deployment create \
 az cognitiveservices account deployment create \
     --name semantic-video-openai \
     --resource-group  semantic-video-search \
-    --deployment-name gpt-35-turbo \
-    --model-name gpt-35-turbo \
-    --model-version "0613"  \
+    --deployment-name gpt-5-mini \
+    --model-name gpt-5-mini \
     --model-format OpenAI \
     --sku-capacity 100 \
     --sku-name "Standard"
@@ -67,11 +66,11 @@ az cognitiveservices account deployment create \
 
 ## Umgebungsvariablen
 
-Die folgenden Umgebungsvariablen sind erforderlich, um die Skripte zur Vorbereitung der YouTube-Transkriptionsdaten auszuführen.
+Die folgenden Umgebungsvariablen sind erforderlich, um die Skripte zur Vorbereitung von YouTube-Transkriptionsdaten auszuführen.
 
 ### Unter Windows
 
-Es wird empfohlen, die Variablen zu den `Benutzer`-Umgebungsvariablen hinzuzufügen.
+Es wird empfohlen, die Variablen zu Ihren `Benutzer`-Umgebungsvariablen hinzuzufügen.
 `Windows Start` > `Systemumgebungsvariablen bearbeiten` > `Umgebungsvariablen` > `Benutzervariablen` für [USER] > `Neu`.
 
 ```text
@@ -81,9 +80,18 @@ AZURE_OPENAI_MODEL_DEPLOYMENT_NAME \<your Azure OpenAI Service model deployment 
 GOOGLE_DEVELOPER_API_KEY = \<your Google developer API key>
 ```
 
+<!-- Sie können die Umgebungsvariablen Ihrem PowerShell-Profil hinzufügen.
+
+```powershell
+$env:AZURE_OPENAI_API_KEY = "<Ihr Azure OpenAI Service API-Schlüssel>"
+$env:AZURE_OPENAI_ENDPOINT = "<Ihr Azure OpenAI Service-Endpunkt>"
+$env:AZURE_OPENAI_MODEL_DEPLOYMENT_NAME = "<Ihr Azure OpenAI Service Modellbereitstellungsname>"
+$env:GOOGLE_DEVELOPER_API_KEY = "<Ihr Google Developer API-Schlüssel>"
+``` -->
+
 ### Unter Linux und macOS
 
-Es wird empfohlen, die folgenden Exporte in Ihre `~/.bashrc` oder `~/.zshrc` Datei einzufügen.
+Es wird empfohlen, die folgenden Exporte zu Ihrer `~/.bashrc` oder `~/.zshrc` Datei hinzuzufügen.
 
 ```bash
 export AZURE_OPENAI_API_KEY=<your Azure OpenAI Service API key>
@@ -94,14 +102,14 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 
 ## Installation der erforderlichen Python-Bibliotheken
 
-1. Installieren Sie den [git-Client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst), falls noch nicht installiert.
-1. Klonen Sie aus einem `Terminal`-Fenster das Beispiel in Ihren bevorzugten Repo-Ordner.
+1. Installieren Sie den [Git-Client](https://git-scm.com/downloads?WT.mc_id=academic-105485-koreyst), falls er noch nicht installiert ist.
+1. Klonen Sie das Beispiel aus einem `Terminal`-Fenster in Ihren bevorzugten Repository-Ordner.
 
     ```bash
     git clone https://github.com/gloveboxes/semanic-search-openai-embeddings-functions.git
     ```
 
-1. Navigieren Sie zum Ordner `data_prep`.
+1. Navigieren Sie zum `data_prep`-Ordner.
 
    ```bash
    cd semanic-search-openai-embeddings-functions/src/data_prep
@@ -149,7 +157,7 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
    pip3 install -r requirements.txt
    ```
 
-## Ausführen der Skripte zur Vorbereitung der YouTube-Transkriptionsdaten
+## Führen Sie die Skripte zur Vorbereitung der YouTube-Transkriptionsdaten aus
 
 ### Unter Windows
 
@@ -163,5 +171,9 @@ export GOOGLE_DEVELOPER_API_KEY=<your Google developer API key>
 ./transcripts_prepare.sh
 ```
 
-**Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,40 +1,42 @@
-# Mistral မော်ဒယ်များဖြင့် ဆောက်လုပ်ခြင်း
+# Mistral မော်ဒယ်များဖြင့် တည်ဆောက်ခြင်း 
 
-## နိဒါန်း
+## နိဒါန်း 
 
-ဒီသင်ခန်းစာမှာ ဖော်ပြမယ့်အကြောင်းအရာများမှာ -  
-- Mistral မော်ဒယ်အမျိုးအစားများကို ရှာဖွေခြင်း  
-- မော်ဒယ်တိုင်းအတွက် အသုံးပြုမှုနှင့် အခြေအနေများကို နားလည်ခြင်း  
-- မော်ဒယ်တိုင်းရဲ့ ထူးခြားချက်များကို ပြသသည့် ကုဒ်နမူနာများ  
+ဒီသင်ခန်းစာတွင်ဖော်ပြပါ့မည်မှာ- 
+- Mistral မော်ဒယ်အမျိုးအစားများကို ရှာဖွေခြင်း 
+- မော်ဒယ်တိုင်းအတွက် အသုံးပြုမှုနှင့် ရှုထောင့်များကို နားလည်ခြင်း 
+- မော်ဒယ်တိုင်း၏ ထူးခြားတဲ့ လက္ခဏာများကို ဖော်ပြသည့် ကုဒ်နမူနာများကို ရှာဖွေခြင်း။ 
 
-## Mistral မော်ဒယ်များ
+## Mistral မော်ဒယ်များ 
 
-ဒီသင်ခန်းစာမှာ Mistral မော်ဒယ် ၃ မျိုးကို ရှာဖွေကြမယ် -  
-**Mistral Large**, **Mistral Small** နဲ့ **Mistral Nemo**။
+ဒီသင်ခန်းစာမှာ Mistral မော်ဒယ် ၃ မျိုးကို ရှာဖွေရန်ဖြစ်ပါသည်- 
+**Mistral Large**, **Mistral Small** နှင့် **Mistral Nemo**။ 
 
-မော်ဒယ်တွေကို Github Model marketplace မှာ အခမဲ့ရနိုင်ပါတယ်။ ဒီ notebook ထဲက ကုဒ်တွေမှာ ဒီမော်ဒယ်တွေကို အသုံးပြုထားပါတယ်။ Github Models ကို [AI မော်ဒယ်တွေနဲ့ prototype ပြုလုပ်ခြင်း](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst) အကြောင်း ပိုမိုသိရှိနိုင်ပါတယ်။
+မော်ဒယ်များအားလုံးကို [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) တွင်အခမဲ့ရရှိနိုင်ပါသည်။ ဒီ notebook မှာ မော်ဒယ်တွေကို အသုံးပြုပြီး ကုဒ်များကို ပြေးခြင်းအတွက် အသုံးပြုမှာဖြစ်သည်။ 
+
+> **မှတ်ချက်။** GitHub မော်ဒယ်များကို ၂၀၂၆ ခုနှစ် ဇူလိုင်လကုန်တွင် ရပ်ဆိုင်းနေပါပြီ။ [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) ရဲ့အသုံးပြုနည်းတွေနဲ့ AI မော်ဒယ်များကို prototype လုပ်နိုင်ရေး နောက်ထပ်အသေးစိတ်ကို ဒီမှာ ကြည့်ရှုနိုင်ပါသည်။ 
+
 
 ## Mistral Large 2 (2407)
+Mistral Large 2 သည် လက်ရှိ Mistral ၏အဓိကမော်ဒယ်ဖြစ်ပြီး စီးပွားရေးအသုံးပြုမှုအတွက်ဒီဇိုင်းရေးဆွဲထားသည်။ 
 
-Mistral Large 2 သည် Mistral ရဲ့ အဓိက flagship မော်ဒယ်ဖြစ်ပြီး စီးပွားရေးအသုံးပြုမှုအတွက် ဒီဇိုင်းထုတ်ထားသည်။
+မော်ဒယ်တွင် Mistral Large မူလမော်ဒယ်၏တိုးတက်မှုများမှာ- 
+-  ကြီးမားသော Context Window - 128k နှင့် 32k 
+-  သင်္ချာနှင့် ကုဒ်ရေးခြင်း လုပ်ငန်းများတွင် ပိုမိုကောင်းမွန်သော စွမ်းဆောင်ရည် - 76.9% စံချိန်တိကျမှုနှင့် 60.4% 
+-  ဘာသာစကားစုံ ကျွမ်းကျင်မှု တိုးတက်ခြင်း - အင်္ဂလိပ်၊ ပြင်သစ်၊ ဂျာမနီ၊ စပိန်၊ အီတလီ၊ ပေါ်တူဂီ၊ ဒတ်ချ်၊ ရုရှား၊ တရုတ်၊ ဂျပန်၊ ကိုရီးယား၊ အာရဗီနှင့် ဟိန္ဒီတို့ပါဝင်သည်။ 
 
-မူလ Mistral Large ကို အဆင့်မြှင့်တင်ထားပြီး  
-- ပိုကြီးမားသော Context Window - 128k နှင့် 32k  
-- သင်္ချာနှင့် ကုဒ်ရေးခြင်းလုပ်ငန်းများတွင် ပိုမိုကောင်းမွန်သော စွမ်းဆောင်ရည် - 76.9% ပျမ်းမျှတိကျမှု နှင့် 60.4%  
-- ဘာသာစကားစုံလင်မှု တိုးတက်မှု - အင်္ဂလိပ်၊ ပြင်သစ်၊ ဂျာမန်၊ စပိန်၊ အီတလီ၊ ပေါ်တူဂီ၊ ဒတ်ချ်၊ ရုရှား၊ တရုတ်၊ ဂျပန်၊ ကိုရီးယား၊ အာရပ်၊ ဟိန္ဒီ စသည့် ဘာသာစကားများပါဝင်သည်။
+ဒီထူးခြားချက်များကြောင့် Mistral Large သည်အောက်ပါအရာများတွင် ထူးချွန်ပါသည်- 
+- *Retrieval Augmented Generation (RAG)* - ကြီးမားသော context window ရှိသောကြောင့် 
+- *Function Calling* - ဒီမော်ဒယ်တွင် function calling မူရင်းပုံစံပါရှိပြီး ပြင်ပ tools နှင့် APIs တို့နှင့် ပေါင်းစည်းသုံးစွဲနိုင်သည်။ ခေါ်ဆိုမှုများကို တပြိုင်နက်၊ သို့မဟုတ် ဆက်တိုက်အလိုက်လည်းလုပ်နိုင်သည်။ 
+- *ကုဒ်ဖန်တီးခြင်း* - Python, Java, TypeScript နှင့် C++ စနစ်များတွင် ထူးခြားသော စွမ်းဆောင်ရည်ရှိသည်။ 
 
-ဒီအင်္ဂါရပ်များကြောင့် Mistral Large သည်  
-- *Retrieval Augmented Generation (RAG)* - ပိုကြီးမားသော context window ကြောင့် ထူးခြားသည်  
-- *Function Calling* - ဒီမော်ဒယ်မှာ native function calling ပါဝင်ပြီး အပြင်ကိရိယာများနှင့် API များနှင့် ပေါင်းစည်းနိုင်သည်။ အဲဒီ function call များကို တပြိုင်နက်တည်း သို့မဟုတ် တစ်ခုချင်းစီ အဆက်မပြတ် ချိတ်ဆက်နိုင်သည်။  
-- *Code Generation* - Python, Java, TypeScript နဲ့ C++ ကုဒ်များ ဖန်တီးရာတွင် ထူးခြားသည်။
+### Mistral Large 2 ကို အသုံးပြုပြီး RAG ဥပမာ 
 
-### Mistral Large 2 ဖြင့် RAG ဥပမာ
+ဒီဥပမာတွင် Mistral Large 2 ကို အသုံးပြုပြီး စာတမ်းတစ်စောင်မှာ RAG ပုံစံဖြင့် ဆောင်ရွက်နေသည်။ မေးခွန်းသည် ကိုရီးယားဘာသာဖြင့်ရေးဆွဲပြီး အဖွဲ့ဝင်တက်သင်ခန်းမမတိုင်မီ၊ သူ၏ လုပ်ငန်းများကို မေးမြန်းထားသည်။ 
 
-ဒီဥပမာမှာ Mistral Large 2 ကို အသုံးပြုပြီး စာရွက်စာတမ်းတစ်ခုအပေါ် RAG ပုံစံကို လည်ပတ်နေသည်။ မေးခွန်းကို ကိုရီးယားဘာသာဖြင့်ရေးထားပြီး စာရေးသူ၏ တက္ကသိုလ်မတက်ခင် လုပ်ဆောင်ချက်များကို မေးမြန်းထားသည်။
+Cohere Embeddings Model ကို သုံးပြီး စာတမ်းနှင့် မေးခွန်းတို့၏ embeddings များ ဖန်တီးသည်။ ဤနမူနာတွင် faiss Python package ကို vector store အဖြစ် သုံးထားသည်။ 
 
-Cohere Embeddings Model ကို စာရွက်စာတမ်းနှင့် မေးခွန်း၏ embedding များ ဖန်တီးရန် အသုံးပြုသည်။ ဤနမူနာတွင် faiss Python package ကို vector store အဖြစ် အသုံးပြုထားသည်။
-
-Mistral မော်ဒယ်ထံ ပို့သော prompt တွင် မေးခွန်းများနှင့် မေးခွန်းနှင့် ဆင်တူသော ရယူထားသော အပိုင်းများ ပါဝင်သည်။ မော်ဒယ်က သဘာဝဘာသာဖြင့် တုံ့ပြန်ချက် ပေးသည်။
+Mistral မော်ဒယ်ထံ ကျွေးပေးသော prompt တွင် မေးခွန်းနှင့် မေးခွန်းနှင့်ဆင်တူသော chunk များပါဝင်ပြီး မော်ဒယ်သည် သဘာဝဘာသာဖြင့် ဖြေကြားချက်ပေးသည်။ 
 
 ```python 
 pip install faiss-cpu
@@ -51,9 +53,10 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference import EmbeddingsClient
 
-endpoint = "https://models.inference.ai.azure.com"
+# သင်၏ Microsoft Foundry ပရောဂျက်၏ "အကျဉ်းချုပ်" စာမျက်နှာမှ ဒီတွေကို ရယူပါ
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -92,7 +95,7 @@ d = text_embeddings.shape[1]
 index = faiss.IndexFlatL2(d)
 index.add(text_embeddings)
 
-question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?？"
+question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?"
 
 question_embedding = embed_client.embed(
     input=[question],
@@ -102,7 +105,7 @@ question_embedding = embed_client.embed(
 question_embeddings = np.array(question_embedding.data[0].embedding)
 
 
-D, I = index.search(question_embeddings.reshape(1, -1), k=2) # distance, index
+D, I = index.search(question_embeddings.reshape(1, -1), k=2) # အကွာအဝေး၊ အညွှန်းနံပါတ်
 retrieved_chunks = [chunks[i] for i in I.tolist()[0]]
 
 prompt = f"""
@@ -130,30 +133,30 @@ chat_response = client.complete(
 print(chat_response.choices[0].message.content)
 ```
 
-## Mistral Small
+## Mistral Small 
+Mistral Small သည် Mistral မော်ဒယ်မျိုးများအတွင်း premier/enterprise အမျိုးအစားအောက်တွင် တစ်ခုတည်းသော မော်ဒယ်ဖြစ်ပြီး၊ အမည်အရ Small Language Model (SLM) ဖြစ်သည်။ Mistral Small ကိုအသုံးပြုရာတွင် အားသာချက်များမှာ- 
+- Mistral Large နှင့် NeMo ကဲ့သို့ Mistral LLM များနှင့် နှိုင်းယှဉ်လျှင် ကုန်ကျစရိတ်သက်သာခြင်း - ၈ဝ% စျေးနှုန်းကျဆင်းခြင်း 
+- Latency နည်းခြင်း - Mistral LLM များနှင့်နှိုင်းလျှင် အမြန်ပြန်လည်ဖြေကြားမှု 
+- ပြောင်းလဲနိုင်မှုများရှိခြင်း - မတူညီသောပတ်ဝန်းကျင်များတွင် လိုအပ်သော အရင်းအမြစ်များကနည်း၍ ဖြန့်ဖြူးနိုင်ခြင်း 
 
-Mistral Small သည် Mistral မော်ဒယ် မျိုးစုံအတွင်း premier/enterprise category အောက်ရှိ မော်ဒယ်တစ်ခုဖြစ်သည်။ အမည်အရ Mistral Small သည် Small Language Model (SLM) ဖြစ်သည်။ Mistral Small ကို အသုံးပြုခြင်း၏ အားသာချက်များမှာ -  
-- Mistral Large နဲ့ NeMo ကဲ့သို့သော Mistral LLM များနှင့် နှိုင်းယှဉ်လျှင် စျေးနှုန်းသက်သာမှု - ၈၀% လျော့နည်းခြင်း  
-- Latency နည်းခြင်း - Mistral LLM များထက် တုံ့ပြန်မှု မြန်ဆန်ခြင်း  
-- ပိုမိုလွယ်ကူသော အသုံးပြုမှု - လိုအပ်သော အရင်းအမြစ်များအပေါ် ကန့်သတ်ချက်နည်းပြီး မတူညီသော ပတ်ဝန်းကျင်များတွင် တပ်ဆင်နိုင်ခြင်း  
 
-Mistral Small သည် အထူးသင့်တော်သည် -  
-- စာသားအခြေပြု လုပ်ငန်းများဖြစ်သော အကျဉ်းချုပ်ခြင်း၊ စိတ်ခံစားချက်ခွဲခြမ်းစိတ်ဖြာခြင်းနှင့် ဘာသာပြန်ခြင်း  
-- စျေးနှုန်းသက်သာမှုကြောင့် မကြာခဏ တောင်းဆိုမှုများရှိသော အပလီကေးရှင်းများ  
-- Latency နည်းသော ကုဒ်လုပ်ငန်းများဖြစ်သော ပြန်လည်သုံးသပ်ခြင်းနှင့် ကုဒ်အကြံပြုချက်များ  
+Mistral Small ကို အထူးသင့်တော်မည့် အခန်းကဏ္ဍများမှာ- 
+- စာသားအခြေခံ အလုပ်များ ဖြစ်သော အနှစ်ချုပ်၊ စိတ်ခံစားမှုခွဲခြမ်းသုံ၊ ဘာသာပြန်ခြင်း စသည်တို့ 
+- မကြာခဏ တောင်းဆိုမှုများရှိသည့် လျှော့စျေးသက်သာသော လျှောက်လွှာများ 
+- latency နည်းသော ကုဒ်လုပ်ငန်းများ ဖြစ်သော စစ်ဆေးခြင်းနှင့် ကုဒ်အကြံပြုချက်များ 
 
-## Mistral Small နှင့် Mistral Large နှိုင်းယှဉ်ခြင်း
+## Mistral Small နှင့် Mistral Large ကို နှိုင်းယှဉ်ခြင်း 
 
-Mistral Small နဲ့ Large တို့၏ latency ကွာခြားမှုကို ပြသရန် အောက်ပါ ကုဒ်များကို လည်ပတ်ပါ။
+Mistral Small နှင့် Large ၏ latency ကွာခြားမှုကို ပြသရန် အောက်ပါ ဆဲလ်များကို ပြေးပါ။ 
 
-တုံ့ပြန်ချိန်ကွာခြားမှု ၃-၅ စက္ကန့်ရှိကြောင်း တွေ့ရမည်။ ထို့အပြင် တူညီသော prompt အပေါ် တုံ့ပြန်ချက်၏ အရှည်နှင့် စတိုင်ကိုလည်း သတိပြုပါ။
+တုံ့ပြန်ချိန်များတွင် ၃-၅ စက္ကန့်ကွာခြားမှုကို တွေ့မြင်ရမည်ဖြစ်သည်။ ထို့အပြင် တူညီသော prompt ထဲတွင် သုံးစကားနှင့် အမျိုးအစားကိုလည်း မှတ်သားပါ။  
 
 ```python 
 
 import os 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-small"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -182,9 +185,9 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -208,30 +211,31 @@ print(response.choices[0].message.content)
 
 ## Mistral NeMo
 
-ဒီသင်ခန်းစာမှာ ဆွေးနွေးထားသော မော်ဒယ်နှစ်ခုနှင့် နှိုင်းယှဉ်လျှင် Mistral NeMo သည် Apache2 License ဖြင့် အခမဲ့ရရှိနိုင်သည့် တစ်ခုတည်းသော မော်ဒယ်ဖြစ်သည်။
+ဒီသင်ခန်းစာတွင် ဆွေးနွေးခဲ့သည့် အခြားမော်ဒယ် နှစ်ခုနှင့် နှိုင်းယှဉ်လျှင် Mistral NeMo သည် Apache2 လိုင်စင် ဖြင့် ရရှိနိုင်သည့် တစ်ခုတည်းသောအခမဲ့မော်ဒယ်ဖြစ်သည်။ 
 
-Mistral ရဲ့ ယခင် open source LLM ဖြစ်သော Mistral 7B ကို အဆင့်မြှင့်တင်ထားသည့် မော်ဒယ်အဖြစ် တွေ့ရှိရသည်။
+Mistral ၏ ရှေးကာလ open source LLM ဖြစ်သည့် Mistral 7B ကိုတိုးတက်အဆင့်မြှင့်ထားသော မော်ဒယ်အဖြစ် ကြည့်မြင်သည်။ 
 
-NeMo မော်ဒယ်၏ အခြားအင်္ဂါရပ်များမှာ -  
+NeMo မော်ဒယ်၏ အခြားသော လက္ခဏာများမှာ- 
 
-- *ပိုမိုထိရောက်သော tokenization:* ဒီမော်ဒယ်မှာ tiktoken ထက် ပိုမိုအသုံးများသော Tekken tokenizer ကို အသုံးပြုသည်။ ဒါကြောင့် ဘာသာစကားများနှင့် ကုဒ်များအပေါ် ပိုမိုကောင်းမွန်သော စွမ်းဆောင်ရည် ရရှိသည်။  
+- *ပိုမိုထိရောက်သော tokenization:* ဒီမော်ဒယ်သည် ပိုပြီး အသုံးများသော tiktoken ၏အစား Tekken tokenizer ကို သုံးသည်။ ဒါကြောင့် ဘာသာစကားများစွာနှင့် ကုဒ်များ၌ ပိုမိုကောင်းမွန်သော စွမ်းဆောင်ရည်ရရှိသည်။ 
 
-- *Finetuning:* အခြေခံမော်ဒယ်ကို finetuning အတွက် ရရှိနိုင်သည်။ ဒါက finetuning လိုအပ်သော အသုံးပြုမှုများအတွက် ပိုမိုလွယ်ကူမှု ပေးသည်။  
+- *Finetuning:* အခြေခံမော်ဒယ်ကို finetuning ပြုလုပ်ရန်ရရှိနိုင်သည်။ ဒါက finetuning လိုအပ်သော အသုံးပြုမှုများအတွက် ပိုမိုလွယ်ကူသော လုပ်ငန်းစဉ်ကို ပေးနိုင်သည်။ 
 
-- *Native Function Calling* - Mistral Large ကဲ့သို့ ဒီမော်ဒယ်မှာ function calling အတွက် သင်ကြားပေးထားသည်။ ဒါကြောင့် ပထမဆုံး open source မော်ဒယ်များထဲမှ တစ်ခုအဖြစ် ထူးခြားသည်။  
+- *Native Function Calling* - Mistral Large ကဲ့သို့ ဒီမော်ဒယ်ကို function calling အတွက်လေ့ကျင့်ထားပြီး သွယ်ဝိုက်မှုကို ရရှိထားသည်။ ဒီလိုဖြစ်မှုကြောင့် ဒါဟာ ပထမဆုံး open source မော်ဒယ်များထဲမှ တစ်ခုအနေနဲ့ ထူးခြားချက်ရှိသည်။ 
 
-### Tokenizer များနှိုင်းယှဉ်ခြင်း
 
-ဒီနမူနာမှာ Mistral NeMo က tokenization ကို Mistral Large နှင့် နှိုင်းယှဉ်ကြည့်မယ်။
+### Tokenizer များကို နှိုင်းယှဉ်ခြင်း 
 
-နမူနာနှစ်ခုလုံးမှာ တူညီသော prompt ကို အသုံးပြုသော်လည်း NeMo မှ token အရေအတွက်နည်းပြီး Mistral Large ထက် နည်းပါးသည်ကို တွေ့ရမည်။
+ဒီနမူနာတွင် Mistral NeMo သည် Mistral Large နှင့် tokenization ကို မည်သို့ xử lýကြောင်း ကြည့်ရှုမည်။ 
+
+နှစ်ခုစလုံးမှာ တူညီသော prompt ကို အသုံးပြုသည်၊ သို့သော် NeMo သည် Mistral Large ထက် token စနစ်နည်းနည်းသာ ပြန်လည်ပေးသည့်အချက်ကို တွေ့မြင်ရမည်။ 
 
 ```bash
 pip install mistral-common
 ```
 
 ```python 
-# Import needed packages:
+# လိုအပ်သော ပက်ကေ့ဂျ်များကို သွင်းယူပါ။
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -242,13 +246,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# Mistral tokenizer ကို ဖတ်ယူပါ။
 
-model_name = "open-mistral-nemo	"
+model_name = "open-mistral-nemo"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# မက်ဆေ့ချ်များစာရင်းကို token များသို့ ခွဲထုတ်ပါ။
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -266,7 +270,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -282,12 +286,12 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# token အရေအတွက်ကို မှန်ချက်ပါ။
 print(len(tokens))
 ```
 
 ```python
-# Import needed packages:
+# လိုအပ်သော package များကိုသွင်းယူပါ။
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -298,13 +302,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# Mistral tokenizer ကို load လုပ်ပါ
 
 model_name = "mistral-large-latest"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# သတင်းစာစာရင်းကို token ပြုလုပ်ပါ
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -322,7 +326,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -338,13 +342,17 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# token များ၏ အရေအတွက်ကိုရေတွက်ပါ
 print(len(tokens))
 ```
 
-## သင်ယူခြင်းသည် ဒီမှာ မရပ်နားပါ၊ ခရီးကို ဆက်လက်သွားပါ
+## သင်ယူခြင်းသည် ဒီနေရာမှာ မသိပ်တော့ပဲ များသားစွမ်းဆောင်ပါ 
 
-ဒီသင်ခန်းစာပြီးဆုံးပြီးနောက် ကျွန်ုပ်တို့ရဲ့ [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ကို ကြည့်ရှု၍ သင်၏ Generative AI အသိပညာကို ပိုမိုမြှင့်တင်ပါ!
+ဒီသင်ခန်းစာပြီးချိန်နောက်ပိုင်း [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) ကိုကြည့်ရှု၍ သင်၏ Generative AI အသိပညာအဆင့်မြှင့်တင်မှုကို ဆက်လက်တိုးတက်အောင်လုပ်ပါ! 
 
-**အကြောင်းကြားချက်**  
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားသော်လည်း အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် မေတ္တာရပ်ခံအပ်ပါသည်။ မူရင်းစာတမ်းကို မိမိဘာသာစကားဖြင့်သာ တရားဝင်အရင်းအမြစ်အဖြစ် ယူဆသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်မှ ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုရာမှ ဖြစ်ပေါ်လာနိုင်သည့် နားလည်မှုမှားယွင်းမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ပြောကြားချက်**
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းနေသော်လည်း၊ စက်ကိရိယာဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါရန် လိုအပ်ပါသည်။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အချက်အလက်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသည့် သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်သူဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော နားလည်မှုကွာခြားမှုများ သို့မဟုတ် မမှန်ကန်သော အသုံးပြုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

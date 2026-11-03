@@ -1,39 +1,42 @@
-# البناء باستخدام نماذج Mistral
+# البناء باستخدام نماذج Mistral 
 
-## المقدمة
+## المقدمة 
 
-ستتناول هذه الدرس:  
-- استكشاف نماذج Mistral المختلفة  
-- فهم حالات الاستخدام والسيناريوهات لكل نموذج  
-- أمثلة برمجية توضح الميزات الفريدة لكل نموذج.
+ستغطي هذه الدرس: 
+- استكشاف نماذج Mistral المختلفة 
+- فهم حالات الاستخدام والسيناريوهات لكل نموذج 
+- استكشاف عينات الشيفرة التي توضح الميزات الفريدة لكل نموذج. 
 
-## نماذج Mistral
+## نماذج Mistral 
 
-في هذا الدرس، سنستعرض 3 نماذج مختلفة من Mistral:  
-**Mistral Large**، **Mistral Small** و **Mistral Nemo**.
+في هذا الدرس، سوف نستكشف 3 نماذج مختلفة من Mistral: 
+**Mistral Large**، **Mistral Small** و **Mistral Nemo**. 
 
-كل هذه النماذج متاحة مجانًا على سوق نماذج Github. الكود في هذا الدفتر سيستخدم هذه النماذج لتشغيل الأكواد. إليك المزيد من التفاصيل حول استخدام نماذج Github لـ [النمذجة الأولية مع نماذج الذكاء الاصطناعي](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+كل واحد من هذه النماذج متاح مجانًا على [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst). سيتم استخدام هذه النماذج في هذا الدفتر لتشغيل الشيفرة.
 
-## Mistral Large 2 (2407)  
-يُعتبر Mistral Large 2 حاليًا النموذج الرائد من Mistral ومصمم للاستخدام المؤسسي.
+> **ملاحظة:** نماذج GitHub سيتم إنهاؤها في نهاية يوليو 2026. هنا المزيد من التفاصيل حول استخدام [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) لنمذجة نماذج الذكاء الاصطناعي. 
 
-هذا النموذج هو ترقية لـ Mistral Large الأصلي من خلال تقديم:  
-- نافذة سياق أكبر - 128k مقابل 32k  
-- أداء أفضل في مهام الرياضيات والبرمجة - دقة متوسطة 76.9% مقابل 60.4%  
-- تحسين الأداء متعدد اللغات - تشمل اللغات: الإنجليزية، الفرنسية، الألمانية، الإسبانية، الإيطالية، البرتغالية، الهولندية، الروسية، الصينية، اليابانية، الكورية، العربية، والهندية.
 
-بفضل هذه الميزات، يتفوق Mistral Large في:  
-- *التوليد المعزز بالاسترجاع (RAG)* - بسبب نافذة السياق الأكبر  
-- *استدعاء الدوال* - يحتوي هذا النموذج على استدعاء دوال مدمج يسمح بالتكامل مع الأدوات والواجهات البرمجية الخارجية. يمكن تنفيذ هذه الاستدعاءات بشكل متوازي أو متسلسل.  
-- *توليد الأكواد* - يتفوق هذا النموذج في توليد أكواد Python وJava وTypeScript وC++.
+## Mistral Large 2 (2407)
+Mistral Large 2 هو حاليًا النموذج الرائد من Mistral ومصمم للاستخدام المؤسسي. 
 
-### مثال RAG باستخدام Mistral Large 2
+هذا النموذج هو ترقية للنموذج الأصلي Mistral Large من خلال تقديم  
+-  نافذة سياق أكبر - 128k مقابل 32k 
+-  أداء أفضل في مهام الرياضيات والترميز - دقة متوسطة 76.9% مقابل 60.4% 
+-  زيادة الأداء متعدد اللغات - اللغات تشمل: الإنجليزية، الفرنسية، الألمانية، الإسبانية، الإيطالية، البرتغالية، الهولندية، الروسية، الصينية، اليابانية، الكورية، العربية، والهندية.
 
-في هذا المثال، نستخدم Mistral Large 2 لتشغيل نمط RAG على مستند نصي. السؤال مكتوب بالكورية ويسأل عن أنشطة المؤلف قبل الجامعة.
+مع هذه الميزات، يتميز Mistral Large في 
+- *التوليد المعزز بالاسترجاع (RAG)* - بسبب نافذة السياق الأكبر
+- *استدعاء الوظائف* - هذا النموذج يحتوي على استدعاء وظائف أصلي يسمح بالاندماج مع الأدوات وواجهات برمجة التطبيقات الخارجية. يمكن إجراء هذه الاستدعاءات بالتوازي أو بالتسلسل الواحدة تلو الأخرى. 
+- *توليد الشيفرة* - يتميز هذا النموذج في توليد البرمجة بـ Python و Java و TypeScript و C++. 
 
-يستخدم نموذج Cohere Embeddings لإنشاء تمثيلات نصية للمستند وكذلك للسؤال. في هذا المثال، يستخدم حزمة faiss في Python كمخزن متجهات.
+### مثال على RAG باستخدام Mistral Large 2 
 
-الموجه المرسل إلى نموذج Mistral يتضمن كل من الأسئلة والقطع المسترجعة المشابهة للسؤال. ثم يقدم النموذج ردًا بلغة طبيعية.
+في هذا المثال، نستخدم Mistral Large 2 لتشغيل نمط RAG على مستند نصي. السؤال مكتوب بالكورية ويسأل عن نشاطات المؤلف قبل الكلية. 
+
+يستخدم نموذج تجسيد النصوص Cohere لإنشاء تمثيلات نصية لكل من المستند والسؤال. في هذا المثال، يستخدم حزمة faiss للبايثون لتخزين المتجهات. 
+
+الحافز المرسل إلى نموذج Mistral يتضمن كلا من الأسئلة والقطع المسترجعة التي تشبه السؤال. ثم يقدم النموذج إجابة بلغة طبيعية. 
 
 ```python 
 pip install faiss-cpu
@@ -50,9 +53,10 @@ from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.inference import EmbeddingsClient
 
-endpoint = "https://models.inference.ai.azure.com"
+# احصل على هذه من صفحة "نظرة عامة" لمشروع Microsoft Foundry الخاص بك
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -91,7 +95,7 @@ d = text_embeddings.shape[1]
 index = faiss.IndexFlatL2(d)
 index.add(text_embeddings)
 
-question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?？"
+question = "저자가 대학에 오기 전에 주로 했던 두 가지 일은 무엇이었나요?"
 
 question_embedding = embed_client.embed(
     input=[question],
@@ -101,7 +105,7 @@ question_embedding = embed_client.embed(
 question_embeddings = np.array(question_embedding.data[0].embedding)
 
 
-D, I = index.search(question_embeddings.reshape(1, -1), k=2) # distance, index
+D, I = index.search(question_embeddings.reshape(1, -1), k=2) # المسافة، الفهرس
 retrieved_chunks = [chunks[i] for i in I.tolist()[0]]
 
 prompt = f"""
@@ -129,29 +133,30 @@ chat_response = client.complete(
 print(chat_response.choices[0].message.content)
 ```
 
-## Mistral Small  
-Mistral Small هو نموذج آخر ضمن عائلة نماذج Mistral تحت فئة النماذج المتميزة/المؤسسية. كما يوحي الاسم، هذا النموذج هو نموذج لغة صغير (SLM). مزايا استخدام Mistral Small هي:  
-- توفير في التكلفة مقارنة بنماذج Mistral LLM مثل Mistral Large وNeMo - انخفاض السعر بنسبة 80%  
-- زمن استجابة منخفض - أسرع مقارنة بنماذج Mistral LLM  
-- مرونة - يمكن نشره في بيئات مختلفة مع قيود أقل على الموارد المطلوبة.
+## Mistral Small 
+Mistral Small هو نموذج آخر في عائلة Mistral ضمن فئة النماذج المتميزة / المؤسسية. كما يوحي الاسم، هذا النموذج هو نموذج لغة صغير (SLM). مزايا استخدام Mistral Small هي: 
+- توفير التكلفة مقارنة بنماذج LLM من Mistral مثل Mistral Large وNeMo - انخفاض سعر بنسبة 80%
+- زمن استجابة منخفض - استجابة أسرع مقارنة بنماذج Mistral LLMs
+- مرونة - يمكن نشره عبر بيئات مختلفة مع قيود أقل على الموارد المطلوبة. 
 
-Mistral Small مناسب لـ:  
-- المهام النصية مثل التلخيص، تحليل المشاعر، والترجمة.  
-- التطبيقات التي تتطلب طلبات متكررة بسبب فعاليته من حيث التكلفة  
-- مهام الأكواد ذات زمن الاستجابة المنخفض مثل المراجعة واقتراحات الأكواد
 
-## مقارنة بين Mistral Small و Mistral Large
+Mistral Small ممتاز لـ: 
+- مهام تعتمد على النص مثل التلخيص، وتحليل المشاعر، والترجمة. 
+- التطبيقات التي تتطلب طلبات متكررة بسبب كفاءته من حيث التكلفة 
+- مهام الشيفرة بزمن استجابة منخفض مثل المراجعة واقتراحات الشيفرة 
 
-لإظهار الفروقات في زمن الاستجابة بين Mistral Small و Large، قم بتشغيل الخلايا أدناه.
+## مقارنة بين Mistral Small و Mistral Large 
 
-يجب أن تلاحظ فرقًا في أوقات الاستجابة يتراوح بين 3-5 ثوانٍ. كما لاحظ طول الردود والأسلوب على نفس الموجه.
+لعرض الفروقات في زمن الاستجابة بين Mistral Small و Large، شغل الخلايا أدناه. 
+
+يجب أن ترى فرقًا في أوقات الاستجابة يتراوح بين 3-5 ثوانٍ. لاحظ أيضًا طول الاستجابات والأسلوب على نفس الحافز.  
 
 ```python 
 
 import os 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-small"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -180,9 +185,9 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-endpoint = "https://models.inference.ai.azure.com"
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Mistral-large"
-token = os.environ["GITHUB_TOKEN"]
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -206,30 +211,31 @@ print(response.choices[0].message.content)
 
 ## Mistral NeMo
 
-مقارنة بالنموذجين الآخرين الذين نوقشوا في هذا الدرس، يُعتبر Mistral NeMo هو النموذج المجاني الوحيد المرخص برخصة Apache2.
+بالمقارنة مع النموذجين الآخرين اللذين نوقشا في هذا الدرس، Mistral NeMo هو النموذج المجاني الوحيد المرخص برخصة Apache2. 
 
-يُنظر إليه كترقية للنموذج مفتوح المصدر السابق من Mistral، وهو Mistral 7B.
+يُنظر إليه كترقية للنموذج المفتوح المصدر السابق من Mistral، Mistral 7B. 
 
-بعض الميزات الأخرى لنموذج NeMo هي:
+بعض الميزات الأخرى لنموذج NeMo هي: 
 
-- *تحسين التقطيع إلى رموز (tokenization):* يستخدم هذا النموذج مقطع Tekken بدلاً من tiktoken الأكثر شيوعًا. هذا يسمح بأداء أفضل عبر لغات وأكواد متعددة.
+- *تشغيل الترميز بشكل أكثر كفاءة:* يستخدم هذا النموذج مشفر Tekken بدلاً من المشفر الشائع الاستخدام tiktoken. هذا يسمح بأداء أفضل عبر لغات وشيفرات أكثر. 
 
-- *التدريب الدقيق (Finetuning):* النموذج الأساسي متاح للتدريب الدقيق، مما يوفر مرونة أكبر لحالات الاستخدام التي قد تحتاج إلى تخصيص.
+- *التخصيص الدقيق (Finetuning):* النموذج الأساسي متاح للتخصيص الدقيق. هذا يوفر مرونة أكثر لحالات الاستخدام التي قد تحتاج إلى تخصيص. 
 
-- *استدعاء الدوال المدمج* - مثل Mistral Large، تم تدريب هذا النموذج على استدعاء الدوال. وهذا يجعله فريدًا كأحد أول النماذج مفتوحة المصدر التي تدعم هذه الميزة.
+- *استدعاء الوظائف الأصلي* - مثل Mistral Large، تم تدريب هذا النموذج على استدعاء الوظائف. هذا يجعله فريدًا كونه واحدًا من أول النماذج مفتوحة المصدر التي تقوم بذلك. 
 
-### مقارنة بين أدوات التقطيع (Tokenizers)
 
-في هذا المثال، سنرى كيف يتعامل Mistral NeMo مع التقطيع مقارنة بـ Mistral Large.
+### مقارنة بين مشفرات النصوص (Tokenizers) 
 
-كلا النموذجين يستخدمان نفس الموجه، لكن ستلاحظ أن NeMo يعيد عددًا أقل من الرموز مقارنة بـ Mistral Large.
+في هذا المثال، سننظر إلى كيفية تعامل Mistral NeMo مع تشغيل الترميز مقارنة بـ Mistral Large. 
+
+كلا المثالين يستخدمان نفس الحافز لكن يجب أن تشاهد أن NeMo يعيد رموز أقل من Mistral Large. 
 
 ```bash
 pip install mistral-common
 ```
 
 ```python 
-# Import needed packages:
+# استيراد الحزم المطلوبة:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -240,13 +246,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# تحميل محلل الرموز Mistral
 
-model_name = "open-mistral-nemo	"
+model_name = "open-mistral-nemo"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# تجزئة قائمة من الرسائل
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -264,7 +270,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -280,12 +286,12 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# عد عدد الرموز
 print(len(tokens))
 ```
 
 ```python
-# Import needed packages:
+# استيراد الحزم اللازمة:
 from mistral_common.protocol.instruct.messages import (
     UserMessage,
 )
@@ -296,13 +302,13 @@ from mistral_common.protocol.instruct.tool_calls import (
 )
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 
-# Load Mistral tokenizer
+# تحميل محلل الرموز Mistral
 
 model_name = "mistral-large-latest"
 
 tokenizer = MistralTokenizer.from_model(model_name)
 
-# Tokenize a list of messages
+# تحليل قائمة من الرسائل إلى رموز
 tokenized = tokenizer.encode_chat_completion(
     ChatCompletionRequest(
         tools=[
@@ -320,7 +326,7 @@ tokenized = tokenizer.encode_chat_completion(
                             "format": {
                                 "type": "string",
                                 "enum": ["celsius", "fahrenheit"],
-                                "description": "The temperature unit to use. Infer this from the users location.",
+                                "description": "The temperature unit to use. Infer this from the user's location.",
                             },
                         },
                         "required": ["location", "format"],
@@ -336,13 +342,17 @@ tokenized = tokenizer.encode_chat_completion(
 )
 tokens, text = tokenized.tokens, tokenized.text
 
-# Count the number of tokens
+# عد عدد الرموز
 print(len(tokens))
 ```
 
-## التعلم لا يتوقف هنا، استمر في الرحلة
+## التعلم لا يتوقف هنا، واصل الرحلة
 
-بعد إكمال هذا الدرس، اطلع على [مجموعة تعلم الذكاء الاصطناعي التوليدي](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) لمواصلة تطوير معرفتك في مجال الذكاء الاصطناعي التوليدي!
+بعد إنهاء هذا الدرس، اطلع على [مجموعة تعلم الذكاء الاصطناعي التوليدي](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) للاستمرار في رفع مستوى معرفتك بالذكاء الاصطناعي التوليدي!
 
-**إخلاء المسؤولية**:  
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق به. للمعلومات الهامة، يُنصح بالاعتماد على الترجمة البشرية المهنية. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

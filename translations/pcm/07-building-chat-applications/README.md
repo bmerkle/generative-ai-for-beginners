@@ -1,66 +1,66 @@
-# How to Build Chat App Wey Use Generative AI
+# Di Build Generative AI-Powered Chat Applications
 
-[![How to Build Chat App Wey Use Generative AI](../../../translated_images/pcm/07-lesson-banner.a279b937f2843833.webp)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
+[![Di Build Generative AI-Powered Chat Applications](../../../translated_images/pcm/07-lesson-banner.a279b937f2843833.webp)](https://youtu.be/R9V0ZY1BEQo?si=IHuU-fS9YWT8s4sA)
 
-> _(Click di image wey dey up to watch di video for dis lesson)_
+> _(Click di pikshua we dey above to watch video of dis lesson)_
 
-Now wey we don see how we fit build app wey dey generate text, make we look how we fit build chat app.
+Now we don see how we fit build text-generation apps, make we look chat applications.
 
-Chat app don become part of our everyday life, e no be just for casual talk. Dem dey use am for customer service, technical support, and even advanced advisory systems. E fit be say you don use chat app get help recently. As we dey add better technology like generative AI into dis platforms, di wahala wey dey come with am go dey increase.
+Chat applications don enter for our everyday life, e no just be to yarn anyhow. Dem dey part of customer service, technical support, and even better advisory systems. Maybe you don get help from chat application before. As we dey put better tecnology like generative AI for these platform dem, di wahala go increase.
 
-Some questions wey we go need answer na:
+Some questions we need make dem answer be:
 
-- **How to build di app**. How we go fit build and join dis AI-powered app for di kind work wey we wan use am do?
-- **Monitoring**. After we don deploy am, how we go fit dey check say di app dey work well, both for di way e dey function and di [six principles of responsible AI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst)?
+- **Build di app**. How we go fit quickly build and join these AI-powered apps for correct use cases?
+- **Monitor**. When we deploy am, how we go take dey watch and make sure say di apps dey work well, for how e dey work and e follow [six principles of responsible AI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst)?
 
-As we dey enter di time wey automation and smooth human-machine interaction dey lead, e dey important to sabi how generative AI dey change di way chat app dey work, di kind work e fit do, and how e dey adapt. Dis lesson go show di architecture wey dey support dis kind system, how we fit fine-tune am for di work wey we wan use am do, and di metrics wey we go use make sure say di AI dey work responsibly.
+As we dey go further into dis level wey automation and human-machine interaction dey easy, to sabi how generative AI dey change how chat applications dey work and adapt na important. Dis lesson go talk about di way we fit build di system, how we fit fine-tune am for different task, and how to check for responsible AI use.
 
 ## Introduction
 
 Dis lesson go cover:
 
-- How to build and join chat app well.
-- How to customize and fine-tune di app.
-- Di strategies and things wey we go consider to dey monitor chat app well.
+- How we go fit quickly build and add chat applications.
+- How to customize and fine-tune di apps.
+- How to monitor chat applications well well.
 
 ## Learning Goals
 
-By di end of dis lesson, you go sabi:
+By di time you finish dis lesson, you go fit:
 
-- Di things wey you go think about when you dey build and join chat app for di system wey dey already.
-- How to customize chat app for di work wey you wan use am do.
-- Di main metrics and things wey you go consider to dey monitor and make sure say di AI-powered chat app dey work well.
-- How to make sure say di chat app dey use AI responsibly.
+- Talk about wetin you go reason for build and join chat apps inside systems.
+- Customize chat apps for particular purposes.
+- Know key metrics and wetin to consider to watch and maintain AI chat apps quality.
+- Make sure say chat apps dey use AI in responsible way.
 
-## How to Add Generative AI into Chat App
+## Join Generative AI for Chat Applications
 
-To make chat app better with generative AI no be just to make dem smart; e dey about how to make di architecture, performance, and user interface better so dat di user go enjoy am. Dis one mean say we go look di foundation, API integration, and di user interface. Dis section go give you di roadmap wey you need to sabi how to handle dis wahala, whether you dey join am for di system wey dey already or you dey build am as standalone platform.
+Make chat apps better with generative AI no mean just to make dem smarter; e be to make their design, performance, and user experience better. Dis one include checking architecture, APIs and how user interface suppose be. Dis part go give you road map for these tori, whether you wan add to existing systems or build stand-alone platform.
 
-By di end of dis section, you go sabi how to build and join chat app well.
+By di time you finish this section, you go get di skills to build and add chat applications well.
 
-### Chatbot or Chat App?
+### Chatbot or Chat application?
 
-Before we start to build chat app, make we compare 'chatbots' and 'AI-powered chat app,' wey dey do different work. Chatbot dey automate specific talk like answering FAQ or tracking package. E dey use rule-based logic or complex AI algorithms. AI-powered chat app na bigger environment wey dey allow different kind digital communication like text, voice, and video chat between people. Di main thing wey dey make am different na di generative AI model wey dey simulate human-like talk, dey give answer based on di input and di context. AI-powered chat app fit talk about anything, dey adapt to di way di talk dey go, and even dey create creative or complex talk.
+Before we come talk about build chat applications, make we compare 'chatbots' with 'AI-powered chat applications,' dem get different jobs and functionalities. Chatbot main work na to automate some small talk task like answer common questions or track package. Dem dey follow rule-based or complex AI algorithm. AI-powered chat applications get broader work, dem fit do text, voice, video chat for human users. Dem use generative AI model wey fit talk like human, respond based on many input and context. Generative AI chat fit do open talks, change with conversation, and even create complex tori.
 
-Di table wey dey below go show di difference and similarity to help us sabi di work wey dem dey do for digital communication.
+Table below show key difference and similarities to help us understand their special role for digital communication.
 
-| Chatbot                               | Generative AI-Powered Chat App         |
+| Chatbot                               | Generative AI-Powered Chat Application |
 | ------------------------------------- | -------------------------------------- |
-| Task-Focused and rule based           | E dey understand context               |
-| E dey join bigger systems             | E fit host one or many chatbots        |
-| E dey limited to programmed functions | E dey use generative AI models         |
-| E dey do structured interactions      | E fit talk about anything              |
+| Task-Focused and rule based           | Context-aware                          |
+| Often integrated into larger systems  | Fit host one or many chatbots          |
+| Limited to programmed functions       | Get generative AI models               |
+| Specialized & structured interactions | Fit do open-domain discussions        |
 
-### How to Use SDKs and APIs Weh Don Ready-Made
+### Use pre-built functions with SDKs and APIs
 
-When you dey build chat app, one better step na to check wetin dey already. To use SDKs and APIs to build chat app na better strategy for many reasons. If you use SDKs and APIs wey dem don document well, you dey position your app for long-term success, dey handle scalability and maintenance wahala.
+When you dey build chat application, good move na check wetin dem already get. Use SDKs and APIs dey better for many reasons. By join well-made SDKs and APIs, you go put your app for success long time, solve problem of growth and maintenance.
 
-- **E dey make development fast and reduce wahala**: If you use ready-made functionalities instead of dey build am yourself, you go fit focus on di other parts of your app wey dey important, like di business logic.
-- **Better performance**: If you dey build functionality from scratch, you go ask yourself "How e go scale? E fit handle plenty users at once?" SDKs and APIs wey dem dey maintain well dey get solution for dis kind wahala.
-- **E dey easy to maintain**: Updates and improvements dey easy to manage because most APIs and SDKs just need you to update di library when new version come out.
-- **Access to better technology**: If you use models wey dem don train well, e go give your app natural language capabilities.
+- **Faster development and less wahala**: Use pre-built functions no need to build by yourself, so you fit focus on other part of your app wey important, like business logic.
+- **Better performance**: When you build from scratch, you go ask "How e go scale? App fit handle plenty users?" Well maintained SDKs and APIs get built-in solution for these matter.
+- **Easy maintenance**: Updates and improve easy because most APIs and SDKs only need update library when new version come.
+- **Access to latest technology**: Use models wey dey fine-tuned and trained well on plenty data give your app natural language powers.
 
-To use SDK or API functionality, you go need permission to use di service, and dis one dey usually through unique key or authentication token. We go use OpenAI Python Library to show how e dey look. You fit try am yourself for dis [notebook for OpenAI](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) or [notebook for Azure OpenAI Services](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) for dis lesson.
+To fit use SDK or API, normally you go need get permission with one unique key or token. We go use OpenAI Python Library to see how dis one dey work. You fit also try am yourself for [notebook for OpenAI](./python/oai-assignment.ipynb?WT.mc_id=academic-105485-koreyst) or [notebook for Azure OpenAI Services](./python/aoai-assignment.ipynb?WT.mc_id=academic-105485-koreys) for dis lesson.
 
 ```python
 import os
@@ -72,120 +72,121 @@ client = OpenAI(
     api_key=API_KEY
     )
 
-chat_completion = client.chat.completions.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Suggest two titles for an instructional lesson on chat applications for generative AI."}])
+response = client.responses.create(model="gpt-5-mini", input="Suggest two titles for an instructional lesson on chat applications for generative AI.", store=False)
+print(response.output_text)
 ```
 
-Di example wey dey up dey use GPT-3.5 Turbo model to complete di prompt, but you go notice say di API key dey set before e run. If you no set di key, e go show error.
+Di example up dey use GPT-5 mini model with Responses API to finish prompt, but see say API key don set already. If you no set key, error go happen.
 
 ## User Experience (UX)
 
-General UX principles dey apply to chat app, but some extra things dey important because of di machine learning wey dey involved.
+Normal UX rules dey apply to chat apps, but here some extra things wey important because of machine learning.
 
-- **How to handle ambiguity**: Generative AI models fit sometimes give answer wey no clear. Feature wey go allow users ask for clarification go help if dem see dis kind problem.
-- **Context retention**: Advanced generative AI models fit remember di context of di talk, and dis one fit help di user experience. If you give users di ability to control and manage di context, e go make di experience better, but e fit also keep sensitive user information. You go need to think about how long you go store dis information, like retention policy, to balance di need for context and privacy.
-- **Personalization**: AI models fit learn and adapt, so e fit give di user personalized experience. If you use features like user profiles, e go make di user feel understood and help dem find di answer wey dem dey look for fast.
+- **Way to fix ambiguity**: Generative AI models sometimes go give unclear answer. Feature wey let user ask to clear things fit help if dis one happen.
+- **Keep context well**: Advanced generative AI fit remember context inside talk, dis one fit make user experience beta. Let user control context go better, but e get risk if sensitive info still dey. You fit think how long to keep info by policy to balance context and privacy.
+- **Personalization**: Because AI fit learn and adapt, e dey give personal experience for user. Make user experience different with user profiles no just make user feel understood, e also help make answer find easier and interaction smooth.
 
-One example of personalization na di "Custom instructions" settings for OpenAI's ChatGPT. E dey allow you provide information about yourself wey fit be important for di prompts. See example of custom instruction.
+One example personalization na the "Custom instructions" inside OpenAI ChatGPT. E allow you put info about yourself wey fit help for your prompts. Here na example custom instruction.
 
 ![Custom Instructions Settings in ChatGPT](../../../translated_images/pcm/custom-instructions.b96f59aa69356fcf.webp)
 
-Dis "profile" dey prompt ChatGPT to create lesson plan on linked lists. You go notice say ChatGPT dey consider say di user fit want more detailed lesson plan based on her experience.
+Dis "profile" make ChatGPT create lesson plan on linked lists. See how ChatGPT consider say user fit want deep lesson based on her experience.
 
 ![A prompt in ChatGPT for a lesson plan about linked lists](../../../translated_images/pcm/lesson-plan-prompt.cc47c488cf1343df.webp)
 
 ### Microsoft's System Message Framework for Large Language Models
 
-[Microsoft don give guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) on how to write better system messages when you dey generate response from LLMs. Dem break am down into 4 areas:
+[Microsoft don give guide](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/system-message#define-the-models-output-format?WT.mc_id=academic-105485-koreyst) for write better system messages when you wan generate response from LLMs, e get 4 parts:
 
-1. Define who di model dey for, di things e fit do, and di things e no fit do.
-2. Define di format wey di model go use for output.
-3. Provide examples wey show di behavior wey you want for di model.
-4. Provide extra rules wey go guide di behavior.
+1. Define who di model dey serve, and wetin e fit do or no fit do.
+2. Define how model go show output.
+3. Give example wey show how model suppose behave.
+4. Give extra rules to control behavior.
 
 ### Accessibility
 
-Whether di user get visual, auditory, motor, or cognitive impairment, di chat app wey dem design well suppose dey easy for everybody to use. Di list wey dey below show di features wey go help make di app accessible for different kind impairment.
+Whether user get problem with eye, ear, motor or brain, good chat app suppose fit make all dem use am. List below dey show features wey dey help users wey get different impairments.
 
-- **For Visual Impairment**: High contrast themes, resizable text, screen reader compatibility.
-- **For Auditory Impairment**: Text-to-speech and speech-to-text functions, visual cues for audio notifications.
-- **For Motor Impairment**: Keyboard navigation support, voice commands.
-- **For Cognitive Impairment**: Simplified language options.
+- **For visual impairment**: High contrast themes and text wey fit resize, screen reader support.
+- **For auditory impairment**: Text-to-speech and speech-to-text, visual señales for audio alert.
+- **For motor impairment**: Keyboard navigation, voice commands.
+- **For cognitive impairment**: Use simple language options.
 
-## How to Customize and Fine-tune for Domain-Specific Language Models
+## Customization and Fine-tuning for Domain-Specific Language Models
 
-Imagine chat app wey sabi your company language and fit predict di kind question wey di users dey always ask. Two approaches dey wey you fit use:
+Imagine chat app wey sabi your company talk and fit guess wetin user fit ask. Two main ways to take do am:
 
-- **Use DSL models**. DSL mean domain specific language. You fit use DSL model wey dem don train for specific domain to sabi di concepts and scenarios.
-- **Fine-tuning**. Fine-tuning na di process wey you go use train di model more with specific data.
+- **Use DSL models**. DSL mean domain-specific language. You fit use model wey train on specific domain to understand e concepts.
+- **Fine-tune**. Fine-tuning na training di model more with specific data.
 
 ## Customization: Use DSL
 
-To use domain-specific language models (DSL Models) fit make users enjoy di app more because e dey give special and relevant talk. Dis model dey train or fine-tune to sabi and generate text wey relate to di specific field, industry, or topic. You fit train one from scratch, use pre-existing ones through SDKs and APIs, or fine-tune existing pre-trained model for di domain.
+Using domain-specific language models (DSL Models) fit make user enjoy more when interaction dey special and correct for context. E mean model train or fine-tune to understand and create text for particular field or subject. You fit train DSL model from scratch or use SDKs and APIs for ready ones. Another way na fine-tune already trained model for specific domain.
 
 ## Customization: Fine-tuning
 
-Fine-tuning dey important when di pre-trained model no dey do well for di specific domain or task.
+Fine-tuning common when pre-trained model no too good for special domain or task.
 
-For example, medical questions dey complex and need plenty context. When doctor dey diagnose patient, e dey based on many things like lifestyle, pre-existing conditions, and even recent medical journals. For dis kind case, general-purpose AI chat app no go fit give reliable answer.
+For example, medical questions complex and need plenty context. When doctor diagnoses patient, e dey based on lifestyle, past sickness, and recent medical journals to confirm diagnosis. For such one, general AI chat app no fit dey reliable.
 
-### Scenario: Medical App
+### Example: Medical application
 
-Imagine chat app wey dey help doctors quick check treatment guidelines, drug interactions, or recent research.
+Think of chat app wey help medical workers to get quick info on treatment guide, drug interactions, or new research.
 
-General-purpose model fit answer basic medical questions or give general advice, but e go struggle for di following:
+General model fit good to answer basic medical questions or give general advice, but e fit waka struggle with:
 
-- **Complex cases**. For example, neurologist fit ask di app, "Wetin be di best way to manage drug-resistant epilepsy for children?"
-- **Recent advancements**. General-purpose model fit no sabi di latest update for neurology and pharmacology.
+- **Very specific or complex cases**. For example, neurologist fit ask, "Wetin be best practice to manage drug-resistant epilepsy for pikin?"
+- **No recent updates**. General model fit no fit give up-to-date answer wey include latest medicine and neurology discoveries.
 
-For dis kind case, fine-tuning di model with medical dataset go make am better to handle di complex medical questions well. You go need big and relevant dataset wey represent di domain-specific wahala and questions.
+For cases like dis, fine-tune model with medical data go make am better for dis kind complex medical questions. Dis one need plenty correct data wey show domain challenges and questions.
 
-## Things to Consider for Better AI Chat Experience
+## Considerations for High-Quality AI-Driven Chat
 
-Dis section go show di things wey make chat app better, including di metrics wey you go track and di framework wey go make sure say di AI dey work responsibly.
+Dis part go talk about criteria for "high-quality" chat apps, including how to measure performance and use AI responsibly.
 
 ### Key Metrics
 
-To make sure say di app dey perform well, you go need to dey track di key metrics and considerations. Dis measurements dey help you check di functionality of di app, di quality of di AI model, and di user experience. Di list wey dey below show di basic, AI, and user experience metrics wey you go consider.
+To keep app performance high, you need to check key metrics and things to consider. These go help check app dey work well and AI and user experience quality. Below na list of basic, AI, and user experience metrics to think about.
 
-| Metric                        | Wetin e mean                                                                                                         | Wetin di Chat Developer go consider                                       |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| **Uptime**                    | Di time wey di app dey work and users fit access am.                                                                 | How you go reduce downtime?                                               |
-| **Response Time**             | Di time wey di app dey take reply user question.                                                                     | How you go make query processing fast?                                    |
-| **Precision**                 | Di ratio of true positive predictions to di total number of positive predictions.                                    | How you go check di precision of your model?                              |
-| **Recall (Sensitivity)**      | Di ratio of true positive predictions to di actual number of positives.                                              | How you go measure and improve recall?                                    |
-| **F1 Score**                  | Di harmonic mean of precision and recall, wey dey balance di two.                                                    | Wetin be your target F1 Score? How you go balance precision and recall?   |
-| **Perplexity**                | E dey measure how di probability distribution wey di model predict dey match di actual distribution of di data.       | How you go reduce perplexity?                                             |
-| **User Satisfaction Metrics** | E dey measure how users dey feel about di app. Dem dey usually collect am through survey.                            | How often you go collect user feedback? How you go use am improve?        |
-| **Error Rate**                | Di rate wey di model dey make mistake for understanding or output.                                                   | Wetin be your plan to reduce error rate?                                  |
-| **Retraining Cycles**         | How often di model dey update to add new data and insights.                                                          | How often you go retrain di model? Wetin go trigger retraining cycle?     |
-| **Anomaly Detection**         | Tools and techniques wey dey help find patterns wey no follow wetin we expect.                        | How you go take handle anomalies?                                        |
+| Metric                        | Meaning                                                                                                             | Wetin chat developer suppose consider                                         |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **Uptime**                    | How long app dey work and users fit use am.                                              | How you go keep downtime reduce?                                           |
+| **Response Time**             | How fast app go answer user question.                                                          | How you go make processing faster to get quick answer?           |
+| **Precision**                 | Ratio of correct positive answer to total positive answer                                     | How you go check model precision?                        |
+| **Recall (Sensitivity)**      | Ratio of true positive answer to actual positive cases                                               | How you go measure and improve recall?                                  |
+| **F1 Score**                  | Balance between precision and recall                                   | Wetin be your target F1 Score? How you go balance precision and recall?  |
+| **Perplexity**                | How well model probability fit real data distribution | How you go reduce perplexity?                                         |
+| **User Satisfaction Metrics** | How users see the app. You fit collect this through surveys                                     | How often you go collect user feedback? How you go take adjust? |
+| **Error Rate**                | How much model dey make mistakes for understanding or generating output                                                 | What ways you get to reduce error?               |
+| **Retraining Cycles**         | How often model dey update with new data and knowledge                                    | How often you go retrain model? Wetin go make you start retrain?   |
+| **Anomaly Detection**         | Tools and techniques for identifying unusual patterns wey no follow wetin dem expect.                        | How you go take respond to anomalies?                                        |
 
-### How to Use Responsible AI Practices for Chat Apps
+### How to Take Put Responsible AI Practices for Chat Applications
 
-Microsoft don talk say dem get six principles wey go guide how AI go dey develop and how we go use am. Below na the principles, wetin dem mean, wetin chat app developers suppose think about, and why e dey important.
+Microsoft way to Responsible AI don find six principles wey suppose guide AI development and use. Below na the principles, their meaning, and tins wey chat developer suppose consider and why dem suppose take am serious.
 
-| Principles             | Wetin Microsoft Talk About Am                                | Wetin Chat Developer Suppose Do                                      | Why E Matter                                                                     |
+| Principles             | Microsoft Meaning                                | Things for Chat Developer to Consider                                      | Why E Important                                                                     |
 | ---------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Fairness               | AI systems suppose dey treat everybody well.            | Make sure say the chat app no dey do discrimination based on user data.  | To make users trust am and make everybody feel welcome; e go also help avoid wahala for law.                |
-| Reliability and Safety | AI systems suppose dey work well and dey safe.        | Do testing and put things wey go stop errors and risks.         | E go make users happy and stop any harm wey fit happen.                                 |
-| Privacy and Security   | AI systems suppose dey secure and respect privacy.      | Use strong encryption and protect user data well.              | To keep user data safe and follow privacy laws.                         |
-| Inclusiveness          | AI systems suppose dey help everybody and involve people. | Design UI/UX wey everybody fit use, no matter who dem be. | E go make sure say plenty people fit use the app well.                   |
-| Transparency           | AI systems suppose dey easy to understand.                  | Give clear documentation and explain how AI dey give answers.            | Users go trust the system more if dem sabi how e dey work. |
-| Accountability         | People suppose dey responsible for AI systems.          | Put process wey go dey check and improve AI decisions.     | E go help make the system better and correct mistakes if dem happen.               |
+| Fairness               | AI systems suppose treat all people fair.            | Make sure say the chat app no dey discriminate base on user data.  | To build trust and make everybody feel say dem dey included; no go cause wahala with law.                |
+| Reliability and Safety | AI systems suppose dey reliable and safe.        | Make testing and fail-safes to reduce errors and risks.         | Make sure users dey satisfied and to prevent any gbege.                                 |
+| Privacy and Security   | AI systems suppose dey secure and respect privacy.      | Put strong encryption and ways to protect data.              | To protect sensitive user data and follow privacy laws.                         |
+| Inclusiveness          | AI systems suppose empower everybody and involve people. | Design UI/UX wey everybody fit use easy for different kinds of people. | Make sure more people fit use the app well.                   |
+| Transparency           | AI systems suppose dey easy to understand.                  | Provide clear documentation and explanation for AI responses.            | Users go trust system more if dem fit understand how decisions dey happen. |
+| Accountability         | People suppose dey responsible for AI systems.          | Make clear process to check and improve AI decisions.     | Make the system fit dey improve and fix mistake when e happen.               |
 
 ## Assignment
 
-Check [assignment](../../../07-building-chat-applications/python). E go carry you go through different exercises from how to run your first chat prompts, to how to classify and summarize text and more. You go see say the assignments dey available for different programming languages!
+See [assignment](../../../07-building-chat-applications/python). E go carry you go through exercise dem from to run your first chat prompts, to classify and summarize text and more. Notice say assignments dey available for different programming languages!
 
-## Good Job! Continue to Learn More
+## Good Work! Make You Continue
 
-After you finish this lesson, go check our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue to sabi more about Generative AI!
+After you finish this lesson, check our [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) to continue improve your Generative AI knowledge!
 
-Go Lesson 8 to see how you fit start [building search applications](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)!
+Go Lesson 8 to see how you fit start [build search applications](../08-building-search-applications/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI transle-shon service [Co-op Translator](https://github.com/Azure/co-op-translator) do di transle-shon. Even as we dey try make am correct, abeg make you sabi say transle-shon wey machine do fit get mistake or no dey accurate well. Di original dokyument for di language wey dem write am first na di one wey you go take as di correct one. For any important mata, e good make you use professional human transle-shon. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis transle-shon.
+**Disclaimer**:
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

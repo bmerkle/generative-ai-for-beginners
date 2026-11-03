@@ -1,51 +1,51 @@
-# البدء مع هذا المقرر
+# البدء في هذه الدورة
 
-نحن متحمسون جدًا لأن تبدأ هذا المقرر وترى ما الذي ستستلهمه للبناء باستخدام الذكاء الاصطناعي التوليدي!
+نحن متحمسون جدًا لبدء هذه الدورة ورؤية ما ستستلهم لبنائه باستخدام الذكاء الاصطناعي التوليدي!
 
-لضمان نجاحك، توضح هذه الصفحة خطوات الإعداد والمتطلبات التقنية، وأين يمكنك الحصول على المساعدة إذا احتجت.
+لضمان نجاحك، توضح هذه الصفحة خطوات الإعداد والمتطلبات التقنية وأين يمكنك الحصول على المساعدة إذا لزم الأمر.
 
 ## خطوات الإعداد
 
-لبدء هذا المقرر، ستحتاج إلى إكمال الخطوات التالية.
+لبدء أخذ هذه الدورة، ستحتاج إلى إكمال الخطوات التالية.
 
-### 1. استنساخ هذا المستودع
+### 1. تفرع هذا المستودع
 
-[انسخ هذا المستودع بالكامل](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) إلى حسابك الخاص على GitHub لتستطيع تعديل أي كود وإكمال التحديات. يمكنك أيضًا [تمييز هذا المستودع بنجمة (🌟)](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars?WT.mc_id=academic-105485-koreyst) لتسهيل العثور عليه وعلى المستودعات ذات الصلة.
+[انشئ تفرعًا لهذا المستودع بأكمله](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) إلى حسابك على GitHub لتتمكن من تغيير أي كود وإكمال التحديات. يمكنك أيضًا [تمييز (⭐) هذا المستودع](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars?WT.mc_id=academic-105485-koreyst) لتجده بسهولة مع المستودعات ذات الصلة.
 
-### 2. إنشاء مساحة أكواد
+### 2. إنشاء مساحة أكواد (codespace)
 
-لتجنب أي مشاكل في التبعيات عند تشغيل الكود، نوصي بتشغيل هذا المقرر في [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=academic-105485-koreyst).
+لتجنب أي مشاكل اعتماد عند تشغيل الكود، نوصي بتشغيل هذه الدورة في [GitHub Codespaces](https://github.com/features/codespaces?WT.mc_id=academic-105485-koreyst).
 
-في استنساخك: **Code -> Codespaces -> New on main**
+في التفرع الخاص بك: **Code -> Codespaces -> جديد على main**
 
-![إظهار مربع حوار به أزرار لإنشاء مساحة أكواد](../../../translated_images/ar/who-will-pay.4c0609b1c7780f44.webp)
+![Dialog showing buttons to create a codespace](../../../translated_images/ar/who-will-pay.4c0609b1c7780f44.webp)
 
 #### 2.1 إضافة سر
 
-1. ⚙️ رمز الترس -> Command Pallete-> Codespaces : Manage user secret -> Add a new secret.
-2. سمِّه OPENAI_API_KEY، والصق مفتاحك، ثم احفظ.
+1. ⚙️ أيقونة الترس -> لوحة الأوامر -> Codespaces: إدارة سر المستخدم -> أضف سرًا جديدًا.
+2. اسم OPENAI_API_KEY، الصق مفتاحك، ثم احفظ.
 
-### 3. وما الخطوة التالية؟
+### 3. ما التالي؟
 
-| أريد أن…           | اذهب إلى…                                                               |
-|--------------------|-------------------------------------------------------------------------|
-| بدء الدرس 1         | [`01-introduction-to-genai`](../01-introduction-to-genai/README.md)     |
-| العمل بدون اتصال   | [`setup-local.md`](02-setup-local.md)                                   |
-| إعداد مزود LLM     | [`providers.md`](03-providers.md)                                        |
-| لقاء متعلمين آخرين | [انضم إلى ديسكورد الخاص بنا](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)   |
+| أريد أن…          | اذهب إلى…                                                                  |
+|---------------------|-------------------------------------------------------------------------|
+| بدء الدرس 1      | [`01-introduction-to-genai`](../01-introduction-to-genai/README.md)     |
+| العمل دون اتصال بالإنترنت        | [`setup-local.md`](02-setup-local.md)                                   |
+| إعداد موفر نموذج كبير | [`providers.md`](03-providers.md)                                        |
+| لقاء متعلمين آخرين | [انضم إلى Discord الخاص بنا](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)   |
 
-## استكشاف الأخطاء وإصلاحها
+## استكشاف المشاكل وإصلاحها
 
 
-| العَرَض                                  | الحل                                                               |
-|-----------------------------------------|-------------------------------------------------------------------|
-| بناء الحاوية متوقف لأكثر من 10 دقائق   | **Codespaces ➜ “Rebuild Container”**                              |
-| `python: command not found`              | لم يكن الطرف متصلًا؛ اضغط **+** ➜ *bash*                          |
-| `401 Unauthorized` من OpenAI             | مفتاح `OPENAI_API_KEY` خاطئ أو منتهي الصلاحية                      |
-| VS Code يظهر “Dev container mounting…” | حدث تحديث لعلامة التبويب في المتصفح—أحيانًا تفقد Codespaces الاتصال |
-| تفقد نواة دفتر الملاحظات                | قائمة الدفتر ➜ **Kernel ▸ Select Kernel ▸ Python 3**              |
+| العرض                                    | الإصلاح                                                             |
+|-------------------------------------------|-----------------------------------------------------------------|
+| توقف بناء الحاوية لأكثر من 10 دقائق            | **Codespaces ➜ “إعادة بناء الحاوية”**                            |
+| `python: command not found`               | الطرفية لم تُربط؛ انقر **+** ➜ *bash*                    |
+| `401 Unauthorized` من OpenAI            | مفتاح `OPENAI_API_KEY` خاطئ أو منتهي الصلاحية                                |
+| VS Code يعرض “Dev container mounting…”   | حدث تحديث صفحة المتصفح—أحيانًا تفقد Codespaces الاتصال   |
+| فقدان نواة المفكرة                   | قائمة المفكرة ➜ **Kernel ▸ اختيار النواة ▸ Python 3**           |
 
-   أنظمة يونكس:
+   أنظمة تشغيل يونكس:
 
    ```bash
    touch .env
@@ -57,21 +57,24 @@
    echo . > .env
    ```
 
-3. **تحرير ملف `.env`**: افتح ملف `.env` في محرر نصوص (مثلاً VS Code، Notepad++، أو أي محرر آخر). أضف السطر التالي للملف، مع استبدال `your_github_token_here` برمز GitHub الخاص بك:
+3. **تحرير ملف `.env`**: افتح ملف `.env` في محرر نصوص (مثل VS Code، Notepad++ أو أي محرر آخر). أضف السطور التالية إلى الملف، مع استبدال القيم النائبة بنقطة النهاية والمفتاح الفعليين من نماذج Microsoft Foundry (انظر [`providers.md`](03-providers.md) لمعرفة كيفية الحصول عليها):
+
+   > **ملاحظة:** نماذج GitHub (ومتغير `GITHUB_TOKEN` الخاص بها) ستتوقف عن الاستخدام في نهاية يوليو 2026. يُرجى استخدام [نماذج Microsoft Foundry](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) بدلاً منها.
 
    ```env
-   GITHUB_TOKEN=your_github_token_here
+   AZURE_INFERENCE_ENDPOINT=your_foundry_endpoint_here
+   AZURE_INFERENCE_CREDENTIAL=your_foundry_api_key_here
    ```
 
-4. **احفظ الملف**: احفظ التغييرات وأغلق محرر النصوص.
+4. **حفظ الملف**: احفظ التغييرات وأغلق محرر النصوص.
 
-5. **تثبيت `python-dotenv`**: إذا لم تكن قد ثبّتَها من قبل، ستحتاج إلى تثبيت حزمة `python-dotenv` لتحميل متغيرات البيئة من ملف `.env` إلى تطبيق Python الخاص بك. يمكنك تثبيتها باستخدام `pip`:
+5. **تثبيت `python-dotenv`**: إذا لم تكن قد فعلت ذلك بعد، ستحتاج إلى تثبيت حزمة `python-dotenv` لتحميل متغيرات البيئة من ملف `.env` إلى تطبيق Python الخاص بك. يمكنك تثبيتها باستخدام `pip`:
 
    ```bash
    pip install python-dotenv
    ```
 
-6. **تحميل متغيرات البيئة في سكريبت Python**: استخدم في سكريبت Python الخاص بك حزمة `python-dotenv` لتحميل المتغيرات من ملف `.env`:
+6. **تحميل متغيرات البيئة في برنامج Python الخاص بك**: في برنامج Python، استخدم حزمة `python-dotenv` لتحميل متغيرات البيئة من ملف `.env`:
 
    ```python
    from dotenv import load_dotenv
@@ -80,41 +83,42 @@
    # تحميل متغيرات البيئة من ملف .env
    load_dotenv()
 
-   # الوصول إلى متغير GITHUB_TOKEN
-   github_token = os.getenv("GITHUB_TOKEN")
+   # الوصول إلى متغيرات نماذج Microsoft Foundry
+   endpoint = os.getenv("AZURE_INFERENCE_ENDPOINT")
+   token = os.getenv("AZURE_INFERENCE_CREDENTIAL")
 
-   print(github_token)
+   print(endpoint)
    ```
 
-هذا كل شيء! لقد أنشأت بنجاح ملف `.env`، وأضفت مفتاح GitHub الخاص بك، وحمّلته في تطبيق Python الخاص بك.
+هذا كل شيء! لقد أنشأت بنجاح ملف `.env`، وأضفت بيانات اعتماد Microsoft Foundry Models، وقمت بتحميلها في تطبيق Python الخاص بك.
 
-## كيفية التشغيل محلياً على جهازك
+## كيفية التشغيل محليًا على جهاز الكمبيوتر الخاص بك
 
-لتشغيل الكود محليًا على جهازك، ستحتاج إلى وجود نسخة من [Python مثبتة](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst).
+لتشغيل الكود محليًا على جهازك، تحتاج إلى تثبيت إصدار من [Python](https://www.python.org/downloads/?WT.mc_id=academic-105485-koreyst).
 
-بعد ذلك، لاستخدام المستودع، تحتاج إلى نسخه:
+لاستخدام المستودع، تحتاج إلى نسخه (استنساخه):
 
 ```shell
 git clone https://github.com/microsoft/generative-ai-for-beginners
 cd generative-ai-for-beginners
 ```
 
-بمجرد حصولك على كل شيء جاهز، يمكنك البدء!
+بمجرد أن تتحقق من كل شيء، يمكنك البدء!
 
 ## خطوات اختيارية
 
 ### تثبيت Miniconda
 
-[Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) هو مثبت خفيف لتثبيت [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst) وPython وبعض الحزم الأخرى.
-Conda هو مدير حزم يسهل إعداد والتبديل بين [بيئات افتراضية](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) مختلفة من Python وحزمها. كما أنه مفيد لتثبيت الحزم غير المتوفرة عن طريق `pip`.
+[Miniconda](https://conda.io/en/latest/miniconda.html?WT.mc_id=academic-105485-koreyst) هو مثبت خفيف لتثبيت [Conda](https://docs.conda.io/en/latest?WT.mc_id=academic-105485-koreyst)، وPython، وبعض الحزم الإضافية.
+Conda هو مدير حزم يسهل عليك إعداد والتبديل بين بيئات Python [الافتراضية](https://docs.python.org/3/tutorial/venv.html?WT.mc_id=academic-105485-koreyst) والحزم. كما أنه مفيد لتثبيت الحزم غير المتوفرة عبر `pip`.
 
-يمكنك متابعة [دليل تثبيت MiniConda](https://docs.anaconda.com/free/miniconda/#quick-command-line-install?WT.mc_id=academic-105485-koreyst) لإعداده.
+يمكنك اتباع [دليل تثبيت MiniConda](https://docs.anaconda.com/free/miniconda/#quick-command-line-install?WT.mc_id=academic-105485-koreyst) لإعداده.
 
-بعد تثبيت Miniconda، تحتاج إلى نسخ [المستودع](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) (إذا لم تكن قد فعلت ذلك بعد)
+بعد تثبيت Miniconda، تحتاج إلى نسخ [المستودع](https://github.com/microsoft/generative-ai-for-beginners/fork?WT.mc_id=academic-105485-koreyst) (إذا لم تكن قد فعلت ذلك بالفعل)
 
-بعدها تحتاج إلى إنشاء بيئة افتراضية. لفعل ذلك باستخدام Conda، قم بإنشاء ملف بيئة جديد (_environment.yml_). إذا كنت تستخدم Codespaces، أنشئ هذا داخل دليل `.devcontainer`، أي `.devcontainer/environment.yml`.
+بعد ذلك، تحتاج إلى إنشاء بيئة افتراضية. للقيام بذلك باستخدام Conda، قم بإنشاء ملف بيئة جديد (environment.yml). إذا كنت تستخدم Codespaces، أنشئ الملف داخل دليل `.devcontainer`، أي `.devcontainer/environment.yml`.
 
-قم بملء ملف البيئة بالمقتطف أدناه:
+ابدأ بملء ملف البيئة بالمقتطف أدناه:
 
 ```yml
 name: <environment-name>
@@ -130,18 +134,18 @@ dependencies:
       - azure-ai-ml
 ```
 
-إذا واجهت أخطاء باستخدام conda، يمكنك تثبيت مكتبات Microsoft AI يدويًا باستخدام الأمر التالي في الطرفية.
+إذا واجهت أخطاء عند استخدام conda، يمكنك تثبيت مكتبات Microsoft AI يدويًا باستخدام الأمر التالي في الطرفية.
 
 ```
 conda install -c microsoft azure-ai-ml
 ```
 
-يحدد ملف البيئة التبعيات التي نحتاجها. يشير `<environment-name>` إلى اسم البيئة التي تود استخدامها مع Conda، و`<python-version>` إلى نسخة Python التي تريد استخدامها، على سبيل المثال، `3` هي النسخة الكبيرة الأحدث من Python.
+يحدد ملف البيئة الاعتمادات التي نحتاجها. `<environment-name>` يشير للاسم الذي ترغب باستخدامه لبيئة Conda الخاص بك، و`<python-version>` هو إصدار Python الذي تريد استخدامه، على سبيل المثال، `3` هو أحدث إصدار رئيسي من Python.
 
-بعد ذلك، يمكنك إنشاء بيئة Conda الخاصة بك بتنفيذ الأوامر التالية في سطر الأوامر/الطرفية
+بعد ذلك، يمكنك متابعة إنشاء بيئة Conda بتنفيذ الأوامر التالية في سطر الأوامر/الطرفية
 
 ```bash
-conda env create --name ai4beg --file .devcontainer/environment.yml # مسار .devcontainer الفرعي ينطبق فقط على إعدادات Codespace
+conda env create --name ai4beg --file .devcontainer/environment.yml # ينطبق مسار .devcontainer الفرعي فقط على إعدادات Codespace
 conda activate ai4beg
 ```
 
@@ -149,19 +153,19 @@ conda activate ai4beg
 
 ### استخدام Visual Studio Code مع امتداد دعم Python
 
-نوصي باستخدام محرر [Visual Studio Code (VS Code)](https://code.visualstudio.com/?WT.mc_id=academic-105485-koreyst) مع [امتداد دعم Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) لهذا المقرر. هذا مجرد توصية وليس مطلبًا ضروريًا.
+نوصي باستخدام محرر [Visual Studio Code (VS Code)](https://code.visualstudio.com/?WT.mc_id=academic-105485-koreyst) مع مثبت امتداد [دعم Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) لهذه الدورة. هذا مجرد توصية وليس شرطًا حتميًا.
 
-> **ملاحظة**: بفتح مستودع المقرر في VS Code، لديك خيار إعداد المشروع داخل حاوية. هذا بفضل دليل [`.devcontainer`](https://code.visualstudio.com/docs/devcontainers/containers?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) الخاص داخل مستودع المقرر. سنشرح المزيد لاحقًا.
+> **ملاحظة**: بفتح مستودع الدورة في VS Code، لديك خيار إعداد المشروع ضمن حاوية. هذا بسبب وجود دليل [خاص `.devcontainer`](https://code.visualstudio.com/docs/devcontainers/containers?itemName=ms-python.python&WT.mc_id=academic-105485-koreyst) داخل مستودع الدورة. المزيد عن هذا لاحقًا.
 
-> **ملاحظة**: عند نسخ وفتح الدليل في VS Code، سيقترح تلقائيًا تثبيت امتداد دعم Python.
+> **ملاحظة**: بمجرد نسخ المستودع وفتحه في VS Code، سيقترح تلقائيًا تثبيت امتداد دعم Python.
 
-> **ملاحظة**: إذا اقترح VS Code إعادة فتح المستودع داخل حاوية، ارفض ذلك لاستخدام نسخة Python المثبتة محليًا.
+> **ملاحظة**: إذا اقترح VS Code إعادة فتح المستودع داخل حاوية، رفض هذا الطلب لاستخدام نسخة Python المثبتة محليًا.
 
 ### استخدام Jupyter في المتصفح
 
-يمكنك أيضًا العمل على المشروع باستخدام بيئة [Jupyter](https://jupyter.org?WT.mc_id=academic-105485-koreyst) مباشرةً ضمن المتصفح. توفر كل من Jupyter الكلاسيكي و[Jupyter Hub](https://jupyter.org/hub?WT.mc_id=academic-105485-koreyst) بيئة تطوير ممتعة مع ميزات مثل الإكمال التلقائي وتظليل الكود، وغيرها.
+يمكنك أيضًا العمل على المشروع باستخدام بيئة [Jupyter](https://jupyter.org?WT.mc_id=academic-105485-koreyst) مباشرة من المتصفح. توفر كل من Jupyter الكلاسيكي و[Jupyter Hub](https://jupyter.org/hub?WT.mc_id=academic-105485-koreyst) بيئة تطوير ممتعة مع ميزات مثل الإكمال التلقائي، تمييز الكود، وغيرها.
 
-لتشغيل Jupyter محليًا، افتح الطرفية/سطر الأوامر، وانتقل إلى دليل المقرر، ونفذ:
+لتشغيل Jupyter محليًا، توجه إلى الطرفية/سطر الأوامر، انتقل إلى دليل الدورة، ونفذ:
 
 ```bash
 jupyter notebook
@@ -173,60 +177,63 @@ jupyter notebook
 jupyterhub
 ```
 
-سيبدأ هذا نسخة Jupyter وسيُعرض عنوان URL للدخول إليه في نافذة سطر الأوامر.
+هذا سيشغل مثيل Jupyter وسيتم عرض عنوان URL للوصول إليه ضمن نافذة سطر الأوامر.
 
-بمجرد الوصول إلى عنوان URL، سترى مخطط المقرر ويمكنك التنقل إلى أي ملف `*.ipynb`. على سبيل المثال، `08-building-search-applications/python/oai-solution.ipynb`.
+بمجرد الوصول إلى العنوان، ستشاهد مسار الدورة ويمكنك التنقل إلى أي ملف `*.ipynb`، مثل `08-building-search-applications/python/oai-solution.ipynb`.
 
 ### التشغيل داخل حاوية
 
-بديل لإعداد كل شيء على جهازك أو في مساحة أكواد هو استخدام [حاوية](../../../00-course-setup/<https:/en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst>). يتيح دليل `.devcontainer` الخاص بالمستودع إمكانية VS Code لإعداد المشروع داخل حاوية. خارج مساحات الأكواد، سيتطلب ذلك تثبيت Docker، وبصراحة، الأمر معقد قليلاً، لذا نوصي بذلك فقط لمن لديهم خبرة في العمل مع الحاويات.
+بديل لإعداد كل شيء على جهاز الكمبيوتر الخاص بك أو في Codespace هو استخدام [الحاويات](../../../00-course-setup/<https:/en.wikipedia.org/wiki/Containerization_(computing)?WT.mc_id=academic-105485-koreyst>). يسمح دليل `.devcontainer` الخاص في مستودع الدورة لـ VS Code بإعداد المشروع ضمن حاوية. خارج Codespaces، هذا يتطلب تثبيت Docker، وبصراحة، يتطلب بعض العمل، لذا نوصي به فقط لمن لديهم خبرة في العمل مع الحاويات.
 
-واحدة من أفضل الطرق لحماية مفاتيح API الخاصة بك عند استخدام GitHub Codespaces هي باستخدام أسرار مساحات الأكواد. يرجى متابعة دليل [إدارة أسرار Codespaces](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-secrets-for-your-codespaces?WT.mc_id=academic-105485-koreyst) لمعرفة المزيد حول هذا.
+إحدى أفضل الطرق للحفاظ على أمان مفاتيح API عند استخدام GitHub Codespaces هي باستخدام أسرار Codespace. يرجى متابعة دليل [إدارة أسرار Codespaces](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-secrets-for-your-codespaces?WT.mc_id=academic-105485-koreyst) لمعرفة المزيد عن هذا.
+
 
 ## الدروس والمتطلبات التقنية
 
-المقرر يحتوي على 6 دروس مفاهيم و6 دروس ترميز.
+تحتوي الدورة على دروس "تعلم" تشرح مفاهيم الذكاء الاصطناعي التوليدي ودروس "بناء" مع أمثلة عملية بالكود باستخدام **Python** و**TypeScript** حيث أمكن.
 
-لدروس الترميز، نستخدم خدمة Azure OpenAI. ستحتاج إلى الوصول إلى خدمة Azure OpenAI ومفتاح API لتشغيل هذا الكود. يمكنك التقديم للحصول على الوصول عبر [إتمام هذا الطلب](https://azure.microsoft.com/products/ai-services/openai-service?WT.mc_id=academic-105485-koreyst).
+للدروس البرمجية، نستخدم Azure OpenAI في Microsoft Foundry. ستحتاج إلى اشتراك Azure ومفتاح API. الوصول مفتوح - لا يتطلب تقديم طلب - لذا يمكنك [إنشاء مورد Microsoft Foundry ونشر نموذج](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) للحصول على نقطة النهاية والمفتاح.
 
-أثناء انتظار معالجة طلبك، يتضمن كل درس ترميز أيضًا ملف `README.md` حيث يمكنك عرض الكود والمخرجات.
+كل درس برمجي يتضمن أيضًا ملف `README.md` حيث يمكنك عرض الكود والنتائج دون تشغيل أي شيء.
 
 ## استخدام خدمة Azure OpenAI لأول مرة
 
-إذا كانت هذه هي المرة الأولى التي تعمل فيها مع خدمة Azure OpenAI، يرجى اتباع هذا الدليل حول كيفية [إنشاء ونشر مورد خدمة Azure OpenAI.](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)
+إذا كانت هذه هي المرة الأولى التي تعمل فيها مع خدمة Azure OpenAI، يرجى اتباع هذا الدليل حول كيفية [إنشاء ونشر مورد خدمة Azure OpenAI.](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst)
 
-## استخدام OpenAI API لأول مرة
+## استخدام واجهة برمجة تطبيقات OpenAI لأول مرة
 
-إذا كانت هذه هي المرة الأولى التي تستخدم فيها OpenAI API، يرجى اتباع الدليل حول كيفية [إنشاء واستخدام الواجهة.](https://platform.openai.com/docs/quickstart?context=pythont&WT.mc_id=academic-105485-koreyst)
+إذا كانت هذه هي المرة الأولى التي تعمل فيها مع واجهة برمجة تطبيقات OpenAI، يرجى اتباع الدليل حول كيفية [إنشاء واستخدام الواجهة.](https://platform.openai.com/docs/quickstart?context=pythont&WT.mc_id=academic-105485-koreyst)
 
-## لقاء المتعلمين الآخرين
+## لقاء متعلمين آخرين
 
-أنشأنا قنوات في خادم [مجتمع الذكاء الاصطناعي الرسمي على ديسكورد](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst) للقاء المتعلمين الآخرين. هذه طريقة رائعة للتشبيك مع رواد أعمال، منشئين، طلاب، وأي شخص يسعى للتطور في الذكاء الاصطناعي التوليدي.
+أنشأنا قنوات في خادمنا الرسمي [AI Community Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst) للقاء متعلمين آخرين. هذه طريقة رائعة للتواصل مع رواد أعمال وبناة وطلاب يشاركونك الاهتمام ويريدون التقدم في مجال الذكاء الاصطناعي التوليدي.
 
-[![انضم إلى قناة ديسكورد](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
+[![Join discord channel](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
 
-فريق المشروع سيكون حاضرًا أيضًا على هذا الخادم لمساعدة أي متعلم.
+سيكون فريق المشروع أيضًا على هذا الخادم لمساعدة أي متعلمين.
 
 ## المساهمة
 
-هذا المقرر هو مبادرة مفتوحة المصدر. إذا لاحظت مجالات للتحسين أو مشكلات، يرجى إنشاء [سحب طلب](https://github.com/microsoft/generative-ai-for-beginners/pulls?WT.mc_id=academic-105485-koreyst) أو تسجيل [مشكلة في GitHub](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst).
+هذه الدورة هي مبادرة مفتوحة المصدر. إذا لاحظت مجالات للتحسين أو مشاكل، يرجى إنشاء [طلب سحب](https://github.com/microsoft/generative-ai-for-beginners/pulls?WT.mc_id=academic-105485-koreyst) أو تسجيل [مشكلة في GitHub](https://github.com/microsoft/generative-ai-for-beginners/issues?WT.mc_id=academic-105485-koreyst).
 
-سيتعقب فريق المشروع كل المساهمات. المساهمة في مفتوح المصدر هي طريقة رائعة لبناء مسيرتك في الذكاء الاصطناعي التوليدي.
+سيتابع فريق المشروع كل المساهمات. المساهمة في المصادر المفتوحة طريقة رائعة لبناء مسيرتك في الذكاء الاصطناعي التوليدي.
 
-تتطلب معظم المساهمات موافقتك على اتفاقية ترخيص المساهم (CLA) التي تفيد بأن لديك الحق وأنك تمنحنا فعليًا الحقوق لاستخدام مساهمتك. للتفاصيل، قم بزيارة [موقع اتفاقية ترخيص المساهم (CLA)](https://cla.microsoft.com?WT.mc_id=academic-105485-koreyst).
+معظم المساهمات تتطلب موافقتك على اتفاقية ترخيص المساهم (CLA) التي تصرح فيها بأن لديك الحق وأنك تمنحنا حقوق استخدام مساهمتك. للتفاصيل، زر [موقع اتفاقية ترخيص المساهم (CLA)](https://cla.microsoft.com?WT.mc_id=academic-105485-koreyst).
 
-مهم: عند ترجمة النصوص في هذا المستودع، يرجى التأكد من عدم استخدام الترجمة الآلية. سنقوم بالتحقق من الترجمات عن طريق المجتمع، فالرجاء التطوع فقط لترجمات اللغات التي تجيدها.
+هام: عند ترجمة النص في هذا المستودع، يرجى التأكد من عدم استخدام الترجمة الآلية. سنقوم بالتحقق من الترجمات عبر المجتمع، لذا يرجى التطوع فقط لترجمات اللغات التي تجيدها.
 
-عند تقديم طلب سحب، سيحدد CLA-bot تلقائيًا ما إذا كنت بحاجة إلى تقديم اتفاقية CLA ويزين طلب السحب بالملصق المناسب (مثلاً، تسمية، تعليق). فقط اتبع التعليمات التي يقدمها الروبوت. ستحتاج للقيام بذلك مرة واحدة فقط عبر كل المستودعات التي تستخدم اتفاقية CLA الخاصة بنا.
 
-هذا المشروع اعتمد [مدونة السلوك المفتوحة لمايكروسوفت](https://opensource.microsoft.com/codeofconduct/?WT.mc_id=academic-105485-koreyst). للمزيد من المعلومات اقرأ أسئلة وأجوبة مدونة السلوك أو اتصل بـ [البريد الإلكتروني opencode](opencode@microsoft.com) لأي أسئلة أو تعليقات إضافية.
+عند تقديم طلب سحب، سيقوم روبوت CLA تلقائيًا بتحديد ما إذا كنت بحاجة إلى تقديم اتفاقية CLA وتزيين طلب السحب بشكل مناسب (مثل التسمية أو التعليق). ما عليك سوى اتباع التعليمات التي يقدمها الروبوت. ستحتاج إلى القيام بذلك مرة واحدة فقط عبر جميع المستودعات التي تستخدم CLA الخاص بنا.
 
-## هيا نبدأ!
-الآن بعد أن أكملت الخطوات اللازمة لإتمام هذه الدورة، لنبدأ بالحصول على [مقدمة في الذكاء الاصطناعي التوليدي ونماذج اللغات الكبيرة](../01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst).
+لقد تبنى هذا المشروع [مدونة قواعد السلوك مفتوحة المصدر من مايكروسوفت](https://opensource.microsoft.com/codeofconduct/?WT.mc_id=academic-105485-koreyst). لمزيد من المعلومات، اقرأ الأسئلة الشائعة حول مدونة قواعد السلوك أو تواصل مع [البريد الإلكتروني opencode](opencode@microsoft.com) لأي أسئلة أو تعليقات إضافية.
+
+## لنبدأ
+
+بعد أن أكملت الخطوات اللازمة لإتمام هذه الدورة، دعنا نبدأ بالحصول على [مقدمة في الذكاء الاصطناعي التوليدي ونماذج اللغة الكبيرة](../01-introduction-to-genai/README.md?WT.mc_id=academic-105485-koreyst).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**إخلاء المسؤولية**:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم بأن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحساسة، يُنصح بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+**تنويه**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى للدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي والمعتمد. للمعلومات الهامة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

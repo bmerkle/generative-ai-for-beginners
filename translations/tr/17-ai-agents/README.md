@@ -2,61 +2,61 @@
 
 ## Giriş
 
-AI Agent'ler, Generative AI dünyasında heyecan verici bir gelişmeyi temsil eder ve Büyük Dil Modellerinin (LLM'ler) asistanlardan eylem gerçekleştirebilen ajanlara dönüşmesini sağlar. AI Agent çerçeveleri, geliştiricilerin LLM'lere araçlara erişim ve durum yönetimi sağlayan uygulamalar oluşturmasına olanak tanır. Bu çerçeveler ayrıca görünürlüğü artırır, kullanıcıların ve geliştiricilerin LLM'lerin planladığı eylemleri izlemesine olanak tanır ve böylece deneyim yönetimini iyileştirir.
+Yapay Zeka Ajanları, Üretken Yapay Zeka alanındaki heyecan verici bir gelişmeyi temsil eder ve Büyük Dil Modellerinin (LLM'ler) asistanlardan eylem alabilen ajanlara dönüşmesini sağlar. Yapay Zeka Ajan çerçeveleri, geliştiricilerin LLM'lere araçlara ve durum yönetimine erişim sağlayan uygulamalar oluşturmalarına olanak tanır. Bu çerçeveler ayrıca görünürlüğü artırır; böylece kullanıcılar ve geliştiriciler LLM'lerin planladığı eylemleri izleyebilir, bu da deneyim yönetimini geliştirir.
 
-Bu ders aşağıdaki konuları kapsayacaktır:
+Ders aşağıdaki alanları kapsayacaktır:
 
-- AI Agent nedir? - AI Agent tam olarak nedir?
-- Dört farklı AI Agent çerçevesini keşfetmek - Onları benzersiz kılan nedir?
-- Bu AI Agent'leri farklı kullanım senaryolarında uygulamak - AI Agent'leri ne zaman kullanmalıyız?
+- Yapay Zeka Ajanının ne olduğunu anlama - Yapay Zeka Ajanı tam olarak nedir?
+- Beş farklı Yapay Zeka Ajan Çerçevesini keşfetme - Onları benzersiz kılan nedir?
+- Bu Yapay Zeka Ajanlarını farklı kullanım durumlarına uygulama - Yapay Zeka Ajanları ne zaman kullanılmalıdır?
 
 ## Öğrenme hedefleri
 
-Bu dersi tamamladıktan sonra:
+Bu dersi tamamladıktan sonra şunları yapabileceksiniz:
 
-- AI Agent'lerin ne olduğunu ve nasıl kullanılabileceğini açıklayabileceksiniz.
-- Popüler AI Agent çerçevelerinden bazılarının farklarını ve nasıl farklılaştıklarını anlayabileceksiniz.
-- AI Agent'lerin nasıl çalıştığını anlayarak onlarla uygulamalar geliştirebileceksiniz.
+- Yapay Zeka Ajanlarının ne olduğunu ve nasıl kullanılabileceğini açıklayabilmek.
+- Popüler Yapay Zeka Ajan Çerçeveleri arasındaki farkları ve nasıl farklı olduklarını anlamak.
+- Uygulama geliştirmek için Yapay Zeka Ajanlarının nasıl çalıştığını kavramak.
 
-## AI Agent'ler Nedir?
+## Yapay Zeka Ajanları Nedir?
 
-AI Agent'ler, Generative AI dünyasında oldukça heyecan verici bir alandır. Bu heyecan bazen terimlerin ve uygulamalarının kafa karışıklığına yol açabilir. İşleri basit ve AI Agent'lere atıfta bulunan çoğu aracı kapsayıcı tutmak için şu tanımı kullanacağız:
+Yapay Zeka Ajanları, Üretken Yapay Zeka dünyasında çok heyecan verici bir alandır. Bu heyecan bazen terimlerin ve uygulamalarının karışıklığına yol açabilir. Konuları olabildiğince basit tutmak ve Yapay Zeka Ajanlarına atıfta bulunan çoğu aracı kapsamak için şu tanımı kullanacağız:
 
-AI Agent'ler, Büyük Dil Modellerinin (LLM'ler) bir **duruma** ve **araçlara** erişim sağlayarak görevleri yerine getirmesine olanak tanır.
+Yapay Zeka Ajanları, Büyük Dil Modellerinin (LLM'ler) **duruma** ve **araçlara** erişim vererek görevler gerçekleştirmelerine olanak tanır.
 
-![Agent Model](../../../translated_images/tr/what-agent.21f2893bdfd01e6a.webp)
+![Ajan Modeli](../../../translated_images/tr/what-agent.21f2893bdfd01e6a.webp)
 
 Bu terimleri tanımlayalım:
 
-**Büyük Dil Modelleri** - Bu kurs boyunca bahsedilen modellerdir, örneğin GPT-3.5, GPT-4, Llama-2, vb.
+**Büyük Dil Modelleri** - Bu derste değindiğimiz GPT-5, GPT-4o ve Llama 3.3 gibi modellerdir.
 
-**Durum** - LLM'nin çalıştığı bağlamı ifade eder. LLM, geçmiş eylemlerinin ve mevcut bağlamın rehberliğinde sonraki eylemler için kararlar alır. AI Agent çerçeveleri, geliştiricilerin bu bağlamı daha kolay yönetmesine olanak tanır.
+**Durum** - Bu, LLM'nin çalıştığı bağlama atıfta bulunur. LLM, önceki eylemlerinin bağlamını ve mevcut durumu kullanarak sonraki eylemlerine rehberlik eder. Yapay Zeka Ajan Çerçeveleri, geliştiricilerin bu bağlamı daha kolay yönetmelerini sağlar.
 
-**Araçlar** - Kullanıcının talep ettiği ve LLM'nin planladığı görevi tamamlamak için LLM'nin araçlara erişmesi gerekir. Araçlara örnek olarak bir veritabanı, bir API, harici bir uygulama veya başka bir LLM verilebilir!
+**Araçlar** - Kullanıcının istediği ve LLM'nin planladığı görevleri tamamlamak için araçlara erişim gereklidir. Araçlara örnek olarak veri tabanı, API, harici bir uygulama veya başka bir LLM verilebilir!
 
-Bu tanımlar, ileride nasıl uygulandıklarını inceleyeceğimiz için size sağlam bir temel sağlayacaktır. Şimdi birkaç farklı AI Agent çerçevesini keşfedelim:
+Bu tanımlar, uygulamalarına baktığımızda ileriye yönelik sağlam bir temel oluşturmanıza yardımcı olacaktır. Şimdi birkaç farklı Yapay Zeka Ajan çerçevesini keşfedelim:
 
-## LangChain Agents
+## LangChain Ajanları
 
-[LangChain Agents](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst), yukarıda verdiğimiz tanımların bir uygulamasıdır.
+[LangChain Ajanları](https://python.langchain.com/docs/how_to/#agents?WT.mc_id=academic-105485-koreyst) yukarıda verdiğimiz tanımların bir uygulamasıdır.
 
-**Durumu** yönetmek için, `AgentExecutor` adlı yerleşik bir işlev kullanır. Bu işlev, tanımlı `agent` ve ona sunulan `tools` öğelerini kabul eder.
+**Durumu** yönetmek için `AgentExecutor` adlı yerleşik bir fonksiyon kullanır. Bu fonksiyon tanımlanmış `ajanın` ve ona erişilebilir `araçların` kabulünü sağlar.
 
-`AgentExecutor`, sohbet geçmişini de saklayarak sohbetin bağlamını sağlar.
+`AgentExecutor` ayrıca sohbet geçmişini saklayarak sohbet bağlamını sağlar.
 
-![Langchain Agents](../../../translated_images/tr/langchain-agents.edcc55b5d5c43716.webp)
+![Langchain Ajanları](../../../translated_images/tr/langchain-agents.edcc55b5d5c43716.webp)
 
-LangChain, LLM'nin erişebileceği [araç kataloğu](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) sunar. Bu araçlar, topluluk ve LangChain ekibi tarafından oluşturulmuştur.
+LangChain, LLM'nin erişebileceği araçları uygulamanıza ithal edebileceğiniz bir [araç kataloğu](https://integrations.langchain.com/tools?WT.mc_id=academic-105485-koreyst) sunar. Bu araçlar topluluk ve LangChain ekibi tarafından yapılmıştır.
 
-Bu araçları tanımlayabilir ve `AgentExecutor`'a iletebilirsiniz.
+Bu araçları tanımlayabilir ve `AgentExecutor`'a geçirebilirsiniz.
 
-AI Agent'lerden bahsederken görünürlük de önemli bir konudur. Uygulama geliştiricilerinin LLM'nin hangi aracı kullandığını ve neden kullandığını anlaması önemlidir. Bunun için LangChain ekibi LangSmith'i geliştirmiştir.
+Görünürlük, Yapay Zeka Ajanları konuşulduğunda önemli bir diğer konudur. Uygulama geliştiricilerinin LLM'nin hangi aracı neden kullandığını anlamaları önemlidir. Bunun için LangChain ekibi LangSmith'i geliştirmiştir.
 
 ## AutoGen
 
-Bir sonraki AI Agent çerçevesi [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). AutoGen'in ana odak noktası konuşmalardır. Agent'ler hem **konuşabilir** hem de **özelleştirilebilir**.
+Bir sonraki tartışacağımız Yapay Zeka Ajan çerçevesi [AutoGen](https://microsoft.github.io/autogen/?WT.mc_id=academic-105485-koreyst). AutoGen'in ana odağı sohbetlerdir. Ajanlar hem **konuşabilir** hem de **özelleştirilebilir**.
 
-**Konuşabilir -** LLM'ler bir görevi tamamlamak için başka bir LLM ile konuşma başlatabilir ve sürdürebilir. Bu, `AssistantAgents` oluşturarak ve onlara belirli bir sistem mesajı vererek yapılır.
+**Konuşabilir -** LLM'ler, bir görevi tamamlamak için başka bir LLM ile sohbet başlatabilir ve sürdürebilir. Bu, `AssistantAgents` yaratılarak ve onlara belirli bir sistem mesajı verilerek yapılır.
 
 ```python
 
@@ -64,7 +64,7 @@ autogen.AssistantAgent( name="Coder", llm_config=llm_config, ) pm = autogen.Assi
 
 ```
 
-**Özelleştirilebilir** - Agent'ler yalnızca LLM olarak değil, bir kullanıcı veya araç olarak da tanımlanabilir. Bir geliştirici olarak, bir görevi tamamlamak için kullanıcıdan geri bildirim almakla sorumlu bir `UserProxyAgent` tanımlayabilirsiniz. Bu geri bildirim, görevin yürütülmesine devam edilmesini veya durdurulmasını sağlayabilir.
+**Özelleştirilebilir** - Ajanlar yalnızca LLM olarak değil, kullanıcı ya da araç olarak da tanımlanabilir. Geliştirici olarak, bir görevin tamamlanması için kullanıcıdan geri bildirim alması sorumlu `UserProxyAgent` tanımlayabilirsiniz. Bu geri bildirim, görevin yürütülmesini sürdürebilir veya durdurabilir.
 
 ```python
 user_proxy = UserProxyAgent(name="user_proxy")
@@ -72,9 +72,9 @@ user_proxy = UserProxyAgent(name="user_proxy")
 
 ### Durum ve Araçlar
 
-Durumu değiştirmek ve yönetmek için, bir yardımcı Agent görevi tamamlamak için Python kodu oluşturur.
+Durumu değiştirmek ve yönetmek için bir asistan ajan, görevi tamamlamak üzere Python kodu üretir.
 
-İşte sürecin bir örneği:
+Süreç şu şekilde örneklenebilir:
 
 ![AutoGen](../../../translated_images/tr/autogen.dee9a25a45fde584.webp)
 
@@ -84,18 +84,18 @@ Durumu değiştirmek ve yönetmek için, bir yardımcı Agent görevi tamamlamak
 system_message="For weather related tasks, only use the functions you have been provided with. Reply TERMINATE when the task is done."
 ```
 
-Bu sistem mesajı, belirli bir LLM'yi görevine uygun işlevlere yönlendirir. Unutmayın, AutoGen ile farklı sistem mesajlarına sahip birden fazla tanımlı AssistantAgent oluşturabilirsiniz.
+Bu sistem mesajı, bu özel LLM'nin görevine uygun olan fonksiyonları yönlendirir. AutoGen ile farklı sistem mesajlarına sahip birden fazla AssistantAgent tanımlayabileceğinizi unutmayın.
 
-#### Kullanıcı Tarafından Sohbet Başlatılır
+#### Sohbet Kullanıcı Tarafından Başlatıldı
 
 ```python
 user_proxy.initiate_chat( chatbot, message="I am planning a trip to NYC next week, can you help me pick out what to wear? ", )
 
 ```
 
-Bu kullanıcı_proxy (İnsan) mesajı, Agent'in hangi işlevleri gerçekleştirmesi gerektiğini keşfetme sürecini başlatır.
+Bu kullanıcı_proxy (İnsan) mesajı, Ajanın hangi fonksiyonları yürütmesi gerektiğini keşfetme sürecini başlatacaktır.
 
-#### İşlev Yürütülür
+#### Fonksiyon Yürütülür
 
 ```bash
 chatbot (to user_proxy):
@@ -106,61 +106,145 @@ chatbot (to user_proxy):
 
 ```
 
-İlk sohbet işlendiğinde, Agent önerilen aracı çağırır. Bu durumda, `get_weather` adlı bir işlevdir. Yapılandırmanıza bağlı olarak, bu işlev Agent tarafından otomatik olarak yürütülebilir veya kullanıcı girdisine göre yürütülebilir.
+Başlangıç sohbeti işlendikten sonra Ajan çağrılması önerilen aracı gönderir. Burada `get_weather` adlı bir fonksiyon vardır. Konfigürasyonunuza bağlı olarak, bu fonksiyon otomatik olarak çalıştırılabilir ve okunabilir ya da kullanıcı girdisine bağlı olarak çalıştırılabilir.
 
-[AutoGen kod örnekleri](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) listesine göz atarak nasıl başlayacağınızı daha fazla keşfedebilirsiniz.
+Başlamak için nasıl bir yol izleneceğini daha fazla keşfetmek amacıyla bazı [AutoGen kod örneklerine](https://microsoft.github.io/autogen/docs/Examples/?WT.mc_id=academic-105485-koreyst) bakabilirsiniz.
 
-## Taskweaver
+## Microsoft Agent Framework
 
-Bir sonraki agent çerçevesi [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). "Kod-öncelikli" bir agent olarak bilinir çünkü `strings` ile çalışmak yerine Python'da DataFrame'lerle çalışabilir. Bu, veri analizi ve üretim görevleri için son derece kullanışlı hale gelir. Örneğin grafikler ve tablolar oluşturmak veya rastgele sayılar üretmek gibi.
+[Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst), Microsoft'un hem **Python** hem de **.NET** için Yapay Zeka Ajanları ve çok ajanlı sistemler oluşturmak için açık kaynak SDK'sıdır. Bu, Microsoft'un önceki iki projesinin — **Semantic Kernel**'in kurumsal özellikleri ve **AutoGen**'in çok-ajan orkestrasyonu — güçlü yönlerini tek, desteklenen bir çerçevede birleştirir. Bugün yeni bir ajan projesine başlıyorsanız, AutoGen'in önerilen halefidir.
+
+Bu çerçeve, tek bir **sohbet ajanından** karmaşık **çok-ajan iş akışlarına** kadar ölçeklenir ve Microsoft Foundry, Azure OpenAI ve OpenAI ile doğrudan entegre olur. Ayrıca, ajanlarınızın tam olarak ne yaptığını izleyebilmeniz için OpenTelemetry aracılığıyla yerleşik gözlemlenebilirlik sunar.
 
 ### Durum ve Araçlar
 
-Sohbetin durumunu yönetmek için TaskWeaver, bir `Planner` kavramını kullanır. `Planner`, kullanıcıların taleplerini alır ve bu talepleri yerine getirmek için tamamlanması gereken görevleri haritalar.
+**Durum** - Çerçeve, sizin için sohbet bağlamını **thread'ler** aracılığıyla yönetir. Bir ajan mesaj geçmişini (kullanıcı istekleri, araç çağrıları ve sonuçları) takip eder, böylece her tur öncekinin üzerine kurulur. Thread'ler ayrıca korunabilir, böylece bir sohbet duraklatılıp sonra devam ettirilebilir.
 
-Görevleri tamamlamak için `Planner`, `Plugins` adı verilen araçlar koleksiyonuna erişir. Bu araçlar Python sınıfları veya genel bir kod yorumlayıcı olabilir. Bu eklentiler, LLM'nin doğru eklentiyi daha iyi arayabilmesi için gömülü olarak saklanır.
+**Araçlar** - Bir ajana araçları, düz Python fonksiyonları olarak verirsiniz. Tip açıklamalı parametreler otomatik olarak bir şemaya dönüştürülür, böylece model onları nasıl ve ne zaman çağıracağını bilir (fonksiyon çağrımı). Çerçeve ayrıca Model Context Protocol (MCP) sunucularını ve kod yorumlayıcı gibi barındırılan araçları destekler.
+
+İşte özel bir araçla tek bir ajan örneği:
+
+```python
+import asyncio
+from typing import Annotated
+
+from pydantic import Field
+from agent_framework import Agent
+from agent_framework.openai import OpenAIChatClient
+
+
+def get_weather(
+    location: Annotated[str, Field(description="The location to get the weather for.")],
+) -> str:
+    """Get the weather for a given location."""
+    return f"The weather in {location} is sunny with a high of 22°C."
+
+
+async def main():
+    agent = Agent(
+        client=OpenAIChatClient(),
+        instructions="You are a helpful assistant that can answer weather questions.",
+        tools=[get_weather],
+    )
+
+    response = await agent.run("What's the weather in Amsterdam?")
+    print(response)
+
+
+asyncio.run(main())
+```
+
+Microsoft Foundry'de Azure OpenAI'ye bağlanmak için, uç noktanızı ve kimlik bilgilerinizi istemciye verin:
+
+```python
+from azure.identity.aio import AzureCliCredential
+from agent_framework.openai import OpenAIChatClient
+
+client = OpenAIChatClient(
+    model="my-gpt-5-mini-deployment",
+    azure_endpoint="https://my-resource.openai.azure.com",
+    credential=AzureCliCredential(),
+)
+```
+
+### Çok-ajan iş akışları
+
+Çerçevenin gerçekten öne çıktığı alan, birden fazla ajanı birlikte orkestre etmesidir. Örneğin, ajanları sırayla çalıştırabilir (her biri bağlamını diğerine aktarır) veya birkaç ajanı paralel olarak çalıştırıp sonuçlarını birleştebilirsiniz:
+
+```python
+from agent_framework.orchestrations import SequentialBuilder, ConcurrentBuilder
+
+# Ajanları sırayla çalıştırın, konuşma bağlamını zincir boyunca geçirin
+sequential = SequentialBuilder(participants=[researcher, writer, editor]).build()
+
+# Ajanlara paralel olarak yayılın, ardından yanıtlarını toplayın
+concurrent = ConcurrentBuilder(participants=[analyst_a, analyst_b, analyst_c]).build()
+```
+
+Çerçeveyi kurmak ve başlamak için:
+
+```bash
+pip install agent-framework-core
+# İsteğe bağlı entegrasyonlar
+pip install agent-framework-openai       # OpenAI ve Azure OpenAI
+pip install agent-framework-foundry      # Microsoft Foundry
+```
+
+Daha fazla keşfetmek için [Microsoft Agent Framework deposunu](https://github.com/microsoft/agent-framework?WT.mc_id=academic-105485-koreyst) ve [resmi dokümantasyonu](https://learn.microsoft.com/agent-framework/?WT.mc_id=academic-105485-koreyst) inceleyebilirsiniz.
+
+## Taskweaver
+
+Bir sonraki keşfedeceğimiz ajan çerçevesi [Taskweaver](https://microsoft.github.io/TaskWeaver/?WT.mc_id=academic-105485-koreyst). Bu, katı string yerine Python'da Veri Çerçeveleri (DataFrame) ile çalışabildiği için "kod-öncelikli" bir ajan olarak bilinir. Bu, veri analizi ve üretimi görevleri için son derece faydalıdır. Örneğin grafik/chart oluşturma veya rastgele sayı üretme gibi.
+
+### Durum ve Araçlar
+
+Konuşma durumunu yönetmek için TaskWeaver, `Planner` kavramını kullanır. `Planner` kullanıcı isteklerini alan ve yerine getirilmesi gereken görevlerin haritasını çıkaran bir LLM'dir.
+
+Görevleri tamamlamak için `Planner`, `Plugins` adı verilen araç koleksiyonuna maruz bırakılır. Bu, Python sınıfları veya genel bir kod yorumlayıcı olabilir. Bu eklentiler, LLM'nin doğru eklentiyi daha iyi arayabilmesi için gömme (embedding) olarak saklanır.
 
 ![Taskweaver](../../../translated_images/tr/taskweaver.da8559999267715a.webp)
 
-İşte anomali tespiti için bir eklenti örneği:
+İşte anormallik tespiti için bir eklenti örneği:
 
 ```python
 class AnomalyDetectionPlugin(Plugin): def __call__(self, df: pd.DataFrame, time_col_name: str, value_col_name: str):
 ```
 
-Kod, yürütülmeden önce doğrulanır. Taskweaver'da bağlamı yönetmek için başka bir özellik de `experience`dır. Deneyim, bir konuşmanın bağlamının uzun vadede YAML dosyasında saklanmasını sağlar. Bu, LLM'nin önceki konuşmalara maruz kaldıkça belirli görevlerde zamanla gelişmesini sağlayabilir.
+Kod yürütülmeden önce doğrulanır. Taskweaver'da bağlamı yönetmek için başka bir özellik `experience`dır. Experience, bir konuşma bağlamının uzun vadede bir YAML dosyasına kaydedilmesine olanak tanır. Bu, LLM'nin önceki konuşmalardan öğrenerek belirli görevlerde zamanla gelişmesini sağlayacak şekilde yapılandırılabilir.
 
 ## JARVIS
 
-Son olarak keşfedeceğimiz agent çerçevesi [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file?WT.mc_id=academic-105485-koreyst). JARVIS'i benzersiz kılan şey, bir LLM'nin sohbetin `durumunu` yönetmesi ve `araçların` diğer AI modelleri olmasıdır. Her bir AI modeli, nesne algılama, transkripsiyon veya görüntü açıklama gibi belirli görevleri yerine getiren uzmanlaşmış modellerdir.
+Keşfedeceğimiz son ajan çerçevesi [JARVIS](https://github.com/microsoft/JARVIS?tab=readme-ov-file&WT.mc_id=academic-105485-koreyst). JARVIS'i benzersiz yapan, sohbetin `durumunu` yönetmek için bir LLM kullanması ve `araçların` diğer Yapay Zeka modelleri olmasıdır. Her bir Yapay Zeka modeli, nesne tespiti, transkripsiyon veya resim alt yazısı oluşturma gibi belirli görevler için uzmanlaşmış modellerdir.
 
 ![JARVIS](../../../translated_images/tr/jarvis.762ddbadbd1a3a33.webp)
 
-Genel amaçlı bir model olan LLM, kullanıcıdan gelen talebi alır ve belirli görevi ve bu görevi tamamlamak için gereken argümanları/verileri belirler.
+Genel amaçlı model olan LLM, kullanıcıdan isteği alır ve görevi belirler, tamamlamak için gereken argümanları/verileri tanımlar.
 
 ```python
 [{"task": "object-detection", "id": 0, "dep": [-1], "args": {"image": "e1.jpg" }}]
 ```
 
-LLM daha sonra talebi, özel AI modelinin yorumlayabileceği bir biçimde, örneğin JSON olarak düzenler. AI modeli, görevine dayalı tahminini geri gönderdiğinde, LLM yanıtı alır.
+LLM, isteği, uzmanlaşmış Yapay Zeka modelinin yorumlayabileceği şekilde (örneğin JSON) formatlar. Yapay Zeka modeli tahminini döndürdüğünde, LLM yanıtı alır.
 
-Görevi tamamlamak için birden fazla modele ihtiyaç duyulursa, LLM bu modellerden gelen yanıtları yorumlar ve bunları birleştirerek kullanıcıya yanıt oluşturur.
+Görevi tamamlamak için birden fazla modele ihtiyaç varsa, LLM bu modellerin yanıtlarını da yorumlayacak ve bunları birleştirerek kullanıcıya cevap oluşturacaktır.
 
-Aşağıdaki örnek, bir kullanıcının bir resimdeki nesnelerin açıklamasını ve sayısını istediği durumda nasıl çalışacağını gösterir:
+Aşağıdaki örnek, kullanıcının bir resimdeki nesnelerin açıklamasını ve sayısını istediğinde nasıl çalışacağını gösterir:
 
 ## Ödev
 
-AI Agent'ler ile öğreniminizi sürdürmek için AutoGen ile şunları yapabilirsiniz:
+Yapay Zeka Ajanları öğreniminize Microsoft Agent Framework ile devam edebilirsiniz:
 
-- Bir eğitim girişiminin farklı departmanlarıyla iş toplantısını simüle eden bir uygulama oluşturun.
-- LLM'lerin farklı kişilikleri ve öncelikleri anlamasına rehberlik eden sistem mesajları oluşturun ve kullanıcıya yeni bir ürün fikrini sunma imkanı sağlayın.
-- LLM, ardından her departmandan gelen takip sorularını oluşturmalı ve bu sorular ürün fikrini geliştirmek için kullanılmalıdır.
+- Bir eğitim başlangıç şirketinin farklı departmanları ile bir iş toplantısını simüle eden bir uygulama.
+- LLM'lerin farklı kişilikleri ve öncelikleri anlamasına rehberlik eden sistem mesajları oluşturun ve kullanıcıya yeni bir ürün fikrini sunma imkanı verin.
+- Sonra, her departman için sunumu ve ürün fikrini geliştirmek üzere takip soruları üretsin.
 
 ## Öğrenme burada bitmiyor, yolculuğa devam edin
 
-Bu dersi tamamladıktan sonra, Generative AI bilginizi geliştirmeye devam etmek için [Generative AI Öğrenme koleksiyonumuza](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) göz atın!
+Bu dersi tamamladıktan sonra, Üretken Yapay Zeka bilginizi ilerletmek için [Üretken Yapay Zeka Öğrenme koleksiyonumuza](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) göz atın!
 
 ---
 
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

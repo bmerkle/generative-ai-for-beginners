@@ -1,248 +1,282 @@
-# Paggawa ng Low Code AI Applications
+# Paggawa ng Mga Low Code AI Application
 
-[![Paggawa ng Low Code AI Applications](../../../translated_images/tl/10-lesson-banner.a01ac8fe3fd86310.webp)](https://youtu.be/1vzq3Nd8GBA?si=h6LHWJXdmqf6mhDg)
+[![Paggawa ng Mga Low Code AI Application](../../../translated_images/tl/10-lesson-banner.a01ac8fe3fd86310.webp)](https://youtu.be/1vzq3Nd8GBA?si=h6LHWJXdmqf6mhDg)
 
-> _(I-click ang imahe sa itaas para mapanood ang video ng araling ito)_
+> _(I-click ang larawan sa itaas upang mapanood ang video ng leksyon na ito)_
 
 ## Panimula
 
-Ngayon na natutunan na natin kung paano gumawa ng mga application na gumagawa ng imahe, pag-usapan natin ang low code. Ang Generative AI ay maaaring gamitin sa iba't ibang larangan kabilang ang low code, pero ano nga ba ang low code at paano natin ito malalagyan ng AI?
+Ngayong natutunan na natin kung paano gumawa ng mga app na lumilikha ng larawan, pag-usapan naman natin ang low code. Ang Generative AI ay maaaring gamitin sa iba't ibang larangan kabilang ang low code, pero ano nga ba ang low code at paano natin maidaragdag ang AI dito?
 
-Ang paggawa ng mga app at solusyon ay naging mas madali para sa mga tradisyunal na developer at hindi developer sa pamamagitan ng paggamit ng Low Code Development Platforms. Ang mga Low Code Development Platforms ay nagbibigay-daan sa iyo na gumawa ng mga app at solusyon na may kaunti o walang code. Ito ay nagagawa sa pamamagitan ng pagbibigay ng visual na development environment na nagbibigay-daan sa iyo na mag-drag at drop ng mga component para makagawa ng mga app at solusyon. Sa ganitong paraan, mas mabilis kang makakagawa ng mga app at solusyon na may mas kaunting resources. Sa araling ito, tatalakayin natin nang mas malalim kung paano gamitin ang Low Code at kung paano mapapahusay ang low code development gamit ang AI sa pamamagitan ng Power Platform.
+Ang paggawa ng mga app at solusyon ay naging mas madali para sa mga tradisyunal na developer at hindi developer sa pamamagitan ng paggamit ng Low Code Development Platforms. Pinahihintulutan ka ng Low Code Development Platforms na gumawa ng mga app at solusyon nang kaunti o walang kodigo. Ito ay nakakamit sa pamamagitan ng pagbibigay ng isang visual development environment na nagpapahintulot sa iyo na i-drag at i-drop ang mga bahagi upang gumawa ng mga app at solusyon. Pinapabilis nito ang paggawa ng mga app at solusyon at nangangailangan ng mas kaunting mga mapagkukunan. Sa leksyon na ito, ating tatalakayin nang malalim kung paano gamitin ang Low Code at paano mapapahusay ang low code development gamit ang AI sa Power Platform.
 
-Ang Power Platform ay nagbibigay sa mga organisasyon ng pagkakataon na bigyang kapangyarihan ang kanilang mga team na gumawa ng sarili nilang mga solusyon sa pamamagitan ng isang intuitive na low-code o no-code na environment. Ang environment na ito ay tumutulong na gawing simple ang proseso ng paggawa ng mga solusyon. Sa Power Platform, ang mga solusyon ay maaaring magawa sa loob ng mga araw o linggo sa halip na buwan o taon. Ang Power Platform ay binubuo ng limang pangunahing produkto: Power Apps, Power Automate, Power BI, Power Pages, at Copilot Studio.
+Nagbibigay ang Power Platform sa mga organisasyon ng pagkakataon na bigyang kapangyarihan ang kanilang mga koponan na gumawa ng kanilang sariling mga solusyon sa pamamagitan ng isang intuitive na low-code o no-code na kapaligiran. Tinutulungan ng kapaligirang ito na gawing mas simple ang proseso ng paggawa ng mga solusyon. Sa Power Platform, maaaring mabuo ang mga solusyon sa loob ng ilang araw o linggo sa halip na buwan o taon. Binubuo ang Power Platform ng limang pangunahing produkto: Power Apps, Power Automate, Power BI, Power Pages at Copilot Studio.
 
-Ang araling ito ay sumasaklaw sa:
+Tinatalakay ng leksyon na ito:
 
 - Panimula sa Generative AI sa Power Platform
 - Panimula sa Copilot at kung paano ito gamitin
-- Paggamit ng Generative AI para gumawa ng mga app at flow sa Power Platform
-- Pag-unawa sa AI Models sa Power Platform gamit ang AI Builder
+- Paggamit ng Generative AI sa paggawa ng mga app at flows sa Power Platform
+- Pag-unawa sa mga AI Models sa Power Platform gamit ang AI Builder
+- Paggawa ng mga intelligent agents gamit ang Microsoft Copilot Studio
 
-## Mga Layunin sa Pag-aaral
+## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng araling ito, magagawa mo ang sumusunod:
+Sa pagtatapos ng leksyon na ito, magagawa mong:
 
 - Maunawaan kung paano gumagana ang Copilot sa Power Platform.
 
 - Gumawa ng Student Assignment Tracker App para sa aming education startup.
 
-- Gumawa ng Invoice Processing Flow na gumagamit ng AI para kunin ang impormasyon mula sa mga invoice.
+- Gumawa ng Invoice Processing Flow na gumagamit ng AI upang kunin ang impormasyon mula sa mga invoice.
 
-- Mag-apply ng pinakamahusay na mga kasanayan sa paggamit ng Create Text with GPT AI Model.
+- Mag-apply ng mga best practices kapag ginagamit ang Create Text with GPT AI Model.
 
-Ang mga tools at teknolohiya na gagamitin mo sa araling ito ay:
+- Maunawaan kung ano ang Microsoft Copilot Studio at kung paano gumawa ng mga intelligent agents gamit ito.
 
-- **Power Apps**, para sa Student Assignment Tracker app, na nagbibigay ng low-code development environment para sa paggawa ng mga app upang subaybayan, pamahalaan, at makipag-ugnayan sa data.
+Ang mga tools at teknolohiya na gagamitin mo sa leksyon na ito ay:
 
-- **Dataverse**, para sa pag-iimbak ng data para sa Student Assignment Tracker app kung saan ang Dataverse ay magbibigay ng low-code data platform para sa pag-iimbak ng data ng app.
+- **Power Apps**, para sa Student Assignment Tracker app, na nagbibigay ng low-code development environment para sa paggawa ng mga app upang subaybayan, pamahalaan at makipag-ugnayan sa data.
 
-- **Power Automate**, para sa Invoice Processing flow kung saan magkakaroon ka ng low-code development environment para sa paggawa ng mga workflow upang i-automate ang proseso ng Invoice Processing.
+- **Dataverse**, para sa pag-iimbak ng data para sa Student Assignment Tracker app kung saan magbibigay ang Dataverse ng low-code data platform para sa pag-iimbak ng data ng app.
 
-- **AI Builder**, para sa Invoice Processing AI Model kung saan gagamit ka ng prebuilt AI Models upang iproseso ang mga invoice para sa aming startup.
+- **Power Automate**, para sa Invoice Processing flow kung saan magkakaroon ka ng low-code development environment para gumawa ng workflows upang i-automate ang proseso ng Invoice Processing.
+
+- **AI Builder**, para sa Invoice Processing AI Model kung saan gagamitin mo ang prebuilt AI Models upang iproseso ang mga invoice para sa aming startup.
 
 ## Generative AI sa Power Platform
 
-Ang pagpapahusay ng low-code development at application gamit ang generative AI ay isang pangunahing pokus para sa Power Platform. Ang layunin ay bigyang-daan ang lahat na makagawa ng mga AI-powered na app, site, dashboard, at mag-automate ng mga proseso gamit ang AI, _nang hindi nangangailangan ng anumang data science expertise_. Ang layuning ito ay nagagawa sa pamamagitan ng pagsasama ng generative AI sa low-code development experience sa Power Platform sa anyo ng Copilot at AI Builder.
+Ang pagpapahusay sa low-code development at aplikasyon gamit ang generative AI ay isa sa mga pangunahing pokus ng Power Platform. Ang layunin ay bigyang kakayahan ang lahat na gumawa ng mga AI-powered na app, site, dashboard at i-automate ang mga proseso gamit ang AI, _nang hindi nangangailangan ng anumang kaalaman sa data science_. Nakakamit ang layuning ito sa pamamagitan ng pag-integrate ng generative AI sa low-code development experience sa Power Platform sa anyo ng Copilot at AI Builder.
 
 ### Paano ito gumagana?
 
-Ang Copilot ay isang AI assistant na nagbibigay-daan sa iyo na gumawa ng mga solusyon sa Power Platform sa pamamagitan ng paglalarawan ng iyong mga pangangailangan sa isang serye ng mga hakbang na conversational gamit ang natural na wika. Halimbawa, maaari mong utusan ang iyong AI assistant na tukuyin kung anong mga field ang gagamitin ng iyong app at gagawin nito ang parehong app at ang underlying data model o maaari mong tukuyin kung paano mag-set up ng flow sa Power Automate.
+Ang Copilot ay isang AI assistant na nagbibigay-daan sa iyo na gumawa ng mga Power Platform solutions sa pamamagitan ng paglalarawan ng iyong mga kinakailangan sa isang serye ng mga hakbang na pang-usap gamit ang natural na wika. Halimbawa, maaari mong utusan ang iyong AI assistant na ilahad kung anong mga field ang gagamitin ng iyong app at gagawa ito ng parehong app at ng ilalim na data model o maaari mong tukuyin kung paano itatakda ang isang flow sa Power Automate.
 
-Maaari mong gamitin ang mga Copilot-driven functionalities bilang isang feature sa iyong app screens upang bigyang-daan ang mga user na matuklasan ang mga insight sa pamamagitan ng mga conversational interaction.
+Maaari mong gamitin ang mga functionality na pinalakas ng Copilot bilang isang tampok sa iyong mga screen ng app upang pahintulutan ang mga user na tuklasin ang mga insight sa pamamagitan ng mga conversational na interaksyon.
 
-Ang AI Builder ay isang low-code AI capability na available sa Power Platform na nagbibigay-daan sa iyo na gumamit ng AI Models upang matulungan kang mag-automate ng mga proseso at mag-predict ng mga resulta. Sa AI Builder, maaari mong dalhin ang AI sa iyong mga app at flow na konektado sa iyong data sa Dataverse o sa iba't ibang cloud data sources, tulad ng SharePoint, OneDrive, o Azure.
+Ang AI Builder ay isang low-code AI capability na available sa Power Platform na nagpapahintulot sa iyo na gamitin ang AI Models upang makatulong sa pag-automate ng mga proseso at magpredict ng mga resulta. Sa AI Builder maaari mong dalhin ang AI sa iyong mga app at flows na nakakonekta sa iyong data sa Dataverse o sa iba't ibang cloud data sources, tulad ng SharePoint, OneDrive o Azure.
 
-Ang Copilot ay available sa lahat ng Power Platform products: Power Apps, Power Automate, Power BI, Power Pages, at Power Virtual Agents. Ang AI Builder ay available sa Power Apps at Power Automate. Sa araling ito, magpo-focus tayo kung paano gamitin ang Copilot at AI Builder sa Power Apps at Power Automate upang gumawa ng solusyon para sa aming education startup.
+Ang Copilot ay available sa lahat ng Power Platform na produkto: Power Apps, Power Automate, Power BI, Power Pages at Copilot Studio (dating Power Virtual Agents). Ang AI Builder ay available sa Power Apps at Power Automate. Sa leksyon na ito, magpo-focus tayo kung paano gamitin ang Copilot at AI Builder sa Power Apps at Power Automate upang gumawa ng solusyon para sa aming education startup.
 
 ### Copilot sa Power Apps
 
-Bilang bahagi ng Power Platform, ang Power Apps ay nagbibigay ng low-code development environment para sa paggawa ng mga app upang subaybayan, pamahalaan, at makipag-ugnayan sa data. Ito ay isang suite ng mga serbisyo sa pag-develop ng app na may scalable na data platform at kakayahang kumonekta sa mga cloud services at on-premises data. Ang Power Apps ay nagbibigay-daan sa iyo na gumawa ng mga app na tumatakbo sa mga browser, tablet, at telepono, at maaaring i-share sa mga kasamahan. Ang Power Apps ay nagpapadali sa mga user sa pag-develop ng app gamit ang isang simpleng interface, kaya't ang bawat business user o pro developer ay maaaring gumawa ng custom na mga app. Ang karanasan sa pag-develop ng app ay pinahusay din gamit ang Generative AI sa pamamagitan ng Copilot.
+Bilang bahagi ng Power Platform, nagbibigay ang Power Apps ng low-code development environment para sa paggawa ng mga app upang subaybayan, pamahalaan at makipag-ugnayan sa data. Ito ay isang suite ng mga serbisyo sa paggawa ng app na may scalable data platform at kakayahang kumonekta sa mga cloud service at on-premises data. Pinapayagan ng Power Apps na gumawa ng mga app na tumatakbo sa browsers, tablets, at telepono, at maaaring ibahagi sa mga kasamahan sa trabaho. Pinapadali ng Power Apps ang paggawa ng app sa mga gumagamit gamit ang simpleng interface, upang bawat business user o pro developer ay makagawa ng custom na app. Pinalalakas din ang karanasan sa paggawa ng app gamit ang Generative AI sa pamamagitan ng Copilot.
 
-Ang Copilot AI assistant feature sa Power Apps ay nagbibigay-daan sa iyo na ilarawan kung anong uri ng app ang kailangan mo at kung anong impormasyon ang gusto mong i-track, kolektahin, o ipakita ng iyong app. Ang Copilot ay gumagawa ng isang responsive Canvas app base sa iyong paglalarawan. Maaari mo itong i-customize upang matugunan ang iyong mga pangangailangan. Ang AI Copilot ay gumagawa rin at nagmumungkahi ng isang Dataverse Table na may mga field na kailangan mo upang i-store ang data na gusto mong i-track at ilang sample data. Tatalakayin natin kung ano ang Dataverse at kung paano mo ito magagamit sa Power Apps sa araling ito. Maaari mo ring i-customize ang table upang matugunan ang iyong mga pangangailangan gamit ang AI Copilot assistant feature sa pamamagitan ng mga conversational steps. Ang feature na ito ay madaling ma-access mula sa Power Apps home screen.
+Ang tampok na copilot AI assistant sa Power Apps ay nagpapahintulot sa iyo na ilarawan kung anong klaseng app ang kailangan mo at anong impormasyon ang nais mong subaybayan, kolektahin, o ipakita ng iyong app. Pagkatapos ay gagawa ang Copilot ng isang responsive Canvas app base sa iyong paglalarawan. Maaari mong i-customize ang app upang umangkop sa iyong mga pangangailangan. Gumagawa at nagmumungkahi rin ang AI Copilot ng isang Dataverse Table na may mga field na kailangan mo upang iimbak ang data na nais mong subaybayan at ilang sample na data. Tatalakayin natin kung ano ang Dataverse at kung paano mo ito magagamit sa Power Apps sa leksyon na ito mamaya. Maaari mo ring i-customize ang table upang umangkop sa iyong mga pangangailangan gamit ang AI Copilot assistant feature sa pamamagitan ng mga conversational na hakbang. Madaling ma-access itong tampok mula sa home screen ng Power Apps.
 
 ### Copilot sa Power Automate
 
-Bilang bahagi ng Power Platform, ang Power Automate ay nagbibigay-daan sa mga user na gumawa ng mga automated workflow sa pagitan ng mga application at serbisyo. Tumutulong ito na i-automate ang mga paulit-ulit na proseso ng negosyo tulad ng komunikasyon, pagkolekta ng data, at pag-apruba ng mga desisyon. Ang simpleng interface nito ay nagbibigay-daan sa mga user na may iba't ibang antas ng teknikal na kakayahan (mula sa mga baguhan hanggang sa mga bihasang developer) na i-automate ang mga gawain sa trabaho. Ang karanasan sa pag-develop ng workflow ay pinahusay din gamit ang Generative AI sa pamamagitan ng Copilot.
+Bilang bahagi ng Power Platform, pinapayagan ng Power Automate ang mga user na gumawa ng automated workflows sa pagitan ng mga aplikasyon at serbisyo. Tinutulungan nito na i-automate ang mga paulit-ulit na proseso ng negosyo tulad ng komunikasyon, pagkolekta ng data, at pag-apruba ng desisyon. Ang simpleng interface nito ay nagpapahintulot sa mga user na may iba't ibang antas ng teknikal na kakayahan (mula sa mga nagsisimula hanggang sa mga bihasang developer) na i-automate ang mga gawain sa trabaho. Pinalalakas din ang karanasan sa paggawa ng workflow gamit ang Generative AI sa pamamagitan ng Copilot.
 
-Ang Copilot AI assistant feature sa Power Automate ay nagbibigay-daan sa iyo na ilarawan kung anong uri ng flow ang kailangan mo at kung anong mga aksyon ang gusto mong gawin ng iyong flow. Ang Copilot ay gumagawa ng flow base sa iyong paglalarawan. Maaari mo itong i-customize upang matugunan ang iyong mga pangangailangan. Ang AI Copilot ay gumagawa rin at nagmumungkahi ng mga aksyon na kailangan mo upang maisagawa ang task na gusto mong i-automate. Tatalakayin natin kung ano ang mga flow at kung paano mo ito magagamit sa Power Automate sa araling ito. Maaari mo ring i-customize ang mga aksyon upang matugunan ang iyong mga pangangailangan gamit ang AI Copilot assistant feature sa pamamagitan ng mga conversational steps. Ang feature na ito ay madaling ma-access mula sa Power Automate home screen.
+Ang tampok na copilot AI assistant sa Power Automate ay nagpapahintulot sa iyo na ilarawan kung anong klaseng flow ang kailangan mo at anong mga aksyon ang nais mong gawin ng iyong flow. Pagkatapos ay gagawa ang Copilot ng flow base sa iyong paglalarawan. Maaari mong i-customize ang flow upang umangkop sa iyong mga pangangailangan. Gumagawa at nagmumungkahi rin ang AI Copilot ng mga aksyon na kailangan mo upang maisagawa ang gawain na nais mong i-automate. Tatalakayin natin kung ano ang mga flow at kung paano mo ito magagamit sa Power Automate sa leksyon na ito mamaya. Maaari mong i-customize ang mga aksyon upang umangkop sa iyong mga pangangailangan gamit ang AI Copilot assistant feature sa pamamagitan ng mga conversational na hakbang. Madaling ma-access itong tampok mula sa home screen ng Power Automate.
 
-## Gawain: Pamahalaan ang mga student assignment at invoice para sa aming startup gamit ang Copilot
+## Paggawa ng Mga Intelligent Agents gamit ang Microsoft Copilot Studio
 
-Ang aming startup ay nagbibigay ng online courses sa mga estudyante. Ang startup ay mabilis na lumago at ngayon ay nahihirapan nang makasabay sa demand para sa mga kurso nito. Ang startup ay kumuha sa iyo bilang isang Power Platform developer upang tulungan silang gumawa ng low code solution upang matulungan silang pamahalaan ang kanilang mga student assignment at invoice. Ang kanilang solusyon ay dapat makatulong sa kanila na subaybayan at pamahalaan ang mga student assignment sa pamamagitan ng isang app at i-automate ang proseso ng invoice processing sa pamamagitan ng isang workflow. Hiniling sa iyo na gamitin ang Generative AI upang ma-develop ang solusyon.
+[Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio?WT.mc_id=academic-105485-koreyst) (dating Power Virtual Agents) ay ang low-code na miyembro ng Power Platform para sa paggawa ng **mga AI agents** — mga conversational copilots na maaaring sumagot ng mga tanong, gumawa ng mga aksyon, at mag-automate ng mga gawain para sa mga user mo. Tulad ng iba pang bahagi ng Power Platform, binubuo mo ang mga agent na ito sa isang visual, natural-language-first na karanasan: ilalarawan mo kung ano ang gusto mong gawin ng agent, at tutulungan ka ng Copilot Studio na ayusin ang mga utos, kaalaman, at aksyon nito.
 
-Kapag nagsisimula kang gumamit ng Copilot, maaari mong gamitin ang [Power Platform Copilot Prompt Library](https://github.com/pnp/powerplatform-prompts?WT.mc_id=academic-109639-somelezediko) upang makapagsimula sa mga prompt. Ang library na ito ay naglalaman ng listahan ng mga prompt na maaari mong gamitin upang gumawa ng mga app at flow gamit ang Copilot. Maaari mo ring gamitin ang mga prompt sa library upang makakuha ng ideya kung paano ilarawan ang iyong mga pangangailangan sa Copilot.
+Para sa aming education startup, maaari kang gumawa ng agent na sumasagot sa mga tanong ng mga estudyante tungkol sa mga kurso, sumusuri sa mga deadline ng assignment, at pati na rin ay nagpapadala ng email sa instructor — lahat ito nang walang pagsusulat ng kodigo.
+
+Narito ang ilan sa mga pinakabagong kakayahan na nagpapalakas sa Copilot Studio:
+
+- **Generative na mga sagot mula sa iyong kaalaman**. Sa halip na mano-manong isulat ang bawat usapan, maaari kang kumonekta sa mga **pinagkukunan ng kaalaman** — mga pampublikong website, SharePoint, OneDrive, Dataverse, mga naikarga na file, o enterprise data sa pamamagitan ng mga connector — at ang agent ay lumikha ng mga batay sa ebidensyang sagot mula dito.
+
+- **Generative orchestration**. Sa halip na umasa sa mahigpit na trigger phrases, ginagamit ng agent ang AI upang maunawaan ang isang kahilingan at dinamiko nitong pinipili kung anong kaalaman, mga paksa, at mga aksyon ang pagsasamahin upang matupad ito, kasama na ang pagsasagawa ng sunod-sunod na mga hakbang.
+
+- **Mga aksyon at connector**. Ang mga agent ay maaaring *gumawa* ng mga bagay, hindi lang makipag-chat. Maaari kang magbigay sa agent ng mga aksyon na suportado ng 1,500+ prebuilt na Power Platform connector, Power Automate flows, custom REST API, prompts, o **Model Context Protocol (MCP)** servers.
+
+- **Autonomous agents**. Hindi limitado ang mga agent sa pagsagot lang sa chat window. Maaari kang gumawa ng **autonomous agents** na napapa-trigger ng mga kaganapan — tulad ng isang bagong email, bagong record sa Dataverse, o isang file na na-upload — at pagkatapos ay kumikilos sa background upang matapos ang isang gawain.
+
+- **Multi-agent orchestration**. Maaaring tawagan ng mga agent ang ibang mga agent. Ang isang Copilot Studio agent ay maaaring ipasa, o mapalawak, ng iba pang mga agent, kabilang na ang mga agent na inilathala sa Microsoft 365 Copilot at mga agent na ginawa sa Microsoft Foundry.
+
+- **Model choice**. Bukod sa mga built-in models, maaari kang magdala ng mga modelo mula sa Microsoft Foundry model catalog upang iakma kung paano magrason at sumagot ang iyong agent.
+
+- **I-publish saanman**. Kapag nagawa na, maaaring i-publish ang agent sa maraming channel — Microsoft Teams, Microsoft 365 Copilot, isang website o custom app, at iba pa — na may seguridad, authentication, at analytics na pinamamahalaan sa pamamagitan ng Power Platform admin experience.
+
+Maaari kang magsimula sa paggawa ng iyong unang agent sa [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com?WT.mc_id=academic-105485-koreyst) at matuto pa sa [Microsoft Copilot Studio documentation](https://learn.microsoft.com/microsoft-copilot-studio/?WT.mc_id=academic-105485-koreyst).
+
+## Takdang-Aralin: Pamahalaan ang mga student assignment at mga invoice para sa aming startup, gamit ang Copilot
+
+Nagbibigay ang aming startup ng mga online na kurso sa mga estudyante. Mabilis ang paglago ng startup at ngayon ay nahihirapan na itong sabayan ang demand para sa mga kurso nito. In-upa ka ng startup bilang Power Platform developer upang tulungan silang gumawa ng low code na solusyon para pamahalaan ang mga student assignment at mga invoice. Dapat makatulong ang kanilang solusyon na subaybayan at pamahalaan ang mga student assignment gamit ang isang app at i-automate ang proseso ng pagproseso ng invoice gamit ang isang workflow. Hinihiling sa iyo na gamitin ang Generative AI upang bumuo ng solusyon.
+
+Kapag nagsisimula kang gumamit ng Copilot, maaari mong gamitin ang [Power Platform Copilot Prompt Library](https://github.com/pnp/powerplatform-prompts?WT.mc_id=academic-109639-somelezediko) upang makakuha ng panimulang mga prompt. Naglalaman ang library ng listahan ng mga prompt na maaari mong gamitin upang gumawa ng mga app at flows gamit ang Copilot. Maaari mo ring gamitin ang mga prompt sa library upang magkaroon ng ideya kung paano ilarawan ang iyong mga kinakailangan sa Copilot.
 
 ### Gumawa ng Student Assignment Tracker App para sa Aming Startup
 
-Ang mga guro sa aming startup ay nahihirapan nang subaybayan ang mga student assignment. Gumagamit sila ng spreadsheet upang subaybayan ang mga assignment ngunit ito ay naging mahirap pamahalaan habang dumadami ang bilang ng mga estudyante. Hiniling nila sa iyo na gumawa ng isang app na makakatulong sa kanila na subaybayan at pamahalaan ang mga student assignment. Ang app ay dapat magbigay-daan sa kanila na magdagdag ng bagong mga assignment, tingnan ang mga assignment, i-update ang mga assignment, at tanggalin ang mga assignment. Ang app ay dapat ding magbigay-daan sa mga guro at estudyante na makita ang mga assignment na na-grade na at ang mga hindi pa na-grade.
+Nahihirapan ang mga guro sa aming startup na subaybayan ang mga student assignment. Ginagamit nila ang isang spreadsheet para subaybayan ang mga assignment ngunit naging mahirap itong pamahalaan dahil sa dami ng mga estudyante. Hiningi nila sa iyo na gumawa ng app na tutulong sa kanila na subaybayan at pamahalaan ang mga student assignment. Dapat payagan ng app ang mga guro na magdagdag ng mga bagong assignment, makita ang mga assignment, i-update ang mga assignment at mag-delete ng mga assignment. Dapat din payagan ng app ang mga guro at estudyante na makita ang mga assignment na na-grade na at ang mga hindi pa na-grade.
 
-Gagawa ka ng app gamit ang Copilot sa Power Apps sa pamamagitan ng pagsunod sa mga hakbang sa ibaba:
+Gagawa ka ng app gamit ang Copilot sa Power Apps sa pamamagitan ng mga sumusunod na hakbang:
 
 1. Pumunta sa [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) home screen.
 
-1. Gamitin ang text area sa home screen upang ilarawan ang app na gusto mong gawin. Halimbawa, **_Gusto kong gumawa ng app para subaybayan at pamahalaan ang mga student assignment_**. I-click ang **Send** button upang ipadala ang prompt sa AI Copilot.
+1. Gamitin ang text area sa home screen upang ilarawan ang app na nais mong gawin. Halimbawa, **_Gusto kong gumawa ng app upang subaybayan at pamahalaan ang mga student assignment_**. I-click ang **Send** na button upang ipadala ang prompt sa AI Copilot.
 
 ![Ilarawan ang app na gusto mong gawin](../../../translated_images/tl/copilot-chat-prompt-powerapps.84250f341d060830.webp)
 
-1. Ang AI Copilot ay magmumungkahi ng Dataverse Table na may mga field na kailangan mo upang i-store ang data na gusto mong i-track at ilang sample data. Maaari mo itong i-customize upang matugunan ang iyong mga pangangailangan gamit ang AI Copilot assistant feature sa pamamagitan ng mga conversational steps.
+1. Magmumungkahi ang AI Copilot ng isang Dataverse Table na may mga field na kailangan mo para i-imbak ang data na gusto mong subaybayan at ilan pang sample na data. Maaari mong i-customize ang table upang umangkop sa iyong mga pangangailangan gamit ang AI Copilot assistant feature sa pamamagitan ng mga conversational na hakbang.
 
-   > **Mahalaga**: Ang Dataverse ay ang underlying data platform para sa Power Platform. Ito ay isang low-code data platform para sa pag-iimbak ng data ng app. Ito ay isang fully managed service na ligtas na nag-iimbak ng data sa Microsoft Cloud at naka-provision sa loob ng iyong Power Platform environment. Mayroon itong built-in na data governance capabilities, tulad ng data classification, data lineage, fine-grained access control, at iba pa. Maaari kang matuto pa tungkol sa Dataverse [dito](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
+   > **Mahalaga**: Ang Dataverse ay ang ilalim na data platform para sa Power Platform. Ito ay isang low-code data platform para sa pag-iimbak ng data ng app. Ito ay isang fully managed na serbisyo na ligtas na nag-iimbak ng data sa Microsoft Cloud at naka-provision sa loob ng iyong Power Platform environment. Mayroon itong built-in na mga kakayahan sa data governance, tulad ng data classification, data lineage, fine-grained access control, at iba pa. Maaari kang matuto nang higit pa tungkol sa Dataverse [dito](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
 
    ![Mga mungkahing field sa iyong bagong table](../../../translated_images/tl/copilot-dataverse-table-powerapps.f4cc07b5d5f9327b.webp)
 
-1. Ang mga guro ay nais magpadala ng mga email sa mga estudyante na nagsumite ng kanilang mga assignment upang panatilihin silang updated sa progreso ng kanilang mga assignment. Maaari mong gamitin ang Copilot upang magdagdag ng bagong field sa table upang i-store ang email ng estudyante. Halimbawa, maaari mong gamitin ang sumusunod na prompt upang magdagdag ng bagong field sa table: **_Gusto kong magdagdag ng column para i-store ang email ng estudyante_**. I-click ang **Send** button upang ipadala ang prompt sa AI Copilot.
+1. Gusto ng mga guro na magpadala ng email sa mga estudyanteng nagsumite ng kanilang mga assignment upang mapanatiling updated sila sa progreso ng kanilang mga assignment. Maaari mong gamitin ang Copilot upang magdagdag ng bagong field sa table upang itago ang student email. Halimbawa, maaari mo gamitin ang sumusunod na prompt upang magdagdag ng bagong field sa table: **_Gusto kong magdagdag ng column upang itago ang email ng estudyante_**. I-click ang **Send** na button upang ipadala ang prompt sa AI Copilot.
 
 ![Pagdaragdag ng bagong field](../../../translated_images/tl/copilot-new-column.35e15ff21acaf274.webp)
 
-1. Ang AI Copilot ay gagawa ng bagong field at maaari mo itong i-customize upang matugunan ang iyong mga pangangailangan.
+1. Gagawa ang AI Copilot ng bagong field at maaari mo itong i-customize upang umangkop sa iyong mga pangangailangan.
 
-1. Kapag tapos ka na sa table, i-click ang **Create app** button upang gumawa ng app.
 
-1. Ang AI Copilot ay gagawa ng responsive Canvas app base sa iyong paglalarawan. Maaari mo itong i-customize upang matugunan ang iyong mga pangangailangan.
+1. Kapag natapos ka na sa talahanayan, i-click ang **Create app** na button upang likhain ang app.
 
-1. Para sa mga guro na magpadala ng mga email sa mga estudyante, maaari mong gamitin ang Copilot upang magdagdag ng bagong screen sa app. Halimbawa, maaari mong gamitin ang sumusunod na prompt upang magdagdag ng bagong screen sa app: **_Gusto kong magdagdag ng screen para magpadala ng email sa mga estudyante_**. I-click ang **Send** button upang ipadala ang prompt sa AI Copilot.
+1. Ang AI Copilot ay gagawa ng isang responsive na Canvas app base sa iyong paglalarawan. Maaari mo itong i-customize para umangkop sa iyong pangangailangan.
 
-![Pagdaragdag ng bagong screen sa pamamagitan ng prompt instruction](../../../translated_images/tl/copilot-new-screen.2e0bef7132a17392.webp)
+1. Para sa mga guro na magsesend ng emails sa mga estudyante, maaari mong gamitin ang Copilot para magdagdag ng bagong screen sa app. Halimbawa, maaari mong gamitin ang sumusunod na prompt para magdagdag ng bagong screen sa app: **_Gusto kong magdagdag ng screen para magpadala ng emails sa mga estudyante_**. I-click ang **Send** na button para ipadala ang prompt sa AI Copilot.
 
-1. Ang AI Copilot ay gagawa ng bagong screen at maaari mo itong i-customize upang matugunan ang iyong mga pangangailangan.
+![Adding a new screen via a prompt instruction](../../../translated_images/tl/copilot-new-screen.2e0bef7132a17392.webp)
 
-1. Kapag tapos ka na sa app, i-click ang **Save** button upang i-save ang app.
+1. Ang AI Copilot ay gagawa ng bagong screen at maaari mo itong i-customize ayon sa iyong pangangailangan.
 
-1. Upang i-share ang app sa mga guro, i-click ang **Share** button at pagkatapos ay i-click muli ang **Share** button. Maaari mo nang i-share ang app sa mga guro sa pamamagitan ng paglalagay ng kanilang email address.
+1. Kapag natapos ka na sa app, i-click ang **Save** na button para i-save ang app.
 
-> **Ang iyong takdang-aralin**: Ang app na ginawa mo ay isang magandang simula ngunit maaari pang mapabuti. Sa email feature, ang mga guro ay maaari lamang magpadala ng email sa mga estudyante nang manu-mano sa pamamagitan ng pag-type ng kanilang mga email. Maaari mo bang gamitin ang Copilot upang gumawa ng automation na magbibigay-daan sa mga guro na magpadala ng email sa mga estudyante nang awtomatiko kapag nagsumite sila ng kanilang mga assignment? Ang iyong hint ay sa tamang prompt maaari mong gamitin ang Copilot sa Power Automate upang gawin ito.
+1. Para ibahagi ang app sa mga guro, i-click ang **Share** na button at pagkatapos ay i-click muli ang **Share** na button. Maaari mo nang ibahagi ang app sa mga guro sa pamamagitan ng paglalagay ng kanilang mga email address.
 
-### Gumawa ng Invoices Information Table para sa Aming Startup
+> **Ang iyong takdang-aralin**: Ang app na ginawa mo ay magandang simula ngunit maaari pang mapabuti. Sa email feature, manu-mano lamang makakapagsend ng mga guro ng email sa mga estudyante sa pamamagitan ng pagta-type ng kanilang mga email. Maaari mo bang gamitin ang Copilot para bumuo ng awtomasyon na magbibigay-daan sa mga guro na magsend ng emails sa mga estudyante nang awtomatiko kapag nagsumite sila ng kanilang mga takdang-aralin? Ang hint mo ay gamit ang tamang prompt, maaari mong gamitin ang Copilot sa Power Automate para gumawa nito.
 
-Ang finance team ng aming startup ay nahihirapan nang subaybayan ang mga invoice. Gumagamit sila ng spreadsheet upang subaybayan ang mga invoice ngunit ito ay naging mahirap pamahalaan habang dumadami ang bilang ng mga invoice. Hiniling nila sa iyo na gumawa ng isang table na makakatulong sa kanila na i-store, subaybayan, at pamahalaan ang impormasyon ng mga invoice na kanilang natanggap. Ang table ay dapat gamitin upang gumawa ng automation na mag-e-extract ng lahat ng impormasyon ng invoice at i-store ito sa table. Ang table ay dapat ding magbigay-daan sa finance team na makita ang mga invoice na nabayaran na at ang mga hindi pa nababayaran.
+### Gumawa ng Talaan ng Mga Impormasyon ng Mga Invoice para sa Aming Startup
 
-Ang Power Platform ay may underlying data platform na tinatawag na Dataverse na nagbibigay-daan sa iyo na i-store ang data para sa iyong mga app at solusyon. Ang Dataverse ay nagbibigay ng low-code data platform para sa pag-iimbak ng data ng app. Ito ay isang fully managed service na ligtas na nag-iimbak ng data sa Microsoft Cloud at naka-provision sa loob ng iyong Power Platform environment. Mayroon itong built-in na data governance capabilities, tulad ng data classification, data lineage, fine-grained access control, at iba pa. Maaari kang matuto pa [tungkol sa Dataverse dito](https://docs.microsoft.com/powerapps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
-Bakit dapat gamitin ang Dataverse para sa ating startup? Ang mga standard at custom na talahanayan sa loob ng Dataverse ay nagbibigay ng ligtas at cloud-based na opsyon para sa pag-iimbak ng iyong data. Ang mga talahanayan ay nagbibigay-daan sa iyo na mag-imbak ng iba't ibang uri ng data, katulad ng paggamit ng maraming worksheet sa isang Excel workbook. Maaari mong gamitin ang mga talahanayan upang mag-imbak ng data na partikular sa iyong organisasyon o pangangailangan ng negosyo. Ilan sa mga benepisyo na makukuha ng ating startup mula sa paggamit ng Dataverse ay kabilang ngunit hindi limitado sa:
+Nahihirapan ang team sa pananalapi ng aming startup sa pagsubaybay ng mga invoice. Gumagamit sila ng spreadsheet para subaybayan ang mga ito ngunit naging mahirap na itong pamahalaan habang dumarami ang mga invoice. Inutusan ka nilang gumawa ng talaan na tutulong sa kanila na mag-imbak, mag-track, at mag-manage ng impormasyon ng mga invoice na kanilang natatanggap. Ang talaan ay gagamitin upang bumuo ng awtomasyon na mag-eextract ng lahat ng impormasyon ng invoice at itatago ito sa talaan. Dapat ding payagan ng talaan ang finance team na makita ang mga nabayarang invoice at yung mga hindi pa nababayaran.
 
-- **Madaling pamahalaan**: Ang metadata at data ay nakaimbak sa cloud, kaya hindi mo kailangang mag-alala tungkol sa mga detalye kung paano ito iniimbak o pinamamahalaan. Maaari kang mag-focus sa paggawa ng iyong mga app at solusyon.
+Ang Power Platform ay may underlying na data platform na tinatawag na Dataverse na nagbibigay-daan sa iyo na i-store ang mga data para sa iyong mga apps at solusyon. Nagbibigay ang Dataverse ng low-code data platform para mag-imbak ng data ng app. Ito ay isang fully managed service na ligtas na nag-iimbak ng data sa Microsoft Cloud at ipinaprovide sa iyong Power Platform environment. Mayroon itong built-in na mga kakayahan sa data governance, gaya ng data classification, data lineage, fine-grained access control, at iba pa. Maaari kang matuto nang higit pa [tungkol sa Dataverse dito](https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-intro?WT.mc_id=academic-109639-somelezediko).
 
-- **Ligtas**: Ang Dataverse ay nagbibigay ng ligtas at cloud-based na opsyon para sa pag-iimbak ng iyong data. Maaari mong kontrolin kung sino ang may access sa data sa iyong mga talahanayan at kung paano nila ito maa-access gamit ang role-based security.
+Bakit natin gagamitin ang Dataverse para sa aming startup? Ang standard at custom tables sa loob ng Dataverse ay nagbibigay ng secure at cloud-based na opsyon para sa pag-iimbak ng data mo. Pinahihintulutan ka ng mga tables na mag-imbak ng iba't ibang uri ng data, kagaya ng paggamit ng maraming worksheets sa isang Excel workbook. Maaari kang gumamit ng tables para mag-imbak ng data na tiyak sa iyong organisasyon o pangangailangan ng negosyo. Ilan sa mga benepisyo na makukuha ng aming startup mula sa paggamit ng Dataverse ay kabilang ngunit hindi limitado sa:
 
-- **Mayamang metadata**: Ang mga uri ng data at relasyon ay direktang ginagamit sa loob ng Power Apps.
+- **Madaling pamahalaan**: Parehong ang metadata at data ay nakaimbak sa ulap, kaya hindi mo kailangang mag-alala sa detalye kung paano sila iniimbak o pinamamahalaan. Maaari kang magpokus sa paggawa ng iyong mga apps at solusyon.
 
-- **Logic at validation**: Maaari mong gamitin ang mga business rules, calculated fields, at validation rules upang ipatupad ang business logic at mapanatili ang katumpakan ng data.
+- **Ligtas**: Nagbibigay ang Dataverse ng secure at cloud-based na opsyon para sa pag-iimbak ng iyong data. Maaari mong kontrolin kung sino ang may access sa data sa iyong mga tables at paano nila ito maa-access gamit ang role-based security.
 
-Ngayon na alam mo kung ano ang Dataverse at kung bakit mo ito dapat gamitin, tingnan natin kung paano mo magagamit ang Copilot upang gumawa ng talahanayan sa Dataverse na tutugon sa mga pangangailangan ng ating finance team.
+- **Mataas na metadata**: Ginagamit mismo sa Power Apps ang mga uri ng data at mga relasyon.
 
-> **Note**: Gagamitin mo ang talahanayan na ito sa susunod na seksyon upang bumuo ng automation na mag-eextract ng lahat ng impormasyon ng invoice at iimbak ito sa talahanayan.
+- **Logic at validation**: Maaari kang gumamit ng business rules, calculated fields, at validation rules para ipatupad ang business logic at panatilihin ang katumpakan ng data.
 
-Para gumawa ng talahanayan sa Dataverse gamit ang Copilot, sundin ang mga hakbang sa ibaba:
+Ngayong alam mo na kung ano ang Dataverse at bakit mo ito dapat gamitin, tingnan natin kung paano mo magagamit ang Copilot upang gumawa ng talaan sa Dataverse na tutugon sa mga kinakailangan ng aming finance team.
+
+> **Tandaan** : Gagamitin mo ang talang ito sa susunod na bahagi para bumuo ng awtomasyon na mag-eextract ng lahat ng impormasyon ng invoice at itatago ito sa talaan.
+
+Para gumawa ng talaan sa Dataverse gamit ang Copilot, sundin ang mga hakbang sa ibaba:
 
 1. Pumunta sa [Power Apps](https://make.powerapps.com?WT.mc_id=academic-105485-koreyst) home screen.
 
 2. Sa kaliwang navigation bar, piliin ang **Tables** at pagkatapos ay i-click ang **Describe the new Table**.
 
-![Piliin ang bagong talahanayan](../../../translated_images/tl/describe-new-table.0792373eb757281e.webp)
+![Select new table](../../../translated_images/tl/describe-new-table.0792373eb757281e.webp)
 
-3. Sa **Describe the new Table** screen, gamitin ang text area upang ilarawan ang talahanayan na nais mong gawin. Halimbawa, **_Gusto kong gumawa ng talahanayan para mag-imbak ng impormasyon ng invoice_**. I-click ang **Send** button upang ipadala ang prompt sa AI Copilot.
+1. Sa **Describe the new Table** screen, gamitin ang text area upang ilarawan ang talahanayan na nais mong likhain. Halimbawa, **_Gusto kong gumawa ng talaan para mag-imbak ng impormasyon ng invoice_**. I-click ang **Send** na button para ipadala ang prompt sa AI Copilot.
 
-![Ilarawan ang talahanayan](../../../translated_images/tl/copilot-chat-prompt-dataverse.feb2f81e5872b9d2.webp)
+![Describe the table](../../../translated_images/tl/copilot-chat-prompt-dataverse.feb2f81e5872b9d2.webp)
 
-4. Ang AI Copilot ay magmumungkahi ng Dataverse Table na may mga field na kailangan mo upang mag-imbak ng data na nais mong i-track at ilang sample na data. Maaari mong i-customize ang talahanayan upang tumugma sa iyong mga pangangailangan gamit ang AI Copilot assistant feature sa pamamagitan ng conversational steps.
+1. Ang AI Copilot ay magmumungkahi ng isang Dataverse Table na may mga field na kailangan mo para i-store ang data na nais mong i-track at may ilang sample data. Maaari mo itong i-customize upang umangkop sa iyong pangangailangan gamit ang AI Copilot assistant feature sa pamamagitan ng mga hakbang na pagsasawika.
 
-![Inirekomendang Dataverse table](../../../translated_images/tl/copilot-dataverse-table.b3bc936091324d9d.webp)
+![Suggested Dataverse table](../../../translated_images/tl/copilot-dataverse-table.b3bc936091324d9d.webp)
 
-5. Ang finance team ay nais magpadala ng email sa supplier upang i-update sila sa kasalukuyang status ng kanilang invoice. Maaari mong gamitin ang Copilot upang magdagdag ng bagong field sa talahanayan para mag-imbak ng supplier email. Halimbawa, maaari mong gamitin ang sumusunod na prompt upang magdagdag ng bagong field sa talahanayan: **_Gusto kong magdagdag ng column para mag-imbak ng supplier email_**. I-click ang **Send** button upang ipadala ang prompt sa AI Copilot.
+1. Gusto ng finance team na magpadala ng email sa supplier para i-update sila sa kasalukuyang status ng kanilang invoice. Maaari mong gamitin ang Copilot para magdagdag ng bagong field sa talaan para i-store ang supplier email. Halimbawa, maaari mong gamitin ang sumusunod na prompt para magdagdag ng bagong column sa talaan: **_Gusto kong magdagdag ng column para i-store ang supplier email_**. I-click ang **Send** na button para ipadala ang prompt sa AI Copilot.
 
-6. Ang AI Copilot ay maggegenerate ng bagong field at maaari mong i-customize ang field upang tumugma sa iyong mga pangangailangan.
+1. Ang AI Copilot ay gagawa ng bagong field at maaari mo itong i-customize upang umangkop sa iyong pangangailangan.
 
-7. Kapag tapos ka na sa talahanayan, i-click ang **Create** button upang gawin ang talahanayan.
+1. Kapag natapos ka na sa talaan, i-click ang **Create** na button upang likhain ang talaan.
 
-## AI Models sa Power Platform gamit ang AI Builder
+## Mga AI Model sa Power Platform gamit ang AI Builder
 
-Ang AI Builder ay isang low-code AI capability na available sa Power Platform na nagbibigay-daan sa iyo na gumamit ng AI Models upang makatulong sa pag-automate ng mga proseso at magpredict ng mga resulta. Sa AI Builder, maaari mong dalhin ang AI sa iyong mga app at flow na konektado sa iyong data sa Dataverse o sa iba't ibang cloud data sources, tulad ng SharePoint, OneDrive, o Azure.
+Ang AI Builder ay isang low-code AI capability na available sa Power Platform na nagbibigay-daan sa iyo na gamitin ang AI Models para tumulong mag-automate ng mga proseso at mahulaan ang mga resulta. Sa AI Builder maaari mong dalhin ang AI sa iyong mga apps at flows na nakakonekta sa iyong data sa Dataverse o sa iba't ibang cloud data sources, tulad ng SharePoint, OneDrive o Azure.
 
 ## Prebuilt AI Models vs Custom AI Models
 
-Ang AI Builder ay nagbibigay ng dalawang uri ng AI Models: Prebuilt AI Models at Custom AI Models. Ang Prebuilt AI Models ay mga ready-to-use AI Models na sinanay ng Microsoft at available sa Power Platform. Ang mga ito ay tumutulong sa iyo na magdagdag ng intelligence sa iyong mga app at flow nang hindi kinakailangang mag-gather ng data at pagkatapos ay mag-build, mag-train, at mag-publish ng sarili mong mga modelo. Maaari mong gamitin ang mga modelong ito upang mag-automate ng mga proseso at magpredict ng mga resulta.
+Nagbibigay ang AI Builder ng dalawang uri ng AI Models: Prebuilt AI Models at Custom AI Models. Ang Prebuilt AI Models ay mga handa nang gamitin na AI Models na sinanay ng Microsoft at available sa Power Platform. Tinutulungan ka nitong magdagdag ng intelihensiya sa iyong mga apps at flows nang hindi na kailangan mangalap ng data at bumuo, magsanay, at mag-publish ng sarili mong mga modelo. Maaari mong gamitin ang mga modelong ito para gawing awtomatiko ang mga proseso at mahulaan ang mga resulta.
 
-Ilan sa mga Prebuilt AI Models na available sa Power Platform ay:
+Ilan sa mga Prebuilt AI Models na available sa Power Platform ay kabilang ang:
 
-- **Key Phrase Extraction**: Ang modelong ito ay nag-eextract ng mga key phrase mula sa text.
-- **Language Detection**: Ang modelong ito ay nagde-detect ng wika ng isang text.
-- **Sentiment Analysis**: Ang modelong ito ay nagde-detect ng positibo, negatibo, neutral, o mixed na sentiment sa text.
-- **Business Card Reader**: Ang modelong ito ay nag-eextract ng impormasyon mula sa mga business card.
-- **Text Recognition**: Ang modelong ito ay nag-eextract ng text mula sa mga imahe.
-- **Object Detection**: Ang modelong ito ay nagde-detect at nag-eextract ng mga object mula sa mga imahe.
-- **Document Processing**: Ang modelong ito ay nag-eextract ng impormasyon mula sa mga forms.
-- **Invoice Processing**: Ang modelong ito ay nag-eextract ng impormasyon mula sa mga invoice.
+- **Key Phrase Extraction**: Ine-extract ng modelong ito ang mga key phrases mula sa teksto.
+- **Language Detection**: Nadede-determine ng modelong ito ang wika ng isang teksto.
+- **Sentiment Analysis**: Nakakakita ang modelong ito ng positibo, negatibo, neutral, o halo-halong damdamin sa teksto.
+- **Business Card Reader**: Kinukuha ng modelong ito ang impormasyon mula sa mga business card.
+- **Text Recognition**: Kinukuha ng modelong ito ang teksto mula sa mga larawan.
+- **Object Detection**: Nadede-determine at ine-extract ng modelong ito ang mga object mula sa mga larawan.
+- **Document processing**: Kinukuha ng modelong ito ang impormasyon mula sa mga form.
+- **Invoice Processing**: Kinukuha ng modelong ito ang impormasyon mula sa mga invoice.
 
-Sa Custom AI Models, maaari mong dalhin ang sarili mong modelo sa AI Builder upang magamit ito tulad ng anumang AI Builder custom model, na nagbibigay-daan sa iyo na i-train ang modelo gamit ang sarili mong data. Maaari mong gamitin ang mga modelong ito upang mag-automate ng mga proseso at magpredict ng mga resulta sa parehong Power Apps at Power Automate. Kapag gumagamit ng sarili mong modelo, may mga limitasyon na nalalapat. Basahin ang higit pa tungkol sa mga [limitasyon](https://learn.microsoft.com/ai-builder/byo-model#limitations?WT.mc_id=academic-105485-koreyst).
+Sa Custom AI Models maaari mong dalhin ang sarili mong modelo sa AI Builder upang gumana ito tulad ng anumang custom AI Builder model, na nagbibigay-daan sa iyo upang sanayin ang modelo gamit ang sarili mong data. Maaari mong gamitin ang mga modelong ito para mag-automate ng mga proseso at mahulaan ang mga resulta sa parehong Power Apps at Power Automate. May mga limitasyon kapag ginamit ang sarili mong modelo. Basahin pa ang tungkol sa mga [limitasyon](https://learn.microsoft.com/ai-builder/byo-model#limitations?WT.mc_id=academic-105485-koreyst).
 
 ![AI builder models](../../../translated_images/tl/ai-builder-models.8069423b84cfc47f.webp)
 
-## Assignment #2 - Gumawa ng Invoice Processing Flow para sa Ating Startup
+## Takdang-Aralin #2 - Gumawa ng Invoice Processing Flow para sa Aming Startup
 
-Ang finance team ay nahihirapan sa pagproseso ng mga invoice. Gumagamit sila ng spreadsheet upang i-track ang mga invoice ngunit ito ay nagiging mahirap pamahalaan habang dumadami ang bilang ng mga invoice. Hiniling nila sa iyo na gumawa ng workflow na makakatulong sa kanila na magproseso ng mga invoice gamit ang AI. Ang workflow ay dapat magbigay-daan sa kanila na mag-extract ng impormasyon mula sa mga invoice at iimbak ang impormasyon sa isang Dataverse table. Ang workflow ay dapat din magbigay-daan sa kanila na magpadala ng email sa finance team na may kasamang extracted na impormasyon.
+Nahihirapan ang finance team namin sa pagproseso ng mga invoice. Ginagamit nila ang spreadsheet para subaybayan ang mga ito ngunit naging mahirap nang pamahalaan habang dumarami ang mga invoice. Inutusan ka nilang gumawa ng workflow na tutulong sa kanila magproseso ng mga invoice gamit ang AI. Dapat payagan ng workflow na ito na mag-extract ng impormasyon mula sa mga invoice at i-store ang impormasyon sa isang Dataverse table. Dapat din nitong payagan sila na magsend ng email sa finance team kasama ang na-extract na impormasyon.
 
-Ngayon na alam mo kung ano ang AI Builder at kung bakit mo ito dapat gamitin, tingnan natin kung paano mo magagamit ang Invoice Processing AI Model sa AI Builder, na tinalakay natin kanina, upang gumawa ng workflow na makakatulong sa finance team na magproseso ng mga invoice.
+Ngayong alam mo na kung ano ang AI Builder at bakit mo ito dapat gamitin, tingnan natin kung paano mo magagamit ang Invoice Processing AI Model sa AI Builder, na natalakay natin kanina, para gumawa ng workflow na tutulong sa finance team sa pagproseso ng mga invoice.
 
-Para gumawa ng workflow na makakatulong sa finance team na magproseso ng mga invoice gamit ang Invoice Processing AI Model sa AI Builder, sundin ang mga hakbang sa ibaba:
+Para gumawa ng workflow na tutulong sa finance team magproseso ng mga invoice gamit ang Invoice Processing AI Model sa AI Builder, sundin ang mga hakbang sa ibaba:
 
 1. Pumunta sa [Power Automate](https://make.powerautomate.com?WT.mc_id=academic-105485-koreyst) home screen.
 
-2. Gamitin ang text area sa home screen upang ilarawan ang workflow na nais mong gawin. Halimbawa, **_Proseso ng invoice kapag dumating ito sa aking mailbox_**. I-click ang **Send** button upang ipadala ang prompt sa AI Copilot.
+2. Gamitin ang text area sa home screen para ilarawan ang workflow na nais mong gawin. Halimbawa, **_Iproseso ang isang invoice kapag dumating ito sa aking mailbox_**. I-click ang **Send** na button para ipadala ang prompt sa AI Copilot.
 
    ![Copilot power automate](../../../translated_images/tl/copilot-chat-prompt-powerautomate.f377e478cc8412de.webp)
 
-3. Ang AI Copilot ay magmumungkahi ng mga aksyon na kailangan upang maisagawa ang task na nais mong i-automate. Maaari mong i-click ang **Next** button upang dumaan sa mga susunod na hakbang.
+3. Magmumungkahi ang AI Copilot ng mga aksyon na kailangan mo para gampanan ang trabahong nais mong gawing awtomatiko. Maaari mong i-click ang **Next** na button para dumaan sa mga susunod na hakbang.
 
-4. Sa susunod na hakbang, ang Power Automate ay magpo-prompt sa iyo upang i-set up ang mga koneksyon na kinakailangan para sa flow. Kapag tapos ka na, i-click ang **Create flow** button upang gawin ang flow.
+4. Sa susunod na hakbang, hihilingin ng Power Automate na i-setup mo ang mga koneksyon na kailangan para sa flow. Kapag tapos ka na, i-click ang **Create flow** na button para likhain ang flow.
 
-5. Ang AI Copilot ay maggegenerate ng flow at maaari mong i-customize ang flow upang tumugma sa iyong mga pangangailangan.
+5. Magge-generate ang AI Copilot ng isang flow at maaari mo itong i-customize para umangkop sa iyong pangangailangan.
 
-6. I-update ang trigger ng flow at i-set ang **Folder** sa folder kung saan iimbak ang mga invoice. Halimbawa, maaari mong i-set ang folder sa **Inbox**. I-click ang **Show advanced options** at i-set ang **Only with Attachments** sa **Yes**. Ito ay magtitiyak na ang flow ay tatakbo lamang kapag may email na may attachment na natanggap sa folder.
+6. I-update ang trigger ng flow at itakda ang **Folder** sa folder kung saan ilalagay ang mga invoice. Halimbawa, maaari mong itakda ang folder sa **Inbox**. I-click ang **Show advanced options** at itakda ang **Only with Attachments** sa **Yes**. Titiyakin nito na ang flow ay tumatakbo lang kapag may natanggap na email na may attachment sa folder.
 
-7. Alisin ang mga sumusunod na aksyon mula sa flow: **HTML to text**, **Compose**, **Compose 2**, **Compose 3**, at **Compose 4** dahil hindi mo ito gagamitin.
+7. Alisin ang mga sumusunod na aksyon mula sa flow: **HTML to text**, **Compose**, **Compose 2**, **Compose 3** at **Compose 4** dahil hindi mo ito gagamitin.
 
-8. Alisin ang **Condition** action mula sa flow dahil hindi mo ito gagamitin. Dapat itong magmukhang tulad ng sumusunod na screenshot:
+8. Alisin ang **Condition** na aksyon mula sa flow dahil hindi mo ito gagamitin. Dapat ganito ang itsura nito tulad ng sumusunod na screenshot:
 
-   ![power automate, alisin ang mga aksyon](../../../translated_images/tl/powerautomate-remove-actions.7216392fe684ceba.webp)
+   ![power automate, remove actions](../../../translated_images/tl/powerautomate-remove-actions.7216392fe684ceba.webp)
 
-9. I-click ang **Add an action** button at hanapin ang **Dataverse**. Piliin ang **Add a new row** action.
+9. I-click ang **Add an action** na button at hanapin ang **Dataverse**. Piliin ang aksyong **Add a new row**.
 
-10. Sa **Extract Information from invoices** action, i-update ang **Invoice File** upang ituro sa **Attachment Content** mula sa email. Ito ay magtitiyak na ang flow ay mag-eextract ng impormasyon mula sa invoice attachment.
+10. Sa aksyong **Extract Information from invoices**, i-update ang **Invoice File** upang ituro sa **Attachment Content** mula sa email. Titiyakin nito na ang flow ay nag-eextract ng impormasyon mula sa attachment ng invoice.
 
-11. Piliin ang **Table** na ginawa mo kanina. Halimbawa, maaari mong piliin ang **Invoice Information** table. Piliin ang dynamic content mula sa nakaraang aksyon upang punan ang mga sumusunod na field:
+11. Piliin ang **Table** na nilikha mo dati. Halimbawa, maaari mong piliin ang **Invoice Information** table. Piliin ang dynamic content mula sa naunang aksyon para punan ang mga sumusunod na field:
 
     - ID
     - Amount
     - Date
     - Name
-    - Status - I-set ang **Status** sa **Pending**.
-    - Supplier Email - Gamitin ang **From** dynamic content mula sa **When a new email arrives** trigger.
+    - Status - Itakda ang **Status** sa **Pending**.
+    - Supplier Email - Gamitin ang dynamic content na **From** mula sa trigger na **When a new email arrives**.
 
     ![power automate add row](../../../translated_images/tl/powerautomate-add-row.5edce45e5dd3d51e.webp)
 
-12. Kapag tapos ka na sa flow, i-click ang **Save** button upang i-save ang flow. Maaari mo itong i-test sa pamamagitan ng pagpapadala ng email na may invoice sa folder na tinukoy mo sa trigger.
+12. Kapag natapos ka na sa flow, i-click ang **Save** na button para i-save ang flow. Maaari mo itong subukan sa pamamagitan ng pagpapadala ng email na may invoice sa folder na itinakda mo sa trigger.
 
-> **Ang iyong homework**: Ang flow na ginawa mo ay isang magandang simula, ngayon kailangan mong mag-isip kung paano ka makakagawa ng automation na magbibigay-daan sa finance team na magpadala ng email sa supplier upang i-update sila sa kasalukuyang status ng kanilang invoice. Ang iyong hint: ang flow ay dapat tumakbo kapag nagbago ang status ng invoice.
+> **Ang iyong takdang-aralin**: Ang flow na ginawa mo ay magandang simula, ngayon kailangan mong isipin kung paano ka makakagawa ng awtomasyon na magbibigay-daan sa aming finance team na magpadala ng email sa supplier para i-update sila sa kasalukuyang status ng kanilang invoice. Ang hint mo: ang flow ay dapat tumakbo kapag nagbago ang status ng invoice.
 
-## Gumamit ng Text Generation AI Model sa Power Automate
+## Gamitin ang Text Generation AI Model sa Power Automate
 
-Ang Create Text with GPT AI Model sa AI Builder ay nagbibigay-daan sa iyo na maggenerate ng text base sa isang prompt at powered ito ng Microsoft Azure OpenAI Service. Sa capability na ito, maaari mong isama ang GPT (Generative Pre-Trained Transformer) technology sa iyong mga app at flow upang makabuo ng iba't ibang automated flows at insightful applications.
+Ang Create Text with GPT AI Model sa AI Builder ay nagbibigay-daan sa iyo na gumawa ng teksto base sa prompt at pinapagana ng Microsoft Azure OpenAI Service. Sa kakayahang ito, maaari mong isama ang GPT (Generative Pre-Trained Transformer) technology sa iyong mga apps at flows upang bumuo ng iba't ibang awtomatikong flows at mga makabuluhang aplikasyon.
 
-Ang GPT models ay dumadaan sa malawak na training gamit ang napakaraming data, na nagbibigay-daan sa kanila na makabuo ng text na malapit sa wika ng tao kapag binigyan ng prompt. Kapag isinama sa workflow automation, ang mga AI models tulad ng GPT ay maaaring magamit upang mag-streamline at mag-automate ng iba't ibang mga gawain.
+Sumailalim ang mga GPT model sa masusing pagsasanay gamit ang malawak na datos, kaya kaya nilang gumawa ng teksto na kahawig ng wika ng tao kapag binigyan ng prompt. Kapag isinama sa workflow automation, maaaring gamitin ang mga AI model tulad ng GPT para gawing mas madali at awtomatiko ang iba't ibang gawain.
 
-Halimbawa, maaari kang gumawa ng mga flow upang awtomatikong maggenerate ng text para sa iba't ibang use cases, tulad ng: drafts ng email, mga product description, at iba pa. Maaari mo ring gamitin ang modelo upang maggenerate ng text para sa iba't ibang app, tulad ng chatbots at customer service apps na nagbibigay-daan sa mga customer service agents na tumugon nang epektibo at mabilis sa mga tanong ng customer.
+Halimbawa, maaari kang gumawa ng mga flow para awtomatikong gumawa ng teksto para sa iba't ibang gamit, tulad ng: mga draft ng email, mga paglalarawan ng produkto, at iba pa. Maaari mo ring gamitin ang model para gumawa ng teksto para sa iba't ibang apps, tulad ng chatbots at mga customer service app na tumutulong sa mga customer service agents na mabilis at epektibong sumagot sa mga tanong ng customer.
 
-![gumawa ng prompt](../../../translated_images/tl/create-prompt-gpt.69d429300c2e870a.webp)
+![create a prompt](../../../translated_images/tl/create-prompt-gpt.69d429300c2e870a.webp)
 
-Para matutunan kung paano gamitin ang AI Model na ito sa Power Automate, dumaan sa [Add intelligence with AI Builder and GPT](https://learn.microsoft.com/training/modules/ai-builder-text-generation/?WT.mc_id=academic-109639-somelezediko) module.
 
-## Magaling na Trabaho! Ipagpatuloy ang Iyong Pag-aaral
+Upang matutunan kung paano gamitin ang AI Model na ito sa Power Automate, pag-aralan ang [Add intelligence with AI Builder and GPT](https://learn.microsoft.com/training/modules/ai-builder-text-generation/?WT.mc_id=academic-109639-somelezediko) na module.
 
-Pagkatapos makumpleto ang araling ito, tingnan ang aming [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) upang patuloy na paunlarin ang iyong kaalaman sa Generative AI!
+## Mahusay na Gawain! Ipagpatuloy ang Iyong Pag-aaral
 
-Pumunta sa Lesson 11 kung saan tatalakayin natin kung paano [i-integrate ang Generative AI sa Function Calling](../11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst)!
+Pagkatapos makumpleto ang araling ito, tingnan ang aming [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) upang ipagpatuloy ang pagpapalawak ng iyong kaalaman sa Generative AI!
+
+Nais mo bang i-customize at mas mapakinabangan ang Copilot? Tuklasin ang [Awesome Copilot](https://github.com/github/awesome-copilot?WT.mc_id=academic-105485-koreyst) — isang koleksyon ng mga tagubilin, ahente, kasanayan, at mga configurasyon na nilikha ng komunidad upang matulungan kang masulit ang GitHub Copilot.
+
+Pumunta sa Aralin 11 kung saan tatalakayin natin kung paano [pagsamahin ang Generative AI sa Function Calling](../11-integrating-with-function-calling/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagamat sinisikap naming maging tumpak, pakatandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

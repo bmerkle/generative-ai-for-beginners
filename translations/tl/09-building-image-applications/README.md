@@ -1,266 +1,146 @@
-# Paggawa ng Mga Aplikasyon para sa Paggawa ng Imahe
+# Pagtatayo ng Mga Aplikasyon sa Paglikha ng Imahe
 
-[![Paggawa ng Mga Aplikasyon para sa Paggawa ng Imahe](../../../translated_images/tl/09-lesson-banner.906e408c741f4411.webp)](https://youtu.be/B5VP0_J7cs8?si=5P3L5o7F_uS_QcG9)
+[![Pagtatayo ng Mga Aplikasyon sa Paglikha ng Imahe](../../../translated_images/tl/09-lesson-banner.906e408c741f4411.webp)](https://aka.ms/gen-ai-lesson9-gh?WT.mc_id=academic-105485-koreyst)
 
-Hindi lang text generation ang kayang gawin ng LLMs. Posible rin ang paggawa ng mga imahe mula sa mga text na deskripsyon. Ang pagkakaroon ng mga imahe bilang modality ay maaaring maging napaka-kapaki-pakinabang sa iba't ibang larangan tulad ng MedTech, arkitektura, turismo, game development, at marami pang iba. Sa kabanatang ito, tatalakayin natin ang dalawang pinakasikat na modelo ng paggawa ng imahe, ang DALL-E at Midjourney.
+Hindi lamang sa paglikha ng teksto umiikot ang LLMs. Maaari ka ring gumawa ng mga imahe mula sa mga paglalarawan ng teksto. Ang mga imahe bilang isang modality ay kapaki-pakinabang sa MedTech, arkitektura, turismo, pag-develop ng laro, marketing, at iba pa. Sa araling ito titingnan natin ang mga kasalukuyang **GPT Image** na modelo at gagawa tayo ng isang app para sa paglikha ng imahe.
 
 ## Panimula
 
-Sa araling ito, tatalakayin natin ang:
+Pinapayagan ka ng paglikha ng imahe na gawing larawan ang isang natural-language prompt. Sa araling ito gagamit tayo ng pamilya ng mga modelo na **`gpt-image`** mula sa OpenAI - ang kasalukuyang henerasyon ng mga modelo ng imahe na available sa **[Microsoft Foundry](https://ai.azure.com?WT.mc_id=academic-105485-koreyst)** at sa plataporma ng OpenAI. Pinalitan ng mga modelong ito ang mga lumang DALL·E na modelo (DALL·E 2/3 ay mga legacy).
 
-- Paggawa ng imahe at kung bakit ito mahalaga.
-- DALL-E at Midjourney, ano ang mga ito, at paano ito gumagana.
-- Paano gumawa ng isang application para sa paggawa ng imahe.
+Sa buong aralin gagamit tayo ng isang kathang-isip na startup, **Edu4All**, na gumagawa ng mga learning tool. Nais ng koponan na gumawa ng mga ilustrasyon para sa mga takdang-aralin at materyales sa pag-aaral.
 
 ## Mga Layunin sa Pagkatuto
 
-Pagkatapos ng araling ito, magagawa mo ang:
+Sa pagtatapos ng araling ito ay magagawa mong:
 
-- Gumawa ng isang application para sa paggawa ng imahe.
-- Tukuyin ang mga limitasyon para sa iyong application gamit ang meta prompts.
-- Gumamit ng DALL-E at Midjourney.
+- Ipaliwanag kung ano ang paglikha ng imahe at saan ito kapaki-pakinabang.
+- Maunawaan ang pamilya ng `gpt-image` na modelo at kung paano ito naiiba sa mga legacy na DALL·E na modelo.
+- Gumawa ng isang app sa paglikha ng imahe gamit ang Python (at TypeScript / .NET).
+- I-edit ang mga imahe at maglagay ng safety guardrails gamit ang metaprompts.
 
-## Bakit gumawa ng application para sa paggawa ng imahe?
+## Ano ang paglikha ng imahe?
 
-Ang mga application para sa paggawa ng imahe ay isang mahusay na paraan upang tuklasin ang kakayahan ng Generative AI. Maaari itong magamit, halimbawa:
+Lumilikha ang mga modelo ng paglikha ng imahe ng mga larawan mula sa isang text prompt. Ang mga modernong modelo tulad ng `gpt-image` ay ginawa gamit ang transformer + diffusion techniques: natututuhan ng modelo ang relasyon ng teksto at mga imahe sa panahon ng pagsasanay, pagkatapos, kapag may prompt, unti-unting "dinidenoise" ang random na ingay upang maging isang imahe na tumutugma sa paglalarawan.
 
-- **Pag-edit at synthesis ng imahe**. Maaari kang gumawa ng mga imahe para sa iba't ibang gamit, tulad ng pag-edit at synthesis ng imahe.
+Dalawang kilalang pamilya ng mga modelo ng imahe ay:
 
-- **Maaaring gamitin sa iba't ibang industriya**. Maaari rin itong gamitin upang gumawa ng mga imahe para sa iba't ibang industriya tulad ng MedTech, Turismo, Game Development, at iba pa.
+- **`gpt-image` (OpenAI)** - ang kasalukuyang henerasyon, na ginagamit sa araling ito. Sinusuportahan ang text-to-image generation at image editing (inpainting gamit ang mask).
+- **Midjourney** - isang tanyag na third-party na modelo na may sariling serbisyo at Discord-based workflow.
 
-## Scenario: Edu4All
+> Ang mga lumang OpenAI na modelo ng imahe - **DALL·E 2** at **DALL·E 3** - ay mga legacy. Hindi na available ang DALL·E 3 para sa mga bagong deployment, at ang mga feature tulad ng `create_variation` ay nasa DALL·E 2 lamang. Gamitin ang mga `gpt-image` na modelo para sa mga bagong aplikasyon.
 
-Bilang bahagi ng araling ito, ipagpapatuloy natin ang pagtatrabaho sa ating startup, ang Edu4All. Ang mga mag-aaral ay gagawa ng mga imahe para sa kanilang mga pagsusuri, kung anong mga imahe ang gagawin ay nakasalalay sa mga mag-aaral, ngunit maaari itong maging mga ilustrasyon para sa kanilang sariling kwentong pambata, lumikha ng bagong karakter para sa kanilang kwento, o tulungan silang mailarawan ang kanilang mga ideya at konsepto.
+### Alin sa `gpt-image` na modelo ang dapat kong gamitin?
 
-Narito ang maaaring gawin ng mga mag-aaral ng Edu4All, halimbawa, kung nagtatrabaho sila sa klase tungkol sa mga monumento:
+Sa Microsoft Foundry ang mga sumusunod ay **Generally Available**:
 
-![Startup ng Edu4All, klase tungkol sa mga monumento, Eiffel Tower](../../../translated_images/tl/startup.94d6b79cc4bb3f5a.webp)
+| Modelo | Mga Tala |
+| --- | --- |
+| **`gpt-image-2`** | Pinakabago at pinakamakapangyarihang modelo ng imahe - inirerekomendang default. |
+| `gpt-image-1.5` | Generally available; mataas ang kalidad sa mas mababang gastos. |
+| `gpt-image-1-mini` | Generally available; pinakamabilis / pinakamababang gastos. |
+| `gpt-image-1` | Preview lamang. |
 
-gamit ang prompt na
+Palaging tingnan ang kasalukuyang [Foundry image models list](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/models?WT.mc_id=academic-105485-koreyst) para sa availability at mga rehiyon.
 
-> "Aso sa tabi ng Eiffel Tower sa maagang liwanag ng araw"
+> **Mahalaga:** Nagbabalik ang mga `gpt-image` na modelo ng nilikhang imahe bilang **base64** (`b64_json`), hindi bilang URL. Dina-decode ng iyong code ang base64 string patungo sa mga byte at sine-save ito - walang image URL na kailangang i-download.
 
-## Ano ang DALL-E at Midjourney?
+## Setup
 
-Ang [DALL-E](https://openai.com/dall-e-2?WT.mc_id=academic-105485-koreyst) at [Midjourney](https://www.midjourney.com/?WT.mc_id=academic-105485-koreyst) ay dalawa sa pinakasikat na mga modelo ng paggawa ng imahe, na nagbibigay-daan sa iyo na gumamit ng mga prompt upang makabuo ng mga imahe.
+Maaari mong patakbuhin ang mga sample laban sa **Azure OpenAI sa Microsoft Foundry** (ang `aoai-*` na mga sample) o sa **OpenAI platform** (ang `oai-*` na mga sample).
 
-### DALL-E
+### 1. Gumawa at i-deploy ang isang modelo
 
-Simulan natin sa DALL-E, na isang Generative AI model na gumagawa ng mga imahe mula sa mga text na deskripsyon.
+Sundan ang gabay na [create a resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal&WT.mc_id=academic-105485-koreyst) upang gumawa ng Microsoft Foundry resource, pagkatapos i-deploy ang isang image model - inirerekomenda ang **`gpt-image-2`**.
 
-> [Ang DALL-E ay kombinasyon ng dalawang modelo, CLIP at diffused attention](https://towardsdatascience.com/openais-dall-e-and-clip-101-a-brief-introduction-3a4367280d4e?WT.mc_id=academic-105485-koreyst).
+### 2. I-configure ang iyong `.env`
 
-- **CLIP**, ay isang modelo na gumagawa ng embeddings, na mga numerikal na representasyon ng data, mula sa mga imahe at text.
+```text
+AZURE_OPENAI_ENDPOINT=<your endpoint>
+AZURE_OPENAI_API_KEY=<your key>
+AZURE_OPENAI_DEPLOYMENT="gpt-image-2"
+```
 
-- **Diffused attention**, ay isang modelo na gumagawa ng mga imahe mula sa embeddings. Ang DALL-E ay sinanay gamit ang dataset ng mga imahe at text at maaaring gamitin upang gumawa ng mga imahe mula sa mga text na deskripsyon. Halimbawa, maaaring gamitin ang DALL-E upang gumawa ng imahe ng pusa na may sombrero, o aso na may mohawk.
+Hanapin ang mga halagang ito sa pahina ng **Deployments** ng iyong resource sa [Foundry portal](https://ai.azure.com?WT.mc_id=academic-105485-koreyst).
 
-### Midjourney
+### 3. I-install ang mga library
 
-Ang Midjourney ay gumagana sa parehong paraan tulad ng DALL-E, gumagawa ito ng mga imahe mula sa mga text prompt. Ang Midjourney ay maaari ring gamitin upang gumawa ng mga imahe gamit ang mga prompt tulad ng “pusa na may sombrero”, o “aso na may mohawk”.
+Gumawa ng `requirements.txt`:
 
-![Larawang ginawa ng Midjourney, mekanikal na kalapati](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png/440px-Rupert_Breheny_mechanical_dove_eca144e7-476d-4976-821d-a49c408e4f36.png?WT.mc_id=academic-105485-koreyst)
-_Credito sa Wikipedia, larawang ginawa ng Midjourney_
+```text
+python-dotenv
+openai
+pillow
+```
 
-## Paano gumagana ang DALL-E at Midjourney
+Pagkatapos ay gumawa at i-activate ang isang virtual environment at i-install:
 
-Una, ang [DALL-E](https://arxiv.org/pdf/2102.12092.pdf?WT.mc_id=academic-105485-koreyst). Ang DALL-E ay isang Generative AI model na nakabase sa transformer architecture na may _autoregressive transformer_.
+```bash
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-Ang _autoregressive transformer_ ay tumutukoy kung paano gumagawa ng mga imahe mula sa mga text na deskripsyon ang isang modelo, gumagawa ito ng isang pixel sa bawat pagkakataon, at pagkatapos ay ginagamit ang mga nagawang pixel upang makabuo ng susunod na pixel. Dumadaan ito sa maraming layer sa isang neural network, hanggang sa mabuo ang imahe.
+## Bumuo ng app
 
-Sa prosesong ito, ang DALL-E ay may kontrol sa mga katangian, bagay, karakteristika, at iba pa sa imahe na ginagawa nito. Gayunpaman, ang DALL-E 2 at 3 ay may mas mataas na kontrol sa nagawang imahe.
+Gumawa ng `app.py` gamit ang sumusunod na code. Lumilikha ito ng imahe at sine-save bilang PNG.
 
-## Paggawa ng iyong unang application para sa paggawa ng imahe
+```python
+import os
+import base64
+from openai import AzureOpenAI
+from PIL import Image
+import dotenv
 
-Ano ang kailangan upang makagawa ng isang application para sa paggawa ng imahe? Kakailanganin mo ang mga sumusunod na library:
+dotenv.load_dotenv()
 
-- **python-dotenv**, inirerekomenda na gamitin ang library na ito upang itago ang iyong mga lihim sa isang _.env_ file na hiwalay sa code.
-- **openai**, ang library na ito ang gagamitin mo upang makipag-ugnayan sa OpenAI API.
-- **pillow**, upang magtrabaho sa mga imahe gamit ang Python.
-- **requests**, upang makatulong sa paggawa ng mga HTTP request.
+# Ituro ang kliyente sa iyong Azure OpenAI (Microsoft Foundry) na resource.
+# Kailangan ng mga image model ng bagong bersyon ng API - tingnan ang Foundry docs para sa kinakailangan ng iyong modelo.
+client = AzureOpenAI(
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+    api_version="2025-04-01-preview",
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+)
 
-## Gumawa at i-deploy ang isang Azure OpenAI model
+deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]  # hal. "gpt-image-2"
 
-Kung hindi pa nagagawa, sundin ang mga tagubilin sa [Microsoft Learn](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource?pivots=web-portal) page upang gumawa ng Azure OpenAI resource at model. Piliin ang DALL-E 3 bilang modelo.
+result = client.images.generate(
+    model=deployment,
+    prompt='Bunny on a horse, holding a lollipop, on a foggy meadow where it grows daffodils',
+    size="1024x1024",   # pati na rin 1536x1024 (landscape), 1024x1536 (portrait), o "auto"
+    n=1,
+)
 
-## Gumawa ng app
-
-1. Gumawa ng file na _.env_ na may ganitong nilalaman:
-
-   ```text
-   AZURE_OPENAI_ENDPOINT=<your endpoint>
-   AZURE_OPENAI_API_KEY=<your key>
-   AZURE_OPENAI_DEPLOYMENT="dall-e-3"
-   ```
-
-   Hanapin ang impormasyong ito sa Azure OpenAI Foundry Portal para sa iyong resource sa seksyong "Deployments".
-
-1. Kolektahin ang mga library sa isang file na tinatawag na _requirements.txt_ tulad nito:
-
-   ```text
-   python-dotenv
-   openai
-   pillow
-   requests
-   ```
-
-1. Susunod, gumawa ng virtual environment at i-install ang mga library:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-   Para sa Windows, gamitin ang mga sumusunod na command upang gumawa at i-activate ang iyong virtual environment:
-
-   ```bash
-   python3 -m venv venv
-   venv\Scripts\activate.bat
-   ```
-
-1. Idagdag ang sumusunod na code sa isang file na tinatawag na _app.py_:
-
-    ```python
-    import openai
-    import os
-    import requests
-    from PIL import Image
-    import dotenv
-    from openai import OpenAI, AzureOpenAI
-    
-    # import dotenv
-    dotenv.load_dotenv()
-    
-    # configure Azure OpenAI service client 
-    client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-    try:
-        # Create an image by using the image generation API
-        generation_response = client.images.generate(
-                                prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                                size='1024x1024', n=1,
-                                model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                              )
-
-        # Set the directory for the stored image
-        image_dir = os.path.join(os.curdir, 'images')
-
-        # If the directory doesn't exist, create it
-        if not os.path.isdir(image_dir):
-            os.mkdir(image_dir)
-
-        # Initialize the image path (note the filetype should be png)
-        image_path = os.path.join(image_dir, 'generated-image.png')
-
-        # Retrieve the generated image
-        image_url = generation_response.data[0].url  # extract image URL from response
-        generated_image = requests.get(image_url).content  # download the image
-        with open(image_path, "wb") as image_file:
-            image_file.write(generated_image)
-
-        # Display the image in the default image viewer
-        image = Image.open(image_path)
-        image.show()
-
-    # catch exceptions
-    except openai.InvalidRequestError as err:
-        print(err)
-   ```
-
-Ipaliwanag natin ang code na ito:
-
-- Una, ini-import natin ang mga library na kailangan natin, kabilang ang OpenAI library, dotenv library, requests library, at Pillow library.
-
-  ```python
-  import openai
-  import os
-  import requests
-  from PIL import Image
-  import dotenv
-  ```
-
-- Susunod, ina-load natin ang mga environment variable mula sa _.env_ file.
-
-  ```python
-  # import dotenv
-  dotenv.load_dotenv()
-  ```
-
-- Pagkatapos nito, kino-configure natin ang Azure OpenAI service client.
-
-  ```python
-  # Get endpoint and key from environment variables
-  client = AzureOpenAI(
-      azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-      api_key=os.environ['AZURE_OPENAI_API_KEY'],
-      api_version = "2024-02-01"
-      )
-  ```
-
-- Susunod, ginagawa natin ang imahe:
-
-  ```python
-  # Create an image by using the image generation API
-  generation_response = client.images.generate(
-                        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                        size='1024x1024', n=1,
-                        model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                      )
-  ```
-
-  Ang code sa itaas ay nagbabalik ng isang JSON object na naglalaman ng URL ng nagawang imahe. Maaari nating gamitin ang URL upang i-download ang imahe at i-save ito sa isang file.
-
-- Sa huli, binubuksan natin ang imahe at ginagamit ang standard image viewer upang ipakita ito:
-
-  ```python
-  image = Image.open(image_path)
-  image.show()
-  ```
-
-### Higit pang detalye sa paggawa ng imahe
-
-Tingnan natin ang code na gumagawa ng imahe nang mas detalyado:
-
-   ```python
-     generation_response = client.images.generate(
-                               prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',
-                               size='1024x1024', n=1,
-                               model=os.environ['AZURE_OPENAI_DEPLOYMENT']
-                           )
-   ```
-
-- **prompt**, ay ang text prompt na ginagamit upang gumawa ng imahe. Sa kasong ito, ginagamit natin ang prompt na "Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils".
-- **size**, ay ang laki ng imahe na ginagawa. Sa kasong ito, gumagawa tayo ng imahe na 1024x1024 pixels.
-- **n**, ay ang bilang ng mga imaheng ginagawa. Sa kasong ito, gumagawa tayo ng dalawang imahe.
-- **temperature**, ay isang parameter na kumokontrol sa randomness ng output ng isang Generative AI model. Ang temperature ay isang halaga sa pagitan ng 0 at 1 kung saan ang 0 ay nangangahulugang deterministic ang output at ang 1 ay nangangahulugang random ang output. Ang default na halaga ay 0.7.
-
-May iba pang mga bagay na maaari mong gawin sa mga imahe na tatalakayin natin sa susunod na seksyon.
-
-## Karagdagang kakayahan ng paggawa ng imahe
-
-Nakita mo na kung paano tayo nakagawa ng imahe gamit ang ilang linya ng Python. Gayunpaman, may iba pang mga bagay na maaari mong gawin sa mga imahe.
-
-Maaari mo ring gawin ang mga sumusunod:
-
-- **Mag-edit ng mga imahe**. Sa pamamagitan ng pagbibigay ng isang umiiral na imahe, mask, at prompt, maaari mong baguhin ang isang imahe. Halimbawa, maaari kang magdagdag ng isang bagay sa isang bahagi ng imahe. Isipin ang ating imahe ng kuneho, maaari kang magdagdag ng sombrero sa kuneho. Paano mo ito gagawin ay sa pamamagitan ng pagbibigay ng imahe, mask (na tumutukoy sa bahagi ng lugar para sa pagbabago) at isang text prompt upang sabihin kung ano ang dapat gawin.
-> Tandaan: hindi ito suportado sa DALL-E 3.
-
-Narito ang isang halimbawa gamit ang GPT Image:
-
-   ```python
-   response = client.images.edit(
-       model="gpt-image-1",
-       image=open("sunlit_lounge.png", "rb"),
-       mask=open("mask.png", "rb"),
-       prompt="A sunlit indoor lounge area with a pool containing a flamingo"
-   )
-   image_url = response.data[0].url
-   ```
-
-  Ang base image ay naglalaman lamang ng lounge na may pool ngunit ang final image ay may flamingo:
+# Ang mga gpt-image model ay nagbabalik ng base64 (b64_json), hindi URL - i-decode ito sa bytes.
+image_bytes = base64.b64decode(result.data[0].b64_json)
+
+os.makedirs("images", exist_ok=True)
+image_path = os.path.join("images", "generated-image.png")
+with open(image_path, "wb") as f:
+    f.write(image_bytes)
+
+Image.open(image_path).show()
+```
+
+Patakbuhin ito gamit ang `python app.py`. Makakakuha ka ng PNG na na-save sa ilalim ng `images/`.
+
+> Bawat tawag sa `images.generate` ay naglalabas ng ibang imahe para sa parehong prompt - hindi gumagamit ang mga image model ng `temperature` parameter (iyon ay para sa text generation control). Para magkaroon ng iba't ibang resulta, tawagin muli ang API; para mabawasan ang pagkakaiba-iba, gawing mas espesipiko ang iyong prompt.
+
+## Pag-edit ng mga imahe
+
+Kayang **i-edit** ng mga `gpt-image` na modelo ang umiiral na imahe: ibigay ang imahe, isang opsyonal na **mask** (na nagtatalaga ng lugar na babaguhin), at isang prompt na naglalarawan ng pagbabago. Tulad ng paglikha, ang mga edits ay ibinabalik bilang base64.
+
+```python
+result = client.images.edit(
+    model=deployment,
+    image=open("sunlit_lounge.png", "rb"),
+    mask=open("mask.png", "rb"),
+    prompt="A sunlit indoor lounge area with a pool containing a flamingo",
+)
+image_bytes = base64.b64decode(result.data[0].b64_json)
+with open("images/edited-image.png", "wb") as f:
+    f.write(image_bytes)
+```
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
   <img src="../../../translated_images/tl/sunlit_lounge.a75a0cb61749db0e.webp" style="width: 30%; max-width: 200px; height: auto;">
@@ -268,211 +148,51 @@ Narito ang isang halimbawa gamit ang GPT Image:
   <img src="../../../translated_images/tl/sunlit_lounge_result.76ae02957c0bbeb8.webp" style="width: 30%; max-width: 200px; height: auto;">
 </div>
 
-- **Gumawa ng mga variation**. Ang ideya ay kumuha ng umiiral na imahe at hilingin na gumawa ng mga variation. Upang gumawa ng variation, magbigay ng imahe at isang text prompt at code tulad nito:
+## Pagtatakda ng mga hangganan gamit ang metaprompts
 
-  ```python
-  response = openai.Image.create_variation(
-    image=open("bunny-lollipop.png", "rb"),
-    n=1,
-    size="1024x1024"
-  )
-  image_url = response['data'][0]['url']
-  ```
-
-  > Tandaan, ito ay suportado lamang sa OpenAI.
-
-## Temperature
-
-Ang temperature ay isang parameter na kumokontrol sa randomness ng output ng isang Generative AI model. Ang temperature ay isang halaga sa pagitan ng 0 at 1 kung saan ang 0 ay nangangahulugang deterministic ang output at ang 1 ay nangangahulugang random ang output. Ang default na halaga ay 0.7.
-
-Tingnan natin ang isang halimbawa kung paano gumagana ang temperature, sa pamamagitan ng pagtakbo ng prompt na ito nang dalawang beses:
-
-> Prompt: "Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils"
-
-![Bunny sa kabayo na may hawak na lollipop, bersyon 1](../../../translated_images/tl/v1-generated-image.a295cfcffa3c13c2.webp)
-
-Ngayon, ulitin natin ang parehong prompt upang makita na hindi natin makukuha ang parehong imahe nang dalawang beses:
-
-![Ginawang imahe ng kuneho sa kabayo](../../../translated_images/tl/v2-generated-image.33f55a3714efe61d.webp)
-
-Tulad ng nakikita mo, magkatulad ang mga imahe, ngunit hindi pareho. Subukan nating baguhin ang halaga ng temperature sa 0.1 at tingnan ang mangyayari:
+Kapag kaya mo nang gumawa ng mga imahe, kailangan mo ng guardrails upang maiwasan ng iyong app na makabuo ng hindi ligtas o off-brand na nilalaman. Ang **metaprompt** ay teksto na dina-append mo sa prompt ng user upang limitahan ang output ng modelo.
 
 ```python
- generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2
-    )
-```
-
-### Pagbabago ng temperature
-
-Subukan nating gawing mas deterministic ang tugon. Napansin natin mula sa dalawang imaheng ginawa na sa unang imahe, may kuneho at sa pangalawang imahe, may kabayo, kaya't malaki ang pagkakaiba ng mga imahe.
-
-Kaya't baguhin natin ang ating code at itakda ang temperature sa 0, tulad nito:
-
-```python
-generation_response = client.images.create(
-        prompt='Bunny on horse, holding a lollipop, on a foggy meadow where it grows daffodils',    # Enter your prompt text here
-        size='1024x1024',
-        n=2,
-        temperature=0
-    )
-```
-
-Ngayon kapag pinatakbo mo ang code na ito, makakakuha ka ng dalawang imaheng ito:
-
-- ![Temperature 0, v1](../../../translated_images/tl/v1-temp-generated-image.a4346e1d2360a056.webp)
-- ![Temperature 0, v2](../../../translated_images/tl/v2-temp-generated-image.871d0c920dbfb0f1.webp)
-
-Dito malinaw mong makikita kung paano mas magkahawig ang mga imahe.
-
-## Paano tukuyin ang mga limitasyon para sa iyong application gamit ang metaprompts
-
-Sa ating demo, maaari na tayong gumawa ng mga imahe para sa ating mga kliyente. Gayunpaman, kailangan nating magtakda ng ilang mga limitasyon para sa ating application.
-
-Halimbawa, ayaw nating gumawa ng mga imahe na hindi ligtas para sa trabaho, o hindi angkop para sa mga bata.
-
-Magagawa natin ito gamit ang _metaprompts_. Ang metaprompts ay mga text prompt na ginagamit upang kontrolin ang output ng isang Generative AI model. Halimbawa, maaari nating gamitin ang metaprompts upang kontrolin ang output, at tiyakin na ang mga nagawang imahe ay ligtas para sa trabaho, o angkop para sa mga bata.
-
-### Paano ito gumagana?
-
-Ngayon, paano gumagana ang meta prompts?
-
-Ang meta prompts ay mga text prompt na ginagamit upang kontrolin ang output ng isang Generative AI model, inilalagay ang mga ito bago ang text prompt, at ginagamit upang kontrolin ang output ng modelo at naka-embed sa mga application upang kontrolin ang output ng modelo. Pinagsasama ang input ng prompt at ang input ng meta prompt sa isang text prompt.
-
-Isang halimbawa ng meta prompt ay ang sumusunod:
-
-```text
-You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-
-(Input)
-
-```
-
-Ngayon, tingnan natin kung paano natin magagamit ang meta prompts sa ating demo.
-
-```python
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
-
-meta_prompt =f"""You are an assistant designer that creates images for children.
-
-The image needs to be safe for work and appropriate for children.
-
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
-{disallow_list}
-"""
-
-prompt = f"{meta_prompt}
-Create an image of a bunny on a horse, holding a lollipop"
-
-# TODO add request to generate image
-```
-
-Mula sa prompt sa itaas, makikita mo kung paano isinasaalang-alang ng lahat ng mga imaheng nilikha ang metaprompt.
-
-## Gawain - tulungan ang mga mag-aaral
-
-Ipinakilala natin ang Edu4All sa simula ng araling ito. Ngayon ay oras na upang tulungan ang mga mag-aaral na gumawa ng mga imahe para sa kanilang mga pagsusuri.
-
-Ang mga mag-aaral ay gagawa ng mga imahe para sa kanilang mga pagsusuri na naglalaman ng mga monumento, kung anong mga monumento ang gagawin ay nakasalalay sa mga mag-aaral. Ang mga mag-aaral ay hinihikayat na gamitin ang kanilang pagkamalikhain sa gawaing ito upang ilagay ang mga monumento sa iba't ibang konteksto.
-
-## Solusyon
-
-Narito ang isang posibleng solusyon:
-```python
-import openai
-import os
-import requests
-from PIL import Image
-import dotenv
-from openai import AzureOpenAI
-# import dotenv
-dotenv.load_dotenv()
-
-# Get endpoint and key from environment variables
-client = AzureOpenAI(
-  azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"],
-  api_key=os.environ['AZURE_OPENAI_API_KEY'],
-  api_version = "2024-02-01"
-  )
-
-
-disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language, adult humor, adult jokes, adult situations, adult"
+disallow_list = "swords, violence, blood, gore, nudity, sexual content, adult content, adult themes, adult language"
 
 meta_prompt = f"""You are an assistant designer that creates images for children.
 
 The image needs to be safe for work and appropriate for children.
+The image needs to be in color, in landscape orientation, and in a 16:9 aspect ratio.
 
-The image needs to be in color.
-
-The image needs to be in landscape orientation.
-
-The image needs to be in a 16:9 aspect ratio.
-
-Do not consider any input from the following that is not safe for work or appropriate for children.
+Do not consider any input that is not safe for work or appropriate for children, including:
 {disallow_list}
 """
 
-prompt = f"""{meta_prompt}
-Generate monument of the Arc of Triumph in Paris, France, in the evening light with a small child holding a Teddy looks on.
-""""
-
-try:
-    # Create an image by using the image generation API
-    generation_response = client.images.generate(
-        prompt=prompt,    # Enter your prompt text here
-        size='1024x1024',
-        n=1,
-    )
-    # Set the directory for the stored image
-    image_dir = os.path.join(os.curdir, 'images')
-
-    # If the directory doesn't exist, create it
-    if not os.path.isdir(image_dir):
-        os.mkdir(image_dir)
-
-    # Initialize the image path (note the filetype should be png)
-    image_path = os.path.join(image_dir, 'generated-image.png')
-
-    # Retrieve the generated image
-    image_url = generation_response.data[0].url  # extract image URL from response
-    generated_image = requests.get(image_url).content  # download the image
-    with open(image_path, "wb") as image_file:
-        image_file.write(generated_image)
-
-    # Display the image in the default image viewer
-    image = Image.open(image_path)
-    image.show()
-
-# catch exceptions
-except openai.BadRequestError as err:
-    print(err)
+prompt = f"{meta_prompt}\nCreate an image of a bunny on a horse, holding a lollipop"
+# ipasa ang `prompt` sa client.images.generate(...)
 ```
 
-## Magaling na Trabaho! Ipagpatuloy ang Iyong Pag-aaral
+Bawat imahe ay nililikha na ngayon sa loob ng mga hangganang itinakda ng metaprompt. Pagsamahin ito sa mga content filter na naka-built sa Microsoft Foundry para sa defense in depth.
 
-Pagkatapos makumpleto ang araling ito, tingnan ang aming [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) upang patuloy na paunlarin ang iyong kaalaman sa Generative AI!
+## Takdang-aralin - tulungan nating ang mga estudyante
 
-Pumunta sa Lesson 10 kung saan tatalakayin natin kung paano [bumuo ng AI applications gamit ang low-code](../10-building-low-code-ai-applications/README.md?WT.mc_id=academic-105485-koreyst)
+Kailangan ng mga estudyante ng Edu4All ng mga imahe para sa kanilang mga pagsusulit. Gumawa ng app na lumilikha ng mga imahe ng **monumento** (alin mang monumento ay nasa iyong desisyon) na inilalagay sa iba't ibang, malikhaing konteksto - halimbawa, isang tanyag na landmark sa paglubog ng araw na may batang nakamasid.
+
+Subukan mo ito mismo, pagkatapos ay ikumpara sa mga reference na solusyon:
+
+- Python (Azure): [aoai-solution.py](../../../09-building-image-applications/python/aoai-solution.py)
+- Python (Azure) buong generation app: [aoai-app.py](../../../09-building-image-applications/python/aoai-app.py)
+- Python (OpenAI): [oai-app.py](../../../09-building-image-applications/python/oai-app.py)
+- TypeScript (Azure): [typescript/image-generation-app](../../../09-building-image-applications/typescript/image-generation-app)
+- .NET (Azure): [dotnet/notebook-azure-openai.dib](../../../09-building-image-applications/dotnet/notebook-azure-openai.dib)
+
+Gawin mo rin ang mga notebook sa [python/](../../../09-building-image-applications/python) (`aoai-assignment.ipynb` para sa Azure, `oai-assignment.ipynb` para sa OpenAI).
+
+## Magaling! Ipagpatuloy ang iyong pag-aaral
+
+Pagkatapos makumpleto ang araling ito, silipin ang aming [Generative AI Learning collection](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) upang patuloy na mapalago ang iyong kaalaman sa Generative AI!
+
+Pumunta sa lesson 10 upang ipagpatuloy ang pag-aaral.
 
 ---
 
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagamat sinisikap naming maging tumpak, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na mapagkakatiwalaang pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Pagtatanggi**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI translation na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, pakatandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pangunahing sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang maling pagkakaintindi o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

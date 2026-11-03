@@ -1,270 +1,280 @@
 # AGENTS.md
 
-## Projektáttekintés
+## Projekt áttekintés
 
-Ez a tároló egy átfogó, 21 leckéből álló tananyagot tartalmaz, amely a generatív mesterséges intelligencia alapjait és alkalmazásfejlesztését tanítja. A kurzus kezdőknek készült, és a legfontosabb fogalmaktól a gyártásra kész alkalmazások építéséig mindent lefed.
+Ez a tárhely egy átfogó, 21 leckéből álló tananyagot tartalmaz, amely a Generatív AI alapjait és alkalmazásfejlesztést tanít. A kurzus kezdőknek készült, és mindent lefed az alapfogalmaktól a termelésre kész alkalmazások elkészítéséig.
 
-**Kulcstechnológiák:**
+**Fő technológiák:**
 - Python 3.9+ könyvtárakkal: `openai`, `python-dotenv`, `tiktoken`, `azure-ai-inference`, `pandas`, `numpy`, `matplotlib`
-- TypeScript/JavaScript Node.js-szel és könyvtárakkal: `@azure/openai`, `@azure-rest/ai-inference`, `openai`
-- Azure OpenAI Service, OpenAI API és GitHub Modellek
-- Jupyter Notebooks interaktív tanuláshoz
-- Dev Containers az egységes fejlesztési környezethez
+- TypeScript/JavaScript Node.js-sel és könyvtárakkal: `openai` (Azure OpenAI a v1 végponton + Responses API), `@azure-rest/ai-inference` (Microsoft Foundry modellek)
+- Azure OpenAI Szolgáltatás, OpenAI API és Microsoft Foundry Modellek (a GitHub Modellek 2026 július végén megszűnnek)
+- Jupyter jegyzetfüzetek interaktív tanuláshoz
+- Fejlesztői konténerek az egységes fejlesztőkörnyezetért
 
-**Tároló felépítése:**
-- 21 számozott lecke könyvtár (00-21), amelyek README fájlokat, kódpéldákat és feladatokat tartalmaznak
-- Többféle megvalósítás: Python, TypeScript, és néha .NET példák
-- Fordítások könyvtára több mint 40 nyelvi verzióval
-- Központosított konfiguráció `.env` fájlon keresztül (használja a `.env.copy` sablont)
+**A tárhely szerkezete:**
+- 21 számozott lecke könyvtár (00-21), amelyek README-ket, kód példákat és feladatokat tartalmaznak
+- Több megvalósítás: Python, TypeScript és néha .NET példák
+- Fordítások könyvtár 40+ nyelvi verzióval
+- Központi konfiguráció `.env` fájlban (használd a `.env.copy` sablonként)
 
-## Beállítási parancsok
+## Beállító parancsok
 
-### Tároló kezdeti beállítása
+### Kezdeti tárhely beállítás
 
 ```bash
-# Clone the repository
+# Klónozd a tárat
 git clone https://github.com/microsoft/generative-ai-for-beginners.git
 cd generative-ai-for-beginners
 
-# Copy environment template
+# Másold az környezeti sablont
 cp .env.copy .env
-# Edit .env with your API keys and endpoints
+# Szerkeszd a .env fájlt az API kulcsaid és végpontjaid megadásával
 ```
 
 ### Python környezet beállítása
 
 ```bash
-# Create virtual environment
+# Virtuális környezet létrehozása
 python3 -m venv venv
 
-# Activate virtual environment
-# On macOS/Linux:
+# Virtuális környezet aktiválása
+# macOS/Linux esetén:
 source venv/bin/activate
-# On Windows:
+# Windows esetén:
 venv\Scripts\activate
 
-# Install dependencies
+# Függőségek telepítése
 pip install -r requirements.txt
 ```
 
-### Node.js/TypeScript beállítása
+### Node.js/TypeScript környezet beállítása
 
 ```bash
-# Install root-level dependencies (for documentation tooling)
+# Telepítse a root szintű függőségeket (a dokumentációs eszközökhöz)
 npm install
 
-# For individual lesson TypeScript examples, navigate to the specific lesson:
+# Az egyes leckék TypeScript példáihoz navigáljon a konkrét leckéhez:
 cd 06-text-generation-apps/typescript/recipe-app
 npm install
 ```
 
-### Dev Container beállítása (ajánlott)
+### Dev Container beállítás (ajánlott)
 
-A tároló tartalmaz egy `.devcontainer` konfigurációt GitHub Codespaces vagy VS Code Dev Containers számára:
+A tárhely tartalmaz `.devcontainer` konfigurációt GitHub Codespaces vagy VS Code Dev Containers használatához:
 
-1. Nyissa meg a tárolót GitHub Codespaces-ben vagy VS Code-ban a Dev Containers bővítménnyel
+1. Nyisd meg a tárhelyet GitHub Codespaces-ben vagy VS Code-ban a Dev Containers kiterjesztéssel
 2. A Dev Container automatikusan:
-   - Telepíti a Python függőségeket a `requirements.txt` fájlból
-   - Lefuttatja a post-create scriptet (`.devcontainer/post-create.sh`)
+   - Telepíti a Python függőségeket a `requirements.txt` alapján
+   - Lefuttatja a létrehozás utáni scriptet (`.devcontainer/post-create.sh`)
    - Beállítja a Jupyter kernelt
 
 ## Fejlesztési munkafolyamat
 
 ### Környezeti változók
 
-Minden API-hozzáférést igénylő lecke a `.env` fájlban definiált környezeti változókat használja:
+Minden API-hozzáférést igénylő lecke környezeti változókat használ, amelyek a `.env` fájlban vannak definiálva:
 
-- `OPENAI_API_KEY` - OpenAI API-hoz
-- `AZURE_OPENAI_API_KEY` - Azure OpenAI Service-hez
-- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI végpont URL-je
-- `AZURE_OPENAI_DEPLOYMENT` - Chat completion modell telepítési neve
-- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Embeddings modell telepítési neve
-- `AZURE_OPENAI_API_VERSION` - API verzió (alapértelmezett: `2024-02-01`)
+- `OPENAI_API_KEY` - OpenAI API kulcs
+- `AZURE_OPENAI_API_KEY` - Azure OpenAI a Microsoft Foundry-ban (az Azure OpenAI szolgáltatás most a Microsoft Foundry része: https://ai.azure.com)
+- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI végpont URL (Foundry erőforrás végpont)
+- `AZURE_OPENAI_DEPLOYMENT` - Chat kiegészítés modell telepítés neve (kurzus alapértelmezés: `gpt-5-mini`)
+- `AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT` - Beágyazások modell telepítés neve (kurzus alapértelmezés: `text-embedding-3-small`)
+- `AZURE_OPENAI_API_VERSION` - API verzió (alapértelmezett: `2024-10-21`)
 - `HUGGING_FACE_API_KEY` - Hugging Face modellekhez
-- `GITHUB_TOKEN` - GitHub Modellekhez
+- `AZURE_INFERENCE_ENDPOINT` - Microsoft Foundry Modellek végpont (többszolgáltatós modell katalógus)
+- `AZURE_INFERENCE_CREDENTIAL` - Microsoft Foundry Modellek API kulcs (helyettesíti a megszűnő `GITHUB_TOKEN`-t)
+- `AZURE_INFERENCE_CHAT_MODEL` - Egy nem következtető modell (pl. `Llama-3.3-70B-Instruct`), amelyet a `temperature` példák használnak, mivel a következtetéses modellek nem támogatják a mintavétel vezérlőket
+
+### Modell konvenciók (fontos)
+
+- **Az alapértelmezett chat modell a `gpt-5-mini`** - egy aktuális, nem elavult **következtető** modell. 2026-tól a régebbi, hőmérséklet-állítható "mini" modellek (`gpt-4o-mini`, `gpt-4.1-mini`) *elavulnak*, ezért a tananyag a GPT-5 családra szabványosít.
+- **A következtető modellek elutasítják a `temperature` és `top_p` paramétereket**, helyette `max_output_tokens`-t (Responses API) / `max_completion_tokens`-t (chat kiegészítések) használnak a `max_tokens` helyett. Ne adj hozzá `temperature`/`top_p`/`max_tokens` értéket azokhoz a mintákhoz, amelyek a `gpt-5-mini`-t hívják.
+- **A `temperature` demonstrálásához** a példák egy **Llama** modellt használnak (`Llama-3.3-70B-Instruct`) a Microsoft Foundry Modellek végpontján keresztül (`AZURE_INFERENCE_CHAT_MODEL`). Kövesd a következtetéses modelleket prompt tervezéssel és következtetési vezérlésekkel, ne mintavétel szabályozókkal.
+- **Finomhangolás (18. lecke)** megtartja a `gpt-4.1-mini`-t: a GPT-5 csak megerősítéses finomhangolást (RFT) támogat, nem a felügyelt finomhangolást (SFT), amely ott szerepel.
+- A 20. (Mistral) és 21. (Meta) leckék megtartják a `temperature`/`max_tokens` használatot, mert Mistral/Llama modelleket céloznak, amelyek támogatják ezt.
 
 ### Python példák futtatása
 
 ```bash
-# Navigate to lesson directory
+# Navigáljon a tanfolyam könyvtárába
 cd 06-text-generation-apps/python
 
-# Run a Python script
+# Futtasson egy Python szkriptet
 python aoai-app.py
 ```
 
 ### TypeScript példák futtatása
 
 ```bash
-# Navigate to TypeScript app directory
+# Navigáljon a TypeScript alkalmazás könyvtárába
 cd 06-text-generation-apps/typescript/recipe-app
 
-# Build the TypeScript code
+# Fordítsa le a TypeScript kódot
 npm run build
 
-# Run the application
+# Futtassa az alkalmazást
 npm start
 ```
 
-### Jupyter Notebooks futtatása
+### Jupyter jegyzetfüzetek futtatása
 
 ```bash
-# Start Jupyter in the repository root
+# Indítsa el a Jupytert a tároló gyökérkönyvtárában
 jupyter notebook
 
-# Or use VS Code with Jupyter extension
+# Vagy használja a VS Code-ot Jupyter kiterjesztéssel
 ```
 
-### Különböző lecketípusokkal való munka
+### Különféle lecketípusok kezelése
 
-- **"Learn" leckék**: README.md dokumentációra és fogalmakra fókuszálnak
-- **"Build" leckék**: Működő kódpéldákat tartalmaznak Pythonban és TypeScriptben
-- Minden lecke tartalmaz egy README.md fájlt elmélettel, kódismertetőkkel és videós tartalmakra mutató hivatkozásokkal
+- **"Learn" leckék**: A README.md dokumentációra és fogalmakra fókuszálnak
+- **"Build" leckék**: Működő kód példákat tartalmaznak Pythonban és TypeScriptben
+- Minden leckének van egy README.md-je elmélettel, kódmagyarázatokkal és videós tartalom linkekkel
 
 ## Kódstílus irányelvek
 
 ### Python
 
-- Használja a `python-dotenv` könyvtárat a környezeti változók kezeléséhez
-- Importálja az `openai` könyvtárat az API interakciókhoz
-- Használja a `pylint` eszközt linteléshez (néhány példa tartalmazza a `# pylint: disable=all` megjegyzést az egyszerűség kedvéért)
-- Kövesse a PEP 8 elnevezési konvenciókat
-- API hitelesítő adatokat `.env` fájlban tárolja, soha ne a kódban
+- Használd a `python-dotenv`-t a környezeti változók kezelésére
+- Importáld az `openai` könyvtárat az API-hívásokhoz
+- Használd a `pylint`-et a linteléshez (néhány példában szerepel `# pylint: disable=all` az egyszerűség kedvéért)
+- Kövesd a PEP 8 elnevezési szabványokat
+- Az API-kulcsokat tárold `.env` fájlban, soha ne a kódban
 
 ### TypeScript
 
-- Használja a `dotenv` csomagot a környezeti változókhoz
-- TypeScript konfiguráció `tsconfig.json` fájlban minden alkalmazáshoz
-- Használja az `@azure/openai` vagy `@azure-rest/ai-inference` könyvtárakat az Azure szolgáltatásokhoz
-- Használja a `nodemon` eszközt automatikus újratöltéssel a fejlesztéshez
-- Építse meg a futtatás előtt: `npm run build`, majd `npm start`
+- Használd a `dotenv` csomagot a környezeti változókhoz
+- TypeScript konfiguráció alkalmazásonként a `tsconfig.json` fájlban
+- Használd az `openai` csomagot az Azure OpenAI-hoz (irányítsd a klienst a `/openai/v1/` végpontra és hívd a `client.responses.create` metódust); használd a `@azure-rest/ai-inference`-t a Microsoft Foundry Modellekhez
+- Fejlesztéshez használd a `nodemon`-t automatikus újratöltéssel
+- Futtatás előtt építsd meg: `npm run build`, majd `npm start`
 
 ### Általános konvenciók
 
-- Tartsa a kódpéldákat egyszerűnek és oktatónak
-- Tartalmazzon megjegyzéseket a kulcsfogalmak magyarázatához
-- Minden lecke kódja legyen önállóan futtatható
-- Használjon következetes elnevezést: `aoai-` előtag az Azure OpenAI-hoz, `oai-` az OpenAI API-hoz, `githubmodels-` a GitHub Modellekhez
+- Tartsd a kód példákat egyszerűnek és oktatónak
+- Kommentáld a kulcsfontosságú fogalmakat
+- Minden lecke kódja önálló és futtatható legyen
+- Használj következetes elnevezést: `aoai-` az Azure OpenAI-hoz, `oai-` az OpenAI API-hoz, `githubmodels-` a Microsoft Foundry Modellekhez (a GitHub Modellek korszakából származó régi előtag megtartva)
 
 ## Dokumentációs irányelvek
 
 ### Markdown stílus
 
-- Minden URL-t `[szöveg](../../url)` formátumban kell megadni, extra szóközök nélkül
-- Relatív hivatkozásoknak `./` vagy `../`-vel kell kezdődniük
-- Minden Microsoft domainre mutató hivatkozásnak tartalmaznia kell követési azonosítót: `?WT.mc_id=academic-105485-koreyst`
-- Ne használjon ország-specifikus lokalizációkat az URL-ekben (kerülje a `/en-us/`-t)
-- Képek a `./images` mappában tárolva, leíró nevekkel
-- Fájlnévben csak angol karakterek, számok és kötőjelek legyenek
+- Minden URL legyen `[text](../../url)` formátumban, szóközök nélkül
+- A relatív linkek `./` vagy `../`-val kezdődjenek
+- Minden Microsoft domainhez tartozó link tartalmazza a követési azonosítót: `?WT.mc_id=academic-105485-koreyst`
+- Ne használj ország-specifikus helyi beállítást az URL-ekben (kerüld az `/en-us/`-t)
+- Képeket a `./images` mappában tárolj leíró nevekkel
+- Használj angol karaktereket, számokat és kötőjeleket a fájlnevekben
 
-### Fordítási támogatás
+### Fordítás támogatás
 
-- A tároló több mint 40 nyelvet támogat automatikus GitHub Actions segítségével
-- Fordítások a `translations/` könyvtárban tárolva
-- Ne küldjön be részleges fordításokat
-- Gépi fordításokat nem fogadunk el
-- Fordított képek a `translated_images/` könyvtárban tárolva
+- A tárhely 40+ nyelvet támogat automatizált GitHub Actions segítségével
+- A fordítások a `translations/` könyvtárban vannak tárolva
+- Ne nyújts részleges fordításokat
+- Gépi fordításokat ne fogadunk el
+- A lefordított képek a `translated_images/` könyvtárban találhatók
 
-## Tesztelés és validálás
+## Tesztelés és validáció
 
 ### Beküldés előtti ellenőrzések
 
-Ez a tároló GitHub Actions-t használ validáláshoz. PR beküldése előtt:
+Ez a tárhely GitHub Actions-t használ validációra. PR beküldés előtt:
 
-1. **Markdown hivatkozások ellenőrzése**:
+1. **Markdown linkek ellenőrzése**:
    ```bash
-   # The validate-markdown.yml workflow checks:
-   # - Broken relative paths
-   # - Missing tracking IDs on paths
-   # - Missing tracking IDs on URLs
-   # - URLs with country locale
-   # - Broken external URLs
+   # A validate-markdown.yml munkafolyamat ellenőrzi:
+   # - Sérült relatív elérési útvonalak
+   # - Hiányzó nyomonkövetési azonosítók az elérési útvonalakon
+   # - Hiányzó nyomonkövetési azonosítók URL-eken
+   # - Ország szerinti lokalizációval rendelkező URL-ek
+   # - Sérült külső URL-ek
    ```
 
-2. **Manuális tesztelés**:
-   - Python példák tesztelése: Aktiválja a venv-et és futtassa a szkripteket
-   - TypeScript példák tesztelése: `npm install`, `npm run build`, `npm start`
-   - Ellenőrizze, hogy a környezeti változók megfelelően vannak konfigurálva
-   - Győződjön meg róla, hogy az API kulcsok működnek a kódpéldákkal
+2. **Kézi tesztelés**:
+   - Teszteld a Python példákat: Aktiváld a venv-t és futtasd a szkripteket
+   - Teszteld a TypeScript példákat: `npm install`, `npm run build`, `npm start`
+   - Ellenőrizd a környezeti változók megfelelő beállítását
+   - Győződj meg róla, hogy az API kulcsok működnek a kód példákban
 
-3. **Kódpéldák**:
-   - Győződjön meg róla, hogy minden kód hiba nélkül fut
-   - Tesztelje az Azure OpenAI és OpenAI API-val, ahol alkalmazható
-   - Ellenőrizze, hogy a példák működnek-e a GitHub Modellekkel, ahol támogatott
+3. **Kód példák**:
+   - Biztosítsd, hogy minden kód hibamentesen fusson
+   - Teszteld mind Azure OpenAI-val, mind OpenAI API-val, ahol alkalmazható
+   - Ellenőrizd a példák kompatibilitását a Microsoft Foundry Modellekkel, ahol támogatott
 
-### Nincs automatizált tesztelés
+### Nincs automatizált teszt
 
-Ez egy oktatási tároló, amely oktatóanyagokra és példákra fókuszál. Nincsenek egységtesztek vagy integrációs tesztek. A validálás főként:
-- Kódpéldák manuális tesztelése
-- GitHub Actions Markdown validáláshoz
-- Közösségi véleményezés az oktatási tartalomról
+Ez egy oktató jellegű tárhely, amely oktatóanyagokra és példákra fókuszál. Nincsenek egység- vagy integrációs tesztek. Az ellenőrzés elsősorban:
+- a kód példák kézi tesztelése
+- GitHub Actions a Markdown validációhoz
+- a közösségi véleményezés az oktatóanyag minőségéhez
 
 ## Pull Request irányelvek
 
 ### Beküldés előtt
 
-1. Tesztelje a kódváltoztatásokat Pythonban és TypeScriptben, ahol alkalmazható
-2. Futtassa a Markdown validálást (automatikusan elindul PR esetén)
-3. Győződjön meg róla, hogy minden Microsoft URL tartalmaz követési azonosítót
-4. Ellenőrizze, hogy a relatív hivatkozások érvényesek
-5. Ellenőrizze, hogy a képek megfelelően vannak hivatkozva
+1. Teszteld a kódváltozásokat Pythonban és TypeScriptben, ahol alkalmazható
+2. Futtasd a Markdown validációt (PR beküldésekor automatikusan elindul)
+3. Ellenőrizd, hogy minden Microsoft URL tartalmazza a követési azonosítót
+4. Győződj meg a relatív linkek helyességéről
+5. Ellenőrizd, hogy a képek helyesen vannak-e hivatkozva
 
 ### PR cím formátuma
 
-- Használjon leíró címeket: `[Lecke 06] Python példa elírás javítása` vagy `README frissítése a 08-as leckéhez`
-- Hivatkozzon probléma számokra, ahol alkalmazható: `Fixes #123`
+- Használj leíró címeket: `[Lesson 06] Javítás Python példa elírás` vagy `README frissítése a 08. leckéhez`
+- Hivatkozz hibaszámokra, ha van: `Fixes #123`
 
-### PR leírás
+### PR leírása
 
-- Magyarázza el, mi változott és miért
-- Linkeljen kapcsolódó problémákra
-- Kódváltoztatások esetén adja meg, mely példákat tesztelte
-- Fordítási PR-ek esetén tartalmazza az összes fájlt a teljes fordításhoz
+- Írd le, mi változott és miért
+- Linkelj kapcsolódó problémákra
+- Kódváltozás esetén részletezd, mely példák lettek tesztelve
+- Fordítási PR esetén tartalmazd az összes fájlt a teljes fordításhoz
 
 ### Hozzájárulási követelmények
 
-- Írja alá a Microsoft CLA-t (automatikus az első PR-nél)
-- Forkolja a tárolót a saját fiókjába, mielőtt változtatásokat végez
-- Egy PR logikai változtatásonként (ne kombináljon nem kapcsolódó javításokat)
-- Tartsa a PR-eket fókuszáltan és kicsiben, ha lehetséges
+- Írd alá a Microsoft CLA-t (automatikus az első PR-nál)
+- Forkold a tárhelyet a saját fiókodba, mielőtt változtatnál
+- Egy PR egy logikai változtatás legyen (ne kombinalj nem összefüggő javításokat)
+- Tartsd a PR-eket fókuszáltan és kicsin, ha lehetséges
 
 ## Gyakori munkafolyamatok
 
-### Új kódpélda hozzáadása
+### Új kód példa hozzáadása
 
-1. Navigáljon a megfelelő lecke könyvtárba
-2. Hozzon létre példát a `python/` vagy `typescript/` alkönyvtárban
-3. Kövesse az elnevezési konvenciót: `{provider}-{example-name}.{py|ts|js}`
-4. Tesztelje valódi API hitelesítő adatokkal
-5. Dokumentálja az új környezeti változókat a lecke README fájljában
+1. Navigálj a megfelelő lecke könyvtárba
+2. Hozd létre a példát a `python/` vagy `typescript/` alkönyvtárban
+3. Kövesd az elnevezési szabványt: `{provider}-{example-name}.{py|ts|js}`
+4. Teszteld valódi API hitelesítő adatokkal
+5. Dokumentáld az új környezeti változókat a lecke README-jében
 
 ### Dokumentáció frissítése
 
-1. Szerkessze a README.md fájlt a lecke könyvtárában
-2. Kövesse a Markdown irányelveket (követési azonosítók, relatív hivatkozások)
-3. A fordítások GitHub Actions által kezelve (ne szerkessze manuálisan)
-4. Tesztelje, hogy minden hivatkozás érvényes
+1. Szerkeszd a lecke könyvtárában a README.md fájlt
+2. Kövesd a Markdown irányelveket (követési azonosítók, relatív linkek)
+3. A fordítások frissítése GitHub Actions által történik (ne szerkeszd kézzel)
+4. Teszteld az összes linket, hogy érvényesek-e
 
-### Dev Containers használata
+### Dev Containerekkel való munka
 
-1. A tároló tartalmazza a `.devcontainer/devcontainer.json` fájlt
-2. A post-create script automatikusan telepíti a Python függőségeket
-3. Python és Jupyter bővítmények előre konfigurálva
-4. A környezet az `mcr.microsoft.com/devcontainers/universal:2.11.2` alapú
+1. A tárhely tartalmazza a `.devcontainer/devcontainer.json` fájlt
+2. A létrehozás utáni script automatikusan telepíti a Python függőségeket
+3. A Python és Jupyter kiterjesztések előre konfiguráltak
+4. A környezet a `mcr.microsoft.com/devcontainers/universal:2.11.2` alapú
 
 ## Telepítés és publikálás
 
-Ez egy oktatási tároló - nincs telepítési folyamat. A tananyagot az alábbiak használják:
+Ez egy tanulási tárhely - nincs telepítési folyamat. A tananyagot az alábbi módokon használják:
 
-1. **GitHub tároló**: Közvetlen hozzáférés a kódhoz és dokumentációhoz
-2. **GitHub Codespaces**: Azonnali fejlesztési környezet előre konfigurált beállítással
-3. **Microsoft Learn**: Tartalom szindikálása az hivatalos tanulási platformra
-4. **docsify**: Dokumentációs oldal Markdown alapján (lásd `docsifytopdf.js` és `package.json`)
+1. **GitHub tárhely**: közvetlen hozzáférés a kódhoz és dokumentációhoz
+2. **GitHub Codespaces**: azonnali fejlesztői környezet előre konfigurált setup-pal
+3. **Microsoft Learn**: a tartalom hivatalos tanulási platformon is elérhető lehet
+4. **docsify**: Markdown alapú dokumentációs oldal (lásd `docsifytopdf.js` és `package.json`)
 
 ### Dokumentációs oldal építése
 
 ```bash
-# Generate PDF from documentation (if needed)
+# PDF generálása a dokumentációból (ha szükséges)
 npm run convert
 ```
 
@@ -272,25 +282,25 @@ npm run convert
 
 ### Gyakori problémák
 
-**Python importálási hibák**:
-- Győződjön meg róla, hogy a virtuális környezet aktiválva van
-- Futtassa a `pip install -r requirements.txt` parancsot
-- Ellenőrizze, hogy a Python verzió 3.9+
+**Python import hibák**:
+- Győződj meg, hogy a virtuális környezet aktivált
+- Fuss le `pip install -r requirements.txt` parancsot
+- Ellenőrizd, hogy a Python verzió 3.9 vagy újabb
 
 **TypeScript build hibák**:
-- Futtassa az `npm install` parancsot az adott alkalmazás könyvtárában
-- Ellenőrizze, hogy a Node.js verzió kompatibilis
-- Törölje a `node_modules` könyvtárat, és telepítse újra, ha szükséges
+- Fuss `npm install` az adott alkalmazás könyvtárában
+- Ellenőrizd, hogy a Node.js verzió kompatibilis
+- Töröld a `node_modules` könyvtárat és telepítsd újra, ha szükséges
 
 **API hitelesítési hibák**:
-- Ellenőrizze, hogy a `.env` fájl létezik és helyes értékeket tartalmaz
-- Győződjön meg róla, hogy az API kulcsok érvényesek és nem jártak le
-- Ellenőrizze, hogy a végpont URL-ek helyesek az Ön régiójában
+- Ellenőrizd, hogy létezik a `.env` fájl és helyes értékeket tartalmaz
+- Győződj meg, hogy az API kulcsok érvényesek és nem jártak le
+- Ellenőrizd, hogy a végpont URL-ek régiódnak megfelelőek
 
 **Hiányzó környezeti változók**:
-- Másolja a `.env.copy` fájlt `.env` néven
-- Töltse ki az összes szükséges értéket az aktuális leckéhez
-- Indítsa újra az alkalmazást a `.env` frissítése után
+- Másold a `.env.copy`-t `.env`-re
+- Töltsd ki az adott lecke összes szükséges értékét
+- Indítsd újra az alkalmazást a `.env` frissítése után
 
 ## További források
 
@@ -299,19 +309,21 @@ npm run convert
 - [Magatartási kódex](./CODE_OF_CONDUCT.md)
 - [Biztonsági irányelvek](./SECURITY.md)
 - [Azure AI Discord](https://aka.ms/genai-discord?WT.mc_id=academic-105485-koreyst)
-- [Haladó kódminták gyűjteménye](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
+- [Haladó kód minták gyűjteménye](https://aka.ms/genai-beg-code?WT.mc_id=academic-105485-koreyst)
 
-## Projekt-specifikus megjegyzések
+## Projektre vonatkozó megjegyzések
 
-- Ez egy **oktatási tároló**, amely a tanulásra fókuszál, nem gyártási kódra
-- A példák szándékosan egyszerűek és oktatási célokat szolgálnak
-- A kódminőség az oktatási érthetőséggel van egyensúlyban
-- Minden lecke önálló, és külön-külön elvégezhető
-- A tároló több API szolgáltatót támogat: Azure OpenAI, OpenAI és GitHub Modellek
-- A tartalom többnyelvű, automatikus fordítási munkafolyamatokkal
-- Aktív közösség a Discordon kérdések és támogatás céljából
+- Ez egy **oktató tárhely**, a tanulásra fókuszál, nem termelési kódra
+- A példák szándékosan egyszerűek és a fogalmak oktatására koncentrálnak
+- A kódminőség kiegyensúlyozott az oktatási tisztasággal
+- Minden lecke önálló és önállóan elvégezhető
+- A tárhely több API szolgáltatót támogat: Azure OpenAI, OpenAI, Microsoft Foundry Modellek és offline szolgáltatók, mint a Foundry Local és Ollama
+- A tartalom többnyelvű, automatizált fordítási munkafolyamatokkal
+- Aktív közösség Discord-on kérdésekre és támogatásra
 
 ---
 
-**Felelősség kizárása**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével került lefordításra. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely ebből a fordításból ered.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

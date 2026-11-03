@@ -1,118 +1,143 @@
-# Pagrindai apie užklausų kūrimą
+# Pagrindai apie užklausų (promptų) kūrimą
 
-[![Pagrindai apie užklausų kūrimą](../../../translated_images/lt/04-lesson-banner.a2c90deba7fedacd.webp)](https://youtu.be/GElCu2kUlRs?si=qrXsBvXnCW12epb8)
+[![Pagrindai apie užklausų (promptų) kūrimą](../../../translated_images/lt/04-lesson-banner.a2c90deba7fedacd.webp)](https://youtu.be/GElCu2kUlRs?si=qrXsBvXnCW12epb8)
 
 ## Įvadas
-Šiame modulyje aptariami esminiai konceptai ir technikos, kaip kurti efektyvias užklausas generatyviniams dirbtinio intelekto modeliams. Tai, kaip jūs formuluojate savo užklausą LLM (dideliam kalbos modeliui), yra labai svarbu. Kruopščiai suformuluota užklausa gali užtikrinti geresnę atsakymo kokybę. Bet ką iš tikrųjų reiškia tokie terminai kaip _užklausa_ ir _užklausų kūrimas_? Ir kaip galima patobulinti užklausos _įvestį_, kurią siunčiate LLM? Tai yra klausimai, į kuriuos bandysime atsakyti šiame ir kitame skyriuje.
+Šis modulis apima svarbias sąvokas ir metodus, kaip kurti veiksmingas užklausas (promptus) generatyviuose DI modeliuose. Svarbu, kaip rašote savo užklausą LLM modeliui. Kruopščiai sukurta užklausa gali užtikrinti geresnės kokybės atsakymą. Bet ką tiksliai reiškia terminai _užklausa_ ir _užklausų inžinerija_? Ir kaip patobulinti užklausos _įvestį_, kurią siunčiu LLM? Tai klausimai, į kuriuos bandysime atsakyti šiame ir kitame skyriuje.
 
-_Generatyvinis dirbtinis intelektas_ gali kurti naują turinį (pvz., tekstą, vaizdus, garsą, kodą ir kt.) reaguodamas į vartotojo užklausas. Tai pasiekiama naudojant _Didelius kalbos modelius_, tokius kaip OpenAI GPT („Generative Pre-trained Transformer“) serija, kurie yra apmokyti naudoti natūralią kalbą ir kodą.
+_Generatyvus DI_ gali kurti naują turinį (pvz., tekstą, paveikslėlius, garsą, kodą ir pan.) pagal vartotojo užklausas. Tai pasiekiama naudojant _didelius kalbos modelius_ (LLM), tokius kaip OpenAI GPT (“Generatyvus iš anksto apmokytas transformerių modelis”), kurie yra apmokyti naudotis natūralia kalba ir kodu.
 
-Dabar vartotojai gali bendrauti su šiais modeliais naudodami pažįstamus paradigmus, tokius kaip pokalbiai, nereikalaujant jokių techninių žinių ar mokymų. Modeliai yra _užklausų pagrindu sukurti_ – vartotojai siunčia tekstinę užklausą (prompt) ir gauna dirbtinio intelekto atsakymą (completion). Jie gali „kalbėtis su dirbtiniu intelektu“ iteratyviai, daugiapakopiuose pokalbiuose, tobulindami savo užklausą, kol atsakymas atitiks jų lūkesčius.
+Vartotojai dabar gali bendrauti su šiais modeliais naudodami pažįstamas paradigmas, tokias kaip pokalbis, nereikalaujant techninių žinių ar mokymų. Modeliai yra _užklausomis valdomi_ – vartotojai siunčia teksto įvestį (užklausą) ir gauna DI atsakymą (užbaigimą). Jie gali tada „kalbėtis su DI“ iteratyviai, daugiausiai kartų, tobulindami užklausą, kol atsakymas atitinka jų lūkesčius.
 
-„Užklausos“ dabar tampa pagrindine _programavimo sąsaja_ generatyviniams dirbtinio intelekto programoms, nurodant modeliams, ką daryti, ir darant įtaką grąžinamų atsakymų kokybei. „Užklausų kūrimas“ yra sparčiai auganti studijų sritis, kuri orientuojasi į užklausų _dizainą ir optimizavimą_, siekiant užtikrinti nuoseklius ir kokybiškus atsakymus dideliu mastu.
+„Užklausos“ dabar tampa pagrindine _programavimo sąsaja_ generatyvioms DI programėlėms, nurodančioms modeliams, ką daryti, ir įtakojančioms gaunamų atsakymų kokybę. „Užklausų inžinerija“ yra sparčiai plečiamas mokslinių tyrimų laukas, kuris orientuojasi į užklausų _dizainą ir optimizavimą_, siekiant užtikrinti nuoseklius ir kokybiškus atsakymus mastu.
 
 ## Mokymosi tikslai
 
-Šioje pamokoje sužinosime, kas yra užklausų kūrimas, kodėl jis svarbus ir kaip galime kurti efektyvesnes užklausas konkrečiam modeliui ir taikymo tikslui. Suprasime pagrindinius užklausų kūrimo konceptus ir geriausias praktikas – ir sužinosime apie interaktyvią Jupyter Notebooks „smėlio dėžės“ aplinką, kurioje galime pritaikyti šiuos konceptus realiuose pavyzdžiuose.
+Šioje pamokoje sužinosime, kas yra užklausų inžinerija, kodėl ji svarbi ir kaip galime sukurti efektyvesnes užklausas konkrečiam modeliui ir programos tikslui. Susipažinsime su pagrindinėmis sąvokomis ir geriausiomis praktikomis užklausų inžinerijoje – taip pat atrasime interaktyvią Jupyter Notebooks „smėlio dėžės“ aplinką, kur galime matyti šių sąvokų pritaikymą realiems pavyzdžiams.
 
-Pamokos pabaigoje mes galėsime:
+Pamokos pabaigoje galėsime:
 
-1. Paaiškinti, kas yra užklausų kūrimas ir kodėl jis svarbus.
-2. Apibūdinti užklausos komponentus ir kaip jie naudojami.
-3. Išmokti geriausias praktikas ir technikas užklausų kūrimui.
-4. Pritaikyti išmoktas technikas realiuose pavyzdžiuose, naudojant OpenAI sąsają.
+1. Paaiškinti, kas yra užklausų inžinerija ir kodėl ji svarbi.
+2. Apibūdinti užklausos sudedamąsias dalis ir jų panaudojimą.
+3. Išmokti geriausias praktikas ir technikas užklausų inžinerijai.
+4. Pritaikyti įgytas technikas realiems pavyzdžiams su OpenAI prieigos tašku.
 
-## Pagrindiniai terminai
+## Svarbios sąvokos
 
-Užklausų kūrimas: Praktika, kai kuriamos ir tobulinamos įvestys, siekiant nukreipti dirbtinio intelekto modelius į norimus rezultatus.
-Tokenizacija: Teksto pavertimo mažesniais vienetais, vadinamais tokenais, procesas, kurį modelis gali suprasti ir apdoroti.
-Instrukcijomis pritaikyti LLM: Dideli kalbos modeliai (LLM), kurie buvo specialiai pritaikyti su konkrečiomis instrukcijomis, siekiant pagerinti jų atsakymų tikslumą ir aktualumą.
+Užklausų Inžinerija: Praktika, skirta kurti ir tobulinti įvestis, kad DI modeliai generuotų pageidaujamus rezultatus.
+Tokenizacija: Teksto paverčiama mažesniais vienetais, vadinamais žetonais, kuriuos modelis supranta ir apdoroja.
+Instrukcijomis Patobulinti LLM: Dideli kalbos modeliai (LLM), kurie yra specifiniai patobulinti naudojant instrukcijas, kad pagerintų atsakymų tikslumą ir aktualumą.
 
-## Mokymosi smėlio dėžė
+## Mokymosi Smėlio Dėžė
 
-Užklausų kūrimas šiuo metu yra labiau menas nei mokslas. Geriausias būdas pagerinti savo intuiciją šioje srityje yra _praktikuotis daugiau_ ir taikyti bandymų ir klaidų metodą, kuris derina taikymo srities žinias su rekomenduojamomis technikomis ir modelio specifinėmis optimizacijomis.
+Užklausų inžinerija šiuo metu labiau menas nei mokslas. Geriausias būdas tobulinti intuiciją – _praktikuoti daugiau_ ir taikyti bandymų ir klaidų metodą, kuris sujungia taikomosios srities žinias su rekomenduojamomis technikomis ir modelio specifinėmis optimizacijomis.
 
-Pamokai skirtas Jupyter Notebook suteikia _smėlio dėžės_ aplinką, kurioje galite išbandyti tai, ką išmokote – tiek pamokos metu, tiek kaip kodo iššūkio dalį pamokos pabaigoje. Norėdami vykdyti pratimus, jums reikės:
+Šiai pamokai pridedamas Jupyter Notebook suteikia _smėlio dėžės_ aplinką, kurioje galite išbandyti įgytas žinias – vykdant užduotis pamokos metu arba kaip užbaigiamąjį kodo iššūkį. Norint vykdyti pratimus, reikės:
 
-1. **Azure OpenAI API rakto** – paslaugos sąsajos, skirtos įdiegtam LLM.
-2. **Python aplinkos** – kurioje galima vykdyti Notebook.
-3. **Vietinių aplinkos kintamųjų** – _užbaikite [NUSTATYMO](./../00-course-setup/02-setup-local.md?WT.mc_id=academic-105485-koreyst) žingsnius dabar, kad pasiruoštumėte_.
+1. **Azure OpenAI API raktas** – paslaugos galinis taškas išdiegti LLM modeliui.
+2. **Python vykdymo aplinka** – kurioje galima vykdyti Notebook.
+3. **Vietinės aplinkos kintamieji** – _užbaikite [SETUP](./../00-course-setup/02-setup-local.md?WT.mc_id=academic-105485-koreyst) žingsnius dabar, kad pasiruoštumėte_.
 
-Notebook turi _pradinių_ pratimų – tačiau jūs esate skatinami pridėti savo _Markdown_ (aprašymo) ir _Code_ (užklausų) sekcijas, kad išbandytumėte daugiau pavyzdžių ar idėjų – ir ugdytumėte savo intuiciją užklausų dizainui.
+Notebook pateikia pradines užduotis – bet skatiname papildyti savo _Markdown_ (aprašymo) ir _Code_ (užklausų) skyrius, kad išbandytumėte daugiau pavyzdžių ar idėjų ir vystytumėte intuiciją užklausų dizainui.
 
 ## Iliustruotas vadovas
 
-Norite gauti bendrą vaizdą apie tai, ką apima ši pamoka, prieš pradedant gilintis? Peržiūrėkite šį iliustruotą vadovą, kuris suteikia supratimą apie pagrindines aptariamas temas ir svarbiausius dalykus, kuriuos verta apmąstyti kiekvienoje iš jų. Pamokos planas veda jus nuo pagrindinių konceptų ir iššūkių supratimo iki jų sprendimo, taikant atitinkamas užklausų kūrimo technikas ir geriausias praktikas. Atkreipkite dėmesį, kad „Pažangių technikų“ skyrius šiame vadove nurodo turinį, aptariamą _kitame_ šios mokymo programos skyriuje.
+Norite gauti bendrą vaizdą, ką ši pamoka apima prieš pradedant? Patikrinkite šį iliustruotą vadovą, kuris suteiks supratimą apie pagrindines aptariamas temas ir svarbiausius išmokimus kiekvienai jų. Pamokos planas veda nuo pagrindinių sąvokų ir iššūkių supratimo iki sprendimų taikant tinkamas užklausų inžinerijos technikas ir geriausias praktikas. Atkreipkite dėmesį, kad „Pažangių Technikų“ skyrius šiame vadove apima medžiagą, aptariamą _kitoje_ šio kurso dalyje.
 
-![Iliustruotas vadovas apie užklausų kūrimą](../../../translated_images/lt/04-prompt-engineering-sketchnote.d5f33336957a1e4f.webp)
+![Iliustruotas Užklausų Inžinerijos Vadovas](../../../translated_images/lt/04-prompt-engineering-sketchnote.d5f33336957a1e4f.webp)
 
-## Mūsų startuolis
+## Mūsų Startuolis
 
-Dabar pakalbėkime apie tai, kaip _ši tema_ susijusi su mūsų startuolio misija [įnešti dirbtinio intelekto inovacijas į švietimą](https://educationblog.microsoft.com/2023/06/collaborating-to-bring-ai-innovation-to-education?WT.mc_id=academic-105485-koreyst). Mes norime kurti dirbtinio intelekto pagrindu veikiančias _personalizuoto mokymosi_ programas – tad pagalvokime, kaip skirtingi mūsų programos vartotojai galėtų „kurti“ užklausas:
+Dabar pakalbėkime, kaip _ši tema_ susijusi su mūsų startuolio misija [atnešti DI inovacijas į švietimą](https://educationblog.microsoft.com/2023/06/collaborating-to-bring-ai-innovation-to-education?WT.mc_id=academic-105485-koreyst). Norime kurti DI pagrįstas programas _personalizuotam mokymuisi_ – todėl pagalvokime, kaip skirtingi mūsų programos naudotojai gali „kūrti“ užklausas:
 
-- **Administratoriai** galėtų paprašyti dirbtinio intelekto _analizuoti mokymo programos duomenis, kad būtų nustatytos spragos aprėptyje_. Dirbtinis intelektas galėtų apibendrinti rezultatus arba vizualizuoti juos naudodamas kodą.
-- **Mokytojai** galėtų paprašyti dirbtinio intelekto _sukurti pamokos planą tam tikrai auditorijai ir temai_. Dirbtinis intelektas galėtų sukurti personalizuotą planą nurodytu formatu.
-- **Mokiniai** galėtų paprašyti dirbtinio intelekto _padėti jiems mokytis sunkios temos_. Dirbtinis intelektas galėtų vesti mokinius per pamokas, pateikti užuominas ir pavyzdžius, pritaikytus jų lygiui.
+- **Administratoriai** gali paprašyti DI _analizuoti mokymo programos duomenis ieškant spragų apimtimi_. DI gali suvesti rezultatus arba juos vizualizuoti su kodu.
+- **Mokytojai** gali paprašyti DI _sukurti pamokos planą tiksliniam auditorijai ir temai_. DI gali paruošti asmeninį planą nurodytu formatu.
+- **Mokiniai** gali paprašyti DI _mokyti juos sudėtingoje srityje_. DI dabar gali nukreipti mokinius su pamokomis, patarimais ir pavyzdžiais, pritaikytais jų lygiui.
 
-Tai tik ledkalnio viršūnė. Peržiūrėkite [Užklausos švietimui](https://github.com/microsoft/prompts-for-edu/tree/main?WT.mc_id=academic-105485-koreyst) – atvirą šaltinio užklausų biblioteką, kurią sudarė švietimo ekspertai – kad gautumėte platesnį galimybių vaizdą! _Pabandykite paleisti kai kurias iš tų užklausų smėlio dėžėje arba naudodami OpenAI Playground ir pažiūrėkite, kas nutiks!_
+Tai tik viršūnėlė. Pažiūrėkite [Prompts For Education](https://github.com/microsoft/prompts-for-edu/tree/main?WT.mc_id=academic-105485-koreyst) – atviro kodo užklausų biblioteką, kuruojamą švietimo ekspertų, kad gautumėte platesnį galimybių suvokimą! _Išbandykite keletą užklausų smėlio dėžėje arba naudodamiesi OpenAI Playground, kad pamatytumėte, kas nutinka!_
 
-## Kas yra užklausų kūrimas?
+<!--
+PAMOKOS ŠABLONAS:
+Ši dalis turėtų apimti pagrindinę sąvoką #1.
+Palaikykite sąvoką pavyzdžiais ir nuorodomis.
 
-Pamoką pradėjome apibrėždami **Užklausų kūrimą** kaip procesą, kurio metu _kuriamos ir optimizuojamos_ tekstinės įvestys (užklausos), siekiant užtikrinti nuoseklius ir kokybiškus atsakymus (užbaigimus) konkrečiam taikymo tikslui ir modeliui. Galime tai laikyti dviejų etapų procesu:
+SĄVOKA #1:
+Užklausų inžinerija.
+Apibrėžkite ją ir paaiškinkite, kodėl ji reikalinga.
+-->
 
-- _kuriant_ pradinę užklausą konkrečiam modeliui ir tikslui
-- _tobulinant_ užklausą iteratyviai, siekiant pagerinti atsakymo kokybę
+## Kas yra užklausų inžinerija?
 
-Tai neišvengiamai yra bandymų ir klaidų procesas, kuris reikalauja vartotojo intuicijos ir pastangų, kad būtų pasiekti optimalūs rezultatai. Kodėl tai svarbu? Norėdami atsakyti į šį klausimą, pirmiausia turime suprasti tris konceptus:
+Šią pamoką pradėjome apibrėždami **užklausų inžineriją** kaip procesą, kuriame _kuriamos ir optimizuojamos_ teksto įvestys (užklausos), siekiant pateikti nuoseklius ir kokybiškus atsakymus (užbaigimus) pagal konkretų taikymo tikslą ir modelį. Galime tai laikyti dviejų žingsnių procesu:
 
-- _Tokenizacija_ = kaip modelis „mato“ užklausą
-- _Bazinis LLM_ = kaip pagrindinis modelis „apdoroja“ užklausą
-- _Instrukcijomis pritaikyti LLM_ = kaip modelis dabar mato „užduotis“
+- _sukurti_ pradinę užklausą konkrečiam modeliui ir tikslui
+- _toliau tobulinti_ užklausą iteratyviai gerinant atsako kokybę
+
+Tai būtinai yra bandymų ir klaidų procesas, reikalaujantis naudotojo intuicijos ir pastangų, norint gauti optimalius rezultatus. Kodėl tai svarbu? Norėdami atsakyti, pirmiausia turime suprasti tris sąvokas:
+
+- _Tokenizacija_ = kaip modelis „matuoja“ užklausą
+- _Pagrindiniai LLM_ = kaip pagrindinis modelis „apdoroja“ užklausą
+- _Instrukcijomis patobulinti LLM_ = kaip modelis dabar mato „užduotis“
 
 ### Tokenizacija
 
-LLM mato užklausas kaip _tokenų seką_, kur skirtingi modeliai (arba modelio versijos) gali skirtingai suskaidyti tą pačią užklausą. Kadangi LLM yra apmokyti su tokenais (o ne su neapdorotu tekstu), būdas, kuriuo užklausos yra suskaidomos į tokenus, tiesiogiai veikia generuojamo atsakymo kokybę.
+LLM mato užklausas kaip _žetonų seką_, kur skirtingi modeliai (ar jų versijos) gali tą pačią užklausą tokenizuoti skirtingais būdais. Kadangi LLM yra apmokyti su žetonais (o ne žaliu tekstu), užklausų tokenizacijos būdas tiesiogiai veikia sugeneruoto atsakymo kokybę.
 
-Norėdami geriau suprasti, kaip veikia tokenizacija, išbandykite tokias priemones kaip [OpenAI Tokenizer](https://platform.openai.com/tokenizer?WT.mc_id=academic-105485-koreyst), parodytą žemiau. Nukopijuokite savo užklausą – ir pažiūrėkite, kaip ji paverčiama į tokenus, atkreipdami dėmesį į tai, kaip tvarkomi tarpai ir skyrybos ženklai. Atkreipkite dėmesį, kad šis pavyzdys rodo senesnį LLM (GPT-3) – todėl bandymas su naujesniu modeliu gali duoti kitokį rezultatą.
+Norėdami suprasti tokenizacijos veikimą, išbandykite įrankius, tokius kaip [OpenAI Tokenizer](https://platform.openai.com/tokenizer?WT.mc_id=academic-105485-koreyst), parodytą žemiau. Įterpkite savo užklausą ir pažiūrėkite, kaip ji paverčiama žetonais, atkreipdami dėmesį į tarpų ir skyrybos ženklų elgesį. Atkreipkite dėmesį, kad šiame pavyzdyje parodytas senesnis LLM (GPT-3), todėl bandymas su naujesniu modeliu gali duoti kitokį rezultatą.
 
 ![Tokenizacija](../../../translated_images/lt/04-tokenizer-example.e71f0a0f70356c5c.webp)
 
-### Konceptas: Pagrindiniai modeliai
+### Sąvoka: Pagrindiniai (skaidymo) modeliai
 
-Kai užklausa yra suskaidyta į tokenus, pagrindinė ["Bazinio LLM"](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) (arba Pagrindinio modelio) funkcija yra numatyti tokeną toje sekoje. Kadangi LLM yra apmokyti su didžiuliais tekstų duomenų rinkiniais, jie gerai supranta statistinius ryšius tarp tokenų ir gali atlikti šią prognozę su tam tikru pasitikėjimu. Atkreipkite dėmesį, kad jie nesupranta _žodžių prasmės_ užklausoje ar tokene; jie tiesiog mato modelį, kurį gali „užbaigti“ savo kita prognoze. Jie gali tęsti sekos prognozavimą, kol vartotojas nutrauks arba bus pasiektos iš anksto nustatytos sąlygos.
+Kai užklausa tokenizuojama, pagrindinė funkcija, kurią atlieka ["Pagrindinis LLM"](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) (arba Pagrindinis modelis) yra numatyti kitą tokeną šioje sekoje. Kadangi LLM apmokyti didžiuliais teksto duomenų rinkiniais, jie gerai supranta statistinius ryšius tarp žetonų ir gali tą prognozę atlikti gana užtikrintai. Jie nesupranta užklausos ar žodžių _prasmės_; jie tiesiog mato šabloną, kurį gali „užbaigti“ kitą žetoną prognozuodami. Jie gali tęsti prognozavimą tol, kol naudotojas nutraukia pokalbį arba įvyksta iš anksto nustatyta sąlyga.
 
-Norite pamatyti, kaip veikia užklausų pagrindu sukurtas užbaigimas? Įveskite aukščiau pateiktą užklausą į Azure OpenAI Studio [_Chat Playground_](https://oai.azure.com/playground?WT.mc_id=academic-105485-koreyst) su numatytaisiais nustatymais. Sistema sukonfigūruota traktuoti užklausas kaip informacijos prašymus – todėl turėtumėte pamatyti užbaigimą, kuris atitinka šį kontekstą.
+Norite pamatyti, kaip veikia užklausomis pagrįstas užbaigimas? Įveskite aukščiau pateiktą užklausą į [Microsoft Foundry playground](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) su numatytosiomis parametrais. Sistema sukonfigūruota traktuoti užklausas kaip informacijos užklausas – todėl turėtumėte matyti atsakymą, atitinkantį šį kontekstą.
 
-Bet kas, jei vartotojas norėtų pamatyti kažką konkretaus, kas atitiktų tam tikrus kriterijus ar užduoties tikslą? Čia į pagalbą ateina _instrukcijomis pritaikyti_ LLM.
+Bet ką daryti, jei vartotojas norėtų pamatyti ką nors konkretaus, atitinkančio tam tikrus kriterijus ar užduoties tikslą? Čia įsijungia _instrukcijomis patobulinti_ LLM.
 
-![Bazinis LLM pokalbio užbaigimas](../../../translated_images/lt/04-playground-chat-base.65b76fcfde0caa67.webp)
+![Pagrindinio LLM pokalbio užbaigimas](../../../translated_images/lt/04-playground-chat-base.65b76fcfde0caa67.webp)
 
-### Konceptas: Instrukcijomis pritaikyti LLM
+### Sąvoka: Instrukcijomis patobulinti LLM
 
-[Instrukcijomis pritaikytas LLM](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) prasideda nuo pagrindinio modelio ir yra pritaikytas naudojant pavyzdžius arba įvesties/išvesties poras (pvz., daugiapakopius „pranešimus“), kurie gali turėti aiškias instrukcijas – ir atsakymas iš dirbtinio intelekto bando laikytis tų instrukcijų.
+[Instrukcijomis Patobulintas LLM](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) prasideda nuo pagrindinio modelio ir toliau jį tikslina pavyzdžiais ar įvesties/išvesties poromis (pvz., daugiažingsnės „žinutės“), kurios gali turėti aiškias instrukcijas – ir DI atsakymas siekia laikytis šių nurodymų.
 
-Tai naudoja tokias technikas kaip stiprinamasis mokymasis su žmogaus grįžtamuoju ryšiu (RLHF), kuris gali apmokyti modelį _laikytis instrukcijų_ ir _mokytis iš grįžtamojo ryšio_, kad jis generuotų atsakymus, kurie yra labiau pritaikyti praktiniams taikymams ir labiau atitinka vartotojo tikslus.
+Tai naudoja metodus, tokius kaip Žmogiškojo Atgalinio Ryšio sustiprintas mokymasis (RLHF), kuris moko modelį _vykdyti instrukcijas_ ir _mokytis iš atsiliepimų_, kad generuoti atsakymus, kurie yra geriau pritaikyti praktinėms programoms ir labiau aktualūs naudotojo tikslams.
 
-Pabandykime – peržiūrėkite aukščiau pateiktą užklausą, tačiau dabar pakeiskite _sistemos pranešimą_, kad pateiktumėte šią instrukciją kaip kontekstą:
+Išbandykime – peržiūrėkite aukščiau pateiktą užklausą, bet dabar pakeiskite _sistemos pranešimą_ nurodydami šią instrukciją kaip kontekstą:
 
-> _Apibendrinkite pateiktą turinį antros klasės mokiniui. Rezultatas turėtų būti vienas paragrafas su 3–5 punktų sąrašu._
+> _Apibendrinkite pateiktą turinį antro klasės mokiniui. Laikykitės vieno pastraipos rezultato su 3–5 punktais._
 
-Pažiūrėkite, kaip rezultatas dabar pritaikytas atspindėti norimą tikslą ir formatą? Mokytojas dabar gali tiesiogiai naudoti šį atsakymą savo klasės skaidrėse.
+Matote, kaip rezultatas dabar pritaikytas siekiamam tikslui ir formatui? Mokytojas dabar gali naudoti šį atsakymą savo skaidrėse tos pamokos metu.
 
-![Instrukcijomis pritaikytas LLM pokalbio užbaigimas](../../../translated_images/lt/04-playground-chat-instructions.b30bbfbdf92f2d05.webp)
+![Instrukcijomis patobulinto LLM pokalbio užbaigimas](../../../translated_images/lt/04-playground-chat-instructions.b30bbfbdf92f2d05.webp)
 
-## Kodėl mums reikia užklausų kūrimo?
+## Kodėl mums reikia užklausų inžinerijos?
 
-Dabar, kai žinome, kaip užklausos yra apdorojamos LLM, pakalbėkime apie _kodėl_ mums reikia užklausų kūrimo. Atsakymas slypi tame, kad dabartiniai LLM kelia daugybę iššūkių, dėl kurių _patikimi ir nuoseklūs užbaigimai_ tampa sunkiau pasiekiami, jei neįdedama pastangų į užklausų konstravimą ir optimizavimą. Pavyzdžiui:
+Dabar, kai žinome, kaip LLM apdoroja užklausas, pakalbėkime, kodėl mums reikia užklausų inžinerijos. Atsakymas slypi tame, kad dabartiniai LLM kelia daugybę iššūkių, dėl kurių _patikimas ir nuoseklus užbaigimas_ yra sudėtingesnis be pastangų kuriant ir tobulinant užklausas. Pavyzdžiui:
 
-1. **Modelio atsakymai yra stochastiški.** _Ta pati užklausa_ greičiausiai duos skirtingus atsakymus su skirtingais modeliais ar modelio versijomis. Ir ji gali netgi duoti skirtingus rezultatus su _tuo pačiu modeliu_ skirtingu metu. _Užklausų kūrimo technikos gali padėti mums sumažinti šiuos skirtumus, suteikiant geresnes apsaugos priemones_.
+1. **Modelių atsakymai yra stokastiniai.** _Ta pati užklausa_ greičiausiai duos skirtingus atsakymus su skirtingais modeliais ar jų versijomis. Netgi tas pats modelis gali skirtingais laikais duoti skirtingus rezultatus. _Užklausų inžinerijos metodai padeda sumažinti šias svyravimus, suteikdami geresnes apsaugas_.
 
-1. **Modeliai gali kurti netikrus atsakymus.** Modeliai yra iš anksto apmokyti su _dideliais, bet ribotais_ duomenų rinkiniais, o tai reiškia, kad jie neturi žinių apie konceptus, esančius už šio mokymo ribų. Dėl to jie gali generuoti užbaigimus, kurie yra netikslūs, išgalvoti arba tiesiogiai prieštarauja žinomiems faktams. _Užklausų kūrimo technikos padeda vartotojams identifikuoti ir sumažinti tokius išgalvojimus, pvz., prašant dirbtinio intelekto pateikti citatas ar argumentus_.
+1. **Modeliai gali sukurti netikrus atsakymus.** Modeliai yra iš anksto apmokyti su _dideliais, bet ribotais_ duomenų rinkiniais, todėl jiems trūksta žinių apie sąvokas už mokymo ribų. Todėl jie gali sukurti netikslius, išgalvotus arba tiesiogiai su tikrais faktais prieštaraujančius atsakymus. _Užklausų inžinerijos metodai padeda vartotojams identifikuoti ir sumažinti tokius netikrumus, pvz., klausiant DI pateikti šaltinius ar pagrindimus_.
 
-1. **Modelių galimybės skiriasi.** Naujesni modeliai ar modelių kartos turės turtingesnes galimybes, tačiau taip pat atneš unikalių keistenybių ir kompromisų dėl kainos ir sudėtingumo. _Užklausų kūrimas gali padėti mums sukurti geriausias praktikas ir darbo eigas, kurios abstra
-Interneto paieška parodė, kad yra išgalvotų pasakojimų (pvz., televizijos serialų ar knygų) apie Marso karus, tačiau nė vieno apie 2076 metus. Sveikas protas taip pat sako, kad 2076 metai yra _ateityje_ ir todėl negali būti susiję su realiu įvykiu.
+1. **Modelių galimybės skirsis.** Naujesni modeliai ar jų kartos turi platesnes galimybes, bet taip pat turi unikalių savybių ir kompromisų kainos bei sudėtingumo srityse. _Užklausų inžinerija padeda kurti geriausias praktikas ir darbo eigas, kurios abstrahuoja skirtumus ir prisitaiko prie modelių specifinių reikalavimų masto ir sklandumo požiūriu_.
 
-Taigi, kas nutinka, kai šį užklausą pateikiame skirtingiems LLM tiekėjams?
+Pažiūrėkime tai praktiškai OpenAI arba Azure OpenAI Playground:
+
+- Panaudokite tą pačią užklausą su skirtingais LLM diegimais (pvz., OpenAI, Azure OpenAI, Hugging Face) – ar pastebėjote skirtumus?
+- Kartokite tą pačią užklausą su _tuo pačiu_ LLM diegimu (pvz., Azure OpenAI playground) – kaip skyrėsi atsakymai?
+
+### Netikrų atsakymų pavyzdys
+
+Šiame kurse terminas **„netikras atsakymas“** (fabrication) reiškia reiškinį, kai LLM kartais generuoja faktiniu požiūriu netikslią informaciją dėl jų mokymo ribotumų ar kitų veiksnių. Galbūt šį reiškinį esate girdėję vadinant _„halucinacijomis“_ populiariuose straipsniuose ar moksliniuose darbuose. Tačiau mes tvirtai rekomenduojame naudoti terminą _„netikras atsakymas“_, kad netyčia neantroponomorfizuotume elgsenos, priskirdami mašinai žmogui būdingas savybes. Tai taip pat atitinka [Atsakingo DI gairių](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) terminologijos perspektyvą, pašalinant sąvokas, kurios kai kuriose situacijose gali būti laikomos įžeidžiančiomis ar neįtraukiamos.
+
+Norite pamatyti, kaip veikia netikri atsakymai? Pagalvokite apie užklausą, kuri nurodo DI sukurti turinį neegzistuojančia tema (kad užtikrinti, jog jos nėra mokymo duomenyse). Pavyzdžiui, aš panaudojau tokią užklausą:
+
+> **Užklausa:** sukurkite pamokos planą apie Marso karą 2076 metais.
+
+Internetinė paieška parodė, kad yra išgalvotos istorijos (pvz., televizijos serialai ar knygos) apie Marso karus – bet ne 2076 metais. Sveikas protas taip pat sako, kad 2076 metai yra _ateityje_ ir todėl negali būti susieti su tikru įvykiu.
+
+
+Kas nutinka, kai šį užklausimą paleidžiame su skirtingais LLM teikėjais?
 
 > **Atsakymas 1**: OpenAI Playground (GPT-35)
 
@@ -122,58 +147,68 @@ Taigi, kas nutinka, kai šį užklausą pateikiame skirtingiems LLM tiekėjams?
 
 ![Atsakymas 2](../../../translated_images/lt/04-fabrication-aoai.b14268e9ecf25caf.webp)
 
-> **Atsakymas 3**: Hugging Face Chat Playground (LLama-2)
+> **Atsakymas 3**: : Hugging Face Chat Playground (LLama-2)
 
 ![Atsakymas 3](../../../translated_images/lt/04-fabrication-huggingchat.faf82a0a51278956.webp)
 
-Kaip ir tikėtasi, kiekvienas modelis (arba modelio versija) pateikia šiek tiek skirtingus atsakymus dėl stochastinio elgesio ir modelio galimybių skirtumų. Pavyzdžiui, vienas modelis orientuojasi į 8 klasės auditoriją, o kitas - į vidurinės mokyklos mokinius. Tačiau visi trys modeliai pateikė atsakymus, kurie galėtų įtikinti neinformuotą vartotoją, kad įvykis buvo tikras.
+Kaip ir tikėtasi, kiekvienas modelis (ar modelio versija) generuoja šiek tiek skirtingus atsakymus dėl stochastinio elgesio ir modelio pajėgumo skirtumų. Pavyzdžiui, vienas modelis skirtas 8 klasės auditorijai, o kitas laiko, kad naudotojas yra vidurinės mokyklos mokinys. Tačiau visi trys modeliai pateikė atsakymus, kurie galėtų įtikinti nežinančią vartotoją, kad įvykis buvo tikras.
 
-Užklausų kūrimo technikos, tokios kaip _metaužklausos_ ir _temperatūros konfigūravimas_, gali tam tikru mastu sumažinti modelio klaidas. Naujos užklausų kūrimo _architektūros_ taip pat sklandžiai integruoja naujus įrankius ir technikas į užklausų srautą, kad sumažintų kai kuriuos šiuos efektus.
+Užklausų inžinerijos technikos, tokios kaip _metaužklausų_ kūrimas ir _temperatūros konfigūracija_, gali tam tikru mastu sumažinti modelių išgalvojimus. Naujos užklausų inžinerijos _architektūros_ taip pat sklandžiai įtraukia naujus įrankius ir technikas į užklausų srautą, siekdamos sumažinti kai kuriuos iš šių efektų.
 
 ## Atvejo analizė: GitHub Copilot
 
-Užbaikime šią dalį, susipažindami su tuo, kaip užklausų kūrimas naudojamas realiame pasaulyje, pažvelgdami į vieną atvejo analizę: [GitHub Copilot](https://github.com/features/copilot?WT.mc_id=academic-105485-koreyst).
+Apibendrinkime šį skyrių ir pažiūrėkime, kaip užklausų inžinerija naudojama realių sprendimų kontekste, nagrinėdami vieną atvejį: [GitHub Copilot](https://github.com/features/copilot?WT.mc_id=academic-105485-koreyst).
 
-GitHub Copilot yra jūsų „AI porinis programuotojas“ – jis paverčia tekstines užklausas kodų užbaigimais ir yra integruotas į jūsų kūrimo aplinką (pvz., Visual Studio Code), kad užtikrintų sklandžią vartotojo patirtį. Kaip dokumentuota žemiau pateiktuose tinklaraščiuose, ankstyviausia versija buvo pagrįsta OpenAI Codex modeliu – inžinieriai greitai suprato poreikį patobulinti modelį ir sukurti geresnes užklausų kūrimo technikas, kad pagerintų kodo kokybę. Liepą jie [pristatė patobulintą AI modelį, kuris pranoksta Codex](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst) ir siūlo dar greitesnius pasiūlymus.
+GitHub Copilot yra jūsų "dirbtinio intelekto programavimo partneris" – jis paverčia tekstines užklausas į kodo užbaigimus ir yra integruotas į jūsų kūrimo aplinką (pvz., Visual Studio Code), užtikrinant sklandžią naudotojo patirtį. Kaip aprašyta žemiau pateiktoje tinklaraščių serijoje, ankstyviausia versija buvo paremta OpenAI Codex modeliu – inžinieriai greitai suprato poreikį tikslinti modelį ir kurti geresnes užklausų inžinerijos technikas, kad pagerintų kodo kokybę. Liepos mėnesį jie [pasirodė su patobulintu DI modeliu, kuris eina už Codex ribų](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst) dar greitesniems pasiūlymams.
 
-Skaitykite įrašus iš eilės, kad galėtumėte sekti jų mokymosi kelionę.
+Skaitykite įrašus jų eiliškumu, kad sektumėte mokymosi kelią.
 
-- **2023 m. gegužė** | [GitHub Copilot tampa geresnis suprantant jūsų kodą](https://github.blog/2023-05-17-how-github-copilot-is-getting-better-at-understanding-your-code/?WT.mc_id=academic-105485-koreyst)
-- **2023 m. gegužė** | [GitHub viduje: darbas su LLM, esančiais už GitHub Copilot](https://github.blog/2023-05-17-inside-github-working-with-the-llms-behind-github-copilot/?WT.mc_id=academic-105485-koreyst).
-- **2023 m. birželis** | [Kaip rašyti geresnes užklausas GitHub Copilot](https://github.blog/2023-06-20-how-to-write-better-prompts-for-github-copilot/?WT.mc_id=academic-105485-koreyst).
-- **2023 m. liepa** | [.. GitHub Copilot pranoksta Codex su patobulintu AI modeliu](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst)
-- **2023 m. liepa** | [Programuotojo vadovas apie užklausų kūrimą ir LLM](https://github.blog/2023-07-17-prompt-engineering-guide-generative-ai-llms/?WT.mc_id=academic-105485-koreyst)
-- **2023 m. rugsėjis** | [Kaip sukurti įmonės LLM programą: pamokos iš GitHub Copilot](https://github.blog/2023-09-06-how-to-build-an-enterprise-llm-application-lessons-from-github-copilot/?WT.mc_id=academic-105485-koreyst)
+- **2023 metų gegužė** | [GitHub Copilot geriau supranta jūsų kodą](https://github.blog/2023-05-17-how-github-copilot-is-getting-better-at-understanding-your-code/?WT.mc_id=academic-105485-koreyst)
+- **2023 metų gegužė** | [Viduje GitHub: darbas su LLM už GitHub Copilot](https://github.blog/2023-05-17-inside-github-working-with-the-llms-behind-github-copilot/?WT.mc_id=academic-105485-koreyst).
+- **2023 metų birželis** | [Kaip rašyti geresnes užklausas GitHub Copilot](https://github.blog/2023-06-20-how-to-write-better-prompts-for-github-copilot/?WT.mc_id=academic-105485-koreyst).
+- **2023 metų liepa** | [GitHub Copilot žengia toliau už Codex su patobulintu DI modeliu](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst)
+- **2023 metų liepa** | [Kūrėjo vadovas užklausų inžinerijai ir LLM](https://github.blog/2023-07-17-prompt-engineering-guide-generative-ai-llms/?WT.mc_id=academic-105485-koreyst)
+- **2023 metų rugsėjis** | [Kaip kurti įmonės LLM programėlę: pamokos iš GitHub Copilot](https://github.blog/2023-09-06-how-to-build-an-enterprise-llm-application-lessons-from-github-copilot/?WT.mc_id=academic-105485-koreyst)
 
-Taip pat galite naršyti jų [inžinerijos tinklaraštį](https://github.blog/category/engineering/?WT.mc_id=academic-105485-koreyst), kad rastumėte daugiau įrašų, tokių kaip [šis](https://github.blog/2023-09-27-how-i-used-github-copilot-chat-to-build-a-reactjs-gallery-prototype/?WT.mc_id=academic-105485-koreyst), kuris parodo, kaip šie modeliai ir technikos yra _taikomi_ realioms programoms kurti.
+Taip pat galite peržiūrėti jų [Inžinerijos tinklaraštį](https://github.blog/category/engineering/?WT.mc_id=academic-105485-koreyst) kitoms įrašams, tokiems kaip [šis](https://github.blog/2023-09-27-how-i-used-github-copilot-chat-to-build-a-reactjs-gallery-prototype/?WT.mc_id=academic-105485-koreyst), kuris parodo, kaip šie modeliai ir technikos yra _pritaikomi_ realių sprendimų kūrimui.
 
 ---
 
-## Užklausų kūrimas
+<!--
+PAMOKOS ŠABLONAS:
+Šis skyrius turėtų apimti pagrindinę koncepciją #2.
+Sustiprinkite koncepciją pavyzdžiais ir nuorodomis.
 
-Jau supratome, kodėl užklausų kūrimas yra svarbus – dabar išsiaiškinkime, kaip užklausos yra _kuriamos_, kad galėtume įvertinti skirtingas technikas efektyvesniam užklausų dizainui.
+KONCEPCIJA #2:
+Užklausos dizainas.
+Iliustruota pavyzdžiais.
+-->
 
-### Pagrindinė užklausa
+## Užklausos konstrukcija
 
-Pradėkime nuo pagrindinės užklausos: teksto įvesties, siunčiamos modeliui be jokio papildomo konteksto. Štai pavyzdys – kai OpenAI [Completion API](https://platform.openai.com/docs/api-reference/completions?WT.mc_id=academic-105485-koreyst) siunčiame pirmuosius JAV nacionalinio himno žodžius, jis iš karto _papildo_ atsakymą kitomis eilutėmis, iliustruodamas pagrindinį prognozavimo elgesį.
+Matėme, kodėl užklausų inžinerija yra svarbi – dabar supraskime, kaip užklausos _kuriamos_, kad galėtume įvertinti skirtingas technikas efektyvesniam užklausų dizainui.
 
-| Užklausa (Įvestis) | Papildymas (Išvestis)                                                                                                                        |
-| :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| Oh say can you see | Atrodo, kad pradedate dainuoti „The Star-Spangled Banner“, Jungtinių Valstijų nacionalinį himną. Pilnas tekstas yra ...                     |
+### Paprasta užklausa
+
+Pradėkime nuo paprastos užklausos: teksto įvesties, siunčiamos modeliui be jokio kito konteksto. Štai pavyzdys – kai pirmuosius kelis žodžius JAV himno siunčiame OpenAI [Completion API](https://platform.openai.com/docs/api-reference/completions?WT.mc_id=academic-105485-koreyst), jis akimirksniu _užbaigia_ atsakymą keliais sekančiais sakiniais, iliustruodamas pagrindinį prognozavimo elgesį.
+
+| Užklausa (įvestis)      | Užbaigimas (išvestis)                                                                                                                        |
+| :--------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| Oh say can you see      | Atrodo, kad pradedate dainuoti "The Star-Spangled Banner", Jungtinių Valstijų nacionalinį himną. Visos dainos žodžiai yra ...              |
 
 ### Sudėtinga užklausa
 
-Dabar pridėkime kontekstą ir instrukcijas prie pagrindinės užklausos. [Chat Completion API](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt?WT.mc_id=academic-105485-koreyst) leidžia mums sukurti sudėtingą užklausą kaip _žinučių_ rinkinį su:
+Dabar pridėkime kontekstą ir nurodymus prie tos paprastos užklausos. [Chat Completion API](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/chatgpt?WT.mc_id=academic-105485-koreyst) leidžia sukurti sudėtingą užklausą kaip _žinučių_ rinkinį, kuriame:
 
-- Įvesties/išvesties poromis, atspindinčiomis _vartotojo_ įvestį ir _asistento_ atsakymą.
-- Sistemos žinute, nustatančia asistento elgesio ar asmenybės kontekstą.
+- Įvesties / išvesties poros, atspindinčios _naudotojo_ įvestį ir _asistento_ atsakymą.
+- Sistemos žinutė, nustatanti asistento elgesio ar asmenybės kontekstą.
 
-Užklausa dabar pateikiama žemiau nurodyta forma, kur _tokenizacija_ efektyviai užfiksuoja svarbią informaciją iš konteksto ir pokalbio. Dabar sistemos konteksto pakeitimas gali turėti tokį patį poveikį atsakymų kokybei, kaip ir pateiktos vartotojo įvestys.
+Užklausa dabar atrodo taip, kur _žodžių skaidymas į žetonus_ efektyviai atspindi svarbią informaciją iš konteksto ir pokalbio. Dabar sistemos konteksto pakeitimas gali turėti tiek pat reikšmės užbaigimų kokybei, kiek ir pateikti naudotojo įrašai.
 
 ```python
-response = openai.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
+response = client.responses.create(
+    model="gpt-5-mini",
+    input=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Who won the world series in 2020?"},
         {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
@@ -182,191 +217,195 @@ response = openai.chat.completions.create(
 )
 ```
 
-### Instrukcijos užklausa
+### Nurodymų užklausa
 
-Ankstesniuose pavyzdžiuose vartotojo užklausa buvo paprastas tekstinis klausimas, kurį galima interpretuoti kaip informacijos užklausą. Naudojant _instrukcijų_ užklausas, galime naudoti tekstą, kad išsamiau nurodytume užduotį, suteikdami AI geresnes gaires. Štai pavyzdys:
+Aukščiau pateiktuose pavyzdžiuose naudotojo užklausa buvo paprastas teksto klausimas, kurį galima interpretuoti kaip prašymą gauti informaciją. Su _nurodymų_ užklausomis galime tą tekstą naudoti užduočiai tiksliau apibrėžti, suteikdami DI geresnę kryptį. Štai pavyzdys:
 
-| Užklausa (Įvestis)                                                                                                                                                                                                                         | Papildymas (Išvestis)                                                                                                        | Instrukcijos tipas  |
+| Užklausa (įvestis)                                                                                                                                                                                                                         | Užbaigimas (išvestis)                                                                                                        | Nurodymo tipas      |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :------------------ |
-| Parašykite aprašymą apie Pilietinį karą                                                                                                                                                                                                   | _grąžino paprastą pastraipą_                                                                                              | Paprasta            |
-| Parašykite aprašymą apie Pilietinį karą. Pateikite pagrindines datas ir įvykius bei apibūdinkite jų reikšmę                                                                                                                                     | _grąžino pastraipą, po kurios pateiktas pagrindinių įvykių datų sąrašas su aprašymais_                                             | Sudėtinga           |
-| Parašykite aprašymą apie Pilietinį karą vienoje pastraipoje. Pateikite 3 punktus su pagrindinėmis datomis ir jų reikšme. Pateikite dar 3 punktus su pagrindiniais istoriniais veikėjais ir jų indėliu. Grąžinkite išvestį JSON failo formatu | _grąžino išsamesnę informaciją teksto laukelyje, suformatuotą kaip JSON, kurį galima nukopijuoti ir įklijuoti į failą bei patikrinti_ | Sudėtinga. Su formatu. |
+| Parašykite aprašymą apie Pilietinį karą                                                                                                                                                                                                | _grąžino paprastą pastraipą_                                                                                               | Paprasta            |
+| Parašykite aprašymą apie Pilietinį karą. Nurodykite pagrindines datas ir įvykius bei aprašykite jų reikšmę                                                                                                                               | _grąžino pastraipą ir sąrašą pagrindinių įvykių datų su aprašymais_                                                         | Sudėtinga           |
+| Parašykite aprašymą apie Pilietinį karą 1 pastraipoje. Pateikite 3 punktus su pagrindinėmis datomis ir jų reikšme. Pateikite dar 3 punktus su pagrindinėmis istorinėmis asmenybėmis ir jų indėliu. Grąžinkite išvestį JSON formatu | _grąžina išsamesnę informaciją teksto lange, suformatuotą kaip JSON, kurį galima nukopijuoti į failą ir prireikus patikrinti_  | Sudėtinga. Suformuota. |
 
 ## Pagrindinis turinys
 
-Ankstesniuose pavyzdžiuose užklausa vis dar buvo gana atvira, leidžianti LLM nuspręsti, kuri jo iš anksto apmokyto duomenų rinkinio dalis yra svarbi. Naudojant _pagrindinio turinio_ dizaino modelį, įvesties tekstas yra padalintas į dvi dalis:
+Aukščiau pateiktuose pavyzdžiuose užklausa vis dar buvo gana atvira, leidžianti LLM nuspręsti, kurios mokymo duomenų dalys yra svarbios. Su _pagrindinio turinio_ dizaino šablonu įvesties tekstas yra padalintas į dvi dalis:
 
-- instrukcija (veiksmas)
-- svarbus turinys (kuris daro įtaką veiksmui)
+- nurodymą (veiksmas)
+- svarbų turinį (įtakojantį veiksmą)
 
-Štai pavyzdys, kur instrukcija yra „sutrumpinkite tai į 2 sakinius“.
+Štai pavyzdys, kai nurodymas yra "sutrumpinkite tai 2 sakiniais".
 
-| Užklausa (Įvestis)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Papildymas (Išvestis)                                                                                                                                                                                                                                                                             |
+| Užklausa (įvestis)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Užbaigimas (išvestis)                                                                                                                                                                                                                                                                             |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Jupiteris yra penkta planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujų milžinas, kurio masė yra tūkstantąja Saulės masės dalimi, tačiau du su puse karto didesnė už visų kitų planetų masę kartu sudėjus. Jupiteris yra vienas ryškiausių objektų, matomų plika akimi naktiniame danguje, ir buvo žinomas senovės civilizacijoms dar prieš užfiksuojant istoriją. Jis pavadintas Romos dievo Jupiterio vardu.[19] Žiūrint iš Žemės, Jupiteris gali būti pakankamai ryškus, kad jo atspindėta šviesa mestų matomus šešėlius,[20] ir vidutiniškai yra trečias ryškiausias natūralus objektas naktiniame danguje po Mėnulio ir Veneros. <br/> **Sutrumpinkite tai į 2 trumpus sakinius** | Jupiteris, penkta planeta nuo Saulės, yra didžiausia Saulės sistemoje ir žinoma kaip vienas ryškiausių objektų naktiniame danguje. Pavadintas Romos dievo Jupiterio vardu, tai dujų milžinas, kurio masė yra du su puse karto didesnė už visų kitų planetų masę kartu sudėjus. |
+| Jupiteris yra penktoji planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujiniai milžinas, kurio masė yra tūkstantąji Saulės masės dalis, bet du su puse karto didesnė už visų kitų planetų Saulės sistemoje masių sumą. Jupiteris yra viena ryškiausių objektų, matomų plika akimi naktiniame danguje, ir jis buvo žinomas senosioms civilizacijoms dar prieš istorijos įrašus. Jis pavadintas romėnų dievo Jupiterio vardu.[19] Žiūrint iš Žemės, Jupiteris gali būti pakankamai ryškus, kad jo atspindėta šviesa mesti matomus šešėlius,[20] ir vidutiniškai yra trečias ryškiausias natūralus objektas naktiniame danguje po Mėnulio ir Veneros. <br/> **Sutrumpinkite tai į 2 trumpus sakinius** | Jupiteris, penktoji planeta nuo Saulės, yra didžiausia Saulės sistemoje ir žinoma kaip viena ryškiausių naktinio dangaus objektų. Pavadintas romėnų dievo Jupiterio vardu, tai dujiniai milžinas, kurio masė yra du su puse karto didesnė už visų kitų planetų Saulės sistemoje sumą. |
 
-Pagrindinio turinio segmentą galima naudoti įvairiais būdais, siekiant efektyvesnių instrukcijų:
+Pagrindinį turinį galima naudoti įvairiais būdais, kad būtų gauti efektyvesni nurodymai:
 
-- **Pavyzdžiai** - vietoj to, kad modelį nurodytume aiškia instrukcija, pateikiame jam pavyzdžių, ką daryti, ir leidžiame jam pačiam suprasti modelį.
-- **Užuominos** - po instrukcijos pateikiame „užuominą“, kuri nukreipia modelį link tinkamesnių atsakymų.
-- **Šablonai** - tai pakartojami „receptai“ užklausoms su vietos rezervavimo ženklais (kintamaisiais), kuriuos galima pritaikyti konkretiems naudojimo atvejams.
+- **Pavyzdžiai** – vietoj to, kad modelis gautų tiesioginį nurodymą, pateikite pavyzdžius, ką reikia padaryti, ir leiskite modeliui suprasti šabloną.
+- **Signalai** – po nurodymo pridėkite „signalą“, kuris nukreipia modelį link tinkamesnių atsakymų.
+- **Šablonai** – tai pakartojami užklausų „receptai“ su kintamaisiais laukais, kurie gali būti pritaikomi konkrečioms situacijoms su duomenimis.
 
-Pažvelkime, kaip tai veikia praktikoje.
+Pažiūrėkime, kaip tai veikia praktiškai.
 
 ### Naudojant pavyzdžius
 
-Tai metodas, kai naudojate pagrindinį turinį, kad „pamaitintumėte modelį“ keliais norimos išvesties pavyzdžiais pagal pateiktą instrukciją ir leistumėte jam pačiam suprasti norimą išvesties modelį. Atsižvelgiant į pateiktų pavyzdžių skaičių, galime turėti užklausas be pavyzdžių, su vienu pavyzdžiu, su keliais pavyzdžiais ir pan.
+Tai metodas, kai pagrindinis turinys naudojamas „maitinti modelį“ pavyzdžiais norimos išvesties pagal tam tikrą nurodymą, leidžiant modeliui suprasti norimos išvesties modelį. Atsižvelgiant į pateiktų pavyzdžių skaičių, galime turėti nulio-shot, vieno-shot, kelių-shot užklausas ir pan.
 
 Užklausa dabar susideda iš trijų komponentų:
 
-- Užduoties aprašymo
-- Kelių norimos išvesties pavyzdžių
-- Naujo pavyzdžio pradžios (kuris tampa netiesioginiu užduoties aprašymu)
+- Užduoties aprašymas
+- Keli pavyzdžiai norimos išvesties
+- Naujo pavyzdžio pradžia (kuri tampa implicitiniu užduoties aprašymu)
 
-| Mokymosi tipas | Užklausa (Įvestis)                                                                                                                                        | Papildymas (Išvestis)         |
-| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------- |
-| Be pavyzdžių  | „The Sun is Shining“. Išverskite į ispanų kalbą                                                                                                            | „El Sol está brillando“.    |
-| Su vienu pavyzdžiu | „The Sun is Shining“ => „El Sol está brillando“. <br> „It's a Cold and Windy Day“ =>                                                                 | „Es un día frío y ventoso“. |
-| Su keliais pavyzdžiais | Žaidėjas bėgo bazėmis => Beisbolas <br/> Žaidėjas pataikė ace => Tenisas <br/> Žaidėjas pataikė šešis => Kriketas <br/> Žaidėjas atliko slam-dunk => | Krepšinis                  |
-|               |                                                                                                                                                       |                             |
+| Mokymosi tipas | Užklausa (įvestis)                                                                                                                                        | Užbaigimas (išvestis)     |
+| :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------ |
+| Nulio-shot    | „The Sun is Shining“. Išversti į ispanų kalbą                                                                                                         | „El Sol está brillando“.  |
+| Vieno-shot    | „The Sun is Shining“ => „El Sol está brillando“. <br> „It's a Cold and Windy Day“ =>                                                                   | „Es un día frío y ventoso“. |
+| Kelių-shot   | Žaidėjas bėgo bazėmis => Beisbolas <br/> Žaidėjas pataikė „ace“ => Tenisas <br/> Žaidėjas pataikė „six“ => Kriketas <br/> Žaidėjas atliko „slam-dunk“ =>  | Krepšinis                |
+|               |                                                                                                                                                       |                           |
 
-Atkreipkite dėmesį, kaip turėjome pateikti aiškią instrukciją („Išverskite į ispanų kalbą“) užklausose be pavyzdžių, tačiau ji tampa suprantama užklausose su vienu pavyzdžiu. Pavyzdys su keliais pavyzdžiais rodo, kaip pridėjus daugiau pavyzdžių modeliai gali tiksliau suprasti be papildomų instrukcijų.
+Atkreipkite dėmesį, kad nulio-shot užklausoje reikėjo pateikti aiškų nurodymą („Išversti į ispanų“), tačiau vieno-shot pavyzdyje jis buvo suprantamas iš konteksto. Kelių-shot pavyzdys parodo, kaip pridėjus daugiau pavyzdžių modelis geba tiksliau spėti be papildomų nurodymų.
 
-### Užklausų užuominos
+### Užklausų signalai
 
-Kitas pagrindinio turinio naudojimo būdas yra pateikti _užuominas_, o ne pavyzdžius. Šiuo atveju mes suteikiame modeliui postūmį tinkama kryptimi, _pradėdami_ nuo fragmento, kuris atspindi norimą atsakymo formatą. Tada modelis „pagauna užuominą“ ir tęsia tuo pačiu stiliumi.
+Kita pagrindinio turinio naudojimo technika yra pateikti _signalus_ vietoj pavyzdžių. Šiuo atveju mes modelį nukreipiame tinkama linkme, _pradėdami_ jį nuo ištrauktos teksto dalies, kuri atspindi norimą atsakymo formatą. Modelis tada „priima signalą“ ir tęsia ta pačia kryptimi.
 
-| Užuominų skaičius | Užklausa (Įvestis)                                                                                                                                                                                                                                                                                                                                                                                                                                               | Papildymas (Išvestis)                                                                                                                                                                                                                                                                                       |
+| Signalų skaičius | Užklausa (įvestis)                                                                                                                                                                                                                                                                                                                                                                                                                                               | Užbaigimas (išvestis)                                                                                                                                                                                                                                                                                       |
 | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0              | Jupiteris yra penkta planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujų milžinas, kurio masė yra tūkstantąja Saulės masės dalimi, tačiau du su puse karto didesnė už visų kitų planetų masę kartu sudėjus. Jupiteris yra vienas ryškiausių objektų, matomų plika akimi naktiniame danguje, ir buvo žinomas senovės civilizacijoms dar prieš užfiksuojant istoriją. <br/>**Sutrumpinkite Tai**                                       | Jupiteris yra didžiausia planeta mūsų Saulės sistemoje ir penkta nuo Saulės. Tai dujų milžinas, kurio masė yra 1/1000 Saulės masės, tačiau jis sunkesnis už visas kitas planetas kartu sudėjus. Senovės civilizacijos jau seniai žinojo apie Jupiterį, ir jis lengvai matomas naktiniame danguje. |
-| 1              | Jupiteris yra penkta planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujų milžinas, kurio masė yra tūkstantąja Saulės masės dalimi, tačiau du su puse karto didesnė už visų kitų Saulės sistemos planetų masę kartu sudėjus. Jupiteris yra vienas ryškiausių objektų, matomų plika akimi naktiniame danguje, ir buvo žinomas senovės civilizacijoms dar prieš užrašytą istoriją. <br/>**Santrauka** <br/> Sužinojome, kad Jupiteris | yra penkta planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujų milžinas, kurio masė yra tūkstantąja Saulės masės dalimi, tačiau du su puse karto didesnė už visų kitų planetų masę kartu sudėjus. Jis lengvai matomas plika akimi ir buvo žinomas nuo senovės laikų.                        |
-| 2              | Jupiteris yra penkta planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujų milžinas, kurio masė yra tūkstantąja Saulės masės dalimi, tačiau du su puse karto didesnė už visų kitų Saulės sistemos planetų masę kartu sudėjus. Jupiteris yra vienas ryškiausių objektų, matomų plika akimi naktiniame danguje, ir buvo žinomas senovės civilizacijoms dar prieš užrašytą istoriją. <br/>**Santrauka** <br/> 3 pagrindiniai faktai, kuriuos sužinojome:         | 1. Jupiteris yra penkta planeta nuo Saulės ir didžiausia Saulės sistemoje. <br/> 2. Tai dujų milžinas, kurio masė yra tūkstantąja Saulės masės dalimi...<br/> 3. Jupiteris buvo matomas plika akimi nuo senovės laikų ...                                                                       |
+| 0              | Jupiteris yra penktoji planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujiniai milžinas, kurio masė yra tūkstantąji Saulės masės dalis, bet du su puse karto didesnė už visų kitų planetų Saulės sistemoje masių sumą. Jupiteris yra viena ryškiausių objektų, matomų plika akimi naktiniame danguje, ir jis buvo žinomas senosioms civilizacijoms dar prieš istorijos įrašus. <br/>**Sutrumpinkite tai**                                       | Jupiteris yra didžiausia planeta mūsų Saulės sistemoje ir penktoji nuo Saulės. Tai dujiniai milžinas, kurio masė yra 1/1000 Saulės masės, tačiau jis sunkesnis nei visos kitos planetos kartu. Senovės civilizacijos jau seniai žino apie Jupiterį, o jis lengvai matomas naktiniame danguje.. |
+| 1              | Jupiteris yra penktoji planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujiniai milžinas, kurio masė yra tūkstantąji Saulės masės dalis, bet du su puse karto didesnė už visų kitų planetų Saulės sistemoje masių sumą. Jupiteris yra viena ryškiausių objektų, matomų plika akimi naktiniame danguje, ir jis buvo žinomas senosioms civilizacijoms dar prieš istorijos įrašus. <br/>**Sutrumpinkite tai** <br/> Ko išmokome yra tai, kad Jupiteris | yra penktoji planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujiniai milžinas, kurio masė yra tūkstantąji Saulės masės dalis, bet du su puse karto didesnė už visų kitų planetų kartu. Jis lengvai matomas plika akimi ir žinomas nuo senoves.                                  |
+| 2              | Jupiteris yra penktoji planeta nuo Saulės ir didžiausia Saulės sistemoje. Tai dujų milžinas, kurio masė yra tūkstantąji dalis Saulės masės, tačiau ji yra du su puse karto didesnė už visų kitų Saulės sistemos planetų masių sumą. Jupiteris yra vienas iš ryškiausių objektų, matomų plika akimi naktiniame danguje, ir jis buvo žinomas senosioms civilizacijoms jau prieš užfiksuotą istoriją. <br/>**Apibendrinkite šį** <br/> Mūsų sužinoti 3 svarbiausi faktai:         | 1. Jupiteris yra penktoji planeta nuo Saulės ir didžiausia Saulės sistemoje. <br/> 2. Tai dujų milžinas, kurio masė yra tūkstantąji dalis Saulės masės...<br/> 3. Jupiteris buvo matomas plika akimi nuo senų laikų ...                                                                       |
 |                |                                                                                                                                                                                                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                           |
 
-### Šablonai užduotims
+### Užklausų Šablonai
 
-Šablonas užduotims yra _iš anksto apibrėžtas šablonas_, kurį galima išsaugoti ir naudoti pagal poreikį, siekiant užtikrinti nuoseklesnę vartotojo patirtį dideliu mastu. Paprasčiausia forma tai yra tiesiog rinkinys pavyzdžių, kaip [šis iš OpenAI](https://platform.openai.com/examples?WT.mc_id=academic-105485-koreyst), kuris pateikia tiek interaktyvius užduoties komponentus (vartotojo ir sistemos pranešimus), tiek API valdomą užklausos formatą - kad būtų galima pakartotinai naudoti.
+Užklausų šablonas yra _iš anksto apibrėžtas užklausos receptas_, kurį galima saugoti ir pakartotinai naudoti, siekiant užtikrinti nuoseklesnes naudotojų patirtis dideliu mastu. Paprasčiausia forma tai yra užklausų pavyzdžių rinkinys, pavyzdžiui, [šis iš OpenAI](https://cookbook.openai.com/examples/gpt4-1_prompting_guide?WT.mc_id=academic-105485-koreyst), kuris pateikia tiek interaktyvias užklausos dalis (naudotojo ir sistemos žinutes), tiek API pagrindu veikiančio užklausos formato pavyzdį - tam, kad būtų palaikomas pakartotinis naudojimas.
 
-Sudėtingesnėje formoje, kaip [šis pavyzdys iš LangChain](https://python.langchain.com/docs/concepts/prompt_templates/?WT.mc_id=academic-105485-koreyst), jis turi _vietos rezervavimo ženklus_, kuriuos galima pakeisti duomenimis iš įvairių šaltinių (vartotojo įvestis, sistemos kontekstas, išoriniai duomenų šaltiniai ir kt.), kad būtų galima dinamiškai generuoti užduotį. Tai leidžia sukurti pakartotinai naudojamų užduočių biblioteką, kuri gali būti naudojama nuosekliai vartotojo patirčiai **programiškai** užtikrinti dideliu mastu.
+Sudėtingesnė forma, kaip [šis pavyzdys iš LangChain](https://python.langchain.com/docs/concepts/prompt_templates/?WT.mc_id=academic-105485-koreyst), turi _vietas rezervuotes_, kurias galima pakeisti duomenimis iš įvairių šaltinių (naudotojo įvestis, sistemos kontekstas, išoriniai duomenų šaltiniai ir pan.), kad būtų dinamiškai sugeneruota užklausa. Tai leidžia sukurti pakartotinai naudojamų užklausų biblioteką, kuri gali būti naudojama **programiškai** nuoseklioms naudotojų patirtims skatinti dideliu mastu.
 
-Galiausiai, tikroji šablonų vertė slypi galimybėje kurti ir publikuoti _užduočių bibliotekas_ tam tikroms taikymo sritims - kur užduoties šablonas yra _optimizuotas_ atspindėti taikymo srities kontekstą ar pavyzdžius, kurie daro atsakymus labiau aktualius ir tikslius tikslinės auditorijos atžvilgiu. [Prompts For Edu](https://github.com/microsoft/prompts-for-edu?WT.mc_id=academic-105485-koreyst) saugykla yra puikus šio požiūrio pavyzdys, kurioje kaupiama užduočių biblioteka švietimo sričiai, akcentuojant pagrindinius tikslus, tokius kaip pamokų planavimas, mokymo programų kūrimas, mokinių konsultavimas ir kt.
+Galiausiai, tikroji šablonų vertė yra galimybė kurti ir publikuoti _užklausų bibliotekas_ tam tikriems vertikaliems programų domenams - kai užklausos šablonas yra dabar _optimizuotas_, kad atspindėtų taikomosios srities specifinį kontekstą ar pavyzdžius, kurie daro atsakymus tinkamesnius ir tikslesnius tiksliniam naudotojų auditorijai. [Prompts For Edu](https://github.com/microsoft/prompts-for-edu?WT.mc_id=academic-105485-koreyst) saugykla yra puikus šio požiūrio pavyzdys, kur ji kuruoja užklausų biblioteką švietimo sričiai, pabrėždama pagrindinius tikslus, kaip pamokų planavimas, mokymo programos kūrimas, studentų mokymas ir pan.
 
-## Papildoma informacija
+## Papildomas Turinys
 
-Jei galvojame apie užduoties kūrimą kaip apie instrukcijos (užduoties) ir tikslo (pagrindinio turinio) turėjimą, tada _antrinis turinys_ yra kaip papildomas kontekstas, kurį pateikiame, kad **kažkaip paveiktume rezultatą**. Tai gali būti parametrų derinimas, formatavimo instrukcijos, temų taksonomijos ir kt., kurie gali padėti modeliui _pritaikyti_ savo atsakymą pagal norimus vartotojo tikslus ar lūkesčius.
+Jei galvosime apie užklausos konstrukciją turint nurodymą (užduotį) ir tikslinį turinį (pagrindinį turinį), tada _antrinis turinys_ yra kaip papildomas kontekstas, kurį mes suteikiame, kad **kaip nors paveiktume rezultatą**. Tai gali būti sureguliavimo parametrai, formatavimo instrukcijos, temų taksonomijos ir pan., kurie gali padėti modeliui _pritaikyti_ savo atsakymą, kad atitiktų norimus naudotojo tikslus ar lūkesčius.
 
-Pavyzdžiui: Turint kursų katalogą su išsamiais metaduomenimis (pavadinimas, aprašymas, lygis, metaduomenų žymos, dėstytojas ir kt.) apie visus mokymo programos kursus:
+Pavyzdžiui: turint kursų katalogą su išsamiais metaduomenimis (pavadinimas, aprašymas, lygis, metaduomenų žymos, dėstytojas ir pan.) apie visus turimus kursus mokymo programoje:
 
-- galime apibrėžti instrukciją „sutrumpinkite 2023 m. rudens semestro kursų katalogą“
+- galime apibrėžti nurodymą „apibendrinti 2023 m. rudens kursų katalogą“
 - galime naudoti pagrindinį turinį, kad pateiktume keletą norimo rezultato pavyzdžių
-- galime naudoti antrinį turinį, kad identifikuotume 5 svarbiausias „žymas“.
+- galime naudoti antrinį turinį, kad išskirtume 5 svarbiausias „žymas“
 
-Dabar modelis gali pateikti santrauką formatu, parodytu keliuose pavyzdžiuose, tačiau jei rezultatas turi kelias žymas, jis gali teikti pirmenybę 5 žymoms, nurodytoms antriniame turinyje.
+Dabar modelis gali pateikti santrauką formatu, kuris parodytas keliuose pavyzdžiuose - tačiau jei rezultatas turi kelias žymas, jis gali prioritetizuoti antriniame turinyje nurodytas 5 žymas.
 
 ---
 
 <!--
 PAMOKOS ŠABLONAS:
-Ši dalis turėtų apimti pagrindinę sąvoką #1.
-Sustiprinkite sąvoką su pavyzdžiais ir nuorodomis.
+Šis skyrius turėtų apimti pagrindinę sąvoką Nr. 1.
+Paryškinkite sąvoką pavyzdžiais ir nuorodomis.
 
-SĄVOKA #3:
-Užduočių kūrimo technikos.
-Kokios yra pagrindinės užduočių kūrimo technikos?
-Iliustruokite tai pratimais.
+SĄVOKA NR. 3:
+Užklausų inžinerijos metodai.
+Kokie yra pagrindiniai užklausų inžinerijos metodai?
+Iliustruokite tai su keletu pratimų.
 -->
 
-## Geriausios užduočių kūrimo praktikos
+## Geriausios Užklausų Praktikos
 
-Dabar, kai žinome, kaip užduotys gali būti _kuriamos_, galime pradėti galvoti, kaip jas _projektuoti_, kad jos atspindėtų geriausias praktikas. Galime tai suskirstyti į dvi dalis - turėti tinkamą _mąstyseną_ ir taikyti tinkamas _technikas_.
+Dabar, kai žinome, kaip užklausos gali būti _sukuriamos_, galime pradėti galvoti apie jų _projektavimą_, siekiant atspindėti geriausias praktikas. Galime tai svarstyti dviem aspektais – turėti tinkamą _požiūrį_ ir taikyti tinkamus _metodus_.
 
-### Užduočių kūrimo mąstysena
+### Užklausų Inžinerijos Požiūris
 
-Užduočių kūrimas yra bandymų ir klaidų procesas, todėl atsiminkite tris pagrindinius veiksnius:
+Užklausų inžinerija yra bandymų ir klaidų procesas, tad prisiminkite tris plačius pagrindinius veiksnius:
 
-1. **Domeno supratimas yra svarbus.** Atsakymo tikslumas ir aktualumas priklauso nuo _domeno_, kuriame veikia taikymas ar vartotojas. Naudokite savo intuiciją ir domeno žinias, kad **pritaikytumėte technikas**. Pavyzdžiui, apibrėžkite _domenui specifines asmenybes_ savo sistemos užduotyse arba naudokite _domenui specifinius šablonus_ vartotojo užduotyse. Pateikite antrinį turinį, kuris atspindi domenui specifinius kontekstus, arba naudokite _domenui specifinius užuominas ir pavyzdžius_, kad nukreiptumėte modelį link pažįstamų naudojimo modelių.
+1. **Srities supratimas svarbus.** Atsakymo tikslumas ir aktualumas priklauso nuo to, kokioje _srityje_ ta programa ar naudotojas veikia. Naudokite savo intuiciją ir srities ekspertizę, kad **dar labiau pritaikytumėte metodus**. Pavyzdžiui, apibrėžkite _srities specifines asmenybes_ savo sistemos užklausose arba naudokite _srities specifinius šablonus_ savo naudotojo užklausose. Pateikite antrinį turinį, atspindintį srities specifinius kontekstus, arba naudokite _srities specifinius signalus ir pavyzdžius_, kad nukreiptumėte modelį pažįstamais naudojimo pavyzdžiais.
 
-2. **Modelio supratimas yra svarbus.** Žinome, kad modeliai yra stochastiški. Tačiau modelių įgyvendinimas taip pat gali skirtis pagal naudojamą mokymo duomenų rinkinį (iš anksto išmoktas žinias), teikiamas galimybes (pvz., per API ar SDK) ir turinio tipą, kuriam jie yra optimizuoti (pvz., kodas, vaizdai ar tekstas). Supraskite modelio, kurį naudojate, stipriąsias ir silpnąsias puses ir naudokite šias žinias, kad _prioritetizuotumėte užduotis_ arba sukurtumėte _pritaikytus šablonus_, optimizuotus modelio galimybėms.
+2. **Modelio supratimas svarbus.** Žinome, kad modeliai yra atsitiktiniai savo prigimtimi. Tačiau modelių įgyvendinimai gali skirtis pagal naudojamus mokymo duomenų rinkinius (iš anksto išmoktas žinias), jų teikiamas galimybes (pvz., per API ar SDK) ir turinio tipą, kuriam jie yra optimizuoti (pvz., kodas, vaizdai, tekstas). Supraskite stipriąsias ir silpnąsias modelio puses, kurį naudojate, ir naudokite šias žinias _užduočių prioritetui_ nustatyti arba _kurti pritaikytus šablonus_, optimizuotus pagal modelio galimybes.
 
-3. **Iteracija ir validacija yra svarbios.** Modeliai greitai tobulėja, kaip ir užduočių kūrimo technikos. Kaip domeno ekspertas, galite turėti kitą kontekstą ar kriterijus, kurie yra svarbūs _jūsų_ specifinei taikymo sričiai, bet gali būti netaikomi platesnei bendruomenei. Naudokite užduočių kūrimo įrankius ir technikas, kad „pradėtumėte“ užduočių kūrimą, tada iteruokite ir validuokite rezultatus naudodamiesi savo intuicija ir domeno žiniomis. Užfiksuokite savo įžvalgas ir sukurkite **žinių bazę** (pvz., užduočių bibliotekas), kurią kiti galėtų naudoti kaip naują pagrindą greitesnėms iteracijoms ateityje.
+3. **Iteracija ir patikra svarbi.** Modeliai greitai tobulėja, kaip ir užklausų inžinerijos metodai. Kaip srities ekspertas, galite turėti kitą kontekstą ar kriterijus _savo_ specifinei programai, kurie gali būti neaktualūs platesnei bendruomenei. Naudokite užklausų inžinerijos įrankius ir metodus, kad „greitai pradėtumėte“ užklausų kūrimą, tada iteruokite ir tikrinkite rezultatus naudodami savo intuiciją ir srities žinias. Fiksuokite savo įžvalgas ir kurkite **žinių bazę** (pvz., užklausų bibliotekas), kuri galėtų būti naudojama kaip naujas pagrindas kitiems, siekiant greitesnių iteracijų ateityje.
 
-## Geriausios praktikos
+## Geriausios Praktikos
 
-Dabar pažvelkime į bendras geriausias praktikas, kurias rekomenduoja [OpenAI](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api?WT.mc_id=academic-105485-koreyst) ir [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering#best-practices?WT.mc_id=academic-105485-koreyst) specialistai.
+Dabar pažvelkime į dažniausiai rekomenduojamas geriausias praktikas, kurias siūlo [OpenAI](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api?WT.mc_id=academic-105485-koreyst) ir [Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/prompt-engineering#best-practices?WT.mc_id=academic-105485-koreyst) praktikų komandos.
 
-| Kas                               | Kodėl                                                                                                                                                                                                                                               |
+| Kas                              | Kodėl                                                                                                                                                                                                                                               |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Įvertinkite naujausius modelius.  | Naujos modelių kartos greičiausiai turės patobulintas funkcijas ir kokybę, tačiau gali būti brangesnės. Įvertinkite jų poveikį, tada priimkite migracijos sprendimus.                                                                                |
-| Atskirkite instrukcijas ir kontekstą | Patikrinkite, ar jūsų modelis/paslaugų teikėjas apibrėžia _skyriklius_, kad aiškiau atskirtų instrukcijas, pagrindinį ir antrinį turinį. Tai gali padėti modeliams tiksliau priskirti svorius žetonams.                                                         |
-| Būkite konkretūs ir aiškūs        | Pateikite daugiau detalių apie norimą kontekstą, rezultatą, ilgį, formatą, stilių ir kt. Tai pagerins tiek atsakymų kokybę, tiek nuoseklumą. Užfiksuokite receptus pakartotinai naudojamuose šablonuose.                                                          |
-| Būkite aprašomieji, naudokite pavyzdžius | Modeliai gali geriau reaguoti į „parodyk ir pasakyk“ metodą. Pradėkite nuo `zero-shot` metodo, kai pateikiate tik instrukciją (be pavyzdžių), tada išbandykite `few-shot` kaip patobulinimą, pateikdami keletą norimo rezultato pavyzdžių. Naudokite analogijas. |
-| Naudokite užuominas, kad pradėtumėte atsakymus | Nukreipkite modelį link norimo rezultato, pateikdami keletą pradinių žodžių ar frazių, kurias jis galėtų naudoti kaip atsakymo pradžią.                                                                                                               |
-| Kartokite                        | Kartais gali prireikti pakartoti instrukcijas modeliui. Pateikite instrukcijas prieš ir po pagrindinio turinio, naudokite instrukciją ir užuominą ir pan. Iteruokite ir validuokite, kad pamatytumėte, kas veikia.                                                         |
-| Tvarka yra svarbi                | Informacijos pateikimo modelio tvarka gali paveikti rezultatą, net ir mokymosi pavyzdžiuose, dėl recency bias. Išbandykite skirtingas galimybes, kad pamatytumėte, kas veikia geriausiai.                                                               |
-| Suteikite modeliui „išeitį“       | Suteikite modeliui _atsarginį_ atsakymą, kurį jis galėtų pateikti, jei dėl kokių nors priežasčių negalėtų užbaigti užduoties. Tai gali sumažinti modelių klaidingų ar išgalvotų atsakymų tikimybę.                                                         |
+| Įvertinkite naujausius modelius.       | Naujos modelių kartos tikėtina turi patobulintas savybes ir kokybę - bet gali sukelti ir didesnes sąnaudas. Įvertinkite jų poveikį ir priimkite migravimo sprendimus.                                                                                |
+| Atskirkite nurodymus ir kontekstą   | Patikrinkite, ar jūsų modelis/teikėjas apibrėžia _ribas_, kad aiškiau atskirtų nurodymus, pagrindinį ir antrinį turinį. Tai gali padėti modeliams tiksliau priskirti svorius žodžių vienetams.                                                         |
+| Būkite konkretūs ir aiškūs             | Pateikite daugiau detalių apie norimą kontekstą, rezultatą, ilgį, formatą, stilių ir pan. Tai pagerins tiek atsakymų kokybę, tiek nuoseklumą. Užfiksuokite receptus pakartotinai naudojamuose šablonuose.                                                          |
+| Būkite aprašomieji, naudokite pavyzdžius      | Modeliai gali geriau reaguoti į „rodyti ir pasakoti“ metodą. Pradėkite nuo „nulinio šūvio“ metodo, kai duodate nurodymą (bet be pavyzdžių), tada pabandykite „keleto šūvių“ metodą, pateikdami keletą norimo rezultato pavyzdžių. Naudokite analogas. |
+| Naudokite signalus užbaigimams paskatinti | Nukreipkite link norimo rezultato, pateikdami pradinius žodžius ar frazes, kuriuos modelis gali naudoti kaip atsakymo pradžią.                                                                                                               |
+| Dvigubinkite                       | Kartais gali tekti modelio pakartoti nurodymus. Pateikite nurodymus prieš ir po pagrindinio turinio, naudokite nurodymą ir signalą ir pan. Iteruokite ir tikrinkite, kas veikia geriausiai.                                                         |
+| Tvarka svarbi                     | Informacijos pateikimo modeliui tvarka gali paveikti rezultatą, net ir mokymosi pavyzdžiuose, dėl naujausio įspūdžio šališkumo. Išbandykite skirtingas galimybes, kad pamatytumėte, kas veikia geriausiai.                                                               |
+| Suteikite modeliui „išeitį“           | Suteikite modeliui _atsarginį_ atsakymo variantą, kurį jis gali pateikti, jei dėl kokios nors priežasties negali užbaigti užduoties. Tai gali sumažinti klaidingų ar sugalvotų atsakymų riziką.                                                         |
 |                                   |                                                                                                                                                                                                                                                   |
 
-Kaip ir bet kuri geriausia praktika, atsiminkite, kad _jūsų rezultatai gali skirtis_ priklausomai nuo modelio, užduoties ir domeno. Naudokite tai kaip pradinį tašką ir iteruokite, kad rastumėte, kas geriausiai veikia jums. Nuolat peržiūrėkite savo užduočių kūrimo procesą, kai atsiranda nauji modeliai ir įrankiai, sutelkdami dėmesį į proceso mastelį ir atsakymų kokybę.
+Kaip ir su bet kuria gerąja praktika, prisiminkite, kad _jūsų patirtis gali skirtis_ priklausomai nuo modelio, užduoties ir srities. Naudokite tai kaip pradinį tašką ir iteruokite, kad rastumėte, kas jums geriausiai tinka. Nuolat peržiūrėkite savo užklausų inžinerijos procesą, kai atsiranda nauji modeliai ir įrankiai, orientuodamiesi į proceso skalę ir atsakymų kokybę.
 
 <!--
 PAMOKOS ŠABLONAS:
-Ši dalis turėtų pateikti kodo iššūkį, jei taikoma
+Šis skyrius turėtų pateikti kodavimo užduotį, jei taikoma
 
-IŠŠŪKIS:
-Nuoroda į Jupyter Notebook su tik kodo komentarais instrukcijose (kodo sekcijos tuščios).
+UŽDUOTIS:
+Nuoroda į Jupyter Notebook, kuriame instrukcijose yra tik kodo komentarai (kodo dalys tuščios).
 
 SPRENDIMAS:
-Nuoroda į to Notebook kopiją su užpildytais ir paleistais užduotimis, parodant, koks galėtų būti vienas pavyzdys.
+Nuoroda į tą patį Notebook su užpildytomis užklausomis ir vykdytą, rodančią vieną pavyzdinį rezultatą.
 -->
 
 ## Užduotis
 
-Sveikiname! Jūs pasiekėte pamokos pabaigą! Dabar laikas išbandyti kai kurias iš šių sąvokų ir technikų su realiais pavyzdžiais!
+Sveikiname! Jūs pasiekėte pamokos pabaigą! Atėjo laikas išbandyti kai kurias šias sąvokas ir metodus su realiais pavyzdžiais!
 
-Mūsų užduočiai naudosime Jupyter Notebook su pratimais, kuriuos galėsite atlikti interaktyviai. Taip pat galite išplėsti Notebook, pridėdami savo Markdown ir kodo langelius, kad savarankiškai tyrinėtumėte idėjas ir technikas.
+Mūsų užduočiai naudosime Jupyter Notebook su pratimais, kuriuos galite atlikti interaktyviai. Taip pat galite išplėsti Notebook pridėdami savo Markdown ir kodo langelius, kad patys tyrinėtumėte idėjas ir metodus.
 
-### Norėdami pradėti, fork'inkite saugyklą, tada
+### Norėdami pradėti, klonuokite repozitoriją, tada
 
 - (Rekomenduojama) Paleiskite GitHub Codespaces
-- (Alternatyva) Klonuokite saugyklą į savo vietinį įrenginį ir naudokite ją su Docker Desktop
-- (Alternatyva) Atidarykite Notebook su savo pasirinkta Notebook vykdymo aplinka.
+- (Alternatyviai) Nuklonuokite repozitoriją į savo vietinį įrenginį ir naudokite ją su Docker Desktop
+- (Alternatyviai) Atidarykite Notebook su savo pageidaujama aplinka.
 
-### Toliau, sukonfigūruokite savo aplinkos kintamuosius
+### Toliau sukonfigūruokite aplinkos kintamuosius
 
-- Nukopijuokite `.env.copy` failą iš saugyklos šaknies į `.env` ir užpildykite `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_ENDPOINT` ir `AZURE_OPENAI_DEPLOYMENT` reikšmes. Grįžkite į [Mokymosi smėlio dėžės skyrių](../../../04-prompt-engineering-fundamentals/04-prompt-engineering-fundamentals), kad sužinotumėte, kaip tai padaryti.
+- Nukopijuokite `.env.copy` failą iš repozitorijos šaknies į `.env` ir užpildykite `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_ENDPOINT` ir `AZURE_OPENAI_DEPLOYMENT` reikšmes. Grįžkite prie [Learning Sandbox skyriaus](#mokymosi-smėlio-dėžė), kad sužinotumėte, kaip tai padaryti.
 
-### Toliau, atidarykite Jupyter Notebook
+### Tada atidarykite Jupyter Notebook
 
-- Pasirinkite vykdymo branduolį. Jei naudojate 1 arba 2 variantą, tiesiog pasirinkite numatytąjį Python 3.10.x branduolį, kurį teikia kūrimo konteineris.
+- Pasirinkite vykdymo branduolį. Jei naudojate 1 ar 2 parinktis, tiesiog pasirinkite numatytąjį Python 3.10.x branduolį, suteiktą kūrimo konteineryje.
 
-Jūs pasiruošę vykdyti pratimus. Atminkite, kad čia nėra _teisingų ar neteisingų_ atsakymų - tiesiog tyrinėkite galimybes bandymų ir klaidų būdu ir kurkite intuiciją, kas veikia tam tikram modeliui ir taikymo sričiai.
+Jūs esate pasiruošę vykdyti pratimus. Atkreipkite dėmesį, kad čia nėra _teisingų ar neteisingų_ atsakymų – tiesiog tyrinėkite galimybes bandymų ir klaidų būdu ir formuokite intuityvumą, kas tinka konkrečiam modeliui ir programos sričiai.
 
-_Dėl šios priežasties šioje pamokoje nėra Kodo sprendimų segmentų. Vietoj to, Notebook turės Markdown langelius pavadinimu „Mano sprendimas:“, kuriuose bus parodytas vienas pavyzdinis atsakymas kaip nuoroda._
+_Dėl šios priežasties šioje pamokoje nėra Kodo sprendimų segmentų. Vietoje to, Notebook turės Markdown langelius pavadinimu „Mano sprendimas:“, kuriuose pateikiamas vienas pavyzdinis atsakymas kaip nuoroda._
 
  <!--
 PAMOKOS ŠABLONAS:
-Apibendrinkite skyrių ir pateikite išteklius savarankiškam mokymuisi.
+Apibendrinkite skyrių su santrauka ir savarankiško mokymosi ištekliais.
 -->
 
 ## Žinių patikrinimas
 
-Kurie iš šių yra geri užduočių pavyzdžiai, atitinkantys pagrįstas geriausias praktikas?
+Kuris iš šių užklausų yra geras ir laikosi pagrįstų geriausių praktikų?
 
-1. Parodyk man raudono automobilio vaizdą
-2. Parodyk man raudono automobilio, Volvo markės ir XC90 modelio, stovinčio prie uolos su besileidžiančia saule, vaizdą
-3. Parodyk man raudono automobilio, Volvo markės ir XC90 modelio, vaizdą
+1. Parodyk man raudonos mašinos paveikslėlį
+2. Parodyk man raudonos mašinos, markės Volvo ir modelio XC90, stovinčios prie uolos saulėlydžio metu, paveikslėlį
+3. Parodyk man raudonos mašinos, markės Volvo ir modelio XC90, paveikslėlį
 
-A: 2, tai geriausia užduotis, nes ji pateikia detales apie „ką“ ir eina į specifiką (ne bet koks automobilis, o konkretus markės ir modelio) ir taip pat aprašo bendrą aplinką. 3 yra kitas geriausias, nes jame taip pat yra daug aprašymo.
+A: 2 yra geriausia užklausa, nes ji pateikia detales apie "ką" ir eina į specifiką (ne bet kokia mašina, o specifinė markė ir modelis) bei aprašo bendrą aplinką. 3 yra antra geriausia, nes taip pat turi daug aprašymų.
 
 ## 🚀 Iššūkis
 
-Pabandykite pasinaudoti „užuominos“ technika su užduotimi: Užbaikite sakinį „Parodyk man raudono automobilio, Volvo markės ir “. Ką jis atsako, ir kaip galėtumėte tai patobulinti?
+Pažiūrėkite, ar galite pasinaudoti „signalo“ technika su užklausa: Užbaikite sakinį „Parodyk man raudonos mašinos, markės Volvo ir „. Koks bus atsakymas ir kaip jį patobulintumėte?
 
-## Puikus darbas! Tęskite mokymąsi
+## Puikiai padirbėta! Tęskite mokymąsi
 
-Norite sužinoti daugiau apie skirtingas užduočių kūrimo sąvokas? Eikite į [tęstinio mokymosi puslapį](https://
+Norite sužinoti daugiau apie skirtingas užklausų inžinerijos sąvokas? Eikite į [tolimesnio mokymosi puslapį](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), kur rasite kitų puikių išteklių šia tema.
+
+Keliu ateiti prie 5 pamokos, kur apžvelgsime [pažangias užklausų technikas](../05-advanced-prompts/README.md?WT.mc_id=academic-105485-koreyst)!
 
 ---
 
-**Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neprisiimame atsakomybės už nesusipratimus ar neteisingus aiškinimus, atsiradusius dėl šio vertimo naudojimo.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama naudoti profesionalų žmogiškąjį vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretaciją, kilusią naudojantis šiuo vertimu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,196 +1,203 @@
-# Introduction to Small Language Models for Generative AI for Beginners
-Generative AI na one kain area for artificial intelligence wey dey focus on how to create system wey fit generate new content. Dis content fit be text, image, music, or even full virtual environment. One of di most interesting way wey dem dey use generative AI na for language models.
+# Introdakshon to Small Language Models for Generative AI for Beginners
+Generative AI na one kain interestin area for artificial intelligence wey dey focus on how to create systems wey fit generate new content. Dis content fit be anything from text and pictures go all di way to music and even whole virtual environments. One of di most excitin tins wey generative AI fit do na for language models.
 
-## Wetin Be Small Language Models?
+## Wetin be Small Language Models?
 
-Small Language Model (SLM) na smaller version of di big language model (LLM), wey dey use di same architectural principles and techniques wey LLMs dey use, but e no dey use plenty computational resources like di big ones.
+Small Language Model (SLM) na smaller version of big language model (LLM), but e still dey use plenty architectural principles and techniques from LLMs, while e dey use less computational power.
 
-SLMs na one type of language model wey dem design to dey generate text wey be like wetin human go write. E no big like di big ones like GPT-4, but e dey more efficient, especially for places wey no get plenty computational resources. Even though e small, e still fit do plenty things. Normally, dem dey build SLMs by compress or distill di big LLMs, so e go still get plenty of di original model functionality and language ability. Di smaller size dey make am easy to use, e no dey use plenty memory or computational power. Even with di smaller size, SLMs fit still do plenty natural language processing (NLP) tasks:
+SLMs na subset of language models wey dem design to generate human-like text. Dem no be as big as their bigger counterparts, like GPT-4; SLMs dey small and efficient, so dem dey perfect for where computational resources no too plenty. Even tho dem small, dem fit still do plenty work. Usually, dem dey build SLMs by compress or distill LLMs, to keep most of di original model functionality and language skill. Dis model size reduction dey make dem less complex, so SLMs fit use less memory and computational power. Even wit all these improvements, SLMs fit do plenty natural language processing (NLP) work:
 
-- Text Generation: E dey create sentences or paragraphs wey make sense and dey relevant.
-- Text Completion: E dey predict and finish sentences based on wetin you give am.
-- Translation: E dey change text from one language to another.
-- Summarization: E dey make long text short and easy to understand.
+- Text Generation: Make correct and context-appropriate sentences or paragraphs.
+- Text Completion: Predict and finish sentences wey dem start.
+- Translation: Change text from one language to another.
+- Summarization: Make long text short and easy make sense summary.
 
-But e no dey perform reach di big ones or understand things deep like dem.
+But, e get some small sacrifice for performance or depth of understanding compared to bigger models dem.
 
-## How Small Language Models Dey Work?
-SLMs dey train with plenty text data. As dem dey train am, e dey learn di pattern and structure of language, so e fit generate text wey correct and make sense. Di training process dey involve:
+## How Small Language Models Dem Dey Work?
+SLMs dey learn from plenty text data. Dem go learn di language patterns and structure as dem dey train, so dem fit generate text wey dey grammatically correct and fit di context. Di training process dey include:
 
-- Data Collection: Dem dey gather plenty text data from different places.
-- Preprocessing: Dem dey clean and arrange di data so e go fit work for training.
-- Training: Dem dey use machine learning algorithms to teach di model how e go understand and generate text.
-- Fine-Tuning: Dem dey adjust di model to make e perform better for specific tasks.
+- Data Collection: Collect plenty text data from different places.
+- Preprocessing: Clean and arrange di data well so e fit ready for training.
+- Training: Use machine learning algorithms to teach di model how to understand and generate text.
+- Fine-Tuning: Adjust di model for make e perform better for specific tasks.
 
-Di way wey dem dey develop SLMs dey match di need for models wey fit work for places wey no get plenty resources, like mobile devices or edge computing platforms. SLMs dey focus on efficiency, so e go balance performance with accessibility, and e go fit work for plenty areas.
+SLMs development dey match di need for models wey fit work well for devices wey get limited resources, like mobile devices or edge computing platforms, where full big LLMs no fit run well because dem need too much resource. By focusing on efficiency, SLMs fit give better balance between performance and accessibility, so dem fit work for plenty areas.
 
 ![slm](../../../translated_images/pcm/slm.4058842744d0444a.webp)
 
-## Learning Objectives
+## Wetin You Go Learn
 
-For dis lesson, we wan introduce di knowledge of SLM and join am with Microsoft Phi-3 to learn different ways wey e fit work for text content, vision, and MoE.
+For dis lesson, we wan introduce una to knowledge of SLM and join am with Microsoft Phi-3 to learn different text content, vision and MoE scenarios.
 
-By di end of dis lesson, you go fit answer di following questions:
+By di end of dis lesson, you suppose fit answer di following questions:
 
-- Wetin be SLM
-- Wetin be di difference between SLM and LLM
-- Wetin be Microsoft Phi-3/3.5 Family
-- How to use Microsoft Phi-3/3.5 Family
+- Wetin be SLM?
+- Wetin different SLM and LLM?
+- Wetin be di Microsoft Phi-3/3.5 Family?
+- How to run inference with di Microsoft Phi-3/3.5 Family?
 
-Ready? Make we start.
+You ready? Make we start.
 
-## Di Difference Between Large Language Models (LLMs) and Small Language Models (SLMs)
+## Differences Between Large Language Models (LLMs) and Small Language Models (SLMs)
 
-Both LLMs and SLMs dey use di same machine learning principles, and dem dey follow similar ways for di design, training, data generation, and evaluation. But some things dey make dem different.
+Both LLMs and SLMs dey based on machine learning principles wey get chance calculations, and dem get similar design, training methods, data generation, and model evaluation. But some key differences make these two model types different.
 
-## Wetin Small Language Models Fit Do
+## Uses for Small Language Models
 
-SLMs get plenty ways wey dem fit use am, like:
+SLMs get plenty uses, like:
 
-- Chatbots: E dey help for customer support and dey talk with people like human.
-- Content Creation: E dey help writers generate ideas or even write full articles.
-- Education: E dey help students with writing assignments or to learn new languages.
-- Accessibility: E dey create tools for people wey get disability, like text-to-speech systems.
+- Chatbots: Help customers and chat with users like human.
+- Content Creation: Help writers by generating ideas or even drafting whole articles.
+- Education: Help students write assignments or learn new languages.
+- Accessibility: Create tools for people with disabilities, like text-to-speech systems.
 
 **Size**
   
-Di main difference between LLMs and SLMs na di size of di models. LLMs, like ChatGPT (GPT-4), fit get up to 1.76 trillion parameters, but open-source SLMs like Mistral 7B get only about 7 billion parameters. Dis difference dey because of di way dem design di models and train dem. For example, ChatGPT dey use self-attention mechanism inside encoder-decoder framework, but Mistral 7B dey use sliding window attention wey dey make training easy for decoder-only model. Dis difference for di design dey affect di complexity and performance of di models.
+Main difference between LLMs and SLMs na size of di model. LLMs like ChatGPT (GPT-4) get about 1.76 trillion parameters, but open-source SLMs like Mistral 7B get much less, about 7 billion parameters. Dis difference come from architecture and training methods. For example, ChatGPT dey use self-attention inside encoder-decoder design, but Mistral 7B dey use sliding window attention inside decoder-only design. Dis difference affect complexity and performance well well.
 
-**Comprehension**
+**Understanding**
 
-SLMs dey focus on performance for specific areas, so dem dey specialize well but dem no dey fit understand plenty things across different areas. LLMs dey try to act like human intelligence for plenty areas. Dem dey train with big and diverse datasets, so dem dey perform well for different areas. Dis make LLMs dey more flexible and fit do plenty tasks, like natural language processing and programming.
+SLMs dey best to perform well inside specific areas, so dem dey specialized but fit no understand plenty contexts across many fields well. But LLMs try mimic human intelligence for many areas. Dem dey train on big and diverse data, so dem fit work for many different domains. Because of this, LLMs dey more versatile and fit perform more tasks, like natural language processing and coding.
 
 **Computing**
 
-To train and use LLMs dey need plenty resources, like big GPU clusters. For example, to train ChatGPT from scratch fit need thousands of GPUs for long time. But SLMs, wey get smaller parameters, dey easy to use for places wey no get plenty resources. Models like Mistral 7B fit train and run for local machines wey get moderate GPU, even though training still dey take time.
+Training and using LLMs need plenty resources, like big GPU clusters. For example, to train model like ChatGPT from start, you need thousands of GPUs for long time. But SLMs get smaller parameters and fit run on local machines with moderate GPU, though training still fit take hours for multiple GPUs.
 
 **Bias**
 
-Bias na one problem wey dey affect LLMs because of di kind training data wey dem dey use. Di data fit no represent some groups well, fit get wrong labeling, or fit show language bias because of dialect, location, or grammar rules. Di complex design of LLMs fit even make di bias worse if dem no fine-tune am well. SLMs, wey dem dey train with smaller and specific datasets, no dey get plenty bias like LLMs, but dem still fit get small bias.
+Bias dey common for LLMs because of training data nature. Dem dey use raw online data, wey fit no properly represent some groups, or get wrong labels, or get language bias because of dialect, location, grammar. Plus, LLMs complex architecture fit increase bias if people no fine-tune am well. But SLMs, because dem train for limited, specific data, normally get less bias, but bias fit still dey.
 
 **Inference**
 
-Di smaller size of SLMs dey make dem fast for inference, so dem fit generate output quick for local hardware without needing plenty processing. LLMs, because of di size and complexity, dey need plenty computational resources to generate output fast. If plenty people dey use LLMs at di same time, e go slow down di response time, especially for big deployment.
+Small size of SLMs mean say dem fit generate result fast for local hardware without heavy parallel processing. But LLMs need plenty parallel compute power to run fast because of size and complexity. Plenty users using LLM at once fit also slow down dem more.
 
-To summarize, even though LLMs and SLMs dey use di same machine learning principles, dem get big difference for size, resources, understanding, bias, and inference speed. LLMs dey more flexible but e dey need plenty resources, while SLMs dey efficient for specific areas and no dey use plenty computational power.
+In summary, even as LLMs and SLMs both dey based on machine learning, dem differ well well for model size, resource needs, understanding context, bias problems, and inference speed. These differences make dem fit different uses, with LLMs more versatile but need plenty resources, and SLMs more efficient for specific areas with less resource use.
 
-***Note：For dis chapter, we go use Microsoft Phi-3 / 3.5 as example to explain SLM.***
+***Note: For dis lesson, we go use Microsoft Phi-3 / 3.5 as example to introduce SLM.***
 
-## Wetin Be Phi-3 / Phi-3.5 Family
+## Introduce Phi-3 / Phi-3.5 Family
 
-Phi-3 / 3.5 Family dey focus on text, vision, and Agent (MoE) application areas:
+Phi-3 / 3.5 Family mainly dey focus on text, vision, and Agent (MoE) use cases:
 
 ### Phi-3 / 3.5 Instruct
 
-E dey focus on text generation, chat completion, and content information extraction.
+Mainly for text generation, chat completion, and content extraction, and so on.
 
 **Phi-3-mini**
 
-Di 3.8B language model dey available for Microsoft Azure AI Studio, Hugging Face, and Ollama. Phi-3 models dey perform better than language models wey get di same or bigger size for key benchmarks (di benchmark numbers dey below, higher numbers mean better). Phi-3-mini dey perform better than models wey big pass am, while Phi-3-small and Phi-3-medium dey perform better than bigger models, including GPT-3.5.
+Di 3.8B language model dey available for Microsoft Foundry, Hugging Face, and Ollama. Phi-3 models dey perform well pass language models wey get same or even bigger size for key benchmarks (see benchmark numbers below, higher better). Phi-3-mini fit perform pass models wey big reach twice di size, while Phi-3-small and Phi-3-medium fit perform pass bigger models like GPT-3.5.
 
 **Phi-3-small & medium**
 
-Phi-3-small wey get 7B parameters dey perform better than GPT-3.5T for different language, reasoning, coding, and math benchmarks.
+With only 7B parameters, Phi-3-small fit beat GPT-3.5T for plenty language, reasoning, coding, and math benchmarks.
 
-Phi-3-medium wey get 14B parameters dey continue di trend and e dey perform better than Gemini 1.0 Pro.
+Phi-3-medium get 14B parameters and e continue to perform well, even pass Gemini 1.0 Pro.
 
 **Phi-3.5-mini**
 
-Dis one na upgrade of Phi-3-mini. Even though di parameters no change, e dey support plenty languages (20+ languages: Arabic, Chinese, Czech, Danish, Dutch, English, Finnish, French, German, Hebrew, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Russian, Spanish, Swedish, Thai, Turkish, Ukrainian) and e dey support long context better.
+You fit see am as upgrade of Phi-3-mini. Even tho parameters no change, e get better ability to support many languages (support 20+ languages: Arabic, Chinese, Czech, Danish, Dutch, English, Finnish, French, German, Hebrew, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese, Russian, Spanish, Swedish, Thai, Turkish, Ukrainian) ​​and e add strong support for long context.
 
-Phi-3.5-mini wey get 3.8B parameters dey perform better than language models wey get di same size and e dey match models wey big pass am.
+Phi-3.5-mini with 3.8B parameters fit perform pass language models of same size and e fit compare well with models twice its size.
 
 ### Phi-3 / 3.5 Vision
 
-We fit see di Instruct model of Phi-3/3.5 as di brain wey dey understand, and Vision na di eye wey dey help Phi understand di world.
+You fit think of Phi-3/3.5 Instruct as how Phi fit understand tins, and Vision na wetin make Phi get eyes to see and understand world.
+
 
 **Phi-3-Vision**
 
-Phi-3-vision wey get only 4.2B parameters dey perform better than bigger models like Claude-3 Haiku and Gemini 1.0 Pro V for general visual reasoning tasks, OCR, and table and diagram understanding tasks.
+Phi-3-vision, wey only get 4.2B parameters, dey continue strong performance and e fit perform pass bigger models like Claude-3 Haiku and Gemini 1.0 Pro V for general visual reasoning, OCR, and table and diagram understanding.
+
 
 **Phi-3.5-Vision**
 
-Phi-3.5-Vision na upgrade of Phi-3-Vision, e dey support multiple images. You fit see am as improvement for vision, e no dey only see pictures, e fit see videos too.
+Phi-3.5-Vision na upgrade for Phi-3-Vision, e fit handle many images. You fit see am as beta vision wey no just fit see picture but also videos.
 
-Phi-3.5-vision dey perform better than bigger models like Claude-3.5 Sonnet and Gemini 1.5 Flash for OCR, table and chart understanding tasks, and e dey match di bigger models for general visual knowledge reasoning tasks. E fit take multiple images as input and do reasoning on top di images.
+Phi-3.5-vision fit perform pass bigger models like Claude-3.5 Sonnet and Gemini 1.5 Flash for OCR, table and chart understanding tasks, and e dey similar for general visual knowledge reasoning tasks. E support multi-frame input, mean say e fit reason many pictures at once
+
 
 ### Phi-3.5-MoE
 
-***Mixture of Experts(MoE)*** dey make models fit train with less compute, so you fit increase di model or dataset size with di same compute resources wey dense model dey use. MoE model fit reach di same quality as di dense model faster during training.
+***Mixture of Experts(MoE)*** mean say models fit train with less compute, so you fit scale model or dataset size well well but still use same compute budget as dense model. MoE model fit reach same quality as dense model faster during pretraining.
 
-Phi-3.5-MoE get 16x3.8B expert modules. Phi-3.5-MoE wey get only 6.6B active parameters dey perform di same level of reasoning, language understanding, and math as bigger models.
+Phi-3.5-MoE get 16x3.8B expert modules. Phi-3.5-MoE with only 6.6B active parameters fit reason, understand language, and do math like big big models.
 
-We fit use di Phi-3/3.5 Family model based on different areas. Unlike LLM, you fit deploy Phi-3/3.5-mini or Phi-3/3.5-Vision for edge devices.
+You fit use Phi-3/3.5 models for different use cases. Unlike LLM, you fit deploy Phi-3/3.5-mini or Phi-3/3.5-Vision for edge devices.
 
-## How to Use Phi-3/3.5 Family Models
 
-We wan use Phi-3/3.5 for different areas. Next, we go show how to use Phi-3/3.5 based on different areas.
+## How to use Phi-3/3.5 Family models
+
+We want use Phi-3/3.5 for different situations. Next, we go use Phi-3/3.5 for different cases.
 
 ![phi3](../../../translated_images/pcm/phi3.655208c3186ae381.webp)
 
-### Inference Difference Cloud's API
+### Inference via Cloud APIs
 
-**GitHub Models**
+**Microsoft Foundry Models**
 
-GitHub Models na di easiest way. You fit quickly access di Phi-3/3.5-Instruct model through GitHub Models. If you join am with Azure AI Inference SDK / OpenAI SDK, you fit use code to access di API and use Phi-3/3.5-Instruct. You fit also test different effects through Playground.
+> **Note:** GitHub Models go stop end July 2026. [Microsoft Foundry Models](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst) na direct replacement.
 
-- Demo:Comparison of di effects of Phi-3-mini and Phi-3.5-mini for Chinese scenarios
+Microsoft Foundry Models na di easiest way. You fit quick quick access Phi-3/3.5-Instruct model thru Foundry model catalog. Combine am with Azure AI Inference SDK / OpenAI SDK, you fit run API call through code to complete Phi-3/3.5-Instruct call. You fit also try different things for Playground.
+
+- Demo: Comparison of Phi-3-mini and Phi-3.5-mini performance for Chinese scenarios
 
 ![phi3](../../../translated_images/pcm/gh1.126c6139713b622b.webp)
 
 ![phi35](../../../translated_images/pcm/gh2.07d7985af66f178d.webp)
 
 
-**Azure AI Studio**
+**Microsoft Foundry**
 
-If you wan use di vision and MoE models, you fit use Azure AI Studio to access dem. If you wan learn more, you fit read di Phi-3 Cookbook to know how to use Phi-3/3.5 Instruct, Vision, MoE through Azure AI Studio [Click dis link](https://github.com/microsoft/Phi-3CookBook/blob/main/md/02.QuickStart/AzureAIStudio_QuickStart.md?WT.mc_id=academic-105485-koreyst)
+If you want use vision and MoE models, you fit use Microsoft Foundry to make calls. If you like, you fit read Phi-3 Cookbook to learn how to use Phi-3/3.5 Instruct, Vision, MoE with Microsoft Foundry [Click dis link](https://github.com/microsoft/Phi-3CookBook/blob/main/md/02.QuickStart/AzureAIStudio_QuickStart.md?WT.mc_id=academic-105485-koreyst)
 
 
 **NVIDIA NIM**
 
-Apart from di cloud-based Model Catalog solutions wey Azure and GitHub dey provide, you fit also use [Nivida NIM](https://developer.nvidia.com/nim?WT.mc_id=academic-105485-koreyst) to access di models. You fit visit NIVIDA NIM to use di API for di Phi-3/3.5 Family. NVIDIA NIM (NVIDIA Inference Microservices) na set of microservices wey dem design to help developers deploy AI models well for different environments, like cloud, data centers, and workstations.
+Besides Microsoft Foundry Models cloud catalog, you fit also use [NVIDIA NIM](https://developer.nvidia.com/nim?WT.mc_id=academic-105485-koreyst) to make related calls. You fit go NVIDIA NIM to make API calls for Phi-3/3.5 Family. NVIDIA NIM (NVIDIA Inference Microservices) na set of fast inference microservices wey help developers deploy AI models well for different environments like clouds, data centers, and workstations.
 
-Here be di key features of NVIDIA NIM:
+Here be some key features of NVIDIA NIM:
 
-- **Ease of Deployment:** NIM dey make am easy to deploy AI models with one command, so e go fit work well with di workflow wey you get.
-- **Optimized Performance:** E dey use NVIDIA’s pre-optimized inference engines, like TensorRT and TensorRT-LLM, to make sure e fast and dey work well.
-- **Scalability:** NIM fit scale automatically for Kubernetes, so e go fit handle different workloads well.
-- **Security and Control:** Organizations fit keep control of dia data and applications by hosting NIM microservices for dia own managed infrastructure.
-- **Standard APIs:** NIM dey provide industry-standard APIs wey make am easy to build and connect AI applications like chatbots, AI assistants, and others.
+- **Ease of Deployment:** NIM make you fit deploy AI models with just one command, e make am easy to add to any workflow.
 
-NIM na part of NVIDIA AI Enterprise, wey dey try make deployment and operationalization of AI models simple, and make sure say dem dey run well for NVIDIA GPUs.
+- **Optimized Performance:** E dey use NVIDIA pre-optimized inference engines dem, like TensorRT and TensorRT-LLM, to make sure say latency low and throughput high.
+- **Scalability:** NIM dey support autoscaling for Kubernetes, wey fit handle different workload well well.
+- **Security and Control:** Organizations fit maintain control over their data and applications by demself hosting NIM microservices for their own managed infrastructure.
+- **Standard APIs:** NIM dey provide industry-standard APIs, wey make am easy to build and integrate AI applications like chatbots, AI assistants, and more.
 
-- Demo: How to use Nividia NIM to call Phi-3.5-Vision-API  [[Click dis link](./python/Phi-3-Vision-Nividia-NIM.ipynb?WT.mc_id=academic-105485-koreyst)]
+NIM na part of NVIDIA AI Enterprise, wey dey try simplify how to deploy and make AI models work well, make sure dem dey run beta for NVIDIA GPUs.
+
+- Demo: Using NVIDIA NIM to call Phi-3.5-Vision-API  [[Click this link](./python/Phi-3-Vision-Nividia-NIM.ipynb?WT.mc_id=academic-105485-koreyst)]
 
 
-### Inference Phi-3/3.5 for local environment
-Inference for Phi-3, or any language model like GPT-3, mean di process wey e dey use to generate answers or predictions based on di input wey e receive. If you give Phi-3 prompt or question, e go use di neural network wey dem train am with to find di most likely and relevant answer by checking di patterns and relationships for di data wey dem train am with.
+### Running Phi-3/3.5 Locally
+Inference for Phi-3, or any language model like GPT-3, mean how e dey generate response or predictions based on wetin e receive as input. When you give Phi-3 prompt or question, e go use im trained neural network infer the most likely and relevant response by checking patterns and relationships for the data wey e don train on.
 
 **Hugging Face Transformer**
-Hugging Face Transformers na strong library wey dem design for natural language processing (NLP) and other machine learning tasks. Dis na di main things about am:
+Hugging Face Transformers na powerful library for natural language processing (NLP) and other machine learning work. Here na some main points about am:
 
-1. **Pretrained Models**: E get thousands of pretrained models wey you fit use for different tasks like text classification, named entity recognition, question answering, summarization, translation, and text generation.
+1. **Pretrained Models**: E get thousands pretrained models wey fit do different work like text classification, named entity recognition, question answering, summarization, translation, and text generation.
 
-2. **Framework Interoperability**: Di library dey support many deep learning frameworks like PyTorch, TensorFlow, and JAX. Dis one mean say you fit train model for one framework and use am for another one.
+2. **Framework Interoperability**: The library dey support many deep learning frameworks like PyTorch, TensorFlow, and JAX. This one allow you train model for one framework then use am for another.
 
-3. **Multimodal Capabilities**: Apart from NLP, Hugging Face Transformers dey also support tasks for computer vision (like image classification, object detection) and audio processing (like speech recognition, audio classification).
+3. **Multimodal Capabilities**: Besides NLP, Hugging Face Transformers fit also do tasks for computer vision (like image classification, object detection) and audio processing (like speech recognition, audio classification).
 
-4. **Ease of Use**: Di library get APIs and tools wey make am easy to download and fine-tune models, so e dey good for both beginners and experts.
+4. **Ease of Use**: The library get APIs and tools wey make am easy to download and fine-tune models, so e dey accessible for both beginners and experts.
 
-5. **Community and Resources**: Hugging Face get strong community and plenty documentation, tutorials, and guides wey go help users start and use di library well.
-[official documentation](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) or dia [GitHub repository](https://github.com/huggingface/transformers?WT.mc_id=academic-105485-koreyst).
+5. **Community and Resources**: Hugging Face get active community and plenty documentation, tutorials, and guides to help users start and use the library well.
+[official documentation](https://huggingface.co/docs/transformers/index?WT.mc_id=academic-105485-koreyst) or their [GitHub repository](https://github.com/huggingface/transformers?WT.mc_id=academic-105485-koreyst).
 
-Dis na di most common method, but e need GPU acceleration. After all, scenes like Vision and MoE need plenty calculations, and CPU go dey very slow if dem no quantize am.
+This na the most common way to use, but e need GPU acceleration. Because scenarios like Vision and MoE need plenty calculations, if dem no quantize am, e go dey very slow for CPU.
 
 
-- Demo:How to use Transformer to call Phi-3.5-Instuct [Click dis link](./python/phi35-instruct-demo.ipynb?WT.mc_id=academic-105485-koreyst)
+- Demo: Using Transformer to call Phi-3.5-Instruct [Click this link](./python/phi35-instruct-demo.ipynb?WT.mc_id=academic-105485-koreyst)
 
-- Demo:How to use Transformer to call Phi-3.5-Vision[Click dis link](./python/phi35-vision-demo.ipynb?WT.mc_id=academic-105485-koreyst)
+- Demo: Using Transformer to call Phi-3.5-Vision [Click this link](./python/phi35-vision-demo.ipynb?WT.mc_id=academic-105485-koreyst)
 
-- Demo:How to use Transformer to call Phi-3.5-MoE[Click dis link](./python/phi35_moe_demo.ipynb?WT.mc_id=academic-105485-koreyst)
+- Demo: Using Transformer to call Phi-3.5-MoE [Click this link](./python/phi35_moe_demo.ipynb?WT.mc_id=academic-105485-koreyst)
 
 **Ollama**
-[Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst) na platform wey dem design to make am easy to run big language models (LLMs) for your machine. E dey support different models like Llama 3.1, Phi 3, Mistral, and Gemma 2, among others. Di platform dey simplify di process by putting model weights, configuration, and data inside one package, so e go dey easy for users to customize and create dia own models. Ollama dey available for macOS, Linux, and Windows. E dey good if you wan test or deploy LLMs without using cloud services. Ollama na di most direct way, you just need to run di statement wey dey below.
+[Ollama](https://ollama.com/?WT.mc_id=academic-105485-koreyst) na platform wey dem design to make am easy to run big language models (LLMs) locally for your machine. E support different models like Llama 3.1, Phi 3, Mistral, and Gemma 2, and others. The platform simplify the process by bundling model weights, configuration, and data into one package, making e easier for users to customize and create their own models. Ollama dey available for macOS, Linux, and Windows. E beta tool if you wan try or deploy LLMs without needing cloud services. Ollama na the most direct way, you just gatz run this command.
 
 
 ```bash
@@ -199,40 +206,67 @@ ollama run phi3.5
 
 ```
 
+**Foundry Local**
+
+[Foundry Local](https://foundrylocal.ai?WT.mc_id=academic-105485-koreyst) na Microsoft offline, on-device runtime wey fit run models like Phi for your own hardware - no need Azure subscription, API key, or network connection. E automatically choose the best execution provider available (NPU, GPU, or CPU) and e get OpenAI-compatible endpoint, so existing `openai`/Azure AI Inference SDK code fit use am with small changes. Check the [Foundry Local documentation](https://learn.microsoft.com/azure/ai-foundry/foundry-local/get-started?WT.mc_id=academic-105485-koreyst) to start.
+
+```bash
+
+winget install Microsoft.FoundryLocal
+foundry model run phi-3.5-mini
+
+```
+
+Or use the SDK directly in Python:
+
+```bash
+
+pip install foundry-local-sdk
+
+```
+
+```python
+
+from foundry_local import FoundryLocalManager
+
+manager = FoundryLocalManager("phi-3.5-mini")
+print(manager.endpoint, manager.api_key)
+
+```
 
 **ONNX Runtime for GenAI**
 
-[ONNX Runtime](https://github.com/microsoft/onnxruntime-genai?WT.mc_id=academic-105485-koreyst) na cross-platform inference and training machine-learning accelerator. ONNX Runtime for Generative AI (GENAI) na strong tool wey go help you run generative AI models well for different platforms. 
+[ONNX Runtime](https://github.com/microsoft/onnxruntime-genai?WT.mc_id=academic-105485-koreyst) na cross-platform inference and training machine-learning accelerator. ONNX Runtime for Generative AI (GENAI) na powerful tool wey help you run generative AI models well well for different platforms. 
 
 ## Wetin be ONNX Runtime?
-ONNX Runtime na open-source project wey dey enable high-performance inference of machine learning models. E dey support models wey dey for Open Neural Network Exchange (ONNX) format, wey be standard for representing machine learning models. ONNX Runtime inference fit make customer experience faster and reduce cost, e dey support models from deep learning frameworks like PyTorch and TensorFlow/Keras as well as classical machine learning libraries like scikit-learn, LightGBM, XGBoost, etc. ONNX Runtime dey work with different hardware, drivers, and operating systems, and e dey provide better performance by using hardware accelerators where e dey possible plus graph optimizations and transforms.
+ONNX Runtime na open-source project wey dey enable high-performance inference of machine learning models. E support models for Open Neural Network Exchange (ONNX) format, wey be standard way to represent machine learning models. ONNX Runtime inference fit make customer experience faster and reduce cost, e support models from deep learning frameworks like PyTorch and TensorFlow/Keras as well as classical machine learning libraries like scikit-learn, LightGBM, XGBoost, and others. ONNX Runtime dey compatible with different hardware, drivers, and operating systems, and e give best performance by using hardware accelerators where e fit along with graph optimizations and transforms.
 
 ## Wetin be Generative AI?
-Generative AI na AI systems wey fit create new content, like text, images, or music, based on di data wey dem train am with. Examples na language models like GPT-3 and image generation models like Stable Diffusion. ONNX Runtime for GenAI library dey provide di generative AI loop for ONNX models, including inference with ONNX Runtime, logits processing, search and sampling, and KV cache management.
+Generative AI mean AI systems wey fit generate new content, like text, images, or music, based on the data dem train for before. Examples na language models like GPT-3 and image generation models like Stable Diffusion. ONNX Runtime for GenAI library dey provide generative AI loop for ONNX models, including inference with ONNX Runtime, logits processing, search and sampling, and KV cache management.
 
 ## ONNX Runtime for GENAI
-ONNX Runtime for GENAI dey expand di features of ONNX Runtime to support generative AI models. Dis na di main features:
+ONNX Runtime for GENAI extend ONNX Runtime capacity to support generative AI models. Here na some key features:
 
-- **Broad Platform Support:** E dey work for different platforms, like Windows, Linux, macOS, Android, and iOS.
-- **Model Support:** E dey support many popular generative AI models, like LLaMA, GPT-Neo, BLOOM, and others.
-- **Performance Optimization:** E get optimizations for different hardware accelerators like NVIDIA GPUs, AMD GPUs, and others.
-- **Ease of Use:** E dey provide APIs wey make am easy to add am to applications, so you fit generate text, images, and other content with small code.
-- Users fit call high level generate() method, or run each iteration of di model inside loop, dey generate one token at a time, and fit change generation parameters inside di loop.
-- ONNX runtime also dey support greedy/beam search and TopP, TopK sampling to generate token sequences and e get built-in logits processing like repetition penalties. You fit also add custom scoring easily.
+- **Broad Platform Support:** E dey work for different platforms like Windows, Linux, macOS, Android, and iOS.
+- **Model Support:** E dey support many popular generative AI models like LLaMA, GPT-Neo, BLOOM, and more.
+- **Performance Optimization:** E get optimizations for different hardware accelerators like NVIDIA GPUs, AMD GPUs, and more.
+- **Ease of Use:** E provide APIs wey make am easy to integrate am inside applications, so you fit generate text, images, and other content with little code
+- Users fit call one high level generate() method, or run each iteration of the model for loop, generate one token at a time, and optionally update generation parameters inside the loop.
+- ONNX runtime still dey support greedy/beam search and TopP, TopK sampling to generate token sequences and e get built-in logits processing like repetition penalties. You fit also easily add your own custom scoring.
 
 ## How to Start
-To start with ONNX Runtime for GENAI, you fit follow dis steps:
+To start with ONNX Runtime for GENAI, you fit follow these steps:
 
 ### Install ONNX Runtime:
 ```Python
 pip install onnxruntime
 ```
-### Install di Generative AI Extensions:
+### Install the Generative AI Extensions:
 ```Python
 pip install onnxruntime-genai
 ```
 
-### Run Model: Dis na simple example for Python:
+### Run a Model: Here na simple example for Python:
 ```Python
 import onnxruntime_genai as og
 
@@ -250,7 +284,7 @@ output_text = tokenizer.decode(output_tokens)
 
 print(output_text) 
 ```
-### Demo:How to use ONNX Runtime GenAI to call Phi-3.5-Vision
+### Demo:Using ONNX Runtime GenAI to call Phi-3.5-Vision
 
 
 ```python
@@ -297,7 +331,7 @@ while not generator.is_done():
 
     new_token = generator.get_next_tokens()[0]
     
-    code += tokenizer_stream.decode(new_token)
+    output = tokenizer_stream.decode(new_token)
     
     print(tokenizer_stream.decode(new_token), end='', flush=True)
 
@@ -306,16 +340,16 @@ while not generator.is_done():
 
 **Others**
 
-Apart from ONNX Runtime and Ollama reference methods, we fit also use di reference of quantitative models based on di model reference methods wey different manufacturers provide. Like Apple MLX framework with Apple Metal, Qualcomm QNN with NPU, Intel OpenVINO with CPU/GPU, etc. You fit also get more content from [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst)
+Besides ONNX Runtime, Ollama, and Foundry Local reference methods, we fit also complete reference of quantitative models based on model reference ways provided by different manufacturers. Like Apple MLX framework with Apple Metal, Qualcomm QNN with NPU, Intel OpenVINO with CPU/GPU, etc. You fit get more content from [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst)
 
 
 ## More
 
-We don learn di basics of Phi-3/3.5 Family, but to sabi more about SLM we need more knowledge. You fit find di answers for di Phi-3 Cookbook. If you wan learn more, abeg visit di [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst).
+We don learn the basics of Phi-3/3.5 Family, but to learn more about SLM we need more knowledge. You fit find answers for the Phi-3 Cookbook. If you want learn more, abeg visit the [Phi-3 Cookbook](https://github.com/microsoft/phi-3cookbook?WT.mc_id=academic-105485-koreyst).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Dis dokyument don use AI translet service [Co-op Translator](https://github.com/Azure/co-op-translator) do di translet. Even as we dey try make am accurate, abeg make you sabi say AI translet fit get mistake or no dey correct well. Di original dokyument wey dey for im native language na di one wey you go take as di correct source. For important mata, e good make you use professional human translet. We no go fit take blame for any misunderstanding or wrong interpretation wey fit happen because you use dis translet.
+**Disclaimer**:
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg make you know say automated translation fit get errors or mistakes. Di original document for dia own language na im be di correct source. For important info, make person wey sabi human translation do am. We no go responsible for any misunderstanding or wrong understanding wey fit happen because of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,18 +1,21 @@
-# Xây Dựng Với Các Mô Hình Gia Đình Meta
+# Xây dựng với các mô hình trong họ Meta
 
-## Giới Thiệu
+## Giới thiệu
 
 Bài học này sẽ bao gồm:
 
-- Khám phá hai mô hình chính trong gia đình Meta - Llama 3.1 và Llama 3.2
+- Khám phá hai mô hình chính trong họ Meta - Llama 3.1 và Llama 3.2
 - Hiểu các trường hợp sử dụng và kịch bản cho từng mô hình
-- Ví dụ mã để thể hiện các tính năng độc đáo của từng mô hình
+- Mẫu mã để thể hiện các tính năng độc đáo của từng mô hình
 
-## Gia Đình Mô Hình Meta
 
-Trong bài học này, chúng ta sẽ khám phá 2 mô hình từ gia đình Meta hay còn gọi là "Llama Herd" - Llama 3.1 và Llama 3.2
+## Họ mô hình Meta
 
-Các mô hình này có nhiều biến thể khác nhau và có sẵn trên GitHub Model marketplace. Dưới đây là thêm thông tin về cách sử dụng GitHub Models để [phát triển nguyên mẫu với các mô hình AI](https://docs.github.com/en/github-models/prototyping-with-ai-models?WT.mc_id=academic-105485-koreyst).
+Trong bài học này, chúng ta sẽ khám phá 2 mô hình từ họ Meta hay "Llama Herd" - Llama 3.1 và Llama 3.2.
+
+Các mô hình này có nhiều biến thể và được cung cấp trong [Microsoft Foundry Models catalog](https://ai.azure.com/catalog/models?WT.mc_id=academic-105485-koreyst).
+
+> **Lưu ý:** GitHub Models sẽ ngừng hoạt động vào cuối tháng 7 năm 2026. Đây là chi tiết thêm về việc sử dụng [Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-foundry/model-inference/overview?WT.mc_id=academic-105485-koreyst) để thử nghiệm với các mô hình AI.
 
 Các biến thể mô hình:
 - Llama 3.1 - 70B Instruct
@@ -20,39 +23,39 @@ Các biến thể mô hình:
 - Llama 3.2 - 11B Vision Instruct
 - Llama 3.2 - 90B Vision Instruct
 
-*Lưu ý: Llama 3 cũng có trên GitHub Models nhưng sẽ không được đề cập trong bài học này*
+*Lưu ý: Llama 3 cũng có trong Microsoft Foundry Models nhưng sẽ không được đề cập trong bài học này*
 
 ## Llama 3.1
 
-Với 405 tỷ tham số, Llama 3.1 thuộc loại LLM mã nguồn mở.
+Với 405 Tỷ tham số, Llama 3.1 thuộc loại LLM mã nguồn mở.
 
-Mô hình này là bản nâng cấp của Llama 3 trước đó với các điểm cải tiến:
+Mô hình này là phiên bản nâng cấp của Llama 3 trước đó cung cấp:
 
 - Cửa sổ ngữ cảnh lớn hơn - 128k token so với 8k token
 - Số token đầu ra tối đa lớn hơn - 4096 so với 2048
-- Hỗ trợ đa ngôn ngữ tốt hơn - nhờ tăng số lượng token huấn luyện
+- Hỗ trợ đa ngôn ngữ tốt hơn - nhờ số lượng token huấn luyện tăng lên
 
-Những cải tiến này giúp Llama 3.1 xử lý các trường hợp sử dụng phức tạp hơn khi xây dựng các ứng dụng GenAI bao gồm:
-- Gọi hàm gốc - khả năng gọi các công cụ và hàm bên ngoài quy trình LLM
-- Hiệu suất RAG tốt hơn - nhờ cửa sổ ngữ cảnh lớn hơn
-- Tạo dữ liệu tổng hợp - khả năng tạo dữ liệu hiệu quả cho các tác vụ như tinh chỉnh mô hình
+Những điều này cho phép Llama 3.1 xử lý các trường hợp sử dụng phức tạp hơn khi xây dựng các ứng dụng GenAI bao gồm:
+- Gọi hàm gốc - khả năng gọi các công cụ và hàm bên ngoài quy trình làm việc của LLM
+- Hiệu suất RAG tốt hơn - nhờ cửa sổ ngữ cảnh mở rộng
+- Tạo dữ liệu tổng hợp - khả năng tạo dữ liệu hiệu quả cho các tác vụ như tinh chỉnh
 
-### Gọi Hàm Gốc
+### Gọi hàm gốc
 
-Llama 3.1 đã được tinh chỉnh để gọi hàm hoặc công cụ hiệu quả hơn. Nó cũng có hai công cụ tích hợp mà mô hình có thể nhận biết cần sử dụng dựa trên câu hỏi từ người dùng. Các công cụ này là:
+Llama 3.1 đã được tinh chỉnh để hiệu quả hơn trong việc gọi hàm hoặc công cụ. Nó cũng có hai công cụ tích hợp mà mô hình có thể nhận biết cần sử dụng dựa trên lời nhắc từ người dùng. Các công cụ này là:
 
-- **Brave Search** - Có thể dùng để lấy thông tin cập nhật như thời tiết bằng cách tìm kiếm trên web
-- **Wolfram Alpha** - Dùng cho các phép tính toán phức tạp, giúp bạn không cần phải tự viết hàm riêng
+- **Brave Search** - Có thể được dùng để lấy thông tin cập nhật như thời tiết bằng cách tìm kiếm web
+- **Wolfram Alpha** - Có thể dùng cho các phép tính toán học phức tạp hơn để không cần viết hàm riêng
 
 Bạn cũng có thể tạo các công cụ tùy chỉnh mà LLM có thể gọi.
 
 Trong ví dụ mã dưới đây:
 
-- Chúng ta định nghĩa các công cụ có sẵn (brave_search, wolfram_alpha) trong phần prompt hệ thống.
-- Gửi một câu hỏi từ người dùng về thời tiết ở một thành phố cụ thể.
-- LLM sẽ phản hồi bằng một lệnh gọi công cụ Brave Search trông như sau `<|python_tag|>brave_search.call(query="Stockholm weather")`
+- Chúng ta định nghĩa các công cụ sẵn có (brave_search, wolfram_alpha) trong lời nhắc hệ thống.
+- Gửi lời nhắc người dùng hỏi về thời tiết ở một thành phố nhất định.
+- LLM sẽ phản hồi với một cuộc gọi công cụ đến Brave Search trông giống như `<|python_tag|>brave_search.call(query="Stockholm weather")`
 
-*Lưu ý: Ví dụ này chỉ thực hiện lệnh gọi công cụ, nếu bạn muốn nhận kết quả, bạn cần tạo tài khoản miễn phí trên trang Brave API và định nghĩa hàm gọi công cụ đó*
+*Lưu ý: Ví dụ này chỉ thực hiện cuộc gọi công cụ, nếu bạn muốn nhận kết quả, bạn cần tạo tài khoản miễn phí trên trang Brave API và định nghĩa hàm tương ứng.
 
 ```python 
 import os
@@ -60,9 +63,10 @@ from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import AssistantMessage, SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
-model_name = "meta-llama-3.1-405b-instruct"
+# Lấy những cái này từ trang "Tổng quan" của dự án Microsoft Foundry của bạn
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
+model_name = "Meta-Llama-3.1-405B-Instruct"
 
 client = ChatCompletionsClient(
     endpoint=endpoint,
@@ -94,15 +98,16 @@ print(response.choices[0].message.content)
 
 ## Llama 3.2
 
-Mặc dù là một LLM, một hạn chế của Llama 3.1 là khả năng đa phương tiện. Tức là có thể sử dụng các loại đầu vào khác nhau như hình ảnh làm prompt và cung cấp phản hồi. Đây là một trong những tính năng chính của Llama 3.2. Các tính năng khác bao gồm:
+Mặc dù là một LLM, một hạn chế của Llama 3.1 là thiếu đa phương thức. Tức là, không thể sử dụng các loại đầu vào khác nhau như hình ảnh làm lời nhắc và cung cấp phản hồi. Khả năng này là một trong những tính năng chính của Llama 3.2. Các tính năng này cũng bao gồm:
 
-- Đa phương tiện - có khả năng xử lý cả prompt văn bản và hình ảnh
-- Các biến thể kích thước nhỏ đến trung bình (11B và 90B) - cung cấp các lựa chọn triển khai linh hoạt
-- Các biến thể chỉ văn bản (1B và 3B) - cho phép mô hình được triển khai trên các thiết bị biên / di động với độ trễ thấp
+- Đa phương thức - có khả năng đánh giá cả lời nhắc bằng văn bản và hình ảnh
+- Các biến thể kích thước nhỏ đến trung bình (11B và 90B) - cung cấp các lựa chọn triển khai linh hoạt,
+- Các biến thể chỉ có văn bản (1B và 3B) - cho phép mô hình được triển khai trên thiết bị biên / di động và cung cấp độ trễ thấp
 
-Hỗ trợ đa phương tiện là một bước tiến lớn trong thế giới các mô hình mã nguồn mở. Ví dụ mã dưới đây sử dụng cả hình ảnh và prompt văn bản để nhận phân tích hình ảnh từ Llama 3.2 90B.
+Hỗ trợ đa phương thức là một bước tiến lớn trong thế giới các mô hình mã nguồn mở. Ví dụ mã dưới đây sử dụng cả lời nhắc hình ảnh và văn bản để lấy phân tích về hình ảnh từ Llama 3.2 90B.
 
-### Hỗ Trợ Đa Phương Tiện với Llama 3.2
+
+### Hỗ trợ đa phương thức với Llama 3.2
 
 ```python 
 import os
@@ -117,8 +122,9 @@ from azure.ai.inference.models import (
 )
 from azure.core.credentials import AzureKeyCredential
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.inference.ai.azure.com"
+# Lấy những thông tin này từ trang "Tổng quan" của dự án Microsoft Foundry của bạn
+token = os.environ["AZURE_INFERENCE_CREDENTIAL"]
+endpoint = os.environ["AZURE_INFERENCE_ENDPOINT"]
 model_name = "Llama-3.2-90B-Vision-Instruct"
 
 client = ChatCompletionsClient(
@@ -149,9 +155,13 @@ response = client.complete(
 print(response.choices[0].message.content)
 ```
 
-## Học Tập Không Dừng Lại Ở Đây, Hãy Tiếp Tục Hành Trình
+## Học tập không dừng lại ở đây, hãy tiếp tục hành trình
 
-Sau khi hoàn thành bài học này, hãy khám phá bộ sưu tập [Generative AI Learning](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) của chúng tôi để tiếp tục nâng cao kiến thức về Generative AI!
+Sau khi hoàn thành bài học này, hãy khám phá [Bộ sưu tập Học tập AI Tạo sinh](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst) của chúng tôi để tiếp tục nâng cao kiến thức về AI Tạo sinh của bạn!
 
-**Tuyên bố từ chối trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ gốc của nó nên được coi là nguồn chính xác và đáng tin cậy. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ sự hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Tuyên bố miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp bởi con người. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

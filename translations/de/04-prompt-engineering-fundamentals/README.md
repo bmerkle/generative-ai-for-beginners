@@ -1,141 +1,143 @@
-# Grundlagen des Prompt Engineering
+# Grundlagen des Prompt Engineerings
 
-[![Grundlagen des Prompt Engineering](../../../translated_images/de/04-lesson-banner.a2c90deba7fedacd.webp)](https://youtu.be/GElCu2kUlRs?si=qrXsBvXnCW12epb8)
+[![Grundlagen des Prompt Engineerings](../../../translated_images/de/04-lesson-banner.a2c90deba7fedacd.webp)](https://youtu.be/GElCu2kUlRs?si=qrXsBvXnCW12epb8)
 
 ## Einführung
-Dieses Modul behandelt grundlegende Konzepte und Techniken zur Erstellung effektiver Prompts für generative KI-Modelle. Die Art und Weise, wie Sie Ihren Prompt an ein LLM schreiben, ist entscheidend. Ein sorgfältig gestalteter Prompt kann die Qualität der Antwort erheblich verbessern. Aber was genau bedeuten Begriffe wie _Prompt_ und _Prompt Engineering_? Und wie kann ich den _Input_ des Prompts, den ich an das LLM sende, verbessern? Diese Fragen werden wir in diesem Kapitel und im nächsten zu beantworten versuchen.
+Dieses Modul behandelt wesentliche Konzepte und Techniken zur Erstellung effektiver Eingabeaufforderungen in generativen KI-Modellen. Die Art und Weise, wie Sie Ihre Eingabeaufforderung an ein LLM schreiben, ist ebenfalls wichtig. Eine sorgfältig gestaltete Eingabeaufforderung kann eine bessere Antwortqualität erzielen. Aber was genau bedeuten Begriffe wie _Prompt_ und _Prompt Engineering_? Und wie verbessere ich die Eingabeaufforderung (_Input_), die ich an das LLM sende? Diese Fragen versuchen wir in diesem Kapitel und dem nächsten zu beantworten.
 
-_Generative KI_ ist in der Lage, neue Inhalte (z. B. Text, Bilder, Audio, Code usw.) als Antwort auf Benutzeranfragen zu erstellen. Dies wird durch _Large Language Models_ wie die GPT-Serie ("Generative Pre-trained Transformer") von OpenAI erreicht, die für die Verwendung von natürlicher Sprache und Code trainiert wurden.
+_Generative KI_ ist in der Lage, auf Benutzeranfragen hin neue Inhalte (z.B. Text, Bilder, Audio, Code usw.) zu erstellen. Dies erreicht sie mit _Großen Sprachmodellen_ wie der GPT-Serie von OpenAI („Generative Pre-trained Transformer“), die für die Verwendung natürlicher Sprache und Code trainiert wurden.
 
-Benutzer können jetzt mit diesen Modellen über vertraute Paradigmen wie Chat interagieren, ohne technische Expertise oder Schulung zu benötigen. Die Modelle sind _Prompt-basiert_ - Benutzer senden einen Texteingang (Prompt) und erhalten eine Antwort der KI (Completion). Sie können dann in mehrstufigen Gesprächen iterativ mit der KI "chatten" und ihren Prompt verfeinern, bis die Antwort ihren Erwartungen entspricht.
+Benutzer können jetzt mit diesen Modellen über vertraute Paradigmen wie Chat interagieren, ohne technische Kenntnisse oder Schulungen zu benötigen. Die Modelle arbeiten _promptbasiert_ – Benutzer senden eine Texteingabe (Prompt) und erhalten die KI-Antwort (Vervollständigung) zurück. Sie können dann iterativ „mit der KI chatten“ in mehrstufigen Gesprächen und ihre Eingabeaufforderung verfeinern, bis die Antwort ihren Erwartungen entspricht.
 
-"Prompts" werden somit zur primären _Programmierschnittstelle_ für generative KI-Anwendungen, die den Modellen mitteilen, was zu tun ist, und die Qualität der zurückgegebenen Antworten beeinflussen. "Prompt Engineering" ist ein schnell wachsendes Forschungsfeld, das sich auf die _Gestaltung und Optimierung_ von Prompts konzentriert, um konsistente und qualitativ hochwertige Antworten in großem Maßstab zu liefern.
+„Prompts“ werden nun zur primären _Programmierschnittstelle_ für generative KI-Anwendungen, indem sie den Modellen sagen, was sie tun sollen, und die Qualität der zurückgegebenen Antworten beeinflussen. „Prompt Engineering“ ist ein schnell wachsendes Studienfeld, das sich auf die _Gestaltung und Optimierung_ von Prompts konzentriert, um konsistente und qualitativ hochwertige Antworten im großen Maßstab zu liefern.
 
 ## Lernziele
 
-In dieser Lektion lernen wir, was Prompt Engineering ist, warum es wichtig ist und wie wir effektivere Prompts für ein bestimmtes Modell und ein bestimmtes Anwendungsziel erstellen können. Wir werden die grundlegenden Konzepte und bewährten Praktiken des Prompt Engineering verstehen und eine interaktive Jupyter-Notebook-Umgebung kennenlernen, in der wir diese Konzepte anhand von realen Beispielen anwenden können.
+In dieser Lektion lernen wir, was Prompt Engineering ist, warum es wichtig ist und wie wir effektivere Prompts für ein bestimmtes Modell und ein Anwendungsziel erstellen können. Wir verstehen Kernkonzepte und bewährte Methoden des Prompt Engineerings und lernen eine interaktive Jupyter Notebooks „Sandbox“-Umgebung kennen, in der wir diese Konzepte an realen Beispielen anwenden können.
 
 Am Ende dieser Lektion werden wir in der Lage sein:
 
 1. Zu erklären, was Prompt Engineering ist und warum es wichtig ist.
-2. Die Bestandteile eines Prompts zu beschreiben und deren Verwendung zu verstehen.
-3. Bewährte Praktiken und Techniken des Prompt Engineering zu erlernen.
-4. Gelernte Techniken anhand von realen Beispielen mit einem OpenAI-Endpunkt anzuwenden.
+2. Die Bestandteile eines Prompts zu beschreiben und wie sie verwendet werden.
+3. Best Practices und Techniken für Prompt Engineering zu erlernen.
+4. Erlernte Techniken an realen Beispielen anzuwenden, unter Verwendung eines OpenAI-Endpunkts.
 
-## Schlüsselbegriffe
+## Wichtige Begriffe
 
-Prompt Engineering: Die Praxis, Eingaben zu gestalten und zu verfeinern, um KI-Modelle dazu zu bringen, gewünschte Ergebnisse zu liefern.  
-Tokenisierung: Der Prozess der Umwandlung von Text in kleinere Einheiten, sogenannte Tokens, die ein Modell verstehen und verarbeiten kann.  
-Instruction-Tuned LLMs: Große Sprachmodelle (LLMs), die mit spezifischen Anweisungen feinabgestimmt wurden, um die Genauigkeit und Relevanz ihrer Antworten zu verbessern.
+Prompt Engineering: Die Praxis, Eingaben zu entwerfen und zu verfeinern, um KI-Modelle zu gewünschten Ausgaben zu führen.
+Tokenisierung: Der Prozess, Text in kleinere Einheiten, sogenannte Tokens, zu zerlegen, die ein Modell verstehen und verarbeiten kann.
+Instruction-Tuned LLMs: Große Sprachmodelle (LLMs), die mit spezifischen Anweisungen feinabgestimmt wurden, um ihre Antwortgenauigkeit und Relevanz zu verbessern.
 
 ## Lern-Sandbox
 
-Prompt Engineering ist derzeit mehr Kunst als Wissenschaft. Der beste Weg, unser Gespür dafür zu verbessern, ist _mehr zu üben_ und einen Trial-and-Error-Ansatz zu verfolgen, der Fachwissen aus dem Anwendungsbereich mit empfohlenen Techniken und modell-spezifischen Optimierungen kombiniert.
+Prompt Engineering ist aktuell mehr Kunst als Wissenschaft. Der beste Weg, unser Gespür dafür zu verbessern, ist mehr _Übung_ und die Anwendung eines Trial-and-Error-Ansatzes, der Fachwissen aus dem Anwendungsbereich mit empfohlenen Techniken und modellspezifischen Optimierungen kombiniert.
 
-Das Jupyter Notebook, das diese Lektion begleitet, bietet eine _Sandbox_-Umgebung, in der Sie das Gelernte direkt ausprobieren können – entweder während der Lektion oder im Rahmen der Code-Challenge am Ende. Um die Übungen auszuführen, benötigen Sie:
+Das zu dieser Lektion gehörende Jupyter Notebook bietet eine _Sandbox_-Umgebung, in der Sie das Gelernte ausprobieren können – während Sie lernen oder als Teil der Aufgabenstellung am Ende. Um die Übungen auszuführen, benötigen Sie:
 
-1. **Einen Azure OpenAI API-Schlüssel** – den Service-Endpunkt für ein bereitgestelltes LLM.  
-2. **Eine Python-Laufzeitumgebung** – in der das Notebook ausgeführt werden kann.  
-3. **Lokale Umgebungsvariablen** – _Schließen Sie die [Einrichtung](./../00-course-setup/02-setup-local.md?WT.mc_id=academic-105485-koreyst) jetzt ab, um bereit zu sein_.  
+1. **Einen Azure OpenAI API-Schlüssel** – den Service-Endpunkt für ein bereitgestelltes LLM.
+2. **Eine Python-Laufzeitumgebung** – um das Notebook auszuführen.
+3. **Lokale Umgebungsvariablen** – _schließen Sie jetzt die [SETUP](./../00-course-setup/02-setup-local.md?WT.mc_id=academic-105485-koreyst) Schritte ab, um vorbereitet zu sein_.
 
-Das Notebook enthält _Einstiegsübungen_ – Sie werden jedoch ermutigt, eigene _Markdown_- (Beschreibung) und _Code_- (Prompt-Anfragen) Abschnitte hinzuzufügen, um weitere Beispiele oder Ideen auszuprobieren und Ihr Gespür für die Gestaltung von Prompts zu entwickeln.
+Das Notebook enthält _Starter_-Übungen – Sie sind jedoch eingeladen, eigene _Markdown_ (Beschreibung) und _Code_ (Prompt-Anfragen) Abschnitte hinzuzufügen, um mehr Beispiele oder Ideen auszuprobieren – und so Ihr Gespür für das Entwerfen von Prompts zu stärken.
 
-## Illustrierte Anleitung
+## Illustrierter Leitfaden
 
-Möchten Sie sich einen Überblick über die Hauptthemen dieser Lektion verschaffen, bevor Sie tiefer eintauchen? Sehen Sie sich diese illustrierte Anleitung an, die Ihnen die wichtigsten Themen und Erkenntnisse vermittelt, über die Sie in jedem Abschnitt nachdenken sollten. Der Lehrplan führt Sie von der Einführung in die grundlegenden Konzepte und Herausforderungen bis hin zu deren Lösung mit relevanten Techniken und bewährten Praktiken des Prompt Engineering. Beachten Sie, dass der Abschnitt "Fortgeschrittene Techniken" in dieser Anleitung auf Inhalte verweist, die im _nächsten_ Kapitel dieses Lehrplans behandelt werden.
+Möchten Sie einen Überblick darüber, was diese Lektion behandelt, bevor Sie eintauchen? Sehen Sie sich diesen illustrierten Leitfaden an, der Ihnen ein Gefühl für die Hauptthemen und die wichtigsten Erkenntnisse gibt, über die Sie in jedem Abschnitt nachdenken sollten. Der Lernpfad führt Sie vom Verständnis der Kernkonzepte und Herausforderungen hin zu deren Behandlung mit relevanten Techniken und Best Practices des Prompt Engineerings. Beachten Sie, dass der Abschnitt „Fortgeschrittene Techniken“ in diesem Leitfaden auf Inhalte im _nächsten_ Kapitel dieses Curriculums verweist.
 
-![Illustrierte Anleitung zum Prompt Engineering](../../../translated_images/de/04-prompt-engineering-sketchnote.d5f33336957a1e4f.webp)
+![Illustrierter Leitfaden zum Prompt Engineering](../../../translated_images/de/04-prompt-engineering-sketchnote.d5f33336957a1e4f.webp)
 
 ## Unser Startup
 
-Nun wollen wir darüber sprechen, wie _dieses Thema_ mit unserer Startup-Mission zusammenhängt, [KI-Innovationen in die Bildung zu bringen](https://educationblog.microsoft.com/2023/06/collaborating-to-bring-ai-innovation-to-education?WT.mc_id=academic-105485-koreyst). Wir möchten KI-gestützte Anwendungen für _personalisiertes Lernen_ entwickeln – denken wir also darüber nach, wie verschiedene Nutzer unserer Anwendung "Prompts" gestalten könnten:
+Kommen wir nun dazu, wie _dieses Thema_ mit unserer Startup-Mission zusammenhängt, [KI-Innovation im Bildungsbereich zu fördern](https://educationblog.microsoft.com/2023/06/collaborating-to-bring-ai-innovation-to-education?WT.mc_id=academic-105485-koreyst). Wir wollen KI-gestützte Anwendungen für _personalisiertes Lernen_ entwickeln – denken wir also darüber nach, wie verschiedene Nutzer unserer Anwendung Prompts „gestalten“ könnten:
 
-- **Administratoren** könnten die KI bitten, _Curriculum-Daten zu analysieren, um Lücken in der Abdeckung zu identifizieren_. Die KI kann Ergebnisse zusammenfassen oder sie mit Code visualisieren.  
-- **Lehrkräfte** könnten die KI bitten, _einen Unterrichtsplan für eine Zielgruppe und ein Thema zu erstellen_. Die KI kann den personalisierten Plan in einem vorgegebenen Format erstellen.  
-- **Schüler** könnten die KI bitten, _sie in einem schwierigen Fach zu unterrichten_. Die KI kann Schüler mit Lektionen, Hinweisen und Beispielen unterstützen, die auf ihrem Niveau zugeschnitten sind.  
+- **Administratoren** könnten die KI bitten, _Lehrplandaten zu analysieren, um Lücken abzudecken_. Die KI kann Ergebnisse zusammenfassen oder mit Code visualisieren.
+- **Lehrkräfte** könnten die KI bitten, _einen Lehrplan für eine Zielgruppe und ein Thema zu erstellen_. Die KI kann den personalisierten Plan in einem angegebenen Format erstellen.
+- **Schüler** könnten die KI bitten, _sie in einem schwierigen Fach zu unterrichten_. Die KI kann nun Schüler mit Lektionen, Hinweisen und Beispielen auf ihrem Niveau anleiten.
 
-Das ist nur die Spitze des Eisbergs. Schauen Sie sich [Prompts For Education](https://github.com/microsoft/prompts-for-edu/tree/main?WT.mc_id=academic-105485-koreyst) an – eine Open-Source-Prompt-Bibliothek, die von Bildungsexperten kuratiert wurde – um ein breiteres Verständnis der Möglichkeiten zu bekommen! _Probieren Sie einige dieser Prompts in der Sandbox oder im OpenAI Playground aus, um zu sehen, was passiert!_
+Das ist nur die Spitze des Eisbergs. Sehen Sie sich [Prompts For Education](https://github.com/microsoft/prompts-for-edu/tree/main?WT.mc_id=academic-105485-koreyst) an – eine Open-Source-Promptbibliothek, kuratiert von Bildungsexperten – um ein breiteres Bild der Möglichkeiten zu erhalten! _Probieren Sie einige dieser Prompts in der Sandbox oder im OpenAI Playground aus, um zu sehen, was passiert!_
 
 <!--
 LEKTIONSVORLAGE:
-Diese Einheit sollte das Kernkonzept #1 abdecken.
-Verstärken Sie das Konzept mit Beispielen und Referenzen.
+Diese Einheit sollte Kernkonzept #1 behandeln.
+Verstärken Sie das Konzept mit Beispielen und Verweisen.
 
 KONZEPT #1:
 Prompt Engineering.
-Definieren Sie es und erklären Sie, warum es benötigt wird.
+Definieren Sie es und erklären Sie, warum es erforderlich ist.
 -->
 
 ## Was ist Prompt Engineering?
 
-Wir haben diese Lektion begonnen, indem wir **Prompt Engineering** als den Prozess definiert haben, _Text-Eingaben (Prompts) zu gestalten und zu optimieren_, um konsistente und qualitativ hochwertige Antworten (Completions) für ein bestimmtes Anwendungsziel und Modell zu liefern. Wir können dies als einen zweistufigen Prozess betrachten:
+Wir haben diese Lektion damit begonnen, **Prompt Engineering** als den Prozess _des Entwerfens und Optimierens_ von Texteingaben (Prompts) zu definieren, um konsistente und qualitativ hochwertige Antworten (Vervollständigungen) für ein gegebenes Anwendungsziel und Modell zu liefern. Wir können dies als einen zweistufigen Prozess betrachten:
 
-- _Gestaltung_ des initialen Prompts für ein bestimmtes Modell und Ziel  
-- _Verfeinerung_ des Prompts, um die Qualität der Antwort zu verbessern  
+- _Entwerfen_ der anfänglichen Eingabeaufforderung für ein gegebenes Modell und Ziel
+- _Verfeinern_ der Eingabeaufforderung iterativ zur Verbesserung der Antwortqualität
 
-Dies ist notwendigerweise ein Trial-and-Error-Prozess, der Benutzerintuition und Aufwand erfordert, um optimale Ergebnisse zu erzielen. Warum ist das wichtig? Um diese Frage zu beantworten, müssen wir zunächst drei Konzepte verstehen:
+Dies ist notwendigerweise ein Trial-and-Error-Prozess, der Benutzerintuition und -anstrengung erfordert, um optimale Ergebnisse zu erzielen. Warum ist es also wichtig? Um diese Frage zu beantworten, müssen wir zunächst drei Konzepte verstehen:
 
-- _Tokenisierung_ = wie das Modell den Prompt "sieht"  
-- _Basis-LLMs_ = wie das Grundmodell einen Prompt "verarbeitet"  
-- _Instruction-Tuned LLMs_ = wie das Modell jetzt "Aufgaben" erkennen kann  
+- _Tokenisierung_ = wie das Modell die Eingabeaufforderung „sieht“
+- _Basis-LLMs_ = wie das Basismodell eine Eingabeaufforderung „verarbeitet“
+- _Instruction-tuned LLMs_ = wie das Modell jetzt „Aufgaben“ sehen kann
 
 ### Tokenisierung
 
-Ein LLM sieht Prompts als eine _Sequenz von Tokens_, wobei verschiedene Modelle (oder Versionen eines Modells) denselben Prompt auf unterschiedliche Weise tokenisieren können. Da LLMs auf Tokens (und nicht auf rohem Text) trainiert werden, hat die Art und Weise, wie Prompts tokenisiert werden, direkten Einfluss auf die Qualität der generierten Antwort.
+Ein LLM sieht Prompts als _Sequenz von Tokens_, wobei verschiedene Modelle (oder Modellversionen) denselben Prompt unterschiedlich tokenisieren können. Da LLMs auf Tokens (und nicht auf Rohtext) trainiert sind, hat die Art der Tokenisierung direkten Einfluss auf die Qualität der generierten Antwort.
 
-Um ein Gespür dafür zu bekommen, wie Tokenisierung funktioniert, probieren Sie Tools wie den [OpenAI Tokenizer](https://platform.openai.com/tokenizer?WT.mc_id=academic-105485-koreyst) aus, der unten gezeigt wird. Kopieren Sie Ihren Prompt hinein – und sehen Sie, wie dieser in Tokens umgewandelt wird, wobei Sie darauf achten, wie Leerzeichen und Satzzeichen behandelt werden. Beachten Sie, dass dieses Beispiel ein älteres LLM (GPT-3) zeigt – das Ausprobieren mit einem neueren Modell könnte ein anderes Ergebnis liefern.
+Um ein Gespür dafür zu bekommen, wie Tokenisierung funktioniert, probieren Sie Werkzeuge wie den [OpenAI Tokenizer](https://platform.openai.com/tokenizer?WT.mc_id=academic-105485-koreyst) aus, der unten gezeigt wird. Kopieren Sie Ihren Prompt hinein und sehen Sie, wie dieser in Tokens umgewandelt wird, wobei Sie darauf achten, wie Leerzeichen und Satzzeichen behandelt werden. Beachten Sie, dass dieses Beispiel ein älteres LLM (GPT-3) zeigt – mit einem neueren Modell kann das Ergebnis anders ausfallen.
 
 ![Tokenisierung](../../../translated_images/de/04-tokenizer-example.e71f0a0f70356c5c.webp)
 
-### Konzept: Grundmodelle
+### Konzept: Foundation Models
 
-Sobald ein Prompt tokenisiert ist, besteht die Hauptfunktion des ["Basis-LLM"](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) (oder Grundmodells) darin, das nächste Token in dieser Sequenz vorherzusagen. Da LLMs auf riesigen Textdatensätzen trainiert werden, haben sie ein gutes Verständnis für die statistischen Beziehungen zwischen Tokens und können diese Vorhersage mit einer gewissen Sicherheit treffen. Beachten Sie, dass sie die _Bedeutung_ der Wörter im Prompt oder Token nicht verstehen; sie sehen lediglich ein Muster, das sie mit ihrer nächsten Vorhersage "vervollständigen" können. Sie können die Sequenz weiter vorhersagen, bis sie durch Benutzereingriff oder eine vorab festgelegte Bedingung beendet werden.
+Sobald ein Prompt tokenisiert ist, ist die Hauptfunktion des ["Basis-LLM"](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) (oder Foundation-Modell) die Vorhersage des nächsten Tokens in dieser Sequenz. Da LLMs auf riesigen Textdatensätzen trainiert sind, haben sie ein gutes Verständnis der statistischen Beziehungen zwischen Tokens und können diese Vorhersage mit gewisser Sicherheit treffen. Sie verstehen jedoch nicht die _Bedeutung_ der Wörter im Prompt oder Token; sie erkennen nur ein Muster, das sie mit ihrer nächsten Vorhersage „vervollständigen“ können. Sie können die Sequenz weiter vorhersagen, bis der Vorgang durch Benutzereingriff oder eine vorab festgelegte Bedingung beendet wird.
 
-Möchten Sie sehen, wie Prompt-basierte Completions funktionieren? Geben Sie den obigen Prompt in das Azure OpenAI Studio [_Chat Playground_](https://oai.azure.com/playground?WT.mc_id=academic-105485-koreyst) mit den Standardeinstellungen ein. Das System ist so konfiguriert, dass Prompts als Informationsanfragen behandelt werden – Sie sollten also eine Completion sehen, die diesen Kontext erfüllt.
+Möchten Sie sehen, wie eine promptbasierte Vervollständigung funktioniert? Geben Sie den oben genannten Prompt im [Microsoft Foundry Playground](https://ai.azure.com?WT.mc_id=academic-105485-koreyst) mit den Standardeinstellungen ein. Das System ist so konfiguriert, dass Prompts als Informationsanfragen behandelt werden – Sie sollten also eine Vervollständigung sehen, die diesen Kontext erfüllt.
 
-Aber was, wenn der Benutzer etwas Spezifisches sehen möchte, das bestimmte Kriterien oder ein Aufgabenobjektiv erfüllt? Hier kommen _Instruction-Tuned_ LLMs ins Spiel.
+Aber was ist, wenn der Nutzer etwas Spezifisches sehen möchte, das bestimmten Kriterien oder einem Aufgabenmotiv entspricht? Hier kommen _instruction-tuned_ LLMs ins Spiel.
 
-![Basis-LLM Chat Completion](../../../translated_images/de/04-playground-chat-base.65b76fcfde0caa67.webp)
+![Basis LLM Chat-Vervollständigung](../../../translated_images/de/04-playground-chat-base.65b76fcfde0caa67.webp)
 
-### Konzept: Instruction-Tuned LLMs
+### Konzept: Instruction Tuned LLMs
 
-Ein [Instruction-Tuned LLM](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) basiert auf dem Grundmodell und wird mit Beispielen oder Eingabe-/Ausgabe-Paaren (z. B. mehrstufigen "Nachrichten") feinabgestimmt, die klare Anweisungen enthalten können – und die Antwort der KI versucht, diese Anweisungen zu befolgen.
+Ein [Instruction Tuned LLM](https://blog.gopenai.com/an-introduction-to-base-and-instruction-tuned-large-language-models-8de102c785a6?WT.mc_id=academic-105485-koreyst) beginnt mit dem Foundation-Modell und verfeinert es mit Beispielen oder Ein-/Ausgabe-Paaren (z.B. mehrstufige „Nachrichten“), die klare Anweisungen enthalten können – die Antwort der KI versucht dieser Anweisung zu folgen.
 
-Dies nutzt Techniken wie Reinforcement Learning mit menschlichem Feedback (RLHF), die das Modell darauf trainieren können, _Anweisungen zu befolgen_ und _aus Feedback zu lernen_, sodass es Antworten liefert, die besser für praktische Anwendungen geeignet und relevanter für die Ziele des Benutzers sind.
+Dies nutzt Techniken wie Reinforcement Learning mit menschlichem Feedback (RLHF), das das Modell trainiert, _Anweisungen zu folgen_ und _aus Feedback zu lernen_, sodass es Antworten liefert, die besser für praktische Anwendungen geeignet und relevanter für Benutzerziele sind.
 
-Probieren wir es aus – gehen Sie zurück zum obigen Prompt, ändern Sie jedoch die _Systemnachricht_, um die folgende Anweisung als Kontext bereitzustellen:
+Probieren wir es aus: Ändern Sie die _Systemnachricht_ im obigen Prompt, um die folgende Anweisung als Kontext zu geben:
 
-> _Fassen Sie den bereitgestellten Inhalt für einen Zweitklässler zusammen. Halten Sie das Ergebnis in einem Absatz mit 3-5 Stichpunkten._
+> _Fassen Sie die bereitgestellten Inhalte für einen Zweitklässler zusammen. Halten Sie das Ergebnis in einem Absatz mit 3-5 Aufzählungspunkten._
 
-Sehen Sie, wie das Ergebnis jetzt auf das gewünschte Ziel und Format abgestimmt ist? Ein Lehrer kann diese Antwort nun direkt in seinen Folien für den Unterricht verwenden.
+Sehen Sie, wie das Ergebnis nun auf das gewünschte Ziel und Format abgestimmt ist? Eine Lehrkraft kann diese Antwort jetzt direkt in ihren Folien für den Unterricht verwenden.
 
-![Instruction-Tuned LLM Chat Completion](../../../translated_images/de/04-playground-chat-instructions.b30bbfbdf92f2d05.webp)
+![Instruction Tuned LLM Chat Completion](../../../translated_images/de/04-playground-chat-instructions.b30bbfbdf92f2d05.webp)
 
 ## Warum brauchen wir Prompt Engineering?
 
-Jetzt, da wir wissen, wie Prompts von LLMs verarbeitet werden, sprechen wir darüber, _warum_ wir Prompt Engineering benötigen. Die Antwort liegt in der Tatsache, dass aktuelle LLMs eine Reihe von Herausforderungen mit sich bringen, die es schwieriger machen, _zuverlässige und konsistente Completions_ zu erzielen, ohne Aufwand in die Konstruktion und Optimierung von Prompts zu investieren. Zum Beispiel:
+Nun, da wir wissen, wie Prompts von LLMs verarbeitet werden, sprechen wir darüber, _warum_ wir Prompt Engineering benötigen. Die Antwort liegt darin, dass aktuelle LLMs eine Reihe von Herausforderungen mit sich bringen, die es erschweren, _zuverlässige und konsistente Vervollständigungen_ ohne Aufwand für die Konstruktion und Optimierung der Eingabeaufforderung zu erzielen. Zum Beispiel:
 
-1. **Modellantworten sind stochastisch.** Der _gleiche Prompt_ wird wahrscheinlich unterschiedliche Antworten mit verschiedenen Modellen oder Modellversionen erzeugen. Und er kann sogar unterschiedliche Ergebnisse mit dem _gleichen Modell_ zu unterschiedlichen Zeiten liefern. _Prompt Engineering-Techniken können uns helfen, diese Variationen zu minimieren, indem sie bessere Leitplanken bieten_.  
+1. **Modellantworten sind stochastisch.** Der _gleiche Prompt_ wird mit unterschiedlichen Modellen oder Modellversionen wahrscheinlich unterschiedliche Antworten erzeugen. Und er kann sogar mit _dem gleichen Modell_ zu verschiedenen Zeiten unterschiedliche Ergebnisse liefern. _Prompt Engineering-Techniken können helfen, diese Schwankungen durch bessere Leitplanken zu minimieren_.
 
-1. **Modelle können Antworten erfinden.** Modelle werden mit _großen, aber begrenzten_ Datensätzen vortrainiert, was bedeutet, dass ihnen Wissen über Konzepte außerhalb dieses Trainingsumfangs fehlt. Infolgedessen können sie Completions erzeugen, die ungenau, erfunden oder direkt widersprüchlich zu bekannten Fakten sind. _Prompt Engineering-Techniken helfen Benutzern, solche Erfindungen zu identifizieren und zu minimieren, z. B. indem sie die KI um Quellenangaben oder Begründungen bitten_.  
+1. **Modelle können Antworten erfinden.** Modelle sind mit _großen, aber endlichen_ Datensätzen vortrainiert, was bedeutet, dass ihnen Wissen über Konzepte außerhalb dieses Trainingsbereichs fehlt. Daher können sie Vervollständigungen erzeugen, die ungenau, erfunden oder direkt widersprüchlich zu bekannten Fakten sind. _Prompt Engineering-Techniken helfen Nutzern, solche Erfindungen zu erkennen und zu mindern, z.B. indem die KI nach Quellenangaben oder Begründungen gefragt wird_.
 
-1. **Modellfähigkeiten variieren.** Neuere Modelle oder Modellgenerationen haben umfangreichere Fähigkeiten, bringen jedoch auch einzigartige Eigenheiten und Kompromisse in Bezug auf Kosten und Komplexität mit sich. _Prompt Engineering kann uns helfen, bewährte Praktiken und Arbeitsabläufe zu entwickeln, die Unterschiede abstrahieren und sich nahtlos an modell-spezifische Anforderungen anpassen_.  
+1. **Modelle weisen unterschiedliche Fähigkeiten auf.** Neuere Modelle oder Modellgenerationen verfügen über umfangreichere Fähigkeiten, bringen aber auch einzigartige Eigenheiten und Kompromisse bei Kosten und Komplexität mit sich. _Prompt Engineering kann uns helfen, Best Practices und Workflows zu entwickeln, die Unterschiede abstrahieren und sich skalierbar, nahtlos an modellspezifische Anforderungen anpassen_.
 
-Lassen Sie uns dies im OpenAI oder Azure OpenAI Playground in Aktion sehen:
+Sehen wir uns das im OpenAI- oder Azure OpenAI Playground an:
 
-- Verwenden Sie denselben Prompt mit verschiedenen LLM-Bereitstellungen (z. B. OpenAI, Azure OpenAI, Hugging Face) – haben Sie die Variationen bemerkt?  
-- Verwenden Sie denselben Prompt wiederholt mit der _gleichen_ LLM-Bereitstellung (z. B. Azure OpenAI Playground) – wie unterschieden sich diese Variationen?  
+- Verwenden Sie denselben Prompt mit verschiedenen LLM-Bereitstellungen (z.B. OpenAI, Azure OpenAI, Hugging Face) – haben Sie die Unterschiede gesehen?
+- Verwenden Sie denselben Prompt mehrfach mit _derselben_ LLM-Bereitstellung (z.B. Azure OpenAI Playground) – wie unterschieden sich diese Variationen?
 
-### Beispiel für Erfindungen
+### Beispiel zu Erfindungen
 
-In diesem Kurs verwenden wir den Begriff **"Erfindung"**, um das Phänomen zu beschreiben, bei dem LLMs manchmal faktisch falsche Informationen generieren, aufgrund von Einschränkungen in ihrem Training oder anderen Faktoren. Möglicherweise haben Sie diesen Begriff auch als _"Halluzinationen"_ in populären Artikeln oder wissenschaftlichen Arbeiten gehört. Wir empfehlen jedoch dringend, den Begriff _"Erfindung"_ zu verwenden, um nicht versehentlich das Verhalten zu vermenschlichen, indem wir ihm eine menschenähnliche Eigenschaft zuschreiben. Dies unterstützt auch die [Richtlinien für verantwortungsvolle KI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) aus terminologischer Sicht, indem Begriffe vermieden werden, die in einigen Kontexten als beleidigend oder nicht inklusiv angesehen werden könnten.
+In diesem Kurs verwenden wir den Begriff **„Erfindung“** für das Phänomen, dass LLMs manchmal faktisch falsche Informationen aufgrund von Beschränkungen in ihrem Training oder anderen Einschränkungen generieren. Sie haben diesen Begriff vielleicht auch als _„Halluzinationen“_ in populären Artikeln oder Forschungsarbeiten gehört. Wir empfehlen jedoch dringend, den Begriff _„Erfindung“_ zu verwenden, um keine unbeabsichtigte Vermenschlichung des Verhaltens vorzunehmen, indem ein menschenähnliches Merkmal auf ein maschinengesteuertes Ergebnis übertragen wird. Dies unterstützt auch die [Richtlinien für verantwortliche KI](https://www.microsoft.com/ai/responsible-ai?WT.mc_id=academic-105485-koreyst) aus Terminologiesicht, indem Begriffe vermieden werden, die in manchen Kontexten als anstößig oder nicht inklusiv gelten könnten.
 
-Möchten Sie ein Gefühl dafür bekommen, wie Erfindungen funktionieren? Denken Sie an einen Prompt, der die KI anweist, Inhalte für ein nicht existierendes Thema zu erstellen (um sicherzustellen, dass es nicht im Trainingsdatensatz enthalten ist). Zum Beispiel habe ich diesen Prompt ausprobiert:
+Möchten Sie ein Gefühl dafür bekommen, wie Erfindungen funktionieren? Denken Sie an einen Prompt, der die KI anweist, Inhalte zu einem nicht existierenden Thema zu generieren (damit sichergestellt ist, dass es nicht im Trainingsdatensatz vorkommt). Zum Beispiel habe ich diesen Prompt ausprobiert:
 
-> **Prompt:** Erstellen Sie einen Unterrichtsplan über den Marskrieg von 2076.
-Eine Websuche hat ergeben, dass es fiktive Berichte (z. B. Fernsehserien oder Bücher) über Marskriege gibt – jedoch keine aus dem Jahr 2076. Der gesunde Menschenverstand sagt uns außerdem, dass 2076 _in der Zukunft_ liegt und daher nicht mit einem realen Ereignis in Verbindung gebracht werden kann.
+> **Prompt:** Erstelle einen Lehrplan zum Marskrieg von 2076.
 
-Was passiert also, wenn wir diese Eingabeaufforderung mit verschiedenen LLM-Anbietern testen?
+Eine Websuche zeigte mir, dass es fiktive Darstellungen (z.B. Fernsehserien oder Bücher) zu Marskriegen gibt – aber keine aus dem Jahr 2076. Der gesunde Menschenverstand sagt auch, dass 2076 _in der Zukunft_ liegt und deshalb nicht mit einem realen Ereignis verbunden sein kann.
+
+
+Was passiert also, wenn wir diesen Prompt mit verschiedenen LLM-Anbietern ausführen?
 
 > **Antwort 1**: OpenAI Playground (GPT-35)
 
@@ -145,58 +147,68 @@ Was passiert also, wenn wir diese Eingabeaufforderung mit verschiedenen LLM-Anbi
 
 ![Antwort 2](../../../translated_images/de/04-fabrication-aoai.b14268e9ecf25caf.webp)
 
-> **Antwort 3**: Hugging Face Chat Playground (LLama-2)
+> **Antwort 3**: : Hugging Face Chat Playground (LLama-2)
 
 ![Antwort 3](../../../translated_images/de/04-fabrication-huggingchat.faf82a0a51278956.webp)
 
-Wie erwartet, erzeugt jedes Modell (oder jede Modellversion) leicht unterschiedliche Antworten, was auf stochastisches Verhalten und Unterschiede in den Modellfähigkeiten zurückzuführen ist. Beispielsweise richtet sich ein Modell an ein Publikum der 8. Klasse, während ein anderes von Schülern der Oberstufe ausgeht. Aber alle drei Modelle haben Antworten generiert, die einen uninformierten Benutzer davon überzeugen könnten, dass das Ereignis real ist.
+Wie erwartet erzeugt jedes Modell (oder jede Modellversion) aufgrund des stochastischen Verhaltens und der Unterschiede in den Modellfähigkeiten leicht unterschiedliche Antworten. Zum Beispiel richtet sich ein Modell an ein Publikum der 8. Klasse, während das andere einen Schüler der Highschool annimmt. Aber alle drei Modelle erzeugten Antworten, die einen uninformierten Nutzer davon überzeugen könnten, dass das Ereignis real war.
 
-Techniken des Prompt Engineerings wie _Metaprompting_ und _Temperature Configuration_ können Modellfälschungen bis zu einem gewissen Grad reduzieren. Neue Architekturen des Prompt Engineerings integrieren auch nahtlos neue Werkzeuge und Techniken in den Prompt-Fluss, um einige dieser Effekte zu mindern oder zu reduzieren.
+Prompt-Engineering-Techniken wie _Metaprompting_ und _Temperaturkonfiguration_ können Modell-Fälschungen bis zu einem gewissen Grad reduzieren. Neue Prompt-Engineering-_Architekturen_ integrieren auch nahtlos neue Werkzeuge und Techniken in den Prompt-Fluss, um einige dieser Effekte abzumildern oder zu reduzieren.
 
 ## Fallstudie: GitHub Copilot
 
-Lassen Sie uns diesen Abschnitt abschließen, indem wir uns ein Bild davon machen, wie Prompt Engineering in realen Lösungen eingesetzt wird. Dazu betrachten wir eine Fallstudie: [GitHub Copilot](https://github.com/features/copilot?WT.mc_id=academic-105485-koreyst).
+Lassen Sie uns diesen Abschnitt abschließen, indem wir uns einen Eindruck davon verschaffen, wie Prompt-Engineering in realen Lösungen eingesetzt wird, anhand einer Fallstudie: [GitHub Copilot](https://github.com/features/copilot?WT.mc_id=academic-105485-koreyst).
 
-GitHub Copilot ist Ihr "KI-Paarprogrammierer" – er wandelt Texteingaben in Codevorschläge um und ist in Ihre Entwicklungsumgebung (z. B. Visual Studio Code) integriert, um ein nahtloses Benutzererlebnis zu bieten. Wie in der Reihe von Blogs unten dokumentiert, basierte die früheste Version auf dem OpenAI Codex-Modell – wobei die Ingenieure schnell erkannten, dass das Modell feinabgestimmt und bessere Prompt Engineering-Techniken entwickelt werden mussten, um die Codequalität zu verbessern. Im Juli [stellten sie ein verbessertes KI-Modell vor, das über Codex hinausgeht](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst) und noch schnellere Vorschläge liefert.
+GitHub Copilot ist Ihr „KI-Paarprogrammierer“ – er wandelt Texteingaben in Code-Vervollständigungen um und ist in Ihre Entwicklungsumgebung (z. B. Visual Studio Code) integriert für eine nahtlose Benutzererfahrung. Wie in der unten stehenden Blogreihe dokumentiert, basierte die früheste Version auf dem OpenAI Codex Modell – wobei die Entwickler schnell erkannten, dass es notwendig war, das Modell feinzujustieren und bessere Prompt-Engineering-Techniken zu entwickeln, um die Codequalität zu verbessern. Im Juli präsentierten sie ein [verbessertes KI-Modell, das über Codex hinausgeht](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst) für noch schnellere Vorschläge.
 
-Lesen Sie die Beiträge in der Reihenfolge, um ihre Lernreise zu verfolgen.
+Lesen Sie die Beiträge der Reihe in der Reihenfolge, um ihre Lernreise nachzuvollziehen.
 
 - **Mai 2023** | [GitHub Copilot wird besser darin, Ihren Code zu verstehen](https://github.blog/2023-05-17-how-github-copilot-is-getting-better-at-understanding-your-code/?WT.mc_id=academic-105485-koreyst)
-- **Mai 2023** | [Inside GitHub: Zusammenarbeit mit den LLMs hinter GitHub Copilot](https://github.blog/2023-05-17-inside-github-working-with-the-llms-behind-github-copilot/?WT.mc_id=academic-105485-koreyst).
-- **Juni 2023** | [Wie man bessere Prompts für GitHub Copilot schreibt](https://github.blog/2023-06-20-how-to-write-better-prompts-for-github-copilot/?WT.mc_id=academic-105485-koreyst).
-- **Juli 2023** | [.. GitHub Copilot geht über Codex hinaus mit verbessertem KI-Modell](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst)
-- **Juli 2023** | [Ein Leitfaden für Entwickler zu Prompt Engineering und LLMs](https://github.blog/2023-07-17-prompt-engineering-guide-generative-ai-llms/?WT.mc_id=academic-105485-koreyst)
-- **September 2023** | [Wie man eine Unternehmens-LLM-App erstellt: Lektionen von GitHub Copilot](https://github.blog/2023-09-06-how-to-build-an-enterprise-llm-application-lessons-from-github-copilot/?WT.mc_id=academic-105485-koreyst)
+- **Mai 2023** | [Inside GitHub: Arbeiten mit den LLMs hinter GitHub Copilot](https://github.blog/2023-05-17-inside-github-working-with-the-llms-behind-github-copilot/?WT.mc_id=academic-105485-koreyst).
+- **Jun 2023** | [Wie man bessere Prompts für GitHub Copilot schreibt](https://github.blog/2023-06-20-how-to-write-better-prompts-for-github-copilot/?WT.mc_id=academic-105485-koreyst).
+- **Jul 2023** | [.. GitHub Copilot geht über Codex hinaus mit verbessertem KI-Modell](https://github.blog/2023-07-28-smarter-more-efficient-coding-github-copilot-goes-beyond-codex-with-improved-ai-model/?WT.mc_id=academic-105485-koreyst)
+- **Jul 2023** | [Ein Entwicklerleitfaden zum Prompt-Engineering und zu LLMs](https://github.blog/2023-07-17-prompt-engineering-guide-generative-ai-llms/?WT.mc_id=academic-105485-koreyst)
+- **Sep 2023** | [Wie man eine Enterprise-LLM-App baut: Lektionen von GitHub Copilot](https://github.blog/2023-09-06-how-to-build-an-enterprise-llm-application-lessons-from-github-copilot/?WT.mc_id=academic-105485-koreyst)
 
-Sie können auch ihren [Engineering-Blog](https://github.blog/category/engineering/?WT.mc_id=academic-105485-koreyst) für weitere Beiträge wie [diesen hier](https://github.blog/2023-09-27-how-i-used-github-copilot-chat-to-build-a-reactjs-gallery-prototype/?WT.mc_id=academic-105485-koreyst) durchsuchen, der zeigt, wie diese Modelle und Techniken _angewendet_ werden, um reale Anwendungen voranzutreiben.
+Sie können auch ihren [Engineering-Blog](https://github.blog/category/engineering/?WT.mc_id=academic-105485-koreyst) für weitere Beiträge wie [diesen](https://github.blog/2023-09-27-how-i-used-github-copilot-chat-to-build-a-reactjs-gallery-prototype/?WT.mc_id=academic-105485-koreyst) durchsuchen, der zeigt, wie diese Modelle und Techniken für den Einsatz in realen Anwendungen _angewendet_ werden.
 
 ---
 
+<!--
+LEKTIONSVORLAGE:
+Diese Einheit sollte das Kernkonzept #2 abdecken.
+Das Konzept mit Beispielen und Referenzen verstärken.
+
+KONZEPT #2:
+Prompt-Design.
+Veranschaulicht mit Beispielen.
+-->
+
 ## Prompt-Konstruktion
 
-Wir haben gesehen, warum Prompt Engineering wichtig ist – jetzt wollen wir verstehen, wie Prompts _konstruiert_ werden, damit wir verschiedene Techniken für ein effektiveres Prompt-Design bewerten können.
+Wir haben gesehen, warum Prompt-Engineering wichtig ist – jetzt wollen wir verstehen, wie Prompts _konstruiert_ werden, um verschiedene Techniken für ein effektiveres Prompt-Design bewerten zu können.
 
 ### Basis-Prompt
 
-Beginnen wir mit dem Basis-Prompt: einer Texteingabe, die ohne weiteren Kontext an das Modell gesendet wird. Hier ist ein Beispiel – wenn wir die ersten Wörter der US-amerikanischen Nationalhymne an die OpenAI [Completion API](https://platform.openai.com/docs/api-reference/completions?WT.mc_id=academic-105485-koreyst) senden, vervollständigt sie die Antwort sofort mit den nächsten Zeilen, was das grundlegende Vorhersageverhalten veranschaulicht.
+Fangen wir mit dem Basis-Prompt an: eine Texteingabe, die ohne weiteren Kontext an das Modell gesendet wird. Hier ist ein Beispiel – wenn wir die ersten Wörter der US-Nationalhymne an die OpenAI [Completion API](https://platform.openai.com/docs/api-reference/completions?WT.mc_id=academic-105485-koreyst) senden, vervollständigt sie sofort die Antwort mit den nächsten Zeilen und zeigt so das grundlegende Vorhersageverhalten.
 
-| Prompt (Eingabe) | Completion (Ausgabe)                                                                                                                        |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| Oh say can you see | Es scheint, als würden Sie die ersten Zeilen von "The Star-Spangled Banner", der Nationalhymne der Vereinigten Staaten, zitieren. Der vollständige Text lautet ... |
+| Prompt (Eingabe)    | Vervollständigung (Ausgabe)                                                                                                                   |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| Oh say can you see | Es klingt, als ob Sie die Liedtexte von „The Star-Spangled Banner“, der Nationalhymne der Vereinigten Staaten, beginnen. Der vollständige Text lautet ... |
 
 ### Komplexer Prompt
 
-Nun fügen wir dem Basis-Prompt Kontext und Anweisungen hinzu. Die [Chat Completion API](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt?WT.mc_id=academic-105485-koreyst) ermöglicht es uns, einen komplexen Prompt als Sammlung von _Nachrichten_ zu erstellen mit:
+Jetzt fügen wir diesem Basis-Prompt Kontext und Anweisungen hinzu. Die [Chat Completion API](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/chatgpt?WT.mc_id=academic-105485-koreyst) erlaubt uns, einen komplexen Prompt als Sammlung von _Nachrichten_ zu konstruieren mit:
 
-- Eingabe-/Ausgabe-Paaren, die die _Benutzer_-Eingabe und die _Assistenten_-Antwort widerspiegeln.
-- Systemnachricht, die den Kontext für das Verhalten oder die Persönlichkeit des Assistenten festlegt.
+- Eingabe/Ausgabe-Paaren, die _Benutzer_-Eingabe und _Assistent_-Antwort widerspiegeln.
+- Systemnachricht zur Festlegung des Kontexts für das Verhalten oder die Persönlichkeit des Assistenten.
 
-Die Anfrage hat nun die folgende Form, bei der die _Tokenisierung_ relevante Informationen aus dem Kontext und der Konversation effektiv erfasst. Das Ändern des Systemkontexts kann genauso wirkungsvoll für die Qualität der Antworten sein wie die bereitgestellten Benutzereingaben.
+Die Anfrage hat nun die folgende Form, wobei die _Tokenisierung_ relevante Informationen aus dem Kontext und dem Gespräch effektiv erfasst. Das Ändern des Systemkontexts kann somit ebenso großen Einfluss auf die Qualität der Vervollständigungen haben wie die vom Benutzer gelieferten Eingaben.
 
 ```python
-response = openai.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
+response = client.responses.create(
+    model="gpt-5-mini",
+    input=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "Who won the world series in 2020?"},
         {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
@@ -205,193 +217,195 @@ response = openai.chat.completions.create(
 )
 ```
 
-### Anweisungs-Prompt
+### Instruktions-Prompt
 
-In den obigen Beispielen war der Benutzer-Prompt eine einfache Textanfrage, die als Informationsanfrage interpretiert werden kann. Mit _Anweisungs_-Prompts können wir diesen Text verwenden, um eine Aufgabe detaillierter zu spezifizieren und dem KI-Modell bessere Anweisungen zu geben. Hier ist ein Beispiel:
+In den obigen Beispielen war der Benutzer-Prompt eine einfache Textanfrage, die als Informationsanfrage interpretiert werden kann. Bei _Instruktions_-Prompts können wir diesen Text verwenden, um eine Aufgabe detaillierter zu spezifizieren und der KI eine bessere Anleitung zu geben. Hier ein Beispiel:
 
-| Prompt (Eingabe)                                                                                                                                                                                                                         | Completion (Ausgabe)                                                                                                        | Anweisungstyp       |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :------------------ |
-| Schreibe eine Beschreibung des Bürgerkriegs                                                                                                                                                                                             | _gab einen einfachen Absatz zurück_                                                                                        | Einfach             |
-| Schreibe eine Beschreibung des Bürgerkriegs. Nenne wichtige Daten und Ereignisse und beschreibe deren Bedeutung                                                                                                                         | _gab einen Absatz gefolgt von einer Liste wichtiger Ereignisdaten mit Beschreibungen zurück_                               | Komplex             |
-| Schreibe eine Beschreibung des Bürgerkriegs in einem Absatz. Nenne 3 Stichpunkte mit wichtigen Daten und deren Bedeutung. Nenne 3 weitere Stichpunkte mit wichtigen historischen Persönlichkeiten und deren Beiträgen. Gib die Ausgabe als JSON-Datei zurück. | _gab ausführlichere Details in einer Textbox zurück, formatiert als JSON, das kopiert und in eine Datei eingefügt werden kann_ | Komplex. Formatiert |
+| Prompt (Eingabe)                                                                                                                                                                                                                          | Vervollständigung (Ausgabe)                                                                                             | Instruktionstyp    |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :----------------- |
+| Schreibe eine Beschreibung des Bürgerkriegs                                                                                                                                                                                            | _gab einen einfachen Absatz zurück_                                                                                     | Einfach            |
+| Schreibe eine Beschreibung des Bürgerkriegs. Gib wichtige Daten und Ereignisse an und beschreibe deren Bedeutung                                                                                                                      | _gab einen Absatz gefolgt von einer Liste mit wichtigen Ereignisdaten und Beschreibungen zurück_                         | Komplex            |
+| Schreibe eine Beschreibung des Bürgerkriegs in 1 Absatz. Gib 3 Stichpunkte mit wichtigen Daten und deren Bedeutung an. Gib 3 weitere Stichpunkte mit wichtigen historischen Personen und deren Beiträgen. Gib die Ausgabe als JSON-Datei zurück | _liefert umfangreichere Details in einem Textfeld, formatiert als JSON, das du kopieren und bei Bedarf validieren kannst_ | Komplex. Formatiert. |
 
-## Primärinhalt
+## Primärer Inhalt
 
-In den obigen Beispielen war der Prompt immer noch ziemlich offen, sodass das LLM selbst entscheiden konnte, welcher Teil seines vortrainierten Datensatzes relevant ist. Mit dem Designmuster des _Primärinhalts_ wird der Eingabetext in zwei Teile unterteilt:
+In den obigen Beispielen war der Prompt noch relativ offen, sodass das LLM selbst entscheiden konnte, welcher Teil seines vortrainierten Datensatzes relevant ist. Mit dem Designmuster _primärer Inhalt_ wird der Eingabetext in zwei Teile geteilt:
 
 - eine Anweisung (Aktion)
 - relevanter Inhalt (der die Aktion beeinflusst)
 
-Hier ist ein Beispiel, bei dem die Anweisung lautet: "Fassen Sie dies in 2 Sätzen zusammen".
+Hier ein Beispiel, bei dem die Anweisung lautet: „Fasse dies in 2 Sätzen zusammen“.
 
-| Prompt (Eingabe)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Completion (Ausgabe)                                                                                                                                                                                                                                                                             |
+| Prompt (Eingabe)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Vervollständigung (Ausgabe)                                                                                                                                                                                                                                                                             |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. Es ist ein Gasriese mit einer Masse von einem Tausendstel der Sonne, aber zweieinhalb Mal so groß wie alle anderen Planeten im Sonnensystem zusammen. Jupiter ist eines der hellsten Objekte, die mit bloßem Auge am Nachthimmel sichtbar sind, und ist seit der voraufgezeichneten Geschichte alten Zivilisationen bekannt. Er ist nach dem römischen Gott Jupiter benannt.[19] Von der Erde aus betrachtet kann Jupiter so hell sein, dass sein reflektiertes Licht sichtbare Schatten wirft,[20] und ist im Durchschnitt das dritthellste natürliche Objekt am Nachthimmel nach dem Mond und der Venus. <br/> **Fassen Sie dies in 2 kurzen Sätzen zusammen** | Jupiter, der fünfte Planet von der Sonne, ist der größte im Sonnensystem und bekannt dafür, eines der hellsten Objekte am Nachthimmel zu sein. Benannt nach dem römischen Gott Jupiter, ist er ein Gasriese, dessen Masse zweieinhalb Mal so groß ist wie die aller anderen Planeten im Sonnensystem zusammen. |
+| Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. Er ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonne beträgt, aber zweieinhalb Mal so schwer ist wie alle anderen Planeten des Sonnensystems zusammen. Jupiter ist eines der hellsten Objekte, die mit bloßem Auge am Nachthimmel sichtbar sind, und ist den antiken Zivilisationen schon seit der Vorgeschichte bekannt. Er ist nach dem römischen Gott Jupiter benannt.[19] Wenn man ihn von der Erde aus betrachtet, kann Jupiter hell genug sein, damit sein reflektiertes Licht sichtbare Schatten wirft,[20] und ist im Durchschnitt das dritthellste natürliche Objekt am Nachthimmel nach Mond und Venus. <br/> **Fasse dies in 2 kurzen Sätzen zusammen** | Jupiter, der fünfte Planet von der Sonne, ist der größte im Sonnensystem und bekannt dafür, eines der hellsten Objekte am Nachthimmel zu sein. Benannt nach dem römischen Gott Jupiter, ist er ein Gasriese mit einer Masse von zweieinhalb Mal der aller anderen Planeten im Sonnensystem zusammen. |
 
-Das Primärinhalt-Segment kann auf verschiedene Weise verwendet werden, um effektivere Anweisungen zu geben:
+Das Segment für primären Inhalt kann auf verschiedene Weise verwendet werden, um effektivere Anweisungen zu erzeugen:
 
-- **Beispiele** – anstatt dem Modell explizit zu sagen, was es tun soll, geben Sie ihm Beispiele für die gewünschte Ausgabe und lassen Sie es das Muster ableiten.
-- **Hinweise** – folgen Sie der Anweisung mit einem "Hinweis", der die Antwort einleitet und das Modell zu relevanteren Antworten führt.
-- **Vorlagen** – dies sind wiederholbare 'Rezepte' für Prompts mit Platzhaltern (Variablen), die mit Daten für spezifische Anwendungsfälle angepasst werden können.
+- **Beispiele** - Anstatt dem Modell eine explizite Anweisung zu geben, zeigen Sie Beispiele, was zu tun ist, und lassen Sie das Muster ableiten.
+- **Hinweise** - Folgen Sie der Anweisung mit einem „Hinweis“, der die Vervollständigung anregt und das Modell zu relevanteren Antworten führt.
+- **Vorlagen** - Dies sind wiederholbare „Rezepte“ für Prompts mit Platzhaltern (Variablen), die mit Daten für bestimmte Anwendungsfälle angepasst werden können.
 
-Lassen Sie uns diese Ansätze in der Praxis erkunden.
+Lassen Sie uns diese in der Praxis erkunden.
 
 ### Verwendung von Beispielen
 
-Dies ist ein Ansatz, bei dem Sie den Primärinhalt verwenden, um dem Modell einige Beispiele für die gewünschte Ausgabe für eine bestimmte Anweisung zu geben und es das Muster für die gewünschte Ausgabe ableiten lassen. Je nach Anzahl der bereitgestellten Beispiele können wir Zero-Shot-Prompting, One-Shot-Prompting, Few-Shot-Prompting usw. haben.
+Dies ist ein Ansatz, bei dem der primäre Inhalt dem Modell Beispiele für die gewünschte Ausgabe für eine bestimmte Anweisung liefert und es das Muster für die gewünschte Ausgabe ableiten lässt. Je nach Anzahl der Beispiele spricht man von Zero-shot-, One-shot- oder Few-shot-Prompting.
 
 Der Prompt besteht nun aus drei Komponenten:
 
-- Einer Aufgabenbeschreibung
-- Einigen Beispielen der gewünschten Ausgabe
-- Dem Beginn eines neuen Beispiels (das zu einer impliziten Aufgabenbeschreibung wird)
+- Einer Aufgabebeschreibung
+- Ein paar Beispiele für die gewünschte Ausgabe
+- Dem Beginn eines neuen Beispiels (das zu einer impliziten Aufgabebeschreibung wird)
 
-| Lernart    | Prompt (Eingabe)                                                                                                                                        | Completion (Ausgabe)         |
-| :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------- |
-| Zero-shot  | "Die Sonne scheint". Übersetze ins Spanische                                                                                                            | "El Sol está brillando".    |
-| One-shot   | "Die Sonne scheint" => ""El Sol está brillando". <br> "Es ist ein kalter und windiger Tag" =>                                                                 | "Es un día frío y ventoso". |
-| Few-shot   | Der Spieler lief die Bases ab => Baseball <br/> Der Spieler schlug ein Ass => Tennis <br/> Der Spieler schlug eine Sechs => Cricket <br/> Der Spieler machte einen Slam-Dunk => | Basketball                  |
-|            |                                                                                                                                                       |                             |
+| Lerntyp   | Prompt (Eingabe)                                                                                              | Vervollständigung (Ausgabe)  |
+| :-------- | :---------------------------------------------------------------------------------------------------------- | :---------------------------- |
+| Zero-shot | „Die Sonne scheint“. Übersetze ins Spanische                                                               | „El Sol está brillando“.      |
+| One-shot  | „Die Sonne scheint“ => „El Sol está brillando“. <br> „Es ist ein kalter und windiger Tag“ =>                  | „Es un día frío y ventoso“.   |
+| Few-shot  | Der Spieler lief die Bases => Baseball <br/> Der Spieler machte ein Ass => Tennis <br/> Der Spieler erzielte eine Six => Cricket <br/> Der Spieler machte einen Slam-Dunk => | Basketball                   |
+|           |                                                                                                             |                              |
 
-Beachten Sie, wie wir im Zero-Shot-Prompting eine explizite Anweisung ("Übersetze ins Spanische") geben mussten, während sie im One-Shot-Prompting-Beispiel abgeleitet wird. Das Few-Shot-Beispiel zeigt, wie das Hinzufügen weiterer Beispiele es den Modellen ermöglicht, genauere Schlussfolgerungen zu ziehen, ohne zusätzliche Anweisungen.
+Beachten Sie, wie wir beim Zero-shot-Prompting eine explizite Anweisung („Übersetze ins Spanische“) geben mussten, die beim One-shot-Prompting-Beispiel abgeleitet wird. Das Few-shot-Beispiel zeigt, wie durch Hinzufügen weiterer Beispiele Modelle genauere Schlüsse ohne weitere Anweisungen ziehen können.
 
 ### Prompt-Hinweise
 
-Eine weitere Technik zur Verwendung von Primärinhalten besteht darin, _Hinweise_ anstelle von Beispielen zu geben. In diesem Fall geben wir dem Modell einen Anstoß in die richtige Richtung, indem wir es mit einem Ausschnitt beginnen, der das gewünschte Antwortformat widerspiegelt. Das Modell "nimmt den Hinweis" und setzt in dieser Richtung fort.
+Eine weitere Technik bei der Verwendung des primären Inhalts ist, dem Modell _Hinweise_ statt Beispiele zu geben. In diesem Fall geben wir dem Modell einen Stups in die richtige Richtung, indem wir mit einem Ausschnitt beginnen, der das gewünschte Antwortformat widerspiegelt. Das Modell „greift den Hinweis auf“ und setzt in dieser Weise fort.
 
-| Anzahl der Hinweise | Prompt (Eingabe)                                                                                                                                                                                                                                                                                                                                                                                                                                               | Completion (Ausgabe)                                                                                                                                                                                                                                                                                       |
-| :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0                   | Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. Es ist ein Gasriese mit einer Masse von einem Tausendstel der Sonne, aber zweieinhalb Mal so groß wie alle anderen Planeten im Sonnensystem zusammen. Jupiter ist eines der hellsten Objekte, die mit bloßem Auge am Nachthimmel sichtbar sind, und ist seit der voraufgezeichneten Geschichte alten Zivilisationen bekannt. <br/>**Fassen Sie dies zusammen**                                       | Jupiter ist der größte Planet in unserem Sonnensystem und der fünfte von der Sonne. Es ist ein Gasriese mit einer Masse von 1/1000 der Sonne, aber schwerer als alle anderen Planeten zusammen. Alte Zivilisationen kennen Jupiter seit langem, und er ist leicht am Nachthimmel sichtbar. |
-| 1              | Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. Es ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonne beträgt, aber zweieinhalb Mal so groß ist wie die aller anderen Planeten im Sonnensystem zusammen. Jupiter ist eines der hellsten Objekte, die mit bloßem Auge am Nachthimmel sichtbar sind, und ist seit der Antike bekannt. <br/>**Zusammenfassung** <br/> Was wir gelernt haben, ist, dass Jupiter | der fünfte Planet von der Sonne und der größte im Sonnensystem ist. Es ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonne beträgt, aber zweieinhalb Mal so groß ist wie die aller anderen Planeten zusammen. Er ist leicht mit bloßem Auge sichtbar und seit der Antike bekannt.                        |
-| 2              | Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. Es ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonne beträgt, aber zweieinhalb Mal so groß ist wie die aller anderen Planeten im Sonnensystem zusammen. Jupiter ist eines der hellsten Objekte, die mit bloßem Auge am Nachthimmel sichtbar sind, und ist seit der Antike bekannt. <br/>**Zusammenfassung** <br/> Die Top 3 Fakten, die wir gelernt haben:         | 1. Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. <br/> 2. Es ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonne beträgt...<br/> 3. Jupiter ist seit der Antike mit bloßem Auge sichtbar ...                                                                       |
+| Anzahl der Hinweise | Prompt (Eingabe)                                                                                                                                                                                                                                                                                                                                                                                      | Vervollständigung (Ausgabe)                                                                                                                                                                                                                                                                                           |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0                   | Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. Er ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonne beträgt, aber zweieinhalb Mal so schwer wie alle anderen Planeten des Sonnensystems zusammen. Jupiter ist eines der hellsten Objekte, die mit bloßem Auge am Nachthimmel sichtbar sind, und ist den antiken Zivilisationen schon seit der Vorgeschichte bekannt. <br/>**Fasse dies zusammen**                                       | Jupiter ist der größte Planet in unserem Sonnensystem und der fünfte von der Sonne. Er ist ein Gasriese mit einer Masse von 1/1000 der Sonne, aber schwerer als alle anderen Planeten zusammen. Antike Kulturen kennen Jupiter schon lange, und er ist leicht am Nachthimmel sichtbar.          |
+| 1                   | Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. Er ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonne beträgt, aber zweieinhalb Mal so schwer wie alle anderen Planeten des Sonnensystems zusammen. Jupiter ist eines der hellsten Objekte, die mit bloßem Auge am Nachthimmel sichtbar sind, und ist den antiken Zivilisationen schon seit der Vorgeschichte bekannt. <br/>**Fasse dies zusammen** <br/> Was wir gelernt haben, ist, dass Jupiter         | der fünfte Planet von der Sonne ist und der größte im Sonnensystem. Er ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonne beträgt, aber zweieinhalb Mal so schwer wie alle anderen Planeten zusammen. Er ist mit bloßem Auge leicht sichtbar und seit der Antike bekannt.                  |
+| 2              | Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. Er ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonnenmasse beträgt, aber zweieinhalbmal so groß ist wie die aller anderen Planeten im Sonnensystem zusammen. Jupiter ist eines der hellsten mit bloßem Auge sichtbaren Objekte am Nachthimmel und ist seit der Zeit vor der aufgezeichneten Geschichte antiken Zivilisationen bekannt. <br/>**Fassen Sie dies zusammen** <br/> Top 3 Fakten, die wir gelernt haben:         | 1. Jupiter ist der fünfte Planet von der Sonne und der größte im Sonnensystem. <br/> 2. Er ist ein Gasriese mit einer Masse, die ein Tausendstel der Sonnenmasse beträgt...<br/> 3. Jupiter ist seit der Antike mit bloßem Auge sichtbar ...                                                                       |
 |                |                                                                                                                                                                                                                                                                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                           |
 
 ### Prompt-Vorlagen
 
-Eine Prompt-Vorlage ist ein _vordefiniertes Rezept für einen Prompt_, das gespeichert und bei Bedarf wiederverwendet werden kann, um konsistentere Benutzererfahrungen in großem Maßstab zu ermöglichen. In seiner einfachsten Form ist es einfach eine Sammlung von Prompt-Beispielen wie [dieses von OpenAI](https://platform.openai.com/examples?WT.mc_id=academic-105485-koreyst), das sowohl die interaktiven Prompt-Komponenten (Benutzer- und Systemnachrichten) als auch das API-gesteuerte Anforderungsformat bereitstellt – um die Wiederverwendung zu unterstützen.
+Eine Prompt-Vorlage ist ein _vordefiniertes Rezept für einen Prompt_, das gespeichert und bei Bedarf wiederverwendet werden kann, um konsistentere Benutzererfahrungen im großen Maßstab zu ermöglichen. In seiner einfachsten Form ist es einfach eine Sammlung von Prompt-Beispielen wie [dieses von OpenAI](https://cookbook.openai.com/examples/gpt4-1_prompting_guide?WT.mc_id=academic-105485-koreyst), die sowohl interaktive Prompt-Komponenten (Benutzer- und Systemnachrichten) als auch das API-gesteuerte Anforderungsformat bereitstellt – zur Unterstützung der Wiederverwendung.
 
-In seiner komplexeren Form wie [dieses Beispiel von LangChain](https://python.langchain.com/docs/concepts/prompt_templates/?WT.mc_id=academic-105485-koreyst) enthält es _Platzhalter_, die durch Daten aus verschiedenen Quellen (Benutzereingaben, Systemkontext, externe Datenquellen usw.) ersetzt werden können, um einen Prompt dynamisch zu generieren. Dies ermöglicht es uns, eine Bibliothek wiederverwendbarer Prompts zu erstellen, die verwendet werden können, um konsistente Benutzererfahrungen **programmatisch** in großem Maßstab zu steuern.
+In seiner komplexeren Form wie [dieses Beispiel von LangChain](https://python.langchain.com/docs/concepts/prompt_templates/?WT.mc_id=academic-105485-koreyst) enthält es _Platzhalter_, die durch Daten aus verschiedenen Quellen (Benutzereingaben, Systemkontext, externe Datenquellen usw.) ersetzt werden können, um dynamisch einen Prompt zu generieren. Dadurch können wir eine Bibliothek wiederverwendbarer Prompts erstellen, die zur Programmierung konsistenter Benutzererfahrungen **maßstabsgetreu** verwendet werden können.
 
-Schließlich liegt der wahre Wert von Vorlagen in der Fähigkeit, _Prompt-Bibliotheken_ für vertikale Anwendungsbereiche zu erstellen und zu veröffentlichen – wobei die Prompt-Vorlage jetzt _optimiert_ ist, um anwendungsspezifischen Kontext oder Beispiele widerzuspiegeln, die die Antworten für die Zielgruppe relevanter und genauer machen. Das [Prompts For Edu](https://github.com/microsoft/prompts-for-edu?WT.mc_id=academic-105485-koreyst)-Repository ist ein großartiges Beispiel für diesen Ansatz, da es eine Bibliothek von Prompts für den Bildungsbereich kuratiert, mit Schwerpunkt auf Schlüsselzielen wie Unterrichtsplanung, Lehrplangestaltung, Schülernachhilfe usw.
+Schließlich liegt der eigentliche Wert von Vorlagen in der Fähigkeit, _Prompt-Bibliotheken_ für vertikale Anwendungsbereiche zu erstellen und zu veröffentlichen – wobei die Prompt-Vorlage nun _optimiert_ ist, um anwendungsspezifischen Kontext oder Beispiele widerzuspiegeln, die die Antworten für die Zielnutzer relevanter und genauer machen. Das [Prompts For Edu](https://github.com/microsoft/prompts-for-edu?WT.mc_id=academic-105485-koreyst) Repository ist ein großartiges Beispiel für diesen Ansatz, indem es eine Bibliothek von Prompts für den Bildungsbereich mit Schwerpunkt auf Schlüsselaspekten wie Unterrichtsplanung, Curriculum-Design, Schülerbetreuung usw. kuratiert.
 
-## Unterstützende Inhalte
+## Unterstützender Inhalt
 
-Wenn wir die Konstruktion von Prompts als eine Kombination aus einer Anweisung (Aufgabe) und einem Ziel (primärer Inhalt) betrachten, dann ist _sekundärer Inhalt_ wie zusätzlicher Kontext, den wir bereitstellen, um **die Ausgabe in irgendeiner Weise zu beeinflussen**. Es könnten Tuning-Parameter, Formatierungsanweisungen, Themen-Taxonomien usw. sein, die dem Modell helfen, seine Antwort an die gewünschten Benutzerziele oder -erwartungen anzupassen.
+Wenn wir über die Konstruktion eines Prompts nachdenken als bestehend aus einer Anweisung (Aufgabe) und einem Ziel (primärer Inhalt), dann ist _sekundärer Inhalt_ wie zusätzlicher Kontext, den wir angeben, um den Output **irgendwie zu beeinflussen**. Es könnten Einstellungsparameter, Formatierungsanweisungen, Themen-Taxonomien usw. sein, die dem Modell helfen, seine Antwort an die gewünschten Benutzerziele oder Erwartungen _maßzuschneidern_.
 
-Beispiel: Angenommen, wir haben einen Kurskatalog mit umfangreichen Metadaten (Name, Beschreibung, Niveau, Metadaten-Tags, Dozent usw.) zu allen verfügbaren Kursen im Lehrplan:
+Zum Beispiel: Gegeben ein Kursverzeichnis mit umfangreichen Metadaten (Name, Beschreibung, Level, Metadaten-Tags, Dozent usw.) zu allen verfügbaren Kursen im Curriculum:
 
-- Wir können eine Anweisung definieren, um "den Kurskatalog für Herbst 2023 zusammenzufassen".
-- Wir können den primären Inhalt verwenden, um einige Beispiele für die gewünschte Ausgabe bereitzustellen.
-- Wir können den sekundären Inhalt verwenden, um die fünf wichtigsten "Tags" von Interesse zu identifizieren.
+- können wir eine Anweisung definieren, um "das Kursverzeichnis für Herbst 2023 zusammenzufassen"
+- können wir den primären Inhalt verwenden, um ein paar Beispiele für die gewünschte Ausgabe zu liefern
+- können wir den sekundären Inhalt verwenden, um die Top 5 "Tags" von Interesse zu identifizieren.
 
-Nun kann das Modell eine Zusammenfassung im Format der gezeigten Beispiele liefern – aber wenn ein Ergebnis mehrere Tags enthält, kann es die fünf im sekundären Inhalt identifizierten Tags priorisieren.
+Jetzt kann das Modell eine Zusammenfassung im durch die Beispiele vorgegebenen Format liefern – aber wenn ein Ergebnis mehrere Tags hat, kann es die 5 im sekundären Inhalt identifizierten Tags priorisieren.
 
 ---
 
 <!--
 LEKTIONSVORLAGE:
 Diese Einheit sollte das Kernkonzept #1 abdecken.
-Verstärken Sie das Konzept mit Beispielen und Referenzen.
+Verstärken Sie das Konzept mit Beispielen und Verweisen.
 
 KONZEPT #3:
-Techniken des Prompt-Engineerings.
-Welche grundlegenden Techniken gibt es für das Prompt-Engineering?
+Prompt Engineering Techniken.
+Was sind einige grundlegende Techniken des Prompt Engineering?
 Veranschaulichen Sie es mit einigen Übungen.
 -->
 
-## Best Practices für Prompts
+## Best Practices beim Prompting
 
-Jetzt, da wir wissen, wie Prompts _konstruiert_ werden können, können wir darüber nachdenken, wie wir sie _gestalten_, um Best Practices zu berücksichtigen. Wir können dies in zwei Teile unterteilen – die richtige _Einstellung_ haben und die richtigen _Techniken_ anwenden.
+Jetzt, da wir wissen, wie Prompts _konstruiert_ werden können, können wir anfangen darüber nachzudenken, wie man sie gestaltet, um Best Practices widerzuspiegeln. Wir können dies in zwei Teile gliedern – die richtige _Einstellung_ und die Anwendung der richtigen _Techniken_.
 
-### Einstellung für Prompt-Engineering
+### Prompt Engineering Einstellung
 
-Prompt-Engineering ist ein Trial-and-Error-Prozess, daher sollten Sie drei allgemeine Leitfaktoren im Hinterkopf behalten:
+Prompt Engineering ist ein Prozess von Versuch und Irrtum, daher sollten drei breite Leitfaktoren im Kopf behalten werden:
 
-1. **Domänenverständnis ist entscheidend.** Die Genauigkeit und Relevanz der Antworten hängt von der _Domäne_ ab, in der die Anwendung oder der Benutzer arbeitet. Nutzen Sie Ihre Intuition und Fachkenntnisse, um **Techniken weiter anzupassen**. Definieren Sie beispielsweise _domänenspezifische Persönlichkeiten_ in Ihren System-Prompts oder verwenden Sie _domänenspezifische Vorlagen_ in Ihren Benutzer-Prompts. Stellen Sie sekundäre Inhalte bereit, die domänenspezifische Kontexte widerspiegeln, oder verwenden Sie _domänenspezifische Hinweise und Beispiele_, um das Modell zu vertrauten Nutzungsmustern zu führen.
+1. **Fachkenntnis im Bereich ist wichtig.** Antwortgenauigkeit und Relevanz hängen vom _Bereich_ ab, in dem die Anwendung oder der Benutzer tätig ist. Wenden Sie Ihre Intuition und Fachkenntnis an, um **Techniken weiter anzupassen**. Definieren Sie beispielsweise _Bereichsspezifische Persönlichkeiten_ in Ihren Systemprompts oder verwenden Sie _bereichsspezifische Vorlagen_ in Ihren Benutzer-Prompts. Stellen Sie sekundären Inhalt zur Verfügung, der bereichsspezifische Kontexte reflektiert, oder verwenden Sie _bereichsspezifische Hinweise und Beispiele_, um das Modell zu vertrauten Nutzungsmustern zu führen.
 
-2. **Modellverständnis ist entscheidend.** Wir wissen, dass Modelle von Natur aus stochastisch sind. Aber Modellimplementierungen können auch in Bezug auf den Trainingsdatensatz, den sie verwenden (vortrainiertes Wissen), die Fähigkeiten, die sie bieten (z. B. über API oder SDK), und die Art des Inhalts, für den sie optimiert sind (z. B. Code vs. Bilder vs. Text), variieren. Verstehen Sie die Stärken und Schwächen des Modells, das Sie verwenden, und nutzen Sie dieses Wissen, um _Aufgaben zu priorisieren_ oder _angepasste Vorlagen_ zu erstellen, die für die Fähigkeiten des Modells optimiert sind.
+2. **Modellverständnis ist wichtig.** Wir wissen, dass Modelle von Natur aus stochastisch sind. Aber Modellausführungen können sich auch hinsichtlich des Trainingsdatensatzes (vorgelerntes Wissen), der Fähigkeiten, die sie bieten (z. B. über API oder SDK), und der Art von Inhalten, für die sie optimiert sind (z. B. Code vs. Bilder vs. Text), unterscheiden. Verstehen Sie die Stärken und Grenzen des Modells, das Sie verwenden, und nutzen Sie dieses Wissen, um _Aufgaben zu priorisieren_ oder _angepasste Vorlagen_ zu erstellen, die für die Fähigkeiten des Modells optimiert sind.
 
-3. **Iteration und Validierung sind entscheidend.** Modelle entwickeln sich schnell weiter, ebenso wie die Techniken des Prompt-Engineerings. Als Domänenexperte haben Sie möglicherweise andere Kontexte oder Kriterien für _Ihre_ spezifische Anwendung, die möglicherweise nicht auf die breitere Community zutreffen. Verwenden Sie Tools und Techniken des Prompt-Engineerings, um den Prompt-Aufbau zu "starten", und iterieren und validieren Sie die Ergebnisse dann mit Ihrer eigenen Intuition und Fachkenntnis. Dokumentieren Sie Ihre Erkenntnisse und erstellen Sie eine **Wissensdatenbank** (z. B. Prompt-Bibliotheken), die von anderen als neue Basis für schnellere Iterationen in der Zukunft verwendet werden kann.
+3. **Iteration & Validierung sind wichtig.** Modelle entwickeln sich schnell, und ebenso die Techniken des Prompt Engineerings. Als Fachexperte haben Sie möglicherweise weiteren Kontext oder Kriterien für _Ihre_ spezifische Anwendung, die nicht für die breitere Community gelten. Nutzen Sie Werkzeuge und Techniken des Prompt Engineerings, um die Prompt-Konstruktion zu „starten“, und iterieren Sie dann und validieren Sie die Ergebnisse mit eigener Intuition und Fachkenntnis. Dokumentieren Sie Ihre Erkenntnisse und erstellen Sie eine **Wissensbasis** (z.B. Prompt-Bibliotheken), die als neue Ausgangsbasis für andere genutzt werden kann, für schnellere Iterationen in Zukunft.
 
 ## Best Practices
 
-Schauen wir uns nun die allgemeinen Best Practices an, die von [OpenAI](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api?WT.mc_id=academic-105485-koreyst) und [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering#best-practices?WT.mc_id=academic-105485-koreyst) empfohlen werden.
+Schauen wir uns jetzt gängige Best Practices an, die von [OpenAI](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api?WT.mc_id=academic-105485-koreyst) und [Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/concepts/prompt-engineering#best-practices?WT.mc_id=academic-105485-koreyst) Praktikern empfohlen werden.
 
-| Was                               | Warum                                                                                                                                                                                                                                               |
+| Was                              | Warum                                                                                                                                                                                                                                               |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Evaluieren Sie die neuesten Modelle.       | Neue Modellgenerationen haben wahrscheinlich verbesserte Funktionen und Qualität – können jedoch auch höhere Kosten verursachen. Bewerten Sie ihre Auswirkungen und treffen Sie dann Migrationsentscheidungen.                                                                                |
-| Trennen Sie Anweisungen und Kontext.   | Überprüfen Sie, ob Ihr Modell/Anbieter _Trennzeichen_ definiert, um Anweisungen, primäre und sekundäre Inhalte klarer zu unterscheiden. Dies kann Modellen helfen, Token genauer zu gewichten.                                                         |
-| Seien Sie spezifisch und klar.             | Geben Sie mehr Details über den gewünschten Kontext, das Ergebnis, die Länge, das Format, den Stil usw. an. Dies verbessert sowohl die Qualität als auch die Konsistenz der Antworten. Erfassen Sie Rezepte in wiederverwendbaren Vorlagen.                                                          |
-| Seien Sie beschreibend, verwenden Sie Beispiele.      | Modelle reagieren möglicherweise besser auf einen "Zeigen und Erzählen"-Ansatz. Beginnen Sie mit einem `Zero-Shot`-Ansatz, bei dem Sie ihm eine Anweisung geben (aber keine Beispiele), und versuchen Sie dann `Few-Shot` als Verfeinerung, indem Sie einige Beispiele für die gewünschte Ausgabe bereitstellen. Verwenden Sie Analogien. |
-| Verwenden Sie Hinweise, um Abschlüsse zu starten. | Stoßen Sie es in Richtung eines gewünschten Ergebnisses, indem Sie ihm einige führende Wörter oder Phrasen geben, die es als Ausgangspunkt für die Antwort verwenden kann.                                                                                                               |
-| Wiederholen Sie sich.                       | Manchmal müssen Sie sich dem Modell gegenüber wiederholen. Geben Sie Anweisungen vor und nach Ihrem primären Inhalt, verwenden Sie eine Anweisung und einen Hinweis usw. Iterieren und validieren Sie, um zu sehen, was funktioniert.                                                         |
-| Reihenfolge ist wichtig.                     | Die Reihenfolge, in der Sie dem Modell Informationen präsentieren, kann die Ausgabe beeinflussen, selbst in den Lernbeispielen, dank des Recency-Effekts. Probieren Sie verschiedene Optionen aus, um zu sehen, was am besten funktioniert.                                                               |
-| Geben Sie dem Modell eine "Ausweichmöglichkeit".           | Geben Sie dem Modell eine _Fallback_-Antwort, die es liefern kann, wenn es die Aufgabe aus irgendeinem Grund nicht abschließen kann. Dies kann die Wahrscheinlichkeit verringern, dass Modelle falsche oder erfundene Antworten generieren.                                                         |
+| Bewerten Sie die neuesten Modelle.       | Neue Modelgenerationen haben wahrscheinlich verbesserte Funktionen und Qualität – können aber auch höhere Kosten verursachen. Bewerten Sie sie hinsichtlich der Auswirkungen und treffen Sie dann Entscheidungen zur Migration.                                                                                |
+| Trennen Sie Anweisungen & Kontext   | Prüfen Sie, ob Ihr Modell/Anbieter _Begrenzer_ definiert, um Anweisungen, primären und sekundären Inhalt klarer zu unterscheiden. Dies kann Modellen helfen, Token-Gewichte genauer zuzuordnen.                                                         |
+| Seien Sie spezifisch und klar             | Geben Sie mehr Details zum gewünschten Kontext, Ergebnis, Länge, Format, Stil usw. Dies verbessert sowohl die Qualität als auch die Konsistenz der Antworten. Halten Sie Rezepte in wiederverwendbaren Vorlagen fest.                                                          |
+| Seien Sie beschreibend, verwenden Sie Beispiele      | Modelle reagieren möglicherweise besser auf eine „zeigen und erklären“-Vorgehensweise. Beginnen Sie mit einem `zero-shot`-Ansatz, bei dem Sie eine Anweisung geben (aber keine Beispiele), und versuchen Sie dann `few-shot` als Verfeinerung, indem Sie einige Beispiele für die gewünschte Ausgabe bereitstellen. Verwenden Sie Analogien. |
+| Verwenden Sie Hinweise, um Abschlüsse zu starten | Stupsen Sie das Modell zu einem gewünschten Ergebnis an, indem Sie ihm einige führende Wörter oder Phrasen geben, die es als Ausgangspunkt für die Antwort verwenden kann.                                                                                                               |
+| Verstärken Sie                     | Manchmal müssen Sie sich beim Modell wiederholen. Geben Sie Anweisungen vor und nach Ihrem primären Inhalt, verwenden Sie eine Anweisung und einen Hinweis usw. Iterieren & validieren Sie, um zu sehen, was funktioniert.                                                         |
+| Reihenfolge ist wichtig                     | Die Reihenfolge, in der Sie Informationen dem Modell präsentieren, kann die Ausgabe beeinflussen, selbst bei den Lernbeispielen, aufgrund des „Recency Bias“. Probieren Sie verschiedene Optionen aus, um zu sehen, was am besten funktioniert.                                                               |
+| Geben Sie dem Modell eine „Ausweichmöglichkeit“           | Geben Sie dem Modell eine _Fallback_-Antwort, die es liefern kann, falls es die Aufgabe aus irgendeinem Grund nicht erfüllen kann. Dies kann die Wahrscheinlichkeit verringern, dass Modelle falsche oder erfundene Antworten generieren.                                                         |
 |                                   |                                                                                                                                                                                                                                                   |
 
-Wie bei jeder Best Practice gilt: _Ihre Ergebnisse können variieren_, je nach Modell, Aufgabe und Domäne. Verwenden Sie diese als Ausgangspunkt und iterieren Sie, um herauszufinden, was für Sie am besten funktioniert. Überprüfen Sie Ihren Prompt-Engineering-Prozess ständig neu, wenn neue Modelle und Tools verfügbar werden, mit Fokus auf Skalierbarkeit des Prozesses und Qualität der Antworten.
+Wie bei jeder Best Practice gilt: _Ihre Erfahrungen können variieren_ je nach Modell, Aufgabe und Bereich. Verwenden Sie diese als Ausgangspunkt und iterieren Sie, um herauszufinden, was für Sie am besten funktioniert. Evaluieren Sie Ihren Prompt Engineering Prozess kontinuierlich neu, wenn neue Modelle und Werkzeuge verfügbar werden, mit Fokus auf Prozessskalierbarkeit und Antwortqualität.
 
 <!--
 LEKTIONSVORLAGE:
-Diese Einheit sollte eine Code-Herausforderung enthalten, falls zutreffend.
+Diese Einheit sollte eine Code-Herausforderung enthalten, falls zutreffend
 
-HERAUSFORDERUNG:
-Link zu einem Jupyter Notebook mit nur den Code-Kommentaren in den Anweisungen (Code-Abschnitte sind leer).
+AUFGABE:
+Verlinkung zu einem Jupyter Notebook mit nur den Codekommentaren in den Anweisungen (Codeabschnitte sind leer).
 
 LÖSUNG:
-Link zu einer Kopie dieses Notebooks mit den ausgefüllten und ausgeführten Prompts, die zeigen, wie ein Beispiel aussehen könnte.
+Verlinkung zu einer Kopie dieses Notebooks mit den ausgefüllten Prompts und ausgeführt, welche ein Beispiel zeigt.
 -->
 
 ## Aufgabe
 
 Herzlichen Glückwunsch! Sie haben das Ende der Lektion erreicht! Es ist Zeit, einige dieser Konzepte und Techniken mit echten Beispielen zu testen!
 
-Für unsere Aufgabe verwenden wir ein Jupyter Notebook mit Übungen, die Sie interaktiv abschließen können. Sie können das Notebook auch mit Ihren eigenen Markdown- und Code-Zellen erweitern, um eigene Ideen und Techniken zu erkunden.
+Für unsere Aufgabe verwenden wir ein Jupyter Notebook mit Übungen, die Sie interaktiv ausführen können. Sie können das Notebook auch mit eigenen Markdown- und Codezellen erweitern, um Ideen und Techniken selbständig zu erkunden.
 
-### Um loszulegen, forken Sie das Repository, dann
+### Um zu starten, forken Sie das Repository, dann
 
 - (Empfohlen) Starten Sie GitHub Codespaces
 - (Alternativ) Klonen Sie das Repository auf Ihr lokales Gerät und verwenden Sie es mit Docker Desktop
 - (Alternativ) Öffnen Sie das Notebook mit Ihrer bevorzugten Notebook-Laufzeitumgebung.
 
-### Als Nächstes konfigurieren Sie Ihre Umgebungsvariablen
+### Anschließend konfigurieren Sie Ihre Umgebungsvariablen
 
-- Kopieren Sie die Datei `.env.copy` im Repository-Stammverzeichnis nach `.env` und füllen Sie die Werte für `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_ENDPOINT` und `AZURE_OPENAI_DEPLOYMENT` aus. Kehren Sie zum Abschnitt [Learning Sandbox](../../../04-prompt-engineering-fundamentals/04-prompt-engineering-fundamentals) zurück, um zu erfahren, wie.
+- Kopieren Sie die Datei `.env.copy` im Repository-Stammverzeichnis nach `.env` und füllen Sie die Werte `AZURE_OPENAI_API_KEY`, `AZURE_OPENAI_ENDPOINT` und `AZURE_OPENAI_DEPLOYMENT` aus. Kommen Sie zurück zum Abschnitt [Learning Sandbox](#lern-sandbox), um zu erfahren, wie das geht.
 
-### Als Nächstes öffnen Sie das Jupyter Notebook
+### Öffnen Sie anschließend das Jupyter Notebook
 
-- Wählen Sie den Laufzeit-Kernel aus. Wenn Sie die Optionen 1 oder 2 verwenden, wählen Sie einfach den Standard-Python 3.10.x-Kernel aus, der vom Entwicklungscontainer bereitgestellt wird.
+- Wählen Sie den Laufzeit-Kernel aus. Wenn Sie Optionen 1 oder 2 verwenden, wählen Sie einfach den Standard-Python 3.10.x Kernel, der vom Entwicklungscontainer bereitgestellt wird.
 
-Sie sind bereit, die Übungen auszuführen. Beachten Sie, dass es hier keine _richtigen und falschen_ Antworten gibt – es geht nur darum, Optionen durch Trial-and-Error zu erkunden und ein Gefühl dafür zu entwickeln, was für ein bestimmtes Modell und Anwendungsbereich funktioniert.
+Sie sind bereit, die Übungen auszuführen. Beachten Sie, dass es hier keine _richtigen oder falschen_ Antworten gibt – sondern nur das Erforschen von Möglichkeiten durch Versuch und Irrtum und das Entwickeln von Intuition dafür, was bei einem bestimmten Modell und Anwendungsbereich funktioniert.
 
-_Aus diesem Grund gibt es in dieser Lektion keine Code-Lösungssegmente. Stattdessen enthält das Notebook Markdown-Zellen mit dem Titel "Meine Lösung:", die ein Beispielergebnis zur Orientierung zeigen._
+_Aus diesem Grund gibt es in dieser Lektion keine Code-Lösungsabschnitte. Stattdessen enthält das Notebook Markdown-Zellen mit dem Titel "Meine Lösung:", die ein Beispielergebnis zur Referenz anzeigen._
 
  <!--
 LEKTIONSVORLAGE:
-Schließen Sie den Abschnitt mit einer Zusammenfassung und Ressourcen für selbstgesteuertes Lernen ab.
+Fassen Sie den Abschnitt mit einer Zusammenfassung und Ressourcen für selbstständiges Lernen zusammen.
 -->
 
 ## Wissensüberprüfung
 
-Welcher der folgenden Prompts entspricht einigen vernünftigen Best Practices?
+Welcher der folgenden Prompts ist ein guter Prompt, der einige vernünftige Best Practices befolgt?
 
-1. Zeige mir ein Bild von einem roten Auto.
-2. Zeige mir ein Bild von einem roten Auto der Marke Volvo und Modell XC90, das an einer Klippe geparkt ist, während die Sonne untergeht.
-3. Zeige mir ein Bild von einem roten Auto der Marke Volvo und Modell XC90.
+1. Zeig mir ein Bild eines roten Autos
+2. Zeig mir ein Bild eines roten Autos der Marke Volvo und Modell XC90, geparkt an einer Klippe bei Sonnenuntergang
+3. Zeig mir ein Bild eines roten Autos der Marke Volvo und Modell XC90
 
-A: 2, es ist der beste Prompt, da er Details darüber liefert, "was" gemeint ist, und ins Detail geht (nicht nur irgendein Auto, sondern eine bestimmte Marke und ein bestimmtes Modell). 3 ist die nächstbeste Option, da sie ebenfalls viele Beschreibungen enthält.
+A: 2, es ist der beste Prompt, da er Details zum „Was“ liefert und in Spezifika geht (nicht nur irgendein Auto, sondern eine bestimmte Marke und ein Modell) und auch die Gesamtszenerie beschreibt. 3 ist zweitbester, da es auch viel Beschreibung enthält.
 
 ## 🚀 Herausforderung
 
-Versuchen Sie, die Technik des "Hinweises" mit dem Prompt zu nutzen: Vervollständigen Sie den Satz "Zeige mir ein Bild von einem roten Auto der Marke Volvo und ". Was antwortet es, und wie würden Sie es verbessern?
+Versuchen Sie, die „Cue“-Technik mit dem Prompt zu nutzen: Vervollständige den Satz „Zeig mir ein Bild eines roten Autos der Marke Volvo und “. Was antwortet es, und wie würden Sie es verbessern?
 
 ## Großartige Arbeit! Setzen Sie Ihr Lernen fort
 
-Möchten Sie mehr über verschiedene Konzepte des Prompt-Engineerings erfahren? Besuchen Sie die [Seite für weiterführendes Lernen](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), um weitere großartige Ressourcen zu diesem Thema zu finden.
+Möchten Sie mehr über verschiedene Prompt Engineering Konzepte lernen? Gehen Sie zur [Fortsetzungsseite für Lernen](https://aka.ms/genai-collection?WT.mc_id=academic-105485-koreyst), um weitere großartige Ressourcen zu diesem Thema zu finden.
 
-Gehen Sie zu Lektion 5, wo wir uns [fortgeschrittene Prompt-Techniken](../05-advanced-prompts/README.md?WT.mc_id=academic-105485-koreyst) ansehen!
+Gehen Sie zu Lektion 5, wo wir [fortgeschrittene Prompt-Techniken](../05-advanced-prompts/README.md?WT.mc_id=academic-105485-koreyst) anschauen werden!
 
 ---
 
-**Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

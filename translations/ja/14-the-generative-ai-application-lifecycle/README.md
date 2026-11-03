@@ -1,93 +1,94 @@
-[![関数呼び出しとの統合](../../../translated_images/ja/14-lesson-banner.066d74a31727ac12.webp)](https://youtu.be/ewtQY_RJrzs?si=dyJ2bjiljH7UUHCh)
+[![function callingとの統合](../../../translated_images/ja/14-lesson-banner.066d74a31727ac12.webp)](https://youtu.be/ewtQY_RJrzs?si=dyJ2bjiljH7UUHCh)
 
-# 生成AIアプリケーションのライフサイクル
+# ジェネレーティブ AI アプリケーションのライフサイクル
 
-すべてのAIアプリケーションにとって重要な問いは、AI機能の関連性です。AIは急速に進化する分野であるため、アプリケーションが常に関連性があり、信頼性が高く、堅牢であることを保証するには、継続的に監視、評価、改善する必要があります。ここで生成AIのライフサイクルが役立ちます。
+すべての AI アプリケーションにとって重要な問いは、AI が急速に進化する分野であるため、AI 機能の関連性です。アプリケーションを関連性があり信頼性が高く堅牢な状態に保つためには、それを継続的に監視、評価、改善していく必要があります。そこでジェネレーティブ AI のライフサイクルが登場します。
 
-生成AIのライフサイクルは、生成AIアプリケーションの開発、展開、維持の各段階を案内するフレームワークです。目標を定義し、パフォーマンスを測定し、課題を特定し、解決策を実装するのに役立ちます。また、アプリケーションをドメインやステークホルダーの倫理的および法的基準に整合させるのにも役立ちます。生成AIのライフサイクルに従うことで、アプリケーションが常に価値を提供し、ユーザーを満足させることを保証できます。
+ジェネレーティブ AI のライフサイクルは、ジェネレーティブ AI アプリケーションを開発、展開、維持する各段階を案内するフレームワークです。目的を定義し、パフォーマンスを測定し、課題を特定し、解決策を実行するのに役立ちます。また、アプリケーションをドメインやステークホルダーの倫理的・法的基準に合わせる手助けもします。ジェネレーティブ AI のライフサイクルに従うことで、常に価値を提供しユーザーを満足させるアプリケーションを保証できます。
 
 ## はじめに
 
-この章では、以下を学びます：
+この章では、次のことを学びます：
 
-- MLOpsからLLMOpsへのパラダイムシフトの理解
-- LLMのライフサイクル
+- MLOps から LLMOps へのパラダイムシフトの理解
+- LLM ライフサイクル
 - ライフサイクルツール
-- ライフサイクルのメトリクス化と評価
+- ライフサイクルのメトリフィケーションと評価
 
-## MLOpsからLLMOpsへのパラダイムシフトの理解
+## MLOps から LLMOps へのパラダイムシフトの理解
 
-LLMは人工知能の新しいツールであり、アプリケーションの分析や生成タスクにおいて非常に強力です。しかし、この力はAIや従来の機械学習タスクの合理化方法にいくつかの影響を与えます。
+LLM は人工知能の新たな道具であり、分析や生成タスクにおいて非常に強力ですが、この力は AI や従来の機械学習タスクの合理化に影響を及ぼします。
 
-これにより、このツールを動的かつ適切なインセンティブで適応させるための新しいパラダイムが必要になります。古いAIアプリを「MLアプリ」、新しいAIアプリを「GenAIアプリ」または単に「AIアプリ」と分類できます。これは当時の主流技術や手法を反映しています。この変化は複数の面で物語を変えます。以下の比較をご覧ください。
+これにより、動的かつ正しいインセンティブに基づいてこのツールを適応させる新しいパラダイムが必要です。古い AI アプリは「ML アプリ」と分類でき、新しい AI アプリは「GenAI アプリ」や単に「AI アプリ」と呼び、その時代の主流技術と手法を反映します。この変化は多方面にわたり、次の比較を参照してください。
 
-![LLMOpsとMLOpsの比較](../../../translated_images/ja/01-llmops-shift.29bc933cb3bb0080.webp)
+![LLMOps 対 MLOps 比較](../../../translated_images/ja/01-llmops-shift.29bc933cb3bb0080.webp)
 
-LLMOpsでは、アプリ開発者により焦点を当て、統合を重要なポイントとして使用し、「モデル・アズ・ア・サービス」を利用し、以下の指標を考慮しています。
+LLMOps では、アプリ開発者により焦点を当て、統合を重要ポイントとし、「Models-as-a-Service」を利用、そして以下のメトリクスを考慮しています。
 
 - 品質：応答の質
-- 有害性：責任あるAI
-- 正直さ：応答の根拠（意味が通じるか？正しいか？）
-- コスト：ソリューションの予算
-- レイテンシ：トークン応答の平均時間
+- 有害性：責任ある AI
+- 正直さ：応答の根拠（筋が通っているか？正しいか？）
+- コスト：解決策の予算
+- レイテンシー：トークン応答の平均時間
 
-## LLMのライフサイクル
+## LLM ライフサイクル
 
-まず、ライフサイクルとその変更点を理解するために、次のインフォグラフィックに注目しましょう。
+まず、ライフサイクルとその変更点を理解するために、次のインフォグラフィックをご覧ください。
 
-![LLMOpsのインフォグラフィック](../../../translated_images/ja/02-llmops.70a942ead05a7645.webp)
+![LLMOps インフォグラフィック](../../../translated_images/ja/02-llmops.70a942ead05a7645.webp)
 
-ご覧の通り、これは通常のMLOpsのライフサイクルとは異なります。LLMには多くの新しい要件があります。プロンプティング、品質向上のためのさまざまな技術（ファインチューニング、RAG、メタプロンプト）、責任あるAIに関する異なる評価と責任、最後に新しい評価指標（品質、有害性、正直さ、コスト、レイテンシ）です。
+ご覧の通り、これは通常の MLOps ライフサイクルとは異なります。LLM は多くの新しい要件があり、プロンプト、品質向上のための様々な技術（ファインチューニング、RAG、メタプロンプト）、責任ある AI に関連する異なる評価と責任、最後に新しい評価指標（品質、有害性、正直さ、コスト、レイテンシー）があります。
 
-例えば、アイデア出しの方法を見てみましょう。プロンプトエンジニアリングを使ってさまざまなLLMを試し、仮説が正しいかどうかを検証します。
+たとえば、私たちがどのようにアイデアを出すか見てみましょう。プロンプトエンジニアリングを使って様々な LLM を試し、その仮説が正しいか探ります。
 
 これは線形ではなく、統合されたループであり、反復的で包括的なサイクルであることに注意してください。
 
-これらのステップをどのように探求できるでしょうか？ライフサイクルの構築方法を詳しく見てみましょう。
+これらのステップをどのように探求できるか、ライフサイクルの構築方法を詳しく見てみましょう。
 
-![LLMOpsのワークフロー](../../../translated_images/ja/03-llm-stage-flows.3a1e1c401235a6cf.webp)
+![LLMOps ワークフロー](../../../translated_images/ja/03-llm-stage-flows.3a1e1c401235a6cf.webp)
 
-少し複雑に見えるかもしれませんが、まずは3つの大きなステップに注目しましょう。
+少し複雑に見えますが、まずは大きな3つのステップに注目しましょう。
 
-1. アイデア出し／探索：探索段階では、ビジネスニーズに応じて探求します。プロトタイピングを行い、[PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst)を作成し、仮説に対して十分に効率的かどうかをテストします。
-1. 構築／拡張：実装段階では、大規模なデータセットで評価を開始し、ファインチューニングやRAGなどの技術を実装してソリューションの堅牢性を確認します。うまくいかない場合は、再実装したり、フローに新しいステップを追加したり、データを再構築したりすることが役立ちます。フローとスケールをテストし、メトリクスを確認したら、次のステップに進む準備が整います。
-1. 運用化：統合段階では、監視およびアラートシステムをシステムに追加し、展開とアプリケーション統合を行います。
+1. アイデア出し/探索：ビジネスニーズに応じて探求します。プロトタイプ作成、[PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) の作成、仮説の検証に十分かテストします。
+1. 構築/強化：実装。大規模データセット向けに評価を始め、ファインチューニングや RAG などの技術を実装してソリューションの堅牢性を確認します。うまくいかない場合は再実装、フローに新ステップ追加、データ構造の見直しが助けになります。フローとスケールをテストし、メトリクスを確認したら次のステップへ。
+1. 運用化：統合。監視およびアラートシステムを追加し、システム展開とアプリケーション統合を行います。
 
-その後、セキュリティ、コンプライアンス、ガバナンスに焦点を当てた管理の包括的なサイクルがあります。
+その後、管理の全体的なサイクルがあり、セキュリティ、コンプライアンス、ガバナンスに注力します。
 
-おめでとうございます。これでAIアプリが準備完了し、運用可能になりました。実践的な体験には、[Contoso Chat Demo](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreys)をご覧ください。
+おめでとうございます。これで AI アプリが準備完了、運用可能です。実践体験として、[Contoso Chat Demo.](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst) をご覧ください。
 
-では、どのようなツールを使えるでしょうか？
+では、どんなツールが使えるでしょうか？
 
 ## ライフサイクルツール
 
-ツールとして、Microsoftは[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys)と[PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst)を提供しており、サイクルの実装を容易にし、すぐに使えるようにします。
+ツールとして、Microsoft は [Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) と [PromptFlow](https://microsoft.github.io/promptflow/index.html?WT.mc_id=academic-105485-koreyst) を提供し、ライフサイクルを実装しやすくしています。
 
-[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreys)では、[AI Studio](https://ai.azure.com/?WT.mc_id=academic-105485-koreys)を利用できます。AI Studioは、モデル、サンプル、ツールを探索し、リソース管理、UI開発フロー、コードファースト開発のためのSDK/CLIオプションを提供するウェブポータルです。
+[Azure AI Platform](https://azure.microsoft.com/solutions/ai/?WT.mc_id=academic-105485-koreyst) では、[Microsoft Foundry](https://ai.azure.com/?WT.mc_id=academic-105485-koreyst) を利用できます。Microsoft Foundry（旧 Azure AI Studio）はモデル、サンプル、ツールの探索、リソース管理、UI開発フローの利用、SDK/CLI を使ったコード中心の開発を可能にするウェブポータルです。
 
-![Azure AIの可能性](../../../translated_images/ja/04-azure-ai-platform.80203baf03a12fa8.webp)
+![Azure AI の可能性](../../../translated_images/ja/04-azure-ai-platform.80203baf03a12fa8.webp)
 
-Azure AIは、複数のリソースを使用して、運用、サービス、プロジェクト、ベクトル検索、データベースのニーズを管理できます。
+Azure AI は、運用、サービス、プロジェクト、ベクター検索、データベース管理など複数のリソースを活用できます。
 
-![Azure AIによるLLMOps](../../../translated_images/ja/05-llm-azure-ai-prompt.a5ce85cdbb494bdf.webp)
+![Azure AI と LLMOps](../../../translated_images/ja/05-llm-azure-ai-prompt.a5ce85cdbb494bdf.webp)
 
-Proof-of-Concept（POC）から大規模アプリケーションまで、PromptFlowで構築：
+PromptFlow を使い、概念実証(POC)から大規模アプリケーションを構築：
 
-- VS Codeから視覚的かつ機能的なツールでアプリを設計・構築
-- 品質の高いAIのためにアプリをテスト・ファインチューニングを簡単に実施
-- Azure AI Studioを使ってクラウドと統合し、迅速な統合のためにプッシュ＆デプロイを繰り返す
+- VS Code からビジュアルかつ機能的なツールでアプリを設計・構築
+- 品質の高い AI のためにアプリを簡単にテスト・ファインチューニング
+- Microsoft Foundry を活用し、クラウド連携、プッシュ、展開で高速統合と反復が可能
 
-![PromptFlowによるLLMOps](../../../translated_images/ja/06-llm-promptflow.a183eba07a3a7fdf.webp)
+![PromptFlow と LLMOps](../../../translated_images/ja/06-llm-promptflow.a183eba07a3a7fdf.webp)
 
 ## 素晴らしい！学習を続けましょう！
 
-素晴らしいですね。次は、[Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst)でこれらの概念を使ったアプリケーションの構造を学び、Cloud Advocacyがデモでこれらの概念をどのように追加しているかを確認しましょう。さらにコンテンツをお求めなら、[Igniteブレイクアウトセッション](https://www.youtube.com/watch?v=DdOylyrTOWg)もご覧ください。
+素晴らしいです。次は [Contoso Chat App](https://nitya.github.io/contoso-chat/?WT.mc_id=academic-105485-koreyst) を使ってアプリ構造を学び、Cloud Advocacy がデモでどのようにこれらの概念を取り入れているかを確認しましょう。さらに詳しくは [Ignite ブレイクアウトセッション！](https://www.youtube.com/watch?v=DdOylyrTOWg)
 
-次に、レッスン15で[Retrieval Augmented Generationとベクトルデータベース](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst)が生成AIにどのように影響し、より魅力的なアプリケーションを作るかを理解しましょう！
+
+続いて、ジェネレーティブ AI に影響を与える [Retrieval Augmented Generation とベクターデータベース](../15-rag-and-vector-databases/README.md?WT.mc_id=academic-105485-koreyst) について理解を深め、より魅力的なアプリケーション作成を目指しましょう！
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**：  
-本書類はAI翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されました。正確性の向上に努めておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があります。原文の言語による文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や誤訳についても、当方は責任を負いかねます。
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
